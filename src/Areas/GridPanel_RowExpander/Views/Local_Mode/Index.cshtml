@@ -1,0 +1,78 @@
+﻿@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "GridPanel with RowExpander Plugin";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var desc_data = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed metus nibh, sodales a, porta at, " +
+                         "vulputate eget, dui. Pellentesque ut nisl. Maecenas tortor turpis, interdum non, sodales non, " +
+                         "iaculis ac, lacus. Vestibulum auctor, tortor quis iaculis malesuada, libero lectus bibendum purus, " +
+                         "sit amet tincidunt quam turpis vel lacus. In pellentesque nisl non sem. Suspendisse nunc sem, " +
+                         "pretium eget, cursus a, fringilla vel, urna.<br/><br/>Aliquam commodo ullamcorper erat. " +
+                         "Nullam vel justo in neque porttitor laoreet. Aenean lacus dui, consequat eu, adipiscing eget, " +
+                         "nonummy non, nisi. Morbi nunc est, dignissim non, ornare sed, luctus eu, massa. Vivamus eget quam. " +
+                         "Vivamus tincidunt diam nec urna. Curabitur velit.",        
+            
+            template = '<span style="color:{0};">{1}</span>',
+            
+            change = function (value) {
+                return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+            },
+            
+            pctChange = function (value) {
+                return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+            };
+    </script>
+}
+
+@section example
+{
+    <h1>GridPanel with RowExpander Plugin</h1>
+
+    @(
+ Html.X().GridPanel()
+            .Title("RowExpander")
+            .Icon(Icon.Table)
+            .Width(600)
+            .Height(600)
+            .Store(Html.X().Store()
+                .DataSource(Model)
+                .Model(Html.X().Model()
+                    .Fields(
+                         Html.X().ModelField().Name("company"),
+                         Html.X().ModelField().Name("price").Type(ModelFieldType.Float),
+                         Html.X().ModelField().Name("change").Type(ModelFieldType.Float),
+                         Html.X().ModelField().Name("pctChange").Type(ModelFieldType.Float),
+                         Html.X().ModelField().Name("lastChange").Type(ModelFieldType.Date).DateFormat("M/d hh:mmtt"),
+                         Html.X().ModelField().Name("industry"),
+                         Html.X().ModelField().Name("desc").DefaultValue("desc_data")
+                    )
+                )
+            )
+            .ColumnModel(
+                Html.X().Column().DataIndex("company").Text("Company").Flex(1),
+                Html.X().Column().DataIndex("price").Text("Price").Renderer(RendererFormat.UsMoney),
+                Html.X().Column().DataIndex("change").Text("Change").Renderer("change"),
+                Html.X().Column().DataIndex("pctChange").Text("Change").Renderer("pctChange"),
+                Html.X().DateColumn().DataIndex("lastChange").Text("Last Updated")
+            )
+            .Plugins(
+                Html.X().RowExpander()
+                    .Listeners(l => {
+                        l.Collapse.Handler = "Ext.Msg.notify('Row collapsed', 'Row № ' + rowIndex);";
+                        l.Collapse.Delay = 1;
+
+                        l.Expand.Handler = "Ext.Msg.notify('Row expanded', 'Row № ' + rowIndex);";
+                        l.Expand.Delay = 1;
+                    })
+                    .TemplateHtml(@"
+                            <p><b>Company:</b> {company}</p><br/>
+							<p><b>Summary:</b> {desc}</p>
+                    ")
+            )
+    )
+}

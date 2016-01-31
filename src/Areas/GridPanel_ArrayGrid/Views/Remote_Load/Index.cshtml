@@ -1,0 +1,78 @@
+@{
+    ViewBag.Title = "Load GridPanel with DirectEvent - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+
+        var onSuccess = function (grid, data) {
+            grid.show(); 
+            grid.getStore().loadData(data);
+        };
+    </script>
+}
+
+@section example
+{    
+    <h1>Load GridPanel with DirectEvent</h1>
+    
+    <p>Demonstrates how to show and load a GridPanel with data during a DirectEvent.</p>
+
+    @(Html.X().Panel()
+        .Title("Example")
+        .Width(600)
+        .Height(350)
+        .Layout(LayoutType.Fit)
+        .TopBar(Html.X().Toolbar()
+            .Items(Html.X().Button()
+                .Text("Load Data")
+                .DirectEvents(de =>
+                {
+                    de.Click.Url = Url.Action("GetData");
+                    de.Click.Success = "onSuccess(App.GridPanel1, result.data);";
+                })
+            )
+        )
+        .Items(Html.X().GridPanel()
+            .ID("GridPanel1")
+            .Hidden(true)
+            .Border(false)
+            .Store(Html.X().Store()
+                .AutoLoad(false)
+                .Model(Html.X().Model()
+                    .Fields(
+                        new ModelField("company"),
+                        new ModelField("price", ModelFieldType.Float),
+                        new ModelField("change", ModelFieldType.Float),
+                        new ModelField("pctChange", ModelFieldType.Float),
+                        new ModelField("lastChange", ModelFieldType.Date, "M/d hh:mmtt")
+                    )
+                )
+                .Reader(reader =>
+                    reader.Add(Html.X().ArrayReader())    
+                )
+            )
+            .ColumnModel(
+                Html.X().Column().Text("Company").DataIndex("company").Flex(1),
+                Html.X().Column().Text("Price").DataIndex("price").Renderer(RendererFormat.UsMoney),
+                Html.X().Column().Text("Change").DataIndex("change").Renderer("change"),
+                Html.X().Column().Text("Change").DataIndex("pctChange").Renderer("pctChange"),
+                Html.X().DateColumn().Text("Last Updated").DataIndex("lastChange")
+            )
+            .View(Html.X().GridView().StripeRows(true).TrackOver(true))
+        )
+    )
+}
+    
+        

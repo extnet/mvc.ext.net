@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Load External Website into an <ext:Window> - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Load External Website into an &lt;ext:Window&gt;</h1>        
+    
+    <p>Load an external url into a Window using the Loader property.</p>
+
+    @(X.Button()
+        .Text("Show Window")
+        .Icon(Icon.Application)
+        .Handler("App.Window1.show(this);")
+    )
+    
+    @(X.Window()
+        .ID("Window1")
+        .Title("Ext.NET")
+        .Width(1000)
+        .Height(500)
+        .Modal(true)
+        .AutoRender(false)
+        .Collapsible(true)
+        .Maximizable(true)
+        .Hidden(true)
+        .Loader(X.ComponentLoader()
+            .Url("http://www.ext.net")
+            .Mode(LoadMode.Frame)
+            .LoadMask(lm => lm.ShowMask = true)
+        )
+    )
+}

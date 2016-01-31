@@ -1,0 +1,267 @@
+﻿@{
+    ViewBag.Title = "VBoxLayout - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        html, body {
+            font    : normal 12px verdana;
+            margin  : 0;
+            padding : 0;
+            border  : 0 none;
+            background-color : #dfe8f6 !important;
+        }
+    </style>
+    
+    <script>
+        var replace = function (panel) {
+            var btns = Ext.getCmp("btns"),
+                comp;
+
+            comp = btns.remove(0, false);
+
+            if (comp) {
+                Ext.get("hiddenArea").appendChild(comp.getEl());
+            }
+
+            btns.add(panel);
+            btns.doLayout();
+        };
+    </script>
+}
+
+@section example
+{
+    @(X.Viewport()
+        .Layout(LayoutType.Border)
+        .Items(
+            X.Panel()
+                .ID("btns")
+                .Region(Region.West)
+                .BaseCls("x-plain")
+                .Width(150)
+                .Layout(LayoutType.Fit)
+                .Split(true)
+                .MinWidth(100)
+                .MaxWidth(250)
+                .MarginSpec("5 5 0 5" )
+                .Items(X.Panel()
+                    .ID("Panel1")
+                    .BaseCls("x-plain")
+                    .Content(c => "<p style='padding:10px;color:#556677;font-size:11px;'>Select a configuration to the right &raquo;</p>")
+                ),
+                
+            X.Panel()
+                .Region(Region.Center)
+                .MarginSpec("0 5 5 5")
+                .Layout(LayoutType.VBox)
+                .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Stretch })
+                .Items(
+                    X.Panel()
+                        .BaseCls("x-plain")
+                        .Height(40)
+                        .Layout(LayoutType.HBox)
+                        .BodyPadding(10)
+                        .Defaults(d => {
+                                d.Add(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value));
+                                d.Add(X.Parameter().Name("pressed").Value("false").Mode(ParameterMode.Raw));
+                                d.Add(X.Parameter().Name("toggleGroup").Value("btns").Mode(ParameterMode.Value));
+                                d.Add(X.Parameter().Name("allowDepress").Value("false").Mode(ParameterMode.Raw));
+                            }
+                        )
+                        .Items(
+                            X.Button().Text("Spaced").OnClientClick("replace(#{pnlSpaced});"),
+                            X.Button().Text("Multi-Spaced").OnClientClick("replace(#{pnlMultiSpaced});"),
+                            X.Button().Text("Align: Top").OnClientClick("replace(#{pnlAlignTop});"),
+                            X.Button().Text("Align: Middle").OnClientClick("replace(#{pnlAlignMiddle});"),
+                            X.Button().Text("Align: Stretch").OnClientClick("replace(#{pnlAlignStretch});"),
+                            X.Button().Text("Align: StretchMax").OnClientClick("replace(#{pnlAlignStretchMax});")
+                        ),
+                    X.Panel()
+                        .BaseCls("x-plain")
+                        .Height(40)
+                        .Layout(LayoutType.HBox)
+                        .BodyPaddingSummary("0 10 10")
+                        .Defaults(d => {
+                                d.Add(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value));
+                                d.Add(X.Parameter().Name("pressed").Value("false").Mode(ParameterMode.Raw));
+                                d.Add(X.Parameter().Name("toggleGroup").Value("btns").Mode(ParameterMode.Value));
+                                d.Add(X.Parameter().Name("allowDepress").Value("false").Mode(ParameterMode.Raw));
+                            }
+                        )
+                        .Items(
+                            X.Button().Text("Flex: All Even").OnClientClick("replace(#{pnlFlexEven});"),
+                            X.Button().Text("Flex: Ratio").OnClientClick("replace(#{pnlFlexRatio});"),
+                            X.Button().Text("Pack: Start").OnClientClick("replace(#{pnlPackStart});"),
+                            X.Button().Text("Pack: Center").OnClientClick("replace(#{pnlPackCenter});"),
+                            X.Button().Text("Pack: End").OnClientClick("replace(#{pnlPackEnd});")
+                        )
+                )
+        )
+    )
+    
+    <div id="hiddenArea" class="x-hidden">
+        @(X.Panel()
+            .ID("pnlSpaced")
+            .Layout(LayoutType.VBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Left })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Panel().BaseCls("x-plain").Flex(1),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4").Margin(0)
+            ))
+
+        @(X.Panel()
+            .ID("pnlMultiSpaced")
+            .Layout(LayoutType.VBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Left })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Panel().BaseCls("x-plain").Flex(1),
+                X.Button().Text("Button 2"),
+                X.Panel().BaseCls("x-plain").Flex(1),
+                X.Button().Text("Button 3"),
+                X.Panel().BaseCls("x-plain").Flex(1),
+                X.Button().Text("Button 4").Margin(0)
+            ))
+
+        @(X.Panel()
+            .ID("pnlAlignTop")
+            .Layout(LayoutType.VBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Left })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4")
+            ))
+
+        @(X.Panel()
+            .ID("pnlAlignMiddle")
+            .Layout(LayoutType.VBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Center })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4")
+            ))
+
+        @(X.Panel()
+            .ID("pnlAlignStretch")
+            .Layout(LayoutType.VBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Stretch })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4")
+            ))
+
+        @(X.Panel()
+            .ID("pnlAlignStretchMax")
+            .Layout(LayoutType.VBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.StretchMax })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4")
+            ))
+
+        @(X.Panel()
+            .ID("pnlFlexEven")
+            .Layout(LayoutType.VBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Center })
+            .Items(
+                X.Button().Text("Button 1").Flex(1),
+                X.Button().Text("Button 2").Flex(1),
+                X.Button().Text("Button 3").Flex(1),
+                X.Button().Text("Button 4").Flex(1).Margin(0)
+            ))
+
+        @(X.Panel()
+            .ID("pnlFlexRatio")
+            .Layout(LayoutType.VBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Center })
+            .Items(
+                X.Button().Text("Button 1").Flex(1),
+                X.Button().Text("Button 2").Flex(1),
+                X.Button().Text("Button 3").Flex(1),
+                X.Button().Text("Button 4").Flex(3).Margin(0)
+            ))
+
+        @(X.Panel()
+            .ID("pnlFlexStretch")
+            .Layout(LayoutType.VBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Stretch })
+            .Items(
+                X.Button().Text("Button 1").Flex(1),
+                X.Button().Text("Button 2").Flex(1),
+                X.Button().Text("Button 3").Flex(1),
+                X.Button().Text("Button 4").Flex(3).Margin(0)
+            ))
+
+        @(X.Panel()
+            .ID("pnlPackStart")
+            .Layout(LayoutType.VBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Center, Pack = BoxPack.Start })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4")
+            ))
+
+        @(X.Panel()
+            .ID("pnlPackCenter")
+            .Layout(LayoutType.VBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Center, Pack = BoxPack.Center })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4")
+            ))
+
+        @(X.Panel()
+            .ID("pnlPackEnd")
+            .Layout(LayoutType.VBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Center, Pack = BoxPack.End })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4")
+            ))
+    </div>
+}

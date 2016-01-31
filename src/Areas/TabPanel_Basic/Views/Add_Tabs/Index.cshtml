@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Adding Tabs On The Fly - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var addTab = function (tabPanel, id, url, menuItem) {
+            var tab = tabPanel.getComponent(id);
+
+            if (!tab) {
+                tab = tabPanel.add({ 
+                    id       : id, 
+                    title    : url, 
+                    closable : true,
+                    menuItem : menuItem,
+                    loader   : {
+                        url      : url,
+                        renderer : 'frame',
+                        loadMask : {
+                            showMask : true,
+                            msg      : 'Loading ' + url + '...'
+                        }
+                    }
+                });
+
+                tab.on('activate', function (tab) {
+                    App.MenuPanel1.setSelection(tab.menuItem);
+                });
+            }
+            
+            tabPanel.setActiveTab(tab);
+        }
+    </script>
+}
+
+@section example
+{
+    @(X.Window()
+        .Title("Adding tab")
+        .Width(700)
+        .Height(500)
+        .Icon(Icon.Link)
+        .Layout(LayoutType.Border)
+        .Items(
+            X.MenuPanel()
+                .ID("MenuPanel1")
+                .Width(200)
+                .Region(Region.West)
+                .Menu(m => { 
+                    m.Add(X.MenuItem()
+                            .Text("Ext.NET")
+                            .OnClientClick("addTab(App.TabPanel1, 'idClt', 'http://www.ext.net', this);"));
+                    m.Add(X.MenuItem()
+                        .Text("Ext.NET forums")
+                        .OnClientClick("addTab(App.TabPanel1, 'idGgl', 'http://forums.ext.net', this);"));
+                    m.Add(X.MenuItem()
+                        .Text("Sencha")
+                        .OnClientClick("addTab(App.TabPanel1, 'idExt', 'http://www.sencha.com', this);"));
+                }),
+                
+            X.TabPanel()
+                .ID("TabPanel1")
+                .Region(Region.Center)
+        )
+    )
+}

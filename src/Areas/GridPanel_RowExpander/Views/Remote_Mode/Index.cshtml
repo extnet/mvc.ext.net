@@ -1,0 +1,80 @@
+﻿@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "RowExpander plugin with server side data";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <style>
+        .template {
+            color: #fff;
+            background-color: gray;
+        }
+    </style>
+
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>RowExpander plugin with server side data</h1>
+
+    @(Html.X().GridPanel()
+        .Title("RowExpander plugin with server side data")
+        .Icon(Icon.Table)
+        .Width(600)
+        .Height(300)
+        .Store(Html.X().Store()
+            .DataSource(Model)
+            .Model(Html.X().Model()
+                .Fields(
+                    Html.X().ModelField().Name("company"),
+                    Html.X().ModelField().Name("price").Type(ModelFieldType.Float),
+                    Html.X().ModelField().Name("change").Type(ModelFieldType.Float),
+                    Html.X().ModelField().Name("pctChange").Type(ModelFieldType.Float),
+                    Html.X().ModelField().Name("lastChange").Type(ModelFieldType.Date).DateFormat("M/d hh:mmtt"),
+                    Html.X().ModelField().Name("industry")
+                )
+            )
+        )
+        .ColumnModel(
+            Html.X().Column().DataIndex("company").Text("Company").Flex(1),
+            Html.X().Column().DataIndex("price").Text("Price").Renderer(RendererFormat.UsMoney),
+            Html.X().Column().DataIndex("change").Text("Change").Renderer("change"),
+            Html.X().Column().DataIndex("pctChange").Text("Change").Renderer("pctChange"),
+            Html.X().DateColumn().DataIndex("lastChange").Text("Last Updated")
+        )
+        .Plugins(
+            Html.X().RowExpander()
+                .Loader(Html.X().ComponentLoader()
+                    .Mode(LoadMode.Data)
+                    .Url(Url.Action("GetData"))
+                    .LoadMask(mask => mask.ShowMask = true)
+                    .Params(
+                        new
+                        {
+                            company = JRawValue.From("this.record.data['company']"),
+                            index = JRawValue.From("this.grid.store.indexOf(this.record)")
+                        }
+                    )
+                )
+                .TemplateHtml(@<text>
+                    <span class="template">
+                        Company: {company}, Row #: {index}, Server Date: {time}
+                    </span>
+                </text>)
+        )
+    )
+}

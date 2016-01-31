@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "GroupingSummary Plugin - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <style>
+        .x-grid-body .x-grid-cell-Cost {
+            background-color : #f1f2f4;
+        }
+         
+        .x-grid-row-summary .x-grid-cell-Cost .x-grid-cell-inner{
+            background-color : #e1e2e4;
+        }    
+
+        .task .x-grid-cell-inner {
+            padding-left: 15px;
+        }
+
+        .x-grid-row-summary .x-grid-cell-inner {
+            font-weight: bold;
+            font-size: 11px;
+            background-color : #f1f2f4;
+        } 
+    </style>
+
+    <script>
+        var totalCost = function(records) {
+            var i = 0,
+                length = records.length,
+                total = 0,
+                record;
+
+            for (; i < length; ++i) {
+                record = records[i];
+                total += record.get('Estimate') * record.get('Rate');
+            }
+            return total;
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>Group Summary Plugin</h1>
+    <p>Advanced grouping grid that allows cell editing and includes custom dynamic summary calculations.</p>
+
+    @(
+ Html.X().GridPanel()
+            .Frame(true)
+            .Title("Sponsored Projects")
+            .Icon(Icon.ApplicationViewColumns)
+            .Width(800)
+            .Height(450)
+            .Store(
+                Html.X().Store()
+                    .DataSource(Model)
+                    .GroupField("Name")
+                    .Sorters(
+                        Html.X().DataSorter().Property("Due").Direction(Ext.Net.SortDirection.ASC)
+                    )
+                    .Model(
+                        Html.X().Model()
+                            .IDProperty("TaskID")
+                            .Fields(
+                                Html.X().ModelField().Name("ProjectID"),
+                                Html.X().ModelField().Name("Name"),
+                                Html.X().ModelField().Name("TaskID"),
+                                Html.X().ModelField().Name("Description"),
+                                Html.X().ModelField().Name("Estimate").Type(ModelFieldType.Int),
+                                Html.X().ModelField().Name("Rate").Type(ModelFieldType.Float),
+                                Html.X().ModelField().Name("Cost").Type(ModelFieldType.Float),
+                                Html.X().ModelField().Name("Due").Type(ModelFieldType.Date)
+                            )
+                    )
+            )
+            .Plugins(
+                Html.X().CellEditing().ClicksToEdit(1)
+            )
+            .ColumnModel(
+                Html.X().SummaryColumn()
+                    .TdCls("task")
+                    .Text("Task")
+                    .DataIndex("Description")
+                    .Hideable(false)
+                    .SummaryType(SummaryType.Count)
+                    .Flex(1)
+                    .SummaryRenderer("return ((value === 0 || value > 1) ? '(' + value +' Tasks)' : '(1 Task)');"),
+
+                Html.X().Column()
+                    .Text("Project")
+                    .DataIndex("Name")
+                    .Width(20),
+
+                Html.X().SummaryColumn()
+                    .Width(85)
+                    .Text("Due Date")
+                    .DataIndex("Due")
+                    .SummaryType(SummaryType.Max)
+                    .Renderer(RendererFormat.Date, "'m/d/Y'")
+                    .SummaryRenderer(new Renderer() { Fn = "Ext.util.Format.dateRenderer('m/d/Y')" })
+                    .Editor(
+                        Html.X().DateField().Format("MM/dd/yyyy")
+                    ),
+
+                Html.X().SummaryColumn()
+                    .Width(75)
+                    .Text("Estimate")
+                    .DataIndex("Estimate")
+                    .SummaryType(SummaryType.Sum)
+                    .Renderer("return value +' hours';")
+                    .SummaryRenderer("return value +' hours';")
+                    .Editor(
+                        Html.X().NumberField().AllowBlank(false).MinValue(0).StyleSpec("text-align:left")
+                    ),
+
+                 Html.X().SummaryColumn()
+                    .Width(75)
+                    .Text("Rate")
+                    .DataIndex("Rate")
+                    .SummaryType(SummaryType.Average)
+                    .Renderer(RendererFormat.UsMoney)
+                    .SummaryRenderer("Ext.util.Format.usMoney")
+                    .Editor(
+                        Html.X().NumberField().AllowBlank(false).MinValue(0).StyleSpec("text-align:left")
+                    ),
+
+                 Html.X().SummaryColumn()
+                    .Width(75)
+                    .Text("Cost")
+                    .DataIndex("Cost")
+                    .Groupable(false)
+                    .CustomSummaryType("totalCost")
+                    .Renderer("return Ext.util.Format.usMoney(record.data.Estimate * record.data.Rate);")
+                    .SummaryRenderer("Ext.util.Format.usMoney")
+            )
+            .View(
+                Html.X().GridView().MarkDirty(false)
+            )
+            .Features(
+                Html.X().GroupingSummary()
+                    .ID("GroupingSummary1")
+                    .GroupHeaderTplString("{name}")
+                    .HideGroupedHeader(true)
+                    .EnableGroupingMenu(false)
+            )
+            .TopBarItem(
+                Html.X().Button()
+                    .Text("Toggle")
+                    .ToolTip("Toggle the visibility of summary row")
+                    .EnableToggle(true)
+                    .Pressed(true)
+                    .Handler("App.GroupingSummary1.toggleSummaryRow(!App.GroupingSummary1.showSummaryRow);App.GroupingSummary1.view.refresh();")
+            )
+    )
+}

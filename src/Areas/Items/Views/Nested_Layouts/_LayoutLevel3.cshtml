@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "_LayoutLevel2.cshtml";
+}
+
+@section section2{
+    @(
+        Html.X().Panel()
+            .Padding(3)
+            .Title("Panel Level3")
+            .Icon(Icon.Add)     
+            .Layout(LayoutType.Accordion)
+            .ItemsFromSection(this, "section3")        
+        )
+}

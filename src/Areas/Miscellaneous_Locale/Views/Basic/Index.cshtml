@@ -1,0 +1,45 @@
+﻿@model Dictionary<string, string>
+@{
+    ViewBag.Title = "Locale - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .spacer {
+            width  : 176px; 
+            height : 5px; 
+            border-bottom : dotted 1px gray;
+            margin-bottom : 5px;
+        }
+    </style>
+
+    <script>
+        var onSelect = function (comboBox) {
+            var query = Ext.Object.fromQueryString(window.location.search);
+            
+            query.lang = comboBox.getValue();
+            window.location.search = Ext.Object.toQueryString(query);
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>Auto detect language (depending UI Culture)</h1>
+    
+    @(X.ComboBox()
+        .ID("ComboBox1")
+        .Listeners(l => l.Select.Fn = "onSelect")
+        .Width(176)
+        .Items(X.ListItem().Text("None").Value("Ignore"))
+        .Items(Model.Select(o => new ListItem(o.Key, o.Value)))
+        .SelectedItems(new ListItem(ViewData["lang"]))
+    )
+    
+    <div class="spacer" />
+    
+    @X.DatePicker()
+}

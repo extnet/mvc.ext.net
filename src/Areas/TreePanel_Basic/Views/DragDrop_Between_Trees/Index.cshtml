@@ -1,0 +1,84 @@
+﻿@model Ext.Net.Node
+@{
+    ViewBag.Title = "Drag and Drop betweens two TreePanels - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .tree {
+    	    float  : left;
+    	    margin : 20px;
+    	    border : 1px solid #c3daf9;
+        }
+    </style>
+}
+
+@section example
+{
+    <h1>Drag and Drop betweens two TreePanels</h1>
+        
+    <p>The TreePanels have a TreeSorter applied in "folderSort" mode.</p>
+        
+    <p>Both TreePanels are in "appendOnly" drop mode since they are sorted.</p>
+        
+    <p>Drag along the edge of the tree to trigger auto scrolling while performing a drag and drop.</p>
+
+    <p>The data for this tree is asynchronously loaded with a TreeStore.</p>
+
+    <div class="tree">
+        @(
+            X.TreePanel()
+                .Border(false)
+                .Height(300)
+                .Width(250)
+                .UseArrows(true)
+                .Store(
+                    X.TreeStore()
+                        .FolderSort(true)
+                        .Proxy(
+                            X.AjaxProxy().Url(Url.Action("GetNodes"))
+                        )
+                        .Sorters(
+                            X.DataSorter().Property("text")
+                        )
+                )
+                .View(
+                    X.TreeView()
+                        .Plugins(
+                            X.TreeViewDragDrop().AppendOnly(true).ContainerScroll(true)
+                        )
+                )
+                .Root(Model)
+        )
+    </div>
+
+    <div class="tree">
+        @(
+            X.TreePanel()
+                .Border(false)
+                .Height(300)
+                .Width(250)
+                .UseArrows(true)
+                .Store(
+                    X.TreeStore()
+                        .FolderSort(true)
+                        .Proxy(
+                            X.AjaxProxy().Url(Url.Action("GetNodes"))
+                        )
+                        .Sorters(
+                            X.DataSorter().Property("text")
+                        )
+                        .Root(X.Node().Text("My Files").Icon(Icon.Folder).Expanded(true).EmptyChildren(true))
+                )
+                .View(
+                    X.TreeView()
+                        .Plugins(
+                            X.TreeViewDragDrop().AppendOnly(true).ContainerScroll(true)
+                        )
+                )
+        )
+    </div>
+}

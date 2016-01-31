@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "TreePanel using DirectMethod";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var nodeLoad = function (store, operation, options) {
+            var node = operation.node;
+
+            App.direct.NodeLoad(node.getId(), {
+                success : function (result) {
+                    node.set('loading', false);
+                    node.set('loaded', true);                    
+                    node.appendChild(result);
+                    node.expand();                    
+                },
+
+                failure : function (errorMsg) {
+                    Ext.Msg.alert('Failure', errorMsg);
+                }
+            });
+
+            return false;
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>TreePanel using DirectMethod</h1>
+    @(
+        Html.X().TreePanel()
+            .Title("Tree")
+            .Width(300)
+            .Height(450)
+            .Border(false)
+            .Root(Html.X().Node().NodeID("0").Text("Root"))
+            .Listeners(l => { l.BeforeLoad.Fn = "nodeLoad"; })
+    )
+}

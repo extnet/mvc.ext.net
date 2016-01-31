@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "TreePanel with Checkbox Enabled Children - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .complete .x-grid-cell-inner {
+            text-decoration : line-through;
+            color : #777;
+        }
+    </style>
+    
+    <script>
+        var getTasks = function (button) {
+            var msg = "", 
+                selChildren = button.up("treepanel").getChecked();
+                
+            Ext.each(selChildren, function (node) {
+                if (msg.length > 0) {
+                    msg += ", ";
+                }
+                
+                msg += node.data.text;
+            });
+            
+            Ext.Msg.show({
+                title    : "Completed Tasks", 
+                msg      : msg.length > 0 ? msg : "None",
+                icon     : Ext.Msg.INFO,
+                minWidth : 200,
+                buttons  : Ext.Msg.OK
+            });
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>TreePanel with Checkbox Enabled Children</h1>        
+    <p>This example demonstrates a simple checkbox selection in a TrePanel. The Checkbox is enabled on leaf Children by simply setting Checked="true/false" at the node level.</p>
+
+    @(
+        X.TreePanel()
+            .Title("My Task List")
+            .Icon(Icon.Accept)
+            .Height(400)
+            .Width(250)
+            .UseArrows(true)
+            .AutoScroll(true)
+            .Animate(true)
+            .RootVisible(false)
+            .Root(
+                X.Node().Children(
+                    X.Node().Text("To Do").Icon(Icon.Folder).Children(
+                        X.Node().Text("Go jogging").Leaf(true).Checked(false),
+                        X.Node().Text("Take a nap").Leaf(true).Checked(false),
+                        X.Node().Text("Clean house").Leaf(true).Checked(false)
+                    ),
+
+                    X.Node().Text("Grocery List").Icon(Icon.Folder).Children(
+                        X.Node().Text("Bananas").Leaf(true).Checked(false),
+                        X.Node().Text("Milk").Leaf(true).Checked(false),
+                        X.Node().Text("Cereal").Leaf(true).Checked(false),
+                        X.Node().Text("Energy foods").Icon(Icon.Folder).Children(
+                            X.Node().Text("Coffee").Leaf(true).Checked(false),
+                            X.Node().Text("Red Bull").Leaf(true).Checked(false)
+                        )
+                    ),
+
+                    X.Node().Text("Kitchen Remodel").Icon(Icon.Folder).Children(
+                        X.Node().Text("Finish the budget").Leaf(true).Checked(false),
+                        X.Node().Text("Call contractors").Leaf(true).Checked(false),
+                        X.Node().Text("Choose design").Leaf(true).Checked(false)
+                    )
+                )
+            )
+            .Listeners(l => {
+                l.CheckChange.Handler = "Ext.get(this.getView().getNode(item))[checked ? 'addCls' : 'removeCls']('complete')";
+                
+                l.AfterRender.Handler = "this.getRootNode().expand(true);";
+                l.AfterRender.Delay = 50;
+            })
+            .Buttons(
+                X.Button().Text("Get Completed Tasks").Handler("getTasks")
+            )
+    )
+}

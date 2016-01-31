@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Direct Events";
+    Layout = "~/Views/Shared/_BaseLayoutNoMgr.cshtml";
+}
+
+@section headtag
+{
+    <style>
+        .box, .box-wihtout-event {
+            width: 100px;
+            height: 50px;
+            border: 1px solid #000;
+            cursor: pointer;
+            text-align: center;
+            margin-bottom: 4px;
+            background-color: white;
+        }
+
+        .red {
+            color: #fff;
+            cursor: default;
+            background-color: red;
+        }
+
+        .blue {
+            color: #fff;
+            background-color: blue;
+        }
+    </style>
+}
+
+@section example
+{
+    @(Html.X().ResourceManager()
+            .CustomDirectEvents(
+                 new DirectEvent { Target = "Button3", Url = Url.Action("UpdateTimeStamp") },
+                 new DirectEvent { Target = "Span1", Url = Url.Action("UpdateTimeStamp") },
+                 new DirectEvent { Target = "Ext.select('div.box', true)", Url = Url.Action("UpdateTimeStamp") }
+            )
+    )
+
+    <h1>Summary of DirectEvents</h1>
+    <p>The action of each of the following samples will trigger a DirectEvent Ajax request to the server and return a Notification Window to the browser.</p>
+    <h2>Add a &lt;Click> DirectEvent to &lt;ext:Button></h2>
+
+    @Html.X().Button().Text("Click Me").DirectClickUrl(Url.Action("UpdateTimeStamp"))
+
+    <h2>Add a &lt;Click> DirectEvent with confirmation to &lt;ext:Button></h2>
+    @(Html.X().Button()
+        .Text("Click Me")
+        .DirectEvents(de =>
+        {
+            de.Click.Url = Url.Action("UpdateTimeStamp");
+            de.Click.Confirmation.ConfirmRequest = true;
+            de.Click.Confirmation.Title = "Title";
+            de.Click.Confirmation.Message = "Sample Confirmation Message...";
+        })
+     )
+
+    <h2>Add a &lt;Click> DirectEvent with dynamic message confirmation to &lt;ext:Button></h2>
+    @(Html.X().Button()
+        .Text("Click Me")
+        .DirectEvents(de =>
+        {
+            de.Click.Url = Url.Action("UpdateTimeStamp");
+            de.Click.Confirmation.ConfirmRequest = true;
+            de.Click.Confirmation.BeforeConfirm = "config.confirmation.title = 'Title'; config.confirmation.message = 'Please confirm clicking on ' + config.control.text;";
+        })
+     )
+
+    <h2>Add a Click DirectEvent to a standard html &lt;input> button</h2>
+    <input id="Button3" type="button" value="Click Me" />
+
+    <h2>Add a Click DirectEvent to html &lt;span> element</h2>
+
+    <span id="Span1" style="cursor: pointer;">*Click Me*</span>
+
+    <h2>Add a Click DirectEvent to several html &lt;div> elements by using a Target Query</h2>
+
+    <p>By using a Target Query we can attach the same DirectEvent (or Listener) to several html elements or Controls and fire a server-side event.</p>
+    <p>The target(s) do not require an "id" and do not need a runat="server" attribute. The elements can be any html element available on the Page.</p>
+    <p>The following Target Query will select all &lt;div> elements on the Page that contain the css class "box", but do not contain the css class "red".</p>
+
+    <div class="box">Click Me</div>
+    <div class="box-wihtout-event red">Not Me</div>
+    <div class="box blue">Click Me too!</div>
+}

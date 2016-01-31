@@ -1,0 +1,53 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Field Mapping - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var departmentRenderer = function (value) {
+            if (!Ext.isEmpty(value)) {
+                return value.Name;
+            }
+
+            return value;
+        };
+    </script>
+}
+
+@section example
+{    
+    @(Html.X().GridPanel()
+        .Title("List")
+        .Icon(Icon.Application)
+        .Store(Html.X().Store()
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("ID", ModelFieldType.Int),
+                    new ModelField("Name"),
+                    new ModelField("Surname"),
+                    new ModelField()
+                    {
+                        Name = "Department",
+                        Type = ModelFieldType.Object
+                    }
+                )
+            )
+            .DataSource(Model)
+        )
+        .ColumnModel(
+            Html.X().Column().Text("ID").DataIndex("ID"),
+            Html.X().Column().Text("NAME").DataIndex("Name"),
+            Html.X().Column().Text("SURNAME").DataIndex("Surname"),
+            Html.X().Column()
+                .Text("DEPARTMENT")
+                .DataIndex("Department")
+                .Width(240)
+                .Renderer("departmentRenderer")
+        )
+    )
+}
+

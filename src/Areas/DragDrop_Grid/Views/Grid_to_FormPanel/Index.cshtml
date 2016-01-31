@@ -1,0 +1,91 @@
+﻿@model Ext.Net.MVC.Examples.Areas.DragDrop_Grid.Models.Grid_to_FormPanelModel
+
+@{
+    ViewBag.Title = "Drag and Drop from GridPanel to FormPanel - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var notifyEnter = function (ddSource, e, data) {
+			App.FormPanel1.body.stopAnimation();
+			App.FormPanel1.body.highlight();
+		};
+		
+		var notifyDrop = function (ddSource, e, data) {
+			var selectedRecord = ddSource.dragData.records[0];
+			App.FormPanel1.getForm().loadRecord(selectedRecord);
+			
+			// Delete record from the grid.  not really required.
+    		ddSource.view.store.remove(selectedRecord);
+			return true;
+		};
+    </script>
+}
+
+@section example 
+{
+    <h1>Drag and Drop from a Data Grid to a Form Panel</h1>
+        
+    <p>This example shows how to setup a one way drag and drop from a grid to an instance of a FormPanel.</p>    
+
+    @(X.Panel()
+        .Width(650)
+        .Height(300)
+        .Layout("border")
+        .Items(
+            X.GridPanel()
+                .ID("GridPanel1")
+                .Region(Region.West)
+                .Width(325)
+                .Title("Left")
+                .MarginSpec("5 5 5 5")
+                .Store(X.Store()
+                    .ID("Store1")
+                    .Model(X.Model()
+                        .Fields("Name", "Column1", "Column2")
+                    )
+                    .DataSource(Model.Data)
+                )
+                .ColumnModel(
+                    X.Column().Text("Record Name").DataIndex("Name").Flex(1),
+                    X.Column().Text("Column 1").DataIndex("Column1").Width(60),
+                    X.Column().Text("Column 2").DataIndex("Column2").Width(60)
+                )
+                .SelectionModel(X.RowSelectionModel().Mode(SelectionMode.Single))
+                .View(X.GridView()
+                    .Plugins(X.GridDragDrop().EnableDrop(false).DDGroup("gridDDGroup"))
+                ),
+                
+            X.FormPanel()
+                .ID("FormPanel1")
+                .Region(Region.Center)
+                .Title("Generic Form Panel")
+                .BodyStyle("background-color: #DFE8F6")
+                .BodyPadding(10)
+                .MarginSpec("5 5 5 0")
+                .Items(
+                    X.TextField().FieldLabel("Record Name").Name("Name"),
+                    X.TextField().FieldLabel("Column 1").Name("Column1"),
+                    X.TextField().FieldLabel("Column 2").Name("Column2")
+                )
+        )
+        .BottomBar(X.Toolbar()
+            .Items(
+                X.ToolbarFill(),
+                X.Button()
+                    .Text("Reset")
+                    .Handler("#{Store1}.loadData(#{Store1}.proxy.data); #{FormPanel1}.getForm().reset();")
+            )
+        )
+    )
+
+    @(X.DropTarget()
+        .Target("={#{FormPanel1}.body}")
+        .Group("gridDDGroup")
+        .NotifyEnter(h => h.Fn = "notifyEnter")
+        .NotifyDrop(h => h.Fn = "notifyDrop")
+    )
+}

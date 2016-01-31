@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "Gauge Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+     <script>
+        var reloadCharts = function() {
+            Ext.Ajax.request({
+                url: '@Url.Action("GetData")',
+                success: function(response) {
+                    var result = Ext.decode(response.responseText).data;
+                    App.Chart1.getStore().loadData(result.Chart1);
+                    App.Chart2.getStore().loadData(result.Chart2);
+                    App.Chart3.getStore().loadData(result.Chart3);
+                }
+            });
+        }
+        
+        var saveChart = function saveChart (chart) {
+            Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as an image?', function (choice) {
+                if (choice == 'yes') {
+                    chart.download();
+                }
+            });
+        };
+    </script>
+}
+
+@section example 
+{
+    <h1>Gauge</h1>
+
+    <p>Displaying three custom gauge charts bound to different data stores with different configuration options and easings.</p>
+        
+    <p>Click on <b>Reload Data</b> to update the information.</p>
+
+    @(X.Panel()
+        .Width(800)
+        .Height(250)
+        .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Stretch })
+        .TopBar(X.Toolbar()
+            .Items(
+                X.ToolbarFill(),
+
+                X.Button()
+                    .Text("Reload Data")
+                    .Icon(Icon.ArrowRefresh)
+                    .Handler("reloadCharts"),
+
+                X.Button()
+                    .Text("Save 1st Chart")
+                    .Icon(Icon.Disk)
+                    .Handler("saveChart(App.Chart1);"),
+
+                X.Button()
+                    .Text("Save 2nd Chart")
+                    .Icon(Icon.Disk)
+                    .Handler("saveChart(App.Chart2);"),
+
+                X.Button()
+                    .Text("Save 3rd Chart")
+                    .Icon(Icon.Disk)
+                    .Handler("saveChart(App.Chart3);")
+            )
+        )
+        .Items(
+            X.PolarChart()
+                .ID("Chart1")
+                .StyleSpec("background:#fff;")
+                .InsetPadding(25)
+                .Flex(1)
+                .Store(X.Store()
+                    .Data(ViewData["Chart1"])
+                    .Model(X.Model()
+                        .Fields(
+                            X.ModelField().Name("Name"),
+                            X.ModelField().Name("Data1")
+                        )
+                    )
+                )
+                .Axes(
+                    X.NumericAxis()
+                        .Position(Position.Gauge)
+                        .Minimum(0)
+                        .Maximum(100)
+                        .MajorTickSteps(10)
+                        .Margin(-10)
+                )
+                .Series(X.GaugeSeries()
+                    .AngleField("Data1")
+                    .Donut(0)
+                    .Colors(new string[] { "#F49D10", "#ddd" })
+                    .TotalAngleDegrees(180)
+                ),
+
+            X.PolarChart()
+                .ID("Chart2")
+                .StyleSpec("background:#fff;")
+                .InsetPadding(25)
+                .Flex(1)
+                .Store(X.Store()
+                    .Data(ViewData["Chart2"])
+                    .Model(X.Model()
+                        .Fields(
+                            X.ModelField().Name("Name"),
+                            X.ModelField().Name("Data1")
+                        )
+                    )
+                )
+                .Axes(
+                    X.NumericAxis()
+                        .Position(Position.Gauge)
+                        .Minimum(0)
+                        .Maximum(100)
+                        .MajorTickSteps(10)
+                        .Margin(7)
+                )
+                .Series(X.GaugeSeries()
+                    .AngleField("Data1")
+                    .Donut(30)
+                    .Colors(new string[] { "#82B525", "#ddd" })
+                    .TotalAngleDegrees(180)
+                ),
+
+            X.PolarChart()
+                .ID("Chart3")
+                .StyleSpec("background:#fff;")
+                .InsetPadding(25)
+                .Flex(1)
+                .AnimationConfig(new AnimConfig { Easing = Easing.BounceOut, Duration = 500 })
+                .Store(X.Store()
+                    .Data(ViewData["Chart3"])
+                    .Model(X.Model()
+                        .Fields(
+                            X.ModelField().Name("Name"),
+                            X.ModelField().Name("Data1")
+                        )
+                    )
+                )
+                .Axes(
+                    X.NumericAxis()
+                        .Position(Position.Gauge)
+                        .Minimum(0)
+                        .Maximum(100)
+                        .MajorTickSteps(10)
+                        .Margin(7)
+                )
+                .Series(X.GaugeSeries()
+                    .AngleField("Data1")
+                    .Donut(80)
+                    .Colors(new string[] { "#3AA8CB", "#ddd" })
+                    .TotalAngleDegrees(180)
+                )
+        )
+    )
+}

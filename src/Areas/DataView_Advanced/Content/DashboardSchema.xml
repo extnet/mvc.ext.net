@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<groups defaultIcon="images/icon.png">
+  <group title="Management">
+    <item>
+      <title>Customers</title>
+      <item-icon>images/icon.png</item-icon>
+      <id>customers</id>
+    </item>
+
+    <item>
+      <title>Orders</title>
+        <id>orders</id>
+    </item>
+
+    <item>
+      <title>Reports</title>
+      <id>reports</id>
+    </item>
+
+  </group>
+
+  <group title="Other group">
+    <item>
+      <title>Inventory</title>
+        <id>inventory</id>
+    </item>
+
+    <item>
+      <title>Suppliers</title>
+      <id>suppliers</id>
+    </item>
+
+    <item>
+      <title>Help</title>
+      <id>help</id>
+    </item>
+
+    <item>
+      <title>Options</title>
+      <id>options</id>
+    </item>
+
+    <item>
+      <title>Employees</title>
+      <id>employees</id>
+    </item>
+  </group>
+</groups>

@@ -1,0 +1,109 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Configure Columns on the fly - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+    </script>    
+}
+
+@section example
+{
+    <h1>Configuring GridPanel's Columns on the fly via DirectEvents</h1>
+
+    @(Html.X().GridPanel()
+        .ID("GridPanel1")
+        .Title("Array Grid")
+        .Width(780)
+        .Height(350)
+        .Store(Html.X().Store()
+            .ID("Store1")
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("company"),
+                    new ModelField("price", ModelFieldType.Float),
+                    new ModelField("change", ModelFieldType.Float),
+                    new ModelField("pctChange", ModelFieldType.Float),
+                    new ModelField("lastChange", ModelFieldType.Date, "M/d hh:mmtt")
+                )
+            )
+            .DataSource(Model)
+        )
+        .ColumnModel(
+            Html.X().Column().ID("CompanyColumn").Text("Company").DataIndex("company").Flex(1).Pattern("{value:uppercase}"),
+            Html.X().Column().ID("PriceColumn").Text("Price").DataIndex("price").Renderer(RendererFormat.UsMoney),
+            Html.X().Column().ID("ChangeColumn").Text("Change").DataIndex("change")
+        )
+        .BottomBar(Html.X().Toolbar()
+            .Items(
+                Html.X().ToolbarFill(),
+                Html.X().Button().Text("Change Header")
+                    .DirectEvents(de =>
+                    {
+                        de.Click.Url = Url.Action("ChangeHeader");
+                        de.Click.Single = true;
+                        de.Click.Success = "this.disable();";
+                    }),
+                Html.X().Button().Text("Change Width")
+                    .DirectEvents(de =>
+                    {
+                        de.Click.Url = Url.Action("ChangeWidth");
+                        de.Click.Single = true;
+                        de.Click.Success = "this.disable();";
+                    }),
+                Html.X().Button().Text("Change Renderer")
+                    .DirectEvents(de =>
+                    {
+                        de.Click.Url = Url.Action("ChangeRenderer");
+                        de.Click.Single = true;
+                        de.Click.Success = "this.disable(); this.up('gridpanel').getView().refresh(false);";
+                    }),
+                Html.X().Button().Text("Hide 'Change'")
+                    .EnableToggle(true)
+                    .DirectEvents(de =>
+                    {
+                        de.Click.Url = Url.Action("ToggleChange");
+                        de.Click.ExtraParams.Add(new
+                        {
+                            pressed = new JRawValue("this.pressed")
+                        });
+                    }),
+                Html.X().Button().Text("Add Column")
+                    .DirectEvents(de =>
+                    {
+                        de.Click.Url = Url.Action("AddColumn");
+                        de.Click.Single = true;
+                        de.Click.Success = "this.disable();";
+                    }),
+                Html.X().Button().Text("Insert Column")
+                    .DirectEvents(de =>
+                    {
+                        de.Click.Url = Url.Action("InsertColumn");
+                        de.Click.Single = true;
+                        de.Click.Success = "this.disable();";
+                    }),
+                Html.X().Button().Text("Set New Pattern")
+                    .DirectEvents(de =>
+                    {
+                        de.Click.Url = Url.Action("SetNewPattern");
+                        de.Click.Single = true;
+                        de.Click.Success = "this.disable();";
+                    })
+            )
+        )
+
+    )
+}

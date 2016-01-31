@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Factory - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+
+@section example
+{
+    <h1>Factory</h1>
+    <p>Factory allows to register control (or a user control or a view) as factory and reuse across all pages in your application</p>
+    <p>Please note that Content cannot be used inside factory widget because the Content region cannot be clonned.</p>
+
+    @(
+        Html.X().Button()
+            .Text("Factory widget, click me")
+            .FactoryAlias("mybutton")
+    )
+
+    @(
+        Html.X().Button()
+            .Text("Render window 1")
+            .DirectClickAction("RenderWindow1")
+    )
+
+    @(
+        Html.X().Button()
+            .Text("Render window 2")
+            .DirectClickAction("RenderWindow2")
+    )
+}

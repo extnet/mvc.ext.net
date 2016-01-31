@@ -1,0 +1,9 @@
+.x-btn .direction-asc {
+    background-image : url("/Areas/DataView_Advanced/Content/Multi_sort/sort_asc.gif");
+    background-position: 4px 6px !important;
+}
+
+.x-btn .direction-desc {
+    background-image : url("/Areas/DataView_Advanced/Content/Multi_sort/sort_desc.gif");
+    background-position: 4px 6px !important;
+}

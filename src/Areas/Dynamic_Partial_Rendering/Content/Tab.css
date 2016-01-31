@@ -1,0 +1,21 @@
+﻿.x-newtab-item
+{
+    float:left;
+    margin:10px;
+    width:200px;
+    height:200px;
+    border: 2px solid #E0E0E0;
+    cursor: pointer;        
+    text-align:center;        
+}
+
+.x-newtab-over-item
+{
+    border: 2px solid gray;
+}
+
+.x-newtab-item h1
+{
+    font-size: 160px;
+    margin-top: 100px
+}

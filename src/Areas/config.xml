@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<example>
+  <order>
+    <folder name="Getting_Started" />
+  </order>
+
+  <icons>
+    <folder name="Action" iconCls="fa fa-play" />
+    <folder name="Associations" iconCls="fa fa-cogs" />
+    <folder name="Buttons" iconCls="fa fa-hand-pointer-o" />
+    <folder name="Calendar" iconCls="fa fa-calendar-o" />
+    <folder name="Chart" iconCls="fa fa-pie-chart" />
+    <folder name="ColorPicker" iconCls="fa fa-paint-brush" />
+    <folder name="Combination_Samples" iconCls="fa fa-random" />
+    <folder name="Data" iconCls="fa fa-database" />
+    <folder name="DataView" iconCls="fa fa-eye-slash" />
+    <folder name="Desktop" iconCls="fa fa-desktop" />
+    <folder name="DragDrop" iconCls="fa fa-arrows" />
+    <folder name="Draw" iconCls="fa fa-pencil-square-o" />
+    <folder name="Dynamic_Partial_Rendering" iconCls="fa fa-bullseye" />
+    <folder name="Editor" iconCls="fa fa-pencil" />
+    <folder name="Element" iconCls="fa fa-puzzle-piece" />
+    <folder name="Events" iconCls="fa fa-bolt" />
+    <folder name="Form" iconCls="fa fa-check-square-o" />
+    <folder name="Getting_Started" iconCls="fa fa-info-circle" />
+    <folder name="GridPanel" iconCls="fa fa-th">
+      <folder name="Plugins" iconCls="icon-plugin" />
+    </folder>
+    <folder name="Items" iconCls="fa fa-cubes" />
+    <folder name="Keys" iconCls="fa fa-keyboard-o" />
+    <folder name="Kitchen_Sink" iconCls="fa fa-home">
+      <folder name="Forms" iconCls="#ApplicationForm" />
+      <folder name="GridPanels" iconCls="#ApplicationViewColumns" />
+      <folder name="Panels" iconCls="#Application" />
+      <folder name="TabPanels" iconCls="#TabPanel" />
+      <folder name="Toolbars" iconCls="#Toolbar" />
+      <folder name="TreePanels" iconCls="#ApplicationSideTree" />
+      <folder name="Windows" iconCls="#ApplicationDouble" />
+    </folder>
+    <folder name="Layout" iconCls="fa fa-th-large" />
+    <folder name="Loaders" iconCls="fa fa-spinner" />
+    <folder name="MessageBox" iconCls="fa fa-envelope-o" />
+    <folder name="MessageBus" iconCls="fa fa-bus" />
+    <folder name="Miscellaneous" iconCls="fa fa-asterisk" />
+    <folder name="Models" iconCls="fa fa-building-o" />
+    <folder name="MultiUpload" iconCls="fa fa-upload" />
+    <folder name="Panel" iconCls="fa fa-clone" />
+    <folder name="Portal" iconCls="fa fa-laptop" />
+    <folder name="PropertyGrid" iconCls="fa fa-columns" />
+    <folder name="SignalR" iconCls="fa fa-wifi" />
+    <folder name="TabPanel" iconCls="fa fa-list-alt" />
+    <folder name="TaskManager" iconCls="fa fa-hourglass-o" />
+    <folder name="Toolbar" iconCls="fa fa-wrench" />
+    <folder name="TreePanel" iconCls="fa fa-tree" />
+    <folder name="Viewport" iconCls="fa fa-object-group" />
+    <folder name="Window" iconCls="fa fa-object-ungroup" />
+    <folder name="XRender" iconCls="fa fa-magic" />
+  </icons>
+
+  <new version="4.0.0">
+  </new>
+
+  <updated version="4.0.0">
+  </updated>
+
+  <!--
+  <new version="3.3.0">
+    <folder name="Chart_Bar\Views\Basic_3D" />
+    <folder name="Form_Login\Views\Auto_Complete" />
+  </new>
+  -->
+
+  <!--
+  <new version="3.0">
+    <folder name="GridPanel_ColumnModel\Views\HyperlinkColumn" />
+    <folder name="Miscellaneous_Factory\Views\Basic" />
+  </new>
+
+  <update version="3.0">
+    <folder name="GridPanel_ColumnModel\Views\Ajax_Configuration" />
+  </update>
+  -->
+
+  <!--<new version="2.5.3">
+    <folder name="Form_ComboBox\Views\Linked_Combos_In_Grid" />
+  </new>-->
+
+  <!--<new version="2.4">
+    <folder name="GridPanel_FilterHeader\Views\Overview" />
+    <folder name="GridPanel_Paging_and_Sorting\Views\Multiple_Sorting_Local" />
+  </new>-->
+  
+  <!--<new version="2.3.0">
+    <folder name="Associations_HasMany\Views\Simple" />
+    <folder name="Associations_HasOne\Views\Simple" />
+    <folder name="Chart_Dashboard\Views\Basic" />
+    <folder name="Data_Basic\Views\ModelSerializer" />
+    <folder name="DragDrop_Advanced\Views\Example3" />
+    <folder name="DragDrop_Grid\Views\Cell_to_Cell" />
+    <folder name="DragDrop_Grid\Views\Field_to_Grid" />
+    <folder name="DragDrop_Grid\Views\Grid_to_FormPanel" />
+    <folder name="DragDrop_Panel\Views\Swap_Dropable_Panel" />
+    <folder name="Draw_Basic\Views\Actions" />
+    <folder name="Draw_Basic\Views\Analytics" />
+    <folder name="Draw_Basic\Views\Animation" />
+    <folder name="Draw_Basic\Views\Animation_Playground" />
+    <folder name="Draw_Basic\Views\Australia" />
+    <folder name="Draw_Basic\Views\Logos" />
+    <folder name="Draw_Basic\Views\Pie_Chart" />
+    <folder name="Draw_Basic\Views\Punch_Chart" />
+    <folder name="Draw_Basic\Views\Reflection" />
+    <folder name="Draw_Basic\Views\Rotate_Image" />
+    <folder name="Draw_Basic\Views\Rotate_Text" />
+    <folder name="Gantt\Views\Buffered_Rendering" />
+    <folder name="Gantt\Views\Print" />
+    <folder name="Gantt\Views\Simple" />
+    <folder name="GridPanel_Miscellaneous\Views\Marking_Records" />
+    <folder name="GridPanel_Selection_Models\Views\Checkbox_Selection" />
+    <folder name="GridPanel_Data_Presentation\Views\Server_Mapping" />
+    <folder name="Form_MultiSelect\Views\Overview" />
+    <folder name="Scheduler\Views\BBC" />
+    <folder name="Scheduler\Views\Buffered_View" />
+    <folder name="Scheduler\Views\Scrolling_Programmatically" />
+    <folder name="TabPanel_Basic\Views\TabMenu" />
+    <folder name="TabPanel_TabStrip\Views\Overview" />
+    <folder name="Viewport_Basic\Views\Build_in_CodeBehind" />
+    <folder name="Viewport_Basic\Views\Built_in_Markup" />
+    <folder name="XRender_Basic\Views\Add_Items" />
+    <folder name="XRender_Basic\Views\New_Window" />
+  </new>-->  
+  
+  <!--<new version="2.2">
+    <folder name="Buttons_Basic\Views\Default_Button" />
+    <folder name="Buttons_Basic\Views\ImageButton" />
+    <folder name="Buttons_Basic\Views\LinkButton" />
+    <folder name="Buttons_Basic\Views\Overview" />
+    <folder name="Calendar_Overview\Views\Basic" />
+    <folder name="Calendar_Overview\Views\Remote_Data" />
+    <folder name="Chart_Area\Views\Basic" />
+    <folder name="Chart_Bar\Views\Basic" />
+    <folder name="Chart_Column\Views\Basic" />
+    <folder name="Chart_Gauge\Views\Basic" />
+    <folder name="Chart_Dashboard\Views\Basic" />
+    <folder name="Chart_Line\Views\Basic" />
+    <folder name="Chart_Pie\Views\Basic" />
+    <folder name="Chart_Radar\Views\Basic" />
+    <folder name="Chart_Scatter\Views\Basic" />
+    <folder name="ColorPicker_Basic\Views\Custom_Colors" />
+    <folder name="ColorPicker_Basic\Views\Custom_View" />
+    <folder name="ColorPicker_Basic\Views\Overview" />
+    <folder name="DataView_Advanced\Views\Animated" />
+    <folder name="DataView_Advanced\Views\Chooser" />
+    <folder name="DataView_Advanced\Views\Grouping" />
+    <folder name="DataView_Advanced\Views\Multi_sort" />
+    <folder name="DataView_Advanced\Views\Report" />
+    <folder name="Desktop\Views\ASPX" />
+    <folder name="Desktop\Views\Overview" />
+    <folder name="DragDrop_Basic\Views\Dom" />
+    <folder name="DragDrop_Basic\Views\Example1" />
+    <folder name="DragDrop_Basic\Views\Example2" />
+    <folder name="DragDrop_Basic\Views\Example3" />
+    <folder name="Editor_Basic\Views\FormPanel_Labels" />
+    <folder name="Editor_Basic\Views\Overview" />
+    <folder name="Element_Basic\Views\Layer" />
+    <folder name="Element_Basic\Views\Overview" />
+    <folder name="Form_ComboBox\Views\Custom_Search" />
+    <folder name="Form_FileUploadField\Views\Basic" />
+    <folder name="Form_FormPanel\Views\Basic" />
+    <folder name="Form_Groups\Views\Basic" />
+    <folder name="Form_Groups\Views\GroupFor" />
+    <folder name="Form_HyperLink\Views\Basic" />
+    <folder name="Form_Label\Views\Basic" />
+    <folder name="Getting_Started\Views\BREAKING_CHANGES" />
+    <folder name="Getting_Started\Views\CHANGELOG" />
+    <folder name="GridPanel_MultiHeader\Views\Filter" />
+    <folder name="Keys_KeyMap\Views\BorderLayout_Regions_Toggle" />
+    <folder name="Keys_KeyNav\Views\Basic" />
+    <folder name="Layout_AbsoluteLayout\Views\Basic" />
+    <folder name="Layout_Accordion\Views\Basic_In_CodeBehind" />
+    <folder name="Layout_Accordion\Views\Basic_In_Markup" />
+    <folder name="Layout_AnchorLayout\Views\Basic" />
+    <folder name="Layout_CardLayout\Views\Basic" />
+    <folder name="Layout_ColumnLayout\Views\Basic" />
+    <folder name="Layout_FitLayout\Views\Basic" />
+    <folder name="Layout_HBoxLayout\Views\Basic" />
+    <folder name="Layout_VBoxLayout\Views\Basic" />
+    <folder name="MessageBox_Basic\Views\ButtonsConfig" />
+    <folder name="MessageBox_Basic\Views\Overview" />
+    <folder name="MessageBus_Basic\Views\Simple" />
+    <folder name="MessageBus_Basic\Views\Complex" />
+    <folder name="Miscellaneous_ClickRepeater\Views\Basic" />
+    <folder name="Miscellaneous_FlashComponent\Views\Basic" />
+    <folder name="Miscellaneous_History\Views\Basic" />
+    <folder name="Miscellaneous_Locale\Views\Basic" />
+    <folder name="Miscellaneous_Mouse_Distance_Sensor\Views\Basic" />
+    <folder name="Miscellaneous_Render_Template\Views\Basic" />
+    <folder name="Miscellaneous_Resizable\Views\Basic" />
+    <folder name="Panel_Basic\Views\Deferred_Loading" />
+    <folder name="Panel_Basic\Views\IFrame_Communication" />
+    <folder name="Panel_Basic\Views\Loader" />
+    <folder name="Panel_BodyMask\Views\Custom_Mask" />
+    <folder name="Panel_BodyMask\Views\Standard_Mask" />
+    <folder name="Panel_Miscellaneous\Views\Bubble_Panel" />
+    <folder name="PropertyGrid_Basic\Views\Overview" />
+    <folder name="TabPanel_Basic\Views\Add_Tabs" />
+    <folder name="TabPanel_Basic\Views\Advanced_Tab" />
+    <folder name="TabPanel_Basic\Views\Ajax_Load" />
+    <folder name="Window_Basic\Views\Hello_World" />
+    <folder name="Window_Basic\Views\Load_External_Website" />
+    <folder name="Window_Basic\Views\Show" />
+    <folder name="Window_Basic\Views\Window_Variations" />        
+    <folder name="XRender_Basic\Views\Add_Items" />        
+    <folder name="XRender_Basic\Views\New_Window" />     
+  </new>-->
+</example>

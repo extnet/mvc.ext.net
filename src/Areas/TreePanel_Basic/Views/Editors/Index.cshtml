@@ -1,0 +1,72 @@
+﻿@model Tuple<Node, Node>
+@{
+    ViewBag.Title = "TreePanel with Editor - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>TreePanel with Editor</h1>
+    <h3>Tree Editor Filter</h3>
+
+    @(
+        X.TreePanel()
+            .Icon(Icon.Anchor)
+            .Title("Tree Editors Filter")
+            .AutoScroll(true)
+            .Width(250)
+            .CollapseFirst(true)            
+            .RootVisible(false)
+            .Fields(
+                X.ModelField().Name("editor").Type(ModelFieldType.Int)
+            )
+            .Editor(
+                X.TextField(),
+                X.NumberField(),
+                X.ComboBox()
+                    .Editable(false)
+                    .Items(
+                        "Item 1",
+                        "Item 2"
+                    )
+            )
+            .EditorStrategy(s => s.Handler="return record.data.editor;")
+            .Plugins(
+                X.CellEditing()
+            )
+            .Root(Model.Item1)
+    )
+
+    <h3>TreePanel with Active Editor</h3>
+
+    @(
+        X.TreePanel()
+            .Icon(Icon.Anchor)
+            .Title("Tree Active Editor")
+            .AutoScroll(true)
+            .Width(250)
+            .CollapseFirst(true)            
+            .RootVisible(false)
+            .TopBarItem(
+                X.Button().Text("Editor1").ToggleGroup("editor").Pressed(true).Handler("this.up('treepanel').activeEditorIndex = 0;"),
+                X.Button().Text("Editor2").ToggleGroup("editor").Handler("this.up('treepanel').activeEditorIndex = 1;"),
+                X.Button().Text("Editor3").ToggleGroup("editor").Handler("this.up('treepanel').activeEditorIndex = 2;")
+            )
+            .Editor(
+                X.TextField(),
+                X.NumberField(),
+                X.ComboBox()
+                    .ForceSelection(true)
+                    .Items(
+                        "Item 1",
+                        "Item 2"
+                    )
+            )
+            .EditorStrategy(s => s.Handler="return panel.activeEditorIndex || 0;")
+            .Plugins(
+                X.CellEditing()
+            )
+            .Root(Model.Item2)
+    )
+}

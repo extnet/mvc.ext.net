@@ -1,0 +1,90 @@
+﻿@model List<AbstractSprite>
+@{
+    ViewBag.Title = "Australia - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        function onMouseOver(sprite, color, idx) {
+            sprite.fx.stop();
+            sprite.setAttributes({
+                fill : color,
+
+
+
+                duration: 500
+            });   
+            sprite.getSurface().renderFrame();
+
+            App.StateName.setValue(App.InfoHolder.mapInfo[idx].state);
+            App.StateDesc.setValue(App.InfoHolder.mapInfo[idx].desc);
+        }
+
+        function onMouseOut(sprite) {
+            sprite.fx.stop();
+            sprite.setAttributes({
+                fill : "#808080",
+
+
+
+                duration: 500
+            });
+
+            sprite.getSurface().renderFrame();
+        }
+    </script>
+
+    <style>
+        .x-state-desc .x-form-display-field{
+            font-size: 14px;
+        }
+
+        .x-state-name .x-form-display-field{
+            text-align:center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
+}
+
+@section example
+{
+    @(X.ObjectHolder().ID("InfoHolder")
+        .Items(i => { i.Add("mapInfo", ViewData["mapInfo"]); })
+    )
+
+    @(X.Viewport()
+        .LayoutConfig(new HBoxLayoutConfig{ Align = HBoxAlign.Middle, Pack = BoxPack.Center })
+        .Items(
+            X.DrawContainer()
+                .ID("Draw1")
+                .Width(300)
+                .Height(300)
+                .Items(i => {
+                    foreach (AbstractSprite sprite in Model)
+                    {
+                        i.Add(sprite);
+                    }
+                }),
+                
+            X.Container()
+                .Height(300)
+                .Width(300)
+                .Layout(LayoutType.Anchor)
+                .Items(
+                    X.DisplayField()
+                        .ID("StateName")
+                        .Cls("x-state-name")
+                        .AnchorHorizontal("100%"),
+                        
+                    X.DisplayField()
+                        .ID("StateDesc")
+                        .Cls("x-state-desc")
+                        .AnchorHorizontal("100%")
+                )
+        )
+    )
+}

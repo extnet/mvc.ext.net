@@ -1,0 +1,18 @@
+﻿@{
+    Layout = null;
+    HttpContext.Current.Items["ext.net.mvc.example"] = true;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="@Url.Content("~/resources/css/examples.css")" />
+	@RenderSection("headtag", false)
+</head>
+<body>
+      @Html.X().ResourceManager(ViewBag.ManagerConfig as MvcResourceManagerConfig)
+      @RenderSection("example", true)
+</body>
+</html>

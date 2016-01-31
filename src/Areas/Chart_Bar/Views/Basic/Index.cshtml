@@ -1,0 +1,117 @@
+﻿@model List<Ext.Net.MVC.Examples.ChartModel>
+@{
+    ViewBag.Title = "Bar Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var saveChart = function (btn) {
+            Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as an image?', function (choice) {
+                if (choice === 'yes') {
+                    btn.up('panel').down('chart').download();
+                }
+            });
+        };
+    </script>
+}
+
+@section example 
+{
+    <h1>Bar Chart Sample</h1>
+
+    <p>
+        A basic bar chart is a chart with horizontal bars of lengths proportional to the
+        magnitudes of the data it represents. Basic bars can be used in the same manner as the
+        column charts. Categories are typically organized along the vertical axis and values
+        along the horizontal axis. Tapping or hovering a bar will highlight it.
+    </p>
+
+    @(X.Panel()
+        .Width(800)
+        .Height(600)
+        .LayoutConfig(new VBoxLayoutConfig { Pack = BoxPack.Center, Align = VBoxAlign.Stretch })
+        .TopBar(X.Toolbar()
+            .Items(
+                X.ToolbarFill(),
+                X.Button()
+                    .Text("Reload Data")
+                    .Icon(Icon.ArrowRefresh)
+                    .Handler("#{Chart1}.getStore().reload()"),
+                X.Button()
+                    .Text("Save Chart")
+                    .Icon(Icon.Disk)
+                    .Handler("saveChart")
+            )
+        )
+        .Items(
+            X.CartesianChart()
+                .ID("Chart1")
+                .FlipXY(true)
+                .InsetPadding(40)
+                .Height(500)
+                .AnimationConfig(new AnimConfig { Duration = 500, Easing = Easing.EaseOut })
+                .Store(X.Store()
+                    .Data(Model)
+                    .Model(X.Model()
+                        .Fields(
+                            X.ModelField().Name("Name"),
+                            X.ModelField().Name("Data1")
+                        )
+                    )
+                    .Proxy(X.AjaxProxy()
+                        .Url(Url.Action("GetData"))
+                        .Reader(X.JsonReader().RootProperty("data"))
+                    )
+                )
+                .Items(
+                    X.TextSprite()
+                        .Text("Bar Charts - Basic Bar")
+                        .FontSize("22")
+                        .Width(100)
+                        .Height(30)
+                        .X(40)
+                        .Y(20),
+
+                    X.TextSprite()
+                        .Text("Data: Browser Stats 2012 - Internet Explorer")
+                        .FontSize("10")
+                        .X(12)
+                        .Y(480),
+
+                    X.TextSprite()
+                        .Text("Source: http://www.w3schools.com/")
+                        .FontSize("10")
+                        .X(12)
+                        .Y(495)
+                 )
+                .Axes(
+                    X.NumericAxis()
+                        .Fields("Data1")
+                        .Position(Position.Bottom)
+                        .Grid(true)
+                        .Maximum(100)
+                        .Renderer(r => r.Handler = "return label.toFixed(0) + '%';"),
+
+                    X.CategoryAxis()
+                        .Position(Position.Left)
+                        .Fields("Name")
+                        .Grid(true)
+                )
+                .Series(X.BarSeries()
+                    .XField("Name")
+                    .YField("Data1")
+                    .StyleSpec(X.SeriesSprite().Opacity(0.8).MinGapWidth(10))
+                    .HighlightConfig(X.RectSprite().FillStyle("rgba(249, 204, 157, 1.0)").StrokeStyle("black").Radius(10))
+                    .Tooltip(X.ChartTip()
+                        .TrackMouse(true)
+                        .StyleSpec("background: #fff")
+                        .Renderer(r => r.Handler = "toolTip.setHtml(record.get('Name') + ': ' + record.get('Data1') + '%');")
+                    )
+                    .Label(X.ChartLabel().Display(SeriesLabelDisplay.InsideEnd).Field("Data1"))
+                )
+        )
+    )
+}

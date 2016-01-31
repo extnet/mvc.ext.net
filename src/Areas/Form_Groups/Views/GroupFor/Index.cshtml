@@ -1,0 +1,47 @@
+﻿@model Ext.Net.MVC.Examples.Areas.Form_Groups.Models.GroupForModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>Checkbox / Radio GroupFor functionality</h1>
+
+    @(Html.X().FormPanel()
+            .Title("Enums")
+            .Width(600)
+            .Layout(LayoutType.Anchor)
+            .Items(
+                Html.X().CheckboxGroupForEnum(m => m.Enums.Borders),
+                Html.X().RadioGroupForEnum(m => m.Enums.Sex)
+            )
+            .Buttons(
+                Html.X().Button().Text("Submit").DirectClickAction("SubmitEnums")
+            )
+    )
+
+    <br />
+
+    @(Html.X().FormPanel()
+            .Title("Strings")
+            .Width(600)
+            .Layout(LayoutType.Anchor)
+            .Items(
+                Html.X().CheckboxGroupFor(m => m.Strings.Borders, new List<Checkbox.Config> { 
+                    new Checkbox.Config{BoxLabel = "Top", InputValue = "Top"},
+                    new Checkbox.Config{BoxLabel = "Bottom", InputValue = "Bottom"},
+                    new Checkbox.Config{BoxLabel = "Left", InputValue = "Left"},
+                    new Checkbox.Config{BoxLabel = "Right", InputValue = "Right"}
+                }),
+
+                Html.X().RadioGroupFor(m => m.Strings.Sex, new List<Radio.Config> { 
+                    new Radio.Config{BoxLabel = "Male", InputValue = "Male"},
+                    new Radio.Config{BoxLabel = "Female", InputValue = "Female"}
+                })
+            )
+            .Buttons(
+                Html.X().Button().Text("Submit").DirectClickAction("SubmitStrings")
+            )
+    )
+}

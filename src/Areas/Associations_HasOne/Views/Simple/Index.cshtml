@@ -1,0 +1,134 @@
+﻿@model List<Ext.Net.MVC.Examples.Areas.Associations_HasOne.Models.Person>
+@{
+    ViewBag.Title = "Simple HasOne Association - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example 
+{
+    <h1>Simple HasOne Association</h1>
+    
+    @(X.Model()
+        .Name("Address")
+        .IDProperty("Id")
+        .Fields(
+            X.ModelField()
+                .Name("Id")
+                .Type(ModelFieldType.Int),
+            X.ModelField()
+                .Name("Number"),
+            X.ModelField()
+                .Name("Street"),
+            X.ModelField()
+                .Name("City"),
+            X.ModelField()
+                .Name("Zip")
+        )
+    )
+    
+    @(X.Store()
+        .ID("PersonsStore")
+        .Data(Model)
+        .Model(
+            X.Model()
+            .Name("Person")
+            .IDProperty("Id")
+            .Fields(
+                X.ModelField()
+                    .Name("Id")
+                    .Type(ModelFieldType.Int),
+                
+                X.ModelField()
+                    .Name("Name")
+                    .Type(ModelFieldType.String)
+            )
+            .Associations(a => a.Add(X.HasOneAssociation()
+                .Model("Address")
+                .AssociationKey("Address")
+            ))
+        )
+    )
+
+    @(X.Panel()
+        .Border(false)
+        .Width(500)
+        .Height(250)
+        .LayoutConfig(l => l.Add(new HBoxLayoutConfig { Align = HBoxAlign.Stretch }))
+        .Defaults(new { margin = 5 })
+        .Items(
+            X.GridPanel()
+                .StoreID("PersonsStore")
+                .Title("Persons (select a row to see an address)")
+                .Flex(1)
+                .ColumnModel(X.Column()
+                    .Text("Name")
+                    .DataIndex("Name")
+                    .Flex(1)
+                )
+                .Listeners(l => l.SelectionChange.Handler = "selected.length && selected[0].getAddress(function(address){#{AddressPanel}.loadRecord(address);});"),
+            
+            X.FormPanel()
+                .ID("AddressPanel")
+                .Title("Address")
+                .BodyPadding(5)
+                .Flex(1)
+                .Items(
+                    X.DisplayField()
+                        .FieldLabel("ID")
+                        .Name("Id"),
+                    X.DisplayField()
+                        .FieldLabel("Number")
+                        .Name("Number"),
+                    X.DisplayField()
+                        .FieldLabel("Street")
+                        .Name("Street"),
+                    X.DisplayField()
+                        .FieldLabel("City")
+                        .Name("City"),
+                    X.DisplayField()
+                        .FieldLabel("Zip")
+                        .Name("Zip")
+                )
+        )
+    )
+    
+    <br />
+    
+    @(X.GridPanel()
+        .StoreID("PersonsStore")
+        .Title("Persons with RowExpander")
+        .Width(500)
+        .Height(250)
+        .ColumnModel(X.Column()
+            .Text("Name")
+            .DataIndex("Name")
+            .Flex(1)
+        )
+        .Plugins(
+            X.RowExpander()
+                .SingleExpand(false)
+                .Component(X.FormPanel()
+                    .BodyPadding(5)
+                    .Items(
+                        X.DisplayField()
+                            .FieldLabel("ID")
+                            .Name("Id"),
+                        X.DisplayField()
+                            .FieldLabel("Number")
+                            .Name("Number"),
+                        X.DisplayField()
+                            .FieldLabel("Street")
+                            .Name("Street"),
+                        X.DisplayField()
+                            .FieldLabel("City")
+                            .Name("City"),
+                        X.DisplayField()
+                            .FieldLabel("Zip")
+                            .Name("Zip")
+                    )
+                    .Listeners(l => l.AfterRender.Handler = "this.record.getAddress(function(address){this.getForm().loadRecord(address);}, this);")
+                )
+        )
+    )
+}

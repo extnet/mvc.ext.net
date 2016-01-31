@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Render Window";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    @(Html.X().Button()
+        .Text("Show window")
+        .DirectEvents(de => {
+            de.Click.Url = Url.Action("RenderWindow");
+        })
+     )
+}

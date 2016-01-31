@@ -1,0 +1,97 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Prepare Toolbar - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+        
+        var prepare = function (grid, toolbar, rowIndex, record) {
+            var firstButton = toolbar.items.get(0);
+
+            if (record.data.price < 50) {
+                firstButton.setDisabled(true);
+                firstButton.setTooltip("Disabled");
+            }
+            
+            //you can return false to cancel toolbar for this record
+        };       
+    </script>
+}
+
+@section example
+{    
+    <h1>Prepare Toolbar</h1>
+
+    @(Html.X().GridPanel()
+        .Title("Prepare toolbar")
+        .Width(750)
+        .Height(420)
+        .Store(Html.X().Store()
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("company"),
+                    new ModelField("price", ModelFieldType.Float),
+                    new ModelField("change", ModelFieldType.Float),
+                    new ModelField("pctChange", ModelFieldType.Float),
+                    new ModelField("lastChange", ModelFieldType.Date, "M/d hh:mmtt")
+                )
+            )
+            .DataSource(Model)
+        )
+        .ColumnModel(
+            Html.X().Column()
+                .Text("Company")
+                .DataIndex("company")
+                .Flex(1),
+            Html.X().Column()
+                .Text("Price")
+                .DataIndex("price")
+                .Width(75)
+                .Renderer(RendererFormat.UsMoney),
+            Html.X().Column()
+                .Text("Change")
+                .DataIndex("change")
+                .Width(75)
+                .Renderer("change"),
+            Html.X().Column()
+                .Text("Change")
+                .DataIndex("pctChange")
+                .Width(75)
+                .Renderer("pctChange"),
+            Html.X().DateColumn()
+                .Text("Last Updated")
+                .Width(110)
+                .DataIndex("lastChange"),
+            Html.X().CommandColumn()
+                .Width(160)
+                .Commands(
+                    Html.X().GridCommand()
+                        .CommandName("Delete")
+                        .Icon(Icon.Delete)
+                        .Text("Delete"),
+                    
+                    Html.X().GridCommand()
+                        .CommandName("Edit")
+                        .Icon(Icon.NoteEdit)
+                        .Text("Edit")
+                )
+                .PrepareToolbar("prepare")
+                .Listeners(ls => ls.Command.Handler = "Ext.Msg.alert(command, record.data.company);")
+            
+            
+        )
+    )
+}

@@ -1,0 +1,78 @@
+@using Ext.Net;
+@using Ext.Net.MVC;
+
+@model Ext.Net.MVC.Examples.Models.ExtNetModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Ext.NET MVC Sample</title>    
+
+    <link type="text/css" rel="stylesheet" href="http://speed.ext.net/www/intro/css/main.css" />
+</head>
+<body>
+    @(Html.X().ResourceManager())
+
+    <header>
+        <a href="http://ext.net/"><img src="http://speed.ext.net/identity/extnet-logo-large.png" class="logo"/></a>
+    </header>
+
+    <div class="wrapper">
+        <h1>Welcome to Ext.NET!</h1>
+        <p>Thank you for installing Ext.NET MVC.</p>
+        <p class="last">You can check that everything is working correctly by submitting a value in the message box below.</p>
+    </div>
+    
+    @using (Html.BeginForm()) {
+    
+        @(Html.X().Panel()
+            .Title(Model.Title)
+            .Height(215)
+            .Width(350)
+            .Frame(true)
+            .Collapsible(true)
+            .Cls("box")
+            .BodyPadding(5)
+            .DefaultButton("Button1")
+            .Layout(LayoutType.Anchor)
+            .DefaultAnchor("100%")
+            .Items(Html.X().TextArea()
+                .Name("message")
+                .EmptyText(Model.TextAreaEmptyText)
+                .FieldLabel("Message")
+                .Height(85)
+            )
+            .Buttons(Html.X().Button()
+                .ID("Button1")
+                .Text("Submit")
+                .Icon(Icon.Accept)
+                .DirectClickAction("SampleAction")
+            )
+        )
+        
+    }
+
+    <div class="wrapper wrapper-lower">
+        <h2><a href="http://ext.net/support/">Technical Support</a></h2>
+        <p>Need a little help? Visit our <a href="http://ext.net/support/">Support</a> page for links to documentation, examples and more. </p>
+        <hr>
+        <h2><a href="http://forums.ext.net/">Community Forums</a></h2>
+        <p>Keep up to date with all things Ext.NET by joining the active community in our <a href="http://forums.ext.net/">Forums</a>.</p>
+        <hr>
+        <h2><a href="http://examples.ext.net/">Examples</a></h2>
+        <p>Ext.NET features over 100 Components and 600 Samples for use in your ASP.NET apps. Check out the <a href="http://examples.ext.net/">Examples Explorer</a> to see what's possible.</p>
+        <hr>
+        <h2><a href="http://ext.net/store/">Purchase</a></h2>
+        <p class="last">When you're ready, <a href="http://ext.net/store/">purchase</a> a license and start building web apps with ease!</p>
+    </div>
+
+    <footer>
+        <p class="last">&copy; 2008-<%= DateTime.Today.Year %> <a href="http://object.net/">Object.NET</a>, Inc. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,45 @@
+﻿@model Ext.Net.MVC.Examples.Areas.Models.TimeCard
+@{
+    ViewBag.Title = "Data Annotations";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    @(
+         Html.X().Window()
+            .Title("Data Annotations")
+            .Width(350)
+            .Height(325)
+            .Layout(LayoutType.Fit)
+            .Closable(false)
+            .TopBarItem(
+                Html.X().Button()
+                    .Text("View")
+                    .Flex(1)
+                    .ToggleGroup("cardMode")
+                    .Pressed(true)
+                    .AllowDepress(false)
+                    .Icon(Icon.Vcard)
+                    .IconAlign(IconAlign.Top)
+                    .DirectEvents(de => {
+                        de.Click.Url = Url.Action("GoToViewMode");
+                        de.Click.ExtraParams.Add(new { containerId = JRawValue.From("this.up('window').id")});
+                    }),
+
+                Html.X().Button()
+                    .Text("Edit")
+                    .Flex(1)
+                    .ToggleGroup("cardMode")
+                    .AllowDepress(false)
+                    .Icon(Icon.VcardEdit)
+                    .IconAlign(IconAlign.Top)
+                    .DirectEvents(de =>
+                    {
+                        de.Click.Url = Url.Action("GoToEditMode");
+                        de.Click.ExtraParams.Add(new { containerId = JRawValue.From("this.up('window').id") });
+                    })
+            )
+            .ItemsFromPartial("Display", Model)
+    )
+}

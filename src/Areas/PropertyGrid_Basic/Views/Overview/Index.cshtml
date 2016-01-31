@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "PropertyGrid with Button DirectEvent - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .data th {
+        	font-weight : bold;
+        }
+        
+        .data th, .data td {
+            padding : 4px;
+            border  : 1px solid black;
+        }
+        
+        .red-label{
+            color:Red;
+        }
+        
+        .blue-label{
+            color:Blue;
+        }
+    </style>
+}
+
+
+@section example
+{
+    <h1>PropertyGrid with Button DirectEvent</h1>
+    
+    @(X.PropertyGrid()
+        .ID("PropertyGrid1")
+        .Width(300)
+        .SortableColumns(false)
+        .Source(s =>
+        {
+            s.Add(new PropertyGridParameter { Name = "(name)", Value = "Properties Grid" });
+            s.Add(new PropertyGridParameter { Name = "grouping", Value = "false", Mode = ParameterMode.Raw });
+            s.Add(new PropertyGridParameter { Name = "autoFitColumns", Value = "true", Mode = ParameterMode.Raw });
+            s.Add(new PropertyGridParameter { Name = "productionQuality", Value = "false", Mode = ParameterMode.Raw });
+            
+            PropertyGridParameter createdParameter = new PropertyGridParameter { Name = "created", Value = "10/15/2006" };
+            createdParameter.Editor.Add(new DateField { Format = "MM/dd/yyyy" });
+            s.Add(createdParameter);
+            
+            PropertyGridParameter testedParameter = new PropertyGridParameter { Name = "tested", Value = "false", Mode = ParameterMode.Raw };
+            testedParameter.Renderer.Handler = "metadata.tdCls = 'red-label'; return value;";
+            s.Add(testedParameter);
+            
+            s.Add(new PropertyGridParameter { Name = "version", Value = "0.01", EditorType = PropertyGridEditorType.Number });
+            
+            PropertyGridParameter borderWidthParameter = new PropertyGridParameter { Name = "borderWidth", Value = "5", Mode = ParameterMode.Raw }; 
+            borderWidthParameter.Editor.Add(new NumberField());
+            s.Add(borderWidthParameter);
+            
+            ComboBox colorComboBox = new ComboBox { ForceSelection = true };
+            colorComboBox.Items.Add(new ListItem("Red"));
+            colorComboBox.Items.Add(new ListItem("Green"));
+            colorComboBox.Items.Add(new ListItem("Blue"));
+            PropertyGridParameter colorParameter = new PropertyGridParameter { Name = "color", DisplayName = "Color", Value = "Red" };
+            colorParameter.Editor.Add(colorComboBox);
+            colorParameter.Renderer.Handler = "return Ext.String.format('<span style=\"color: {0};\">{1}</span>', value.toLowerCase(), value);";
+            s.Add(colorParameter);
+
+            TextField triggerEditor = new TextField();
+            triggerEditor.Triggers.Add(new FieldTrigger { Icon = TriggerIcon.SimpleEllipsis, Tag = "ellipsis" });
+            triggerEditor.Listeners.TriggerClick.Handler = "#{PropertyGrid1}.editingPlugin.completeEdit();  Ext.Msg.alert('Trigger click', tag + ' trigger click');";
+            PropertyGridParameter triggerParameter = new PropertyGridParameter { Name = "trigger", DisplayName = "Trigger Field", Value = "TriggerField" };
+            triggerParameter.Renderer.Handler = "metadata.tdCls = 'blue-label'; return value;";
+            triggerParameter.Editor.Add(triggerEditor);
+            s.Add(triggerParameter);
+        })
+        .Buttons(
+            X.Button()
+                .Text("Add property")
+                .DirectClickAction("AddPropertyClick"),
+                
+            X.Button()
+                .Text("Remove property")
+                .DirectClickAction("RemovePropertyClick"),
+                
+            X.Button()
+                .ID("Button1")
+                .Text("Save")
+                .Icon(Icon.Disk)
+                .DirectEvents(de => 
+                {
+                    de.Click.Action = "Button1_Click";
+                    de.Click.ExtraParams.Add(new Parameter("rawSourceValues", "#{PropertyGrid1}.store.getRecordsValues()", ParameterMode.Raw));
+                })
+        )
+    )
+
+    <p>
+        @(X.Label().ID("Label1"))
+    </p>
+}

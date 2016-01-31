@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Animation with a Draw Component - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Animation with a Draw Component</h1>
+    
+    @(X.Button()
+        .Text("Animate circles (client side)")
+        .Handler("#{Draw1}.getSurface().get('circles').setAttributes({translationX: 150}); #{Draw1}.getSurface().renderFrame();")
+    )
+    
+    @(X.Button()
+        .Text("Animate rectangles (server side)")
+        .DirectClickAction("AnimateRect")
+    )
+    
+    <br />
+    
+    @(X.DrawContainer()
+        .ID("Draw1")
+        .Width(800)
+        .Height(600)
+        .Items(
+            X.CompositeSprite()
+                .SpriteID("circles")
+                .Duration(1000)
+                .Items(
+                    X.CircleSprite().Radius(10).FillStyle("#f00").CX(10).CY(10),
+                    X.CircleSprite().Radius(10).FillStyle("#0f0").CX(50).CY(50),
+                    X.CircleSprite().Radius(10).FillStyle("#00f").CX(100).CY(100)
+                ),
+
+            X.CompositeSprite()
+                .SpriteID("rectangles")
+                .Items(
+                    X.RectSprite().Width(20).Height(20).FillStyle("#f00").X(10).Y(10),
+                    X.RectSprite().Width(20).Height(20).FillStyle("#0f0").X(50).Y(50),
+                    X.RectSprite().Width(20).Height(20).FillStyle("#00f").X(100).Y(100)
+                )
+        )
+    )
+}

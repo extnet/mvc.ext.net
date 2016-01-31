@@ -1,0 +1,19 @@
+﻿@using Ext.Net.MVC.Examples.Areas.Models.Models
+@model FormPanelDepartment
+
+@(
+    Html.X().ComboBoxFor(m => m.ID)
+        .Items(FormPanelDepartment.GetAll().Select(d => new ListItem(d.Name, d.ID)))
+        .FieldLabel("Department")
+        .SimpleSubmit(true)
+        .Listeners(l => {
+            l.Select.Handler = "this.next().setValue(this.getRawValue());";
+        })
+)
+
+@(
+    // we submit department name via hidden field
+    // it is rare situation because name must be retrieved on the server by submitted id
+    // just for demo purpose
+    Html.X().HiddenFor(m=>m.Name)
+)

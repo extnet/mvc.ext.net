@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "FormPanel Labels with Editor - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var bodyInit = function () {
+            this.body.on("dblclick", function (e, t) {
+                App.Editor1.startEdit(t);
+            }, null, {
+                delegate : "label.x-form-item-label"
+            });
+            
+            this.header.titleCmp.textEl.on("dblclick", function (e, t) {
+                App.Editor2.startEdit(t);
+            });
+        };
+        
+        var beforeComplete = function (editor, value, startValue) {
+            // Just ensure we have a ':' as the last char of label.
+            
+            if (value.charAt(value.length - 1) != ":") { 
+                editor.setValue(editor.getValue() + ":");
+            } 
+            
+            return true;
+        };
+        
+        var complete = function (editor, value, startValue) {
+            // Notify user the Editor value has changed.
+            Ext.Msg.notify("Editor Changed", 
+                Ext.String.format("<b>{0}</b><br />changed to<br /><b>{1}</b>", startValue, value));
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>FormPanel Labels with Editor</h1>
+        
+    <p>Double-click on the Field Labels and the Panel Title to activate the Editor.</p>
+    
+    @(X.FormPanel()
+        .Title("User Details")
+        .Width(350)
+        .Height(185)
+        .Icon(Icon.User)
+        .BodyPadding(5)
+        .FieldDefaults(fd => fd.LabelWidth = 110)
+        .Items(
+            X.TextField()
+                .FieldLabel("First Name")
+                .AnchorHorizontal("100%")
+                .EmptyText("<-- Double-click Label or Title"),
+            X.TextField()
+                .FieldLabel("Middle Name")
+                .AnchorHorizontal("100%"),
+            X.TextField()
+                .FieldLabel("Last Name")
+                .AnchorHorizontal("100%"),
+            X.DateField()
+                .FieldLabel("D.O.B")
+                .AnchorHorizontal("100%")
+        )
+        .Listeners(l => l.AfterRender.Fn = "bodyInit")
+    )
+    
+    @(X.Editor()
+        .ID("Editor1")
+        .Shadow(false)
+        .Alignment("l-l")
+        .IgnoreNoChange(true)
+        .Field(f => f.Add(
+            X.TextField()
+                .AllowBlank(false)
+                .Width(95)
+                .SelectOnFocus(true)
+            )
+        )
+        .Listeners(l => {
+            l.BeforeComplete.Fn = "beforeComplete";
+            l.Complete.Fn = "complete";
+        })
+    )
+    
+    @(X.Editor()
+        .ID("Editor2")
+        .Shadow(false)
+        .IgnoreNoChange(true)
+        .Cls("x-small-editor")
+        .AlignmentConfig(new EditorAlignmentConfig {
+            ElementAnchor = AnchorPoint.BottomLeft, TargetAnchor = AnchorPoint.BottomLeft, ConstrainViewport = true
+        })
+        .Field(f => f.Add(
+            X.ComboBox()
+                .Width(110)
+                .TriggerAction(TriggerAction.All)
+                .Editable(false)
+                .Items(
+                    X.ListItem().Text("User Details"),
+                    X.ListItem().Text("Developer Details"),
+                    X.ListItem().Text("Manager Details")
+                )
+            )
+        )
+        .Listeners(l => l.Complete.Fn = "complete")
+    )
+}

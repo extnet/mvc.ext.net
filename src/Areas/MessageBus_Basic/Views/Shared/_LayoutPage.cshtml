@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+    HttpContext.Current.Items["ext.net.mvc.example"] = true;
+    var X = Html.X();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="@Url.Content("~/resources/css/examples.css")" />
+	@RenderSection("headtag", false)
+</head>
+<body>
+    @X.ResourceManager(ViewBag.ManagerConfig as MvcResourceManagerConfig)
+    
+    @(X.Viewport()
+        .Layout(LayoutType.Border)
+        .Items(
+            X.Panel()
+                .Title("Global logger in the layout page")
+                .Height(200)
+                .Region(Region.North)
+                .Layout(LayoutType.Fit)
+                .MessageBusListeners(new MessageBusListener
+                {
+                    Name = "**",
+                    Handler = "this.body.createChild({html: 'Name: ' + name, tag:'p'});"
+                }),
+                
+            X.Container()
+                .Layout(LayoutType.Fit)
+                .Region(Region.Center)
+                .ItemsFromSection(this, "example")
+        )
+    )
+</body>
+</html>

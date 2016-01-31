@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "FlashComponent - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(X.Window()
+        .ID("Window1")
+        .Title("Flash Movie")
+        .Layout(LayoutType.Fit)
+        .Height(320)
+        .Width(402)
+        .Maximizable(true)
+        .Items(X.FlashComponent()
+            .Height(310)
+            .Width(400)
+            .ID("VideoPlayer")
+            .Url("http://vimeo.com/moogaloop.swf?clip_id=3911557&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1&js_api=1")
+            .FlashParams(p => p.Add(X.Parameter().Name("allowfullscreen").Value("true").Mode(ParameterMode.Raw)))
+        )
+    )
+}

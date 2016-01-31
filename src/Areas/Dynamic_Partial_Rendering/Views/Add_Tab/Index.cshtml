@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Add Tab";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>Add tab</h1>
+    <p>In this example, View is appended as new tab</p>
+    <p>Click on the button in tab strip for adding a tab with view</p>
+
+    @(Html.X().Window()
+        .Title("Tabs")
+        .Width(680)
+        .Height(500)
+        .Layout(LayoutType.Fit)
+        .Items(Html.X().TabPanel()
+            .ID("TabPanel1")
+            .TabBar(Html.X().Button()
+                .Icon(Icon.Add)
+                .Flat(true)
+                .DirectEvents(de => {
+                    de.Click.Url = Url.Action("AddTab");
+                    de.Click.ExtraParams.Add(new { containerId = "TabPanel1" });
+                })
+            )
+        )
+    )
+        
+}

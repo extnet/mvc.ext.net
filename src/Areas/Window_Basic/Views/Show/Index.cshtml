@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Show a Hidden Window - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Show a Hidden Window</h1>        
+    
+    <p>This sample demonstrates several client-side and server-side techniques for triggering the &lt;ext:Window> to "show" if hidden.</p>
+        
+    <p>Within server-side code, the .Show() Method should be used. Within client-side code, the .show() function should be used.</p>
+    
+    <h2>Example</h2>
+        
+    <h3>ext:Button's</h3>
+    
+    <p>
+    @(X.Button()
+        .ID("Button1")
+        .Text("Click Listener")
+        .Icon(Icon.Application)
+        .Handler("App.Window1.show(this)")
+    )
+    </p>
+    
+    <p>
+    @(X.Button()
+        .ID("Button2")
+        .Text("Click DirectEvent")
+        .Icon(Icon.Application)
+        .DirectClickAction("Button2_Click")
+    )
+    </p>
+        
+    <p>
+    @(X.Button()
+        .ID("Button3")
+        .Text("Click DirectMethod")
+        .Icon(Icon.Application)
+        .Handler("#{DirectMethods}.Button3_Click();")
+    )
+    </p>
+    
+    @(X.Window()
+        .ID("Window1")
+        .Icon(Icon.House)
+        .Title("Click Listener")
+        .Hidden(true)
+        .X(205)
+        .Y(100)
+    )
+    
+    @(X.Window()
+        .ID("Window2")
+        .Icon(Icon.House)
+        .Title("Click DirectEvent")
+        .Hidden(true)
+        .X(275)
+        .Y(150)
+    )
+    
+    @(X.Window()
+        .ID("Window3")
+        .Icon(Icon.House)
+        .Title("Click DirectMethod")
+        .Hidden(true)
+        .X(300)
+        .Y(200)
+    )
+}

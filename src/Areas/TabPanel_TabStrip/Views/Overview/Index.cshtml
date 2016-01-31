@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "TabStrip and TabStripItem - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>TabStrip with setting the TabStripItems .ActionItemID Property</h1>
+        
+    <p>The TabStrip component can be added to any position within a Toolbar.</p>
+    
+    @(X.Panel()
+        .ID("Panel1")
+        .Height(185)
+        .Width(350)
+        .Layout(LayoutType.Card)
+        .ActiveIndex(0)
+        .Defaults(d => {
+            d.Add(new Parameter("border", "false", ParameterMode.Raw));
+            d.Add(new Parameter("padding", "5", ParameterMode.Raw));
+        })
+        .TopBar(
+            X.Toolbar()
+                .StyleSpec("padding-bottom:0px;")
+                .Items(
+                    X.Button().Icon(Icon.Database),
+                    X.Button().Icon(Icon.Disk),
+                    X.ToolbarFill(),
+                    X.TabStrip()
+                        .Items(t => {
+                            t.Add(X.Tab().ActionItemID("pnlSummary").Text("Summary"));
+                            t.Add(X.Tab().ActionItemID("pnlData").Text("Data"));
+                        }),
+                    X.ToolbarSeparator(),
+                    X.Button().Icon(Icon.Key),
+                    X.Button().Icon(Icon.Help)
+                )
+        )
+        .Items(
+            X.Panel()
+                .ID("pnlSummary")
+                .Html("Summary")
+                .Header(false),
+                
+            X.Panel()
+                .ID("pnlData")
+                .Html("Data")
+                .Header(false)
+        )
+    )
+    
+    <br />
+    <h1>TabStrip with ActionContainerID</h1>
+    
+    @(X.Panel()
+        .ID("Panel2")
+        .Height(105)
+        .Width(350)
+        .Layout(LayoutType.Card)
+        .ActiveIndex(0)
+        .Border(false)
+        .Padding(5)
+        .TopBar(
+            X.Toolbar()
+                .StyleSpec("padding-bottom:0px;")
+                .Items(
+                    X.TabStrip()
+                        .ActionContainerID("Panel2")
+                        .Items(t => {
+                            t.Add(X.Tab().Text("Summary"));
+                            t.Add(X.Tab().Text("Data"));
+                        })
+                )
+        )
+        .Items(
+            X.Panel()
+                .Html("Summary")
+                .Header(false),
+                
+            X.Panel()
+                .Html("Data")
+                .Header(false)
+        )
+    )
+    
+    <br />
+    <h1>Setting ActionItemID with Divs</h1>
+    
+    @(X.TabStrip()
+        .ActionContainerID("Panel2")
+        .Items(t => {
+            t.Add(X.Tab().Text("Summary").ActionItemID("elm1"));
+            t.Add(X.Tab().Text("Data").ActionItemID("elm2"));
+        })
+    )
+    
+    <div id="elm1" style="padding:5px;">Summary</div>
+    <div id="elm2" style="padding:5px;">Data</div>
+}

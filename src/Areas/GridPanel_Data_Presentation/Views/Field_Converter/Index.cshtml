@@ -1,0 +1,42 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Field Converter - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{    
+    @(Html.X().GridPanel()
+        .Title("Grid")
+        .Width(600)
+        .Height(350)
+        .Store(Html.X().Store()
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("company"),
+                    new ModelField("price", ModelFieldType.Float),
+                    new ModelField("change", ModelFieldType.Float),
+                    new ModelField("pctChange", ModelFieldType.Float),
+                    new ModelField()
+                    {
+                        Name = "active",
+                        Type = ModelFieldType.Boolean,
+                        Convert =
+                        {
+                            Handler = "return value === 'Y';"
+                        }
+                    }
+                )
+            )
+            .DataSource(Model)
+        )
+        .ColumnModel(
+            Html.X().Column().Text("Company").DataIndex("company").Flex(1),
+            Html.X().Column().Text("Price").DataIndex("price").Width(75),
+            Html.X().Column().Text("Change").DataIndex("change").Width(75),
+            Html.X().Column().Text("Change").DataIndex("pctChange").Width(75),
+            Html.X().CheckColumn().Text("Active").DataIndex("active").Width(50)
+        )
+    )
+}

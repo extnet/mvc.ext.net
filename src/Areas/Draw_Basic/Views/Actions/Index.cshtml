@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Draw Actions - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Draw Actions</h1>
+    
+    @(X.Window()
+        .Title("Draw Actions")
+        .Width(640)
+        .Height(480)
+        .Layout(LayoutType.Border)
+        .Items(
+            X.Panel()
+                .Frame(true)
+                .Width(200)
+                .Region(Region.West)
+                .Layout(LayoutType.VBox)
+                .Margin(5)
+                .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Stretch, Pack = BoxPack.Center })
+                .Defaults(new { margin = 5 })
+                .Items(
+                    X.Button()
+                        .Text("Create Sprite")
+                        .DirectEvents(de => {
+                            de.Click.Url = Url.Action("CreateSprite");
+                            de.Click.ExtraParams.Add(new Parameter("button", "this.id", ParameterMode.Raw));
+                            de.Click.Success = "this.disable(); this.next().enable(); ";
+                        }),
+                        
+                    X.Button()
+                        .Text("Change Color")
+                        .Disabled(true)
+                        .DirectEvents(de => {
+                            de.Click.Url = Url.Action("ChangeColor");
+                            de.Click.ExtraParams.Add(new Parameter("button", "this.id", ParameterMode.Raw));
+                            de.Click.Success = "this.disable(); this.next().enable(); ";
+                        }),
+                        
+                    X.Button()
+                        .Text("Rotate -45")
+                        .Disabled(true)
+                        .DirectEvents(de => {
+                            de.Click.Url = Url.Action("RotateLeft");
+                            de.Click.ExtraParams.Add(new Parameter("button", "this.id", ParameterMode.Raw));
+                            de.Click.Success = "this.disable(); this.next().enable(); ";
+                        }),
+                        
+                    X.Button()
+                        .Text("Rotate back (animaton)")
+                        .Disabled(true)
+                        .DirectEvents(de => {
+                            de.Click.Url = Url.Action("RotateRight");
+                            de.Click.ExtraParams.Add(new Parameter("button", "this.id", ParameterMode.Raw));
+                            de.Click.Success = "this.disable(); this.next().enable(); ";
+                        }),
+                        
+                    X.Button()
+                        .Text("Scaling")
+                        .Disabled(true)
+                        .DirectEvents(de => {
+                            de.Click.Url = Url.Action("Scaling");
+                            de.Click.ExtraParams.Add(new Parameter("button", "this.id", ParameterMode.Raw));
+                            de.Click.Success = "this.disable(); this.next().enable(); ";
+                        }),
+                        
+                    X.Button()
+                        .Text("Translation")
+                        .Disabled(true)
+                        .DirectEvents(de => {
+                            de.Click.Url = Url.Action("Translation");
+                            de.Click.ExtraParams.Add(new Parameter("button", "this.id", ParameterMode.Raw));
+                            de.Click.Success = "this.disable();";
+                        })
+                ),
+                
+            X.DrawContainer()
+                .ID("Draw1")
+                .Region(Region.Center)
+        )
+    )
+}

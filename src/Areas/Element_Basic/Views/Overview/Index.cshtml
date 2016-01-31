@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "FormPanel Labels with Editor - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var hoverCard = function () {
+            Ext.get("Cards1").select(".cards-header a").removeCls("current");
+
+            var id = Ext.get(this).addCls("current").getAttribute("rel");
+
+            Ext.get("Cards1").select(".card").hide().filter("#" + id).show();
+        };
+    </script>
+}
+
+
+@section example
+{
+    @(X.Button()
+        .ID("Button1")
+        .Text("Create cards")
+        .DirectEvents(de => de.Click.Url = Url.Action("CreateClick"))
+    )
+
+
+}

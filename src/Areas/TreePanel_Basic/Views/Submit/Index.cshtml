@@ -1,0 +1,35 @@
+﻿@model Ext.Net.Node
+@{
+    ViewBag.Title = "TreePanel Submit - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>TreePanel Submit</h1>
+    @(
+        Html.X().TreePanel()
+            .Icon(Icon.Anchor)
+            .Title("Tree")
+            .Width(550)
+            .RootVisible(false)
+            .Root(Model)
+            .SubmitUrl(Url.Action("SubmitNodes"))
+            .Fields(
+                Html.X().ModelField().Name("submit").Type(ModelFieldType.Boolean)
+            )
+            .Buttons(
+                Html.X().Button()
+                    .Text("Simple Submit")
+                    .Handler("this.up('treepanel').submitNodes();"),
+                    
+                Html.X().Button()
+                    .Text("Submit with Callback")
+                    .Handler("this.up('treepanel').submitNodes({text : 'Submit finish', callback : function (o, success, r) { alert(o.text + ', Status : ' + success); }});"),
+                    
+                Html.X().Button()
+                    .Text("Submit with Node Filter")
+                    .Handler("this.up('treepanel').submitNodes({ nodeFilter : function (node) { return node.data.submit || node.isRoot();}});")
+            )
+    )
+}

@@ -1,0 +1,154 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Prepare Commands - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@{
+    MvcResourceManager.RegisterGlobalIcon(Icon.Accept);
+    MvcResourceManager.RegisterGlobalIcon(Icon.MoneyEuro);
+    MvcResourceManager.RegisterGlobalIcon(Icon.MoneyAdd);
+}
+
+@section headtag
+{
+    <script>
+        var prepareToolbar = function (grid, toolbar, rowIndex, record) {
+            // for example hide 'Edit' button if price < 50
+            if (record.get("price") < 50) {
+                //hide separator
+                toolbar.items.getAt(1).hide();
+                //hide edit button
+                toolbar.items.getAt(2).hide();
+            } else{
+                //otherwise add another button
+                toolbar.add(new Ext.Button({
+                    iconCls : "icon-accept",
+                    command : "accept"
+                }));
+                toolbar.doLayout();
+            }
+        };
+        
+        //in PrepareCommands we can modify commands collection
+        var prepareCommands = function (grid, commands, record, row) {
+            if (record.get("price") >= 50) {
+                commands.push({
+                        command : "accept",                        
+                        iconCls : "icon-accept"                                         
+                });               
+            }            
+        };
+        
+        //in PrepareCommand we can modify command
+        var prepareCommand = function (grid, command, record, row) {
+            if (command.command == 'Edit' && record.get("price") < 50) {
+                command.hidden = true;
+                command.hideMode = 'display'; //you can try 'visibility' also                 
+            }            
+        };
+        
+        var prepareCellCommand = function (grid, command, record, row, col, value) {
+            if (command.command == 'Dollar' && record.get("price") < 50) {
+                command.iconCls = "icon-moneyeuro";               
+            }   
+        };
+        
+        var prepareCellCommands = function (grid, commands, record, row, col, value) {
+            if (record.get("price") >= 50) {
+               commands.push({
+                   iconCls: "icon-moneyadd",
+                   command: "moneyadd"
+               });                
+            }   
+        };
+    </script>
+}
+
+@section example
+{    
+     @(Html.X().GridPanel()
+        .Title("Row commands")
+        .Width(800)
+        .Height(300)
+        .Store(Html.X().Store()
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("company"),
+                    new ModelField("price", ModelFieldType.Float),
+                    new ModelField("change", ModelFieldType.Float),
+                    new ModelField("pctChange", ModelFieldType.Float),
+                    new ModelField("lastChange", ModelFieldType.Date, "M/d hh:mmtt")
+                )
+            )
+            .DataSource(Model)
+        )
+        .ColumnModel(
+            Html.X().Column()
+                .Text("Company")
+                .DataIndex("company")
+                .Flex(1),
+                
+            Html.X().Column()
+                .Text("Price")
+                .DataIndex("price")
+                .Renderer(RendererFormat.UsMoney)
+                .Commands(Html.X().ImageCommand().Icon(Icon.MoneyDollar).CommandName("Dollar"))
+                .PrepareCommand("prepareCellCommand")
+                .PrepareCommands("prepareCellCommands")
+                .Listeners(ls => ls.Command.Handler = "Ext.Msg.alert(command, record.data.company);"),
+                
+            Html.X().Column()
+                .Text("Change")
+                .DataIndex("change")
+                .Width(75),
+                
+            Html.X().Column()
+                .Text("Change")
+                .DataIndex("pctChange")
+                .Width(75),
+                
+            Html.X().DateColumn()
+                .Text("Last Updated")
+                .DataIndex("lastChange")
+                .Width(85),
+                
+            Html.X().ImageCommandColumn()
+                .Text("Image Cmds")
+                .Commands(
+                    Html.X().ImageCommand()
+                        .Icon(Icon.Delete)
+                        .CommandName("Delete")
+                        .ToolTip(tt => tt.Text = "Delete"),
+                    
+                    Html.X().ImageCommand()
+                        .Icon(Icon.NoteEdit)
+                        .CommandName("Edit")
+                        .ToolTip(tt => tt.Text = "Edit")
+                )
+                .PrepareCommand("prepareCommand")
+                .PrepareCommands("prepareCommands")
+                .Listeners(ls => ls.Command.Handler = "Ext.Msg.alert(command, record.data.company);"),
+                
+            Html.X().CommandColumn()
+                .Text("Toolbar Cmds")
+                .Commands(
+                    Html.X().GridCommand()
+                        .Icon(Icon.Delete)
+                        .CommandName("Delete")
+                        .ToolTip(tt => tt.Text = "Delete"),
+                    
+                    Html.X().CommandSeparator(),
+                    
+                    Html.X().GridCommand()
+                        .Icon(Icon.NoteEdit)
+                        .CommandName("Edit")
+                        .ToolTip(tt => tt.Text = "Edit")
+                )
+                .PrepareToolbar("prepareToolbar")
+                .Listeners(ls => ls.Command.Handler = "Ext.Msg.alert(command, record.data.company);")
+
+        )
+    )
+}

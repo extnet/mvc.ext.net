@@ -1,0 +1,260 @@
+﻿@{
+    ViewBag.Title = "Editor Overview - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .editable {
+            font: 14px Tahoma;
+            padding: 3px 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .editableBlock .x-label-value {
+            display: block;
+        }
+
+        .editable-over {
+            background-color: #ffc;
+        }
+
+        .x-form-field-editor {
+            font: 12px Tahoma;
+        }
+    </style>
+}
+
+@section example
+{
+    @(X.Viewport()
+        .Layout(LayoutType.Fit)
+        .Items(X.TabPanel()
+            .Border(false)
+            .Defaults(d => d.Add(new Parameter("BodyStyle", "padding:10px;", ParameterMode.Value)))
+            .Items(
+                X.Panel()
+                    .ID("Tab1")
+                    .Title("Labels")
+                    .Content(
+                     @<text>
+    @(X.Label()
+                            .ID("Label1")
+                            .Cls("editable")
+                            .Icon(Icon.NoteEdit)
+                            .OverCls("editable-over")
+                            .Text("With predefined field and fixed width")
+                            .Editor(e => e.Add(
+                                X.Editor()
+                                    .Shadow(false)
+                                    .Alignment("tl-tl?")
+                                    .Field(f => f.Add(
+                                        X.TextField()
+                                            .Cls("x-form-field-editor")
+                                            .Width(300)
+                                    ))
+                            ))
+                        )
+
+    <br />
+    <br />
+
+    @(X.Label()
+                            .ID("Label2")
+                            .Cls("editable")
+                            .Icon(Icon.NoteEdit)
+                            .OverCls("editable-over")
+                            .Text("With standard field and auto width")
+                            .Editor(e => e.Add(
+                                X.Editor()
+                                    .Shadow(false)
+                                    .Alignment("tl-tl?")
+                                    .AutoSizeConfig(new EditorAutoSize { Width = EditorAutoSizeDimension.BoundEl })
+                            ))
+                        )
+
+    <br />
+    <br />
+
+    @(X.Label()
+                            .ID("Label4")
+                            .Cls("editable")
+                            .Icon(Icon.NoteEdit)
+                            .OverCls("editable-over")
+                            .Text("Double click editing")
+                            .Editor(e => e.Add(
+                                X.Editor()
+                                    .ActivateEvent("dblclick")
+                                    .Shadow(false)
+                                    .Alignment("tl-tl?")
+                                    .AutoSizeConfig(new EditorAutoSize { Width = EditorAutoSizeDimension.BoundEl })
+                            ))
+                        )
+
+    <br />
+    <br />
+
+    @(X.Label()
+                            .ID("Label5")
+                            .Cls("editable")
+                            .Icon(Icon.NoteEdit)
+                            .OverCls("editable-over")
+                            .Text("Custom editor aligment")
+                            .Editor(e => e.Add(
+                                X.Editor()
+                                    .HideEl(false)
+                                    .Shadow(false)
+                                    .AutoSizeConfig(new EditorAutoSize { Width = EditorAutoSizeDimension.BoundEl })
+                                    .AlignmentConfig(new EditorAlignmentConfig { ElementAnchor = AnchorPoint.TopLeft, TargetAnchor = AnchorPoint.BottomLeft })
+                            ))
+                        )
+
+    <br />
+    <br />
+
+    @(X.Label()
+                            .ID("Label3")
+                            .Cls("editable editableBlock")
+                            .Html("<hr/><p>With TextArea</p><p>Line1</p><p>Line2</p><hr/>")
+                            .Editor(e => e.Add(
+                                X.Editor()
+                                    .Shadow(false)
+                                    .AutoSize(true)
+                                    .Alignment("tl-tl?")
+                                    .UseHtml(true)
+                                    .Field(f => f.Add(X.TextArea()
+                                        .Cls("x-form-field-editor")
+                                    ))
+                            ))
+                        )
+
+    <br />
+    <br />
+    <asp:label id="aspLabel" runat="server" text="&amp;lt;asp:Label> with Editor" />
+
+    <p>@(X.Editor()
+                            .Target("aspLabel")
+                            .Shadow(false)
+                            .Alignment("tl-tl?")
+                            .UseHtml(true)
+                        )
+    </p>
+    </text>
+                    )
+            ,
+
+            X.Panel()
+                .ID("Tab2")
+                .Title("Divs")
+                .Content(
+                    @<text>
+    <div class="editable" field="txt">Lorem ipsum dolor sit amet #1</div>
+    <div class="editable" field="txt">Lorem ipsum dolor sit amet #2</div>
+    <div class="editable" field="tar">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a urna. Praesent libero. Nullam vitae nisl. Maecenas pellentesque, magna eget pharetra fermentum, tortor dolor suscipit est, ultricies sollicitudin turpis orci vitae quam. Vestibulum augue diam, auctor ac, interdum eu, egestas ac, leo. Nulla justo mauris, mollis quis, consectetur non, varius ac, nunc. Sed facilisis. Sed elementum. Praesent tortor. Maecenas ipsum tellus, fringilla nec, scelerisque sed, scelerisque a, nulla. Phasellus eleifend interdum arcu. Nulla porta ligula placerat tortor.</div>
+
+    @(X.Editor()
+                            .ID("TextLineEditor")
+                            .AutoSize(true)
+                            .Shadow(false)
+                        )
+
+    @(X.Editor()
+                            .ID("TextBlockEditor")
+                            .AutoSize(true)
+                            .Shadow(false)
+                            .Field(f => f.Add(X.TextArea()))
+                        )
+    </text>
+                )
+                .Listeners(l =>
+                {
+                    l.Activate.Handler = "#{TextLineEditor}.retarget(Ext.select('#Tab2 [field=txt].editable', true)); #{TextBlockEditor}.retarget(Ext.select('#Tab2 [field=tar].editable', true));";
+                    l.Activate.Single = true;
+                }),
+
+            X.Panel()
+                .ID("Tab3")
+                .Title("Ajax Update")
+                .Items(
+                    X.Label()
+                        .ID("AjaxLabel")
+                        .Cls("editable")
+                        .Icon(Icon.NoteEdit)
+                        .OverCls("editable-over")
+                        .Text("Ajax Label")
+                        .Editor(e => e.Add(
+                            X.Editor()
+                                .ID("AjaxLabelEditor")
+                                .Shadow(false)
+                                .Alignment("tl-tl?")
+                                .UpdateEl(false)
+                                .AutoSizeConfig(new EditorAutoSize { Width = EditorAutoSizeDimension.BoundEl })
+                                .DirectEvents(de =>
+                                {
+                                    de.Complete.Url = Url.Action("CompleteEdit");
+                                    de.Complete.EventMask.ShowMask = true;
+                                    de.Complete.EventMask.Target = MaskTarget.CustomTarget;
+                                    de.Complete.EventMask.CustomTarget = "={#{Tab3}.body}";
+                                    de.Complete.ExtraParams.Add(new Parameter("value", "value", ParameterMode.Raw));
+                                })
+                           )
+                        )
+                ),
+
+            X.Panel()
+                .Title("Editor Panel")
+                .Items(
+                    X.Panel()
+                        .ID("Panel1")
+                        .Width(610)
+                        .Height(300)
+                        .Html("Content")
+                        .BodyPadding(6)
+                        .Title("Editor panel")
+                        .TopBar(X.Toolbar()
+                            .Items(
+                                X.Button()
+                                    .ID("Button1")
+                                    .Text("Edit")
+                                    .Icon(Icon.Pencil)
+                                    .Listeners(l => l.Click.Handler = "this.setDisabled(true);#{Button2}.setDisabled(false);#{PanelEditor}.startEdit(#{Panel1}.getBody());"),
+                                X.Button()
+                                    .ID("Button2")
+                                    .Text("Save")
+                                    .Icon(Icon.Disk)
+                                    .Disabled(true)
+                                    .Listeners(l => l.Click.Handler = "this.setDisabled(true);#{Button1}.setDisabled(false);#{PanelEditor}.completeEdit();")
+                            )
+                        ),
+
+                    X.Editor()
+                        .ID("PanelEditor")
+                        .HtmlDecode(true)
+                        .UseHtml(true)
+                        .AutoSize(true)
+                        .Alignment("tl-tl?")
+                        .AllowBlur(false)
+                        .Shadow(false)
+                        .AutoSizeConfig(new EditorAutoSize { Width = EditorAutoSizeDimension.BoundEl, Height = EditorAutoSizeDimension.BoundEl })
+                        .Field(f => f.Add(
+                            X.HtmlEditor()
+                                .ID("HtmlEditor1")
+                                .CustomConfig(cc =>
+                                    //ExtJS bug. Editor requires a field's getRawValue, but HtmlEditor doesn't have such the method --%>
+                                    cc.Add(new ConfigItem { Name = "getRawValue", Value = "function() { return ''; }", Mode = ParameterMode.Raw })
+                                )
+                        ))
+                        .Listeners(l =>
+                        {
+                            l.StartEdit.Handler = "this.field.iframeEl.setHeight(this.field.getHeight() - this.field.getToolbar().getHeight() - 4); this.field.textareaEl.setHeight(this.field.getHeight() - this.field.getToolbar().getHeight() - 4);";
+                            l.StartEdit.Delay = 10;
+                        })
+                )
+                .Listeners(l => l.Deactivate.Handler = "#{Button1}.setDisabled(false);#{Button2}.setDisabled(true);#{PanelEditor}.completeEdit();")
+            )
+        )
+    )
+}

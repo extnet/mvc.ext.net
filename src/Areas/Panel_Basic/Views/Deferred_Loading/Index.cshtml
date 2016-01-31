@@ -1,0 +1,212 @@
+﻿@{
+    ViewBag.Title = "Deferred Loading - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+         .msg {
+        	border  : 1px solid #999;
+        	padding : 6px;
+        	width   : 250px;
+        	font-weight   : bold;
+            text-align    : center;
+            margin-bottom : 30px;
+        }
+        
+        .msg em {
+        	font-style  : italic;
+        	font-weight : bold;
+        }
+    </style>
+}
+
+@section example
+{
+    <div class="msg x-box-mc">
+        Main page creation time: <em><ext:Label ID="Label1" runat="server" />@DateTime.Now.ToLongTimeString()</em>
+    </div>
+         
+    <hr />
+         
+    <br />
+    <br />
+    
+    <h3>1. TabPanel</h3>
+    
+    @(X.TabPanel()
+        .Width(500)
+        .Height(200)
+        .DeferredRender(false)
+        .Items(
+            X.Panel()
+                .ID("LoadingOnRenderTab")
+                .Title("Loading on render")
+                .Loader(X.ComponentLoader()
+                    .Url(Url.Action("RenderChild"))
+                    .Mode(LoadMode.Frame)
+                    .Params(new { containerId = "LoadingOnRenderTab" })
+                    .LoadMask(lm => lm.ShowMask = true)
+                ),
+            
+            X.Panel()
+                .ID("LoadingOnShowTab")
+                .Title("Loading on show")
+                .Loader(X.ComponentLoader()
+                    .Url(Url.Action("RenderChild"))
+                    .Mode(LoadMode.Frame)
+                    .TriggerEvent("show")
+                    .Params(new { containerId = "LoadingOnShowTab" })
+                    .LoadMask(lm => lm.ShowMask = true)
+                ),
+            
+            X.Panel()
+                .ID("ManuallyLoadTab")
+                .Title("Manual Load")
+                .TopBar(X.Toolbar()
+                    .Items(
+                        X.Button()
+                            .Text("Load")
+                            .Icon(Icon.Connect)
+                            .Handler("#{ManuallyLoadTab}.reload();")
+                    )
+                )
+                .Loader(X.ComponentLoader()
+                    .Url(Url.Action("RenderChild"))
+                    .Mode(LoadMode.Frame)
+                    .AutoLoad(false)
+                    .Params(new { containerId = "ManuallyLoadTab" })
+                    .LoadMask(lm => lm.ShowMask = true)
+                ),
+            
+            X.Panel()
+                .ID("LoadingOnShowWithReloading")
+                .Title("Loading on Show with Reloading")
+                .Loader(X.ComponentLoader()
+                    .Url(Url.Action("RenderChild"))
+                    .Mode(LoadMode.Frame)
+                    .TriggerEvent("show")
+                    .ReloadOnEvent(true)
+                    .DisableCaching(true)
+                    .Params(new { containerId = "LoadingOnShowWithReloading" })
+                    .LoadMask(lm => lm.ShowMask = true)
+                ),
+            
+            X.Panel()
+                .ID("ParentPanel")
+                .Title("Deferred Loading of Internal Panels")
+                .Items(
+                    X.Panel()
+                        .ID("InnerPanel1")
+                        .Title("Panel")
+                        .Height(150)
+                        // TriggerControl can be js function also
+                        .Loader(X.ComponentLoader()
+                            .Url(Url.Action("RenderChild"))
+                            .Mode(LoadMode.Frame)
+                            .TriggerControl("#{ParentPanel}")
+                            .TriggerEvent("Activate")
+                            .Params(new { containerId = "InnerPanel1" })
+                            .LoadMask(lm => lm.ShowMask = true)
+                        )
+                )
+        )
+    )
+    
+    <br />
+    <br />
+         
+    <h3>2. Accordion</h3>
+    
+    @(X.Panel()
+        .Title("Accordion with Deferred Loaded Panels")
+        .Width(500)
+        .Height(300)
+        .Layout(LayoutType.Accordion)
+        .Items(
+            X.Panel()
+                .ID("Panel1")
+                .Title("Panel 1")
+                .Loader(X.ComponentLoader()
+                    .Url(Url.Action("RenderChild"))
+                    .Mode(LoadMode.Frame)
+                    .Params(new { containerId = "Panel1" })
+                    .LoadMask(lm => lm.ShowMask = true)
+            ),
+            X.Panel()
+                .ID("Panel2")
+                .Title("Panel 2")
+                .Loader(X.ComponentLoader()
+                    .Url(Url.Action("RenderChild"))
+                    .Mode(LoadMode.Frame)
+                    .TriggerEvent("expand")
+                    .Params(new { containerId = "Panel2" })
+                    .LoadMask(lm => lm.ShowMask = true)
+            ),
+            X.Panel()
+                .ID("Panel3")
+                .Title("Panel 3")
+                .Loader(X.ComponentLoader()
+                    .Url(Url.Action("RenderChild"))
+                    .Mode(LoadMode.Frame)
+                    .TriggerEvent("expand")
+                    .Params(new { containerId = "Panel3" })
+                    .LoadMask(lm => lm.ShowMask = true)
+            )
+        )
+    )
+    
+    <br />
+    <br />
+         
+    <h3>3. Panel - loading on render and on each expand event, clear content on collapse</h3>
+    
+    @(X.Panel()
+        .ID("ExpandablePanel")
+        .Title("Panel")
+        .Width(500)
+        .Height(300)
+        .Collapsible(true)
+        .Loader(X.ComponentLoader()
+            .Url(Url.Action("RenderChild"))
+            .Mode(LoadMode.Frame)
+            .DisableCaching(true)
+            .Params(new { containerId = "ExpandablePanel" })
+            .LoadMask(lm => lm.ShowMask = true)
+        )
+        .Listeners(l => {
+            l.Expand.Handler = "this.reload();";
+            l.Collapse.Handler = "this.clearContent();";
+        })
+    )
+    
+    <h3>4. Window - loading on show with reloading, clear content on close</h3>
+    
+    @(X.Button()
+        .Text("Show window")
+        .Handler("App.Window1.show();")
+    )
+    
+    @(X.Window()
+        .ID("Window1")
+        .Title("Window")
+        .Width(300)
+        .Height(185)
+        .Hidden(true)
+        .Loader(X.ComponentLoader()
+            .Url(Url.Action("RenderChild"))
+            .Mode(LoadMode.Frame)
+            .DisableCaching(true)
+            .TriggerEvent("show")
+            .ReloadOnEvent(true)
+            .Params(new { containerId = "Window1" })
+            .LoadMask(lm => lm.ShowMask = true)
+        )
+        .Listeners(l => {
+            l.Hide.Handler = "this.clearContent();";
+        })
+    )
+    
+}

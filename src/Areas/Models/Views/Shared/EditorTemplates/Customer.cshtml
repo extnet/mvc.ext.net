@@ -1,0 +1,8 @@
+﻿@model Ext.Net.MVC.Examples.Areas.Models.Customer
+
+@Html.X().HiddenFor(c=>c.ID)
+@Html.X().TextFieldFor(c=>c.FirstName)
+@Html.X().TextFieldFor(c=>c.LastName)
+@Html.X().TextFieldFor(c=>c.Company)
+@Html.EditorFor(c=>c.ShippingAddress, new {itemId = "shippingAddress", title = "Shipping address", url = Url.Action("ShippingAddressSubmit")})
+@Html.EditorFor(c => c.BillingAddress, new { itemId = "billingAddress", title = "Billing address", copy = true, url = Url.Action("BillingAddressSubmit") })

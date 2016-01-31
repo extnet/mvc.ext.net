@@ -1,0 +1,31 @@
+﻿@model Ext.Net.MVC.Examples.Areas.Models.Model_BindModel
+@{
+    ViewBag.Title = "Model Bind";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>Model Bind</h1>
+
+    @(
+        Html.X().FormPanel()
+        .Layout(LayoutType.Form)
+        .Width(350)
+        .FieldDefaults(d => {
+            d.LabelWidth = 150;
+        })
+        .BodyPadding(10)
+        .Frame(true)
+        .Items(
+            Html.X().TextFieldFor(m => m.TextValue),
+            Html.X().DateFieldFor(m => m.DateTimeValue),
+            Html.X().ComboBoxFor(m => m.ComboValue1).Items(Model.Data),
+            Html.X().ComboBoxFor(m => m.ComboValue2).Items(Model.Data),
+            Html.X().ComboBoxFor(m => m.ComboValue3).Items(Model.Data),
+            Html.X().CheckboxFor(m => m.CheckboxValue),
+            Html.X().NumberFieldFor(m => m.NumberValue),
+            Html.X().SliderFor(m => m.MultiSliderValue)   
+        )
+    )    
+}

@@ -1,0 +1,242 @@
+﻿@{
+    ViewBag.Title = "Logos - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(X.Window()
+        .Width(600)
+        .Height(400)
+        .Hidden(false)
+        .Border(false)
+        .Title("Draw Components")
+        .Layout(LayoutType.Fit)
+        .Resizable(false)
+        .Items(
+            X.TabPanel()
+                .ActiveIndex(0)
+                .Defaults(d => d.Add(new Parameter("Padding", "0 0 0 0")))
+                .Items(
+                    X.Panel()
+                        .Title("Safari")
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.DrawContainer()
+                                .Gradients(g => g.Add(X.LinearGradient()
+                                        .GradientID("sfblackblue")
+                                        .Degrees(90)
+                                        .Stops(s => {
+                                            s.Add(X.GradientStop()
+                                            .Offset(0)
+                                            .Color("rgb(156, 178, 248)"));
+                                            s.Add(X.GradientStop()
+                                            .Offset(1)
+                                            .Color("rgb(33, 33, 33)"));
+                                        })                         
+                                    )
+                                )
+                                .Items(X.PathSprite()
+                                    .FillStyle("url(#sfblackblue)")
+                                    .Path((string)ViewData["SAFARI_PATH"])
+                                    .Scaling(11.5)
+                                    .TranslationX(280)
+                                    .TranslationY(147)
+                                )
+                        ),
+                        
+                    X.Panel()
+                        .Title("Sencha")
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.DrawContainer()
+                                .Gradients(g => {
+                                    g.Add(X.LinearGradient()
+                                        .GradientID("grad1")
+                                        .Degrees(100)
+                                        .Stops(s => {
+                                            s.Add(X.GradientStop()
+                                            .Offset(0)
+                                            .Color("#2FA042"));
+                                            s.Add(X.GradientStop()
+                                            .Offset(1)
+                                            .Color("#AACE36"));
+                                        })                         
+                                    );
+                                    
+                                    g.Add(X.LinearGradient()
+                                        .GradientID("grad2")
+                                        .Degrees(21)
+                                        .Stops(s => {
+                                            s.Add(X.GradientStop()
+                                                .Offset(0)
+                                                .Color("#005020"));
+                                            s.Add(X.GradientStop()
+                                                .Offset(0.13)
+                                                .Color("#005F27"));
+                                            s.Add(X.GradientStop()
+                                                .Offset(0.34)
+                                                .Color("#277B2F"));
+                                            s.Add(X.GradientStop()
+                                                .Offset(0.58)
+                                                .Color("#559332"));
+                                            s.Add(X.GradientStop()
+                                                .Offset(0.86)
+                                                .Color("#70A333"));
+                                            s.Add(X.GradientStop()
+                                                .Offset(0)
+                                                .Color("#79A933"));
+                                        })                         
+                                    );
+                                    
+                                    g.Add(X.LinearGradient()
+                                        .GradientID("grad3")
+                                        .Degrees(55)
+                                        .Stops(s => {
+                                            s.Add(X.GradientStop()
+                                                .Offset(0)
+                                                .Color("#00AA4B"));
+                                            s.Add(X.GradientStop()
+                                                .Offset(0.53)
+                                                .Color("#7CBA3D"));
+                                            s.Add(X.GradientStop()
+                                                .Offset(1)
+                                                .Color("#79AB35"));
+                                        })                         
+                                    );
+                                })
+                                .Items(
+                                    X.PathSprite()
+                                        .FillStyle("#C5D83E")
+                                        .Path((string)ViewData["SENCHA_PATH1"])
+                                        .TranslationX(170),
+                                    
+                                    X.PathSprite()
+                                        .FillStyle("url(#grad1)")
+                                        .Path((string)ViewData["SENCHA_PATH2"])
+                                        .TranslationX(170),
+                                    
+                                    X.PathSprite()
+                                        .FillStyle("url(#grad2)")
+                                        .Path((string)ViewData["SENCHA_PATH3"])
+                                        .TranslationX(170),
+                                    
+                                    X.PathSprite()
+                                        .FillStyle("url(#grad3)")
+                                        .Path((string)ViewData["SENCHA_PATH4"])
+                                        .TranslationX(170)
+                                )
+                        ),
+                        
+                    X.Panel()
+                        .Title("Firefox")
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.DrawContainer()
+                                .Gradients(g => g.Add(X.LinearGradient()
+                                        .GradientID("ffblackblue")
+                                        .Degrees(90)
+                                        .Stops(s => {
+                                            s.Add(X.GradientStop()
+                                            .Offset(0)
+                                            .Color("rgb(156, 178, 248)"));
+                                            s.Add(X.GradientStop()
+                                            .Offset(1)
+                                            .Color("rgb(33, 33, 33)"));
+                                        })                         
+                                    )
+                                )
+                                .Items(X.PathSprite()
+                                    .FillStyle("url(#ffblackblue)")
+                                    .Path((string)ViewData["FIREFOX_PATH"])
+                                    .Scaling(11.5)
+                                    .TranslationX(280)
+                                    .TranslationY(147)
+                                )
+                        ),
+                        
+                    X.Panel()
+                        .Title("Explorer")
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.DrawContainer()
+                                .Gradients(g => g.Add(X.LinearGradient()
+                                        .GradientID("ieblackblue")
+                                        .Degrees(90)
+                                        .Stops(s => {
+                                            s.Add(X.GradientStop()
+                                            .Offset(0)
+                                            .Color("rgb(156, 178, 248)"));
+                                            s.Add(X.GradientStop()
+                                            .Offset(1)
+                                            .Color("rgb(33, 33, 33)"));
+                                        })                         
+                                    )
+                                )
+                                .Items(X.PathSprite()
+                                    .FillStyle("url(#ieblackblue)")
+                                    .Path((string)ViewData["IE_PATH"])
+                                    .Scaling(11.5)
+                                    .TranslationX(280)
+                                    .TranslationY(147)
+                                )
+                        ),
+                        
+                    X.Panel()
+                        .Title("Chrome")
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.DrawContainer()
+                                .Gradients(g => g.Add(X.LinearGradient()
+                                        .GradientID("wkblackblue")
+                                        .Degrees(90)
+                                        .Stops(s => {
+                                            s.Add(X.GradientStop()
+                                            .Offset(0)
+                                            .Color("rgb(156, 178, 248)"));
+                                            s.Add(X.GradientStop()
+                                            .Offset(1)
+                                            .Color("rgb(33, 33, 33)"));
+                                        })                         
+                                    )
+                                )
+                                .Items(X.PathSprite()
+                                    .FillStyle("url(#wkblackblue)")
+                                    .Path((string)ViewData["CHROME_PATH"])
+                                    .Scaling(11.5)
+                                    .TranslationX(280)
+                                    .TranslationY(147)
+                                )
+                        ),
+                        
+                    X.Panel()
+                        .Title("Opera")
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.DrawContainer()
+                                .Gradients(g => g.Add(X.LinearGradient()
+                                        .GradientID("opblackblue")
+                                        .Degrees(90)
+                                        .Stops(s => {
+                                            s.Add(X.GradientStop()
+                                            .Offset(0)
+                                            .Color("rgb(156, 178, 248)"));
+                                            s.Add(X.GradientStop()
+                                            .Offset(1)
+                                            .Color("rgb(33, 33, 33)"));
+                                        })                         
+                                    )
+                                )
+                                .Items(X.PathSprite()
+                                    .FillStyle("url(#opblackblue)")
+                                    .Path((string)ViewData["OPERA_PATH"])
+                                    .Scaling(11.5)
+                                    .TranslationX(280)
+                                    .TranslationY(147)
+                                )
+                        )
+                )
+        )
+    )
+}

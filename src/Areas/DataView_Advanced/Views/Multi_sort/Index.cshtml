@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Multisort DataView Example";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>Multisort DataView Example</h1>
+    <p>This example shows using multiple sorters on a Store attached to a DataView.</p>
+    <p>We're also using the reorderable toolbar plugin to make it easy to reorder the sorters with drag and drop.</p>
+
+    @Html.X().Container().Control(c=>c.Items.Add(new Ext.Net.MVC.Examples.Areas.DataView_Advanced.Models.MultiSortPanel()))
+}

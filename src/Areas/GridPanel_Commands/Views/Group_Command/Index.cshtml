@@ -1,0 +1,135 @@
+@{
+    ViewBag.Title = "Group Commands - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var prepareGroupToolbar = function (grid, toolbar, groupId, records) {
+            // you can prepare ready toolbar
+        };
+
+        var onGroupCommand = function (column, command, group) {
+            if (command === 'SelectGroup') {
+                column.gridRef.getSelectionModel().select(group.items, true);
+                return;
+            }
+
+            Ext.Msg.alert(command, 'Group name: ' + group.getGroupKey() + '<br/>Count - ' + group.items.length);
+        };
+
+        var getAdditionalData = function (data, idx, record, orig) {
+            return {
+                rowBodyColspan: record.self.fields.length,
+                rowBody: Ext.String.format('<div style=\'padding:0 5px 5px 5px;\'>The {0} [{1}] requires light conditions of <i>{2}</i>.<br /><b>Price: {3}</b></div>', data.Common, data.Botanical, data.Light, Ext.util.Format.usMoney(data.Price))
+            };
+        };
+    </script>
+}
+
+@section example
+{
+    @(Html.X().GridPanel()
+        .Title("Plants")
+        .Width(600)
+        .Height(350)
+        .Frame(true)
+        .Collapsible(true)
+        .ForceFit(true)
+        .Store(Html.X().Store()
+            .GroupField("Light")
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("Common"),
+                    new ModelField("Botanical"),
+                    new ModelField("Zone", ModelFieldType.Int),
+                    new ModelField("ColorCode"),
+                    new ModelField("Light"),
+                    new ModelField("Price", ModelFieldType.Float),
+                    new ModelField("Availability", ModelFieldType.Date),
+                    new ModelField("Indoor", ModelFieldType.Boolean)
+                )
+            )
+            .Proxy(Html.X().AjaxProxy()
+                .Url(Url.Action("GetPlants"))
+                .ActionMethods(ams =>
+                    ams.Read = HttpMethod.POST
+                )
+                .Reader(Html.X().JsonReader().RootProperty("data"))
+            )
+            .Sorters(sorters =>
+                sorters.Add(Html.X().DataSorter()
+                    .Property("Common")
+                    .Direction(Ext.Net.SortDirection.ASC)
+                )
+            )
+        )
+        .ColumnModel(
+            Html.X().Column()
+                .Text("Common Name")
+                .DataIndex("Common")
+                .Width(220),
+
+            Html.X().Column()
+                .Text("Light")
+                .DataIndex("Light")
+                .Width(130),
+
+            Html.X().Column()
+                .Text("Price")
+                .DataIndex("Price")
+                .Width(70)
+                .Align(Alignment.Right)
+                .Groupable(false)
+                .Renderer(RendererFormat.UsMoney),
+
+            Html.X().DateColumn()
+                .Text("Available")
+                .DataIndex("Availability")
+                .Width(95)
+                .Groupable(false)
+                .Format("yyyy-MM-dd"),
+
+            Html.X().Column()
+                .Text("Indoor?")
+                .DataIndex("Indoor")
+                .Width(55),
+
+            Html.X().CommandColumn()
+                .Hidden(true)
+                .GroupCommands(
+                    Html.X().GridCommand()
+                        .Icon(Icon.TableRow)
+                        .CommandName("SelectGroup")
+                        .ToolTip(tt =>
+                        {
+                            tt.Title = "Select";
+                            tt.Text = "Select all rows of the group";
+                        }),
+
+                    Html.X().CommandFill(),
+
+                    Html.X().GridCommand()
+                        .Text("Menu")
+                        .StandOut(true)
+                        .MenuItem(
+                            Html.X().MenuCommand().CommandName("ItemCommand").Text("Item"),
+                            Html.X().MenuCommand().CommandName("ItemCommand").Text("Item")
+                        )
+                )
+                .PrepareGroupToolbar("prepareGroupToolbar")
+                .Listeners(ls =>
+                    ls.GroupCommand.Fn = "onGroupCommand"
+                )
+        )
+        .SelectionModel(Html.X().CheckboxSelectionModel().RowSpan(2))
+        .Features(
+            Html.X().Grouping()
+                .HideGroupedHeader(true)
+                .GroupHeaderTplString("{columnName}: {name} ({[values.rows.length]} {[values.rows.length > 1 ? \"Items\" : \"Item\"]})"),
+
+            Html.X().RowBody().GetAdditionalData("getAdditionalData")
+        )
+    )
+}

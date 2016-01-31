@@ -1,0 +1,58 @@
+    body  {
+        padding: 10px;
+    }
+
+    .availableLot {
+        width:                 103px;
+        border:                1px solid #999999;
+        padding:               10px;
+        height:                310px;
+        margin: 10px;
+        -moz-border-radius:    17px;
+        -webkit-border-radius: 17px;
+        border-radius:    17px;
+    }
+
+    .rented, .repair {
+        width: 195px;
+    }
+
+    .vehicleIcon {
+        -moz-border-radius:    5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        width:                 85px;
+        border:                1px solid #666666;
+        padding:               3px;
+        background-color:      #FFFFFF;
+        margin:                5px;
+        cursor:                move;
+        text-align:            center;
+    }
+
+    #cars div, #trucks div {
+        margin: 5px;
+        width:  85px;
+    }
+
+    #repair div, #rented div {
+        float:  left;
+        margin: 2px;
+    }
+
+    .imgThumb {
+        position: relative;
+        top: 2px;
+        height:  57px;
+        width:   77px;
+        border: 1px solid #777777;
+    }
+
+
+    .dropOK {
+        background-color: #99ff99 !important;
+    }
+
+    .dropNotOK {
+        border: 1px solid #FF0000 !important;
+    }

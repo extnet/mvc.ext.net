@@ -1,0 +1,34 @@
+﻿@(
+    Html.X().Window()
+        .ID("ImgChooserDlg")
+        .Height(400)
+        .Width(600)
+        .Cls("img-chooser-dlg")
+        .Title("Choose an Image")
+        .Layout(LayoutType.Border)
+        .ItemsFromPartial("IconBrowser")
+        .ItemsFromPartial("InfoPanel")
+        .HtmlBin(@<text>
+            <script>
+                function insertImage () {
+                    var win = this.up('window'),
+                        image = win.down('[cls=img-chooser-view]').selModel.getSelection()[0];
+
+                    if (image) {
+                        var imageEl = Ext.fly('images').createChild({
+                            tag: 'img',
+                            src: image.get('url')
+                        });
+                    
+                        imageEl.hide().show({duration: 500}).frame();                    
+                        win.animateTarget = imageEl;
+                        win.hide();
+                    }
+                }
+            </script>            
+        </text>)
+        .Buttons(
+            Html.X().Button().Text("OK").Handler("insertImage"),
+            Html.X().Button().Text("Cancel").Handler("this.up('window').close();")
+        )
+)

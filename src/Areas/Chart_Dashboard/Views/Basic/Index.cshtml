@@ -1,0 +1,362 @@
+﻿@{
+    ViewBag.Title = "Chart Dashboard - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var form = false,
+            rec = false,
+            selectedStoreItem = false;
+
+        var selectItem = function (storeItem) {
+            var name = storeItem.get('company'),
+                series = App.BarChart1.series[0],
+                store = series.getStore();
+
+            App.BarChart1.setHighlightItem(series.getItemByIndex(store.indexOf(storeItem)));
+        };
+
+        var updateRecord = function (rec) {
+            var name,
+                series,
+                i,
+                l,
+                items,
+                json = [{
+                    'Name': 'Price',
+                    'Data': rec.get('price')
+                }, {
+                    'Name': 'Revenue %',
+                    'Data': rec.get('revenue')
+                }, {
+                    'Name': 'Growth %',
+                    'Data': rec.get('growth')
+                }, {
+                    'Name': 'Product %',
+                    'Data': rec.get('product')
+                }, {
+                    'Name': 'Market %',
+                    'Data': rec.get('market')
+                }];
+            App.RadarStore.loadData(json);
+            selectItem(rec);
+        };
+
+        var afterEdit = function (field, newValue, oldValue) {
+            if (rec && form) {
+                if (newValue > field.maxValue) {
+                    field.setValue(field.maxValue);
+                } else {
+                    if (form.isValid()) {
+                        form.updateRecord(rec);
+                        updateRecord(rec);
+                    }
+                }
+            }
+        };
+
+        var onMouseUp = function (series, item, event, evntOpts) {
+            var index = item.index,
+                selectionModel = App.CompanyGrid.getSelectionModel();
+
+            selectedStoreItem = item.storeItem;
+            selectionModel.select(index);
+        };
+
+        var onSelectionChange = function (model, records) {
+            var json,
+                    name,
+                    i,
+                    l,
+                    items,
+                    series,
+                    fields;
+
+            if (records[0]) {
+                rec = records[0];
+                if (!form) {
+                    form = this.up('form').getForm();
+                    fields = form.getFields();
+                    fields.each(function (field) {
+                        if (field.name != 'company') {
+                            field.setDisabled(false);
+                        }
+                    });
+                } else {
+                    fields = form.getFields();
+                }
+
+                // prevent change events from firing
+                fields.each(function (field) {
+                    field.suspendEvents();
+                });
+
+                form.loadRecord(rec);
+                updateRecord(rec);
+
+                fields.each(function (field) {
+                    field.resumeEvents();
+                });
+            }
+        };
+    </script>
+
+    <style>
+        .x-panel-framed {
+            padding: 0;
+        }
+    </style>
+}
+
+@section example
+{
+    <h1>Dynamic Form, Grid and Charts</h1>
+
+    <p>
+        Showing companies information in a grid. Selecting a row will highlight
+        the bar corresponding to that company and fill in the form with the company
+        data. A radar chart will show the company information. You can update the
+        information in the form to see it change live in the grid, bar chart and radar charts.
+    </p>
+    
+    @(X.FormPanel()
+        .Title("Company data")
+        .Frame(true)
+        .BodyPadding(5)
+        .Width(870)
+        .Height(720)
+        .Bin(
+            X.Store()
+                .ID("CompanyStore")
+                .Data(ViewData["Data"])
+                .Model(X.Model()
+                    .Fields(
+                        X.ModelField().Name("company").Mapping("Company"),
+                        X.ModelField().Name("price").Mapping("Price").Type(ModelFieldType.Float),
+                        X.ModelField().Name("revenue").Mapping("revenue").Type(ModelFieldType.Float),
+                        X.ModelField().Name("revenue").Mapping("Revenue").Type(ModelFieldType.Float),
+                        X.ModelField().Name("growth").Mapping("Growth").Type(ModelFieldType.Float),
+                        X.ModelField().Name("product").Mapping("Product").Type(ModelFieldType.Float),
+                        X.ModelField().Name("market").Mapping("Market").Type(ModelFieldType.Float)
+                    )
+                )
+        )
+        .FieldDefaults(fd => {
+            fd.LabelAlign = LabelAlign.Left;
+            fd.MsgTarget = MessageTarget.Side;
+        })
+        .LayoutConfig(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch })
+        .Items(
+            X.Panel()
+                .Height(200)
+                .Layout(LayoutType.Fit)
+                .MarginSpec("0 0 3 0")
+                .Items(
+                    X.CartesianChart()
+                        .ID("BarChart1")
+                        .Border(false)
+                        .StoreID("CompanyStore")
+                        .Interactions(i => i.Add(X.ItemHighlightInteraction()))
+                        .AnimationConfig(new AnimConfig { Duration = 300, Easing = Easing.EaseOut })
+                        .Axes(
+                            X.NumericAxis().Position(Position.Left).Fields("price").Minimum(0).Hidden(true),
+                            X.CategoryAxis()
+                                .Position(Position.Bottom)
+                                .Fields("company")
+                                .Label(X.ChartLabel().Font("9px Arial").RotationDegrees(-45))
+                                .Renderer(r => r.Handler = "return Ext.String.ellipsis(label, 15, false);")
+                        )
+                        .Series(X.BarSeries()
+                            .Highlight(true)
+                            .XField("company")
+                            .YField("price")
+                            .StyleSpec(X.Sprite().FillStyle("#456d9f"))
+                            .HighlightConfig(X.Sprite().FillStyle("#a2b5ca"))
+                            .Label(X.ChartLabel()
+                                .Display(SeriesLabelDisplay.InsideEnd)
+                                .Field("price")
+                                .Color("#000")
+                                .Orientation(Orientation.Vertical)
+                                .TextAlign(TextSpriteAlign.Center)
+                            )
+                            .Listeners(events => events.ItemMouseUp.Fn="onMouseUp")
+                        )
+                        .Plugins(p => p.Add(X.ChartItemEvents()))
+                ),
+                
+            X.Panel()
+                .Flex(1)
+                .Border(false)
+                .BodyStyle("background-color: transparent;")
+                .LayoutConfig(new HBoxLayoutConfig() { Align = HBoxAlign.Stretch })
+                .Items(
+                    X.GridPanel()
+                        .ID("CompanyGrid")
+                        .Flex(6)
+                        .Title("Company Data")
+                        .StoreID("CompanyStore")
+                        .ColumnModel(
+                            X.Column()
+                                .ID("Company")
+                                .Text("Company")
+                                .Flex(1)
+                                .DataIndex("company"),
+                                    
+                            X.Column()
+                                .Text("Price")
+                                .Width(75)
+                                .DataIndex("price")
+                                .Align(Alignment.Right)
+                                .Renderer(RendererFormat.UsMoney),
+                                    
+                            X.Column()
+                                .Text("Revenue")
+                                .Width(75)
+                                .DataIndex("revenue")
+                                .Align(Alignment.Right)
+                                .Renderer("return value + '%';"),
+                                    
+                            X.Column()
+                                .Text("Growth")
+                                .Width(75)
+                                .DataIndex("growth")
+                                .Align(Alignment.Right)
+                                .Renderer("return value + '%';"),
+                                    
+                            X.Column()
+                                .Text("Product")
+                                .Width(75)
+                                .DataIndex("product")
+                                .Align(Alignment.Right)
+                                .Renderer("return value + '%';"),
+                                    
+                            X.Column()
+                                .Text("Market")
+                                .Width(75)
+                                .DataIndex("market")
+                                .Align(Alignment.Right)
+                                .Renderer("return value + '%';")
+                        )
+                        .Listeners(l => l.SelectionChange.Fn = "onSelectionChange"),
+                
+                    
+                X.Panel()
+                    .Flex(4)
+                    .Title("Company Details")
+                    .MarginSpec("0 0 0 5")
+                    .LayoutConfig(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch } )
+                    .Items(
+                        X.FieldSet()
+                            .Margin(5)
+                            .Flex(1)
+                            .Title("Company Details")
+                            .Defaults(d => {
+                                d.Add(new Parameter("Width", "240"));
+                                d.Add(new Parameter("LabelWidth", "90"));
+                                d.Add(new Parameter("Disabled", "true"));
+                            })
+                            .Items(
+                                X.TextField()
+                                    .FieldLabel("Name")
+                                    .Name("company"),
+                                
+                                X.NumberField()
+                                    .FieldLabel("Price")
+                                    .Name("price")
+                                    .MinValue(0)
+                                    .MaxValue(100)
+                                    .EnforceMaxLength(true)
+                                    .MaxLength(5)
+                                    .Listeners(l => {
+                                        l.Change.Fn = "afterEdit";
+                                        l.Change.Buffer = 200;
+                                    }),
+                                
+                                X.NumberField()
+                                    .FieldLabel("Revenue %")
+                                    .Name("revenue")
+                                    .MinValue(0)
+                                    .MaxValue(100)
+                                    .EnforceMaxLength(true)
+                                    .MaxLength(5)
+                                    .Listeners(l => {
+                                        l.Change.Fn = "afterEdit";
+                                        l.Change.Buffer = 200;
+                                    }),
+                                
+                                X.NumberField()
+                                    .FieldLabel("Growth %")
+                                    .Name("growth")
+                                    .MinValue(0)
+                                    .MaxValue(100)
+                                    .EnforceMaxLength(true)
+                                    .MaxLength(5)
+                                    .Listeners(l => {
+                                        l.Change.Fn = "afterEdit";
+                                        l.Change.Buffer = 200;
+                                    }),
+                                
+                                X.NumberField()
+                                    .FieldLabel("Product %")
+                                    .Name("product")
+                                    .MinValue(0)
+                                    .MaxValue(100)
+                                    .EnforceMaxLength(true)
+                                    .MaxLength(5)
+                                    .Listeners(l => {
+                                        l.Change.Fn = "afterEdit";
+                                        l.Change.Buffer = 200;
+                                    }),
+                                
+                                X.NumberField()
+                                    .FieldLabel("Market %")
+                                    .Name("market")
+                                    .MinValue(0)
+                                    .MaxValue(100)
+                                    .EnforceMaxLength(true)
+                                    .MaxLength(5)
+                                    .Listeners(l => {
+                                        l.Change.Fn = "afterEdit";
+                                        l.Change.Buffer = 200;
+                                    })
+                            ),
+                    
+                        X.PolarChart()
+                            .Margin(0)
+                            .InsetPadding(20)
+                            .Flex(1)
+                            .StandardTheme(StandardChartTheme.Blue)
+                            .Store(X.Store()
+                                .ID("RadarStore")
+                                .Data(ViewData["RadarData"])
+                                .Model(X.Model().Fields("Name", "Data"))
+                            )
+                            .Axes(
+                                X.CategoryAxis()
+                                    .Position(Position.Angular)
+                                    .Grid(true)
+                                    .Label(X.ChartLabel().FontSize("10")),
+                                    
+                                X.NumericAxis()
+                                    .MajorTickSteps(5)
+                                    .Minimum(0)
+                                    .Maximum(100)
+                                    .Position(Position.Radial)
+                                    .Grid(true)
+                            )
+                            .Series(
+                                X.RadarSeries()
+                                    .AngleField("Name")
+                                    .RadiusField("Data")
+                                    .ShowMarkers(true)
+                                    .Marker(X.CircleSprite().Radius(4).FillStyle("rgb(69,109,159)"))
+                                    .StyleSpec(X.Sprite().FillStyle("rgb(194,214,240)").Opacity(0.5).LineWidth(0.5))
+                            )
+                    )
+                )
+        )
+    )
+}

@@ -1,0 +1,101 @@
+﻿@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Mouse Sensor Distance - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <style>
+        .x-grid-row-over .x-grid-cell-inner {
+            font-weight : bold;
+        }
+    </style>
+
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+    </script>  
+}
+
+@section example
+{    
+    @(Html.X().Viewport()
+        .Layout(LayoutType.Border)
+        .Items(
+            Html.X().Panel()
+                .Region(Region.North)
+                .Height(75)
+                .BodyPadding(20)
+                .Html("<h1>Mouse Sensor Distance</h1>"),
+                
+            Html.X().GridPanel()
+                .ID("GridPanel1")
+                .Region(Region.Center)
+                .Title("Move cursor to the bottom right window")
+                .Store(Html.X().Store()
+                    .Model(Html.X().Model()
+                        .Fields(
+                            new ModelField("company"),
+                            new ModelField("price", ModelFieldType.Float),
+                            new ModelField("change", ModelFieldType.Float),
+                            new ModelField("pctChange", ModelFieldType.Float),
+                            new ModelField("lastChange", ModelFieldType.Date, "M/d hh:mmtt")
+                        )
+                    )
+                    .DataSource(Model)
+                )
+                .ColumnModel(
+                    Html.X().Column().Text("Company").DataIndex("company").Flex(1),
+                    Html.X().Column().Text("Price").DataIndex("price").Renderer(RendererFormat.UsMoney),
+                    Html.X().Column().Text("Change").DataIndex("change").Renderer("change"),
+                    Html.X().Column().Text("Change").DataIndex("pctChange").Renderer("pctChange"),
+                    Html.X().DateColumn().Text("Last Updated").DataIndex("lastChange")
+                )
+                .SelectionModel(Html.X().RowSelectionModel()
+                    .Mode(SelectionMode.Single)
+                    .Listeners(l => l.Select.Handler = "#{FormPanel1}.getForm().loadRecord(record);")
+                )
+                .View(Html.X().GridView()
+                    .StripeRows(true)
+                    .TrackOver(true)
+                )
+        )
+    )
+    
+    @(Html.X().Window()
+          .Title("Record")
+          .Width(300)
+          .Height(200)
+          .Layout(LayoutType.Fit)
+          .Hidden(true)
+          .Closable(false)
+          .Shadow(false)
+          .Items(Html.X().FormPanel()
+                     .ID("FormPanel1")
+                     .Border(false)
+                     .DefaultAnchor("100%")
+                     .BodyPadding(10)
+                     .Items(
+                         Html.X().TextField().Name("company").FieldLabel("Company"),
+                         Html.X().NumberField().Name("price").FieldLabel("Price"),
+                         Html.X().NumberField().Name("change").FieldLabel("Change"),
+                         Html.X().NumberField().Name("pctChange").FieldLabel("Change"),
+                         Html.X().DateField().Name("lastChange").FieldLabel("Last Updated")
+              )
+          )
+          .Listeners(l =>
+              {
+                  l.AfterRender.Handler = "this.show();this.el.alignTo(document, 'br-br', [-20,-20]);"; 
+                  l.AfterRender.Delay = 1;
+              })
+          .Plugins(Html.X().MouseDistanceSensor().MinOpacity((decimal)0.3)))
+}

@@ -1,0 +1,279 @@
+﻿@using Ext.Net.MVC.Examples.Areas.Desktop.Models
+
+<script>
+    var processRenderer = function (sprite, config, rendererData, index) {
+        var lowColor = Ext.draw.Color.fromString('#b1da5a'),
+            record = rendererData.store.getAt(index),
+            value = record.get('Memory'),
+            color;
+
+        if (value > 5) {
+            color = lowColor.createDarker((value - 5) / 15).toString();
+        } else {
+            color = lowColor.createLighter(((5 - value) / 20)).toString();
+        }
+
+        if (value >= 8) {
+            color = '#CD0000';
+        }
+
+        return {
+            fillStyle: color
+        };
+    };
+</script>
+
+@{
+    string[] memoryColors = new string[]{ "rgb(244, 16, 0)", "rgb(248, 130, 1)", "rgb(0, 7, 255)", "rgb(84, 254, 0)" };
+    var data = new SystemStatusData(true);
+    SystemStatusModel.UpdateCharts(data);    
+ }
+
+@(
+ Html.X().DesktopModuleProxy()
+        .Module(
+            Html.X().DesktopModule()
+                .ModuleID("systemstatus")
+                .Shortcut(
+                    Html.X().DesktopShortcut()
+                        .Name("System Status")
+                        .IconCls("x-status-shortcut")
+                        .SortIndex(2)
+                )
+                .Window(
+                    Html.X().Window()
+                        .Width(800)
+                        .Height(600)
+                        .CloseAction(CloseAction.Destroy)
+                        .Layout(LayoutType.Fit)
+                        .Title("System Status")
+                        .Bin(
+                            Html.X().Store()
+                                .ID("CPULoadStore")
+                                .DataSource(data.CPULoadData)
+                                .Model(
+                                    Html.X().Model()
+                                        .Fields(
+                                            Html.X().ModelField().Name("Core1"),
+                                            Html.X().ModelField().Name("Core2"),
+                                            Html.X().ModelField().Name("Time")
+                                        )
+                                ),
+
+                            Html.X().Store()
+                                .ID("MemoryStore")
+                                .DataSource(data.MemoryData)
+                                .Model(
+                                    Html.X().Model()
+                                        .Fields(
+                                            Html.X().ModelField().Name("Name"),
+                                            Html.X().ModelField().Name("Memory")
+                                        )
+                                ),
+
+                            Html.X().Store()
+                                .ID("ProcessStore")
+                                .DataSource(data.ProcessData)
+                                .Model(
+                                    Html.X().Model()
+                                        .Fields(
+                                            Html.X().ModelField().Name("Name"),
+                                            Html.X().ModelField().Name("Memory")
+                                        )
+                                ),
+
+                            Html.X().TaskManager()
+                                .ID("TaskManager1")
+                                .Tasks(
+                                    Html.X().Task()
+                                        .TaskID("updateCharts")
+                                        .WaitPreviousRequest(true)
+                                        .AutoRun(false)
+                                        .Interval(2000)
+                                        .DirectEvents(de =>
+                                        {
+                                            de.Update.Url = Url.Action("UpdateTask");
+                                        })
+                                ),
+
+                            Html.X().ChartTheme()
+                                .ThemeName("Memory")
+                                .Colors(memoryColors)
+                        )
+                        .Items(
+                            Html.X().Panel()
+                                .LayoutConfig(
+                                    new HBoxLayoutConfig { Align = HBoxAlign.Stretch }
+                                )
+                                .Items(
+                                    Html.X().Container()
+                                        .Flex(1)
+                                        .LayoutConfig(
+                                            new VBoxLayoutConfig { Align = VBoxAlign.Stretch }
+                                        )
+                                        .Items(
+                                            Html.X().CartesianChart()
+                                                .ID("CPUChart1")
+                                                .Flex(1)
+                                                .StandardTheme(StandardChartTheme.Category1)
+                                                .Animation(false)
+                                                .Legend(true)
+                                                .StoreID("CPULoadStore")
+                                                .Axes(
+                                                    Html.X().NumericAxis()
+                                                        .Position(Position.Left)
+                                                        .Minimum(0)
+                                                        .Maximum(100)
+                                                        .Fields("Core1")
+                                                        .Title("CPU Load")
+                                                        .Grid(true)
+                                                        .TitleConfig(
+                                                            new Sprite { Font = "13px Arial" }
+                                                        )
+                                                        .Label(
+                                                            new ChartLabel { Font = "13px Arial" }
+                                                        )
+                                                )
+                                                .Series(
+                                                    Html.X().LineSeries()
+                                                        .Title("Core 1 (3.4GHz)")
+                                                        .Fill(true)
+                                                        .XField("Time")
+                                                        .YField("Core1")
+                                                        .StyleSpec(
+                                                            new Sprite { LineWidth = 1 }
+                                                        )
+                                                ),
+
+                                                Html.X().CartesianChart()
+                                                    .ID("CPUChart2")
+                                                    .Flex(1)
+                                                    .StandardTheme(StandardChartTheme.Category2)
+                                                    .Animation(false)
+                                                    .Legend(true)
+                                                    .StoreID("CPULoadStore")
+                                                    .Axes(
+                                                        Html.X().NumericAxis()
+                                                            .Position(Position.Left)
+                                                            .Minimum(0)
+                                                            .Maximum(100)
+                                                            .Fields("Core2")
+                                                            .Title("CPU Load")
+                                                            .Grid(true)
+                                                            .TitleConfig(
+                                                                new Sprite { Font = "13px Arial" }
+                                                            )
+                                                            .Label(
+                                                                new ChartLabel { Font = "11px Arial" }
+                                                            )
+                                                    )
+                                                    .Series(
+                                                        Html.X().LineSeries()
+                                                            .Title("Core 2 (3.4GHz)")
+                                                            .ShowMarkers(true)
+                                                            .Fill(true)
+                                                            .XField("Time")
+                                                            .YField("Core2")
+                                                            .StyleSpec(
+                                                                new Sprite { LineWidth = 1 }
+                                                            )
+                                                    )
+                                        ),
+
+                                    Html.X().Container()
+                                        .Flex(1)
+                                        .LayoutConfig(
+                                            new VBoxLayoutConfig { Align = VBoxAlign.Stretch }
+                                        )
+                                        .Items(
+                                            Html.X().PolarChart()
+                                                .ID("MemoryChart")
+                                                .Flex(1)
+                                                .StoreID("MemoryStore")
+                                                .InnerPadding(20)
+                                                .Shadow(true)
+                                                .Theme("Memory")
+                                                .LegendConfig(new ChartLegend { Dock = Dock.Right })
+                                                .Series(
+                                                    Html.X().PieSeries()
+                                                        .Donut(30)
+                                                        .AngleField("Memory")
+                                                        .ShowInLegend(true)
+                                                        .HighlightMargin(20)
+                                                        .Tooltip(new ChartTip
+                                                        {
+                                                            TrackMouse = true,
+                                                            Width = 140,
+                                                            Height = 28,
+                                                            Renderer =
+                                                            {
+                                                                Handler = "toolTip.setTitle(record.get('Name') + ': ' + Math.round(record.get('Memory') / #{MemoryStore}.sum('Memory') * 100) + '%');"
+                                                            }
+                                                        })
+                                                        .Label(new ChartLabel
+                                                        {
+                                                            Field = new string[] { "Name" },
+                                                            Display = SeriesLabelDisplay.Rotate,
+                                                            Font = "12px Arial"
+                                                        })
+                                                ),
+
+                                            Html.X().CartesianChart()
+                                                .Flex(1)
+                                                .StandardTheme(StandardChartTheme.Category1)
+                                                .StoreID("ProcessStore")
+                                                .AnimationConfig(new AnimConfig
+                                                {
+                                                    Easing = Easing.EaseInOut,
+                                                    Duration = 750
+                                                })
+                                                .Axes(
+                                                    Html.X().NumericAxis()
+                                                        .Position(Position.Left)
+                                                        .Minimum(0)
+                                                        .Maximum(10)
+                                                        .Fields("Memory")
+                                                        .Title("Memory")
+                                                        .TitleConfig(new Sprite
+                                                        {
+                                                            Font = "13px Arial"
+                                                        })
+                                                        .Label(new ChartLabel
+                                                        {
+                                                            Font = "11px Arial"
+                                                        }),
+
+                                                    Html.X().CategoryAxis()
+                                                        .Position(Position.Bottom)
+                                                        .Fields("Name")
+                                                        .Title("System Processes")
+                                                        .TitleConfig(new Sprite
+                                                        {
+                                                            Font = "13px Arial"
+                                                        })
+                                                        .Label(new ChartLabel
+                                                        {
+                                                            RotationDegrees = 45
+                                                        })
+                                                )
+                                                .Series(
+                                                    Html.X().BarSeries()
+                                                        .Title("Processes")
+                                                        .XField("Name")
+                                                        .YField("Memory")
+                                                        .Renderer("processRenderer")
+                                                        .StyleSpec(new Sprite { 
+                                                            LineWidth = 1
+                                                        })
+                                                )
+
+                                        )
+                                )
+                        )
+                        .Listeners(l =>
+                        {
+                            l.AfterRender.Handler = "App.TaskManager1.startTask('updateCharts');";
+                        })
+                )
+        )
+)

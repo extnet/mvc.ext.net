@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Column Layout - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(X.Viewport()
+        .Layout(LayoutType.Column)
+        .Items(
+            X.Panel()
+                .ColumnWidth(0.25)
+                .Height(100)
+                .Title("Width=0.25")
+                .Html("This is some content."),
+            
+            X.Panel()
+                .ColumnWidth(0.75)
+                .Height(100)
+                .Title("Width=0.75")
+                .Html("This is some content."),
+                
+            X.Panel()
+                .Width(250)
+                .Height(100)
+                .Title("Width=250px")
+                .Html("This is some content.")
+        )
+    )
+}
+}

@@ -1,0 +1,24 @@
+﻿@model Ext.Net.MVC.Examples.Areas.Models.Models.FormPanelEmployee
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>FormPanel for Model</h1>
+    <p>Automatically build a form panel for a model</p>
+    <p>If you running that example in your project, please do not forget to put Customer.cshtml and Department.cshtml to the Views\Shared\EditorTemplates folder</p>
+
+    @(
+    Html.X().FormPanelFor(m=>m)
+            .BodyPadding(5)
+            .DefaultAnchor("100%")
+            .Width(300)
+            .Buttons(Html.X().Button()
+                .Text("Submit")
+                .DirectClickUrl(Url.Action("Submit"))
+            )
+     )
+}

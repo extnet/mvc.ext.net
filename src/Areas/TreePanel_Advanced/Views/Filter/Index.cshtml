@@ -1,0 +1,85 @@
+﻿@model Ext.Net.Node
+@{
+    ViewBag.Title = "Tree Filter - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var filterTree = function (tf, e) {
+            var tree = tf.up("treepanel"),
+                store = tree.store,
+                logic = App.FilterLogic.getValue() ? tree : store,
+                text = tf.getRawValue();
+
+            logic.clearFilter();
+
+            if (Ext.isEmpty(text, false)) {
+                return;
+            }
+
+            if (e.getKey() === e.ESC) {
+                clearFilter();
+            } else {
+                var re = new RegExp(".*" + text + ".*", "i");
+
+                logic.filterBy(function (node) {
+                    return re.test(node.data.text);
+                });
+            }
+        };
+
+        var clearFilter = function () {
+            var field = this,
+                tree = this.up("treepanel"),
+                store = tree.store,
+                logic = App.FilterLogic.getValue() ? tree : store;
+
+            field.setValue("");
+            logic.clearFilter(true);
+            tree.getView().focus();
+        };
+
+    </script>
+}
+
+@section example
+{
+    <h1>Tree Filter</h1>
+    <h3>
+        <b>Notice:</b> Deactivating the 'tree' checkbox turns on 'store' filtering logic. Store logic
+        filter applies the pattern directly to the tree's store so its behavior is much different.
+        <br />
+        Example filter pattern: <b>exa|grid</b>
+    </h3>
+    @(Html.X().TreePanel()
+        .Height(300)
+        .Width(300)
+        .UseArrows(true)
+        .Root(Model)
+        .RootVisible(false)
+        .TopBarItem(
+            Html.X().ToolbarTextItem().Text("Filter:"),
+            Html.X().ToolbarSpacer(),
+            Html.X().TextField()
+                .EnableKeyEvents(true)
+                .Triggers(
+                    Html.X().FieldTrigger().Icon(TriggerIcon.Clear)
+                )
+                .Listeners(l =>
+                {
+                    l.KeyUp.Fn = "filterTree";
+                    l.KeyUp.Buffer = 250;
+
+                    l.TriggerClick.Fn = "clearFilter";
+                }),
+            Html.X().ToolbarSpacer(),
+            Html.X().Checkbox()
+                .ID("FilterLogic")
+                .BoxLabel("Tree filtering")
+                .Checked(true)
+                .ToolTips(tips => tips.Add(new ToolTip { Html = "If checked then tree logic filtering (instead store logic)" }))
+        )
+    )
+}

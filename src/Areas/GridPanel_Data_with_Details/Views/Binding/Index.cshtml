@@ -1,0 +1,67 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Master-Detail Data Binding - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>Data Binding Example</h1>
+    <p>This example shows how to implement data binding for a master-detail view.</p>
+
+    @(Html.X().XTemplate()
+        .ID("BookTpl")
+        .Html(@<text>
+            Title: <a href="{DetailPageURL}" target="_blank">{Title}</a><br/>
+                Author: {Author}<br/>
+                Manufacturer: {Manufacturer}<br/>
+                Product Group: {ProductGroup}<br/>    
+        </text>)
+    )
+
+    @(Html.X().Panel()
+        .Frame(true)
+        .Title("Book List")
+        .Width(540)
+        .Height(400)
+        .Layout("border")
+        .Items(Html.X().GridPanel()
+            .Region(Region.North)
+            .Split(true)
+            .Height(210)
+            .Store(Html.X().Store()
+                .Model(Html.X().Model()
+                    .Name("Book")
+                    .Fields(
+                        new ModelField("Author"),
+                        new ModelField("Title"),
+                        new ModelField("Manufacturer"),
+                        new ModelField("ProductGroup"),
+                        new ModelField("DetailPageURL")
+                    )
+                )
+                .Proxy(Html.X().AjaxProxy()
+                    .Url(Url.Content("~/Areas/GridPanel_Data_with_Details/Content/sheldon.xml"))
+                    .Reader(Html.X().XmlReader().Record("Item"))
+                )
+            )
+            .ColumnModel(
+                Html.X().Column().Text("Author").Width(120).DataIndex("Author"),
+                Html.X().Column().Text("Title").Flex(1).DataIndex("Title"),
+                Html.X().Column().Text("Manufacturer").Width(115).DataIndex("Manufacturer"),
+                Html.X().Column().Text("Product Group").DataIndex("ProductGroup")
+            )
+            .Listeners(ls =>
+                ls.SelectionChange.Handler = "selected.length && App.BookTpl.overwrite(App.DetailPanel.body, selected[0].data);"
+            ),
+            Html.X().Panel()
+                .ID("DetailPanel")
+                .Region(Region.Center)
+                .BodyPadding(7)
+                .BodyStyle("background: #ffffff;")
+                .Html("Please select a book to see additional details.")
+        )
+    )
+}
+

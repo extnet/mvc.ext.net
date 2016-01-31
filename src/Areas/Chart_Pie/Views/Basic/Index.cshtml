@@ -1,0 +1,108 @@
+﻿@model List<Ext.Net.MVC.Examples.ChartModel>
+@{
+    ViewBag.Title = "Pie Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var tipRenderer = function (toolTip, storeItem, item) {
+            var total = 0;
+
+            App.Chart1.getStore().each(function (rec) {
+                total += rec.get('Data1');
+            });
+
+            toolTip.setTitle(storeItem.get('Name') + ': ' + Math.round(storeItem.get('Data1') / total * 100) + '%');
+        };
+
+        var saveChart = function (btn) {
+            Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as an image?', function (choice) {
+                if (choice === 'yes') {
+                    btn.up('panel').down('polar').download();
+                }
+            });
+        };
+    </script>
+}
+
+@section example 
+{
+    <h1>Pie Chart Example</h1>
+
+    <p>Display 5 sets of random data using a pie chart. Reload data will randomly generate a new set of data in the store.</p>
+
+    <p>Toggle Donut button will dynamically change the chart between a Donut and Pie chart.</p>
+
+    <p>Click or hover on the legend items to highlight and remove them from the chart.</p>
+
+    @(X.Panel()
+        .Width(800)
+        .Height(600)
+        .Title("Semester Trends")
+        .Layout("fit")
+        .TopBar(X.Toolbar()
+            .Items(
+                X.ToolbarFill(),
+
+                X.Button()
+                    .Text("Save Chart")
+                    .Icon(Icon.Disk)
+                    .Handler("saveChart"),
+                    
+                X.Button()
+                    .Text("Preview")
+                    .Handler("this.up('panel').down('polar').preview();"),
+
+                X.Button()
+                    .Text("Reload Data")
+                    .Icon(Icon.ArrowRefresh)
+                    .Handler("App.Chart1.getStore().reload();"),
+
+                X.Button()
+                    .Text("Donut")
+                    .EnableToggle(true)
+                            .Listeners(events => events.Toggle.Handler = "App.Chart1.series[0].setDonut(pressed ? 35 : false); App.Chart1.redraw();")
+            )
+        )
+        .Items(X.PolarChart()
+            .ID("Chart1")
+            .Shadow(true)
+            .InsetPadding(60)
+            .InnerPadding(20)
+            .LegendConfig(X.ChartLegend().Dock(Dock.Right))
+            .Store(X.Store()
+                .Data(Model)
+                .Model(X.Model().Fields("Name", "Data1"))
+                .ServerProxy(X.AjaxProxy()
+                    .Url(Url.Action("GetData"))
+                    .Reader(X.JsonReader().RootProperty("data"))
+                )
+            )
+            .Interactions(
+                X.ItemHighlightInteraction(),
+                X.RotateInteraction()
+            )
+            .Series(X.PieSeries()
+                .AngleField("Data1")
+                .ShowInLegend(true)
+                .Donut(0)
+                .HighlightMargin(20)
+                .Label(X.ChartLabel()
+                    .Field("Name")
+                    .Display(SeriesLabelDisplay.Rotate)
+                    .FontSize("18")
+                    .FontFamily("Arial")
+                )
+                .Tooltip(X.ChartTip()
+                    .TrackMouse(true)
+                    .Width(140)
+                    .Height(28)
+                    .Renderer(r => r.Fn = "tipRenderer")
+                )
+            )
+        )
+    )
+}

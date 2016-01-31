@@ -1,0 +1,48 @@
+﻿@model Ext.Net.Node
+@{
+    ViewBag.Title = "Drag and Drop ordering of TreePanel Nodes - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var moveNode = function (item, oldParent, newParent, index, options) {
+            var buf=[];
+            buf.push("Node = " + item.data.text);
+            buf.push("<br/>");
+            buf.push("Old parent = " + oldParent.data.text);
+            buf.push("<br/>");
+            buf.push("New parent = " + newParent.data.text);
+            buf.push("<br/>");
+            buf.push("Index = " + index);
+            
+            Ext.Msg.alert("Node droped", buf.join(""));
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>Drag and Drop ordering of TreePanel Nodes</h1>
+        
+    <p>This example shows basic drag and drop node moving in a tree. In this implementation there are no restrictions and 
+    anything can be dropped anywhere except appending to nodes marked "leaf".</p>        
+        
+    <p>In order to demonstrate drag and drop insertion points, sorting was <b>not</b> enabled.</p>
+
+    @(
+        Html.X().TreePanel()
+            .Height(300)
+            .Width(250)
+            .UseArrows(true)
+            .Listeners(l=>l.ItemMove.Fn = "moveNode")
+            .View(
+                Html.X().TreeView()
+                    .Plugins(
+                        Html.X().TreeViewDragDrop().ContainerScroll(true)
+                    )   
+            )            
+            .Root(Model)
+    )
+}

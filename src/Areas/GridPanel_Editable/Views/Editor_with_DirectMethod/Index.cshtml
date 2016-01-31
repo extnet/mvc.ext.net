@@ -1,0 +1,112 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Editor with DirectMethod - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var template = 'color:{0};';
+
+        var change = function (value, meta) {
+            meta.style = Ext.String.format(template, (value > 0) ? "green" : "red");            
+            return value;
+        };
+
+        var pctChange = function (value, meta) {
+            meta.style = Ext.String.format(template, (value > 0) ? "green" : "red");            
+            return value + "%";
+        };
+        
+        var edit = function (editor, e) {
+            /*
+                "e" is an edit event with the following properties:
+
+                    grid - The grid
+                    record - The record that was edited
+                    field - The field name that was edited
+                    value - The value being set
+                    originalValue - The original value for the field, before the edit.
+                    row - The grid table row
+                    column - The grid Column defining the column that was edited.
+                    rowIdx - The row index that was edited
+                    colIdx - The column index that was edited
+            */
+            
+            // Call DirectMethod
+            if (!(e.value === e.originalValue || (Ext.isDate(e.value) && Ext.Date.isEqual(e.value, e.originalValue)))) {
+                Ext.net.DirectMethod.request({
+                    url: '@(Url.Action("Edit"))',
+                    params: {
+                        id: e.record.data.ID,
+                        field: e.field,
+                        oldValue: e.originalValue,
+                        newValue: e.value,
+                        customer: e.record.data
+                    }
+                });
+            }
+        };
+    </script>
+}
+
+@section example
+{    
+    <h1>Editable GridPanel With Save To [DirectMethod]</h1>
+
+    @(Html.X().GridPanel()
+        .Title("Editable GridPanel")
+        .Width(600)
+        .Height(350)
+        .Store(Html.X().Store()
+            .ID("Store1")
+            .Model(Html.X().Model()
+                .IDProperty("ID")
+                .Fields(
+                    new ModelField("ID", ModelFieldType.Int),
+                    new ModelField("Name"),
+                    new ModelField("Price", ModelFieldType.Float),
+                    new ModelField("Change", ModelFieldType.Float),
+                    new ModelField("PctChange", ModelFieldType.Float),
+                    new ModelField("LastChange", ModelFieldType.Date)
+                )
+            )
+            .DataSource(Model)
+        )
+        .ColumnModel(
+            Html.X().Column().Text("ID").DataIndex("ID").Width(35),
+            Html.X().Column()
+                .Text("Name")
+                .DataIndex("Name")
+                .Flex(1)
+                .Editor(Html.X().TextField()),
+            Html.X().Column()
+                .Text("Price")
+                .DataIndex("Price")
+                .Renderer(RendererFormat.UsMoney)
+                .Editor(Html.X().NumberField()),
+            Html.X().Column()
+                .Text("Change")
+                .DataIndex("Change")
+                .Renderer("change")
+                .Editor(Html.X().NumberField()),
+             Html.X().Column()
+                .Text("PctChange")
+                .DataIndex("PctChange")
+                .Renderer("pctChange")
+                .Editor(Html.X().NumberField()),
+            Html.X().DateColumn()
+                .Text("Last Updated")
+                .DataIndex("LastChange")
+                .Format("yyyy-MM-dd")
+                .Editor(Html.X().DateField().Format("yyyy-MM-dd"))
+        )
+        .SelectionModel(Html.X().CellSelectionModel())
+        .Plugins(
+            Html.X().CellEditing().Listeners(ls => ls.Edit.Fn = "edit")
+        )
+    )
+}
+

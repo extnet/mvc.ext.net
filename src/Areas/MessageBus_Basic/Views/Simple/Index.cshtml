@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "MessageBus - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <p>Please see the following links to understand message (token) syntax</p>
+
+    <p>
+        <a href="http://www.openajax.org/member/wiki/OpenAjax_Hub_2.0_Specification">OpenAjax Hub 2.0 Specification</a>
+        <br />
+        <a href="http://www.openajax.org/member/wiki/OpenAjax_Hub_2.0_Specification_Topic_Names">OpenAjax Hub 2.0 Specification Topic Names</a>
+    </p>
+    
+    @(X.Container()
+        .Layout(LayoutType.HBox)
+        .Items(
+            X.Panel()
+                .ID("Panel1")
+                .Title("Catch ALL App Events")
+                .Width(300)
+                .Height(300)
+                .Layout(LayoutType.Fit)
+                .BodyPadding(5)
+                .Margin(5)
+                .MessageBusListeners(new MessageBusListener
+                    {
+                        Name = "App.*", 
+                        Handler = "this.body.createChild({html: name + ' from ' + data.item.id, tag:'p'});"
+                    }
+                )
+                .Buttons(
+                    X.Button()
+                        .ID("Button1")
+                        .Text("Publish 'App.event1'")
+                        .Listeners(l => l.Click.BroadcastOnBus = "App.event1"),
+                        
+                    X.Button()
+                        .ID("Button2")
+                        .Text("Publish 'App.event2'")
+                        .Listeners(l => l.Click.BroadcastOnBus = "App.event2")
+                ),
+                
+            X.Panel()
+                .ID("Panel2")
+                .Title("Category Events")
+                .Layout(LayoutType.Fit)
+                .Width(350)
+                .Height(300)
+                .BodyPadding(5)
+                .Margin(5)
+                .MessageBusListeners(l => {
+                    l.Add(new MessageBusListener { Name = "Msg.Log", Handler = "this.body.createChild({html: data, tag:'p', style:'color:blue;'});" });
+                    l.Add(new MessageBusListener { Name = "Msg.Error", Handler = "this.body.createChild({html: data, tag:'p', style:'color:red;'});" });
+                })
+                .MessageBusDirectEvents(de => {
+                    var e = new MessageBusDirectEvent { Name = "Msg.Server", Action = "ServerBusEvent" };
+                    e.ExtraParams.Add(new Parameter("message", "data", ParameterMode.Raw));
+                    de.Add(e);
+                })
+                .Buttons(
+                    X.Button()
+                        .Text("Publish 'Log'")
+                        .OnClientClick("Ext.net.Bus.publish('Msg.Log', 'A Log Message');"),
+                        
+                    X.Button()
+                        .Text("Publish 'Error'")
+                        .OnClientClick("Ext.net.Bus.publish('Msg.Error', 'An Error Message');"),
+                        
+                    X.Button()
+                        .Text("Publish 'Server'")
+                        .DirectEvents(de => de.Click.Action = "PublishEvent")
+                )
+        )
+    )
+}

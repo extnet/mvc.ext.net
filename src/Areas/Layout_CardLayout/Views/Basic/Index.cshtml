@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "CardLayout - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(X.Panel()
+        .ID("WizardPanel")
+        .Title("Example Wizard")
+        .BodyPadding(15)
+        .Height(300)
+        .Layout(LayoutType.Card)
+        .ActiveIndex(0)
+        .Items(
+            X.Container().Html("<h1>Welcome to the Wizard!</h1><p>Step 1 of 3</p>"),
+                
+            X.Container().Html("<h1>Card 2</h1><p>Step 2 of 3</p>"),
+                
+            X.Container().Html("<h1>Congratulations!</h1><p>Step 3 of 3 - Complete</p>")
+        )
+        .Buttons(
+            X.Button()
+                .ID("btnPrev")
+                .Text("Prev")
+                .Disabled(true)
+                .Icon(Icon.PreviousGreen)
+                .DirectEvents(de => {
+                    de.Click.Url = Url.Action("Prev_Click");
+                    de.Click.ExtraParams.Add(new Parameter("index", "#{WizardPanel}.items.indexOf(#{WizardPanel}.layout.activeItem)", ParameterMode.Raw));
+                }),
+                
+            X.Button()
+                .ID("btnNext")
+                .Text("Next")
+                .Icon(Icon.NextGreen)
+                .DirectEvents(de => {
+                    de.Click.Url = Url.Action("Next_Click");
+                    de.Click.ExtraParams.Add(new Parameter("index", "#{WizardPanel}.items.indexOf(#{WizardPanel}.layout.activeItem)", ParameterMode.Raw));
+                })
+        )
+    )
+}

@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "TabPanel with MenuTab - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var beforeMenu = function (pnl, tab, menu) {
+            menu.items.get(0).setText(tab.title);            
+
+            var item = menu.getComponent(5),
+                lastTab = pnl.items.get(pnl.items.getCount() - 1);
+            
+            if (tab.id == "customMenuTab") {                
+                item.show();
+
+                if (lastTab.isTabMenuVisible()) {
+                    item.setText("Hide Menu for last Tab");
+                    item.handler = function () {
+                        lastTab.hideTabMenu();
+                    };
+                } else {
+                    item.setText("Show Menu for last Tab");
+                    item.handler = function () {
+                        lastTab.showTabMenu();
+                    };
+                }
+            } else {
+                item.hide();
+            }
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>TabPanel with TabMenu</h1>
+        
+    <h2>Simple TabMenu</h2>
+    
+    @(X.TabPanel()
+        .ID("TabPanel1")
+        .Height(100)
+        .Items(
+            X.Panel().Title("No Menu"),
+            
+            X.Panel()
+                .Title("Menu 1")
+                .TabMenu(m => m.Add(X.Menu()
+                    .Items(
+                        X.MenuItem()
+                            .Text("Item 1"),
+                            
+                        X.MenuItem()
+                            .Text("Item 2"),
+                            
+                        X.MenuSeparator(),
+                        
+                        X.Label()
+                            .Text("Rename Tab:")
+                            .StyleSpec("padding-left:30px;"),
+                        
+                        X.TextField()
+                            .ID("RenameField")
+                            .Text("New title")
+                            .StyleSpec("margin-left:30px;")
+                            .Triggers(
+                                X.FieldTrigger()
+                                    .Icon(TriggerIcon.Empty)
+                                    .QTip("Click to rename")
+                            )
+                            .Listeners(l => l.TriggerClick.Handler = "var menu = this.up('menu'); menu.tab.setTitle(this.getValue());menu.hide();")
+                    ))
+                ),
+                
+            X.Panel()
+                .ID("Tab3")
+                .Title("Menu 2")
+                .Closable(true)
+                .BodyPadding(6)
+                .TabMenu(m => 
+                    m.Add(X.ColorMenu()
+                        .Listeners(l => l.Select.Handler = "#{TabPanel1}.setActiveTab(this.tab); this.tab.body.applyStyles(Ext.String.format('background-color:{0}', '#' + color));")
+                    )
+                )
+        )
+    )
+    
+    <h2>Default TabMenu</h2>
+    
+    @(X.TabPanel()
+        .ID("TabPanel2")
+        .Height(100)
+        .DefaultTabMenu(m => m.Add(X.Menu()
+            .Items(
+                X.Label()
+                    .StyleSpec("font-weight:bold;margin-left:30px;"),
+                    
+                X.MenuSeparator(),
+                
+                X.MenuItem()
+                    .Text("Item 1"),
+                
+                X.MenuItem()
+                    .Text("Item 2"),
+                    
+                X.MenuSeparator(),
+                
+                X.MenuItem()
+                    .Text("Hide Menu for last Tab")
+            ))
+        )
+        .Listeners(l => l.BeforeTabMenuShow.Fn = "beforeMenu")
+        .Items(
+            X.Panel()
+                .TabMenuHidden(true)
+                .Title("No Menu"),
+                
+            X.Panel()
+                .Title("Default Menu"),
+                
+            X.Panel()
+                .ID("customMenuTab")
+                .Title("Default Menu +"),
+                
+            X.Panel()
+                .TabMenuHidden(true)
+                .Title("Default Menu")
+        )
+    )
+}

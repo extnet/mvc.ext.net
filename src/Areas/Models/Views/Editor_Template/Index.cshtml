@@ -1,0 +1,30 @@
+﻿@model Ext.Net.MVC.Examples.Areas.Models.Customer
+
+@{
+    ViewBag.Title = "Editor Template";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{    
+    @(
+        Html.X().Window()
+            .Title("Editor Template")
+            .Width(350)
+            .Height(550)
+            .Layout(LayoutType.Fit)
+            .Closable(false)
+            .Border(false)
+            .Items(
+                Html.X().FormPanel()
+                    .Frame(true)                    
+                    .Url(Url.Action("Submit"))
+                    .DefaultAnchor("100%")
+                    .BodyPadding(6)
+                    .ItemsFrom(b => Html.EditorForModel())
+            )
+            .Buttons(
+                Html.X().Button().Text("Submit").Handler("this.up('window').down('form').submit();")
+            )
+    )
+}

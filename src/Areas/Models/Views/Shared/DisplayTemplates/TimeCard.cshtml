@@ -1,0 +1,17 @@
+﻿@model Ext.Net.MVC.Examples.Areas.Models.TimeCard
+
+@(
+ Html.X().Container()
+        .Layout(LayoutType.Anchor)
+        .DefaultAnchor("100%")        
+        .Padding(6)
+        .Defaults(new { 
+            emptyText = "&lt;no value>"
+        })
+        .Items(
+            Html.X().DisplayFieldFor(tc => tc.Username),
+            Html.X().DisplayFieldFor(tc => tc.Hours),
+            Html.X().DisplayFieldFor(tc => tc.StartDate, format: "{0:g}"),
+            Html.X().DisplayFieldFor(tc => tc.EndDate, format: "{0:g}")
+        )
+)

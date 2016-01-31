@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Windows Example - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .x-panel-body p
+        {
+            margin: 10px;
+            font-size: 12px;
+        }
+    </style>
+}
+
+@section example
+{
+    <h1>Windows Example</h1>
+    <p>This illustrates the <code>headerPosition</code> config of Panels, and also relative z-index management.</p>
+    <p>The third Window owns two floating Windows who's z-indices are managed relative
+        to <i>its</i> z-index. When that Window is occluded by another Window, and you click
+        to bring it to the front, both its dependent Windows move to the front too.</p>
+    <p>This also illustrates constraining Windows.</p>
+    
+    @(X.Window()
+        .Height(200)
+        .Width(400)
+        .X(450)
+        .Y(450)
+        .Title("Constraining Window, plain: true")
+        .Closable(false)
+        .Plain(true)
+        .Layout(LayoutType.Fit)
+        .Items(
+            X.Window()
+                .ID("W1")
+                .Title("Constrained Window")
+                .Width(200)
+                .Height(100)
+                .X(20)
+                .Y(20)
+                .Constrain(true)
+                .Layout(LayoutType.Fit)
+                .Items(
+                    X.Panel()
+                        .Border(false)
+                ),
+
+            X.Window()
+                .ID("W2")
+                .Title("Constrained Window")
+                .Width(200)
+                .Height(100)
+                .X(120)
+                .Y(120)
+                .ConstrainHeader(true)
+                .Layout(LayoutType.Fit)
+                .Items(
+                    X.Panel()
+                        .Border(false)
+                ),
+
+            X.Panel()
+                .Border(false)
+        )
+    )
+    
+    @(X.Window()
+        .Title("Left Header, plain: true")
+        .Width(400)             
+        .Height(200)
+        .X(10)
+        .Y(200)
+        .Plain(true)
+        .HeaderPosition(Direction.Left)
+        .Layout(LayoutType.Fit)
+        .Items(
+            X.Panel()
+                .Border(false)
+        )
+    )
+    
+    @(X.Window()
+        .Title("Right Header, plain: true")
+        .Width(400)             
+        .Height(200)
+        .X(450)
+        .Y(200)
+        .Plain(true)
+        .HeaderPosition(Direction.Right)
+        .Layout(LayoutType.Fit)
+        .Items(
+            X.Panel()
+                .Border(false)
+        )
+    )
+    
+    @(X.Window()
+        .Title("Bottom Header, plain: true")
+        .Width(400)             
+        .Height(200)
+        .X(10)
+        .Y(450)
+        .Plain(true)
+        .HeaderPosition(Direction.Bottom)
+        .Layout(LayoutType.Fit)
+        .Items(
+            X.Panel()
+                .Border(false)
+        )
+    )
+}

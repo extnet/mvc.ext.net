@@ -1,0 +1,314 @@
+﻿@{
+    ViewBag.Title = "Desktop - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <link href="/Areas/Desktop/Content/desktop.css" rel="stylesheet" />
+
+    <script>
+        var tile = function () {
+            Ext.net.Desktop.desktop.tileWindows();
+        };
+
+        var cascade = function () {
+            Ext.net.Desktop.desktop.cascadeWindows();
+        };
+
+        var initSlidePanel = function () {
+            this.setHeight(Ext.net.Desktop.desktop.body.getHeight());            
+
+            if (!this.windowListen) {                
+                this.windowListen = true;
+
+                this.el.alignTo(Ext.net.Desktop.desktop.body, 'tl-tr', [0, 0]);                
+                Ext.on("resize", initSlidePanel, this);
+            }
+        };
+    </script>
+}
+
+@section example
+{
+    @(
+        Html.X().Desktop()
+            .ID("Desktop1")
+            .Listeners(l => {
+                l.Ready.BroadcastOnBus = "App.Desktop.ready";
+            })
+            .Modules(
+                Html.X().DesktopModule()
+                .ModuleID("Hello")
+                .AutoRun(true)
+                .Window(
+                    Html.X().Window()
+                        .Plain(true)
+                        .Padding(10)
+                        .Width(150)
+                        .Height(100)
+                        .Title("Greeting")
+                        .CloseAction(CloseAction.Destroy)
+                        .Maximizable(false)
+                        .Minimizable(false)
+                        .Html("Welcome to Ext.Net desktop!")
+                ),
+
+                Html.X().DesktopModule()
+                    .ModuleID("notepad")
+                    .Shortcut(
+                        Html.X().DesktopShortcut()
+                            .Name("Notepad")
+                            .IconCls("x-notepad-shortcut")
+                            .SortIndex(2)
+                    )
+                    .Launcher(
+                        Html.X().MenuItem()
+                            .Text("Notepad")
+                            .Icon(Icon.ApplicationForm)
+                    )
+                    .Window(
+                        Html.X().Window()
+                            .Title("Notepad")
+                            .Width(800)
+                            .Height(400)
+                            .Icon(Icon.ApplicationForm)
+                            .AnimCollapse(false)
+                            .Border(false)
+                            .HideMode(HideMode.Offsets)
+                            .Layout(LayoutType.Fit)
+                            .CloseAction(CloseAction.Destroy)
+                            .Items(
+                                Html.X().HtmlEditor()
+                                    .Text("Some <b>rich</b> <font color='red'>text</font> goes <u>here</u><br>Give it a try!")
+                            )
+                    ),
+
+                Html.X().DesktopModule()
+                    .ModuleID("create-module")
+                    .Shortcut(
+                        Html.X().DesktopShortcut()
+                            .Name("Create window")
+                            .Handler("App.direct.CreateWindow();")
+                            .SortIndex(3)
+                    ),
+
+                Html.X().DesktopModule()
+                    .ModuleID("add-module")
+                    .Shortcut(
+                        Html.X().DesktopShortcut()
+                            .Name("Render dynamic module")
+                            .Handler("App.direct.AddNewModule();")
+                            .X("200")
+                            .Y("100")
+                            .TextCls("x-long-label")
+                    ),
+
+                Html.X().DesktopModule()
+                    .ModuleID("add1-module")
+                    .Shortcut(
+                        Html.X().DesktopShortcut()
+                            .Name("Render another module")
+                            .Handler("App.direct.AddAnotherModule();")
+                            .X("200")
+                            .Y("300")
+                            .TextCls("x-long-label")
+                    )
+            )
+            .DesktopConfig(
+                Html.X().DesktopConfig()
+                    .Wallpaper("~/Areas/Desktop/Content/wallpapers/blue.jpg")
+                    .ShortcutDragSelector(true)
+                    .ShortcutDefaults(defaults =>
+                    {
+                        defaults.IconCls = "x-default-shortcut";
+                    })
+                    .ContextMenu(
+                        Html.X().Menu()
+                            .Items(
+                                Html.X().MenuItem().Text("Change Settings"),
+                                Html.X().MenuSeparator(),
+                                Html.X().MenuItem().Text("Title").Handler("tile").Icon(Icon.ApplicationTileVertical),
+                                Html.X().MenuItem().Text("Cascade").Handler("cascade").Icon(Icon.ApplicationCascade)
+                            )
+                    )
+                    .Content(
+                    @<text>
+                        @(
+                            Html.X().Image()
+                                .ImageUrl("~/Areas/Desktop/Content/logo.png")
+                                .StyleSpec("position:absolute;top: 50%;left: 50%;width: 77px; height: 78px;margin-top: -39px; margin-left: -39px;")
+                        )
+
+                        @(
+                            Html.X().Image()
+                                .ImageUrl("~/Areas/Desktop/Content/powered.png")
+                                .StyleSpec("position:absolute;right:10px;bottom:20px;width:300px;height:39px;")
+                        )
+
+                        @(
+                            Html.X().DisplayField()
+                                .Text("You can place controls to desktop")
+                                .FieldStyle("color:white;font-size:24px;")
+                                .StyleSpec("position:absolute;left: 50%; bottom: 100px;margin-left: -180px;")
+                        )
+
+                        @(
+                            Html.X().DisplayField()
+                                .Text("Move mouse to the right edge -->")
+                                .FieldStyle("color:white;font-size:24px;")
+                                .StyleSpec("position:absolute;right:50px;top:50px;")
+                        )
+
+                        @(
+                            Html.X().Toolbar()
+                                .Width(520)
+                                .Floating(true)
+                                .ClassicButtonStyle(true)
+                                .Flat(true)
+                                .Border(false)
+                                .Shadow(false)
+                                .Defaults(new
+                                {
+                                    IconAlign = "top",
+                                    Width = 100,
+                                    Icon = Url.Content("~/Areas/Desktop/Content/cmd.png"),
+                                    Scale = "large",
+                                    Handler = JRawValue.From("function(){Ext.Msg.alert('Launch', this.text);}")
+                                })
+                                .Items(
+                                    Html.X().Button().Text("Word"),
+                                    Html.X().Button().Text("Excel"),
+                                    Html.X().Button().Text("Notepad"),
+                                    Html.X().Button().Text("Paint"),
+                                    Html.X().Button().Text("Explorer")
+                                )
+                                .MessageBusListeners(
+                                    new MessageBusListener
+                                    {
+                                        Name = "App.Desktop.ready",
+                                        Handler = "this.el.anchorTo(Ext.net.Desktop.desktop.body, 'c-b', [0, -50]);"
+                                    }
+                                )
+                        )                       
+                    </text>
+                    )
+            )
+            .StartMenu(
+                Html.X().DesktopStartMenu()
+                    .Title("Ext.Net Desktop")
+                    .Icon(Icon.Application)
+                    .Height(300)
+                    .ToolConfig(
+                        Html.X().Toolbar()
+                            .Width(100)
+                            .Items(
+                                Html.X().Button()
+                                    .Text("Settings")
+                                    .Icon(Icon.Cog),
+
+                                Html.X().Button()
+                                    .Text("Logout")
+                                    .Icon(Icon.Key)
+                                    .DirectEvents(de =>
+                                    {
+                                        de.Click.Action = "Logout";
+                                        de.Click.EventMask.ShowMask = true;
+                                        de.Click.EventMask.Msg = "Good Bye...";
+                                        de.Click.EventMask.MinDelay = 1000;
+                                    })
+                            )
+                    )
+            )
+            .TaskBar(
+                Html.X().DesktopTaskBar()
+                    .TrayWidth(110)
+                    .QuickStart(
+                        Html.X().Toolbar()
+                            .Items(
+                                Html.X().Button()
+                                    .Handler("tile")
+                                    .Icon(Icon.ApplicationTileVertical)
+                                    .ToolTip("Tile windows")
+                                    .OverflowText("Tile windows"),
+
+                                Html.X().Button()
+                                    .Handler("cascade")
+                                    .Icon(Icon.ApplicationCascade)
+                                    .ToolTip("Cascade windows")
+                                    .OverflowText("Cascade windows")
+                            )
+                    )
+                    .Tray(
+                        Html.X().Toolbar()
+                            .Items(
+                                Html.X().Button()
+                                    .ID("LangButton")
+                                    .Text("EN")
+                                    .ArrowVisible(false)
+                                    .Cls("x-bold-text")
+                                    .MenuAlign("br-tr")
+                                    .MenuItem(
+                                        Html.X().CheckMenuItem()
+                                            .Group("lang")
+                                            .Text("English")
+                                            .Checked(true)
+                                            .CheckHandler("function(item, checked) {checked && App.LangButton.setText('EN');}"),
+
+                                        Html.X().CheckMenuItem()
+                                            .Group("lang")
+                                            .Text("French")
+                                            .Checked(true)
+                                            .CheckHandler("function(item, checked) {checked && App.LangButton.setText('FR');}"),
+
+                                        Html.X().MenuSeparator(),
+
+                                        Html.X().MenuItem()
+                                            .Text("Show the Language Bar")
+                                    ),
+
+                                Html.X().ToolbarFill()
+                            )
+                    )
+            )
+    )
+
+     @(
+        Html.X().Panel()
+            .Title("Slide panel")
+            .Frame(true)
+            .Width(250)
+            .Layout(LayoutType.Accordion)
+            .Floating(true)
+            .Shadow(false)
+            .Items(
+                Html.X().Panel().Title("Section 1").Icon(Icon.User),
+                Html.X().Panel().Title("Section 2").Icon(Icon.UserB),
+                Html.X().Panel().Title("Section 3").Icon(Icon.UserB),
+                Html.X().Panel().Title("Section 4").Icon(Icon.UserB),
+                Html.X().Panel().Title("Section 5").Icon(Icon.UserB)
+            )
+            .MessageBusListeners(
+                new MessageBusListener
+                {
+                    Name = "App.Desktop.ready",
+                    Fn = "initSlidePanel"
+                }
+            )
+            .Plugins(
+                Html.X().MouseDistanceSensor()
+                    .Opacity(false)
+                    .Threshold(25)
+                    .Listeners(l =>
+                    {
+                        l.Near.Handler = "this.component.el.alignTo(Ext.net.Desktop.desktop.body, 'tr-tr', [0, 0], true);";
+                        l.Far.Handler = "this.component.el.alignTo(Ext.net.Desktop.desktop.body, 'tl-tr', [0, 0], true);";
+                    })
+            )
+    )
+
+    @Html.Partial("WhatsNew")
+    @Html.Partial("AccordionWindow")
+    @Html.Partial("GridWindow")
+    @Html.Partial("SystemStatus")
+}

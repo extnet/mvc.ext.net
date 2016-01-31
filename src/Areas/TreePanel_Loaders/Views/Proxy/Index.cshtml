@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "TreePanel with Ajax proxy";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>TreePanel with Ajax proxy</h1> 
+
+    @(
+        Html.X().TreePanel()
+            .Title("Tree")
+            .Height(500)
+            .Width(200)
+            .Border(false)
+            .Store(
+                Html.X().TreeStore()
+                    .Proxy(
+                        Html.X().AjaxProxy().Url(Url.Action("GetChildren"))
+                    )
+            )
+            .Root(
+                Html.X().Node().NodeID("0").Text("Root")
+            )
+            .ViewConfig(Html.X().TreeView().LoadMask(false))
+    )
+}

@@ -1,0 +1,52 @@
+﻿@model Ext.Net.MVC.Examples.Areas.Models.TimeCard
+@{
+    ViewBag.Title = "Model State";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    @(
+ Html.X().Window()
+            .Title("Model State")
+            .Width(350)
+            .Height(400)
+            .LayoutConfig(
+                new VBoxLayoutConfig { Align = VBoxAlign.Stretch }
+            )
+            .Closable(false)
+            .Items(
+                Html.X().Container()
+                    .Flex(2)
+                    .Layout(LayoutType.Fit)
+                    .ItemsFrom(b => Html.EditorForModel(new 
+                    { 
+                        Handler = @"this.up('window').child('dataview').getStore().removeAll(); 
+                                    this.up('form').submit({clientValidation: false});", //prevent validation for demo purpose
+                        FormBind = false 
+                    })), 
+                    
+                Html.X().DataView()
+                    .StyleHtmlContent(true)
+                    .Flex(1)
+                    .ItemSelector("li")
+                    .StyleSpec("background:white;border:1px solid gray;")
+                    .Store(
+                        Html.X().ModelStateStore()
+                            .ID("ModelStateStore1")
+                    )
+                    .Tpl(
+                        Html.X().XTemplate()
+                            .Html(
+                                @<text>
+                                    <ul style="list-style-type:circle">
+                                        <tpl for=".">
+                                            <li style="color:red;">{error}</li>
+                                        </tpl>
+                                    </ul>
+                                </text>
+                            )
+                    )
+            )
+    )
+}

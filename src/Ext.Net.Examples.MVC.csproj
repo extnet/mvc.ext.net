@@ -1,0 +1,1624 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0D4BEEAD-B980-4E43-BBEB-B0BADE9D328C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ext.Net.MVC.Examples</RootNamespace>
+    <AssemblyName>Ext.Net.MVC.Examples</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ext.Net, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ext.NET.MVC.4.0.0\lib\net45\Ext.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ext.Net.Utilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=2c34ac34702a3c23, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ext.NET.Utilities.2.5.0\lib\Ext.Net.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ReferenceAssemblies\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Transformer.NET, Version=2.1.1.22883, Culture=neutral, PublicKeyToken=e274d618e7c603a7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Transformer.NET.2.1.1\lib\net35\Transformer.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Wilco.SyntaxHighlighter, Version=0.5.0.0, Culture=neutral, PublicKeyToken=fb87150479c2990b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ReferenceAssemblies\Wilco.SyntaxHighlighter.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\ExtNetConfig.cs" />
+    <Compile Include="Areas\Associations_HasMany\Associations_HasManyAreaRegistration.cs" />
+    <Compile Include="Areas\Associations_HasMany\Controllers\SimpleController.cs" />
+    <Compile Include="Areas\Associations_HasMany\Models\Product.cs" />
+    <Compile Include="Areas\Associations_HasMany\Models\User.cs" />
+    <Compile Include="Areas\Associations_HasOne\Associations_HasOneAreaRegistration.cs" />
+    <Compile Include="Areas\Associations_HasOne\Controllers\SimpleController.cs" />
+    <Compile Include="Areas\Associations_HasOne\Models\Address.cs" />
+    <Compile Include="Areas\Associations_HasOne\Models\Person.cs" />
+    <Compile Include="Areas\Chart_Bar\Controllers\Basic_3DController.cs" />
+    <Compile Include="Areas\Data_Basic\Data_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\Data_Basic\Controllers\ModelSerializerController.cs" />
+    <Compile Include="Areas\Data_Basic\Models\ModelSerializerModel.cs" />
+    <Compile Include="Areas\Form_ComboBox\Controllers\Linked_Combos_In_GridController.cs" />
+    <Compile Include="Areas\Form_Login\Controllers\Auto_CompleteController.cs" />
+    <Compile Include="Areas\Form_Login\Form_LoginAreaRegistration.cs" />
+    <Compile Include="Areas\Form_MultiSelect\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\Form_MultiSelect\Form_MultiSelectAreaRegistration.cs" />
+    <Compile Include="Areas\Buttons_Basic\Buttons_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\Buttons_Basic\Controllers\Default_ButtonController.cs" />
+    <Compile Include="Areas\Buttons_Basic\Controllers\ImageButtonController.cs" />
+    <Compile Include="Areas\Buttons_Basic\Controllers\HyperlinkButtonController.cs" />
+    <Compile Include="Areas\Buttons_Basic\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\Calendar_Overview\Calendar_OverviewAreaRegistration.cs" />
+    <Compile Include="Areas\Calendar_Overview\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Calendar_Overview\Controllers\Remote_DataController.cs" />
+    <Compile Include="Areas\Calendar_Overview\Models\BasicModel.cs" />
+    <Compile Include="Areas\Calendar_Overview\Models\Remote_DataModel.cs" />
+    <Compile Include="Areas\Chart_Area\Chart_AreaAreaRegistration.cs" />
+    <Compile Include="Areas\Chart_Area\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Chart_Bar\Chart_BarAreaRegistration.cs" />
+    <Compile Include="Areas\Chart_Bar\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Chart_Column\Chart_ColumnAreaRegistration.cs" />
+    <Compile Include="Areas\Chart_Column\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Chart_Dashboard\Chart_DashboardAreaRegistration.cs" />
+    <Compile Include="Areas\Chart_Dashboard\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Chart_Gauge\Chart_GaugeAreaRegistration.cs" />
+    <Compile Include="Areas\Chart_Gauge\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Chart_Line\Chart_LineAreaRegistration.cs" />
+    <Compile Include="Areas\Chart_Line\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Chart_Pie\Chart_PieAreaRegistration.cs" />
+    <Compile Include="Areas\Chart_Pie\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Chart_Radar\Chart_RadarAreaRegistration.cs" />
+    <Compile Include="Areas\Chart_Radar\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Chart_Scatter\Chart_ScatterAreaRegistration.cs" />
+    <Compile Include="Areas\Chart_Scatter\Controllers\BasicController.cs" />
+    <Compile Include="Areas\ColorPicker_Basic\ColorPicker_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\ColorPicker_Basic\Controllers\Custom_ColorsController.cs" />
+    <Compile Include="Areas\ColorPicker_Basic\Controllers\Custom_ViewController.cs" />
+    <Compile Include="Areas\ColorPicker_Basic\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\DragDrop_Advanced\Controllers\Example3Controller.cs" />
+    <Compile Include="Areas\DragDrop_Advanced\DragDrop_AdvancedAreaRegistration.cs" />
+    <Compile Include="Areas\DragDrop_Advanced\Models\Example3Model.cs" />
+    <Compile Include="Areas\DragDrop_Grid\Controllers\Cell_to_CellController.cs" />
+    <Compile Include="Areas\DragDrop_Grid\Controllers\Field_to_GridController.cs" />
+    <Compile Include="Areas\DragDrop_Grid\Controllers\Grid_to_FormPanelController.cs" />
+    <Compile Include="Areas\DragDrop_Grid\DragDrop_GridAreaRegistration.cs" />
+    <Compile Include="Areas\DragDrop_Grid\Models\Cell_to_CellModel.cs" />
+    <Compile Include="Areas\DragDrop_Grid\Models\Field_to_GridModel.cs" />
+    <Compile Include="Areas\DragDrop_Grid\Models\Grid_to_FormPanelModel.cs" />
+    <Compile Include="Areas\DragDrop_Panel\Controllers\Swap_Dropable_PanelController.cs" />
+    <Compile Include="Areas\DragDrop_Panel\DragDrop_PanelAreaRegistration.cs" />
+    <Compile Include="Areas\DragDrop_Basic\Controllers\DomController.cs" />
+    <Compile Include="Areas\DragDrop_Basic\Controllers\Example1Controller.cs" />
+    <Compile Include="Areas\DragDrop_Basic\Controllers\Example2Controller.cs" />
+    <Compile Include="Areas\DragDrop_Basic\Controllers\Example3Controller.cs" />
+    <Compile Include="Areas\DragDrop_Basic\DragDrop_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\Draw_Basic\Controllers\ActionsController.cs" />
+    <Compile Include="Areas\Draw_Basic\Controllers\AnalyticsController.cs" />
+    <Compile Include="Areas\Draw_Basic\Controllers\AnimationController.cs" />
+    <Compile Include="Areas\Draw_Basic\Controllers\Animation_PlaygroundController.cs" />
+    <Compile Include="Areas\Draw_Basic\Controllers\AustraliaController.cs" />
+    <Compile Include="Areas\Draw_Basic\Controllers\LogosController.cs" />
+    <Compile Include="Areas\Draw_Basic\Controllers\Pie_ChartController.cs" />
+    <Compile Include="Areas\Draw_Basic\Controllers\Punch_ChartController.cs" />
+    <Compile Include="Areas\Draw_Basic\Controllers\ReflectionController.cs" />
+    <Compile Include="Areas\Draw_Basic\Controllers\Rotate_ImageController.cs" />
+    <Compile Include="Areas\Draw_Basic\Controllers\Rotate_TextController.cs" />
+    <Compile Include="Areas\Draw_Basic\Draw_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\Editor_Basic\Controllers\FormPanel_LabelsController.cs" />
+    <Compile Include="Areas\Editor_Basic\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\Editor_Basic\Editor_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\Element_Basic\Controllers\LayerController.cs" />
+    <Compile Include="Areas\Element_Basic\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\Element_Basic\Element_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\Form_FileUploadField\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Form_FileUploadField\Form_FileUploadFieldAreaRegistration.cs" />
+    <Compile Include="Areas\Form_FormPanel\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Form_FormPanel\Form_FormPanelAreaRegistration.cs" />
+    <Compile Include="Areas\Form_Groups\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Form_Groups\Controllers\GroupForController.cs" />
+    <Compile Include="Areas\Form_Groups\Form_GroupsAreaRegistration.cs" />
+    <Compile Include="Areas\Form_Groups\Models\GroupForModel.cs" />
+    <Compile Include="Areas\Form_Hyperlink\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Form_Hyperlink\Form_HyperlinkAreaRegistration.cs" />
+    <Compile Include="Areas\Form_Label\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Form_Label\Form_LabelAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_ColumnModel\Controllers\HyperlinkColumnController.cs" />
+    <Compile Include="Areas\GridPanel_FilterHeader\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\GridPanel_FilterHeader\GridPanel_FilterHeaderAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_Miscellaneous\Controllers\Marking_RecordsController.cs" />
+    <Compile Include="Areas\GridPanel_Miscellaneous\GridPanel_MiscellaneousAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_Miscellaneous\Models\Marking_RecordsModel.cs" />
+    <Compile Include="Areas\GridPanel_Paging_and_Sorting\Controllers\Multiple_Sorting_LocalController.cs" />
+    <Compile Include="Areas\GridPanel_Selection_Models\Controllers\Checkbox_SelectionController.cs" />
+    <Compile Include="Areas\GridPanel_Selection_Models\GridPanel_Selection_ModelsAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_Selection_Models\Models\Checkbox_SelectionModel.cs" />
+    <Compile Include="Areas\Keys_KeyMap\Controllers\BorderLayout_Regions_ToggleController.cs" />
+    <Compile Include="Areas\Keys_KeyMap\Keys_KeyMapAreaRegistration.cs" />
+    <Compile Include="Areas\Keys_KeyNav\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Keys_KeyNav\Keys_KeyNavAreaRegistration.cs" />
+    <Compile Include="Areas\Layout_AbsoluteLayout\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Layout_AbsoluteLayout\Layout_AbsoluteLayoutAreaRegistration.cs" />
+    <Compile Include="Areas\Layout_Accordion\Controllers\Basic_In_CodeBehindController.cs" />
+    <Compile Include="Areas\Layout_Accordion\Controllers\Basic_In_MarkupController.cs" />
+    <Compile Include="Areas\Layout_Accordion\Layout_AccordionAreaRegistration.cs" />
+    <Compile Include="Areas\Layout_AnchorLayout\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Layout_AnchorLayout\Layout_AnchorLayoutAreaRegistration.cs" />
+    <Compile Include="Areas\Layout_CardLayout\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Layout_CardLayout\Layout_CardLayoutAreaRegistration.cs" />
+    <Compile Include="Areas\Layout_ColumnLayout\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Layout_ColumnLayout\Layout_ColumnLayoutAreaRegistration.cs" />
+    <Compile Include="Areas\Layout_FitLayout\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Layout_FitLayout\Layout_FitLayoutAreaRegistration.cs" />
+    <Compile Include="Areas\Layout_HBoxLayout\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Layout_HBoxLayout\Layout_HBoxLayoutAreaRegistration.cs" />
+    <Compile Include="Areas\Layout_VBoxLayout\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Layout_VBoxLayout\Layout_VBoxLayoutAreaRegistration.cs" />
+    <Compile Include="Areas\MessageBox_Basic\Controllers\ButtonsConfigController.cs" />
+    <Compile Include="Areas\MessageBox_Basic\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\MessageBox_Basic\MessageBox_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\MessageBus_Basic\Controllers\ComplexController.cs" />
+    <Compile Include="Areas\MessageBus_Basic\Controllers\SimpleController.cs" />
+    <Compile Include="Areas\MessageBus_Basic\MessageBus_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\Miscellaneous_ClickRepeater\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Miscellaneous_ClickRepeater\Miscellaneous_ClickRepeaterAreaRegistration.cs" />
+    <Compile Include="Areas\Miscellaneous_FlashComponent\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Miscellaneous_FlashComponent\Miscellaneous_FlashComponentAreaRegistration.cs" />
+    <Compile Include="Areas\Miscellaneous_History\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Miscellaneous_History\Miscellaneous_HistoryAreaRegistration.cs" />
+    <Compile Include="Areas\Miscellaneous_Locale\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Miscellaneous_Locale\Miscellaneous_LocaleAreaRegistration.cs" />
+    <Compile Include="Areas\Miscellaneous_Mouse_Distance_Sensor\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Miscellaneous_Mouse_Distance_Sensor\Miscellaneous_Mouse_Distance_SensorAreaRegistration.cs" />
+    <Compile Include="Areas\Miscellaneous_Render_Template\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Miscellaneous_Render_Template\Miscellaneous_Render_TemplateAreaRegistration.cs" />
+    <Compile Include="Areas\Miscellaneous_Factory\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Miscellaneous_Factory\Miscellaneous_FactoryAreaRegistration.cs" />
+    <Compile Include="Areas\Miscellaneous_Resizable\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Miscellaneous_Resizable\Miscellaneous_ResizableAreaRegistration.cs" />
+    <Compile Include="Areas\PropertyGrid_Basic\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\PropertyGrid_Basic\Models\StoreValueModel.cs" />
+    <Compile Include="Areas\PropertyGrid_Basic\PropertyGrid_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\TabPanel_Basic\Controllers\Add_TabsController.cs" />
+    <Compile Include="Areas\TabPanel_Basic\Controllers\Advanced_TabController.cs" />
+    <Compile Include="Areas\TabPanel_Basic\Controllers\Ajax_LoadController.cs" />
+    <Compile Include="Areas\TabPanel_Basic\Controllers\TabMenuController.cs" />
+    <Compile Include="Areas\TabPanel_Basic\TabPanel_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\TabPanel_TabStrip\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\TabPanel_TabStrip\TabPanel_TabStripAreaRegistration.cs" />
+    <Compile Include="Areas\Viewport_Basic\Controllers\Built_as_ClassController.cs" />
+    <Compile Include="Areas\Viewport_Basic\Controllers\Built_as_BuilderController.cs" />
+    <Compile Include="Areas\Viewport_Basic\Viewport_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\XRender_Basic\Controllers\Add_ItemsController.cs" />
+    <Compile Include="Areas\XRender_Basic\Controllers\New_WindowController.cs" />
+    <Compile Include="Areas\XRender_Basic\XRender_BasicAreaRegistration.cs" />
+    <Compile Include="Controllers\ExtNetController.cs" />
+    <Compile Include="Models\ChartModel.cs" />
+    <Compile Include="Areas\DataView_Advanced\Models\MultiSortPanel.cs" />
+    <Compile Include="Areas\DataView_Advanced\Models\SortButton.cs" />
+    <Compile Include="Areas\DataView_Advanced\Controllers\AnimatedController.cs" />
+    <Compile Include="Areas\DataView_Advanced\Controllers\ChooserController.cs" />
+    <Compile Include="Areas\DataView_Advanced\Controllers\GroupingController.cs" />
+    <Compile Include="Areas\DataView_Advanced\Controllers\Multi_sortController.cs" />
+    <Compile Include="Areas\DataView_Advanced\Controllers\ReportController.cs" />
+    <Compile Include="Areas\DataView_Advanced\DataView_AdvancedAreaRegistration.cs" />
+    <Compile Include="Areas\DataView_Basic\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\DataView_Basic\Controllers\PagingController.cs" />
+    <Compile Include="Areas\Desktop\Controllers\ASPXController.cs" />
+    <Compile Include="Areas\Form_ComboBox\Controllers\Custom_SearchController.cs" />
+    <Compile Include="Areas\Form_ComboBox\Models\Custom_SearchModel.cs" />
+    <Compile Include="Areas\Getting_Started\Controllers\BREAKING_CHANGESController.cs" />
+    <Compile Include="Areas\Getting_Started\Controllers\CHANGELOGController.cs" />
+    <Compile Include="Areas\Getting_Started\Getting_StartedAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_MultiHeader\Controllers\FilterController.cs" />
+    <Compile Include="Areas\GridPanel_MultiHeader\GridPanel_MultiHeaderAreaRegistration.cs" />
+    <Compile Include="Areas\Panel_Basic\Controllers\Deferred_LoadingController.cs" />
+    <Compile Include="Areas\Panel_Basic\Controllers\IFrame_CommunicationController.cs" />
+    <Compile Include="Areas\Panel_Basic\Controllers\LoaderController.cs" />
+    <Compile Include="Areas\Panel_Basic\Panel_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\Panel_BodyMask\Controllers\Custom_MaskController.cs" />
+    <Compile Include="Areas\Panel_BodyMask\Controllers\Standard_MaskController.cs" />
+    <Compile Include="Areas\Panel_BodyMask\Panel_BodyMaskAreaRegistration.cs" />
+    <Compile Include="Areas\Panel_Miscellaneous\Controllers\Bubble_PanelController.cs" />
+    <Compile Include="Areas\Panel_Miscellaneous\Panel_MiscellaneousAreaRegistration.cs" />
+    <Compile Include="Areas\Portal\Controllers\ComplexController.cs" />
+    <Compile Include="Areas\Portal\Models\PortalModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\Portal\PortalAreaRegistration.cs" />
+    <Compile Include="Areas\Desktop\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\Desktop\DesktopAreaRegistration.cs" />
+    <Compile Include="Areas\Desktop\Models\SystemStatusModel.cs" />
+    <Compile Include="Areas\Dynamic_Partial_Rendering\Controllers\Add_TabController.cs" />
+    <Compile Include="Areas\Dynamic_Partial_Rendering\Controllers\Partial_ContentController.cs" />
+    <Compile Include="Areas\Dynamic_Partial_Rendering\Controllers\Partial_ItemsController.cs" />
+    <Compile Include="Areas\Dynamic_Partial_Rendering\Controllers\ASPX_EngineController.cs" />
+    <Compile Include="Areas\Dynamic_Partial_Rendering\Controllers\WindowController.cs" />
+    <Compile Include="Areas\Dynamic_Partial_Rendering\Dynamic_Partial_RenderingAreaRegistration.cs" />
+    <Compile Include="Areas\Events\Controllers\AnotherDirectMethodController.cs" />
+    <Compile Include="Areas\Events\Controllers\DirectEventsController.cs" />
+    <Compile Include="Areas\Events\Controllers\DirectMethodController.cs" />
+    <Compile Include="Areas\Events\EventsAreaRegistration.cs" />
+    <Compile Include="Areas\Form_ComboBox\Controllers\Ajax_Linked_CombosController.cs" />
+    <Compile Include="Areas\Form_ComboBox\Form_ComboBoxAreaRegistration.cs" />
+    <Compile Include="Areas\Form_ComboBox\Models\Ajax_Linked_CombosModel.cs" />
+    <Compile Include="Areas\GridPanel_ArrayGrid\Controllers\ArrayWithPagingController.cs" />
+    <Compile Include="Areas\GridPanel_ColumnModel\Controllers\Ajax_ConfigurationController.cs" />
+    <Compile Include="Areas\GridPanel_ColumnModel\Controllers\Column_VariationsController.cs" />
+    <Compile Include="Areas\GridPanel_ColumnModel\Controllers\RatingColumnController.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Controllers\Cell_CommandController.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Controllers\Group_CommandController.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Controllers\Image_CommandController.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Controllers\Menu_Row_CommandController.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Controllers\Over_CommandsController.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Controllers\Prepare_CommandsController.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Controllers\Prepare_ToolbarController.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Controllers\Row_CommandController.cs" />
+    <Compile Include="Areas\GridPanel_ArrayGrid\Controllers\DirectEvent_CreationController.cs" />
+    <Compile Include="Areas\GridPanel_ArrayGrid\Controllers\Remote_LoadController.cs" />
+    <Compile Include="Areas\GridPanel_ArrayGrid\Controllers\SimpleController.cs" />
+    <Compile Include="Areas\GridPanel_ArrayGrid\Models\ArrayWithPagingModel.cs" />
+    <Compile Include="Areas\GridPanel_ColumnModel\Models\Ajax_ConfigurationModel.cs" />
+    <Compile Include="Areas\GridPanel_ColumnModel\Models\Column_VariationsModel.cs" />
+    <Compile Include="Areas\GridPanel_ColumnModel\Models\RatingColumnModel.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Models\Cell_CommandModel.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Models\Group_CommandModel.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Models\Image_CommandModel.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Models\Menu_Row_CommandModel.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Models\Over_CommandsModel.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Models\Prepare_CommandsModel.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Models\Prepare_ToolbarModel.cs" />
+    <Compile Include="Areas\GridPanel_Commands\Models\Row_CommandModel.cs" />
+    <Compile Include="Areas\GridPanel_ArrayGrid\Models\DirectEvent_CreationModel.cs" />
+    <Compile Include="Areas\GridPanel_ArrayGrid\Models\Remote_LoadModel.cs" />
+    <Compile Include="Areas\GridPanel_ArrayGrid\Models\SimpleModel.cs" />
+    <Compile Include="Areas\GridPanel_ArrayGrid\GridPanel_ArrayGridAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_ColumnModel\GridPanel_ColumnModelAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_Commands\GridPanel_CommandsAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_ComponentColumn\Controllers\EditorController.cs" />
+    <Compile Include="Areas\GridPanel_ComponentColumn\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\GridPanel_ComponentColumn\Controllers\Over_EditorController.cs" />
+    <Compile Include="Areas\GridPanel_ComponentColumn\Controllers\Pin_EditorController.cs" />
+    <Compile Include="Areas\GridPanel_ComponentColumn\GridPanel_ComponentColumnAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_ComponentColumn\Models\EditorModel.cs" />
+    <Compile Include="Areas\GridPanel_ComponentColumn\Models\OverviewModel.cs" />
+    <Compile Include="Areas\GridPanel_ComponentColumn\Models\Over_EditorModel.cs" />
+    <Compile Include="Areas\GridPanel_ComponentColumn\Models\Pin_EditorModel.cs" />
+    <Compile Include="Areas\GridPanel_Data_Presentation\Controllers\Data_PrepareController.cs" />
+    <Compile Include="Areas\GridPanel_Data_Presentation\Controllers\Editor_Field_MappingController.cs" />
+    <Compile Include="Areas\GridPanel_Data_Presentation\Controllers\Field_ConverterController.cs" />
+    <Compile Include="Areas\GridPanel_Data_Presentation\Controllers\Field_MappingController.cs" />
+    <Compile Include="Areas\GridPanel_Data_Presentation\Controllers\Server_MappingController.cs" />
+    <Compile Include="Areas\GridPanel_Data_Presentation\GridPanel_Data_PresentationAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_Data_Presentation\Models\Data_PrepareModel.cs" />
+    <Compile Include="Areas\GridPanel_Data_Presentation\Models\Editor_Field_MappingModel.cs" />
+    <Compile Include="Areas\GridPanel_Data_Presentation\Models\Field_ConverterModel.cs" />
+    <Compile Include="Areas\GridPanel_Data_Presentation\Models\Field_MappingModel.cs" />
+    <Compile Include="Areas\GridPanel_Data_Presentation\Models\Server_MappingModel.cs" />
+    <Compile Include="Areas\GridPanel_Data_with_Details\Controllers\BindingController.cs" />
+    <Compile Include="Areas\GridPanel_Data_with_Details\GridPanel_Data_with_DetailsAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_Editable\Controllers\Editor_with_DirectMethodController.cs" />
+    <Compile Include="Areas\GridPanel_Editable\GridPanel_EditableAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_Editable\Models\Editor_with_DirectMethodModel.cs" />
+    <Compile Include="Areas\GridPanel_Paging_and_Sorting\Controllers\Local_Paging_with_Remote_DataController.cs" />
+    <Compile Include="Areas\GridPanel_Paging_and_Sorting\Controllers\RemoteController.cs" />
+    <Compile Include="Areas\GridPanel_Paging_and_Sorting\Controllers\LocalController.cs" />
+    <Compile Include="Areas\GridPanel_Paging_and_Sorting\GridPanel_Paging_and_SortingAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_Paging_and_Sorting\Models\LocalModel.cs" />
+    <Compile Include="Areas\GridPanel_Paging_and_Sorting\Models\RemoteModel.cs" />
+    <Compile Include="Areas\GridPanel_Plugins\Controllers\CellEditingController.cs" />
+    <Compile Include="Areas\GridPanel_Plugins\Controllers\GridFilters_LocalController.cs" />
+    <Compile Include="Areas\GridPanel_Plugins\Controllers\GridFilters_RemoteController.cs" />
+    <Compile Include="Areas\GridPanel_Plugins\Controllers\GroupingSummaryController.cs" />
+    <Compile Include="Areas\GridPanel_Plugins\GridPanel_PluginsAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_Plugins\Models\GridFiltersModel.cs" />
+    <Compile Include="Areas\GridPanel_Plugins\Models\GroupingSummaryModel.cs" />
+    <Compile Include="Areas\GridPanel_RowExpander\Controllers\ComponentController.cs" />
+    <Compile Include="Areas\GridPanel_RowExpander\Controllers\Dynamic_GridPanelsController.cs" />
+    <Compile Include="Areas\GridPanel_RowExpander\Controllers\Dynamic_ViewController.cs" />
+    <Compile Include="Areas\GridPanel_RowExpander\Controllers\Local_ModeController.cs" />
+    <Compile Include="Areas\GridPanel_RowExpander\Controllers\MultiLevel_GridPanelController.cs" />
+    <Compile Include="Areas\GridPanel_RowExpander\Controllers\Remote_ModeController.cs" />
+    <Compile Include="Areas\GridPanel_RowExpander\GridPanel_RowExpanderAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_RowExpander\Models\Local_ModeModel.cs" />
+    <Compile Include="Areas\GridPanel_RowExpander\Models\MultiLevel_GridPanelModel.cs" />
+    <Compile Include="Areas\GridPanel_Infinite_Scrolling\Controllers\Buffered_ScrollingController.cs" />
+    <Compile Include="Areas\GridPanel_Infinite_Scrolling\Controllers\Forum_topicsController.cs" />
+    <Compile Include="Areas\GridPanel_Infinite_Scrolling\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\GridPanel_Infinite_Scrolling\Controllers\Remote_FilterController.cs" />
+    <Compile Include="Areas\GridPanel_Infinite_Scrolling\Infinite_ScrollingAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_Infinite_Scrolling\Models\Buffered_ScrollingModel.cs" />
+    <Compile Include="Areas\GridPanel_Infinite_Scrolling\Models\OverviewModel.cs" />
+    <Compile Include="Areas\GridPanel_Update\Controllers\AutoSaveController.cs" />
+    <Compile Include="Areas\GridPanel_Update\Controllers\BatchController.cs" />
+    <Compile Include="Areas\GridPanel_Update\Controllers\RestfulController.cs" />
+    <Compile Include="Areas\GridPanel_Update\GridPanel_UpdateAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_Update\Models\AutoSaveModel.cs" />
+    <Compile Include="Areas\GridPanel_Update\Models\BatchModel.cs" />
+    <Compile Include="Areas\GridPanel_Update\Models\RestfulModel.cs" />
+    <Compile Include="Areas\Items\Controllers\ActionController.cs" />
+    <Compile Include="Areas\Items\Controllers\ASPX_EngineController.cs" />
+    <Compile Include="Areas\Items\Controllers\Nested_LayoutsController.cs" />
+    <Compile Include="Areas\Items\Controllers\PageController.cs" />
+    <Compile Include="Areas\Items\Controllers\SectionController.cs" />
+    <Compile Include="Areas\Items\Controllers\Section_From_PageController.cs" />
+    <Compile Include="Areas\Items\ItemsAreaRegistration.cs" />
+    <Compile Include="Areas\Models\Controllers\ASPX_EngineController.cs" />
+    <Compile Include="Areas\Models\Controllers\Data_AnnotationsController.cs" />
+    <Compile Include="Areas\Models\Controllers\Editor_TemplateController.cs" />
+    <Compile Include="Areas\Models\Controllers\FormPanelForController.cs" />
+    <Compile Include="Areas\Models\Controllers\GridPanelForController.cs" />
+    <Compile Include="Areas\Models\Controllers\Model_BindController.cs" />
+    <Compile Include="Areas\Models\Controllers\Model_StateController.cs" />
+    <Compile Include="Areas\Models\Controllers\StoreForController.cs" />
+    <Compile Include="Areas\Models\Controllers\SubmitController.cs" />
+    <Compile Include="Areas\Models\ModelsAreaRegistration.cs" />
+    <Compile Include="Areas\Models\Models\Data_AnnotationsModel.cs" />
+    <Compile Include="Areas\Models\Models\Editor_TemplateModel.cs" />
+    <Compile Include="Areas\Models\Models\FormPanelForModel.cs" />
+    <Compile Include="Areas\Models\Models\Model_BindModel.cs" />
+    <Compile Include="Areas\Models\Models\StoreForModel.cs" />
+    <Compile Include="Areas\Models\Models\SubmitModel.cs" />
+    <Compile Include="Areas\Models\Models\GridPanelForModel.cs" />
+    <Compile Include="Areas\Portal\Controllers\SimpleController.cs" />
+    <Compile Include="Areas\TreePanel_Advanced\Controllers\FilterController.cs" />
+    <Compile Include="Areas\TreePanel_Advanced\Controllers\Image_OrganizerController.cs" />
+    <Compile Include="Areas\TreePanel_Advanced\Controllers\Remote_ModeController.cs" />
+    <Compile Include="Areas\TreePanel_Advanced\Controllers\TreeGridController.cs" />
+    <Compile Include="Areas\TreePanel_Advanced\Models\FilterModel.cs" />
+    <Compile Include="Areas\TreePanel_Advanced\Models\Image_OrganizerModel.cs" />
+    <Compile Include="Areas\TreePanel_Basic\Controllers\Checkbox_NodesController.cs" />
+    <Compile Include="Areas\TreePanel_Basic\Controllers\DragDrop_Between_TreesController.cs" />
+    <Compile Include="Areas\TreePanel_Basic\Controllers\EditorsController.cs" />
+    <Compile Include="Areas\TreePanel_Basic\Controllers\Refresh_Static_TreeController.cs" />
+    <Compile Include="Areas\TreePanel_Basic\Controllers\Reorder_NodesController.cs" />
+    <Compile Include="Areas\TreePanel_Basic\Controllers\SimpleController.cs" />
+    <Compile Include="Areas\TreePanel_Basic\Controllers\SiteMapController.cs" />
+    <Compile Include="Areas\TreePanel_Basic\Controllers\SubmitController.cs" />
+    <Compile Include="Areas\TreePanel_Basic\Models\DragDrop_Between_TreesModel.cs" />
+    <Compile Include="Areas\TreePanel_Basic\Models\EditorsModel.cs" />
+    <Compile Include="Areas\TreePanel_Basic\Models\Refresh_Static_TreeModel.cs" />
+    <Compile Include="Areas\TreePanel_Basic\Models\Reorder_NodesModel.cs" />
+    <Compile Include="Areas\TreePanel_Basic\Models\SiteMapModel.cs" />
+    <Compile Include="Areas\TreePanel_Basic\TreePanel_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\TreePanel_Loaders\Controllers\Direct_MethodController.cs" />
+    <Compile Include="Areas\TreePanel_Loaders\Controllers\ProxyController.cs" />
+    <Compile Include="Areas\TreePanel_Loaders\Controllers\XML_File_LoadingController.cs" />
+    <Compile Include="Areas\TreePanel_Loaders\TreePanel_LoadersAreaRegistration.cs" />
+    <Compile Include="Areas\TreePanel_Advanced\TreePanel_AdvancedAreaRegistration.cs" />
+    <Compile Include="Areas\DataView_Basic\DataView_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\Window_Basic\Controllers\Hello_WorldController.cs" />
+    <Compile Include="Areas\Window_Basic\Controllers\Load_External_WebsiteController.cs" />
+    <Compile Include="Areas\Window_Basic\Controllers\ShowController.cs" />
+    <Compile Include="Areas\Window_Basic\Controllers\Window_VariationsController.cs" />
+    <Compile Include="Areas\Window_Basic\Window_BasicAreaRegistration.cs" />
+    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\SourceController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExamplesModel.cs" />
+    <Compile Include="Models\ExtNetModel.cs" />
+    <Compile Include="Models\SourceModel.cs" />
+    <Compile Include="Models\StaticNodeIcon.cs" />
+    <Compile Include="Models\ZipResult.cs" />
+    <Compile Include="Module\AnalyticsFilter.cs" />
+    <Compile Include="Module\AnalyticsModule.cs" />
+    <Compile Include="Module\HighLighterUtils.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Readme\Ext.NET.Utilities\BREAKING_CHANGES.txt" />
+    <Content Include="App_Readme\Ext.NET.Utilities\LICENSE.txt" />
+    <Content Include="App_Readme\Ext.NET.Utilities\README.txt" />
+    <Content Include="App_Readme\Ext.NET\BREAKING_CHANGES.txt" />
+    <Content Include="App_Readme\Ext.NET\CHANGELOG.txt" />
+    <Content Include="App_Readme\Ext.NET\LICENSE.txt" />
+    <Content Include="App_Readme\Ext.NET\README.txt" />
+    <Content Include="App_Readme\Transformer.NET\LICENSE.txt" />
+    <Content Include="App_Readme\Transformer.NET\README.txt" />
+    <Content Include="Areas\Associations_HasMany\Views\Simple\config.xml" />
+    <Content Include="Areas\Associations_HasOne\Views\Simple\config.xml" />
+    <Content Include="Areas\Buttons_Basic\Content\images\arrow-down.gif" />
+    <Content Include="Areas\Buttons_Basic\Content\images\button.gif" />
+    <Content Include="Areas\Buttons_Basic\Content\images\disabled.gif" />
+    <Content Include="Areas\Buttons_Basic\Content\images\overButton.gif" />
+    <Content Include="Areas\Buttons_Basic\Content\images\pressed.gif" />
+    <Content Include="Areas\Buttons_Basic\Content\images\thumbnail.gif" />
+    <Content Include="Areas\Buttons_Basic\Views\Default_Button\config.xml" />
+    <Content Include="Areas\Buttons_Basic\Views\ImageButton\config.xml" />
+    <Content Include="Areas\Buttons_Basic\Views\HyperlinkButton\config.xml" />
+    <Content Include="Areas\Buttons_Basic\Views\Overview\config.xml" />
+    <Content Include="Areas\Calendar_Overview\Content\css\main.css" />
+    <Content Include="Areas\Calendar_Overview\Content\js\common.js" />
+    <Content Include="Areas\Calendar_Overview\Views\Basic\config.xml" />
+    <Content Include="Areas\Calendar_Overview\Views\Remote_Data\config.xml" />
+    <Content Include="Areas\Chart_Area\Views\Basic\config.xml" />
+    <Content Include="Areas\Chart_Bar\Views\Basic_3D\config.xml" />
+    <Content Include="Areas\Chart_Bar\Views\Basic\config.xml" />
+    <Content Include="Areas\Chart_Column\Views\Basic\config.xml" />
+    <Content Include="Areas\Chart_Dashboard\Views\Basic\config.xml" />
+    <Content Include="Areas\Chart_Gauge\Views\Basic\config.xml" />
+    <Content Include="Areas\Chart_Line\Views\Basic\config.xml" />
+    <Content Include="Areas\Chart_Pie\Views\Basic\config.xml" />
+    <Content Include="Areas\Chart_Radar\Views\Basic\config.xml" />
+    <Content Include="Areas\Chart_Scatter\Views\Basic\config.xml" />
+    <Content Include="Areas\ColorPicker_Basic\Views\Custom_Colors\config.xml" />
+    <Content Include="Areas\ColorPicker_Basic\Views\Custom_View\config.xml" />
+    <Content Include="Areas\ColorPicker_Basic\Views\Overview\config.xml" />
+    <Content Include="Areas\config.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\DataView_Advanced\Content\animated-dataview.css" />
+    <Content Include="Areas\DataView_Advanced\Content\chooser.css" />
+    <Content Include="Areas\DataView_Advanced\Content\DashboardSchema.xml" />
+    <Content Include="Areas\DataView_Advanced\Content\images\group-expand-sprite.gif" />
+    <Content Include="Areas\DataView_Advanced\Content\images\icon.png" />
+    <EmbeddedResource Include="Areas\DataView_Advanced\Content\Multi_sort\multisortpanel.css" />
+    <EmbeddedResource Include="Areas\DataView_Advanced\Content\Multi_sort\MultiSortPanel.js" />
+    <EmbeddedResource Include="Areas\DataView_Advanced\Content\Multi_sort\sortbutton.css" />
+    <EmbeddedResource Include="Areas\DataView_Advanced\Content\Multi_sort\SortButton.js" />
+    <EmbeddedResource Include="Areas\DataView_Advanced\Content\Multi_sort\sort_asc.gif" />
+    <EmbeddedResource Include="Areas\DataView_Advanced\Content\Multi_sort\sort_desc.gif" />
+    <Content Include="Areas\DataView_Advanced\Views\Animated\config.xml" />
+    <Content Include="Areas\DataView_Advanced\Views\Chooser\config.xml" />
+    <Content Include="Areas\DataView_Advanced\Views\Grouping\config.xml" />
+    <Content Include="Areas\DataView_Advanced\Views\Multi_sort\config.xml" />
+    <Content Include="Areas\DataView_Advanced\Views\Report\config.xml" />
+    <Content Include="Areas\DataView_Basic\Content\data-view.css" />
+    <Content Include="Areas\DataView_Basic\Views\Overview\config.xml" />
+    <Content Include="Areas\DataView_Basic\Views\Paging\config.xml" />
+    <Content Include="Areas\Data_Basic\Views\ModelSerializer\config.xml" />
+    <Content Include="Areas\Desktop\Content\cmd.png" />
+    <Content Include="Areas\Desktop\Views\ASPX\AccordionWindow.ascx" />
+    <Content Include="Areas\Desktop\Views\ASPX\config.xml" />
+    <Content Include="Areas\Desktop\Views\ASPX\Desktop.aspx" />
+    <Content Include="Areas\Desktop\Views\ASPX\GridWindow.ascx" />
+    <Content Include="Areas\Desktop\Views\ASPX\Index.aspx" />
+    <Content Include="Areas\Desktop\Views\ASPX\SystemStatus.ascx" />
+    <Content Include="Areas\Desktop\Views\ASPX\TabWindow.ascx" />
+    <Content Include="Areas\Desktop\Views\ASPX\WhatsNew.ascx" />
+    <Content Include="Areas\DataView_Basic\Content\images\loading.gif" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\Audiovox-CDM8600.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\BlackBerry-Curve-8520-BlackBerry.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\BlackBerry-Curve-8900-BlackBerry.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\LG-KC910-Renoir.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\LG-KS360.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\LG-PRADA-KE850.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\LG-Xenon-GR500.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\Motorola-RAZR-V3.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\Motorola-SLVR-L6i.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\Motorola-W377.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\Nokia-5310-XpressMusic.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\Nokia-E63-Smartphone-110-MB.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\Nokia-N85.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\Nokia-N900-Smartphone-32-GB.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\Samsung-SGH-U600-Ultra-Edition-10.9.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\Sony-Ericsson-C510a-Cyber-shot.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\Sony-Ericsson-W580i-Walkman.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\Sony-Ericsson-W705a-Walkman.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\Sony-Ericsson-XPERIA-X1.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\phones\T-Mobile-Sidekick-3-Smartphone-64-MB.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\row-over.gif" />
+    <Content Include="Areas\DataView_Basic\Content\images\selected.gif" />
+    <EmbeddedResource Include="Areas\DataView_Basic\Content\images\sort_asc.gif" />
+    <EmbeddedResource Include="Areas\DataView_Basic\Content\images\sort_desc.gif" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs2\Image1.JPG" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs2\Image10.JPG" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs2\Image2.JPG" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs2\Image3.JPG" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs2\Image4.JPG" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs2\Image5.JPG" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs2\Image6.JPG" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs2\Image7.JPG" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs2\Image8.JPG" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs2\Image9.JPG" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs\dance_fever.jpg" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs\gangster_zack.jpg" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs\kids_hug.jpg" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs\kids_hug2.jpg" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs\sara_pink.jpg" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs\sara_pumpkin.jpg" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs\sara_smile.jpg" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs\up_to_something.jpg" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs\zack.jpg" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs\zacks_grill.jpg" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs\zack_dress.jpg" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs\zack_hat.jpg" />
+    <Content Include="Areas\DataView_Basic\Content\images\thumbs\zack_sink.jpg" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\ajax.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\carousel.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\DnD.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\forms.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\geocongress.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\guide.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\icons.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\kiva.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\map.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\nestedList.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\overlays.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\picker.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\sink.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\sortable.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\tabs.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\tabs2.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\toolbars.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\twitter.png" />
+    <Content Include="Areas\DataView_Basic\Content\images\touch-icons\yql.png" />
+    <Content Include="Areas\Desktop\Content\desktop.css" />
+    <Content Include="Areas\Desktop\Content\grid48x48.png" />
+    <Content Include="Areas\Desktop\Content\im48x48.gif" />
+    <Content Include="Areas\Desktop\Content\logo.png" />
+    <Content Include="Areas\Desktop\Content\notepadLarge.png" />
+    <Content Include="Areas\Desktop\Content\powered.png" />
+    <Content Include="Areas\Desktop\Content\statusLarge.png" />
+    <Content Include="Areas\Desktop\Content\user48x48.png" />
+    <Content Include="Areas\Desktop\Content\wallpapers\Blue.jpg" />
+    <Content Include="Areas\Desktop\Content\wallpapers\desk.jpg" />
+    <Content Include="Areas\Desktop\Content\window48x48.png" />
+    <Content Include="Areas\Desktop\Views\Overview\config.xml" />
+    <Content Include="Areas\DragDrop_Advanced\Views\Example3\config.xml" />
+    <Content Include="Areas\DragDrop_Basic\Content\images\camaro.jpg" />
+    <Content Include="Areas\DragDrop_Basic\Content\images\corvette.jpg" />
+    <Content Include="Areas\DragDrop_Basic\Content\images\f150.jpg" />
+    <Content Include="Areas\DragDrop_Basic\Content\images\miata.jpg" />
+    <Content Include="Areas\DragDrop_Basic\Content\images\mustang.jpg" />
+    <Content Include="Areas\DragDrop_Basic\Content\images\s10.jpg" />
+    <Content Include="Areas\DragDrop_Basic\Content\images\tacoma.jpg" />
+    <Content Include="Areas\DragDrop_Basic\Content\images\tahoe.jpg" />
+    <Content Include="Areas\DragDrop_Basic\Content\styles.css" />
+    <Content Include="Areas\DragDrop_Basic\Views\Dom\config.xml" />
+    <Content Include="Areas\DragDrop_Basic\Views\Example1\config.xml" />
+    <Content Include="Areas\DragDrop_Basic\Views\Example2\config.xml" />
+    <Content Include="Areas\DragDrop_Basic\Views\Example3\config.xml" />
+    <Content Include="Areas\DragDrop_Grid\Views\Cell_to_Cell\config.xml" />
+    <Content Include="Areas\DragDrop_Grid\Views\Field_to_Grid\config.xml" />
+    <Content Include="Areas\DragDrop_Grid\Views\Grid_to_FormPanel\config.xml" />
+    <Content Include="Areas\DragDrop_Panel\Views\Swap_Dropable_Panel\config.xml" />
+    <Content Include="Areas\Draw_Basic\Content\Australia.xml" />
+    <Content Include="Areas\Draw_Basic\Content\bd.jpg" />
+    <Content Include="Areas\Draw_Basic\Views\Actions\config.xml" />
+    <Content Include="Areas\Draw_Basic\Views\Analytics\config.xml" />
+    <Content Include="Areas\Draw_Basic\Views\Animation\config.xml" />
+    <Content Include="Areas\Draw_Basic\Views\Animation_Playground\config.xml" />
+    <Content Include="Areas\Draw_Basic\Views\Australia\config.xml" />
+    <Content Include="Areas\Draw_Basic\Views\Logos\config.xml" />
+    <Content Include="Areas\Draw_Basic\Views\Pie_Chart\config.xml" />
+    <Content Include="Areas\Draw_Basic\Views\Punch_Chart\config.xml" />
+    <Content Include="Areas\Draw_Basic\Views\Reflection\config.xml" />
+    <Content Include="Areas\Draw_Basic\Views\Rotate_Image\config.xml" />
+    <Content Include="Areas\Draw_Basic\Views\Rotate_Text\config.xml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\config.xml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Content\Tab.css" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Add_Tab\config.xml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\ASPX_Engine\config.xml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\ASPX_Engine\Index.aspx" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\ASPX_Engine\View1.ascx" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\ASPX_Engine\View2.ascx" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\ASPX_Engine\View3.ascx" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\ASPX_Engine\View4.ascx" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Partial_Content\config.xml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Partial_Items\config.xml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Window\config.xml" />
+    <Content Include="Areas\Editor_Basic\Views\FormPanel_Labels\config.xml" />
+    <Content Include="Areas\Editor_Basic\Views\Overview\config.xml" />
+    <Content Include="Areas\Element_Basic\Content\styles.css" />
+    <Content Include="Areas\Element_Basic\Views\Layer\config.xml" />
+    <Content Include="Areas\Element_Basic\Views\Overview\config.xml" />
+    <Content Include="Areas\Events\Views\DirectEvents\config.xml" />
+    <Content Include="Areas\Events\Views\DirectMethod\config.xml" />
+    <Content Include="Areas\Events\Views\Web.config" />
+    <Content Include="Areas\Events\Views\DirectEvents\Index.cshtml" />
+    <Content Include="Areas\Events\Views\DirectMethod\Index.cshtml" />
+    <Content Include="Areas\Form_ComboBox\Content\Plants.xml" />
+    <Content Include="Areas\Form_ComboBox\Views\Ajax_Linked_Combos\config.xml" />
+    <Content Include="Areas\Form_ComboBox\Views\Ajax_Linked_Combos\Index.cshtml" />
+    <Content Include="Areas\Form_ComboBox\Views\Custom_Search\config.xml" />
+    <Content Include="Areas\Form_ComboBox\Views\Linked_Combos_In_Grid\config.xml" />
+    <Content Include="Areas\Form_ComboBox\Views\Web.config" />
+    <Content Include="Areas\Form_Login\Views\Auto_Complete\config.xml" />
+    <Content Include="Areas\Form_FileUploadField\Views\Basic\config.xml" />
+    <Content Include="Areas\Form_FormPanel\Views\Basic\config.xml" />
+    <Content Include="Areas\Form_Groups\Views\Basic\config.xml" />
+    <Content Include="Areas\Form_Groups\Views\GroupFor\config.xml" />
+    <Content Include="Areas\Form_Hyperlink\Views\Basic\config.xml" />
+    <Content Include="Areas\Form_Label\Views\Basic\config.xml" />
+    <Content Include="Areas\Form_MultiSelect\Views\Overview\config.xml" />
+    <Content Include="Areas\Getting_Started\config.xml" />
+    <Content Include="Areas\Getting_Started\Views\BREAKING_CHANGES\config.xml" />
+    <Content Include="Areas\Getting_Started\Views\CHANGELOG\config.xml" />
+    <Content Include="Areas\GridPanel_ArrayGrid\Views\ArrayWithPaging\config.xml" />
+    <Content Include="Areas\GridPanel_ArrayGrid\Views\DirectEvent_Creation\config.xml" />
+    <Content Include="Areas\GridPanel_ArrayGrid\Views\Remote_Load\config.xml" />
+    <Content Include="Areas\GridPanel_ArrayGrid\Views\Simple\config.xml" />
+    <Content Include="Areas\GridPanel_ColumnModel\Views\Ajax_Configuration\config.xml" />
+    <Content Include="Areas\GridPanel_ColumnModel\Views\Column_Variations\config.xml" />
+    <Content Include="Areas\GridPanel_ColumnModel\Views\HyperlinkColumn\config.xml" />
+    <Content Include="Areas\GridPanel_ColumnModel\Views\RatingColumn\config.xml" />
+    <Content Include="Areas\GridPanel_Commands\Views\Cell_Command\config.xml" />
+    <Content Include="Areas\GridPanel_Commands\Views\Group_Command\config.xml" />
+    <Content Include="Areas\GridPanel_Commands\Views\Image_Command\config.xml" />
+    <Content Include="Areas\GridPanel_Commands\Views\Menu_Row_Command\config.xml" />
+    <Content Include="Areas\GridPanel_Commands\Views\Over_Commands\config.xml" />
+    <Content Include="Areas\GridPanel_Commands\Views\Prepare_Commands\config.xml" />
+    <Content Include="Areas\GridPanel_Commands\Views\Prepare_Toolbar\config.xml" />
+    <Content Include="Areas\GridPanel_Commands\Views\Row_Command\config.xml" />
+    <Content Include="Areas\GridPanel_ComponentColumn\Views\Editor\config.xml" />
+    <Content Include="Areas\GridPanel_ComponentColumn\Views\Overview\config.xml" />
+    <Content Include="Areas\GridPanel_ComponentColumn\Views\Over_Editor\config.xml" />
+    <Content Include="Areas\GridPanel_ComponentColumn\Views\Pin_Editor\config.xml" />
+    <Content Include="Areas\GridPanel_Data_Presentation\Views\Data_Prepare\config.xml" />
+    <Content Include="Areas\GridPanel_Data_Presentation\Views\Editor_Field_Mapping\config.xml" />
+    <Content Include="Areas\GridPanel_Data_Presentation\Views\Field_Converter\config.xml" />
+    <Content Include="Areas\GridPanel_Data_Presentation\Views\Field_Mapping\config.xml" />
+    <Content Include="Areas\GridPanel_Data_Presentation\Views\Server_Mapping\config.xml" />
+    <Content Include="Areas\GridPanel_Data_with_Details\Views\Binding\config.xml" />
+    <Content Include="Areas\GridPanel_Editable\Views\Editor_with_DirectMethod\config.xml" />
+    <Content Include="Areas\GridPanel_FilterHeader\Views\Overview\config.xml" />
+    <Content Include="Areas\GridPanel_Infinite_Scrolling\Views\Buffered_Scrolling\config.xml" />
+    <Content Include="Areas\GridPanel_Infinite_Scrolling\Views\Forum_topics\config.xml" />
+    <Content Include="Areas\GridPanel_Infinite_Scrolling\Views\Overview\config.xml" />
+    <Content Include="Areas\GridPanel_Infinite_Scrolling\Views\Remote_Filter\config.xml" />
+    <Content Include="Areas\GridPanel_Miscellaneous\Views\Marking_Records\config.xml" />
+    <Content Include="Areas\GridPanel_MultiHeader\Views\Filter\config.xml" />
+    <Content Include="Areas\GridPanel_Paging_and_Sorting\Views\Local\config.xml" />
+    <Content Include="Areas\GridPanel_Paging_and_Sorting\Views\Local_Paging_with_Remote_Data\config.xml" />
+    <Content Include="Areas\GridPanel_Paging_and_Sorting\Views\Multiple_Sorting_Local\config.xml" />
+    <Content Include="Areas\GridPanel_Paging_and_Sorting\Views\Remote\config.xml" />
+    <Content Include="Areas\GridPanel_Plugins\Views\CellEditing\config.xml" />
+    <Content Include="Areas\GridPanel_Plugins\Views\GridFilters_Local\config.xml" />
+    <Content Include="Areas\GridPanel_Plugins\Views\GridFilters_Remote\config.xml" />
+    <Content Include="Areas\GridPanel_Plugins\Views\GroupingSummary\config.xml" />
+    <Content Include="Areas\GridPanel_RowExpander\Views\Component\config.xml" />
+    <Content Include="Areas\GridPanel_RowExpander\Views\Dynamic_GridPanels\config.xml" />
+    <Content Include="Areas\GridPanel_RowExpander\Views\Dynamic_View\config.xml" />
+    <Content Include="Areas\GridPanel_RowExpander\Views\Local_Mode\config.xml" />
+    <Content Include="Areas\GridPanel_RowExpander\Views\MultiLevel_GridPanel\config.xml" />
+    <Content Include="Areas\GridPanel_RowExpander\Views\Remote_Mode\config.xml" />
+    <Content Include="Areas\GridPanel_Selection_Models\Views\Checkbox_Selection\config.xml" />
+    <Content Include="Areas\GridPanel_Update\Views\AutoSave\config.xml" />
+    <Content Include="Areas\GridPanel_Update\Views\Batch\config.xml" />
+    <Content Include="Areas\GridPanel_Update\Views\Restful\config.xml" />
+    <Content Include="Areas\Items\Views\Action\config.xml" />
+    <Content Include="Areas\Items\Views\ASPX_Engine\config.xml" />
+    <Content Include="Areas\Items\Views\Nested_Layouts\config.xml" />
+    <Content Include="Areas\Items\Views\Page\config.xml" />
+    <Content Include="Areas\Items\Views\Section\config.xml" />
+    <Content Include="Areas\Items\Views\Section_From_Page\config.xml" />
+    <Content Include="Areas\Keys_KeyMap\Views\BorderLayout_Regions_Toggle\config.xml" />
+    <Content Include="Areas\Keys_KeyNav\Views\Basic\config.xml" />
+    <Content Include="Areas\Layout_AbsoluteLayout\Views\Basic\config.xml" />
+    <Content Include="Areas\Layout_Accordion\Views\Basic_In_CodeBehind\config.xml" />
+    <Content Include="Areas\Layout_Accordion\Views\Basic_In_Markup\config.xml" />
+    <Content Include="Areas\Layout_AnchorLayout\Views\Basic\config.xml" />
+    <Content Include="Areas\Layout_CardLayout\Views\Basic\config.xml" />
+    <Content Include="Areas\Layout_ColumnLayout\Views\Basic\config.xml" />
+    <Content Include="Areas\Layout_FitLayout\Views\Basic\config.xml" />
+    <Content Include="Areas\Layout_HBoxLayout\Views\Basic\config.xml" />
+    <Content Include="Areas\Layout_VBoxLayout\Views\Basic\config.xml" />
+    <Content Include="Areas\MessageBox_Basic\Views\ButtonsConfig\config.xml" />
+    <Content Include="Areas\MessageBox_Basic\Views\Overview\config.xml" />
+    <Content Include="Areas\MessageBus_Basic\Views\Complex\config.xml" />
+    <Content Include="Areas\MessageBus_Basic\Views\Simple\config.xml" />
+    <Content Include="Areas\Miscellaneous_ClickRepeater\Views\Basic\config.xml" />
+    <Content Include="Areas\Miscellaneous_Factory\Views\Basic\MyWindow1.ascx" />
+    <Content Include="Areas\Miscellaneous_Factory\Views\Basic\Window.ascx" />
+    <Content Include="Areas\Miscellaneous_FlashComponent\Views\Basic\config.xml" />
+    <Content Include="Areas\Miscellaneous_History\Content\Warning.html" />
+    <Content Include="Areas\Miscellaneous_History\Views\Basic\config.xml" />
+    <Content Include="Areas\Miscellaneous_Locale\Views\Basic\config.xml" />
+    <Content Include="Areas\Miscellaneous_Mouse_Distance_Sensor\Views\Basic\config.xml" />
+    <Content Include="Areas\Miscellaneous_Render_Template\Views\Basic\config.xml" />
+    <Content Include="Areas\Miscellaneous_Factory\Views\Basic\config.xml" />
+    <Content Include="Areas\Miscellaneous_Resizable\Content\css\basic.css" />
+    <Content Include="Areas\Miscellaneous_Resizable\Content\images\avus_gtr.jpg" />
+    <Content Include="Areas\Miscellaneous_Resizable\Content\images\CroixDeFer.jpg" />
+    <Content Include="Areas\Miscellaneous_Resizable\Content\images\flower.jpg" />
+    <Content Include="Areas\Miscellaneous_Resizable\Content\images\grass.jpg" />
+    <Content Include="Areas\Miscellaneous_Resizable\Content\images\square.gif" />
+    <Content Include="Areas\Miscellaneous_Resizable\Content\images\stones.jpg" />
+    <Content Include="Areas\Miscellaneous_Resizable\Views\Basic\config.xml" />
+    <Content Include="Areas\Models\Views\ASPX_Engine\config.xml" />
+    <Content Include="Areas\Models\Views\Data_Annotations\config.xml" />
+    <Content Include="Areas\Models\Views\Editor_Template\config.xml" />
+    <Content Include="Areas\Models\Views\FormPanelFor\config.xml" />
+    <Content Include="Areas\Models\Views\GridPanelFor\config.xml" />
+    <Content Include="Areas\Models\Views\Model_Bind\config.xml" />
+    <Content Include="Areas\Models\Views\Model_State\config.xml" />
+    <Content Include="Areas\Models\Views\StoreFor\config.xml" />
+    <Content Include="Areas\Models\Views\Submit\config.xml" />
+    <Content Include="Areas\Panel_Basic\Views\Deferred_Loading\config.xml" />
+    <Content Include="Areas\Panel_Basic\Views\IFrame_Communication\config.xml" />
+    <Content Include="Areas\Panel_Basic\Views\Loader\config.xml" />
+    <Content Include="Areas\Panel_BodyMask\Content\loading.gif" />
+    <Content Include="Areas\Panel_BodyMask\Views\Custom_Mask\config.xml" />
+    <Content Include="Areas\Panel_BodyMask\Views\Standard_Mask\config.xml" />
+    <Content Include="Areas\Panel_Miscellaneous\Content\css\bubble.css" />
+    <Content Include="Areas\Panel_Miscellaneous\Content\images\panel-bubble-corners.gif" />
+    <Content Include="Areas\Panel_Miscellaneous\Content\images\panel-bubble-sides.gif" />
+    <Content Include="Areas\Panel_Miscellaneous\Views\Bubble_Panel\config.xml" />
+    <Content Include="Areas\Portal\Content\companyx_logo.png" />
+    <Content Include="Areas\Portal\Views\Complex\config.xml" />
+    <Content Include="Areas\Portal\Views\Complex\Index.cshtml" />
+    <Content Include="Areas\DataView_Advanced\Views\Web.config" />
+    <Content Include="Areas\DataView_Advanced\Views\Animated\Index.cshtml" />
+    <Content Include="Areas\DataView_Advanced\Views\Chooser\Index.cshtml" />
+    <Content Include="Areas\DataView_Advanced\Views\Chooser\ChooserDialog.cshtml" />
+    <Content Include="Areas\DataView_Advanced\Views\Chooser\IconBrowser.cshtml" />
+    <Content Include="Areas\DataView_Advanced\Views\Chooser\InfoPanel.cshtml" />
+    <Content Include="Areas\DataView_Advanced\Views\Grouping\Index.cshtml" />
+    <Content Include="Areas\DataView_Advanced\Views\Report\Index.cshtml" />
+    <Content Include="Areas\DataView_Advanced\Views\Multi_sort\Index.cshtml" />
+    <Content Include="Areas\Buttons_Basic\Views\Web.config" />
+    <Content Include="Areas\Buttons_Basic\Views\Default_Button\Index.cshtml" />
+    <Content Include="Areas\Buttons_Basic\Views\ImageButton\Index.cshtml" />
+    <Content Include="Areas\Buttons_Basic\Views\HyperlinkButton\Index.cshtml" />
+    <Content Include="Areas\Buttons_Basic\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\Calendar_Overview\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Calendar_Overview\Views\Remote_Data\Index.cshtml" />
+    <Content Include="Areas\Calendar_Overview\Views\Shared\EventsViewer.cshtml" />
+    <Content Include="Areas\Calendar_Overview\Views\Web.config" />
+    <Content Include="Areas\Chart_Area\Views\Web.config" />
+    <Content Include="Areas\Chart_Area\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Chart_Bar\Views\Web.config" />
+    <Content Include="Areas\Chart_Bar\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Chart_Column\Views\Web.config" />
+    <Content Include="Areas\Chart_Column\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Chart_Gauge\Views\Web.config" />
+    <Content Include="Areas\Chart_Gauge\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Chart_Line\Views\Web.config" />
+    <Content Include="Areas\Chart_Line\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Chart_Pie\Views\Web.config" />
+    <Content Include="Areas\Chart_Pie\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Chart_Radar\Views\Web.config" />
+    <Content Include="Areas\Chart_Radar\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\ColorPicker_Basic\Views\Web.config" />
+    <Content Include="Areas\ColorPicker_Basic\Views\Custom_Colors\Index.cshtml" />
+    <Content Include="Areas\ColorPicker_Basic\Views\Custom_View\Index.cshtml" />
+    <Content Include="Areas\ColorPicker_Basic\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\Chart_Scatter\Views\Web.config" />
+    <Content Include="Areas\Chart_Scatter\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Chart_Dashboard\Views\Web.config" />
+    <Content Include="Areas\Chart_Dashboard\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\DragDrop_Panel\Views\Swap_Dropable_Panel\Index.cshtml" />
+    <Content Include="Areas\DragDrop_Panel\Views\Web.config" />
+    <Content Include="Areas\DragDrop_Advanced\Views\Example3\Index.cshtml" />
+    <Content Include="Areas\DragDrop_Advanced\Views\Web.config" />
+    <Content Include="Areas\Associations_HasMany\Views\Web.config" />
+    <Content Include="Areas\Associations_HasMany\Views\Simple\Index.cshtml" />
+    <Content Include="Areas\Associations_HasOne\Views\Web.config" />
+    <Content Include="Areas\Associations_HasOne\Views\Simple\Index.cshtml" />
+    <Content Include="App_Readme\Ext.NET\Sample.Web.config" />
+    <Content Include="Areas\Chart_Area\Views\Basic\DownloadOptions.cshtml" />
+    <Content Include="Areas\Chart_Bar\Views\Basic_3D\Index.cshtml" />
+    <None Include="Areas\DataView_Basic\Content\sencha-touch-examples.json" />
+    <Content Include="Areas\Desktop\Views\Web.config" />
+    <Content Include="Areas\Desktop\Views\Overview\Desktop.cshtml" />
+    <Content Include="Areas\Desktop\Views\Overview\WhatsNew.cshtml" />
+    <Content Include="Areas\Desktop\Views\Overview\TabWindow.cshtml" />
+    <Content Include="Areas\Desktop\Views\Overview\AccordionWindow.cshtml" />
+    <Content Include="Areas\Desktop\Views\Overview\GridWindow.cshtml" />
+    <Content Include="Areas\Desktop\Views\Overview\SystemStatus.cshtml" />
+    <Content Include="Areas\Desktop\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\DataView_Basic\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\DataView_Basic\Views\Paging\Index.cshtml" />
+    <Content Include="Areas\Form_ComboBox\Views\Custom_Search\Index.cshtml" />
+    <Content Include="Areas\Getting_Started\Views\BREAKING_CHANGES\Index.cshtml" />
+    <Content Include="Areas\Getting_Started\Views\CHANGELOG\Index.cshtml" />
+    <Content Include="Areas\Getting_Started\Views\Web.config" />
+    <Content Include="Areas\DragDrop_Basic\Views\Web.config" />
+    <Content Include="Areas\DragDrop_Basic\Views\Dom\Index.cshtml" />
+    <Content Include="Areas\DragDrop_Basic\Views\Dom\HtmlMarkupPartial.cshtml" />
+    <Content Include="Areas\DragDrop_Basic\Views\Example1\Index.cshtml" />
+    <Content Include="Areas\DragDrop_Basic\Views\Example2\Index.cshtml" />
+    <Content Include="Areas\DragDrop_Basic\Views\Example3\Index.cshtml" />
+    <Content Include="Areas\Editor_Basic\Views\Web.config" />
+    <Content Include="Areas\Editor_Basic\Views\FormPanel_Labels\Index.cshtml" />
+    <Content Include="Areas\Editor_Basic\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\Element_Basic\Views\Web.config" />
+    <Content Include="Areas\Element_Basic\Views\Layer\Index.cshtml" />
+    <Content Include="Areas\Element_Basic\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\Form_FileUploadField\Views\Web.config" />
+    <Content Include="Areas\Form_FileUploadField\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Form_FormPanel\Views\Web.config" />
+    <Content Include="Areas\Form_FormPanel\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Form_Hyperlink\Views\Web.config" />
+    <Content Include="Areas\Form_Hyperlink\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Form_Label\Views\Web.config" />
+    <Content Include="Areas\Form_Label\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Form_Groups\Views\Web.config" />
+    <Content Include="Areas\Form_Groups\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Form_Groups\Views\GroupFor\Index.cshtml" />
+    <Content Include="Areas\Draw_Basic\Views\Web.config" />
+    <Content Include="Areas\Draw_Basic\Views\Actions\Index.cshtml" />
+    <Content Include="Areas\Draw_Basic\Views\Analytics\Index.cshtml" />
+    <Content Include="Areas\Draw_Basic\Views\Animation\Index.cshtml" />
+    <Content Include="Areas\Draw_Basic\Views\Animation_Playground\Index.cshtml" />
+    <Content Include="Areas\Draw_Basic\Views\Australia\Index.cshtml" />
+    <Content Include="Areas\Draw_Basic\Views\Pie_Chart\Index.cshtml" />
+    <Content Include="Areas\Draw_Basic\Views\Punch_Chart\Index.cshtml" />
+    <Content Include="Areas\Draw_Basic\Views\Reflection\Index.cshtml" />
+    <Content Include="Areas\Draw_Basic\Views\Logos\Index.cshtml" />
+    <Content Include="Areas\Draw_Basic\Views\Rotate_Image\Index.cshtml" />
+    <Content Include="Areas\Draw_Basic\Views\Rotate_Text\Index.cshtml" />
+    <Content Include="Areas\DragDrop_Grid\Views\Cell_to_Cell\Index.cshtml" />
+    <Content Include="Areas\DragDrop_Grid\Views\Field_to_Grid\Index.cshtml" />
+    <Content Include="Areas\DragDrop_Grid\Views\Grid_to_FormPanel\Index.cshtml" />
+    <Content Include="Areas\DragDrop_Grid\Views\Web.config" />
+    <Content Include="Areas\Form_MultiSelect\Views\Web.config" />
+    <Content Include="Areas\Form_MultiSelect\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\Data_Basic\Views\ModelSerializer\Index.cshtml" />
+    <Content Include="Areas\Data_Basic\Views\Web.config" />
+    <Content Include="Areas\Form_ComboBox\Views\Linked_Combos_In_Grid\Index.cshtml" />
+    <Content Include="Areas\Form_Login\Views\Auto_Complete\Index.cshtml" />
+    <Content Include="Areas\Form_Login\Views\Web.config" />
+    <None Include="Areas\GridPanel_ArrayGrid\Views\ArrayWithPaging\Index.cshtml" />
+    <None Include="Areas\GridPanel_ColumnModel\Views\Ajax_Configuration\Index.cshtml" />
+    <None Include="Areas\GridPanel_ColumnModel\Views\Column_Variations\Index.cshtml" />
+    <Content Include="Areas\GridPanel_ColumnModel\Views\HyperlinkColumn\Index.cshtml" />
+    <None Include="Areas\GridPanel_ColumnModel\Views\RatingColumn\Index.cshtml" />
+    <Content Include="Areas\Form_ComboBox\Content\Cities.xml" />
+    <Content Include="Areas\GridPanel_Commands\Content\Plants.xml" />
+    <Content Include="Areas\GridPanel_ColumnModel\Content\star_fade_n.png" />
+    <Content Include="Areas\GridPanel_ColumnModel\Content\star_n.png" />
+    <Content Include="Areas\GridPanel_Data_with_Details\Content\sheldon.xml" />
+    <Content Include="Areas\GridPanel_Plugins\Content\Plants.xml" />
+    <Content Include="Areas\Items\Views\ASPX_Engine\Index.aspx" />
+    <Content Include="Areas\Items\Views\ASPX_Engine\View1.ascx" />
+    <Content Include="Areas\Items\Views\ASPX_Engine\View2.ascx" />
+    <Content Include="Areas\Models\Content\VType.greater.js" />
+    <Content Include="Areas\Models\Content\storeHelpers.js" />
+    <Content Include="Areas\Models\Views\ASPX_Engine\Index.aspx" />
+    <Content Include="Areas\Portal\Views\Simple\config.xml" />
+    <Content Include="Areas\PropertyGrid_Basic\Views\Overview\config.xml" />
+    <Content Include="Areas\TabPanel_Basic\Views\Add_Tabs\config.xml" />
+    <Content Include="Areas\TabPanel_Basic\Views\Advanced_Tab\config.xml" />
+    <Content Include="Areas\TabPanel_Basic\Views\Ajax_Load\config.xml" />
+    <Content Include="Areas\TabPanel_Basic\Views\TabMenu\config.xml" />
+    <Content Include="Areas\TabPanel_TabStrip\Views\Overview\config.xml" />
+    <Content Include="Areas\TreePanel_Advanced\Content\album.gif" />
+    <Content Include="Areas\TreePanel_Advanced\Content\loading.gif" />
+    <Content Include="Areas\TreePanel_Advanced\Content\organizer.css" />
+    <Content Include="Areas\TreePanel_Advanced\Views\Filter\config.xml" />
+    <Content Include="Areas\TreePanel_Advanced\Views\Image_Organizer\config.xml" />
+    <Content Include="Areas\TreePanel_Advanced\Views\Remote_Mode\config.xml" />
+    <Content Include="Areas\TreePanel_Advanced\Views\TreeGrid\config.xml" />
+    <Content Include="Areas\TreePanel_Basic\Views\Checkbox_Nodes\config.xml" />
+    <Content Include="Areas\TreePanel_Basic\Views\DragDrop_Between_Trees\config.xml" />
+    <Content Include="Areas\TreePanel_Basic\Views\Editors\config.xml" />
+    <Content Include="Areas\TreePanel_Basic\Views\Refresh_Static_Tree\config.xml" />
+    <Content Include="Areas\TreePanel_Basic\Views\Reorder_Nodes\config.xml" />
+    <Content Include="Areas\TreePanel_Basic\Views\Simple\config.xml" />
+    <Content Include="Areas\TreePanel_Basic\Views\SiteMap\config.xml" />
+    <Content Include="Areas\TreePanel_Basic\Views\Submit\config.xml" />
+    <Content Include="Areas\TreePanel_Loaders\Content\authors.xml" />
+    <Content Include="Areas\TreePanel_Loaders\Views\Direct_Method\config.xml" />
+    <Content Include="Areas\TreePanel_Loaders\Views\Proxy\config.xml" />
+    <Content Include="Areas\TreePanel_Loaders\Views\XML_File_Loading\config.xml" />
+    <Content Include="Areas\Viewport_Basic\Views\Built_as_Class\config.xml" />
+    <Content Include="Areas\Viewport_Basic\Views\Built_as_Builder\config.xml" />
+    <Content Include="Areas\Window_Basic\Views\Hello_World\config.xml" />
+    <Content Include="Areas\Window_Basic\Views\Load_External_Website\config.xml" />
+    <Content Include="Areas\Window_Basic\Views\Show\config.xml" />
+    <Content Include="Areas\Window_Basic\Views\Window_Variations\config.xml" />
+    <Content Include="Areas\XRender_Basic\Views\Add_Items\config.xml" />
+    <Content Include="Areas\XRender_Basic\Views\New_Window\config.xml" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="ReferenceAssemblies\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="ReferenceAssemblies\ReadMe.txt" />
+    <Content Include="ReferenceAssemblies\Wilco.SyntaxHighlighter.dll" />
+    <Content Include="resources\css\examples.css" />
+    <Content Include="resources\css\main.css" />
+    <Content Include="resources\fonts\fontawesome-webfont.svg" />
+    <Content Include="resources\fonts\LICENSE_TITILLIUMTEXT.txt" />
+    <Content Include="resources\fonts\OpenSans-Italic-webfont.svg" />
+    <Content Include="resources\fonts\OpenSans-Light-webfont.svg" />
+    <Content Include="resources\fonts\OpenSans-Regular-webfont.svg" />
+    <Content Include="resources\fonts\OpenSans-Semibold-webfont.svg" />
+    <Content Include="resources\fonts\TitilliumText25L003-webfont.svg" />
+    <Content Include="resources\fonts\TitilliumText25L005-webfont.svg" />
+    <Content Include="resources\icons\application.png" />
+    <Content Include="resources\icons\application_double.png" />
+    <Content Include="resources\icons\application_error.png" />
+    <Content Include="resources\icons\application_form.png" />
+    <Content Include="resources\icons\application_go.png" />
+    <Content Include="resources\icons\application_side_tree.png" />
+    <Content Include="resources\icons\application_view_columns.png" />
+    <Content Include="resources\icons\application_view_detail.png" />
+    <Content Include="resources\icons\application_view_tile.png" />
+    <Content Include="resources\icons\arrow_refresh.png" />
+    <Content Include="resources\icons\asterisk_orange.png" />
+    <Content Include="resources\icons\brick.png" />
+    <Content Include="resources\icons\button.png" />
+    <Content Include="resources\icons\buttons.png" />
+    <Content Include="resources\icons\calendar.png" />
+    <Content Include="resources\icons\clock.png" />
+    <Content Include="resources\icons\cog.png" />
+    <Content Include="resources\icons\color_swatch.png" />
+    <Content Include="resources\icons\comments.png" />
+    <Content Include="resources\icons\comment_add.png" />
+    <Content Include="resources\icons\compress.png" />
+    <Content Include="resources\icons\css.png" />
+    <Content Include="resources\icons\cup_black.png" />
+    <Content Include="resources\icons\desktop.png" />
+    <Content Include="resources\icons\editor.png" />
+    <Content Include="resources\icons\emoticon_smile.png" />
+    <Content Include="resources\icons\hourglass.png" />
+    <Content Include="resources\icons\information.png" />
+    <Content Include="resources\icons\keyboard.png" />
+    <Content Include="resources\icons\layout.png" />
+    <Content Include="resources\icons\lightning.png" />
+    <Content Include="resources\icons\link.png" />
+    <Content Include="resources\icons\page_white_code.png" />
+    <Content Include="resources\icons\page_white_csharp.png" />
+    <Content Include="resources\icons\pencil.png" />
+    <Content Include="resources\icons\plugin.png" />
+    <Content Include="resources\icons\script.png" />
+    <Content Include="resources\icons\script_code_red.png" />
+    <Content Include="resources\icons\shape_square_select.png" />
+    <Content Include="resources\icons\tab.png" />
+    <Content Include="resources\icons\table_multiple.png" />
+    <Content Include="resources\icons\tabpanel.png" />
+    <Content Include="resources\icons\textfield_rename.png" />
+    <Content Include="resources\icons\toolbar.png" />
+    <Content Include="resources\icons\viewport.png" />
+    <Content Include="resources\icons\wand.png" />
+    <Content Include="resources\icons\wrench.png" />
+    <Content Include="resources\images\404.png" />
+    <Content Include="resources\images\bg-main.png" />
+    <Content Include="resources\images\bg.gif" />
+    <Content Include="resources\images\bgnoise.png" />
+    <Content Include="resources\images\black10.png" />
+    <Content Include="resources\images\button-bg-30tall.png" />
+    <Content Include="resources\images\collapse-all.gif" />
+    <Content Include="resources\images\commentlogo.png" />
+    <Content Include="resources\images\coolite.png" />
+    <Content Include="resources\images\ee-ad-bg.png" />
+    <Content Include="resources\images\ee-ad-content.png" />
+    <Content Include="resources\images\ee-ad-store-bg.png" />
+    <Content Include="resources\images\expand-all.gif" />
+    <Content Include="resources\images\ext.net-logo.png" />
+    <Content Include="resources\images\ext_net_badge.gif" />
+    <Content Include="resources\images\ext_net_logo_small.gif" />
+    <Content Include="resources\images\grid-badge-bg.png" />
+    <Content Include="resources\images\grid.png" />
+    <Content Include="resources\images\group-expand-sprite.gif" />
+    <Content Include="resources\images\icon-briefcase.png" />
+    <Content Include="resources\images\icon-download.png" />
+    <Content Include="resources\images\item-hd4.gif" />
+    <Content Include="resources\images\layout-browser-hd-bg.gif" />
+    <Content Include="resources\images\loading.gif" />
+    <Content Include="resources\images\loading32.gif" />
+    <Content Include="resources\images\logo.png" />
+    <Content Include="resources\images\new.gif" />
+    <Content Include="resources\images\newgray.gif" />
+    <Content Include="resources\images\noimage.gif" />
+    <Content Include="resources\images\noimage.png" />
+    <Content Include="resources\images\sample-over.gif" />
+    <Content Include="resources\images\screenshot.png" />
+    <Content Include="resources\images\title-background.png" />
+    <Content Include="resources\images\titlebar-badge-bg.png" />
+    <Content Include="resources\images\titlebar-bg.jpg" />
+    <Content Include="resources\images\titlebar-logo-bg.jpg" />
+    <Content Include="resources\images\welcome-bullet.png" />
+    <Content Include="resources\images\welcome-screens.png" />
+    <Content Include="resources\js\examples.js" />
+    <Content Include="resources\js\main.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\_BaseLayoutNoMgr.cshtml" />
+    <Content Include="Web.sitemap" />
+    <Content Include="Areas\GridPanel_MultiHeader\Views\Web.config" />
+    <Content Include="Areas\GridPanel_MultiHeader\Views\Filter\Index.cshtml" />
+    <Content Include="Areas\Layout_AbsoluteLayout\Views\Web.config" />
+    <Content Include="Areas\Layout_AbsoluteLayout\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Layout_Accordion\Views\Web.config" />
+    <Content Include="Areas\Layout_Accordion\Views\Basic_In_Markup\Index.cshtml" />
+    <Content Include="Areas\Layout_Accordion\Views\Basic_In_CodeBehind\Index.cshtml" />
+    <Content Include="Areas\Keys_KeyNav\Views\Web.config" />
+    <Content Include="Areas\Keys_KeyNav\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Layout_AnchorLayout\Views\Web.config" />
+    <Content Include="Areas\Layout_AnchorLayout\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Layout_CardLayout\Views\Web.config" />
+    <Content Include="Areas\Layout_CardLayout\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Layout_ColumnLayout\Views\Web.config" />
+    <Content Include="Areas\Layout_ColumnLayout\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Layout_FitLayout\Views\Web.config" />
+    <Content Include="Areas\Layout_FitLayout\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Layout_HBoxLayout\Views\Web.config" />
+    <Content Include="Areas\Layout_HBoxLayout\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Layout_VBoxLayout\Views\Web.config" />
+    <Content Include="Areas\Layout_VBoxLayout\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\MessageBox_Basic\Views\Web.config" />
+    <Content Include="Areas\MessageBox_Basic\Views\ButtonsConfig\Index.cshtml" />
+    <Content Include="Areas\MessageBox_Basic\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\MessageBus_Basic\Views\Web.config" />
+    <Content Include="Areas\MessageBus_Basic\Views\Simple\Index.cshtml" />
+    <Content Include="Areas\MessageBus_Basic\Views\Shared\_LayoutPage.cshtml" />
+    <Content Include="Areas\MessageBus_Basic\Views\Complex\Index.cshtml" />
+    <Content Include="Areas\MessageBus_Basic\Views\Complex\PartialView1.cshtml" />
+    <Content Include="Areas\MessageBus_Basic\Views\Complex\PartialView2.cshtml" />
+    <Content Include="Areas\Miscellaneous_ClickRepeater\Views\Web.config" />
+    <Content Include="Areas\Miscellaneous_ClickRepeater\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Miscellaneous_FlashComponent\Views\Web.config" />
+    <Content Include="Areas\Miscellaneous_FlashComponent\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Miscellaneous_History\Views\Web.config" />
+    <Content Include="Areas\Miscellaneous_History\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Miscellaneous_Locale\Views\Web.config" />
+    <Content Include="Areas\Miscellaneous_Locale\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Keys_KeyMap\Views\Web.config" />
+    <Content Include="Areas\Keys_KeyMap\Views\BorderLayout_Regions_Toggle\Index.cshtml" />
+    <Content Include="Areas\Miscellaneous_Mouse_Distance_Sensor\Views\Web.config" />
+    <Content Include="Areas\Miscellaneous_Mouse_Distance_Sensor\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Miscellaneous_Resizable\Views\Web.config" />
+    <Content Include="Areas\Miscellaneous_Resizable\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Miscellaneous_Render_Template\Views\Web.config" />
+    <Content Include="Areas\Miscellaneous_Render_Template\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\PropertyGrid_Basic\Views\Web.config" />
+    <Content Include="Areas\PropertyGrid_Basic\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\TabPanel_Basic\Views\Web.config" />
+    <Content Include="Areas\TabPanel_Basic\Views\Add_Tabs\Index.cshtml" />
+    <Content Include="Areas\TabPanel_Basic\Views\Advanced_Tab\Index.cshtml" />
+    <Content Include="Areas\TabPanel_Basic\Views\Ajax_Load\Index.cshtml" />
+    <Content Include="Areas\TabPanel_Basic\Views\Ajax_Load\Ajax.cshtml" />
+    <Content Include="Areas\Viewport_Basic\Views\Web.config" />
+    <Content Include="Areas\Viewport_Basic\Views\Built_as_Class\Index.cshtml" />
+    <Content Include="Areas\Viewport_Basic\Views\Built_as_Builder\Index.cshtml" />
+    <Content Include="Areas\XRender_Basic\Views\Web.config" />
+    <Content Include="Areas\XRender_Basic\Views\Add_Items\Index.cshtml" />
+    <Content Include="Areas\XRender_Basic\Views\New_Window\Index.cshtml" />
+    <Content Include="Areas\TabPanel_Basic\Views\TabMenu\Index.cshtml" />
+    <Content Include="Areas\TabPanel_TabStrip\Views\Web.config" />
+    <Content Include="Areas\TabPanel_TabStrip\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Selection_Models\Views\Checkbox_Selection\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Selection_Models\Views\Web.config" />
+    <Content Include="Areas\GridPanel_Miscellaneous\Views\Marking_Records\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Miscellaneous\Views\Web.config" />
+    <Content Include="Areas\GridPanel_Paging_and_Sorting\Views\Multiple_Sorting_Local\Index.cshtml" />
+    <Content Include="Areas\GridPanel_FilterHeader\Views\Web.config" />
+    <Content Include="Areas\GridPanel_FilterHeader\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\Miscellaneous_Factory\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Miscellaneous_Factory\Views\Web.config" />
+    <Content Include="Areas\Miscellaneous_Factory\Views\Basic\MyWindow2.cshtml" />
+    <None Include="resources\fonts\fontawesome-webfont.eot" />
+    <None Include="resources\fonts\fontawesome-webfont.ttf" />
+    <None Include="resources\fonts\fontawesome-webfont.woff" />
+    <None Include="resources\fonts\OpenSans-Italic-webfont.eot" />
+    <None Include="resources\fonts\OpenSans-Italic-webfont.ttf" />
+    <None Include="resources\fonts\OpenSans-Italic-webfont.woff" />
+    <None Include="resources\fonts\OpenSans-Light-webfont.eot" />
+    <None Include="resources\fonts\OpenSans-Light-webfont.ttf" />
+    <None Include="resources\fonts\OpenSans-Light-webfont.woff" />
+    <None Include="resources\fonts\OpenSans-Regular-webfont.eot" />
+    <None Include="resources\fonts\OpenSans-Regular-webfont.ttf" />
+    <None Include="resources\fonts\OpenSans-Regular-webfont.woff" />
+    <None Include="resources\fonts\OpenSans-Semibold-webfont.eot" />
+    <None Include="resources\fonts\OpenSans-Semibold-webfont.ttf" />
+    <None Include="resources\fonts\OpenSans-Semibold-webfont.woff" />
+    <None Include="resources\fonts\TitilliumText25L003-webfont.eot" />
+    <None Include="resources\fonts\TitilliumText25L003-webfont.ttf" />
+    <None Include="resources\fonts\TitilliumText25L003-webfont.woff" />
+    <None Include="resources\fonts\TitilliumText25L005-webfont.eot" />
+    <None Include="resources\fonts\TitilliumText25L005-webfont.ttf" />
+    <None Include="resources\fonts\TitilliumText25L005-webfont.woff" />
+    <Content Include="Views\Shared\_BaseLayoutClean.cshtml" />
+    <Content Include="Views\ExtNet\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Web.config" />
+    <Content Include="Views\Shared\_BaseLayout.cshtml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Partial_Content\Index.cshtml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Partial_Content\PartialView.cshtml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Partial_Items\Index.cshtml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Partial_Items\WestItems.cshtml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Partial_Items\CenterView.cshtml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Add_Tab\Index.cshtml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Add_Tab\Tab.cshtml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Window\Index.cshtml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Window\Window.cshtml" />
+    <Content Include="Areas\Items\Views\Web.config" />
+    <Content Include="Areas\Items\Views\Section\_LayoutSection.cshtml" />
+    <Content Include="Areas\Items\Views\Section\Index.cshtml" />
+    <Content Include="Areas\Items\Views\Page\Index.cshtml" />
+    <Content Include="Areas\Items\Views\Page\SubPage.cshtml" />
+    <Content Include="Areas\Items\Views\Nested_Layouts\_LayoutLevel1.cshtml" />
+    <Content Include="Areas\Items\Views\Nested_Layouts\_LayoutLevel2.cshtml" />
+    <Content Include="Areas\Items\Views\Nested_Layouts\_LayoutLevel3.cshtml" />
+    <Content Include="Areas\Items\Views\Nested_Layouts\Index.cshtml" />
+    <Content Include="Areas\Items\Views\Section_From_Page\_LayoutSection.cshtml" />
+    <Content Include="Areas\Items\Views\Section_From_Page\Index.cshtml" />
+    <Content Include="Areas\Items\Views\Section_From_Page\SubPage.cshtml" />
+    <Content Include="Areas\Items\Views\Action\Index.cshtml" />
+    <Content Include="Areas\Items\Views\Action\PartialView.cshtml" />
+    <Content Include="Areas\Models\Views\Web.config" />
+    <Content Include="Areas\Models\Views\Model_Bind\Index.cshtml" />
+    <Content Include="Areas\Models\Views\Submit\Index.cshtml" />
+    <Content Include="Areas\Models\Views\Shared\EditorTemplates\Customer.cshtml" />
+    <Content Include="Areas\Models\Views\Shared\EditorTemplates\Address.cshtml" />
+    <Content Include="Areas\Models\Views\Shared\EditorTemplates\Country.cshtml" />
+    <Content Include="Areas\Models\Views\Editor_Template\Index.cshtml" />
+    <Content Include="Areas\Models\Views\Data_Annotations\Index.cshtml" />
+    <Content Include="Areas\Models\Views\Shared\DisplayTemplates\TimeCard.cshtml" />
+    <Content Include="Areas\Models\Views\Shared\EditorTemplates\TimeCard.cshtml" />
+    <Content Include="Areas\Models\Views\Data_Annotations\Display.cshtml" />
+    <Content Include="Areas\Models\Views\Data_Annotations\Edit.cshtml" />
+    <Content Include="Areas\GridPanel_ArrayGrid\Views\DirectEvent_Creation\Index.cshtml" />
+    <Content Include="Areas\GridPanel_ArrayGrid\Views\Remote_Load\Index.cshtml" />
+    <Content Include="Areas\GridPanel_ArrayGrid\Views\Simple\Index.cshtml" />
+    <Content Include="Areas\Models\Views\Model_State\Index.cshtml" />
+    <Content Include="Areas\GridPanel_ComponentColumn\Views\Editor\Index.cshtml" />
+    <Content Include="Areas\GridPanel_ComponentColumn\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\GridPanel_ComponentColumn\Views\Over_Editor\Index.cshtml" />
+    <Content Include="Areas\GridPanel_ComponentColumn\Views\Pin_Editor\Index.cshtml" />
+    <Content Include="Areas\GridPanel_ComponentColumn\Views\Web.config" />
+    <Content Include="Areas\GridPanel_ArrayGrid\Views\Web.config" />
+    <Content Include="Areas\GridPanel_ColumnModel\Views\Web.config" />
+    <Content Include="Areas\GridPanel_Commands\Views\Web.config" />
+    <Content Include="Areas\GridPanel_Commands\Views\Cell_Command\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Commands\Views\Group_Command\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Commands\Views\Image_Command\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Commands\Views\Menu_Row_Command\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Commands\Views\Over_Commands\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Commands\Views\Prepare_Commands\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Commands\Views\Prepare_Toolbar\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Commands\Views\Row_Command\Index.cshtml" />
+    <Content Include="Areas\Models\Views\StoreFor\Index.cshtml" />
+    <Content Include="Areas\Models\Views\GridPanelFor\Index.cshtml" />
+    <Content Include="Areas\Models\Views\Shared\EditorTemplates\Department.cshtml" />
+    <Content Include="Areas\Models\Views\FormPanelFor\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Update\Views\Web.config" />
+    <Content Include="Areas\GridPanel_Update\Views\AutoSave\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Data_Presentation\Views\Data_Prepare\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Data_Presentation\Views\Editor_Field_Mapping\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Data_Presentation\Views\Field_Converter\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Data_Presentation\Views\Field_Mapping\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Data_Presentation\Views\Server_Mapping\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Data_Presentation\Views\Web.config" />
+    <Content Include="Areas\GridPanel_Update\Views\Batch\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Data_with_Details\Views\Binding\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Data_with_Details\Views\Web.config" />
+    <Content Include="Areas\GridPanel_Editable\Views\Web.config" />
+    <Content Include="Areas\GridPanel_Editable\Views\Editor_with_DirectMethod\Index.cshtml" />
+    <Content Include="packages.config" />
+    <Content Include="Areas\GridPanel_Update\Views\Restful\Index.cshtml" />
+    <Content Include="Areas\GridPanel_RowExpander\Views\Web.config" />
+    <Content Include="Areas\GridPanel_RowExpander\Views\Dynamic_GridPanels\Index.cshtml" />
+    <Content Include="Areas\GridPanel_RowExpander\Views\Dynamic_View\Index.cshtml" />
+    <Content Include="Areas\GridPanel_RowExpander\Views\Dynamic_View\InnerGrid.cshtml" />
+    <Content Include="Areas\GridPanel_RowExpander\Views\Local_Mode\Index.cshtml" />
+    <Content Include="Areas\GridPanel_RowExpander\Views\MultiLevel_GridPanel\Index.cshtml" />
+    <Content Include="Areas\GridPanel_RowExpander\Views\Remote_Mode\Index.cshtml" />
+    <Content Include="Areas\GridPanel_RowExpander\Views\Component\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Infinite_Scrolling\Views\Buffered_Scrolling\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Infinite_Scrolling\Views\Forum_topics\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Infinite_Scrolling\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Infinite_Scrolling\Views\Remote_Filter\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Infinite_Scrolling\Views\Web.config" />
+    <Content Include="Areas\GridPanel_Paging_and_Sorting\Views\Web.config" />
+    <Content Include="Areas\GridPanel_Paging_and_Sorting\Views\Remote\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Paging_and_Sorting\Views\Local\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Paging_and_Sorting\Views\Local_Paging_with_Remote_Data\Index.cshtml" />
+    <Content Include="Areas\TreePanel_Basic\Views\Web.config" />
+    <Content Include="Areas\TreePanel_Basic\Views\Simple\Index.cshtml" />
+    <Content Include="Areas\TreePanel_Basic\Views\Checkbox_Nodes\Index.cshtml" />
+    <Content Include="Areas\TreePanel_Basic\Views\DragDrop_Between_Trees\Index.cshtml" />
+    <Content Include="Areas\TreePanel_Basic\Views\Editors\Index.cshtml" />
+    <Content Include="Areas\TreePanel_Basic\Views\Refresh_Static_Tree\Index.cshtml" />
+    <Content Include="Areas\TreePanel_Basic\Views\Reorder_Nodes\Index.cshtml" />
+    <Content Include="Areas\TreePanel_Basic\Views\SiteMap\Index.cshtml" />
+    <Content Include="Areas\TreePanel_Basic\Views\Submit\Index.cshtml" />
+    <Content Include="Areas\TreePanel_Loaders\Views\Web.config" />
+    <Content Include="Areas\TreePanel_Loaders\Views\Direct_Method\Index.cshtml" />
+    <Content Include="Areas\TreePanel_Loaders\Views\Proxy\Index.cshtml" />
+    <Content Include="Areas\TreePanel_Loaders\Views\XML_File_Loading\Index.cshtml" />
+    <Content Include="Areas\TreePanel_Advanced\Views\Web.config" />
+    <Content Include="Areas\TreePanel_Advanced\Views\Filter\Index.cshtml" />
+    <Content Include="Areas\TreePanel_Advanced\Views\Image_Organizer\Index.cshtml" />
+    <Content Include="Areas\DataView_Basic\Views\Web.config" />
+    <Content Include="Areas\TreePanel_Advanced\Views\TreeGrid\Index.cshtml" />
+    <Content Include="Areas\TreePanel_Advanced\Views\Remote_Mode\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Plugins\Views\Web.config" />
+    <Content Include="Areas\GridPanel_Plugins\Views\GridFilters_Remote\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Plugins\Views\GridFilters_Local\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Plugins\Views\CellEditing\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Plugins\Views\GroupingSummary\Index.cshtml" />
+    <Content Include="Areas\Portal\Views\Simple\Index.cshtml" />
+    <Content Include="Areas\Portal\Views\Web.config" />
+    <Content Include="Areas\Window_Basic\Views\Web.config" />
+    <Content Include="Areas\Window_Basic\Views\Hello_World\Index.cshtml" />
+    <Content Include="Areas\Window_Basic\Views\Load_External_Website\Index.cshtml" />
+    <Content Include="Areas\Window_Basic\Views\Show\Index.cshtml" />
+    <Content Include="Areas\Window_Basic\Views\Window_Variations\Index.cshtml" />
+    <Content Include="Areas\Panel_Basic\Views\Web.config" />
+    <Content Include="Areas\Panel_Basic\Views\Deferred_Loading\Index.cshtml" />
+    <Content Include="Areas\Panel_Basic\Views\Deferred_Loading\Child.cshtml" />
+    <Content Include="Areas\Panel_Basic\Views\IFrame_Communication\Index.cshtml" />
+    <Content Include="Areas\Panel_Basic\Views\IFrame_Communication\A.cshtml" />
+    <Content Include="Areas\Panel_Basic\Views\IFrame_Communication\B.cshtml" />
+    <Content Include="Areas\Panel_Basic\Views\Loader\Index.cshtml" />
+    <Content Include="Areas\Panel_Basic\Views\Loader\Child.cshtml" />
+    <Content Include="Areas\Panel_BodyMask\Views\Web.config" />
+    <Content Include="Areas\Panel_BodyMask\Views\Custom_Mask\Index.cshtml" />
+    <Content Include="Areas\Panel_BodyMask\Views\Standard_Mask\Index.cshtml" />
+    <Content Include="Areas\Panel_Miscellaneous\Views\Web.config" />
+    <Content Include="Areas\Panel_Miscellaneous\Views\Bubble_Panel\Index.cshtml" />
+    <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="Views\Main\_Viewport.cshtml" />
+    <Content Include="Views\Main\_North.cshtml" />
+    <Content Include="Views\Main\_Center.cshtml" />
+    <Content Include="Views\Main\_West.cshtml" />
+    <Content Include="Views\Main\Home.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'WebForm NET35 Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'WebForm NET40 Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'WebForm NET35 Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'WebForm NET40 Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC4 NET40 Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC4 NET40 Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'WebForm NET45 Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'WebForm NET45 Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC4 NET45 Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC4 NET45 Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC5 NET45 Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC5 NET45 Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC4 NET452 Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC4 NET452 Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC5 NET452 Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC5 NET452 Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'WebForm NET452 Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'WebForm NET452 Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC4 NET46 Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC4 NET46 Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC5 NET46 Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MVC5 NET46 Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'WebForm NET46 Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'WebForm NET46 Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64682</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:64683/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+</Project>

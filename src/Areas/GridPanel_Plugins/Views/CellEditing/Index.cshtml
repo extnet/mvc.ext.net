@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "Cell Editing - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var addPlant = function (btn) {
+            // Create a model instance
+            var r = Ext.create('Plant', {
+                    common: 'New Plant 1',
+                    light: 'Mostly Shady',
+                    price: 0,
+                    availability: Ext.Date.clearTime(new Date()),
+                    indoor: false
+                }),
+                grid = btn.up("gridpanel");
+
+            grid.store.insert(0, r);
+
+            Ext.Function.defer(function () {
+                grid.editingPlugin.startEditByPosition({ row: 0, column: 0 });
+            }, 100);
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>Cell Editing Grid Example</h1>
+    <p>This example shows how to enable users to edit the contents of a grid.</p>
+
+    @(Html.X().GridPanel()
+            .Width(600)
+            .Height(300)
+            .Title("Edit Plants")
+            .Frame(true)
+            .Store(
+                Html.X().Store()
+                    .Proxy(
+                        Html.X().AjaxProxy()
+                            .Url("~/Areas/GridPanel_Plugins/Content/Plants.xml")
+                            .Reader(
+                                Html.X().XmlReader().Record("plant")
+                            )
+                    )
+                    .Model(
+                        Html.X().Model()
+                            .Name("Plant")
+                            .Fields(
+                                Html.X().ModelField().Name("common").Type(ModelFieldType.String),
+                                Html.X().ModelField().Name("botanical").Type(ModelFieldType.String),
+                                Html.X().ModelField().Name("light"),
+                                Html.X().ModelField().Name("price").Type(ModelFieldType.Float),
+                                Html.X().ModelField().Name("availability").Type(ModelFieldType.Date).DateFormat("MM/dd/yyyy"),
+                                Html.X().ModelField().Name("indoor").Type(ModelFieldType.Boolean)
+                            )
+                    )
+                    .Listeners(l =>
+                    {
+                        l.Load.Handler = @"Ext.Msg.show({
+                                        title: 'Store Load Callback',
+                                        msg: 'store was loaded, data available for processing',
+                                        modal: false,
+                                        icon: Ext.Msg.INFO,
+                                        buttons: Ext.Msg.OK
+                                    });";
+                        l.Load.Single = true;
+                    })
+            )
+            .TopBarItem(
+                Html.X().Button().Text("Add plant").Handler("addPlant")
+            )
+            .ColumnModel(
+                Html.X().Column()
+                    .Text("Common Name")
+                    .DataIndex("common")
+                    .Flex(1)
+                    .Editor(
+                        Html.X().TextField().AllowBlank(false)
+                    ),
+
+                Html.X().Column()
+                    .Text("Light")
+                    .DataIndex("light")
+                    .Width(130)
+                    .Editor(
+                        Html.X().ComboBox()
+                            .TypeAhead(true)
+                            .SelectOnTab(true)
+                            .Items(
+                                "Shade",
+                                "Mostly Shady",
+                                "Sun or Shade",
+                                "Mostly Sunny",
+                                "Sunny"
+                            )
+                    ),
+
+                Html.X().DateColumn()
+                    .Text("Available")
+                    .DataIndex("availability")
+                    .Width(95)
+                    .Format("MMM dd, yyyy")
+                    .Editor(
+                        Html.X().DateField()
+                            .Format("yyyy-MM-dd")
+                            .MinDate(new DateTime(2006, 1, 1))
+                            .DisabledDays(new int[] { 0, 6 })
+                            .DisabledDaysText("Plants are not available on the weekends")
+                    ),
+
+                Html.X().CheckColumn()
+                    .Text("Indoor?")
+                    .DataIndex("indoor")
+                    .StopSelection(false)
+                    .Editable(true)
+                    .Width(55),
+
+                Html.X().ImageCommandColumn()
+                    .Width(30)
+                    .Commands(
+                        Html.X().ImageCommand()
+                            .Icon(Icon.Decline)
+                            .ToolTip(t =>
+                            {
+                                t.Text = "Delete plant";
+                            })
+                            .CommandName("delete")
+                    )
+                    .Listeners(l =>
+                    {
+                        l.Command.Handler = "this.up('gridpanel').store.removeAt(recordIndex);";
+                    })
+            )
+            .SelectionModel(
+                Html.X().CellSelectionModel()
+            )
+            .Plugins(
+                Html.X().CellEditing().ClicksToEdit(1)
+            )
+    )
+}

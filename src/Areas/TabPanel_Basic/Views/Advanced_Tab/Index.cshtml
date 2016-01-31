@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Scrollable Tabs with TabScrollerMenu Plugin - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@functions
+{
+    private string GenerateWindow()
+    {
+        Window win = new Window
+        {
+            Height = 250,
+            Width = 600,
+            Closable = false,
+            Title = "Scrollable Tabs",
+            Layout = "Fit"
+        };
+
+        TabPanel tabs = new TabPanel
+        {
+            ID = "TabPanel1",
+            Border = false,
+            MinTabWidth = 100,
+            ActiveTabIndex = 6,
+            Plugins =
+            {
+                new TabScrollerMenu { PageSize = 5 }
+            }
+        };
+
+        tabs.Add(new Panel { Title = "Our First Tab" });
+
+        int index = 1;
+
+        while (index <= 11)
+        {
+            Panel tab = new Panel
+            {
+                Title = "Tab # " + index.ToString(),
+                Html = "Tab " + index.ToString(),
+                Closable = true,
+                Border = false,
+                Padding = 6
+            };
+
+            tabs.Items.Add(tab);
+            index++;
+        }
+        
+        win.Items.Add(tabs);
+
+        return win.ToScript();
+    }
+}
+    
+@section example 
+{
+    <h1>Scrollable Tabs with TabScrollerMenu Plugin</h1>
+    
+    <script>
+        Ext.onReady(function () {
+            @Html.Raw(GenerateWindow());
+        });
+    </script>
+}

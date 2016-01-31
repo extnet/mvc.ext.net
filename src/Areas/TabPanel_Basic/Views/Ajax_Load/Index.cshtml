@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Fixed Height TabPanel with options - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <div>
+        <h1>Fixed Height TabPanel with options</h1>
+        <p>Tabs with no tab strip and a fixed height that scroll the content.</p>
+    </div>
+    
+    <div>
+        @(X.TabPanel()
+            .ID("TabPanel1")
+            .ActiveTabIndex(0)
+            .Width(600)
+            .Height(250)
+            .Plain(true)
+            .Items(
+                X.Panel()
+                    .ID("Tab1")
+                    .Title("Normal Tab")
+                    .Html("My content was added with the Html Property.")
+                    .BodyPadding(6)
+                    .AutoScroll(true),
+                    
+                X.Panel()
+                    .ID("Tab2")
+                    .Title("Closable Tab")
+                    .Html("You can close this Tab.")
+                    .BodyPadding(6)
+                    .Closable(true),
+                    
+                X.Panel()
+                    .ID("Tab3")
+                    .Title("Ajax Tab")
+                    .BodyPadding(6)
+                    .AutoScroll(true)
+                    .Loader(X.ComponentLoader()
+                        .Url(Url.Action("Ajax"))
+                        .LoadMask(m => m.ShowMask = true)
+                        .Params(new Parameter("containerId", "Tab3"))
+                        .Mode(LoadMode.Html)
+                    ),
+                
+                X.Panel()
+                    .ID("Tab4")
+                    .Title("Event Tab")
+                    .Html("I am tab 3's content. I also have an event listener attached.")
+                    .BodyPadding(6)
+                    .AutoScroll(true)
+                    .Listeners(l =>
+                    {
+                        l.Activate.Handler = "Ext.Msg.alert('Event', this.title + ' was activated.');";
+                        l.Activate.Delay = 1;       
+                    }),
+                    
+                X.Panel()
+                    .ID("Tab5")
+                    .Title("Disabled Tab")
+                    .Disabled(true)
+                    .Html("Can't see me cause I'm disabled")
+                    .AutoScroll(true)
+            )
+        )
+    </div>
+}

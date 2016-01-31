@@ -1,0 +1,72 @@
+@model object[]
+
+@{
+    ViewBag.Title = "Editor Field Mapping - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var departmentRenderer = function (value) {
+            var r = App.StoreCombo.getById(value);
+
+            if (Ext.isEmpty(r)) {
+                return "";
+            }
+
+            return r.data.Name;
+        };
+    </script>
+}
+
+@section example
+{    
+    @(Html.X().Store()
+        .ID("StoreCombo")
+        .Model(Html.X().Model()
+            .IDProperty("ID")
+            .Fields(
+                new ModelField("ID"),
+                new ModelField("Name")
+            )
+        )
+        .DataSource(Model[1])
+    )
+
+    @(Html.X().GridPanel()
+        .Title("List")
+        .Icon(Icon.Application)
+        .Store(Html.X().Store()
+            .Model(Html.X().Model()
+                .IDProperty("ID")
+                .Fields(
+                    new ModelField("ID", ModelFieldType.Int),
+                    new ModelField("Name"),
+                    new ModelField("Surname"),
+                    new ModelField("DepartmentId")
+                )
+            )
+            .DataSource(Model[0])
+        )
+        .ColumnModel(
+            Html.X().Column().Text("ID").DataIndex("ID"),
+            Html.X().Column().Text("NAME").DataIndex("Name"),
+            Html.X().Column().Text("SURNAME").DataIndex("Surname"),
+            Html.X().Column()
+                .Text("DEPARTMENT")
+                .DataIndex("DepartmentId")
+                .Width(240)
+                .Renderer("departmentRenderer")
+                .Editor(Html.X().ComboBox()
+                    .QueryMode(DataLoadMode.Local)
+                    .Editable(false)
+                    .StoreID("StoreCombo")
+                    .DisplayField("Name")
+                    .ValueField("ID")
+                )
+        )
+        .Plugins(Html.X().CellEditing())
+    )
+}
+

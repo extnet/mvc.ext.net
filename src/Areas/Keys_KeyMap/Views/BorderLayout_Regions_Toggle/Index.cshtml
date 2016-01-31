@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "KeyMap Toggling BorderLayout Regions - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(X.Viewport()
+        .Layout(LayoutType.Border)
+        .Items(
+            X.Panel()
+                .ID("North")
+                .Region(Region.North)
+                .Title("North")
+                .Frame(true)
+                .Height(200)
+                .Collapsible(true),
+                
+            X.Panel()
+                .ID("West")
+                .Region(Region.West)
+                .Title("West")
+                .Frame(true)
+                .Width(200)
+                .Collapsible(true),
+                
+            X.Panel()
+                .Region(Region.Center)
+                .BodyPadding(5)
+                .Content(c => @"<ul>
+                        <li>If keys are not working then click on center area</li>
+                        <li>NORTH toggle: N</li>
+                        <li>WEST toggle: W</li>
+                        <li>EAST toggle: E</li>
+                        <li>SOUTH toggle: S</li>
+                    </ul>"),
+                
+            X.Panel()
+                .ID("East")
+                .Region(Region.East)
+                .Title("East")
+                .Frame(true)
+                .Width(200)
+                .Collapsible(true),
+                
+            X.Panel()
+                .ID("South")
+                .Region(Region.South)
+                .Title("South")
+                .Frame(true)
+                .Height(200)
+                .Collapsible(true)
+        )
+    )
+        
+    @(X.KeyMap()
+        .Target("={Ext.isGecko ? Ext.getDoc() : Ext.getBody()}")
+        .Binding(b => {
+            b.Add(X.KeyBinding()
+                .Handler("#{North}.toggleCollapse();")
+                .KeysString("N")
+            );
+                
+            b.Add(X.KeyBinding()
+                .Handler("#{West}.toggleCollapse();")
+                .KeysString("W")
+            );
+                
+            b.Add(X.KeyBinding()
+                .Handler("#{East}.toggleCollapse();")
+                .KeysString("E")
+            );
+                
+            b.Add(X.KeyBinding()
+                .Handler("#{South}.toggleCollapse();")
+                .KeysString("S")
+            );
+        })    
+    )
+}

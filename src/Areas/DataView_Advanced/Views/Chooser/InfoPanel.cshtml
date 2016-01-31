@@ -1,0 +1,40 @@
+﻿@(
+ Html.X().Panel()
+        .ID("ImgDetailPanel")
+        .Width(150)
+        .Region(Region.East)
+        .Split(true)
+        .MinWidth(150)
+        .Config("loadRecord", JRawValue.From("loadRecord"))
+        .Tpl(@<text>
+            <div class="details">
+                <tpl for=".">                        
+                    <tpl if="!Ext.isIE6">
+                        <img src="{url}" />
+                    </tpl>
+                    <tpl if="Ext.isIE6">
+                        <div style="width:74px;height:74px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{url}')"></div>
+                    </tpl>
+                    <div class="details-info">
+                        <b>File Name:</b>
+                        <span>{name}</span>
+                        <b>File URL:</b>
+                        <span><a href="{url}" target="_blank">{name}</a></span>
+                        <b>Size:</b>
+                        <span>{sizeString}</span>
+                    </div>
+                </tpl>
+            </div>
+        </text>)
+        .HtmlBin(@<text>
+            <script>
+                function loadRecord(image){
+                    this.body.hide();
+                    this.tpl.overwrite(this.body, image.data);
+                    this.body.slideIn('l', {
+                        duration: 250
+                    });
+                }
+            </script>
+        </text>)
+)

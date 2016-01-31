@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "Draggable Panels within a Viewport - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .invite {
+            background-color : #99bbe8 !important;
+        }
+        
+        .x-drop-marker {
+            background-color : silver;
+        }
+    </style>
+    
+    <script>
+        var notifyDrop = function (source, e, data) {
+            var targetCt = Ext.getCmp(this.el.dom.id),
+                targetPanel = targetCt.items.get(0),
+                sourceCt = data.panel.ownerCt;
+
+            sourceCt.add(targetPanel);
+            targetCt.add(data.panel);
+
+            Ext.defer(function (){
+                targetPanel.updateLayout();
+                data.panel.updateLayout();
+            }, 1);            
+        };
+
+        var startDrag = function () {            
+            Ext.select(".dropable").addCls("x-drop-marker");
+            Ext.select(".draggable").hide();
+            this.panelProxy.moveOnDrag = false;
+        };
+
+        var endDrag = function () {            
+            Ext.select(".dropable").removeCls("x-drop-marker");
+            Ext.select(".draggable").show();
+            Ext.panel.DD.prototype.endDrag.apply(this, arguments);            
+        };
+    </script>
+}
+
+@section example 
+{
+    @{var viewport = Html.X().Viewport()
+        .Layout(LayoutType.Border)
+        .Items(
+            Html.X().Container()
+                .Region(Region.North)
+                .Cls("dropable")
+                .Layout(LayoutType.Fit)
+                .Height(100)
+                .MarginSpec("10 10 5 10")
+                .Items(
+                    Html.X().Panel()
+                        .Cls("draggable")
+                        .Title("North")
+                ),
+                     
+            Html.X().Container()
+                .Region(Region.East)
+                .Cls("dropable")
+                .Layout(LayoutType.Fit)
+                .Width(200)
+                .MarginSpec("5 10 5 10")
+                .Items(
+                    Html.X().Panel()
+                        .Cls("draggable")
+                        .Title("East")
+                    ),
+                                 
+            Html.X().Container()
+                .Region(Region.Center)
+                .Cls("dropable")
+                .Layout(LayoutType.Fit)
+                .MarginSpec("5 0 5 0")
+                .Items(
+                    Html.X().Panel()
+                        .Cls("draggable")
+                        .Title("Center")
+                        .Html("Drag/Drop Panel Headers to a different Viewport Region")
+                        .BodyPadding(5)
+                ),
+ 
+            Html.X().Container()
+                .Region(Region.South)
+                .Cls("dropable")
+                .Layout(LayoutType.Fit)
+                .Height(100)
+                .MarginSpec("5 10 10 10")
+                .Items(
+                    Html.X().Panel()
+                        .Cls("draggable")
+                        .Title("South")
+                    ),
+ 
+            Html.X().Container()
+                .Region(Region.West)
+                .Cls("dropable")
+                .Layout(LayoutType.Fit)
+                .Width(200)
+                .MarginSpec("5 10 5 10")
+                .Items(
+                    Html.X().Panel()
+                        .Cls("draggable")
+                        .Title("West")
+                    )
+        );
+    }
+ 
+    @{viewport.ToComponent().Items.ForEach(item =>
+        {
+            var region = item as Container;
+ 
+            Ext.Net.Panel p = (Ext.Net.Panel)region.Items[0];
+ 
+            p.DraggablePanelConfig = new DragSource
+            {
+                Group = "panelDD",
+                StartDrag =
+                {
+                    Fn = "startDrag"
+                },
+ 
+                EndDrag =
+                {
+                    Fn = "endDrag"
+                }
+            };
+        });
+    }
+ 
+    @viewport
+     
+ 
+    @(Html.X().DropTarget()
+        .Target("${.dropable}")
+        .Group("panelDD")
+        .OverClass("invite")
+        .NotifyDrop(nd => nd.Fn = "notifyDrop")
+        .NotifyOut(nout => nout.Handler = "this.el.removeCls('invite');")
+        .NotifyOver(nover => nover.Handler = "Ext.select('.dropable').removeCls('invite'); this.el.addCls('invite');")
+  
+    )
+}

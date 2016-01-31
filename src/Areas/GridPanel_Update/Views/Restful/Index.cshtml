@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Ext.Net.MVC.Examples.Areas.GridPanel_Update.Models.Restful.TestPerson>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var onWrite = function (store, operation) {
+            var record = operation.getRecords()[0],
+                name = Ext.String.capitalize(operation.action),
+                verb;
+
+            if (name == 'Destroy') {
+                verb = 'Destroyed';
+            } else {
+                verb = name + 'd';
+            }
+
+            Ext.net.Notification.show({ title: name, html: Ext.String.format("{0} user: {1}<br/>{2}", verb, record.getId(), operation.getResultSet().message) });
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>RESTful Store</h1>
+
+    @(Html.X().GridPanel()
+            .Icon(Icon.Table)
+            .Frame(true)
+            .Title("Users")
+            .Height(400)
+            .Width(500)
+            .Store(
+                Html.X().StoreForModel().Control(s =>
+                {
+                    s.AutoSync = true;
+                    s.Proxy.Add(
+                        new RestProxy
+                        {
+                            AppendAction = false,
+                            Reader = { 
+                                new JsonReader {
+                                    RootProperty = "data",
+                                    MessageProperty = "message"
+                                }
+                            },
+                            API =
+                            {
+                                Read = Url.Action("Read"),
+                                Update = Url.Action("Update"),
+                                Create = Url.Action("Create"),
+                                Destroy = Url.Action("Destroy")
+                            },
+                            Writer = {
+                                new JsonWriter
+                                {
+                                    AllowSingle = true
+                                }
+                            }
+                        }
+                    );
+                    s.Listeners.Write.Fn = "onWrite";
+                    s.Listeners.Write.Delay = 1;
+                })
+            )
+            .ColumnModel(
+                Html.X().ColumnFor(Model, m => m.Id)
+                    .ToBuilder<Column.Builder>()
+                    .Width(40)
+                    .Renderer("return record.phantom ? '' : value;"),
+
+                Html.X().ColumnFor(Model, m => m.Email)
+                    .ToBuilder<Column.Builder>()
+                    .Flex(1)
+                    .Editor(
+                        Html.X().TextField().AllowBlank(false).StandardVtype(ValidationType.Email)
+                    ),
+
+               Html.X().ColumnFor(Model, m => m.First)
+                    .ToBuilder<Column.Builder>()
+                    .Flex(1)
+                    .Editor(
+                        Html.X().TextField().AllowBlank(false)
+                    ),
+
+               Html.X().ColumnFor(Model, m => m.Last)
+                    .ToBuilder<Column.Builder>()
+                    .Flex(1)
+                    .Editor(
+                        Html.X().TextField().AllowBlank(false)
+                    )
+            )
+            .TopBar(
+                Html.X().Toolbar()
+                    .Items(
+                        Html.X().Button()
+                            .Text("Add")
+                            .Icon(Icon.Add)
+                            .Handler("this.up('grid').store.insert(0, new Person());this.up('grid').editingPlugin.startEdit(0, 0);"),
+
+                        Html.X().Button()
+                            .ItemID("btnRemove")
+                            .Text("Delete")
+                            .Icon(Icon.Exclamation)
+                            .Handler("this.up('grid').deleteSelected();")
+                    )
+            )
+            .Plugins(
+                Html.X().RowEditing()
+                    .Listeners(l =>
+                    {
+                        l.CancelEdit.Handler = "if(e.record.phantom){e.store.remove(e.record);}";
+                    })
+            )
+    )
+}

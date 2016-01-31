@@ -1,0 +1,205 @@
+﻿@{
+    ViewBag.Title = "Field to Grid - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag 
+{
+    <style>
+        .x-drop-target-active {
+	        background-color : #D88;
+        }
+    </style>
+
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+        
+        //---DD-------------------
+        
+        var getTargetFromEvent = function (e) {
+            var grid = App.GridPanel1,
+                t = e.getTarget(grid.view.getCellSelector());
+            if (t) {
+                var row = grid.view.findItemByChild(t),
+                    columnIndex = t.cellIndex;
+
+                if (row && Ext.isDefined(columnIndex)) {
+                    return {
+                        node: t,
+                        record: grid.view.getRecord(row),
+                        fieldName: grid.getVisibleColumnManager().getColumns()[columnIndex].dataIndex
+                    }
+                }
+            }
+        };
+
+        var onNodeEnter = function (target, dd, e, dragData) {
+            delete this.dropOK;
+            if (!target) {
+                return;
+            }
+
+            var f = dragData.field;
+            if (!f) {
+                return;
+            }
+
+            var field = target.record.fieldsMap[target.fieldName];
+            if (field.isNumeric) {
+                if (!f.isXType('numberfield')) {
+                    return;
+                }
+            }
+            else if (field.isDateField) {
+                if (!f.isXType('datefield')) {
+                    return;
+                }
+            }
+            else if (field.isBooleanField) {
+                if (!f.isXType('checkbox')) {
+                    return;
+                }
+            }
+            this.dropOK = true;
+            Ext.fly(target.node).addCls('x-drop-target-active');
+        };
+
+        var onNodeOver = function (target, dd, e, dragData) {
+            return this.dropOK ? this.dropAllowed : this.dropNotAllowed;
+        };
+
+        var onNodeOut = function (target, dd, e, dragData) {
+            Ext.fly(target.node).removeCls("x-drop-target-active");
+        };
+
+        var onNodeDrop = function (target, dd, e, dragData) {
+            if (this.dropOK) {
+                var value = dragData.field.getValue();
+                target.record.set(target.fieldName, value);
+                this.onCellDrop(target.fieldName, value);
+                return true;
+            }
+        };
+
+        var onCellDrop = function (field) {
+            var sorter = App.Store1.sorters.first();
+            if (sorter && sorter.property == field) {
+                App.Store1.sort();
+            }
+        };
+        
+        var getDragData = function (e) {
+            var targetLabel = e.getTarget('label', null, true),
+                field,
+                oldMark,
+                text,
+                dragEl;
+            if (targetLabel) {
+                //Get the data we are dragging: the Field
+                //create a ddel for the drag proxy to display
+                field = Ext.getCmp(targetLabel.up('.' + Ext.form.Labelable.prototype.formItemCls).id);
+                // Temporary prevent marking the field as invalid, since it causes changes
+                // to the underlying dom element which can cause problems in IE
+                oldMark = field.preventMark;
+                field.preventMark = true;
+                if (field.isValid()) {
+                    field.preventMark = oldMark;
+                    dragEl = document.createElement('div');
+                    dragEl.className = 'x-form-text';
+                    text = field.getRawValue();
+                    dragEl.innerHTML = Ext.isEmpty(text) ? '&#160;' : text;
+                    Ext.fly(dragEl).setWidth(field.getEl().getWidth());
+                    return {
+                        field: field,
+                        ddel: dragEl
+                    };
+                } else {
+                    e.stopEvent();
+                }
+                field.preventMark = oldMark;
+            }
+        };
+
+        var getRepairXY = function () {
+            return this.dragData.field.getEl().getXY();
+        };
+    </script>
+}
+
+@section example 
+{
+    <h1>Using a GridPanel as a DropZone managing each grid cell as a target</h1>
+    <p>This example assumes prior knowledge of using a GridPanel.</p>
+    <p>This illustrates how a DragZone can manage an arbitrary number of drag sources, and
+    how a DropZone can manage an arbitrary number of targets.</p>
+    <p>Fields are editable. Drag the fields into the grid using the <b>label</b> as the handle.</p>
+
+    @(X.GridPanel()
+        .ID("GridPanel1")
+        .Title("Grid")
+        .Height(350)
+        .Width(600)
+        .Store(X.Store()
+            .ID("Store1")
+            .Proxy(X.AjaxProxy()
+                .Url(Url.Action("GetData"))
+                .Reader(X.ArrayReader().RootProperty("data"))
+            )
+            .PageSize(100)
+            .Model(X.Model()
+                .Fields(
+                    X.ModelField().Name("company").Type(ModelFieldType.String),
+                    X.ModelField().Name("price").Type(ModelFieldType.Float),
+                    X.ModelField().Name("change").Type(ModelFieldType.Float),
+                    X.ModelField().Name("pctChange").Type(ModelFieldType.Float),
+                    X.ModelField().Name("lastChange").Type(ModelFieldType.Date)
+                )
+            )
+        )
+        .ColumnModel(
+            X.Column().Text("Company").DataIndex("company").Flex(1),
+            X.Column().Text("Price").DataIndex("price").Renderer(RendererFormat.UsMoney),
+            X.Column().Text("Change").DataIndex("change").Renderer("change"),
+            X.Column().Text("Change").DataIndex("pctChange").Renderer("pctChange"),
+            X.DateColumn().Text("Last Updated").DataIndex("lastChange")
+        )
+    )
+
+    @(X.Panel()
+        .ID("Panel1")
+        .Frame(true)
+        .Width(600)
+        .Items(
+            X.TextField().FieldLabel("Drag this text").Text("test"),
+            X.NumberField().FieldLabel("Drag this number").Number(1.2),
+            X.DateField().FieldLabel("Drag this date").SelectedDate(DateTime.Now)
+        )
+    )
+
+    @(X.DropZone()
+        .ContainerScroll(true)
+        .Target("={#{GridPanel1}.view.el}")
+        .GetTargetFromEvent(h => h.Fn = "getTargetFromEvent")
+        .OnNodeEnter(h => h.Fn = "onNodeEnter")
+        .OnNodeOver(h => h.Fn = "onNodeOver")
+        .OnNodeOut(h => h.Fn = "onNodeOut")
+        .OnNodeDrop(h => h.Fn = "onNodeDrop")
+        .CustomConfig(cc => cc.Add(new ConfigItem("onCellDrop", "onCellDrop", ParameterMode.Raw)))
+    )
+
+    @(X.DragZone()
+        .Target("={#{Panel1}.getEl()}")
+        .GetDragData(h => h.Fn = "getDragData")
+        .GetRepairXY(h => h.Fn = "getRepairXY")
+        
+    )
+}

@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>Items (nested layouts)</h1>
+
+    @(Html.X().Panel()
+        .Title("Panel Level1")
+        .Padding(3)
+        .Width(400)
+        .Height(400)
+        .Icon(Icon.Add)     
+        .Layout(LayoutType.Fit)   
+        .ItemsFromSection(this, "section1")        
+    )
+}

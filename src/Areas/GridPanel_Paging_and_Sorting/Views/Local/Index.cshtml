@@ -1,0 +1,187 @@
+﻿@model System.Collections.IEnumerable
+@{
+    ViewBag.Title = "Local paging and sorting";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var count = 0; // a counter for new records
+
+        function addRecord (grid) {
+            grid.store.insert(0, { company : 'New' + count++ });
+
+            Ext.Function.defer(function() {
+                grid.editingPlugin.startEditByPosition({row: 0, column: 0})
+            }, 100); 
+        }
+
+        function deleteSelected (grid) {
+            var store = grid.store,
+                records = grid.selModel.getSelection();
+
+            store.remove(records); 
+            store.load(true);
+        }
+
+        function selectRecord (grid, id) {
+            var record = grid.store.getById(id);
+            
+            if (!record) {
+                Ext.Msg.alert("Error", "Record '" + id + "' not found.");
+            } else {
+                grid.store.loadPage(grid.store.findPage(record), {
+                    callback: function () {
+                        grid.getSelectionModel().select(record);
+                    }
+                });
+            }
+        };
+        
+        function exportData (grid, selectedOnly) {                        
+            grid.submitData(
+                //serialization config
+                {
+                   selectedOnly : selectedOnly
+                }, 
+             
+                //request config
+                {
+                   isUpload:true,
+                   url : '@Url.Action("Submit")'
+                }
+           );
+        }
+        
+        
+    </script>
+}
+
+@section example
+{
+    <h1>The following sample demonstrates local paging in the GridPanel.</h1>
+        
+    <p>1. Local Paging</p>
+    <p>2. You can submit data from all grid's pages in one request</p>
+    <p>3. If you edit data on various grid's pages then you can save in one request and changes will not be lost when you navigate beetwen pages</p>
+    <p>4. Get selected data from all pages</p>
+    <p>5. Navigate on page by record</p>
+
+    @(
+        Html.X().GridPanel()
+            .Title("Plants")
+            .Frame(true)
+            .Width(750)
+            .Height(340)
+            .Store(
+                Html.X().Store()
+                    .ID("Store1")
+                    .DataSource(Model)
+                    .Model(
+                        Html.X().Model()
+                            .IDProperty("company")
+                            .Fields(
+                                Html.X().ModelField().Name("company"),
+                                Html.X().ModelField().Name("price").Type(ModelFieldType.Float),
+                                Html.X().ModelField().Name("change").Type(ModelFieldType.Float),
+                                Html.X().ModelField().Name("pctChange").Type(ModelFieldType.Float),
+                                Html.X().ModelField().Name("lastChange").Type(ModelFieldType.Date)
+                            )
+                    )
+                    .PageSize(10)
+                    .ServerProxy(
+                        Html.X().AjaxProxy()
+                            .Url(Url.Action("Read"))
+                            .API(api=>api.Sync = Url.Action("Sync"))
+                    )
+            )
+            .ColumnModel(
+                Html.X().Column()
+                    .DataIndex("company")
+                    .Text("Company")
+                    .Flex(1)
+                    .Editor(Html.X().TextField()),
+                    
+                Html.X().Column()
+                    .DataIndex("price")
+                    .Text("Price")
+                    .Width(75)
+                    .Editor(Html.X().NumberField()),
+                    
+                Html.X().Column()
+                    .DataIndex("change")
+                    .Text("Change")
+                    .Width(75),
+                    
+                Html.X().Column()
+                    .DataIndex("pctChange")
+                    .Text("Change")
+                    .Width(75),
+                    
+                Html.X().DateColumn()
+                    .DataIndex("lastChange")
+                    .Text("Last Updated")
+                    .Width(85)
+                    .Format("HH:mm:ss")
+            )
+            .SelectionModel(
+                Html.X().RowSelectionModel().Mode(SelectionMode.Multi)
+            )
+            .Plugins(
+                Html.X().CellEditing()
+            )
+            .BottomBar(
+                Html.X().PagingToolbar()
+            )
+            .TopBar(
+                Html.X().Toolbar()
+                    .Items(
+                        Html.X().Button()
+                            .Text("Add record")
+                            .Icon(Icon.Add)
+                            .Handler("addRecord(this.up('grid'));"),
+
+                        Html.X().Button()
+                            .Text("Delete selected")
+                            .Icon(Icon.Delete)
+                            .Handler("deleteSelected(this.up('grid'));"),
+                            
+                        Html.X().ToolbarFill(),
+                        
+                        Html.X().Button()
+                            .Text("Find 'Government Motors'")
+                            .Icon(Icon.Find)
+                            .Handler("selectRecord(this.up('grid'), 'Government Motors Corporation');"),
+                            
+                        Html.X().Button()
+                            .Text("To XML")
+                            .Icon(Icon.PageCode)
+                            .Handler("exportData(this.up('grid'));"),
+                            
+                        Html.X().Button()
+                            .Text("Selection To XML")
+                            .Icon(Icon.PageCode)
+                            .Handler("exportData(this.up('grid'), true);"),
+                            
+                        Html.X().Button()
+                            .Text("Save")
+                            .Icon(Icon.Disk)
+                            .DirectEvents(de =>
+                            {
+                                de.Click.Url = Url.Action("Sync");
+                                de.Click.ExtraParams.Add(new Parameter
+                                {
+                                    Name = "data",
+                                    Value = "this.up('grid').store.getChangedData()",
+                                    Mode = ParameterMode.Raw,
+                                    Encode = true
+                                });
+                            })
+                    )
+            )
+    )
+
+    @Html.X().Label().ID("Label1")
+}
+

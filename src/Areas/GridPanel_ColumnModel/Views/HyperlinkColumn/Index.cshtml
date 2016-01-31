@@ -1,0 +1,38 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "HyperlinkColumn - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>HyperlinkColumn</h1>
+
+    <p>Please note that links in the HyperlinkColumn are fake. There are just some links for the sake of demonstration that it actually works.</p>
+
+    @(X.GridPanel()
+        .ID("GridPanel1")
+        .Width(400)
+        .Store(X.Store()
+            .Model(X.Model()
+                .Fields("companyName", "companyId")
+            )
+            .DataSource(Model)
+        )
+        .ColumnModel(
+            X.Column().Text("Company Name").DataIndex("companyName"),
+            X.Column().Text("Company ID").DataIndex("companyId"),
+            X.HyperlinkColumn()
+                .ID("HyperlinkColumn1")
+                .Text("Hyperlink")
+                .Width(150)
+                .DataIndex("companyName")
+                .DataIndexHref("companyId")
+                .Pattern("{text:uppercase}")
+                .HrefPattern("http://ext.net?companyId={href}")
+        )
+        .Buttons(X.Button().Text("Change Patterns for HyperlinkColumn").DirectClickAction("Update"))
+    )
+}

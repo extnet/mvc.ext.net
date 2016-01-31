@@ -1,0 +1,42 @@
+﻿@model Ext.Net.Node
+@{
+    ViewBag.Title = "Refresh Static Tree - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var refreshTree = function (tree) {            
+            App.direct.RefreshMenu({
+                success : function (node) {   
+                    if (!Ext.isEmpty(node)) {
+                        tree.setRootNode(node);
+                    }
+                    else {
+                        tree.getRootNode().removeAll();
+                    }
+                }
+            });
+        };
+    </script>
+}
+
+@section example
+{
+    @(
+        Html.X().TreePanel()
+            .Title("Tree")
+            .Icon(Icon.Anchor)
+            .Width(250)
+            .RootVisible(false)
+            .BodyPaddingSummary("0 0 0 10")
+            .Tools(
+                Html.X().Tool()
+                    .Type(ToolType.Refresh)
+                    .Handler("refreshTree(this.up('treepanel'));")
+                    .ToolTip("Refresh")
+            )
+            .Root(Model)
+    )
+}

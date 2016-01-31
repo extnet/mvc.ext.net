@@ -1,0 +1,154 @@
+@model List<Ext.Net.MVC.Examples.ChartModel>
+
+@{
+    ViewBag.Title = "Bar Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var refresh = function() {
+            var chart = App.Chart1,
+                store = chart.getStore();
+
+            chart.setAnimation({
+                duration: 500,
+                easing: 'easeInOut'
+            });
+
+            store.reload();
+        };
+
+        var switchTheme = function() {
+            var chart = App.Chart1,
+                currentThemeClass = Ext.getClassName(chart.getTheme()),
+                themes = Ext.chart.theme,
+                themeNames = [],
+                currentIndex = 0,
+                name;
+
+            for (name in themes) {
+                if (Ext.getClassName(themes[name]) === currentThemeClass) {
+                    currentIndex = themeNames.length;
+                }
+
+                if (name !== 'Base' && name.indexOf('Gradients') < 0) {
+                    themeNames.push(name);
+                }
+            }
+
+            chart.setTheme(themes[themeNames[++currentIndex % themeNames.length]]);
+            chart.redraw();
+        };
+    </script>
+}
+@section example
+{
+    <h1>3D Bar Chart Example</h1>
+    <p>This example shows how to create a 3D Bar chart much like the regular bar chart.</p>
+
+    @(X.Panel()
+        .Width(800)
+        .Height(600)
+        .LayoutConfig(new VBoxLayoutConfig
+        {
+            Pack = BoxPack.Center,
+            Align = VBoxAlign.Stretch
+        })
+        .TopBar(X.Toolbar()
+            .Items(
+                X.Button()
+                    .Text("Reload Data")
+                    .Icon(Icon.ArrowRefresh)
+                    .Handler("#{Chart1}.getStore().reload()"),
+                X.Button()
+                    .Text("Switch Theme")
+                    .Icon(Icon.Disk)
+                    .Handler("switchTheme")
+            )
+        )
+        .Items(
+            X.CartesianChart()
+                .ID("Chart1")
+                .FlipXY(true)
+                .InsetPadding(40)
+                .Height(500)
+                .AnimationConfig(new AnimConfig
+                {
+                    Duration = 500,
+                    Easing = Easing.EaseOut
+                })
+                .Store(X.Store()
+                    .Data(Model)
+                    .Model(X.Model()
+                        .Fields(
+                            X.ModelField().Name("Name"),
+                            X.ModelField().Name("Data1")
+                        )
+                    )
+                    .Proxy(X.AjaxProxy()
+                        .Url(Url.Action("GetData"))
+                        .Reader(X.JsonReader().RootProperty("data"))
+                    )
+                )
+                .Items(
+                    X.TextSprite()
+                        .Text("3D Bar Charts - Basic")
+                        .FontSize("22")
+                        .Width(100)
+                        .Height(30)
+                        .X(40)
+                        .Y(20),
+
+                    X.TextSprite()
+                        .Text("Data: Browser Stats 2012 - Internet Explorer")
+                        .FontSize("10")
+                        .X(12)
+                        .Y(480),
+
+                    X.TextSprite()
+                        .Text("Source: http://www.w3schools.com/")
+                        .FontSize("10")
+                        .X(12)
+                        .Y(495)
+                 )
+                .Axes(
+                    X.NumericAxis()
+                        .Fields("Data1")
+                        .Position(Position.Bottom)
+                        .Grid(true)
+                        .Maximum(100)
+                        .Renderer(r => r.Handler = "return label.toFixed(0) + '%';"),
+
+                    X.CategoryAxis()
+                        .Position(Position.Left)
+                        .Fields("Name")
+                        .Grid(true)
+                )
+                .Series(X.Bar3DSeries()
+                    .XField("Name")
+                    .YField("Data1")
+                    .StyleSpec(X.SeriesSprite()
+                        .Opacity(0.8)
+                        .MinGapWidth(10)
+                    )
+                    .HighlightConfig(X.RectSprite()
+                        .FillStyle("rgba(249, 204, 157, 1.0)")
+                        .StrokeStyle("black")
+                        .Radius(10)
+                    )
+                    .Tooltip(X.ChartTip()
+                        .TrackMouse(true)
+                        .StyleSpec("background: #fff")
+                        .Renderer(r => r.Handler = "toolTip.setHtml(record.get('Name') + ': ' + record.get('Data1') + '%');")
+                    )
+                    .Label(X.ChartLabel()
+                        .Display(SeriesLabelDisplay.InsideEnd)
+                        .Field("Data1")
+                    )
+                )
+        )
+    )
+}

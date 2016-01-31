@@ -1,0 +1,82 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Ajax Linked Combos - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    @(Html.X().ComboBox()
+        .ID("ComboBoxCountry")
+        .Editable(false)
+        .QueryMode(DataLoadMode.Local)
+        .TriggerAction(TriggerAction.All)
+        .EmptyText("Select a country")
+        .Listeners(ls =>
+            ls.Select.Handler = "App.ComboBoxCity.clearValue(); App.ComboBoxCity.getStore().load()"
+        )
+        .Items(
+            new ListItem("Belgium", "BE"),
+            new ListItem("Brazil", "BR"),
+            new ListItem("Bulgaria", "BG"),
+            new ListItem("Canada", "CA"),
+            new ListItem("Chile", "CL"),
+            new ListItem("Cyprus", "CY"),
+            new ListItem("Finland", "FI"),
+            new ListItem("France", "FR"),
+            new ListItem("Germany", "DE"),
+            new ListItem("Hungary", "HU"),
+            new ListItem("Ireland", "IE"),
+            new ListItem("Israel", "IL"),
+            new ListItem("Italy", "IT"),
+            new ListItem("Lithuania", "LT"),
+            new ListItem("Mexico", "MX"),
+            new ListItem("Netherlands", "NL"),
+            new ListItem("New Zealand", "NZ"),
+            new ListItem("Norway", "NO"),
+            new ListItem("Pakistan", "PK"),
+            new ListItem("Poland", "PL"),
+            new ListItem("Romania", "RO"),
+            new ListItem("Slovakia", "SK"),
+            new ListItem("Slovenia", "SI"),
+            new ListItem("Spain", "ES"),
+            new ListItem("Sweden", "SE"),
+            new ListItem("Switzerland", "CH"),
+            new ListItem("United Kingdom", "GB")
+        )
+    )
+
+    @(Html.X().ComboBox()
+        .ID("ComboBoxCity")
+        .TypeAhead(true)
+        .QueryMode(DataLoadMode.Local)
+        .ForceSelection(true)
+        .TriggerAction(TriggerAction.All)
+        .DisplayField("name")
+        .ValueField("id")
+        .EmptyText("Loading...")
+        .ValueNotFoundText("Loading...")
+        .Store(Html.X().Store()
+            .AutoLoad(false)
+            .Model(Html.X().Model()
+                .IDProperty("Id")
+                .Fields(
+                    new ModelField("id", ModelFieldType.String) { Mapping = "Id" },
+                    new ModelField("name", ModelFieldType.String) { Mapping = "Name" }
+                )
+            )
+            .Proxy(Html.X().AjaxProxy()
+                .Url(Url.Action("GetCities"))
+                .Reader(Html.X().JsonReader().RootProperty("data"))
+            )
+            .Parameters(ps =>
+                ps.Add(new StoreParameter("country", "App.ComboBoxCountry.getValue()", ParameterMode.Raw))
+            )
+            .Listeners(ls =>
+                ls.Load.Handler = @"var combo = App.ComboBoxCity;
+                                    combo.setValue(records[0].get(combo.valueField));"
+            )
+        )
+    )
+}

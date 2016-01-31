@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Reflection - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(X.Viewport()
+        .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Center, Pack = BoxPack.Center })
+        .Items(
+            X.DrawContainer()
+                .Width(320)
+                .Height(400)
+                .Items(
+                    X.ImageSprite()
+                        .Src(Url.Content("~/Areas/Draw_Basic/Content/bd.jpg"))
+                        .X(0)
+                        .Y(0)
+                        .Width(320)
+                        .Height(240),
+
+                    X.ImageSprite()
+                        .Src(Url.Content("~/Areas/Draw_Basic/Content/bd.jpg"))
+                        .X(0).Y(200)
+                        .Width(320)
+                        .Height(240)
+                        .ScalingX(1)
+                        .ScalingY(-0.7)
+                        .Opacity(0.5),
+
+                    X.RectSprite()
+                        .X(0)
+                        .Y(210)
+                        .Width(320)
+                        .Height(200)
+                        .FillStyle("url(#reflectGrd)")
+                )
+                .Gradients(g => 
+                    g.Add(X.LinearGradient()
+                        .GradientID("reflectGrd")
+                        .Degrees(90)
+                        .Stops(s => {
+                            s.Add(new GradientStop 
+                            { 
+                                Offset = 0.35, 
+                                Color = "white"
+                            });
+
+                            s.Add(new GradientStop 
+                            { 
+                                Offset = 1.0
+                            });
+                        })
+                    )
+                )
+        )
+    )
+}

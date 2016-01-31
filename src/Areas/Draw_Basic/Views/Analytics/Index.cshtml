@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Draw Actions - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var leave_timer;
+
+        function onMouseOver(sprite, data, label, i) {
+            var dot = sprite.getSurface().get("dot_" + i),
+                tip = App.DotTooltip;
+            dot.setAttributes({ radius: 6 });
+            sprite.getSurface().renderFrame();
+
+            clearTimeout(leave_timer);
+
+            //tip.data = {label:label, value:data};          
+            var xy = dot.el.getXY();
+            xy[0] = xy[0] + 20;
+            xy[1] = xy[1] - 5;
+            tip.setTitle(data + ' hits');
+            tip.update(label + ' January 2012');
+            tip.showAt(xy);
+        }
+
+        function onMouseOut(sprite, i) {
+            var dot = sprite.getSurface().get("dot_" + i);
+            dot.setAttributes({ radius: 4 });
+            sprite.getSurface().renderFrame();
+
+            leave_timer = setTimeout(function () {
+                App.DotTooltip.hide();
+            }, 500);
+        }
+
+    </script>
+}
+
+@section example
+{
+    @(X.Viewport()
+        .LayoutConfig(new VBoxLayoutConfig() { Align = VBoxAlign.Center, Pack = BoxPack.Center })
+        .Loader(
+            Html.X().ComponentLoader()
+                .AutoLoad(true)
+                .Url(Url.Action("GetDraw"))
+                .Mode(LoadMode.Component)
+        )
+    )
+    
+    @(X.ToolTip()
+        .ID("DotTooltip")
+        .Anchor("left")
+        .Title("&#160;")
+    )
+}

@@ -1,0 +1,226 @@
+﻿@{
+    ViewBag.Title = "HBoxLayout - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        html, body {
+            font    : normal 12px verdana;
+            margin  : 0;
+            padding : 0;
+            border  : 0 none;
+            background-color : #dfe8f6 !important;
+        }
+    </style>
+    
+    <script>
+        var replace = function (panel) {
+            var btns = Ext.getCmp("btns");
+
+            Ext.get("hiddenArea").appendChild(btns.remove(0, false).getEl());
+            btns.add(panel);
+
+            btns.doLayout();
+        };
+    </script>
+}
+
+@section example
+{
+    @(X.Viewport()
+        .Layout(LayoutType.Border)
+        .Items(
+            X.Container()
+                .ID("btns")
+                .Region(Region.North)
+                .Split(true)
+                .MinHeight(40)
+                .MaxHeight(85)
+                .MarginSpec("5 5 0 5" )
+                .Height(50)
+                .Layout(LayoutType.Fit)
+                .Items(X.Container()
+                    .Content(c => "<p style='padding:10px;color:#556677;'>Select a configuration below:</p>")
+                ),
+                
+            X.Panel()
+                .Layout(LayoutType.Anchor)
+                .Region(Region.Center)
+                .MarginSpec("0 5 5 5")
+                .BodyPadding(10)
+                .Items(
+                    X.Container()
+                        .AnchorHorizontal("100%")
+                        .Layout(LayoutType.HBox)
+                        .Margin(10)
+                        .Defaults(d => {
+                                d.Add(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value));
+                                d.Add(X.Parameter().Name("toggleGroup").Value("btns").Mode(ParameterMode.Value));
+                                d.Add(X.Parameter().Name("allowDepress").Value("false").Mode(ParameterMode.Raw));
+                            }
+                        )
+                        .Items(
+                            X.Button().Text("Spaced").OnClientClick("replace(#{pnlSpaced});"),
+                            X.Button().Text("Align: Top").OnClientClick("replace(#{pnlAlignTop});"),
+                            X.Button().Text("Align: Middle").OnClientClick("replace(#{pnlAlignMiddle});"),
+                            X.Button().Text("Align: Stretch").OnClientClick("replace(#{pnlAlignStretch});"),
+                            X.Button().Text("Align: StretchMax").OnClientClick("replace(#{pnlAlignStretchMax});")
+                        ),
+                    X.Container()
+                        .AnchorHorizontal("100%")
+                        .Layout(LayoutType.HBox)
+                        .PaddingSpec("0 10 10")
+                        .Defaults(d => {
+                                d.Add(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value));
+                                d.Add(X.Parameter().Name("pressed").Value("false").Mode(ParameterMode.Raw));
+                                d.Add(X.Parameter().Name("toggleGroup").Value("btns").Mode(ParameterMode.Value));
+                                d.Add(X.Parameter().Name("allowDepress").Value("false").Mode(ParameterMode.Raw));
+                            }
+                        )
+                        .Items(
+                            X.Button().Text("Flex: All Even").OnClientClick("replace(#{pnlFlexEven});"),
+                            X.Button().Text("Flex: Ratio").OnClientClick("replace(#{pnlFlexRatio});"),
+                            X.Button().Text("Pack: Start").OnClientClick("replace(#{pnlPackStart});"),
+                            X.Button().Text("Pack: Center").OnClientClick("replace(#{pnlPackCenter});"),
+                            X.Button().Text("Pack: End").OnClientClick("replace(#{pnlPackEnd});")
+                        )
+                )
+        )
+    )
+    
+    <div id="hiddenArea" class="x-hidden">
+        @(X.Panel()
+            .ID("pnlSpaced")
+            .Layout(LayoutType.HBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Top })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Component().Flex(1),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4").Margin(0)
+            ))
+
+        @(X.Panel()
+            .ID("pnlAlignTop")
+            .Layout(LayoutType.HBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Top })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4")
+            ))
+
+        @(X.Panel()
+            .ID("pnlAlignMiddle")
+            .Layout(LayoutType.HBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4")
+            ))
+
+        @(X.Panel()
+            .ID("pnlAlignStretch")
+            .Layout(LayoutType.HBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Stretch })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4")
+            ))
+
+        @(X.Panel()
+            .ID("pnlAlignStretchMax")
+            .Layout(LayoutType.HBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.StretchMax })
+            .Items(
+                X.Button().Text("Button 1 - height 30px").Height(30),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4")
+            ))
+
+        @(X.Panel()
+            .ID("pnlFlexEven")
+            .Layout(LayoutType.HBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle })
+            .Items(
+                X.Button().Text("Button 1").Flex(1),
+                X.Button().Text("Button 2").Flex(1),
+                X.Button().Text("Button 3").Flex(1),
+                X.Button().Text("Button 4").Flex(1).Margin(0)
+            ))
+
+        @(X.Panel()
+            .ID("pnlFlexRatio")
+            .Layout(LayoutType.HBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle })
+            .Items(
+                X.Button().Text("Button 1").Flex(1),
+                X.Button().Text("Button 2").Flex(1),
+                X.Button().Text("Button 3").Flex(1),
+                X.Button().Text("Button 4").Flex(3).Margin(0)
+            ))
+
+        @(X.Panel()
+            .ID("pnlPackStart")
+            .Layout(LayoutType.HBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle, Pack = BoxPack.Start })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4")
+            ))
+
+        @(X.Panel()
+            .ID("pnlPackCenter")
+            .Layout(LayoutType.HBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle, Pack = BoxPack.Center })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4")
+            ))
+
+        @(X.Panel()
+            .ID("pnlPackEnd")
+            .Layout(LayoutType.HBox)
+            .BodyPadding(5)
+            .Defaults(X.Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+            .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle, Pack = BoxPack.End })
+            .Items(
+                X.Button().Text("Button 1"),
+                X.Button().Text("Button 2"),
+                X.Button().Text("Button 3"),
+                X.Button().Text("Button 4")
+            ))
+    </div>
+}

@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Custom Mask - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+<style>      
+        div.botright {
+        display    : block;
+        position   : absolute;
+        bottom     : 0;
+        right      : 0;
+        width      : 105px;
+        height     : 105px;
+        border     : 1px solid #ddd;
+        background : #eee;
+        }
+</style> 
+}
+
+@section example
+{
+    <h1>Demonstrates how to show custom load mask while frame loading.</h1>
+
+    <p>The animation will be shown at the right bottom corner of page</p>
+    
+    @(X.Window()
+        .ID("Window1")
+        .Width(500)
+        .Height(470)
+        .Icon(Icon.Link)
+        .Title("Frame loader")
+        .Closable(false)
+        .Loader(X.ComponentLoader()
+            .Url("http://www.ext.net")
+            .Mode(LoadMode.Frame)
+            .Listeners(l => {
+                l.BeforeLoad.Handler = "Ext.get('maskDiv').removeCls('x-hidden-display');";
+                l.Load.Handler = "Ext.get('maskDiv').addCls('x-hidden-display');";
+            })
+        )
+        .TopBar(X.Toolbar()
+            .Items(
+                X.ToolbarFill(),
+                
+                X.Button()
+                    .Text("Load Ext.NET forums")
+                    .Icon(Icon.Application)
+                    .Handler("#{Window1}.load('http://forums.ext.net');"),
+                
+                X.Button()
+                    .Text("Refresh")
+                    .Icon(Icon.ArrowRotateAnticlockwise)
+                    .Handler("#{Window1}.reload();")
+            )
+        )
+    )
+    
+    <div id="maskDiv" class="botright x-hidden-display">     
+        <img src="@Url.Content("~/Areas/Panel_BodyMask/Content/loading.gif")" />
+    </div>
+}

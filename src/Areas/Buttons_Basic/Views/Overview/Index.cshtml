@@ -1,0 +1,182 @@
+﻿@{
+    ViewBag.Title = "Button Control Variations - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag {
+    <style>
+        .custom-icon1 {
+        	background-image : url(@Url.Content("~/Areas/Buttons_Basic/Content/images/arrow-down.gif")) !important;
+        }
+    </style>
+}
+
+@section example 
+{
+    <h2>1. Button with Listener</h2>
+    
+    @(X.Button()
+        .Text("Click me")
+        .OnClientClick("alert('Clicked');")
+    )
+    
+    <h2>2. Button with DirectEvent</h2>
+    
+    @(X.Button()
+        .Text("Click me")
+        .DirectEvents(de => {
+                de.Click.Url = Url.Action("Button_Click");
+                de.Click.EventMask.ShowMask = true;
+                de.Click.ExtraParams.Add(new Parameter("Item", "One"));
+                
+            }
+        )
+    )
+    
+    <h2>3. Button with Icon</h2>
+    
+    @(X.Button()
+       .Text("Text")
+       .Icon(Icon.Add)
+    )
+    
+    <h2>4. Button with Custom Icon</h2>
+    
+    @(X.Button()
+       .Text("Text")
+       .IconCls("custom-icon1")
+    )
+    
+    <h2>5. Button with QuickTip</h2>
+    
+    @(X.Button()
+        .Text("Text")
+        .ToolTips(t => t.Add(X.ToolTip()
+            .Html("Desription"))
+        )
+    )
+    
+    <h2>6. Toggle Buttons</h2>
+    
+    @(X.Button()
+       .Text("Button1")
+       .EnableToggle(true)
+       .ToggleGroup("Group1")
+       .Pressed(true)
+    )
+    
+    @(X.Button()
+       .Text("Button2")
+       .EnableToggle(true)
+       .ToggleGroup("Group1")
+    )
+    
+    @(X.Button()
+       .Text("Button3")
+       .EnableToggle(true)
+       .ToggleGroup("Group1")
+    )
+    
+    <h2>7. Button with menu</h2>
+    
+    @(X.Button()
+       .Text("Text")
+       .Menu(X.Menu()
+              .Items(
+                  X.MenuItem()
+                   .Text("Item 1")
+                   .Icon(Icon.GroupAdd),
+                  X.MenuItem()
+                   .Text("Item 2")
+                   .Icon(Icon.GroupDelete),
+                  X.MenuItem()
+                   .Text("Item 3")
+                   .Icon(Icon.GroupEdit)
+           )
+       )
+    )
+    
+    <h2>8. SplitButton with menu</h2>
+    
+    @(X.SplitButton()
+       .Text("Text")
+       .Menu(X.Menu()
+              .Items(
+                  X.MenuItem()
+                   .Text("Item 1")
+                   .Icon(Icon.GroupAdd),
+                  X.MenuItem()
+                   .Text("Item 2")
+                   .Icon(Icon.GroupDelete),
+                  X.MenuItem()
+                   .Text("Item 3")
+                   .Icon(Icon.GroupEdit)
+           )
+       )
+    )
+    
+    <h2>9. SplitButton with custom drop down</h2>
+    
+    @(X.SplitButton()
+       .Text("Text")
+       .Bin(
+           X.Panel()
+            .Width(150)
+            .Height(300)
+            .Layout(LayoutType.Accordion)
+            .Floating(true)
+            .Items(
+                X.Panel().Title("Item 1"),
+                X.Panel().Title("Item 2"),
+                X.Panel().Title("Item 3"),
+                X.Panel().Title("Item 4"),
+                X.Panel().Title("Item 5")
+            )
+            .BottomBar(X.Toolbar()
+                .ClassicButtonStyle(true)
+                .Items(
+                    X.ToolbarFill(),
+                    X.Button()
+                        .Text("Close")
+                        .Handler("function(){this.up('panel').hide();}")
+                )
+            )
+        )
+        .Listeners(l => l.ArrowClick.Handler = "this.bin[0].show(); this.bin[0].alignTo(this.el);")
+    )
+    
+    <h2>10. CycleButton</h2>
+    
+    @(X.CycleButton()
+        .ShowText(true)
+        .PrependText("View As ")
+        .Menu(X.Menu()
+            .Items(
+                X.CheckMenuItem()
+                    .Text("Text only")
+                    .Icon(Icon.Note),
+                X.CheckMenuItem()
+                    .Text("Html")
+                    .Icon(Icon.Html)
+                    .Checked(true)
+            )
+        )
+    )
+    
+    <h2>11. Flat Button</h2>
+    
+    @(X.Button()
+       .Text("FlatButton")
+       .Icon(Icon.Accept)
+       .Flat(true)
+    )
+    
+    <h2>12. Custom Size Button</h2>
+    
+    @(X.Button()
+       .Text("128 x 128")
+       .Height(128)
+       .Width(128)
+    )
+}

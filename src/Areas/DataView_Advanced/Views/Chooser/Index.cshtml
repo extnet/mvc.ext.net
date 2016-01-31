@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Advanced DataView - Ext.NET Example";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <link href="@Url.Content("~/Areas/DataView_Advanced/Content/chooser.css")" rel="stylesheet" />
+    
+    <script>
+        function beforeCreate(){
+            var dialog = Ext.getCmp("ImgChooserDlg");
+            if(dialog){
+                dialog.show();
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+}
+
+@section example
+{
+    <h1>Advanced DataView Example</h1>
+    <p>This example shows loading a DataView in a Window.  Each item has a linked details view, and the DataView supports custom sorting and filtering.</p>
+
+    @(
+ Html.X().Button()
+           .Icon(Icon.Add)
+           .Text("Insert Image")
+           .DirectEvents(de => {
+               de.Click.Action = "CreateChooser";
+               de.Click.Before = "return beforeCreate();";
+           })
+    )
+
+    <div id="images" style="margin:20px;width:600px;"></div>
+}

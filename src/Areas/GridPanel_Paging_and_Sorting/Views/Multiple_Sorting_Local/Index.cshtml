@@ -1,0 +1,224 @@
+﻿@model object[]
+@{
+    var X = Html.X();
+    ViewBag.Title = "Multiple Sorting- Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>        
+        var doSort = function () {
+            App.Store1.sort(getSorters());
+        };
+
+        var getSorters = function () {
+            var sorters = [];
+            
+            Ext.each(App.Toolbar1.query('button'), function (button) {
+                sorters.push(button.sortData);
+            }, this);
+            
+            return sorters;
+        };
+
+        var changeSortDirection = function (button, changeDirection) {
+            var sortData = button.sortData,
+                iconCls  = button.iconCls;
+        
+            if (sortData) {
+                if (changeDirection !== false) {
+                    button.sortData.direction = Ext.String.toggle(button.sortData.direction, "ASC", "DESC");
+                    button.setIconCls(Ext.String.toggle(iconCls, "icon-sortascending", "icon-sortdescending"));
+                }
+                App.Store1.clearFilter();
+                doSort();
+            }
+        };
+       
+        
+        var createItem = function (data) {
+            var header = data.header,
+                headerCt = header.ownerCt,
+                reorderer = headerCt.reorderer;
+            
+            // Hide the drop indicators of the standard HeaderDropZone
+            // in case user had a pending valid drop in 
+            if (reorderer) {
+                reorderer.dropZone.invalidateDrop();
+            }
+
+            return createSorterButtonConfig({
+                text: header.text,
+                sortData: {
+                    property: header.dataIndex,
+                    direction: "ASC"
+                }
+            });
+        };
+        
+        var createSorterButtonConfig = function (config) {
+            config = config || {};
+                  
+            Ext.applyIf(config, {
+                listeners : {
+                    click : function (button, e) {
+                        changeSortDirection(button, true);             
+                    }
+                },
+                iconCls     : config.sortData.direction.toLowerCase() == "asc" ? "icon-sortascending" : "icon-sortdescending",
+                reorderable : true,
+                xtype: 'splitbutton',
+                menu : {
+                    xtype: "menu",
+                    items : [
+                        {
+                            text    : "Remove",
+                            handler : remove
+                        }
+                    ]
+                }
+            });
+            
+            return config;
+        };
+        
+        var canDrop = function (dragSource, event, data) {
+            var sorters = getSorters(),
+                header  = data.header,
+                length = sorters.length,
+                entryIndex = this.calculateEntryIndex(event),
+                targetItem = this.toolbar.getComponent(entryIndex),
+                i;
+
+            // Group columns have no dataIndex and therefore cannot be sorted
+            // If target isn't reorderable it could not be replaced
+            if (!header.dataIndex || (targetItem && targetItem.reorderable === false)) {
+                return false;
+            }
+
+            for (i = 0; i < length; i++) {
+                if (sorters[i].property == header.dataIndex) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+        
+        var remove = function (menu) {
+            App.Toolbar1.remove(menu.up('button'));            
+            App.Store1.clearFilter();
+            doSort();
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>Multiple Grid Sorting Example</h1>
+        
+    <p>This example demontrates how to sort a grid by more than a single field.</p>
+        
+    <p>The store is initially sorted by Rating DESC then by Salary ASC, as indicated in the toolbar.</p>
+        
+    <p>Click a button to change sorting direction, drag buttons to reorder them.</p>
+        
+    <p>This example also uses the ToolbarDroppable plugin to allow column headers to be dropped onto the toolbar. Try it with 
+        Name column header. Each column is only allowed one button, so Rating and Salary cannot be dropped in this example.</p>
+    
+    @(X.GridPanel()
+        .ID("GridPanel1")
+        .Title("Array Grid")
+        .Width(600)
+        .Height(350)
+        .Store(X.Store()
+            .ID("Store1")
+            .Data(Model)
+            .Model(X.Model()
+                .Fields(
+                    X.ModelField().Name("name"),
+                    X.ModelField().Name("rating").Type(ModelFieldType.Int),
+                    X.ModelField().Name("salary").Type(ModelFieldType.Float)
+                )
+            )
+            .Reader(X.ArrayReader())
+        )
+        .ColumnModel(
+            X.Column()
+                .Text("Name")
+                .Flex(1)
+                .DataIndex("name")
+                .Sortable(false),
+            X.Column()
+                .Text("Rating")
+                .Flex(1)
+                .DataIndex("rating")
+                .Sortable(false)
+                .Width(125),
+            X.Column()
+                .Text("Salary")
+                .Flex(1)
+                .DataIndex("salary")
+                .Sortable(false)
+                .Width(125)
+                .Align(Alignment.Right)
+        )
+        .TopBar(X.Toolbar()
+            .ID("Toolbar1")
+            .Items(
+                X.ToolbarTextItem()
+                    .Text("Sorting order:")
+                    .Reorderable(false),
+                X.ToolbarSeparator()
+                    .Reorderable(false),
+                X.SplitButton()
+                    .Text("Rating")
+                    .Icon(Icon.SortDescending)
+                    .OnClientClick("changeSortDirection(this, true);")
+                    .Reorderable(true)
+                    .CustomConfig(c => c.Add(new ConfigItem("sortData", "{property:'rating',direction:'DESC'}", ParameterMode.Raw)))
+                    .Menu(
+                        X.Menu()
+                            .Items(
+                                X.MenuItem()
+                                    .Text("Remove")
+                                    .OnClientClick("remove(this);")
+                            )
+                    ),
+                X.SplitButton()
+                    .Text("Salary")
+                    .Icon(Icon.SortAscending)
+                    .OnClientClick("changeSortDirection(this, true);")
+                    .Reorderable(true)
+                    .CustomConfig(c => c.Add(new ConfigItem("sortData", "{property:'salary',direction:'ASC'}", ParameterMode.Raw)))
+                    .Menu(
+                        X.Menu()
+                            .Items(
+                                X.MenuItem()
+                                    .Text("Remove")
+                                    .OnClientClick("remove(this);")
+                            )
+                    )
+
+            )
+            .Plugins(p =>
+            {
+                BoxReorderer br = new BoxReorderer();
+                br.Listeners.Drop.Handler = "changeSortDirection(dragCmp, false);";
+                p.Add(br);
+
+                ToolbarDroppable td = new ToolbarDroppable();
+                td.ID = "ToolbarDroppable1";
+                td.CreateItem.Fn = "createItem";
+                td.CanDrop.Fn = "canDrop";
+                td.Listeners.Drop.Fn = "doSort";
+                p.Add(td);
+            })
+        )
+        .Listeners(l => {
+            l.AfterLayout.Handler = "#{ToolbarDroppable1}.addDDGroup(this.child('headercontainer').reorderer.dragZone.ddGroup); doSort();";
+            l.AfterLayout.Single = true;
+        })
+    )
+}

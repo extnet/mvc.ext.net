@@ -1,0 +1,44 @@
+﻿@(Html.X().Panel()
+    .Header(false)
+    .Region(Region.North)
+    .Border(false)
+    .Height(70)
+    .Content(
+    @<text>
+        <header class="site-header" role="banner">
+            <nav class="top-navigation">
+                <div class="logo-container">
+                    <img src="../../resources/images/extdotnet-logo.svg" />
+                </div>
+                <div class="navigation-bar">
+                    <div class="platform-selector-container">
+                        @(Html.X().Button()
+                            .Cls("platform-selector")
+                            .Width(450)
+                            .Text("MVC Examples Explorer (4.0 Preview)")
+                            .Height(70)
+                            .ArrowVisible(false)
+                            .Menu(Html.X().Menu()
+                                .Cls("platform-selector-dropdown")
+                                .Plain(true)
+                                    .Items(
+                                        Html.X().MenuItem()
+                                        .Text("Web Forms Examples Explorer (4.0 Preview)")
+                                        .Href("http://examples4.ext.net/")
+                                        .Height(70)
+                                        .Width(448)
+                                        .Padding(12)
+                                )
+                            )
+                        )
+                    </div>
+                    <input type="checkbox" id="menu-button-checkbox" />
+                    <label id="menu-button" for="menu-button-checkbox">
+                        <span></span>
+                    </label>
+                </div>
+            </nav>
+        </header>
+    </text>
+    )
+)

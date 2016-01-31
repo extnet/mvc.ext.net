@@ -1,0 +1,194 @@
+﻿@{
+    ViewBag.Title = "Remote mode - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <style>
+        .bold-text{
+            font-weight:bold;
+            padding-left: 32px;
+            margin-bottom:2px;
+            font-size:110%;
+        }
+    </style>
+    
+    <script>
+        var showMenu = function (view, node, item, index, e) {            
+            var menu = App.TreeContextMenu;
+            
+			this.menuNode = node; 
+            menu.nodeName = node.get("text");                
+			view.getSelectionModel().select(node);
+		    
+		    menu.showAt([e.getXY()[0], e.getXY()[1]+10]);
+		    e.stopEvent();
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>Remote mode</h1>
+        
+    <p>This example demomstrates remote mode of the TreePanel : remote confirmation of basic operations (rename, remove, append/insert, drag/drop)</p>
+        
+    <p>The remote mode is activating if set Mode="Remote"</p>
+        
+    <p>You can define particular action as local even if Mode="Remote" (LocalActions property)</p>
+        
+    <p>List of available values for LocalActions: rename, remove, append, insert, move</p>
+
+    @(
+        Html.X().Menu()
+            .ID("TreeContextMenu")
+            .Items(
+                Html.X().Label()
+                    .Cls("bold-text"),
+
+                Html.X().MenuSeparator(),
+
+                Html.X().MenuItem()
+                    .Text("Edit")
+                    .Icon(Icon.Pencil)
+                    .Handler("App.TreePanel1.editingPlugin.startEdit(App.TreePanel1.menuNode, 0);"),
+                    
+                Html.X().MenuItem()
+                    .Text("Rename to 'TEST'")
+                    .Icon(Icon.Pencil)
+                    .Handler("App.TreePanel1.editNode(App.TreePanel1.menuNode, 'text', 'TEST');"),
+                    
+                Html.X().MenuItem()
+                    .Text("Remove")
+                    .Icon(Icon.Delete)
+                    .Handler("App.TreePanel1.removeNode(App.TreePanel1.menuNode);"),
+                    
+                Html.X().MenuItem()
+                    .Text("Append child")
+                    .Icon(Icon.Add)
+                    .Handler("App.TreePanel1.appendChild(App.TreePanel1.menuNode, 'New');"),
+                    
+                Html.X().MenuItem()
+                    .Text("Insert before this node")
+                    .Icon(Icon.ArrowRight)
+                    .Handler("App.TreePanel1.insertBefore(App.TreePanel1.menuNode, 'New');")
+            )
+            .Listeners(l => {
+                l.Show.Handler = "this.getComponent(0).setText(this.nodeName);";
+            })
+    )
+
+    @(
+        Html.X().TreePanel()
+            .ID("TreePanel1")
+            .Title("TreePanel with CellEditing")
+            .Height(300)
+            .Width(250)
+            .UseArrows(true)
+            .AutoScroll(true)
+            .Mode(TreePanelMode.Remote)
+            .RootVisible(false)
+            .RemoteEditUrl(Url.Action("RemoteEdit"))
+            .RemoteRemoveUrl(Url.Action("RemoteRemove"))
+            .RemoteAppendUrl(Url.Action("RemoteAppend"))
+            .RemoteInsertUrl(Url.Action("RemoteInsert"))
+            .RemoteMoveUrl(Url.Action("RemoteMove"))
+            .Editor(
+                Html.X().TextField()
+            )
+            .Store(
+                Html.X().TreeStore()
+                    .Proxy(
+                        Html.X().AjaxProxy()
+                            .Url(Url.Action("GetNodes"))
+                    )
+                    .Root(
+                        Html.X().Node().NodeID("Root")
+                    )                    
+            )
+            .Listeners(l => {
+                l.ItemContextMenu.Fn = "showMenu";
+                l.ItemContextMenu.StopEvent = true;
+                
+                l.RemoteActionRefusal.Handler = "Ext.Msg.alert('Action refusal', e.message);";
+            })
+            .View(
+                Html.X().TreeView()
+                    .Plugins(
+                        Html.X().TreeViewDragDrop().AllowLeafDrop(true).ContainerScroll(true)
+                    )
+            )
+            .Plugins(
+                Html.X().CellEditing()
+            )
+    )
+    
+    <br />
+
+    @(
+        Html.X().TreePanel()
+            .ID("TreePanel2")
+            .Title("TreePanel with RowEditing")
+            .Height(300)
+            .Width(250)
+            .UseArrows(true)
+            .AutoScroll(true)
+            .Mode(TreePanelMode.Remote)
+            .RootVisible(false)
+            .RemoteEditUrl(Url.Action("RemoteEdit_RowEditing"))            
+            .Fields(
+                new ModelField("number")
+            )
+            .ColumnModel(
+                Html.X().TreeColumn()
+                    .Text("Text")
+                    .Flex(2)
+                    .DataIndex("text")
+                    .Editor(Html.X().TextField().AllowBlank(false)),
+
+                Html.X().Column()
+                    .Text("Number")
+                    .Flex(1)
+                    .DataIndex("number")
+                    .Editor(Html.X().NumberField().AllowBlank(false))
+            )
+            .Root(
+                Html.X().Node()
+                    .Children(
+                        Html.X().Node()
+                            .Leaf(true)
+                            .NodeID("1")
+                            .Text("text 1")
+                            .AttributesObject(new { number = 1 }),
+                            
+                        Html.X().Node()
+                            .Leaf(true)
+                            .NodeID("2")
+                            .Text("text 2")
+                            .AttributesObject(new { number = 2 }),
+                            
+                        Html.X().Node()
+                            .Leaf(true)
+                            .NodeID("3")
+                            .Text("text 3")
+                            .AttributesObject(new { number = 3 }),
+                            
+                        Html.X().Node()
+                            .Leaf(true)
+                            .NodeID("4")
+                            .Text("text 4")
+                            .AttributesObject(new { number = 4 }),
+                            
+                        Html.X().Node()
+                            .Leaf(true)
+                            .NodeID("5")
+                            .Text("text 5")
+                            .AttributesObject(new { number = 5 })
+                    )
+            )
+            .Plugins(
+                Html.X().RowEditing()
+            )
+    )
+}

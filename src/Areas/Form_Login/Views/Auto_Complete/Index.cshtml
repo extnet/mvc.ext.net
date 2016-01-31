@@ -1,0 +1,151 @@
+@{
+    ViewBag.Title = "Login - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        // Invalidate the login fields with the given reason.
+        var invalidateLogin = function(reason) {
+            App.txtUsername.setValidation(reason);
+            App.txtPassword.setValidation(reason);
+            App.txtUsername.validate();
+            App.txtPassword.validate();
+
+            Ext.MessageBox.show({
+                title: 'Authentication error',
+                msg: reason,
+                buttons: Ext.MessageBox.OK,
+                animateTarget: 'Window1',
+                icon: 'Error'
+            });
+        };
+
+        var handleLogin = function () {
+            var form = App.Window1.el.dom;
+
+            App.Window1.close();
+
+            // Restore form submit destinations
+            if (Ext.isIE) {
+                form.action = orgFormAction;
+                form.target = orgFormTarget;
+            }
+
+            // Now this would work for Chrome, and we already triggered autoComplete for IE.
+            // Chrome's is only triggered after the destination page is loaded.
+            form.submit();
+        };
+
+        var orgFormAction, orgFormTarget,
+            btn = null, iframe = null;
+
+        // If we are on IE, we will create a button and click it (at once),
+        // so autoComplete is triggered.
+        var handleClientClick = function () {
+            var form = App.Window1.el.dom;
+
+            if (Ext.isIE) {
+                if (iframe == null) {
+                    iframe = document.createElement("IFRAME");
+                    iframe.name = "ie_login_flush";
+                    form.appendChild(iframe);
+                }
+
+                if (btn == null) {
+                    btn = document.createElement("BUTTON");
+                    btn.type = "submit";
+                    btn.id = "submitButton";
+                    btn.style = "display: none";
+                    orgFormAction = form.action;
+                    form.action = "about:blank";
+                    orgFormTarget = form.target;
+                    form.target = "ie_login_flush";
+                    form.appendChild(btn);
+                }
+
+                // At this time, AutoComplete for IE is triggered.
+                btn.click();
+            }
+        }
+    </script>
+}
+
+@section example 
+{
+    <h1>Logging with browser saving functionality</h1>
+    <p>The valid login/password combination here would be:</p>
+    <p>
+        Username: Ext.NET<br>
+        Password: extnet
+    </p>
+    <p>On successful authentication, you will be redirected to the Desktop example.</p>
+
+    @(
+        X.Window()
+            .ID("Window1")
+            .Closable(false)
+            .Resizable(false)
+            .Height(200)
+            .Icon(Icon.Lock)
+            .Title("Login")
+            .Draggable(true)
+            .Width(350)
+            .Modal(false)
+            .BodyPadding(5)
+            .Layout(LayoutType.Form)
+            .AutoEl(el =>
+            {
+                el.Tag = HtmlTextWriterTag.Form;
+                el.CustomConfig.Add(new ConfigItem()
+                {
+                    Name = "method",
+                    Value = "POST",
+                    Mode = ParameterMode.Value
+                });
+                el.CustomConfig.Add(new ConfigItem()
+                {
+                    Name = "action",
+                    Value = "../../Desktop/Overview/Desktop",
+                    Mode = ParameterMode.Value
+                });
+            })
+            .Items(
+                X.TextField()
+                    .ID("txtUsername")
+                    .Name("username")
+                    .FieldLabel("Username")
+                    .AllowBlank(false)
+                    .BlankText("Your username is required"),
+                X.TextField()
+                    .ID("txtPassword")
+                    .Name("password")
+                    .InputType(Ext.Net.InputType.Password)
+                    .FieldLabel("Password")
+                    .AllowBlank(false)
+                    .BlankText("Your password is required")
+            )
+            .Buttons(
+                X.Button()
+                    .Text("Login")
+                    .Icon(Icon.Accept)
+                    .FormBind(true)
+                    .Handler("handleClientClick")
+                    .DirectEvents(de =>
+                    {
+                        de.Click.Url = Url.Action("Button1_Click");
+                        de.Click.Success = "handleLogin";
+                        de.Click.Failure = "invalidateLogin(result.errorMessage);";
+                        de.Click.ShowWarningOnFailure = false;
+                        de.Click.EventMask.ShowMask = true;
+                        de.Click.EventMask.Msg = "Verifying...";
+                        de.Click.EventMask.MinDelay = 1000;
+
+                        de.Click.ExtraParams.Add(new Parameter("user", "App.txtUsername.value", ParameterMode.Raw));
+                        de.Click.ExtraParams.Add(new Parameter("pass", "App.txtPassword.value", ParameterMode.Raw));
+                    })
+            )
+    )
+}

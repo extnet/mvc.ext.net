@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "B";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+
+@section example
+{
+    @(X.TextField()
+        .ID("TextField1")
+    )
+    
+    @(X.Button()
+        .Text("To the A")
+        .Icon(Icon.ArrowLeft)
+        .Handler("parent.App.Panel1.getBody().App.TextField1.setValue(App.TextField1.getValue());")
+    )
+}

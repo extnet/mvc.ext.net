@@ -1,0 +1,41 @@
+﻿@model Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models.Plant
+@{
+    ViewBag.Title = "Remote paging and sorting";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>Remote paging and sorting</h1>
+
+    @(Html.X().GridPanel()
+            .Title("Plants")
+            .Frame(true)
+            .Height(300)
+            .Store(
+                Html.X().StoreForModel()
+                    .Proxy(Html.X().AjaxProxy()
+                        .Url(Url.Action("Read"))
+                        .Reader(Html.X().JsonReader().RootProperty("data"))
+                    )
+                    .RemoteSort(true)
+                    .PageSize(5)
+                    .SorterFor(Model, m => m.Common, Ext.Net.SortDirection.ASC)
+            )
+            .ColumnModel(
+                Html.X().Column().DataIndex(Model, m => m.Common).Text("Common Name").Flex(1),
+                Html.X().Column().DataIndex(Model, m => m.Botanical).Text("Botanical").Width(230),
+                Html.X().Column().DataIndex(Model, m => m.Light).Text("Light").Width(130),
+                Html.X().Column().DataIndex(Model, m => m.Price).Text("Price").Width(70).Align(Alignment.Right),
+                Html.X().DateColumn().DataIndex(Model, m => m.Availability).Text("Available").Width(95).Format("yyyy-MM-dd"),
+                Html.X().Column().DataIndex(Model, m => m.Indoor).Text("Indoor?").Width(55)
+            )
+            .BottomBar(
+                Html.X().PagingToolbar()
+                    .DisplayInfo(true)
+                    .DisplayMsg("Displaying plants {0} - {1} of {2}")
+                    .EmptyMsg("No plants to display")
+            )
+    )
+}
+

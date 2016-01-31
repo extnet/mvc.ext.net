@@ -1,0 +1,34 @@
+﻿@for (int idx = 1; idx <= 3; idx++)
+{
+    @(Html.X().MenuPanel()
+        .Title("Menu " + idx)
+        .SaveSelection(false)
+        .Menu(m =>
+        {
+            m.Items.AddRange(new[]{
+                new MenuItem{
+                    Text = "Item " + idx + "-1",
+                    Icon = Icon.ApplicationFormAdd
+                },
+                    
+                new MenuItem{
+                    Text = "Item " + idx + "-2",
+                    Icon = Icon.ApplicationFormAdd
+                },
+                    
+                new MenuItem{
+                    Text = "Item " + idx + "-3",
+                    Icon = Icon.ApplicationFormAdd
+                }
+            });
+
+            m.DirectEvents.Click.Before = @"if (!menuItem) { return false; }
+                                            o.extraParams.text = menuItem.text;";
+            m.DirectEvents.Click.Url = Url.Action("LoadView");
+            m.DirectEvents.Click.ExtraParams.Add(new
+            {
+                containerId = "Center1"
+            });
+        })
+    )		 
+}

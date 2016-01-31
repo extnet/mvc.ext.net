@@ -1,0 +1,455 @@
+﻿@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Portal - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayoutNoMgr.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+
+        (function () {
+            var prevWidth = 10000,
+                viewPort,
+                thresholdWidth = 1000,
+                resizeHandler = function (width, height) {
+                    var portal,
+                        menu,
+                        breadcrumb,
+                        wide, 
+                        narrow,
+                        north;
+                    viewPort = viewPort || Ext.ComponentQuery.query("viewport")[0];
+
+                    if (!viewPort) {
+                        return;
+                    }
+                    narrow = width < thresholdWidth && thresholdWidth <= prevWidth;
+                    wide = width >= thresholdWidth && thresholdWidth > prevWidth;
+
+                    if (wide || narrow) {
+                        Ext.suspendLayouts();
+                        portal = viewPort.down("portalpanel");
+                        menu = viewPort.down("#managementMenu");
+                        breadcrumb = viewPort.down("#breadcrumb");
+
+                        if (narrow) {                            
+                            portal.items.each(function(column){
+                                column._columnWidth = column.columnWidth;
+                                column.columnWidth = 1;
+
+                                column.items.each(function(item){
+                                    item._minHeight = item.minHeight;
+                                    item.minHeight = item.minHeight >= 500 ? item.minHeight : 500;
+                                });
+                            });
+
+                            breadcrumb.insert(0, {
+                                xtype : "button",
+                                text : (menu.menu.getComponent(menu.selectedIndex || 0)).text,
+                                menu : {
+                                    items : menu.menu.removeAll(false),
+                                    listeners : {
+                                        click : function (menu, item) {
+                                            this.up("button").setText(item.text);
+                                        }
+                                    }
+                               }                            
+                            });
+
+                            menu.hide();
+                            north = viewPort.down("#north");
+                            north.setHeight(150);
+                            north.getLayout().setActiveItem(1);
+                            north.getComponent(1).add(north.getComponent(0).removeAll(false));                            
+                        }
+                        else if (wide) {                            
+                            portal.items.each(function(column){
+                                column.columnWidth = column._columnWidth;
+
+                                column.items.each(function(item){
+                                    item.minHeight = item._minHeight;
+                                });
+                            });
+
+                            menu.menu.add(breadcrumb.getComponent(0).menu.removeAll(false));
+                            breadcrumb.getComponent(0).destroy();
+                            menu.show();
+                            north = viewPort.down("#north");
+                            north.getLayout().setActiveItem(0);
+                            north.getComponent(0).add(north.getComponent(1).removeAll(false));
+                            north.setHeight(100);
+                        }
+
+                        Ext.resumeLayouts(false);
+                        viewPort.updateLayout();
+                    }                    
+
+                    prevWidth = width;                    
+                };
+
+                Ext.on("resize", resizeHandler, window, {buffer : 100});
+                Ext.net.Bus.subscribe("App.resize", function () {
+                    resizeHandler(Ext.Element.getViewportWidth());
+                });
+        })();
+        
+    </script> 
+}
+
+@section example
+{
+    @X.ResourceManager(this.ViewBag.ManagerConfig as MvcResourceManagerConfig).Theme(Theme.Gray)
+
+    @(X.Viewport()
+        .Layout(LayoutType.VBox)
+        .LayoutConfig(
+            new VBoxLayoutConfig { Align = VBoxAlign.Stretch }
+        )
+        .Listeners(l => {
+            l.AfterLayout.BroadcastOnBus = "App.resize";
+            l.AfterLayout.Single = true;
+        })
+        .Items(
+            X.Panel()
+                .ItemID("north")
+                .Height(100)
+                .Header(false)
+                .Border(false)
+                .TopBar(X.Toolbar().Items(items =>
+                {
+                    items.Add(new ToolbarTextItem { Text = "You are logged in as:" });
+                    items.Add(new Hyperlink { Text = "Jack Smith" });
+
+                    items.Add(new ToolbarSpacer());
+                    items.Add(new ToolbarSeparator());
+                    items.Add(new ToolbarSpacer());
+
+                    items.Add(new Hyperlink { Text = "Logout" });
+
+                    items.Add(new ToolbarSpacer());
+                    items.Add(new ToolbarSeparator());
+                    items.Add(new ToolbarSpacer());
+
+                    items.Add(new Hyperlink { Text = "My Profile" });
+
+                    items.Add(new ToolbarSpacer());
+                    items.Add(new ToolbarSeparator());
+                    items.Add(new ToolbarSpacer());
+
+                    items.Add(new Hyperlink { Text = "Messages (3)" });
+
+                    items.Add(new ToolbarSpacer());
+                    items.Add(new ToolbarSeparator());
+                    items.Add(new ToolbarSpacer());
+
+                    items.Add(new Hyperlink { Text = "Help" });
+
+                    items.Add(new ToolbarFill());
+
+                    items.Add(new Button
+                    {
+                        Text = "My Account",
+                        MarginSpec = "0 20 0 0",
+                        Listeners = {
+                            Click = {
+                                Handler = "Ext.Msg.alert(Ext.getBody().getSize().width.toString());"
+                            }
+                        },
+                        Menu =
+                        {
+                            new Menu{
+                                Items = { 
+                                    new MenuItem { Text =  "Settings", Icon = Icon.Cog },
+                                    new MenuItem { Text =  "About", Icon = Icon.Information }
+                                }
+                            }
+                        }
+                    });
+                }))
+                .Layout(LayoutType.Card)
+                .Items(
+                    X.Container()
+                        .Layout(LayoutType.HBox)
+                        .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle })
+                        .Items(items =>
+                        {
+                            items.Add(new Image
+                            {
+                                ImageUrl = "~/Areas/Portal/Content/companyx_logo.png",
+                                Width = 296,
+                                Height = 72
+                            });
+                            items.Add(X.Container().Flex(1));
+
+                            items.Add(new Container
+                            {
+                                LayoutConfig = {
+                                    new HBoxLayoutConfig {Align = HBoxAlign.Middle, Pack = BoxPack.End}
+                                },
+                                Width = 280,
+                                Height = 40,
+                                Items = { 
+                                    X.TextField()
+                                        .ID("txtSearch")
+                                        .MarginSpec("0 10 0 0")
+                                        .EmptyText("Search...")
+                                        .Width(215),
+                                            
+                                    X.Button()
+                                        .Icon(Icon.Magnifier)
+                                        .MarginSpec("0 20 0 0")
+                                        .OnClientClick("Ext.Msg.notify('Search', 'Term : ' + App.txtSearch.getValue());")    
+                                }
+                            });
+                        }),
+
+                        X.Container()
+                            .Layout(LayoutType.VBox)
+                ),
+            X.TabPanel()
+                .Flex(1)
+                .ActiveTabIndex(1)
+                .Items(
+                    X.Panel()
+                        .Title("Home")
+                        .BodyPadding(10)
+                        .Html("Home Page"),
+                    X.Panel()
+                        .Title("Management")
+                        .Layout(LayoutType.HBox)
+                        .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Stretch })
+                        .Items(
+                            X.MenuPanel()
+                                .ItemID("managementMenu")
+                                .Width(215)
+                                .Border(false)
+                                .SelectedIndex(0)
+                                .Menu(menu =>
+                                {
+                                    menu.Add(new MenuItem { Text = "Dashboard" });
+                                    menu.Add(new MenuItem { Text = "Employees" });
+                                    menu.Add(new MenuItem { Text = "Sales" });
+                                    menu.Add(new MenuItem { Text = "Inventory" });
+                                }),
+                            X.Panel()
+                                .Flex(1)
+                                .Border(false)
+                                .Header(false)
+                                .TopBar(new Toolbar
+                                {
+                                    ItemID = "breadcrumb",
+                                    Items = { 
+                                            new Hyperlink { Text = "Management", MarginSpec = "5 0 5 20" },
+                                            new ToolbarSpacer(),
+                                            new ToolbarTextItem { Text = "/" },
+                                            new ToolbarSpacer(),
+                                            new ToolbarTextItem { Text = "Dashboard" }
+                                            }
+                                })
+                                .Layout(LayoutType.VBox)
+                                .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Stretch })
+                                .Items(
+                                    X.Container()
+                                        .Height(50)
+                                        .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle, })
+                                        .Items(
+                                            X.Label()
+                                                .Text("Dashboard")
+                                                .MarginSpec("0 0 0 20")
+                                                .Height(40)
+                                                .StyleSpec("color:#333; font-size: 24px;"),
+
+                                            X.Container().Flex(1),
+
+                                            X.Button()
+                                                .Text("Dashboard Settings")
+                                                .Icon(Icon.Cog)
+                                                .MarginSpec("0 20 0 0")
+                                        ),
+                                                                    
+                                    X.Portal()
+                                        .Border(false)
+                                        .Flex(1)
+                                        .Items(
+                                            X.PortalColumn()
+                                                .Cls("x-column-padding")
+                                                .MarginSpec("0 10 0 10")
+                                                .Items(
+                                                    X.Portlet()
+                                                        .Title("Status")
+                                                        .Closable(false)
+                                                        .Layout(LayoutType.Fit)
+                                                        .Anchor("100% 50%")
+                                                        .Height(350)
+                                                        .TopBar(new Toolbar
+                                                        {
+                                                            Items = { 
+                                                                new Button { 
+                                                                    Text = "Reload",
+                                                                    Icon = Icon.ArrowRefresh,
+                                                                    OnClientClick = "App.Store1.load()"
+                                                                }
+                                                            }
+                                                        })
+                                                        .Items(
+                                                            Html.X().PolarChart()
+                                                                .Shadow(true)
+                                                                .Border(false)
+                                                                .InnerPadding(20)
+                                                                .StandardTheme(StandardChartTheme.DefaultGradients)
+                                                                .LegendConfig(new ChartLegend
+                                                                {
+                                                                    Dock = Dock.Right
+                                                                })
+                                                                .Series(Html.X().PieSeries()
+                                                                    .AngleField("Data1")
+                                                                    .ShowInLegend(true)
+                                                                    .HighlightMargin(20)
+                                                                    .Label(new ChartLabel
+                                                                    {
+                                                                        Field = new string[] { "Name" },
+                                                                        Display = SeriesLabelDisplay.Rotate,
+                                                                        Font = "18px Arial"
+                                                                    })
+                                                                )
+                                                                .Interactions(
+                                                                    X.ItemHighlightInteraction(),
+                                                                    X.RotateInteraction()
+                                                                )
+                                                                .Store(Html.X().Store()
+                                                                    .ID("Store1")
+                                                                    .Proxy(
+                                                                        Html.X().AjaxProxy()
+                                                                            .Url(Url.Action("GetChartData"))
+                                                                            .ActionMethods(actions =>
+                                                                            {
+                                                                                actions.Read = HttpMethod.POST;
+                                                                            })
+                                                                            .Reader(
+                                                                                Html.X().JsonReader().RootProperty("result")
+                                                                            )
+                                                                    )
+                                                                    .Model(Html.X().Model().Fields("Name", "Data1", "Data2"))
+                                                                )
+                                                        ),
+
+                                                    X.Portlet()
+                                                        .Title("History")
+                                                        .Closable(false)
+                                                        .Layout(LayoutType.Fit)
+                                                        .Anchor("100% 50%")
+                                                        .Height(350)
+                                                        .TopBar(new Toolbar
+                                                        {
+                                                            Items = { 
+                                                                new Button { 
+                                                                    Text = "Reload",
+                                                                    Icon = Icon.ArrowRefresh,
+                                                                    OnClientClick = "App.Store1.load()"
+                                                                }
+                                                            }
+                                                        })
+                                                        .Items(
+                                                            Html.X().CartesianChart()
+                                                                .StoreID("Store1")
+                                                                .Shadow(true)
+                                                                .Border(false)
+                                                                .StyleSpec("background:#fff;")
+                                                                .InsetPadding(10)
+                                                                .StandardTheme(StandardChartTheme.Category1)
+                                                                .LegendConfig(new ChartLegend
+                                                                {
+                                                                    Dock = Dock.Right
+                                                                })
+
+                                                                .Axes(
+                                                                    Html.X().NumericAxis()
+                                                                        .Position(Position.Left)
+                                                                        .Fields(new string[] { "Data1", "Data2" })
+                                                                        .Title("Number of Hits")
+                                                                        .MinorTickSteps(1)
+                                                                        .Minimum(0),
+            
+                                                                    Html.X().CategoryAxis()
+                                                                        .Position(Position.Bottom)
+                                                                        .Fields("Name")
+                                                                        .Title("Month of the Year")
+                                                                )
+                                                                .Series(
+                                                                    Html.X().LineSeries()
+                                                                        .XField("Name")
+                                                                        .YField("Data1")
+                                                                        .HighlightConfig(X.Sprite().Scaling(1.5))
+                                                                        .Marker(X.Sprite().SpriteType(SpriteType.Cross))
+                                                                )
+                                                                .Interactions(Html.X().ItemHighlightInteraction())
+                                                        )
+                                                ),
+
+                                            X.PortalColumn()
+                                                .Cls("x-column-padding")
+                                                .MarginSpec("0 10 0 10")                                                    
+                                                .Items(
+                                                    X.Portlet()
+                                                        .Title("Employees")
+                                                        .Layout(LayoutType.Fit)
+                                                        .Anchor("100% 100%")
+                                                        .Closable(false)
+                                                        .Items(
+                                                            X.GridPanel()
+                                                                .Header(false)
+                                                                .Border(false)
+                                                                .Store(X.Store()
+                                                                    .AutoLoad(true)
+                                                                    .Proxy(
+                                                                        X.AjaxProxy()
+                                                                            .Url(Url.Action("GetPersons"))
+                                                                            .ActionMethods(actions =>
+                                                                            {
+                                                                                actions.Read = HttpMethod.POST;
+                                                                            })
+                                                                            .Reader(
+                                                                                X.JsonReader().RootProperty("result")
+                                                                            )
+                                                                    )
+                                                                    .Model(X.Model()
+                                                                        .Fields(
+                                                                            new ModelField("FirstName"),
+                                                                            new ModelField("LastName"),
+                                                                            new ModelField("Status")
+                                                                        )
+                                                                    )
+
+                                                                )
+                                                                .ColumnModel(
+                                                                    X.Column().Text("Last Name").DataIndex("LastName").Flex(1),
+                                                                    X.Column().Text("First Name").DataIndex("FirstName").Flex(1),
+                                                                    X.Column().Text("Status").DataIndex("Status")
+                                                                )
+                                                        )
+                                                )
+                                        )
+                                )
+                        ),
+
+                    X.Panel()
+                        .Title("Projects")
+                        .BodyPadding(10)
+                        .Html("Projects &amp; Teams")
+                )
+            )
+        )
+    )
+}

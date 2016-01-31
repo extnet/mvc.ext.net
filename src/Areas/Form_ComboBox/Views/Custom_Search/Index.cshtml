@@ -1,0 +1,98 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "ComboBox with Template - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag 
+{
+    <style>
+        .search-item {
+            font          : normal 11px tahoma, arial, helvetica, sans-serif;
+            padding       : 3px 10px 3px 10px;
+            border        : 1px solid #fff;
+            border-bottom : 1px solid #eeeeee;
+            white-space   : normal;
+            color         : #555;
+        }
+        
+        .search-item h3 {
+            display     : block;
+            font        : inherit;
+            font-weight : bold;
+            color       : #222;
+            margin      :0px;
+        }
+
+        .search-item h3 span {
+            float       : right;
+            font-weight : normal;
+            margin      : 0 0 5px 5px;
+            width       : 100px;
+            display     : block;
+            clear       : none;
+        } 
+        
+        p { width: 650px; }
+        
+        .ext-ie .x-form-text { position : static !important; }
+    </style>    
+}
+
+@section example
+{
+    <h1>ComboBox with Templates and AJAX</h1>
+
+    <p>This is a more advanced example demonstrating how to combine Store Paging and a Template to create "live search" functionality.</p>
+    
+    <div style="width:600px;">
+        <div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
+        <div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
+            <h3 style="margin-bottom:5px;">Search the plants</h3>
+
+            @(Html.X().ComboBox()
+                .DisplayField("Common")
+                .ValueField("Common")
+                .TypeAhead(false)
+                .Width(500)
+                .PageSize(10)
+                .HideTrigger(true)
+                .MinChars(0)
+                .TriggerAction(TriggerAction.Query)
+                .ListConfig(Html.X().BoundList()
+                    .LoadingText("Searching...")
+                    .ItemTpl(Html.X().XTemplate()
+                        .Html(@<text>
+                            <div class="search-item">
+							    <h3><span>${Price}</span>{Common}</h3>
+							    {Botanical}
+						    </div>
+                        </text>)
+                    )
+                )
+                .Store(Html.X().Store()
+                    .AutoLoad(false)
+                    .Proxy(Html.X().AjaxProxy()
+                        .Url(Url.Action("GetPlants"))
+                        .ActionMethods(am => am.Read = HttpMethod.POST)
+                        .Reader(Html.X().JsonReader().RootProperty("data"))
+                    )
+                    .Model(Html.X().Model()
+                        .Fields(
+                            Html.X().ModelField().Name("Common"),
+                            Html.X().ModelField().Name("Botanical"),
+                            Html.X().ModelField().Name("Light"),
+                            Html.X().ModelField().Name("Price").Type(ModelFieldType.Float),
+                            Html.X().ModelField().Name("Indoor").Type(ModelFieldType.Boolean)
+                        )
+                    )
+                )
+            )
+            <div style="padding-top:4px;">
+            Plants search (type '*' (asterisk) for showing all)
+        </div>
+        </div></div></div>
+        <div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
+    </div>
+}

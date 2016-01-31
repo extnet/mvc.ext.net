@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Draw Actions - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var onMouseOver = function (sprite, i) {
+            sprite.fx.stop();
+            sprite.setAttributes({ scalingX: 1.1, scalingY: 1.1, cx: 350, cy: 350, duration: 500, easing: "backOut" });
+            sprite.getSurface().get("text" + i).setAttributes({ globalAlpha: 1, duration: 500 });
+            sprite.getSurface().renderFrame();
+        }
+
+        var onMouseOut = function (sprite, i) {
+            sprite.fx.stop();
+            sprite.setAttributes({ scalingX: 1, scalingY: 1, cx: 350, cy: 350, duration: 500, easing: "backIn" });
+            sprite.getSurface().get("text" + i).setAttributes({ globalAlpha: 0, duration: 500 });
+            sprite.getSurface().renderFrame();
+        }
+    </script>
+
+}
+
+@section example
+{
+    @(X.Viewport()
+        .LayoutConfig(new VBoxLayoutConfig() { Align = VBoxAlign.Center, Pack = BoxPack.Center })
+        .Loader(
+            Html.X().ComponentLoader()
+                .AutoLoad(true)
+                .Url(Url.Action("GetChart"))
+                .Mode(LoadMode.Component)
+        )
+    )
+}

@@ -1,0 +1,118 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Infinite Scrolling - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var renderTopic = function(value, p, record) {
+            return Ext.String.format(
+                '<a href="http://sencha.com/forum/showthread.php?t={2}" target="_blank">{0}</a>',
+                value,
+                record.data.forumtitle,
+                record.getId(),
+                record.data.forumid
+            );
+        };
+
+        var groupchange = function(store, groupers) {
+            var sortable = !store.isGrouped(),
+                grid = App.GridPanel1,
+                headers = grid.headerCt.getVisibleGridColumns(),
+                i, 
+                len = headers.length;
+                
+            for (i = 0; i < len; i++) {
+                headers[i].sortable = (headers[i].sortable !== undefined) ? headers[i].sortable : sortable;
+            }
+        };
+
+        // This particular service cannot sort on more than one field, so if grouped, disable sorting
+        var beforeprefetch = function(store, operation) {
+            if (operation.groupers && operation.groupers.length) {
+                delete operation.sorters;
+            }
+        };
+    </script>
+}
+
+@section example
+{    
+    <h1>Infinite Scrolling</h1>
+
+    <p>Introduced with Ext.NET 2, grid supports infinite scrolling, which enables you to load any number of records into a grid without paging.</p>
+        
+    <p>This grid approach uses a virtualized scrolling system to handle potentially infinite data sets without any impact on client side performance.</p>
+
+    @(Html.X().GridPanel()
+        .ID("GridPanel1")
+        .Width(700)
+        .Height(500)
+        .Title("Sencha.com - Browse Forums")
+        .Store(Html.X().Store()
+            .RemoteSort(true)
+            .Buffered(true)
+            .RemoteGroup(true)
+            .LeadingBufferZone(300)
+            .PageSize(100)
+            .Proxy(Html.X().JsonPProxy()
+                .Url("http://www.sencha.com/forum/remote_topics/index.php")
+                .SimpleSortMode(true)
+                .SimpleGroupMode(true)
+                .GroupParam("sort")
+                .GroupDirectionParam("dir")
+                .Reader(Html.X().JsonReader().RootProperty("topics").TotalProperty("totalCount"))
+            )
+            .Model(Html.X().Model()
+                .IDProperty("threadid")
+                .Fields(
+                    new ModelField("title"),
+                    new ModelField("forumtitle"),
+                    new ModelField("forumid"),
+                    new ModelField("author"),
+                    new ModelField("replycount", ModelFieldType.Int),
+                    new ModelField("lastpost", ModelFieldType.Date, "timestamp"),
+                    new ModelField("lastposter"),
+                    new ModelField("excerpt"),
+                    new ModelField("threadid")
+                )
+            )
+            .Sorters("threadid", Ext.Net.SortDirection.ASC)
+            .Listeners(ls =>
+            {
+                ls.GroupChange.Fn = "groupchange";
+                ls.BeforePrefetch.Fn = "beforeprefetch";
+            })
+        )
+        .ColumnModel(
+            Html.X().RowNumbererColumn().Width(50),
+            Html.X().Column()
+                .Text("Topic")
+                .DataIndex("title")
+                .Flex(1)
+                .Renderer("renderTopic"),
+            Html.X().Column()
+                .Text("Author")
+                .DataIndex("author")
+                .Hidden(true),
+            Html.X().Column()
+                .Text("Replies")
+                .DataIndex("replycount")
+                .Width(70)
+                .Align(Alignment.Center)
+                .Sortable(false),
+            Html.X().Column()
+                .Text("Last Post")
+                .DataIndex("lastpost")
+                .Width(130)
+                .Groupable(false)
+                .Renderer(RendererFormat.Date, new string[] { "'n/j/Y g:i A'" })
+        )
+        .View(Html.X().GridView().TrackOver(false))
+        .SelectionModel(Html.X().RowSelectionModel().PruneRemoved(false).Mode(SelectionMode.Multi))
+        .Features(Html.X().Grouping().HideGroupedHeader(false))        
+    )
+}

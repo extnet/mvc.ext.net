@@ -1,0 +1,18 @@
+﻿@model System.Collections.IEnumerable
+
+@(
+    Html.X().GridPanel()
+        .Height(200)
+        .Store(Html.X().Store()
+            .DataSource(Model)
+            .Model(Html.X().Model()
+                .Fields(
+                    Html.X().ModelField().Name("ID"),
+                    Html.X().ModelField().Name("Name")
+                )
+            )
+        )
+        .ColumnModel(
+            Html.X().Column().Text("Products's Name").DataIndex("Name").Width(150)
+        )
+)

@@ -1,0 +1,200 @@
+﻿@model IEnumerable<Ext.Net.MVC.Examples.Areas.GridPanel_Update.Models.AutoSave.TestPerson>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var updateRecord = function (form) {
+            if (form.getForm()._record == null) {
+                return;
+            }
+
+            if (!form.getForm().isValid()) {
+                Ext.net.Notification.show({
+                    iconCls: "icon-exclamation",
+                    html: "Form is invalid",
+                    title: "Error"
+                });
+                return false;
+            }
+
+            form.getForm().updateRecord();
+        };
+
+        var addRecord = function (form, grid) {
+            if (!form.getForm().isValid()) {
+                Ext.net.Notification.show({
+                    iconCls: "icon-exclamation",
+                    html: "Form is invalid",
+                    title: "Error"
+                });
+
+                return false;
+            }
+
+            grid.store.insert(0, new Person(form.getForm().getValues()));
+            form.getForm().reset();
+        };
+
+        var onStoreException = function (proxy, response, operation) {
+            var error = operation.getError(),
+                        message = Ext.isString(error) ? error : ('(' + error.status + ')' + error.statusText);
+
+            Ext.net.Notification.show({
+                iconCls: 'icon-exclamation',
+                html: message + "\n<br /><b>Proxy type:</b> " + proxy.type,
+                title: 'EXCEPTION',
+                autoScroll: true,
+                hideDelay: 5000,
+                width: 300,
+                height: 200
+            });
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>Grid with AutoSave</h1>
+    <p>An Error has been simulated on the server-side: Attempting to update a record having ODD-numbered id will generate this errror. This error can be handled by listening to the "exception" event upon your Store.</p>
+
+    @(Html.X().FormPanelForModel()
+            .ID("UserForm")
+            .Icon(Icon.User)
+            .Frame(true)
+            .Title("User -- All fields are required")
+            .Width(500)
+            .DefaultAnchor("100%")
+            .DefaultButton("1")
+            .FieldDefaults(d =>
+            {
+                d.LabelAlign = LabelAlign.Right;
+            })
+            .Buttons(
+                Html.X().Button()
+                    .Text("Save")
+                    .Icon(Icon.Disk)
+                    .Handler("updateRecord(this.up('form'));"),
+
+                Html.X().Button()
+                    .Text("Create")
+                    .Icon(Icon.UserAdd)
+                    .Handler("addRecord(this.up('form'), App.GridPanel1); this.up('form').defaultButton='1';"),
+
+                Html.X().Button()
+                    .Text("Reset")
+                    .Handler("this.up('form').getForm().reset(); this.up('form').defaultButton='1';")
+            )
+    )
+
+    @(Html.X().GridPanel()
+            .ID("GridPanel1")
+            .Store(
+                Html.X().StoreForModel()
+                    .AutoSync(true)
+                    .ShowWarningOnFailure(false)
+                    .Listeners(l =>
+                    {
+                        l.Exception.Fn = "onStoreException";
+                    })
+                    .SyncUrl(Url.Action("HandleChanges"))
+            )
+            .Icon(Icon.Table)
+            .Frame(true)
+            .Title("Users")
+            .Height(400)
+            .Width(500)
+            .StyleSpec("margin-top: 10px;")
+            .ColumnModel(
+                Html.X().ColumnFor(Model, m => m.Id)
+                    .ToBuilder<Column.Builder>()
+                    .Width(40)
+                    .Renderer("return record.phantom ? '' : value;"),
+
+                Html.X().ColumnFor(Model, m => m.Email)
+                    .ToBuilder<Column.Builder>()
+                    .Flex(1)
+                    .Editor(
+                        Html.X().TextField().AllowBlank(false).StandardVtype(ValidationType.Email)
+                    ),
+
+               Html.X().ColumnFor(Model, m => m.First)
+                    .ToBuilder<Column.Builder>()
+                    .Flex(1)
+                    .Editor(
+                        Html.X().TextField().AllowBlank(false)
+                    ),
+
+               Html.X().ColumnFor(Model, m => m.Last)
+                    .ToBuilder<Column.Builder>()
+                    .Flex(1)
+                    .Editor(
+                        Html.X().TextField().AllowBlank(false)
+                    ),
+
+               Html.X().CommandColumn()
+                   .Width(70)
+                   .Commands(
+                        Html.X().GridCommand()
+                            .Text("Reject")
+                            .ToolTip(t =>
+                            {
+                                t.Text = "Reject row changes";
+                            })
+                            .CommandName("reject")
+                            .Icon(Icon.ArrowUndo)
+                   )
+                   .PrepareToolbar(t =>
+                   {
+                       t.Handler = "toolbar.items.get(0).setVisible(record.dirty);";
+                   })
+                   .Listeners(l =>
+                   {
+                       l.Command.Handler = "record.reject();";
+                   })
+            )
+            .TopBar(
+                Html.X().Toolbar()
+                    .Items(
+                        Html.X().Button()
+                            .Text("Add")
+                            .Icon(Icon.Add)
+                            .Handler("this.up('grid').store.insert(0, new Person());"),
+
+                        Html.X().Button()
+                            .Text("Delete")
+                            .Icon(Icon.Exclamation)
+                            .Handler("this.up('grid').deleteSelected(); App.UserForm.getForm().reset();"),
+
+                        Html.X().ToolbarSeparator(),
+
+                        Html.X().Button()
+                            .Text("Auto Sync")
+                            .EnableToggle(true)
+                            .Pressed(true)
+                            .ToolTip("When enabled, Store will execute Ajax requests as soon as a Record becomes dirty.")
+                            .ToggleHandler("function(b, pressed){this.up('grid').store.autoSync = pressed;}")
+                    )
+            )
+            .SelectionModel(
+                Html.X().RowSelectionModel()
+                    .Mode(SelectionMode.Single)
+                    .Listeners(l =>
+                    {
+                        l.Select.Handler = "App.UserForm.getForm().loadRecord(record); App.UserForm.defaultButton='0';";
+                    })
+            )
+            .Buttons(
+                Html.X().Button()
+                    .Text("Sync")
+                    .Icon(Icon.Disk)
+                    .Handler("this.up('grid').store.sync();")
+            )
+            .Plugins(
+                Html.X().CellEditing()
+            )
+    )
+}

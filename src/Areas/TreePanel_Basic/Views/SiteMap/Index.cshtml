@@ -1,0 +1,73 @@
+﻿@model Ext.Net.Node
+@{
+    ViewBag.Title = "Load SiteMap into TreePanel - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var loadPage = function (tabPanel, record) {
+            var tab = tabPanel.getComponent("node" + record.data.hash);
+
+            if (!tab) {
+                tab = tabPanel.add({
+                    id: "node" + record.data.hash,
+                    title    : record.data.text,
+                    closable : true,
+                    loader : {
+                        url      : record.data.url,
+                        renderer     : "frame",
+                        loadMask : {
+                            showMask : true,
+                            msg  : "Loading " + record.data.url + "..."
+                        }
+                    },
+                    autoScroll : true
+                });                
+            }
+            
+            tabPanel.setActiveTab(tab);
+        };
+    </script>
+}
+
+@section example
+{
+    @(
+        Html.X().Viewport()
+            .Layout(LayoutType.Border)
+            .Items(
+                Html.X().TreePanel()
+                    .Region(Region.West)
+                    .Width(300)
+                    .Title("Site Map - Preload")
+                    .Icon(Icon.ChartOrganisation)
+                    .Listeners(l => {
+                        l.ItemClick.Handler = "if (record.data.url) { loadPage(this.next('tabpanel'), record); return false; }";
+                    })
+                    .RootVisible(false)
+                    .Root(Model),
+                    
+                Html.X().TabPanel()
+                    .Region(Region.Center),
+                    
+                Html.X().TreePanel()
+                    .Region(Region.East)
+                    .Width(300)
+                    .Title("Site Map - Dynamic")
+                    .Icon(Icon.ChartOrganisation)
+                    .Listeners(l => {
+                        l.ItemClick.Handler = "if (record.data.url) { loadPage(this.prev('tabpanel'), record); }";
+                    })
+                    .RootVisible(false)
+                    .Store(
+                        Html.X().TreeStore()
+                            .DefaultRootId("_root")
+                            .Proxy(
+                                Html.X().AjaxProxy().Url(Url.Action("LoadPages"))
+                            )
+                    )    
+            )
+    )
+}

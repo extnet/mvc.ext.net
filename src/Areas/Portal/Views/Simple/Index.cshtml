@@ -1,0 +1,172 @@
+﻿@{
+    ViewBag.Title = "Portal in TabPanel - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script type="text/javascript">
+        var text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed metus nibh, sodales a, porta at, vulputate eget, dui. Pellentesque ut nisl. Maecenas tortor turpis, interdum non, sodales non, iaculis ac, lacus. Vestibulum auctor, tortor quis iaculis malesuada, libero lectus bibendum purus, sit amet tincidunt quam turpis vel lacus. In pellentesque nisl non sem. Suspendisse nunc sem, pretium eget, cursus a, fringilla vel, urna.";
+    </script>
+}
+
+@functions 
+{
+    private void InitPortlet(Portlet portlet) 
+    {
+        portlet.Html = "={text}";
+        portlet.BodyPadding = 5;
+        portlet.CloseAction = CloseAction.Hide;
+        
+        portlet.DirectEvents.Hide.Action =  "PortletHide";
+        portlet.DirectEvents.Hide.EventMask.ShowMask = true;
+        portlet.DirectEvents.Hide.EventMask.Msg = "Saving...";
+        portlet.DirectEvents.Hide.EventMask.MinDelay = 500;
+
+        portlet.DirectEvents.Hide.ExtraParams.Add(new { id = portlet.ClientID });
+    }
+}
+
+@section example
+{
+    @(
+        Html.X().Viewport()
+            .Layout(LayoutType.Border)
+            .Items(
+                Html.X().Panel()
+                    .Region(Region.West)
+                    .Title("West")
+                    .Width(200)
+                    .Collapsible(true)
+                    .Split(true)
+                    .MinWidth(175)
+                    .MaxWidth(400)
+                    .MarginSpec("5 0 5 5")
+                    .Layout(LayoutType.Accordion)
+                    .Items(
+                        Html.X().Panel()
+                            .Collapsed(true)
+                            .Icon(Icon.Note)
+                            .AutoScroll(true)
+                            .Title("Content")
+                            .Html("={text}")
+                            .BodyPadding(5),
+                            
+                        Html.X().Panel()
+                            .Collapsed(true)
+                            .Icon(Icon.FolderWrench)
+                            .AutoScroll(true)
+                            .Title("Settings")
+                            .Html("={text}")
+                            .BodyPadding(5)
+                    ),
+                    
+               Html.X().TabPanel()
+                    .Region(Region.Center)
+                    .Title("TabPanel")
+                    .MarginSpec("5 5 5 0")
+                    .Items(
+                        Html.X().Panel()
+                            .Title("Tab 1")
+                            .Layout(LayoutType.Fit)
+                            .Items(
+                                Html.X().Portal()
+                                    .Items(
+                                        Html.X().PortalColumn()
+                                            .Items(
+                                                Html.X().Portlet()
+                                                    .ID("Portlet1")
+                                                    .Title("Another Panel 1")
+                                                    .Icon(Icon.Accept)
+                                                    .Control(portlet => {
+                                                        this.InitPortlet(portlet);
+                                                    })
+                                            ),
+                                            
+                                        Html.X().PortalColumn()
+                                            .Items(
+                                                Html.X().Portlet()
+                                                    .ID("Portlet2")
+                                                    .Title("Panel 2")
+                                                    .Control(portlet => {
+                                                        this.InitPortlet(portlet);
+                                                    }),
+                                                    
+                                                Html.X().Portlet()
+                                                    .ID("Portlet3")
+                                                    .Title("Another Panel 2")
+                                                    .Control(portlet => {
+                                                        this.InitPortlet(portlet);
+                                                    })
+                                            ),
+                                            
+                                         Html.X().PortalColumn()
+                                            .Items(
+                                                Html.X().Portlet()
+                                                    .ID("Portlet4")
+                                                    .Title("Panel 3")
+                                                    .Control(portlet => {
+                                                        this.InitPortlet(portlet);
+                                                    }),
+                                                    
+                                                Html.X().Portlet()
+                                                    .ID("Portlet5")
+                                                    .Title("Another Panel 3")
+                                                    .Control(portlet => {
+                                                        this.InitPortlet(portlet);
+                                                    })
+                                            )
+                                    )                                    
+                            ),
+                            
+                       Html.X().Panel()
+                            .Title("Tab 2")
+                            .Layout(LayoutType.Fit)
+                            .Items(
+                                Html.X().Portal()
+                                    .Items(
+                                        Html.X().PortalColumn()
+                                            .Items(
+                                                Html.X().Portlet()
+                                                    .ID("Portlet7")
+                                                    .Title("Another Panel 3")
+                                                    .Control(portlet => {
+                                                        this.InitPortlet(portlet);
+                                                    })
+                                            ),
+                                            
+                                        Html.X().PortalColumn()
+                                            .Items(
+                                                Html.X().Portlet()
+                                                    .ID("Portlet8")
+                                                    .Title("Panel 2")
+                                                    .Icon(Icon.Accept)
+                                                    .Control(portlet => {
+                                                        this.InitPortlet(portlet);
+                                                    }),
+                                                    
+                                                Html.X().Portlet()
+                                                    .ID("Portlet9")
+                                                    .Title("Another Panel 2")
+                                                    .Icon(Icon.Accept)
+                                                    .Control(portlet => {
+                                                        this.InitPortlet(portlet);
+                                                    })
+                                            ),
+                                            
+                                         Html.X().PortalColumn()
+                                            .Items(
+                                                Html.X().Portlet()
+                                                    .ID("Portlet10")
+                                                    .Title("Another Panel 1")
+                                                    .Icon(Icon.Accept)
+                                                    .Control(portlet => {
+                                                        this.InitPortlet(portlet);
+                                                    })
+                                            )
+                                    )                                    
+                            )
+                    )
+            )
+    )
+}

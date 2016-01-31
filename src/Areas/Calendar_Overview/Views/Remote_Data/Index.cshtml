@@ -1,0 +1,147 @@
+﻿@model EventModelCollection
+
+@{
+    ViewBag.Title = "Remote Data Calendar - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayoutNoMgr.cshtml";
+}
+
+@section headtag
+{
+    <link rel="stylesheet" href="@Url.Content("~/Areas/Calendar_Overview/Content/css/main.css")" />        
+    <script src="@Url.Content("~/Areas/Calendar_Overview/Content/js/common.js")"></script>
+}
+
+@section example
+{
+    @Html.X().ResourceManager().Namespace("CompanyX")    
+    
+    @(Html.X().Viewport()
+        .Layout("border")
+        .Items(
+            Html.X().Panel()
+                .Height(35)
+                .Border(false)
+                .Region(Region.North)
+                .Cls("app-header")
+                .BodyCls("app-header-content")
+                .Content(
+                    @<text>
+                        <div id="app-logo">
+                            <div class="logo-top">&nbsp;</div>
+                            <div id="logo-body">&nbsp;</div>
+                            <div class="logo-bottom">&nbsp;</div>
+                        </div>
+                        <h1>My Calendar</h1>
+                        <span id="app-msg" class="x-hidden"></span>
+                    </text>),
+            Html.X().Panel()
+                .ID("Panel1")
+                .Title("...")
+                .Layout("border")
+                .Region(Region.Center)
+                .Cls("app-center")
+                .Items(
+                    Html.X().Panel()
+                        .Width(213)
+                        .Region(Region.West)
+                        .Border(false)
+                        .Cls("app-west")
+                        .Items(
+                            Html.X().DatePicker()
+                                .ID("DatePicker1")
+                                .Cls("ext-cal-nav-picker")
+                                .Listeners(events =>
+                                    {
+                                        events.Select.Fn = "CompanyX.setStartDate";
+                                        events.Select.Scope = "CompanyX";
+                                    })
+                        )
+                        .TopBar(Html.X().Toolbar()
+                            .Items(Html.X().Button()
+                                .Text("Save All Events")
+                                .Icon(Icon.Disk)
+                                .Handler("CompanyX.record.saveAll")
+                            )
+                        ),
+                    Html.X().CalendarPanel()
+                        .ID("CalendarPanel1")
+                        .Region(Region.Center)
+                        .ActiveIndex(2)
+                        .Border(false)
+                        .EventStore(Html.X().EventStore()
+                            .ID("EventStore1")
+                            .NoMappings(true)
+                            .Proxy(Html.X().AjaxProxy()
+                                .Url(Url.Action("GetEvents"))
+                                .Reader(Html.X().JsonReader().RootProperty("data"))
+                            )
+                            .Listeners(events =>
+                                events.BeforeSync.Handler = @"Ext.Msg.alert('Sync', 'The EventStore initiates a sync request after that action. The EventStore synchronization is not implemented in that example.');
+                                                              this.commitChanges();
+                                                              return false;"
+                            )
+                            .CustomConfig(cc => cc.Add(new { submitDataUrl = Url.Action("SubmitData") }))
+                        )
+                        .CalendarStore(Html.X().CalendarStore()
+                            .ID("CalendarStore1")
+                            .Calendars(
+                                new CalendarModel() { CalendarId = 1, Title = "Home" },
+                                new CalendarModel() { CalendarId = 2, Title = "Work" },
+                                new CalendarModel() { CalendarId = 3, Title = "School" }
+                            )
+                        )
+                        // Setting enableFx to false is a workaround for #833
+                        .MonthView(Html.X().MonthView()
+                            .ShowHeader(true)
+                            .ShowWeekLinks(true)
+                            .ShowWeekNumbers(true)
+                            .EnableFx(false)
+                        )
+                        .WeekView(Html.X().WeekView()
+                            .CustomConfig(cc => cc.Add(new { enableFx = false }))
+                        )
+                        .DayView(Html.X().DayView()
+                            .CustomConfig(cc => cc.Add(new { enableFx = false }))
+                        )
+                        .Listeners(events =>
+                        {
+                            events.ViewChange.Fn = "CompanyX.viewChange";
+                            events.ViewChange.Scope = "CompanyX";
+                            events.EventClick.Fn = "CompanyX.record.show";
+                            events.EventClick.Scope = "CompanyX";
+                            events.DayClick.Fn = "CompanyX.dayClick";
+                            events.DayClick.Scope = "CompanyX";
+                            events.RangeSelect.Fn = "CompanyX.rangeSelect";
+                            events.RangeSelect.Scope = "CompanyX";
+                            events.EventMove.Fn = "CompanyX.record.move";
+                            events.EventMove.Scope = "CompanyX";
+                            events.EventResize.Fn = "CompanyX.record.resize";
+                            events.EventResize.Scope = "CompanyX";
+                            events.EventAdd.Fn = "CompanyX.record.addFromEventDetailsForm";
+                            events.EventAdd.Scope = "CompanyX";
+                            events.EventUpdate.Fn = "CompanyX.record.updateFromEventDetailsForm";
+                            events.EventUpdate.Scope = "CompanyX";
+                            events.EventDelete.Fn = "CompanyX.record.removeFromEventDetailsForm";
+                            events.EventDelete.Scope = "CompanyX";
+                        })
+                )
+        )
+    )
+
+    @(Html.X().EventWindow()
+        .ID("EventWindow1")
+        .Hidden(true)
+        .CalendarStoreID("CalendarStore1")
+        .Listeners(events =>
+        {
+            events.EventAdd.Fn = "CompanyX.record.add";
+            events.EventAdd.Scope = "CompanyX";
+            events.EventUpdate.Fn = "CompanyX.record.update";
+            events.EventUpdate.Scope = "CompanyX";
+            events.EditDetails.Fn = "CompanyX.record.edit";
+            events.EditDetails.Scope = "CompanyX";
+            events.EventDelete.Fn = "CompanyX.record.remove";
+            events.EventDelete.Scope = "CompanyX";
+        })
+    )
+}

@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Animation playground - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(X.Viewport()
+        .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Center, Pack = BoxPack.Center })
+        .Items(
+            X.Panel()
+                .Border(false)
+                .Header(false)
+                .Width(640)
+                .Height(480)
+                .Layout(LayoutType.Fit)
+                .BodyStyle("background:transparent;")
+                .ButtonAlign(Alignment.Center)
+                .Items(
+                    X.DrawContainer()
+                        .ID("Canvas")
+                        .Items(
+                            X.RectSprite()
+                                .X(0)
+                                .Y(0)
+                                .FillStyle("#CECECE")
+                                .Radius(10)
+                                .Width(640)
+                                .Height(480),
+                            
+                            X.CircleSprite()
+                                .SpriteID("circle")
+                                .CX(320)
+                                .CY(240)
+                                .FillStyle("#000")
+                                .Radius(60)
+                        )
+                )
+                .FooterBar(
+                    X.Toolbar()
+                        .Items(
+                            X.TextField()
+                                .ID("toConfig")
+                                .Width(400)
+                                .Text("{fill: '#223fa3', stroke: '#000', 'stroke-width': 80, 'stroke-opacity': 0.5}"),
+                                
+                            X.NumberField()
+                                .ID("duration")
+                                .Number(2000)
+                                .Width(70),
+                                
+                            X.Button()
+                                .Text("Run")
+                                .Handler(@"
+                                    try {
+                                        #{Canvas}.getSurface().get('circle').setAttributes(Ext.apply(Ext.decode(#{toConfig}.getValue()), {duration: #{duration}.getValue()}));
+                                        #{Canvas}.getSurface().renderFrame();
+
+
+                                    } catch (e) {
+                                        alert(e.message || e);
+                                    }")
+                        )
+                )
+        )
+    )
+
+}

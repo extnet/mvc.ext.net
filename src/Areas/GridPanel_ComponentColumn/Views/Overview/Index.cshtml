@@ -1,0 +1,159 @@
+@model System.Collections.IEnumerable
+           
+@using System.Collections.Generic
+
+@{
+    ViewBag.Title = "ComponentColumn Overview - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var bindWidgets = function (column, cmp, record) {
+            var status = record.get('Status'),
+                statusLbl = cmp.down('#Status'),
+                progressWidget = cmp.down('#Progress'),
+                triggerButton = cmp.down('#Trigger'); 
+
+            // 0 - Ready to run
+            // 1 - Starting
+            // 2 - Executing
+            // 3 - Complete
+
+            cmp.suspendLayout = true;
+            
+            statusLbl.setVisible(status == 1 || status == 3);            
+            triggerButton.setVisible(status == 0);
+            progressWidget.setVisible(status == 2);
+
+            if (status == 2) {
+                progressWidget.updateProgress(record.get('Progress'), "Executing...", false);
+            }
+
+            if (status == 1 || status == 3) {
+                statusLbl.setText(status == 1 ? "Starting..." : "Complete");
+            }
+
+            cmp.suspendLayout = false;
+            cmp.doLayout();
+        };
+
+        var hasPendingTasks = function (store) {
+            var has = false;
+
+            store.each(function (record) {
+                var status = record.get('Status');
+                if (status == 1 || status == 2) {
+                    has = true;
+                    return false;
+                }
+            });
+
+            return has;
+        };
+
+        var filterTask = function (record) {
+            return record.get('Status') == 1 || record.get('Status') == 2;
+        };
+
+        var onTaskUpdate = function () {
+            return hasPendingTasks(App.StoreTasks) ? true : Ext.net.TaskResponse.stopAjax;
+        };
+    </script>
+}
+
+@section example
+{    
+    <h1>ComponentColumn Overview</h1>
+    
+    @(Html.X().GridPanel()
+        .Title("ComponentColumn Overview")
+        .Width(320)
+        .Height(180)
+        .Store(Html.X().Store()
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("Index", ModelFieldType.Int),
+                    new ModelField("Percentage", ModelFieldType.Float)
+                )
+            )
+            .DataSource(Model.Cast<object[]>().ElementAt(0))
+        )
+        .ColumnModel(
+            Html.X().RowNumbererColumn(),
+            
+            Html.X().ComponentColumn()
+                .Component(Html.X().ProgressBar().Text("Progress"))
+                .Listeners(ls => ls.Bind.Handler = "cmp.updateProgress(record.get('Percentage'));"),
+                
+            Html.X().ComponentColumn()
+                .OverOnly(true)
+                .Width(180)
+                .Component(Html.X().Container()
+                        .Layout("hbox")
+                        .Items(
+                            Html.X().Button().Text("Button 1").Icon(Icon.Add),
+                            Html.X().Button().Text("Button 2").Icon(Icon.Decline)
+                        )
+                    )
+                .Renderer("metadata.style='color:gray;'; return 'Move mouse here';")
+        )
+    )
+
+    <br />
+    <h3>Tasks Emulation</h3>
+    <br />
+
+    @(Html.X().GridPanel()
+        .Title("Tasks")
+        .Width(320)
+        .Height(190)
+        .Bin(Html.X().TaskManager()
+            .Tasks(Html.X().Task()
+                .WaitPreviousRequest(true)
+                .Interval(1000)
+                .Listeners(ls =>
+                    ls.Update.Fn = "onTaskUpdate"
+                )
+                .DirectEvents(des =>
+                {
+                    des.Update.Url = Url.Action("DoTasks");
+                    des.Update.ExtraParams.Add(new { tasks = new JRawValue("App.StoreTasks.getRecordsValues({filterRecord: filterTask})") });
+                               
+                })
+            )
+        )
+        .Store(Html.X().Store()
+            .ID("StoreTasks")
+            .Model(Html.X().Model()
+                .IDProperty("TaskID")
+                .Fields(
+                    new ModelField("TaskID", ModelFieldType.Int),
+                    new ModelField("TaskName", ModelFieldType.String),
+                    new ModelField("Progress", ModelFieldType.Float),
+                    new ModelField("Status", ModelFieldType.Int)
+                )
+            )
+            .DataSource(Model.Cast<object[]>().ElementAt(1))
+        )
+        .ColumnModel(
+            Html.X().RowNumbererColumn(),
+            Html.X().Column().Text("Task").DataIndex("TaskName"),
+            Html.X().ComponentColumn()
+                .Flex(1)
+                .Component(Html.X().Container()
+                    .Items(
+                        Html.X().Label().ItemID("Status"),
+                        Html.X().ProgressBar().ItemID("Progress"),
+                        Html.X().Button()
+                            .Text("Run")
+                            .ItemID("Trigger")
+                            .Listeners(ls => ls.Click.Handler = "this.ownerCt.record.set('Status', 1);")
+                            
+                    )
+                )
+                .Listeners(ls => ls.Bind.Fn = "bindWidgets")
+        )
+    )
+}

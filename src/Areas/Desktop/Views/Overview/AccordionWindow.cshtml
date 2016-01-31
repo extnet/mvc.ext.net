@@ -1,0 +1,123 @@
+﻿<script>
+    var mimicRemoteLoading = function () {
+        var tree = this.up('treepanel');
+        tree.setLoading(true, tree.body);
+
+        var root = tree.getRootNode();
+        
+        root.collapseChildren(true, false);
+        
+        Ext.Function.defer(function () { // mimic a server call
+            tree.setLoading(false);
+            root.expand(true, true);
+        }, 1000);
+    };
+</script>
+
+@(
+ Html.X().DesktopModuleProxy()
+        .Module(
+            Html.X().DesktopModule()
+                .ModuleID("acc-win")
+                .Shortcut(
+                    Html.X().DesktopShortcut()
+                        .Name("Accordion Window")
+                        .IconCls("x-im-shortcut")
+                        .QTip("List of Online Users")
+                        .SortIndex(0)
+                )
+                .Launcher(
+                    Html.X().MenuItem()
+                        .Text("Accordion Window")
+                        .Icon(Icon.User)
+                )
+                .Window(
+                    Html.X().Window()
+                        .Width(250)
+                        .Height(400)
+                        .Layout(LayoutType.Accordion)
+                        .Title("Accordion Window")
+                        .TopBar(
+                            Html.X().Toolbar()
+                                .UIName("plain")
+                                .Items(
+                                    Html.X().Button()
+                                        .Icon(Icon.Connect)
+                                        .QTipCfg(qtip => {
+                                            qtip.Title = "Rich Tooltips";
+                                            qtip.Text = "Let your users know what they can do!";
+                                        }),
+                                        
+                                    Html.X().ToolbarSeparator(),
+                                    
+                                    Html.X().Button()
+                                        .Icon(Icon.UserAdd)
+                                        .ToolTip("Add a new user"),
+                                        
+                                    Html.X().Button()
+                                        .Icon(Icon.UserDelete)
+                                        .ToolTip("Remove the selected user")
+                                )
+                        )
+                        .Items(
+                            Html.X().TreePanel()
+                                .RootVisible(false)
+                                .Lines(false)
+                                .AutoScroll(true)
+                                .Title("Online Users")
+                                .Tools(
+                                    Html.X().Tool()
+                                        .Type(ToolType.Refresh)
+                                        .Fn("mimicRemoteLoading")
+                                )
+                                .Store(
+                                    Html.X().TreeStore()
+                                        .Root(
+                                            Html.X().Node()
+                                                .Text("Online")
+                                                .Expanded(true)
+                                                .Children(
+                                                    Html.X().Node()
+                                                        .Text("Friends")    
+                                                        .Expanded(true)
+                                                        .Children(
+                                                            Html.X().Node().Text("Brian").Icon(Icon.User).Leaf(true),
+                                                            Html.X().Node().Text("Kevin").Icon(Icon.User).Leaf(true),
+                                                            Html.X().Node().Text("Mark").Icon(Icon.User).Leaf(true),
+                                                            Html.X().Node().Text("Matt").Icon(Icon.User).Leaf(true),
+                                                            Html.X().Node().Text("Michael").Icon(Icon.User).Leaf(true),
+                                                            Html.X().Node().Text("Mike Jr").Icon(Icon.User).Leaf(true),
+                                                            Html.X().Node().Text("Mike Sr").Icon(Icon.User).Leaf(true),
+                                                            Html.X().Node().Text("JR").Icon(Icon.User).Leaf(true),
+                                                            Html.X().Node().Text("Rich").Icon(Icon.User).Leaf(true),
+                                                            Html.X().Node().Text("Brent").Icon(Icon.User).Leaf(true),
+                                                            Html.X().Node().Text("Zac").Icon(Icon.User).Leaf(true)
+                                                        ),
+                                                        
+                                                   Html.X().Node()
+                                                        .Text("Family")    
+                                                        .Expanded(true)
+                                                        .Children(
+                                                            Html.X().Node().Text("Kiana").Icon(Icon.UserFemale).Leaf(true),
+                                                            Html.X().Node().Text("Aubrey").Icon(Icon.UserFemale).Leaf(true),
+                                                            Html.X().Node().Text("Cale").Icon(Icon.UserGreen).Leaf(true)
+                                                        )     
+                                                )
+                                        )
+                                ),
+                                
+                            Html.X().Panel()
+                                .Title("Settings")
+                                .Html("<p>Something useful would be in here.</p>"),
+                                
+                            Html.X().Panel()
+                                .Title("Even More Stuff")
+                                .Html("<p>Something useful would be in here.</p>"),
+                                
+                            Html.X().Panel()
+                                .Title("My Stuff")
+                                .Html("<p>Something useful would be in here.</p>")
+                        )
+                )
+        )
+)

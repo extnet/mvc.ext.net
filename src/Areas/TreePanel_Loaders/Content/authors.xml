@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Authors>
+    <Author name="Author 1">
+        <blog url="http://ext.net/blogs/author1/" />
+    </Author>
+    <Author name="Author 2">
+        <blog url="http://ext.net/blogs/author2/" />
+    </Author>
+    <Author name="Author 3">
+        <blog url="http://ext.net/blogs/author3/" />
+    </Author>
+    <Author name="Author 4">
+        <blog url="http://ext.net/blogs/author4/" />
+    </Author>
+</Authors>

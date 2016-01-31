@@ -1,0 +1,119 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Basic Row Command - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+
+        var prepare = function (grid, command, record, row, col, value) {
+            if (value < 0 && command.command == "Dollar") {
+                command.hidden = true;
+                command.hideMode = "visibility";
+            }
+        };
+
+        var onCommand = function (column, command, record, recordIndex, cellIndex) {
+            Ext.Msg.alert('Command', 'Command = '+ command + '<br/>'+ 'Column = ' + column.gridRef.columns[cellIndex].dataIndex);
+        };
+    </script>
+}
+
+@section example
+{    
+    @(Html.X().GridPanel()
+        .Title("Cell commands")
+        .Width(700)
+        .Height(300)
+        .Store(Html.X().Store()
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("company"),
+                    new ModelField("price", ModelFieldType.Float),
+                    new ModelField("change", ModelFieldType.Float),
+                    new ModelField("pctChange", ModelFieldType.Float)
+                )
+            )
+            .DataSource(Model)
+        )
+        .ColumnModel(
+            Html.X().Column()
+                .Text("Company")
+                .DataIndex("company")
+                .Flex(1)
+                .Commands(Html.X().ImageCommand()
+                    .CommandName("Edit")
+                    .Icon(Icon.NoteEdit)
+                    .Text("Edit")
+                    .ToolTip(tt => tt.Text = "Edit")  
+                )
+                .Listeners(ls =>
+                    ls.Command.Fn = "onCommand"
+                ),
+                
+            Html.X().Column()
+                .Text("Price")
+                .DataIndex("price")
+                .Align(Alignment.Right)
+                .RightCommandAlign(false)
+                .Renderer(RendererFormat.UsMoney)
+                .Commands(
+                    Html.X().ImageCommand()
+                        .CommandName("Dollar")
+                        .Icon(Icon.MoneyDollar),
+                    
+                    Html.X().ImageCommand()
+                        .CommandName("Euro")
+                        .Icon(Icon.MoneyEuro)
+                )
+                .Listeners(ls =>
+                    ls.Command.Fn = "onCommand"
+                ),
+                
+            Html.X().Column()
+                .Text("Change")
+                .DataIndex("change")
+                .Align(Alignment.Right)
+                .RightCommandAlign(false)
+                .Renderer("change")
+                .Commands(
+                    Html.X().ImageCommand()
+                        .CommandName("Dollar")
+                        .Icon(Icon.MoneyDollar),
+                        
+                    Html.X().ImageCommand()
+                        .CommandName("Euro")
+                        .Icon(Icon.MoneyEuro)
+                )
+                .Listeners(ls =>
+                    ls.Command.Fn = "onCommand"
+                ),
+            Html.X().Column()
+                .Text("Change")
+                .DataIndex("pctChange")
+                .Align(Alignment.Right)
+                .Renderer("pctChange")
+                .Commands(Html.X().ImageCommand()
+                    .CommandName("Chart")
+                    .Icon(Icon.ChartBar)
+                    .Style("margin-left:5px !important;")
+                )
+                .Listeners(ls =>
+                    ls.Command.Fn = "onCommand"
+                )
+        )
+        .SelectionModel(Html.X().RowSelectionModel().Mode(SelectionMode.Multi))
+    )   
+}

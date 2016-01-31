@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Setting Html and Loader Properties - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+
+@section example
+{
+    <h1>Setting Html and Loader Properties</h1>
+    
+    <h2>Html Property</h2>
+    
+    <p>Setting the &lt;Content> region or setting the .Html property will add the text directly to the "body" of the Panel.</p>
+    
+    @(X.Panel()
+        .ID("Panel1")
+        .Width(350)
+        .Height(200)
+        .Title("Html")
+        .BodyPadding(5)
+        .Content(c => DateTime.Now.ToLongTimeString())
+        .Buttons(
+            X.Button()
+                .Text("Set Html Property")
+                .DirectEvents(de => {
+                    de.Click.Url = Url.Action("SetHtmlProperty");
+                    de.Click.ExtraParams.Add(new Parameter("containerId", "Panel1"));
+                })
+        )
+    )
+    
+    <h2>Loader with Html Mode</h2>
+    
+    @(X.Panel()
+        .ID("Panel2")
+        .Width(350)
+        .Height(200)
+        .Title("Html Mode")
+        .BodyPadding(5)
+        .Loader(X.ComponentLoader()
+            .Url(Url.Action("RenderChild"))
+            .Mode(LoadMode.Html)
+            .LoadMask(lm => lm.ShowMask = true)
+        )
+        .Buttons(
+            X.Button()
+                .Text("Set Property")
+                .DirectEvents(de => {
+                    de.Click.Url = Url.Action("SetLoaderProperty");
+                    de.Click.Method = HttpMethod.GET;
+                    de.Click.ExtraParams.Add(new Parameter("containerId", "Panel2"));
+                }),
+                
+            X.Button()
+                .Text("Load")
+                .DirectEvents(de => {
+                    de.Click.Url = Url.Action("LoadHtmlContent");
+                    de.Click.ExtraParams.Add(new Parameter("containerId", "Panel2"));
+                })
+        )
+    )
+
+    <h2>Loader with Frame Mode</h2>
+    
+    @(X.Panel()
+        .ID("Panel3")
+        .Width(350)
+        .Height(200)
+        .Title("Frame Mode")
+        .Loader(X.ComponentLoader()
+            .Url(Url.Action("RenderChild"))
+            .Mode(LoadMode.Frame)
+            .LoadMask(lm => lm.ShowMask = true)
+        )
+        .Buttons(
+            X.Button()
+                .Text("Set Property")
+                .DirectEvents(de => {
+                    de.Click.Url = Url.Action("SetIFrameLoadProperty");
+                    de.Click.Method = HttpMethod.GET;
+                    de.Click.ExtraParams.Add(new Parameter("containerId", "Panel3"));
+                }),
+            
+            X.Button()
+                .Text("Load")
+                .DirectEvents(de => {
+                    de.Click.Url = Url.Action("LoadIFrameContent");
+                    de.Click.ExtraParams.Add(new Parameter("containerId", "Panel3"));
+                })
+        )
+    )
+}

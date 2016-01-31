@@ -1,0 +1,68 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Data Prepare - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+            var prepareCity = function (value, record) {
+                return record.get('Address').City;
+            };
+
+            var prepareStreet = function (value, record) {
+                return record.get('Address').StreetAddress;
+            };
+    </script>
+}
+
+@section example
+{    
+    @(Html.X().GridPanel()
+        .Title("Customers")
+        .Width(630)
+        .Height(300)
+        .Store(Html.X().Store()
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("ID", ModelFieldType.Int),
+                    new ModelField("FirstName"),
+                    new ModelField("LastName"),
+                    new ModelField("Company"),
+                    new ModelField()
+                    {
+                        Name = "Address",
+                        Type = ModelFieldType.Object
+                    },
+                    new ModelField()
+                    {
+                        Name = "City",
+                        Convert =
+                        {
+                            Fn = "prepareCity"    
+                        }
+                    },
+                    new ModelField()
+                    {
+                        Name = "Street",
+                        Convert =
+                        {
+                            Fn = "prepareStreet"
+                        }
+                    }
+                )
+            )
+            .DataSource(Model)
+        )
+        .ColumnModel(
+            Html.X().Column().Text("ID").DataIndex("ID"),
+            Html.X().Column().Text("FirstName").DataIndex("FirstName"),
+            Html.X().Column().Text("LastName").DataIndex("LastName"),
+            Html.X().Column().Text("Company").DataIndex("Company"),
+            Html.X().Column().Text("City").DataIndex("City"),
+            Html.X().Column().Text("Street").DataIndex("Street")
+        )
+    )
+}

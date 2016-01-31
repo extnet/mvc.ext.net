@@ -1,0 +1,57 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Simple Array Grid - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <style>
+        .x-grid-row-over .x-grid-cell-inner {
+            font-weight : bold;
+        }
+    </style>
+
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+    </script>  
+}
+
+@section example
+{    
+    <h1>Simple Array Grid</h1>
+
+    @(Html.X().GridPanel()
+        .Title("Array Grid")
+        .Width(600)
+        .Height(350)
+        .Store(Html.X().Store()
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("company"),
+                    new ModelField("price", ModelFieldType.Float),
+                    new ModelField("change", ModelFieldType.Float),
+                    new ModelField("pctChange", ModelFieldType.Float),
+                    new ModelField("lastChange", ModelFieldType.Date, "M/d hh:mmtt")
+                )
+            )
+            .DataSource(Model)
+        )
+        .ColumnModel(
+            Html.X().Column().Text("Company").DataIndex("company").Flex(1),
+            Html.X().Column().Text("Price").DataIndex("price").Renderer(RendererFormat.UsMoney),
+            Html.X().Column().Text("Change").DataIndex("change").Renderer("change"),
+            Html.X().Column().Text("Change").DataIndex("pctChange").Renderer("pctChange"),
+            Html.X().DateColumn().Text("Last Updated").DataIndex("lastChange")
+        )
+    )
+}

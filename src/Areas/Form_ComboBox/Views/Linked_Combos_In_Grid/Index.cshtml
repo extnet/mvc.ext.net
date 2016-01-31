@@ -1,0 +1,186 @@
+@model System.Collections.IEnumerable[]
+
+@{
+    ViewBag.Title = "ComboBox with Template - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag 
+{
+    <script>
+        var beforeEdit = function (ed, e) {
+            var field = this.getEditor(e.record, e.column).field;
+            
+            switch(e.field) {
+                case "state":
+                    field.allQuery = e.record.get('country');
+                    break;
+                case "city":
+                    field.allQuery = e.record.get('state');
+                    break;
+                case "region":
+                    field.allQuery = e.record.get('city');
+                    break;
+            }
+        };
+    </script>
+}
+
+@section example
+{
+    @(X.Store()
+        .ID("CountryStore")
+        .Model(X.Model()
+            .Fields(X.ModelField()
+                .Name("text")
+                .ServerMapping("Text")
+                .Type(ModelFieldType.String)
+            )
+        )
+        .DataSource(Model[1])
+    )
+
+    @(X.Store()
+        .ID("StateStore")
+        .Model(X.Model()
+            .Fields(X.ModelField()
+                .Name("text")
+                .Mapping("Text")
+                .Type(ModelFieldType.String)
+            )
+        )
+        .Proxy(X.AjaxProxy()
+            .Url(Url.Action("GetStates"))
+            .Reader(X.JsonReader().RootProperty("data"))
+        )
+    )
+
+    @(X.Store()
+        .ID("CityStore")
+        .Model(X.Model()
+            .Fields(X.ModelField()
+                .Name("text")
+                .Mapping("Text")
+                .Type(ModelFieldType.String)
+            )
+        )
+        .Proxy(X.AjaxProxy()
+            .Url(Url.Action("GetCities"))
+            .Reader(X.JsonReader().RootProperty("data"))
+        )
+    )
+
+    @(X.Store()
+        .ID("RegionStore")
+        .Model(X.Model()
+            .Fields(X.ModelField()
+                .Name("text")
+                .Mapping("Text")
+                .Type(ModelFieldType.String)
+            )
+        )
+        .Proxy(X.AjaxProxy()
+            .Url(Url.Action("GetRegions"))
+            .Reader(X.JsonReader().RootProperty("data"))
+        )
+    )
+
+    @(X.GridPanel()
+        .ID("GridPanel1")
+        .Height(300)
+        .Width(600)
+        .Title("Grid")
+        .ForceFit(true)
+        .Store(X.Store()
+            .ID("Store1")
+            .Model(X.Model()
+                .Fields(
+                    X.ModelField()
+                        .Name("country")
+                        .ServerMapping("Country")
+                        .Type(ModelFieldType.String),
+
+                    X.ModelField()
+                        .Name("state")
+                        .ServerMapping("State")
+                        .Type(ModelFieldType.String),
+
+                    X.ModelField()
+                        .Name("city")
+                        .ServerMapping("City")
+                        .Type(ModelFieldType.String),
+
+                    X.ModelField()
+                        .Name("region")
+                        .ServerMapping("Region")
+                        .Type(ModelFieldType.String)
+                )
+            )
+            .DataSource(Model[0])
+        )
+        .ColumnModel(
+            X.Column()
+                .DataIndex("country")
+                .Text("Country")
+                .Editor(X.ComboBox()
+                    .QueryMode(DataLoadMode.Local)
+                    .TriggerAction(TriggerAction.All)
+                    .StoreID("CountryStore")
+                    .ValueField("text")
+                    .DisplayField("text")
+                ),
+
+            X.Column()
+                .DataIndex("state")
+                .Text("State")
+                .Editor(X.ComboBox()
+                    .QueryMode(DataLoadMode.Remote)
+                    .TriggerAction(TriggerAction.All)
+                    .StoreID("StateStore")
+                    .ValueField("text")
+                    .DisplayField("text")
+                    .CustomConfig(cc => cc.Add(new ConfigItem { Name = "initQuery", Value = "Ext.emptyFn", Mode = ParameterMode.Raw }))
+                ),
+                
+            X.Column()
+                .DataIndex("city")
+                .Text("City")
+                .Editor(X.ComboBox()
+                    .QueryMode(DataLoadMode.Remote)
+                    .TriggerAction(TriggerAction.All)
+                    .StoreID("CityStore")
+                    .ValueField("text")
+                    .DisplayField("text")
+                    .CustomConfig(cc => cc.Add(new ConfigItem { Name = "initQuery", Value = "Ext.emptyFn", Mode = ParameterMode.Raw }))
+                ),
+                
+            X.Column()
+                .DataIndex("region")
+                .Text("Region")
+                .Editor(X.ComboBox()
+                    .QueryMode(DataLoadMode.Remote)
+                    .TriggerAction(TriggerAction.All)
+                    .StoreID("RegionStore")
+                    .ValueField("text")
+                    .DisplayField("text")
+                    .CustomConfig(cc => cc.Add(new ConfigItem { Name = "initQuery", Value = "Ext.emptyFn", Mode = ParameterMode.Raw }))
+                )
+        )
+        .Plugins(X.CellEditing()
+            .Listeners(events => events.BeforeEdit.Fn = "beforeEdit")
+            .DirectEvents(events => 
+            {
+                events.Edit.Action = "Edit";
+                events.Edit.EventMask.ShowMask = true;
+                events.Edit.EventMask.Target = MaskTarget.CustomTarget;
+                events.Edit.EventMask.CustomTarget = "App.GridPanel1";
+                events.Edit.Before = "return e.value !== e.originalValue;";
+                events.Edit.ExtraParams.Add(new Parameter { Name = "field", Value = "e.field", Mode = ParameterMode.Raw });
+                events.Edit.ExtraParams.Add(new Parameter { Name = "index", Value = "e.rowIdx", Mode = ParameterMode.Raw });
+                events.Edit.ExtraParams.Add(new Parameter { Name = "recordData", Value = "e.record.data", Mode = ParameterMode.Raw });
+            })
+        )
+
+    )
+}

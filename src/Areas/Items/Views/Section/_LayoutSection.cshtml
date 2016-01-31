@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>Items from section</h1>
+    <p>Items of panels are defined in the sections</p>
+    @(Html.X().Panel()
+        .Title("Items from section1")
+        .Width(400)
+        .Height(250)
+        .Icon(Icon.Add)
+        .Layout(LayoutType.Accordion)
+        .ItemsFromSection(this, "section1")        
+    )
+    
+    <br />
+
+    @(Html.X().Panel()
+        .Title("Items from section2")
+        .Width(400)
+        .Height(250)
+        .Icon(Icon.Application)
+        .Layout(LayoutType.Accordion)
+        .ItemsFromSection(this, "section2")        
+    )
+}

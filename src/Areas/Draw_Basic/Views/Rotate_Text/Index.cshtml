@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Rotate Text - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Rotating Text with a Draw Component</h1>
+    <p>
+        In this example, you can see how easy it is to create text in a Draw Component which can be rotated easily in any browser. Use the slider to spin the text 360 degrees.
+    </p>
+
+    <p>
+        See the Drawing guide <a href="http://docs.sencha.com/extjs/5.0/core_concepts/drawing.html">here</a>.
+    </p>
+    
+    @(X.Slider()
+        .Width(400)
+            .MinValue(0)
+            .MaxValue(360)
+            .Number(0)
+            .Listeners(events =>
+                events.Change.Handler = "App.Draw1.getSurface().get('Sprite1').setAttributes({rotationRads: newValue * Math.PI / 180}); App.Draw1.getSurface().renderFrame();"
+            )
+    )
+
+    @(X.DrawContainer()
+        .ID("Draw1")
+        .Height(350)
+        .Items(X.TextSprite()
+            .SpriteID("Sprite1")
+            .Text("Rotate me")
+            .FillStyle("#0F0")
+            .FontSize("18px")
+            .FontFamily("Arial")
+            .TranslationY(50)
+            .TranslationX(150)
+        )
+    )
+}

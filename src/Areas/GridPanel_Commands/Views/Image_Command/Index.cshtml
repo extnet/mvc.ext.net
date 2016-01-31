@@ -1,0 +1,147 @@
+@{
+    ViewBag.Title = "Group Image Commands - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var prepareCommand = function (grid, command, record, row) {
+            // you can prepare group command
+            if (command.command == 'Delete' && record.data.Price < 5) {
+                command.hidden = true;
+                command.hideMode = 'visibility'; //you can try 'display' also                 
+            }
+        };
+        
+        var prepareGroupCommand = function (grid, command, groupId, group) {
+            // you can prepare group command
+        };
+
+        var getAdditionalData = function (data, idx, record, orig) {
+            return {
+                rowBodyColspan : record.getFields().length,
+                rowBody: Ext.String.format('<div style=\'padding:0 5px 5px 5px;\'>The {0} [{1}] requires light conditions of <i>{2}</i>.<br /><b>Price: {3}</b></div>', data.Common, data.Botanical, data.Light, Ext.util.Format.usMoney(data.Price))
+            };
+        };
+    </script>
+}
+
+@section example
+{    
+    <h1>ImageCommandColumn is a simpler and faster version of CommandColumn</h1>
+    
+    @(Html.X().GridPanel()
+        .Title("Plants")
+        .Width(650)
+        .Height(350)
+        .Frame(true)
+        .Collapsible(true)        
+        .Store(Html.X().Store()
+            .GroupField("Light")
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("Common"),
+                    new ModelField("Botanical"),
+                    new ModelField("Zone", ModelFieldType.Int),
+                    new ModelField("ColorCode"),
+                    new ModelField("Light"),
+                    new ModelField("Price", ModelFieldType.Float),
+                    new ModelField("Availability", ModelFieldType.Date),
+                    new ModelField("Indoor", ModelFieldType.Boolean)
+                )
+            )
+            .Proxy(Html.X().AjaxProxy()
+                .Url(Url.Action("GetPlants"))
+                .ActionMethods(ams =>
+                    ams.Read = HttpMethod.POST
+                )
+                .Reader(Html.X().JsonReader().RootProperty("data"))
+            )
+            .Sorters(sorters =>
+                sorters.Add(Html.X().DataSorter()
+                    .Property("Common")
+                    .Direction(Ext.Net.SortDirection.ASC)
+                )
+            )
+        )
+        .ColumnModel(
+            Html.X().Column()
+                .Text("Common Name")
+                .DataIndex("Common")
+                .Flex(1),
+            Html.X().Column()
+                .Text("Light")
+                .DataIndex("Light")
+                .Width(130),
+            Html.X().Column()
+                .Text("Price")
+                .DataIndex("Price")
+                .Width(70)
+                .Align(Alignment.Right)
+                .Groupable(false)
+                .Renderer(RendererFormat.UsMoney),
+            Html.X().DateColumn()
+                .Text("Available")
+                .DataIndex("Availability")
+                .Width(95)
+                .Groupable(false)
+                .Format("yyyy-MM-dd"),
+            Html.X().Column()
+                .Text("Indoor?")
+                .DataIndex("Indoor")
+                .Width(55),
+            Html.X().ImageCommandColumn()
+                .Width(110)
+                .Commands(
+                    Html.X().ImageCommand()
+                        .CommandName("Delete")
+                        .Icon(Icon.Delete)
+                        .Text("Delete")
+                        .ToolTip(tt => tt.Text = "Delete"),
+                    
+                    Html.X().ImageCommand()
+                        .CommandName("Edit")
+                        .Icon(Icon.TableEdit)
+                        .Text("Edit")
+                        .ToolTip(tt => tt.Text = "Edit")
+                )
+                .GroupCommands(
+                    Html.X().GroupImageCommand()
+                        .CommandName("Delete")
+                        .Icon(Icon.Delete)
+                        .Text("Delete")
+                        .ToolTip(tt => tt.Text = "Delete"),
+                    
+                    Html.X().GroupImageCommand()
+                        .CommandName("Edit")
+                        .Icon(Icon.TableEdit)
+                        .Text("Edit")
+                        .ToolTip(tt => tt.Text = "Edit"),
+                    
+                    Html.X().GroupImageCommand()
+                        .CommandName("Chart")
+                        .Icon(Icon.ChartBar)
+                        .Text("Chart")
+                        .RightAlign(true)
+                        .ToolTip(tt => tt.Text = "Chart")
+                )
+                .PrepareCommand("prepareCommand")
+                .PrepareGroupCommand("prepareGroupCommand")
+                .Listeners(ls =>
+                {
+                    ls.Command.Handler = "Ext.Msg.alert(command, record.data.Common);";
+                    ls.GroupCommand.Handler = "Ext.Msg.alert(command, 'Group name: '+ group.getGroupKey() +'<br/>Count - ' + group.items.length);";
+                })
+        )
+        .View(Html.X().GridView().StripeRows(false))
+        .SelectionModel(Html.X().RowSelectionModel().Mode(SelectionMode.Multi))
+        .Features(
+            Html.X().Grouping()
+                .HideGroupedHeader(true)
+                .GroupHeaderTplString("{columnName}: {name} ({[values.rows.length]} {[values.rows.length > 1 ? \"Items\" : \"Item\"]})"),    
+            
+            Html.X().RowBody().GetAdditionalData("getAdditionalData")
+        )
+    )
+}

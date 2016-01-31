@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Items from action";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>Items from action</h1>
+    <p>Items of panels are loaded from action</p>
+
+    @(Html.X().Panel()
+        .Title("Items from action")
+        .Width(400)
+        .Height(250)
+        .Icon(Icon.Add)
+        .Layout(LayoutType.Accordion)
+        .ItemsFromAction("LoadView")
+    )
+
+    <br />
+
+    @(Html.X().Panel()
+        .Title("Items from action with route values")
+        .Width(400)
+        .Height(250)
+        .Icon(Icon.Add)
+        .Layout(LayoutType.Accordion)
+        .ItemsFromAction("LoadViewWithTitles", new { titles = new Tuple<string, string, string>("Title 1", "Title 2", "Title 3") })
+    )
+}

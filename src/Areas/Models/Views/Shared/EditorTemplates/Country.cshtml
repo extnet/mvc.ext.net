@@ -1,0 +1,9 @@
+﻿@using Ext.Net.MVC.Examples.Areas.Models
+@model Ext.Net.MVC.Examples.Areas.Models.Country
+
+@(
+    Html.X().ComboBoxFor(m=>m.Code)
+        .Items(Country.CountryItems)
+        .SimpleSubmit(true)
+        .FieldLabel("Country")
+)

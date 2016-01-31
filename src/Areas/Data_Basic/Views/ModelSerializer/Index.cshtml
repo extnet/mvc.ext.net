@@ -1,0 +1,75 @@
+﻿.RootProperty("data")@model Ext.Net.Model
+@{
+    ViewBag.Title = "Model Serializer - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example 
+{
+    <h1>ModelSerizalier</h1>
+
+    <p>ModelSerializer is a helper class to serialize the data according to an Ext.Net.Model instance.</p>
+    <p>More details are <a href="http://forums.ext.net/showthread.php?26842">here.</a></p>
+    
+    @(X.Container()
+        .Layout("hbox")
+        .Defaults(new { margin = "20"})
+        .Items(
+            X.Container()
+                .Width(435)
+                .Items(
+                    X.Button().Text("Bind full data").Handler("App.GridPanel1.getStore().load();"),
+                    X.GridPanel()
+                        .ID("GridPanel1")
+                        .PaddingSpec("10 0")
+                        .Store(
+                            X.Store()
+                                .Model(Model)
+                                .Proxy(X.AjaxProxy()
+                                    .Url(@Url.Action("GetFullData"))
+                                    .Reader(X.JsonReader().RootProperty("data"))
+                                )
+                                .AutoLoad(false)
+                            )
+                            .ColumnModel(
+                                Html.X().Column().Text("ID").DataIndex("Id").Width(25),
+                                Html.X().Column().Text("Company").DataIndex("Company").Width(150),
+                                Html.X().Column().Text("Price").DataIndex("Price").Renderer(RendererFormat.UsMoney).Width(60),
+                                Html.X().DateColumn().Text("Date").DataIndex("Date").Align(Alignment.Center).Format("yyyy-MM-dd").Width(80),
+                                Html.X().Column().Text("Size").DataIndex("Size").Width(70),
+                                Html.X().BooleanColumn().Text("Visible").DataIndex("Visible").Align(Alignment.Center).Width(50)
+                            )
+                ),
+
+            X.Container()
+                .Width(150)
+                .Items(
+                    X.Button().Text("Bind partial data").Handler("App.DataView1.getStore().load();"),
+
+                    X.DataView()
+                        .ID("DataView1")
+                        .PaddingSpec("10 0")
+                        .ItemSelector("div")
+                        .Store(
+                            X.Store()
+                                .Model(X.Model().Fields("Company", "Price"))
+                                .Proxy(X.AjaxProxy()
+                                    .Url(@Url.Action("GetPartialData"))
+                                    .Reader(X.JsonReader().RootProperty("data"))
+                                )
+                                .AutoLoad(false)
+                         )
+                        .Tpl(X.XTemplate()
+                            .Html(@<text>
+                                <tpl for=".">
+                                    <div>{Company}: {Price} $</div>
+                                </tpl>
+                            </text>)
+                        )
+                ),
+
+            X.Button().Text("Get a list of companies with sizes").DirectClickAction("GetListOfCompaniesWithSizes")
+        )
+    )
+}

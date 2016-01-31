@@ -1,0 +1,89 @@
+﻿@model Ext.Net.MVC.Examples.Areas.Models.Person
+
+@{
+    ViewBag.Title = "Submit";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        function success (btn) {
+            submit(btn.up('window').down('form'), '@Url.Action("SuccessSubmit")');
+        }
+
+        function failure (btn) {
+            submit(btn.up('window').down('form'), '@Url.Action("FailureSubmit")');
+        }
+        
+        function submit(form, url)
+        {
+            form.submit({
+                url: url,
+                waitMsg : "Submitting...",
+                success: function(form, action){
+                    // server responded with success = true
+                    var result = action.result;                    
+                },
+                failure: function(form, action){
+                    if (action.failureType === Ext.form.action.Action.CONNECT_FAILURE) {
+                        Ext.Msg.alert('Error',
+                            'Status:'+action.response.status+': '+
+                            action.response.statusText);
+                    }
+                    if (action.failureType === Ext.form.action.Action.SERVER_INVALID){
+                        // server responded with success = false
+                        Ext.Msg.alert('Invalid', action.result.errorMessage);
+                    }
+                }
+            })
+        }
+    </script>
+}
+
+@section example
+{    
+    @(
+ Html.X().Window()
+            .Title("Submit")
+            .Width(250)
+            .Height(220)
+            .Layout(LayoutType.Fit)
+            .Closable(false)
+            .Border(false)
+            .Items(
+                Html.X().FormPanel()
+                    .ID("FormPanel1")
+                    .Frame(true)
+                    .DefaultAnchor("100%")
+                    .BodyPadding(6)
+                    .FieldDefaults(def =>
+                    {
+                        def.MsgTarget = MessageTarget.Side;
+                    })
+                    .Items(
+                        Html.X().HiddenFor(m => m.ID),
+                        Html.X().TextFieldFor(m => m.FirstName),
+                        Html.X().TextFieldFor(m => m.LastName),
+                        Html.X().DateFieldFor(m => m.DateOfBirth),
+                        Html.X().ComboBoxFor(m => m.Sex),
+                        Html.X().CheckboxFor(m => m.Approved)
+                    )
+            )
+            .Buttons(
+                Html.X().Button()
+                    .Text("Submit variations")
+                    .MenuItem(
+                        Html.X().MenuItem().Text("FormPanel submit - Success").Handler("success"),
+                        Html.X().MenuItem().Text("FormPanel submit - Failure").Handler("failure"),
+                        Html.X().MenuItem()
+                            .Text("DirectEvent submit")
+                            .DirectEvents(de => {
+                                de.Click.Url = Url.Action("DirectEventSubmit");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.FormID = "FormPanel1";
+                            })
+                    )
+            )
+    )
+}

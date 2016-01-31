@@ -1,0 +1,318 @@
+﻿@{
+    ViewBag.Title = "Overview of MultiSelect - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .label {
+            font    : bold 11px tahoma,arial,sans-serif;
+            width   : 300px;
+            height  : 25px;
+            padding : 5px 0;
+            border  : 1px dotted #99bbe8;
+            color   : #15428b;
+            cursor  : default;
+            margin  : 10px;
+            background  : #dfe8f6;
+            text-align  : center;
+            margin-left : 0px;
+        }
+    </style>
+}
+
+@section example
+{
+    @(X.TabPanel()
+        .Plain(true)
+        .Height(400)
+        .Items(
+            X.Panel()
+                .Title("Legend")
+                .BodyPadding(10)
+                .Layout(LayoutType.Table)
+                .LayoutConfig(new TableLayoutConfig() { Columns = 2 })
+                .Items(
+                    X.Label().Html("<div class='label'>With Legend</div>"),
+                    X.Label().Html("<div class='label'>Without Legend</div>"),
+                    X.Panel()
+                        .Border(false)
+                        .Width(300)
+                        .Height(260)
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.FieldSet()
+                                .Title("With Legend")
+                                .Layout(LayoutType.Fit)
+                                .Items(
+                                    X.MultiSelect()
+                                        .Border(false)
+                                        .Items(
+                                            X.ListItem().Text("Item 1").Value("1"),
+                                            X.ListItem().Text("Item 2").Value("2"),
+                                            X.ListItem().Text("Item 3").Value("3"),
+                                            X.ListItem().Text("Item 4").Value("4"),
+                                            X.ListItem().Text("Item 5").Value("5")
+                                        )
+                                )
+                        ),
+                        
+                    X.Panel()
+                        .Border(false)
+                        .Width(300)
+                        .PaddingSpec("2 0 0 0")
+                        .Height(248)
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.MultiSelect()
+                                .Items(
+                                    X.ListItem().Text("Item 1").Value("1"),
+                                    X.ListItem().Text("Item 2").Value("2"),
+                                    X.ListItem().Text("Item 3").Value("3"),
+                                    X.ListItem().Text("Item 4").Value("4"),
+                                    X.ListItem().Text("Item 5").Value("5")
+                                )
+                        )
+                ),
+                
+            X.Panel()
+                .Title("Selection Mode")
+                .BodyPadding(10)
+                .Layout(LayoutType.Table)
+                .LayoutConfig(new TableLayoutConfig() { Columns = 2 })
+                .Items(
+                    X.Label().Html("<div class='label'>Simple Select</div>"),
+                    X.Label().Html("<div class='label'>Multi Select with Ctrl/Shift</div>"),
+                    X.Panel()
+                        .Border(false)
+                        .Width(300)
+                        .Height(250)
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.MultiSelect()
+                                .Items(
+                                    X.ListItem().Text("Item 1").Value("1"),
+                                    X.ListItem().Text("Item 2").Value("2"),
+                                    X.ListItem().Text("Item 3").Value("3"),
+                                    X.ListItem().Text("Item 4").Value("4"),
+                                    X.ListItem().Text("Item 5").Value("5")
+                                )
+                        ),
+                        
+                    X.Panel()
+                        .Border(false)
+                        .Width(300)
+                        .Height(250)
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.MultiSelect()
+                                .MultiSelect(true)
+                                .Items(
+                                    X.ListItem().Text("Item 1").Value("1"),
+                                    X.ListItem().Text("Item 2").Value("2"),
+                                    X.ListItem().Text("Item 3").Value("3"),
+                                    X.ListItem().Text("Item 4").Value("4"),
+                                    X.ListItem().Text("Item 5").Value("5")
+                                )
+                        )
+                ),
+                
+            X.Panel()
+                .Title("Bars")
+                .BodyPadding(10)
+                .Layout(LayoutType.Table)
+                .LayoutConfig(new TableLayoutConfig() { Columns = 2 })
+                .Items(
+                    X.Label().Html("<div class='label'>Top Bar</div>"),
+                    X.Label().Html("<div class='label'>Bottom Bar</div>"),
+                    X.Panel()
+                        .Border(false)
+                        .Width(300)
+                        .Height(250)
+                        .Layout(LayoutType.Fit)
+                        .TopBar(
+                            X.Toolbar()
+                                .Items(X.Button()
+                                    .Text("Clear Selection")
+                                    .Listeners(l => l.Click.Handler = "#{MultiSelect1}.reset();")
+                                )
+                        )
+                        .Items(
+                            X.MultiSelect()
+                                .ID("MultiSelect1")
+                                .Items(
+                                    X.ListItem().Text("Item 1").Value("1"),
+                                    X.ListItem().Text("Item 2").Value("2"),
+                                    X.ListItem().Text("Item 3").Value("3"),
+                                    X.ListItem().Text("Item 4").Value("4"),
+                                    X.ListItem().Text("Item 5").Value("5")
+                                )
+                        ),
+                        
+                    X.Panel()
+                        .Border(false)
+                        .Width(300)
+                        .Height(250)
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.MultiSelect()
+                                .ID("MultiSelect2")
+                                .Items(
+                                    X.ListItem().Text("Item 1").Value("1"),
+                                    X.ListItem().Text("Item 2").Value("2"),
+                                    X.ListItem().Text("Item 3").Value("3"),
+                                    X.ListItem().Text("Item 4").Value("4"),
+                                    X.ListItem().Text("Item 5").Value("5")
+                                )
+                        )
+                        .BottomBar(
+                            X.Toolbar()
+                                .Items(X.Button()
+                                    .Text("Select [2,3]")
+                                    .Listeners(l => l.Click.Handler = "#{MultiSelect2}.setValue([2, 3]);")
+                                )
+                        )
+                ),
+                
+            X.Panel()
+                .Title("Drag/Drop")
+                .BodyPadding(10)
+                .Layout(LayoutType.Table)
+                .LayoutConfig(new TableLayoutConfig() { Columns = 2 })
+                .Items(
+                    X.Label().Html("<div class='label'>Drag</div>"),
+                    X.Label().Html("<div class='label'>Drop</div>"),
+                    X.Panel()
+                        .Border(false)
+                        .Width(300)
+                        .Height(250)
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.MultiSelect()
+                                .DragGroup("grp1")
+                                .MultiSelect(true)
+                                .Items(
+                                    X.ListItem().Text("Item 1").Value("1"),
+                                    X.ListItem().Text("Item 2").Value("2"),
+                                    X.ListItem().Text("Item 3").Value("3"),
+                                    X.ListItem().Text("Item 4").Value("4"),
+                                    X.ListItem().Text("Item 5").Value("5")
+                                )
+                        ),
+                        
+                    X.Panel()
+                        .Border(false)
+                        .Width(300)
+                        .Height(250)
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.MultiSelect()
+                                .AppendOnly(true)
+                                .DropGroup("grp1")
+                                .MultiSelect(true)
+                                .Items(
+                                    X.ListItem().Text("Item 6").Value("6"),
+                                    X.ListItem().Text("Item 7").Value("7"),
+                                    X.ListItem().Text("Item 8").Value("8"),
+                                    X.ListItem().Text("Item 9").Value("9"),
+                                    X.ListItem().Text("Item 10").Value("10")
+                                )
+                        )
+                ),
+                
+            X.Panel()
+                .Title("Drag/Drop and reordering")
+                .BodyPadding(10)
+                .Layout(LayoutType.Table)
+                .LayoutConfig(new TableLayoutConfig() { Columns = 2 })
+                .Items(
+                    X.Label().Html("<div class='label'>Drag/Drop with Reorder</div>"),
+                    X.Label().Html("<div class='label'>Drag/Drop with Reorder</div>"),
+                    X.Panel()
+                        .Border(false)
+                        .Width(300)
+                        .Height(250)
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.MultiSelect()
+                                .DragGroup("grp2")
+                                .DropGroup("grp2")
+                                .MultiSelect(true)
+                                .Items(
+                                    X.ListItem().Text("Item 1").Value("1"),
+                                    X.ListItem().Text("Item 2").Value("2"),
+                                    X.ListItem().Text("Item 3").Value("3"),
+                                    X.ListItem().Text("Item 4").Value("4"),
+                                    X.ListItem().Text("Item 5").Value("5")
+                                )
+                        ),
+                        
+                    X.Panel()
+                        .Border(false)
+                        .Width(300)
+                        .Height(250)
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.MultiSelect()
+                                .AppendOnly(true)
+                                .DragGroup("grp2")
+                                .DropGroup("grp2")
+                                .DDReorder(true)
+                                .MultiSelect(true)
+                                .Items(
+                                    X.ListItem().Text("Item 6").Value("6"),
+                                    X.ListItem().Text("Item 7").Value("7"),
+                                    X.ListItem().Text("Item 8").Value("8"),
+                                    X.ListItem().Text("Item 9").Value("9"),
+                                    X.ListItem().Text("Item 10").Value("10")
+                                )
+                        )
+                ),
+                
+            X.Panel()
+                .Title("Submit")
+                .BodyPadding(10)
+                .Layout(LayoutType.Table)
+                .LayoutConfig(new TableLayoutConfig() { Columns = 1 })
+                .Items(
+                    X.Label().Html("<div class='label'>Indexes, Values and Text Submit</div>"),
+                    X.Panel()
+                        .Border(false)
+                        .Width(300)
+                        .Height(250)
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                            X.MultiSelect()
+                                .ID("MultiSelect3")
+                                .CustomConfig(c => c.Add(new ConfigItem("submitText", "false", ParameterMode.Raw)))
+                                .Items(
+                                    X.ListItem().Text("Item 1").Value("1"),
+                                    X.ListItem().Text("Item 2").Value("2"),
+                                    X.ListItem().Text("Item 3").Value("3"),
+                                    X.ListItem().Text("Item 4").Value("4"),
+                                    X.ListItem().Text("Item 5").Value("5")
+                                )
+                                .SelectedItems(
+                                    X.ListItem().Value("1"),
+                                    X.ListItem().Value("3"),
+                                    X.ListItem().Value("5")
+                                )
+                        )
+                        .BottomBar(
+                            X.Toolbar()
+                                .Items(
+                                    X.ToolbarFill(),
+                                    X.Button()
+                                        .Text("Submit")
+                                        .DirectEvents(de => {
+                                            de.Click.Action = "SubmitSelection1";
+                                            de.Click.ExtraParams.Add(new Parameter("items", "App.MultiSelect3.getSubmitArray()", ParameterMode.Raw));
+                                        })
+                                )
+                        )
+                )
+        )
+    )
+}

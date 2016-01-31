@@ -1,0 +1,82 @@
+﻿@model Ext.Net.MVC.Examples.Areas.GridPanel_Miscellaneous.Models.Marking_RecordsModel
+
+@{
+    ViewBag.Title = "Marking Records - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .dirty-row .x-grid-cell, .dirty-row .x-grid-rowwrap-div {
+	        background-color: #FFFDD8 !important;
+        }
+        
+        .new-row .x-grid-cell, .new-row .x-grid-rowwrap-div {
+	        background: #c8ffc8 !important;
+        } 
+    </style>
+
+    <script>
+        var getRowClass = function (record) {
+            if (record.phantom) {
+                return "new-row";
+            }
+                
+            if (record.dirty) {
+                return "dirty-row";
+            }
+        };
+
+        var insertRecord = function () {
+            var grid = App.GridPanel1;
+                
+            grid.store.insert(0, {});
+            grid.getView().focusRow(0);
+            grid.editingPlugin.startEdit(grid.store.getAt(0), grid.columns[0]);
+        };
+    </script>  
+}
+
+@section example
+{
+    <h1>Marking Records</h1>
+        
+    <p>Demonstrates how to mark rows with custom colors. Edit any cell or insert new record.</p>
+
+    @(X.GridPanel()
+        .ID("GridPanel1")
+        .Title("Test Grid")
+        .Width(600)
+        .Height(350)
+        .Store(X.Store()
+            .Model(X.Model()
+                .IDProperty("TestCell")
+                .Fields("TestCell")
+            )
+            .DataSource(Model.TestData)
+        )
+        .ColumnModel(
+            X.Column()
+                .Text("TestCell")
+                .DataIndex("TestCell")
+                .Flex(1)
+                .Editor(X.TextField())
+        )
+        .View(X.GridView()
+            .StripeRows(true)
+            .GetRowClass(grc => grc.Fn = "getRowClass")
+        )
+        .Plugins(
+            X.CellEditing().ClicksToEdit(1).Listeners(events => events.Edit.Handler = "e.grid.getView().refresh();")
+        )
+        .Buttons(
+            X.Button()
+                .Text("Insert record")
+                .Icon(Icon.Add)
+                .Handler("insertRecord")
+        )
+    
+    )
+}

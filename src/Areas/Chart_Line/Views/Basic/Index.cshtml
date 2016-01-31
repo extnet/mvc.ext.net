@@ -1,0 +1,101 @@
+﻿@model List<Ext.Net.MVC.Examples.ChartModel>
+@{
+    ViewBag.Title = "Line Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+     <script>
+        var saveChart = function (btn) {
+            Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as an image?', function (choice) {
+                if (choice == 'yes') {
+                    btn.up('panel').down('chart').download();
+                }
+            });
+        };
+    </script>
+}
+
+@section example 
+{
+    <h1>Line Chart Example</h1>
+
+    <p>Display 3 sets of random data in a line series. Reload data will randomly generate a new set of data in the store. Click on the legend items to remove them from the chart.</p>
+
+    @(X.Panel()
+        .Layout(LayoutType.Fit)
+        .Width(800)
+        .Height(600)
+        .TopBar(X.Toolbar()
+            .Items(
+                X.ToolbarFill(),
+                
+                X.Button()
+                    .Text("Reload Data")
+                    .Icon(Icon.ArrowRefresh)
+                    .Handler("App.Chart1.getStore().reload()"),
+                    
+                X.Button()
+                    .Text("Save Chart")
+                    .Icon(Icon.Disk)
+                    .Handler("saveChart")
+            )
+        )
+        .Items(X.CartesianChart()
+            .ID("Chart1")
+            .StyleSpec("background:#fff;")
+            .Shadow(true)
+            .StandardTheme(StandardChartTheme.Category1)
+            .LegendConfig(X.ChartLegend().Dock(Dock.Right))
+            .Store(X.Store()
+                .Data(Model)
+                .Model(X.Model().Fields("Name", "Data1", "Data2", "Data3"))
+                .ServerProxy(X.AjaxProxy()
+                    .Url(Url.Action("GetData"))
+                    .Reader(X.JsonReader().RootProperty("data"))
+                )
+            )
+            .Axes(
+                X.NumericAxis()
+                    .Position(Position.Left)
+                    .Fields(new string[] { "Data1", "Data2", "Data3" })
+                    .Title("Number of Hits")
+                    .MinorTickSteps(1)
+                    .Minimum(0)
+                    .GridConfig(X.AxisGrid()
+                        .Odd(X.Sprite().Opacity(1).FillStyle("#ddd").StrokeStyle("#bbb").LineWidth(0.5))
+                    ),
+
+                X.CategoryAxis()
+                    .Position(Position.Bottom)
+                    .Fields("Name")
+                    .Title("Month of the Year")
+            )
+            .Series(
+                X.LineSeries()
+                    .XField("Name")
+                    .YField("Data1")
+                    .HighlightConfig(X.Sprite().Scaling(2))
+                    .Marker(X.Sprite().SpriteType(SpriteType.Cross).Radius(4).LineWidth(0)),
+                
+                X.LineSeries()
+                    .XField("Name")
+                    .YField("Data2")
+                    .Smooth(3)
+                    .HighlightConfig(X.Sprite().Radius(7))
+                    .Marker(X.CircleSprite().Radius(4).LineWidth(0)),
+                
+                X.LineSeries()
+                    .XField("Name")
+                    .YField("Data3")
+                    .Smooth(3)
+                    .StyleSpec(X.Sprite().FillOpacity(0.5))
+                    .HighlightConfig(X.CircleSprite().Radius(7))
+                    .Marker(X.CircleSprite().Radius(4).LineWidth(0))
+            )
+            .Interactions(i => i.Add(X.ItemHighlightInteraction()))
+        )
+    )
+}

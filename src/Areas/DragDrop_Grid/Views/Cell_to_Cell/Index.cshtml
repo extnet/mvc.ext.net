@@ -1,0 +1,45 @@
+﻿@model Ext.Net.MVC.Examples.Areas.DragDrop_Grid.Models.Cell_to_CellModel
+
+@{
+    ViewBag.Title = "Cell to Cell Drag and Drop - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example 
+{
+    <h1>Drag and Drop from Cell to Cell within the same GridView</h1>
+    <p>This illustrates how a custom plugin can enable a cell to cell drag and drop operation within the same GridView.</p>
+    <p>This example only allows a drag and drop operation for cells with the same data type, although that is configurable. The custom plugin allows for other configs, please see the comments in the source.</p>
+
+    @(X.GridPanel()
+        .Width(800)
+        .Height(400)
+        .Store(X.Store()
+            .Model(X.Model()
+                .Fields(
+                    X.ModelField().Name("company").Type(ModelFieldType.String),
+                    X.ModelField().Name("firstChange").Type(ModelFieldType.Date).DateFormat("M/d hh:mmtt"),
+                    X.ModelField().Name("stock"),
+                    X.ModelField().Name("price").Type(ModelFieldType.Float),
+                    X.ModelField().Name("change").Type(ModelFieldType.Float),
+                    X.ModelField().Name("pctChange").Type(ModelFieldType.Float),
+                    X.ModelField().Name("lastChange").Type(ModelFieldType.Date)
+                )
+            )
+            .DataSource(Model.Companies)
+        )
+        .ColumnModel(
+            X.Column().Text("Company").DataIndex("company").Width(160),
+            X.DateColumn().Text("First Updated").DataIndex("firstChange").Width(235),
+            X.Column().Text("Price").DataIndex("price").Width(75),
+            X.Column().Text("Stock").DataIndex("stock").Width(75),
+            X.Column().Text("Change").DataIndex("change").Width(75),
+            X.Column().Text("% Change").DataIndex("pctChange").Width(75),
+            X.DateColumn().Text("Last Updated").DataIndex("lastChange").Width(235)
+        )
+        .View(X.GridView()
+            .Plugins(X.CellDragDrop().ApplyEmptyText(true).EnforceType(true))
+        )
+    )
+}

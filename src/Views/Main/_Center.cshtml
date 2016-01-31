@@ -1,0 +1,32 @@
+﻿@(
+ Html.X().TabPanel()
+        .ID("ExampleTabs")
+        .Region(Region.Center)
+        .MarginSpec("0")
+        .Cls("tabs")
+        .MinTabWidth(115)
+        .Items(items =>
+        {
+            items.Add(new Panel
+            {
+                ID = "tabHome",
+                Title = "Home",
+                HideMode = HideMode.Offsets,
+                IconCls = "fa fa-home",
+                Loader = new ComponentLoader
+                {
+                    Mode = LoadMode.Frame,
+                    Url = Url.Action("Home"),
+                    LoadMask =
+                    {
+                        ShowMask = true
+                    }
+                }
+            });
+        })
+        .Listeners(l =>
+        {
+            l.TabChange.Fn = "addToken";
+        })
+        .Plugins(plugins => plugins.Add(new TabCloseMenu()))
+)

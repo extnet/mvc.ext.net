@@ -1,0 +1,81 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Buffered Scrolling - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <h1>Buffered Scrolling</h1>
+
+    <p>Introduced with Ext.Net 2.0, grid supports infinite scrolling, which enables you to load any number of records into a grid without paging.</p>
+
+    <p>This grid approach uses a virtualized scrolling system to handle potentially infinite data sets without any impact on client side performance.</p>
+
+    <p>This example illustrates loading of all the records up front and buffering the rendered grid.</p>
+
+    <script>
+        var go = function () {
+            var me = this,
+                field = me.up('toolbar').down('#gotoLine'); 
+            
+            if (field.isValid()) { 
+                me.up('grid').view.bufferedRenderer.scrollTo(field.getValue() - 1, true);
+            }
+        };
+    </script>
+}
+
+@section example
+{    
+    @(Html.X().GridPanel()
+        .Title("Buffered Grid of 5,000 random records")
+        .Width(700)
+        .Height(500)
+        .Store(Html.X().Store()
+            .PageSize(5000)
+            .Buffered(true)
+            .DataSource(Model)
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("id"),
+                    new ModelField("name"),
+                    new ModelField("rating", ModelFieldType.Int),
+                    new ModelField("salary", ModelFieldType.Float)
+                )
+            )
+        )
+        .View(Html.X().GridView().TrackOver(false))
+        .ColumnModel(
+            Html.X().RowNumbererColumn().Width(40).Sortable(false),
+                    Html.X().Column().Text("Name").Flex(1).DataIndex("name").Sortable(false),
+                    Html.X().Column().Text("Rating").Width(125).DataIndex("rating").Sortable(false),
+            Html.X().Column()
+                .Text("Salary")
+                .Width(125)
+                .DataIndex("salary")
+                .Align(Alignment.Right)
+                .Renderer(RendererFormat.UsMoney)
+                .Sortable(false)
+        )
+        .SelectionModel(Html.X().RowSelectionModel().PruneRemoved(false))
+        .BottomBar(Html.X().Toolbar()
+            .Items(
+                Html.X().NumberField()
+                    .FieldLabel("Jump to row")
+                    .MinValue(1)
+                    .MaxValue(5000)
+                    .AllowDecimals(false)
+                    .ItemID("gotoLine"),
+                Html.X().Button()
+                    .Text("Go")
+                    .Listeners(ls =>
+                        ls.Click.Fn = "go"
+                    )
+            )
+        )
+        
+    )
+}
+

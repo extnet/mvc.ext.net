@@ -1,0 +1,157 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Infinite Scrolling with remote filtering - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var renderTopic = function(value, p, record) {
+            return Ext.String.format(
+                '<a href="http://sencha.com/forum/showthread.php?p={1}" target="_blank">{0}</a>',
+                value,
+                record.getId()
+            );
+        };
+
+        var searchFieldTriggerClick = function (field, trigger, index) {
+            var me = field,
+                store = me.up("grid").getStore(),
+                value = me.getValue();
+
+            if(index == 0){
+                me.setValue('');
+                store.clearFilter();                
+                trigger.hide();
+            }
+            else{
+                if (value.length > 0) {
+                    // Param name is ignored here since we use custom encoding in the proxy.
+                    // id is used by the Store to replace any previous filter
+                    store.filter({
+                        id: store.proxy.filterParam,
+                        property: store.proxy.filterParam,
+                        value: value
+                    });                    
+                    me.getTrigger(0).show();
+                }
+            }
+        };
+
+        var onSpecialKey = function (field, e) {
+             if (e.getKey() === e.ENTER) { 
+                searchFieldTriggerClick(field, null, 1); 
+                e.stopEvent(); 
+            }
+        };
+    </script>
+}
+
+@section example
+{    
+    <h1>Infinite Scrolling with remote filtering</h1>
+    <p>Introduced with Ext.NET 2, grid supports infinite scrolling, which enables you to load any number of records into a grid without paging.</p>
+    <p>This grid approach uses a virtualized scrolling system to handle potentially infinite data sets without any impact on client side performance.</p>        
+    <p>A filtering UI is included which applies a remote filter and reloads the grid beginning at page one.</p>
+
+    @(Html.X().GridPanel()
+        .ID("GridPanel1")
+        .Width(700)
+        .Height(500)
+        .Collapsible(true)
+        .Title("Sencha.com - Browse Forums")
+        .Store(Html.X().Store()
+            .Buffered(true)
+            .RemoteFilter(true)
+            .LeadingBufferZone(1000)
+            .PageSize(50)
+            .Proxy(Html.X().JsonPProxy()
+                .Url("http://www.sencha.com/forum/topics-remote.php")
+                .SimpleSortMode(true)
+                .FilterParam("query")
+                .Reader(
+                    Html.X().JsonReader().RootProperty("topics").TotalProperty("totalCount")
+                )
+                .CustomConfig(config => {
+                    config.Add(new { encodeFilters = JRawValue.From("function (filters) { return filters[0].getValue(); }") });
+                })
+            )
+            .Model(Html.X().Model()
+                .IDProperty("post_id")
+                .Fields(
+                    new ModelField("title") { Mapping = "topic_title" },
+                    new ModelField("forumtitle") { Mapping = "forum_title" },
+                    new ModelField("forumid", ModelFieldType.Int),
+                    new ModelField("username") { Mapping = "author" },
+                    new ModelField("replycount", ModelFieldType.Int) { Mapping = "reply_count" },
+                    new ModelField("lastpost", ModelFieldType.Date, "timestamp") { Mapping = "post_time" },
+                    new ModelField("lastposter"),
+                    new ModelField("excerpt"),
+                    new ModelField("topic_id")
+                )
+            )
+            .Listeners(ls =>
+                ls.TotalCountChange.Handler = "#{GridPanel1}.down('#status').update({ count: this.getTotalCount() });"
+            )
+        )
+        .ColumnModel(
+            Html.X().RowNumbererColumn().Width(50),
+            Html.X().Column()
+                .Text("Topic")
+                .DataIndex("title")
+                .Flex(1)
+                .Renderer("renderTopic")
+                .Sortable(false),
+            Html.X().Column()
+                .Text("Author")
+                .DataIndex("username")
+                .Hidden(true)
+                .Sortable(false),
+            Html.X().Column()
+                .Text("Replies")
+                .DataIndex("replycount")
+                .Width(70)
+                .Align(Alignment.Center)
+                .Sortable(false),
+            Html.X().Column()
+                .Text("Last Post")
+                .DataIndex("lastpost")
+                .Width(130)
+                .Sortable(false)
+                .Renderer(RendererFormat.Date, new string[] { "'n/j/Y g:i A'" })
+        )
+        .View(Html.X().GridView().TrackOver(false))
+        .SelectionModel(Html.X().RowSelectionModel().PruneRemoved(false).Mode(SelectionMode.Multi))
+        .DockedItems(Html.X().Toolbar()
+            .Dock(Dock.Top)
+            .Items(
+                Html.X().TextField()
+                    .Width(400)
+                    .FieldLabel("Search")
+                    .LabelWidth(50)                    
+                    .Triggers(
+                        Html.X().FieldTrigger().Icon(TriggerIcon.Clear).Hidden(true),
+                        Html.X().FieldTrigger().Icon(TriggerIcon.Search)
+                    )
+                    .Listeners(ls =>
+                    {
+                        ls.TriggerClick.Fn = "searchFieldTriggerClick";
+                        ls.SpecialKey.Fn = "onSpecialKey";
+                    }),
+                Html.X().ToolbarFill(),
+                Html.X().Component()
+                    .ItemID("status")
+                    .StyleSpec("margin-right:5px;")
+                    .Tpl(Html.X().XTemplate()
+                        .Html(
+                            @<text>
+                                Matching threads: {count}
+                            </text>
+                        )
+                    )
+            )
+        )
+    )
+}

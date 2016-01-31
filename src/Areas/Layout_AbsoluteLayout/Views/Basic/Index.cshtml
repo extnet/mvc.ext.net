@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "AbsoluteLayout - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(X.Viewport()
+        .Layout(LayoutType.Absolute)
+        .Items(
+            X.Panel()
+                .BodyPadding(15)
+                .Width(200)
+                .Height(100)
+                .Frame(true)
+                .Title("Panel 1")
+                .X(50)
+                .Y(50)
+                .Html("Positioned at x:50, y:50"),
+            X.Panel()
+                .BodyPadding(15)
+                .Width(200)
+                .Height(100)
+                .Frame(true)
+                .Title("Panel 2")
+                .X(125)
+                .Y(125)
+                .Html("Positioned at x:125, y:125")
+        )
+    )
+}

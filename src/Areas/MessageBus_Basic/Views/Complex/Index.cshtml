@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "MessageBus Complex - Ext.NET MVC Examples";
+    Layout = "~/Areas/MessageBus_Basic/Views/Shared/_LayoutPage.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(X.Panel()
+        .Title("Container In Content Page")
+        .Layout(LayoutType.VBox)
+        .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Stretch })
+        .Items(i => 
+        {
+            i.Add(X.Panel()
+                .Height(200)
+                .Layout(LayoutType.Fit)
+                .Header(false)
+                .MessageBusListeners(new MessageBusListener()
+                {
+                    Name = "FromPartialView.*",
+                    Handler = "this.body.createChild({html: 'Name: ' + name, tag:'p'});"
+                })
+            );
+            
+            i.Add(X.Container()
+                .Flex(1)
+                .Layout(LayoutType.HBox)
+                .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Stretch })
+                .ItemsFromPartial("PartialView1")
+                .ItemsFromPartial("PartialView2")
+            );
+        }
+        )
+    )
+}

@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "AccordionLayout in Markup - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Accordion Layout in Markup</h1>
+    
+    @(X.Window()
+        .Title("Accordion")
+        .Width(250)
+        .Height(400)
+        .Maximizable(true)
+        .BodyBorder(0)
+        .Icon(Icon.ApplicationTileVertical)
+        .Layout(LayoutType.Accordion)
+        .TopBar(
+            X.Toolbar()
+                .Items(X.Button()
+                    .Icon(Icon.Connect)
+                    .ToolTips(t => t.Add(
+                        X.ToolTip()
+                            .Title("Rich ToolTips")
+                            .Html("Let your users know what they can do!"))
+                    ),
+                    
+                    X.Button()
+                        .ID("Button2")
+                        .Icon(Icon.UserAdd)
+                    ,
+                    
+                    X.Button()
+                        .ID("Button3")
+                        .Icon(Icon.UserDelete)
+                )
+        )
+        .Items(X.TreePanel()
+            .Title("Online Users")
+            .RootVisible(false)
+            .Tools(X.Tool()
+                .Type(ToolType.Refresh)
+                .Handler("Ext.Msg.alert('Message','Refresh Tool Clicked!');")
+            )
+            .Root(X.Node()
+                .Text("Root")
+                .Children(
+                    X.Node()
+                        .Text("Friends")
+                        .Expanded(true)
+                        .Children(
+                            X.Node().Text("Jack").Icon(Icon.User).Leaf(true),
+                            X.Node().Text("Brian").Icon(Icon.User).Leaf(true),
+                            X.Node().Text("Jon").Icon(Icon.User).Leaf(true),
+                            X.Node().Text("Tim").Icon(Icon.User).Leaf(true),
+                            X.Node().Text("Brent").Icon(Icon.User).Leaf(true),
+                            X.Node().Text("Fred").Icon(Icon.User).Leaf(true),
+                            X.Node().Text("Bob").Icon(Icon.User).Leaf(true)
+                        ),
+                        
+                    X.Node()
+                        .Text("Family")
+                        .Expanded(true)
+                        .Children(
+                            X.Node().Text("Kelly").Icon(Icon.UserFemale).Leaf(true),
+                            X.Node().Text("Sara").Icon(Icon.UserFemale).Leaf(true),
+                            X.Node().Text("Zack").Icon(Icon.UserGreen).Leaf(true),
+                            X.Node().Text("John").Icon(Icon.UserGreen).Leaf(true)
+                        )
+                )
+            ),
+            
+            X.Panel().Title("Settings"),
+            X.Panel().Title("Even More Stuff"),
+            X.Panel().Title("My Stuff")
+        )
+    )
+}

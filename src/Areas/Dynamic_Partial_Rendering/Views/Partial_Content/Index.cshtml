@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Partial Content";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>Partial Content</h1>
+    <p>In this example, View is loaded as content</p>
+
+    @Html.X().Button().Text("Load View to the following container").DirectEvents(e => {
+        e.Click.Url = Url.Action("PartialView");
+        e.Click.ExtraParams.Add(new { containerId = "ViewContainer1" });
+    })
+    <br />
+    @Html.X().Container().ID("ViewContainer1").StyleSpec("border:solid 1px black; height:150px; width:300px;")
+
+    <br />
+    <h3>Auto load content</h3>
+    @(Html.X().Container()
+        .ID("ViewContainer2")
+        .StyleSpec("border:solid 1px black; height:150px; width:300px;")
+        .Loader(Html.X().ComponentLoader()
+            .Url(Url.Action("AutoLoadPartialView"))
+            .Mode(LoadMode.Script)
+            .Params(new { containerId = "ViewContainer2" })
+        )
+     )
+}

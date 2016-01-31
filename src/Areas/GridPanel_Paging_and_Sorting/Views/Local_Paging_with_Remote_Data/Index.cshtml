@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Local Paging for Remote Data - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>Local Paging for Remote Data</h1>
+
+    @(
+        Html.X().GridPanel()
+            .Title("Grid")
+            .Width(600)
+            .Height(330)
+            .Store(
+                Html.X().Store()
+                    .RemotePaging(false)
+                    .PageSize(10)
+                    .Proxy(
+                        Html.X().AjaxProxy()
+                            .Url(Url.Action("Read"))
+                            .Reader(Html.X().JsonReader().RootProperty("data"))
+                    )
+                    .Model(
+                        Html.X().Model()
+                            .Fields(
+                                Html.X().ModelField().Name("field")
+                            )
+                    )
+                    .Parameters(new {
+                        startRemote = JRawValue.From("App.Slider1.getValue()[0]"),
+                        limitRemote = 1000,
+                        start = 0,
+                        limit = 10
+                    })
+            )
+            .ColumnModel(
+                Html.X().Column().DataIndex("field").Text("Field").Flex(1)
+            )
+            .View(
+                Html.X().GridView().LoadingText("Loading Data...")
+            )
+            .BottomBar(
+                Html.X().PagingToolbar()
+            )
+            .TopBar(
+                Html.X().Toolbar()
+                    .Items(
+                        Html.X().ToolbarTextItem().Text("Remote Pager:"),
+                        Html.X().ToolbarSpacer().Width(20),
+                        
+                        Html.X().Slider()
+                            .ID("Slider1")
+                            .MinValue(0)
+                            .MaxValue(7000)
+                            .Increment(1000)
+                            .Width(250)
+                            .Plugins(
+                                Html.X().SliderTip()
+                            )
+                            .Listeners(l=>{
+                                l.Change.Handler = "this.nextSibling('tbtext').setText((newValue+1) + '-' + (newValue + 1000));";
+                                l.ChangeComplete.Handler = "this.up('grid').store.load();";
+                            }),                            
+                        
+                        Html.X().ToolbarSpacer().Width(20),
+                        Html.X().ToolbarTextItem().Text("(1-1000)")
+                    )
+            )
+     )
+}

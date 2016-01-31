@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = "Simple TreePanel";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Simple TreePanel</h1>
+
+    @(
+        X.TreePanel()
+            .Width(300)
+            .Height(450)
+            .Icon(Icon.BookOpen)
+            .Title("Catalog")
+            .AutoScroll(true)
+            .TopBar(
+                X.Toolbar()
+                    .Items(
+                        X.Button()
+                            .Text("Expand All")
+                            .Handler("this.up('treepanel').expandAll();"),
+                            
+                        X.Button()
+                            .Text("Collapse All")
+                            .Handler("this.up('treepanel').collapseAll();")   
+                    )                    
+            )
+            .Root(
+                X.Node()
+                 .Text("Composers")
+                 .Expanded(true)
+                 .Children(
+                    X.Node()
+                        .Text("Beethoven")
+                        .Icon(Icon.UserGray)
+                        .Children(
+                            X.Node()
+                                .Text("Concertos")
+                                .Children(
+                                    X.Node().Text("No. 1 - C").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("No. 2 - B-Flat Major").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("No. 3 - C Minor").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("No. 4 - G Major").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("No. 5 - E-Flat Major").Icon(Icon.Music).Leaf(true)
+                                ),
+                                
+                            X.Node()
+                                .Text("Quartets")
+                                .Children(
+                                    X.Node().Text("Six String Quartets").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("Three String Quartets").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("Grosse Fugue for String Quartets").Icon(Icon.Music).Leaf(true)
+                                ),
+                                
+                           X.Node()
+                                .Text("Sonatas")
+                                .Children(
+                                    X.Node().Text("Sonata in A Minor").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("Sonata in F Major").Icon(Icon.Music).Leaf(true)
+                                ),
+                                
+                           X.Node()
+                                .Text("Symphonies")
+                                .Children(
+                                    X.Node().Text("No. 1 - C Major").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("No. 2 - D Major").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("No. 3 - E-Flat Major").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("No. 4 - B-Flat Major").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("No. 5 - C Minor").Icon(Icon.Music).Leaf(true)
+                                )
+                        ),
+                        
+                     X.Node()
+                        .Text("Brahms")
+                        .Icon(Icon.UserGray)
+                        .Children(
+                            X.Node()
+                                .Text("Concertos")
+                                .Children(
+                                    X.Node().Text("Violin Concerto").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("Double Concerto - A Minor").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("Piano Concerto No. 1 - D Minor").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("Piano Concerto No. 2 - B-Flat Major").Icon(Icon.Music).Leaf(true)
+                                ),
+                                
+                            X.Node()
+                                .Text("Quartets")
+                                .Children(
+                                    X.Node().Text("Piano Quartet No. 1 - G Minor").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("Piano Quartet No. 2 - A Major").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("Piano Quartet No. 3 - C Minor").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("Piano Quartet No. 3 - B-Flat Minor").Icon(Icon.Music).Leaf(true)
+                                ),
+                                
+                            X.Node()
+                                .Text("Sonatas")
+                                .Children(
+                                    X.Node().Text("Two Sonatas for Clarinet - F Minor").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("Two Sonatas for Clarinet - E-Flat Major").Icon(Icon.Music).Leaf(true)
+                                ),
+                                
+                            X.Node()
+                               .Text("Symphonies")
+                               .Children(
+                                   X.Node().Text("No. 1 - C Minor").Icon(Icon.Music).Leaf(true),
+                                   X.Node().Text("No. 2 - D Minor").Icon(Icon.Music).Leaf(true),
+                                   X.Node().Text("No. 3 - F Major").Icon(Icon.Music).Leaf(true),
+                                   X.Node().Text("No. 4 - E Minor").Icon(Icon.Music).Leaf(true)
+                               )
+                        ),
+                        
+                      X.Node()
+                        .Text("Mozart")
+                        .Icon(Icon.UserGray)
+                        .Children(
+                            X.Node()
+                                .Text("Concertos")
+                                .Children(
+                                    X.Node().Text("Piano Concerto No. 12").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("Piano Concerto No. 17").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("Clarinet Concerto").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("Violin Concerto No. 5").Icon(Icon.Music).Leaf(true),
+                                    X.Node().Text("Violin Concerto No. 4").Icon(Icon.Music).Leaf(true)
+                                )
+                        )
+                 )
+            )
+            .BottomBar(
+                X.StatusBar().AutoClear(1500)
+            )
+            .Listeners(l => {
+                l.ItemClick.Handler = "this.down('statusbar').setStatus({text: 'Node Selected: <b>' + record.data.text + '<br />', clear: false});";
+                
+                l.ItemExpand.Handler = "this.down('statusbar').setStatus({text: 'Node Expanded: <b>' + item.data.text + '<br />', clear: false});";
+                l.ItemExpand.Buffer = 50;
+                
+                l.ItemCollapse.Handler = "this.down('statusbar').setStatus({text: 'Node Collapsed: <b>' + item.data.text + '<br />', clear: false});";
+                l.ItemCollapse.Buffer = 50;
+            })
+    )
+}

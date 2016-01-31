@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Xml File Loading - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    @(
+        Html.X().TreePanel()
+            .Height(300)
+            .Width(250)
+            .Store(
+                Html.X().TreeStore()
+                    .DataSource(Model)
+                    .DataBindings(
+                        new NodeBinding { DataMember = "Authors", Text = "Authors List" },
+                        new NodeBinding { DataMember = "Author", TextField = "name" },
+                        new NodeBinding { DataMember = "blog", HrefField = "url", TextField = "url", Leaf = true }
+                    )
+            )
+     )
+}

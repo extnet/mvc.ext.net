@@ -1,0 +1,59 @@
+﻿@model List<Sprite>
+@{
+    ViewBag.Title = "Punch Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var onMouseOver = function (surface, id) {
+            var lbl = surface.get("lbl"+id),
+                bg = surface.get("bg"+id),
+                dt = surface.get("dt"+id);
+
+            if (bg) {
+                bg.show(true);
+            } else {
+                var clr = Ext.draw.Color.fromString(dt.fill).getHSL();
+                clr[1] = .5;
+                dt._fill = dt.fill;
+                dt.setAttributes({"fill" : Ext.draw.Color.fromHSL(clr[0], clr[1], clr[2]).toString()});
+            }
+
+            lbl.show();
+
+            surface.renderFrame();
+        }
+
+        var onMouseOut = function (surface, id) {
+            var lbl = surface.get("lbl"+id),
+                bg = surface.get("bg"+id),
+                dt = surface.get("dt"+id);
+
+            if (bg) {
+                bg.hide();
+            } else {
+                dt.setAttributes({"fill" : dt._fill});
+            }
+
+            lbl.hide();
+
+            surface.renderFrame();
+        }
+    </script>   
+}
+
+@section example
+{
+    @(X.Viewport()
+        .LayoutConfig(new VBoxLayoutConfig() { Align = VBoxAlign.Center, Pack = BoxPack.Center })
+        .Loader(
+            Html.X().ComponentLoader()
+                .AutoLoad(true)
+                .Url(Url.Action("GetChart"))
+                .Mode(LoadMode.Component)
+        )
+    )
+}

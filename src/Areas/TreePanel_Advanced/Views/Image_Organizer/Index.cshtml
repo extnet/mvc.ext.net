@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "Organizing Images into Albums";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <link href="/Areas/TreePanel_Advanced/Content/organizer.css" rel="stylesheet" />    
+}
+
+@section example
+{
+    <h1>Organizing Images into Albums</h1>
+    <p>This example shows demonstrates how you can drop anything into the tree.</p>
+    <p>This example also shows how a customized DragZone can be
+    applied to a JsonView to get automatic lightweight drag and drop of asynchronously loaded data.</p>
+    <p>The multi image drag drop added a little complexity to the code, but hopefully it is still easy to follow.</p>
+    <p>For simplicity, there is no validation on the names you enter in the tree node editor and you can drag the same picture
+    into an album as many times as you want.</p>
+    <p>Hold shift/control to select multiple images in the main images view. You can drag those images into the tree.</p>
+    
+    @(
+ Html.X().Panel()
+            .Width(700)
+            .Height(490)
+            .Layout(LayoutType.Border)
+            .Items(
+                Html.X().TreePanel()
+                    .ID("TreePanel1")
+                    .Region(Region.West)
+                    .Width(200)
+                    .Padding(5)
+                    .Title("My Albums")
+                    .RootVisible(false)
+                    .DisplayField("name")
+                    .View(
+                        Html.X().TreeView()
+                            .Plugins(
+                                Html.X().TreeViewDragDrop().DDGroup("organizerDD")
+                            )
+                    )
+                    .TopBarItem(
+                        Html.X().Button()
+                            .Text("New Album")
+                            .IconCls("album-btn")
+                            .DirectClickAction("AddNewAlbum")
+                    )
+                    .Store(
+                        Html.X().TreeStore()
+                            .Model(
+                                Html.X().Model()
+                                    .Fields(
+                                        new ModelField("name")
+                                    )
+                            )
+                            .Root(
+                                Html.X().Node()
+                                    .NodeID("root")
+                                    .Expanded(true)
+                                    .AllowDrop(false)
+                                    .Children(
+                                        Html.X().Node()
+                                            .AllowDrag(false)
+                                            .EmptyChildren(true)
+                                            .IconCls("album-btn")
+                                            .AttributesObject(
+                                                new { name = "Album 1" }
+                                            )
+                                    )
+                            )
+                    )
+                    .Editor(
+                        Html.X().TextField()
+                            .AllowBlank(false)
+                            .BlankText("A name is required")
+                            .SelectOnFocus(true)
+                    )
+                    .Plugins(
+                        Html.X().CellEditing()
+                    ),
+                    
+                    Html.X().Panel()
+                        .Region(Region.Center)
+                        .Title("My Images")
+                        .Layout(LayoutType.Fit)
+                        .PaddingSpec("5 5 5 0")
+                        .Items(
+                            Html.X().DataView()
+                                .TrackOver(true)
+                                .Cls("x-image-view")
+                                .AutoScroll(true)
+                                .ItemSelector("div.thumb-wrap")
+                                .MultiSelect(true)
+                                .SingleSelect(false)
+                                .Tpl(@<text>
+                                    <tpl for=".">
+                                        <div class="thumb-wrap">
+                                            <div class="thumb">
+                                                 <tpl if="!Ext.isIE6">
+                                                    <img src="{url}" />
+                                                </tpl>
+                                                <tpl if="Ext.isIE6">
+                                                    <div style="width:76px;height:76px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\"{url}\")"></div>
+                                                </tpl>              
+                                            </div>
+                                            <span>{name}</span>
+                                        </div>
+                                    </tpl>
+                                </text>)
+                                .Store(
+                                    Html.X().Store()
+                                        .DataSource(Model)
+                                        .Model(
+                                            Html.X().Model()
+                                                .IDProperty("name")
+                                                .Fields(
+                                                    new ModelField("name"),
+                                                    new ModelField("url"),
+                                                    new ModelField { Name = "leaf", DefaultValue = "true" }
+                                                )
+                                        )
+                                )
+                                .Plugins(
+                                    Html.X().DataViewDragSelector(),
+                                    Html.X().DataViewDraggable()
+                                        .DDConfig(
+                                            Html.X().DragZone().Group("organizerDD")
+                                        )
+                                        .GhostTpl(@<text>
+                                            <tpl for=".">
+                                                <img src="{url}" />
+                                                <tpl if="xindex % 4 == 0"><br /></tpl>
+                                            </tpl>
+                                            <div class="count">
+                                                {[values.length]} images selected
+                                            <div>
+                                        </text>)
+                                )
+                        )                        
+            )
+    )    
+}

@@ -1,0 +1,429 @@
+﻿@{
+    ViewBag.Title = "TreeGrid - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var formatHours = function (v) {
+            if (v < 1) {
+                return Math.round(v * 60) + " mins";
+            } else if (Math.floor(v) !== v) {
+                var min = v - Math.floor(v);
+                return Math.floor(v) + "h " + Math.round(min * 60) + "m";
+            } else {
+                return v + " hour" + (v === 1 ? "" : "s");
+            }
+        };
+
+        var handler = function(grid, rowIndex, colIndex, actionItem, event, record, row) {
+            Ext.Msg.alert('Editing' + (record.get('done') ? ' completed task' : '') , record.get('task'));
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>TreeGrid Example</h1>
+
+    <p>
+        This example is an advanced tree example. It illustrates:
+    </p>
+    
+    <div class="x-html">
+        <ul class="feature-list">
+            <li>Multiple headers</li>            
+
+            <li>Header hiding, showing, reordering and resizing</li>
+        
+            <li>useArrows configuration</li>
+        
+            <li>Keyboard Navigation</li>
+        
+            <li>Discontinguous selection by holding the CTRL key</li>            
+        
+            <li>singleExpand has been set to true</li>
+        </ul>
+    </div>
+
+    <br />
+
+    @(
+ X.TreePanel()
+            .Title("Core Team Projects")
+            .Width(500)
+            .Height(300)
+            .Collapsible(true)
+            .UseArrows(true)
+            .RootVisible(false)
+            .MultiSelect(true)
+            .SingleExpand(true)
+            .FolderSort(true)
+            .Fields(
+                X.ModelField().Name("task"),
+                X.ModelField().Name("user"),
+                X.ModelField().Name("duration"),
+                X.ModelField().Name("done").Type(ModelFieldType.Boolean)
+            )
+            .ColumnModel(
+                X.TreeColumn()
+                    .Text("Task")
+                    .Flex(2)
+                    .DataIndex("task"),
+
+                X.TemplateColumn()
+                    .Text("Duration")
+                    .Flex(1)
+                    .DataIndex("duration")
+                    .Align(Alignment.Center)
+                    .Template(t =>
+                    {
+                        t.Html = "{duration:this.formatHours}";
+                        t.Functions.Add(new JFunction { Name = "formatHours", Fn = "formatHours" });
+                    }),
+
+                X.Column()
+                    .Text("Assigned To")
+                    .Flex(1)
+                    .DataIndex("user"),
+
+                X.CheckColumn()
+                    .Text("Done")
+                    .DataIndex("done")
+                    .Width(40)
+                    .Editable(true)
+                    .StopSelection(false),
+
+                X.ActionColumn()
+                    .Text("Edit")
+                    .Width(40)
+                    .MenuDisabled(true)
+                    .Align(Alignment.Center)
+                    .Items(
+                        X.ActionItem()
+                            .Tooltip("Edit task")
+                            .Icon(Icon.PageWhiteEdit)
+                            .Handler("handler")
+                            .IsDisabled(func => {
+                                func.Handler = "return !record.data.leaf;";
+                            })
+                    )
+            )
+            .Root(
+                X.Node().Text("Tasks")
+                    .Children(
+                        X.Node()
+                             .Icon(Icon.Folder)
+                             .Expanded(true)
+                             .AttributesObject(
+                                new
+                                {
+                                    task = "Project: Shopping",
+                                    duration = 13.25,
+                                    user = "Clark Lewis"
+                                }
+                             )
+                             .Children(
+                                X.Node()
+                                    .Icon(Icon.Folder)
+                                    .AttributesObject(
+                                        new
+                                        {
+                                            task = "Housewares",
+                                            duration = 1.25,
+                                            user = "Clark Lewis"
+                                        }
+                                    )
+                                    .Children(
+                                        X.Node()
+                                            .Leaf(true)
+                                            .AttributesObject(
+                                                new
+                                                {
+                                                    task = "Kitchen supplies",
+                                                    duration = 0.25,
+                                                    user = "Clark Lewis"
+                                                }
+                                            ),
+
+                                        X.Node()
+                                            .Leaf(true)
+                                            .AttributesObject(
+                                                new
+                                                {
+                                                    task = "Groceries",
+                                                    duration = 0.4,
+                                                    user = "Clark Lewis",
+                                                    done = true
+                                                }
+                                            ),
+
+                                        X.Node()
+                                            .Leaf(true)
+                                            .AttributesObject(
+                                                new
+                                                {
+                                                    task = "Cleaning supplies",
+                                                    duration = 0.4,
+                                                    user = "Clark Lewis"
+                                                }
+                                            ),
+
+                                        X.Node()
+                                            .Leaf(true)
+                                            .AttributesObject(
+                                                new
+                                                {
+                                                    task = "Office supplies",
+                                                    duration = 0.2,
+                                                    user = "Clark Lewis"
+                                                }
+                                            )
+                                    ),
+
+                                 X.Node()
+                                    .Expanded(true)
+                                    .Icon(Icon.Folder)
+                                    .AttributesObject(
+                                        new
+                                        {
+                                            task = "Remodeling",
+                                            duration = 12,
+                                            user = "Clark Lewis"
+                                        }
+                                    )
+                                    .Children(
+                                        X.Node()
+                                            .Leaf(true)
+                                            .AttributesObject(
+                                                new
+                                                {
+                                                    task = "Retile kitchen",
+                                                    duration = 6.5,
+                                                    user = "Clark Lewis"
+                                                }
+                                            ),
+
+                                        X.Node()
+                                            .Icon(Icon.Folder)
+                                            .AttributesObject(
+                                                new
+                                                {
+                                                    task = "Paint bedroom",
+                                                    duration = 2.75,
+                                                    user = "Clark Lewis"
+                                                }
+                                            )
+                                            .Children(
+                                                X.Node()
+                                                    .Leaf(true)
+                                                    .AttributesObject(
+                                                        new
+                                                        {
+                                                            task = "Ceiling",
+                                                            duration = 1.25,
+                                                            user = "Clark Lewis"
+                                                        }
+                                                    ),
+
+                                                X.Node()
+                                                    .Leaf(true)
+                                                    .AttributesObject(
+                                                        new
+                                                        {
+                                                            task = "Walls",
+                                                            duration = 1.5,
+                                                            user = "Clark Lewis"
+                                                        }
+                                                    )
+                                            ),
+
+                                        X.Node()
+                                            .Leaf(true)
+                                            .AttributesObject(
+                                                new
+                                                {
+                                                    task = "Decorate living room",
+                                                    duration = 2.75,
+                                                    user = "Clark Lewis",
+                                                    done = true
+                                                }
+                                            ),
+
+                                        X.Node()
+                                            .Leaf(true)
+                                            .AttributesObject(
+                                                new
+                                                {
+                                                    task = "Fix lights",
+                                                    duration = 0.75,
+                                                    user = "Clark Lewis",
+                                                    done = true
+                                                }
+                                            ),
+
+                                        X.Node()
+                                            .Leaf(true)
+                                            .AttributesObject(
+                                                new
+                                                {
+                                                    task = "Reattach screen door",
+                                                    duration = 2,
+                                                    user = "Clark Lewis"
+                                                }
+                                            )
+                                    )
+                             ),
+
+                         X.Node()
+                             .Icon(Icon.Folder)
+                             .AttributesObject(
+                                new
+                                {
+                                    task = "Project: Testing",
+                                    duration = 2,
+                                    user = "Core Team"
+                                }
+                             )
+                             .Children(
+                                    X.Node()
+                                        .Icon(Icon.Folder)
+                                        .AttributesObject(
+                                            new
+                                            {
+                                                task = "Mac OSX",
+                                                duration = 0.75,
+                                                user = "Clark Lewis"
+                                            }
+                                        )
+                                        .Children(
+                                            X.Node()
+                                                .Leaf(true)
+                                                .AttributesObject(
+                                                    new
+                                                    {
+                                                        task = "FireFox",
+                                                        duration = 0.25,
+                                                        user = "Clark Lewis"
+                                                    }
+                                                ),
+
+                                            X.Node()
+                                                .Leaf(true)
+                                                .AttributesObject(
+                                                    new
+                                                    {
+                                                        task = "Safari",
+                                                        duration = 0.25,
+                                                        user = "Clark Lewis"
+                                                    }
+                                                ),
+
+                                            X.Node()
+                                                .Leaf(true)
+                                                .AttributesObject(
+                                                    new
+                                                    {
+                                                        task = "Chrome",
+                                                        duration = 0.25,
+                                                        user = "Clark Lewis"
+                                                    }
+                                                )
+                                        ),
+
+                                  X.Node()
+                                        .Icon(Icon.Folder)
+                                        .AttributesObject(
+                                            new
+                                            {
+                                                task = "Windows",
+                                                duration = 3.75,
+                                                user = "Darrell Meyer"
+                                            }
+                                        )
+                                        .Children(
+                                            X.Node()
+                                                .Leaf(true)
+                                                .AttributesObject(
+                                                    new
+                                                    {
+                                                        task = "FireFox",
+                                                        duration = 0.25,
+                                                        user = "Darrell Meyer"
+                                                    }
+                                                ),
+
+                                            X.Node()
+                                                .Leaf(true)
+                                                .AttributesObject(
+                                                    new
+                                                    {
+                                                        task = "Safari",
+                                                        duration = 0.25,
+                                                        user = "Darrell Meyer"
+                                                    }
+                                                ),
+
+                                            X.Node()
+                                                .Leaf(true)
+                                                .AttributesObject(
+                                                    new
+                                                    {
+                                                        task = "Chrome",
+                                                        duration = 0.25,
+                                                        user = "Darrell Meyer"
+                                                    }
+                                                ),
+
+                                            X.Node()
+                                                .Leaf(true)
+                                                .AttributesObject(
+                                                    new
+                                                    {
+                                                        task = "Internet Explorer",
+                                                        duration = 3,
+                                                        user = "Darrell Meyer"
+                                                    }
+                                                )
+                                        ),
+
+                                  X.Node()
+                                        .Icon(Icon.Folder)
+                                        .AttributesObject(
+                                            new
+                                            {
+                                                task = "Linux",
+                                                duration = 0.5,
+                                                user = "Steve Scott"
+                                            }
+                                        )
+                                        .Children(
+                                            X.Node()
+                                                .Leaf(true)
+                                                .AttributesObject(
+                                                    new
+                                                    {
+                                                        task = "FireFox",
+                                                        duration = 0.25,
+                                                        user = "Steve Scott"
+                                                    }
+                                                ),
+
+                                            X.Node()
+                                                .Leaf(true)
+                                                .AttributesObject(
+                                                    new
+                                                    {
+                                                        task = "Chrome",
+                                                        duration = 0.25,
+                                                        user = "Steve Scott"
+                                                    }
+                                                )
+                                        )
+                             )
+                    )
+            )
+    )
+}

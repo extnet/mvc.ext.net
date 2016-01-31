@@ -1,0 +1,115 @@
+﻿@model System.Collections.IEnumerable
+@{
+    ViewBag.Title = "DataView Overview - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <link href="@Url.Content("~/Areas/DataView_Basic/Content/data-view.css")" rel="stylesheet" />
+    <script>
+        var prepareData = function (data) {
+            data.shortName = Ext.util.Format.ellipsis(data.name, 15);
+            data.sizeString = Ext.util.Format.fileSize(data.size);
+            data.dateString = Ext.Date.format(data.lastmod, "m/d/Y g:i a");
+
+            return data;
+        };
+            
+        var selectionChanged = function (selModel, selected) {
+			var l = selected.length, s = l != 1 ? 's' : '';
+			App.Panel1.setTitle('Simple DataView (' + l + ' item' + s + ' selected)');
+		};
+    </script>
+}
+
+@section example
+{
+    <h1>DataView Example</h1>
+    <p>This example shows how to use an Ext.view.View.  It demonstrates editable labels (click<br />
+    any of the photo labels), basic multi-select (using ctrl or shift) and drag selection.</p>
+    
+    @(
+ Html.X().Panel()
+            .ID("Panel1")
+            .Cls("images-view")
+            .Frame(true)
+            .Width(605)
+            .Collapsible(true)
+            .Layout(LayoutType.Fit)
+            .Title("Simple DataView (0 items selected)")
+            .Items(
+                Html.X().DataView()
+                    .ID("ImageView")
+                    .Store(
+                        Html.X().Store()
+                            .DataSource(Model)
+                            .Model(
+                                Html.X().Model()
+                                    .IDProperty("name")
+                                    .Fields(
+                                        Html.X().ModelField().Name("name"),
+                                        Html.X().ModelField().Name("url"),
+                                        Html.X().ModelField().Name("size").Type(ModelFieldType.Int),
+                                        Html.X().ModelField().Name("lastmod").Type(ModelFieldType.Date)
+                                    )
+                            )
+                    )
+                    .MultiSelect(true)
+                    .OverItemCls("x-item-over")
+                    .ItemSelector("div.thumb-wrap")
+                    .EmptyText("No images to display")
+                    .TrackOver(true)
+                    .Tpl(
+                        Html.X().XTemplate()
+                            .Html(
+                                @<text>
+                                    <tpl for=".">
+								        <div class="thumb-wrap" id="{name}">
+									        <div class="thumb"><img src="{url}" title="{name}"></div>
+									        <span class="x-editable">{shortName}</span>
+								        </div>
+							        </tpl>
+							        <div class="x-clear"></div>
+                                </text>
+                            )
+                    )
+                    .PrepareData("prepareData")
+                    .Listeners(l =>
+                    {
+                        l.SelectionChange.Fn = "selectionChanged";
+                    })
+                    .Plugins(
+                        Html.X().DataViewDragSelector(),
+                        Html.X().DataViewLabelEditor().DataIndex("name")
+                    )
+            )
+            .Buttons(
+                Html.X().Button()
+                    .Text("Submit selected")
+                    .DirectEvents(de => {
+                        de.Click.Action = "SubmitSelection";
+                        de.Click.ExtraParams.Add(new Parameter("ImageView", "App.ImageView.getSelectionSubmit().getSelectionModelField().getValue()", ParameterMode.Raw));
+                    }),
+
+                Html.X().Button()
+                    .Text("Submit selected with values")
+                    .DirectEvents(de => {
+                        de.Click.Action = "SubmitSelectionWithValues";
+                        de.Click.ExtraParams.Add(new Parameter("images", "App.ImageView.getRowsValues({ selectedOnly : true })", ParameterMode.Raw));
+                    }),
+                    
+                 Html.X().Button()
+                    .Text("Clear Selection")
+                    .Handler("App.ImageView.getSelectionModel().deselectAll();"),                    
+                    
+                 Html.X().Button()
+                    .Text("Add 'Zack' to selection")
+                    .DirectClickAction("AddZack")
+            )
+    )    
+
+    <div style="width:600px; padding:10px;">
+        @Html.X().Label().ID("Label1")
+    </div>
+}

@@ -1,0 +1,86 @@
+﻿@model System.Collections.IEnumerable
+@{
+    ViewBag.Title = "DataView Overview - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <link href="@Url.Content("~/Areas/DataView_Basic/Content/data-view.css")" rel="stylesheet" />
+    <script>
+        var prepareData = function (data) {
+            data.shortName = Ext.util.Format.ellipsis(data.name, 15);
+            data.sizeString = Ext.util.Format.fileSize(data.size);
+            data.dateString = Ext.Date.format(data.lastmod, "m/d/Y g:i a");
+
+            return data;
+        };
+            
+        var selectionChanged = function (selModel, selected) {
+			var l = selected.length, s = l != 1 ? 's' : '';
+			App.ImagePanel.setTitle('Simple DataView (' + l + ' item' + s + ' selected)');
+		};
+    </script>
+}
+
+@section example
+{
+    <h1>DataView Example with paging</h1>
+    
+    @(
+        Html.X().Panel()
+            .ID("ImagePanel")
+            .Cls("images-view")
+            .Frame(true)
+            .Width(535)
+            .Collapsible(true)
+            .Title("Simple DataView (0 items selected)")
+            .Items(
+                Html.X().DataView()
+                    .ID("ImageView")
+                    .Store(
+                        Html.X().Store()
+                            .ID("Store1")
+                            .PageSize(5)
+                            .DataSource(Model)
+                            .Model(
+                                Html.X().Model()
+                                    .IDProperty("name")
+                                    .Fields(
+                                        Html.X().ModelField().Name("name"),
+                                        Html.X().ModelField().Name("url"),
+                                        Html.X().ModelField().Name("size").Type(ModelFieldType.Int),
+                                        Html.X().ModelField().Name("lastmod").Type(ModelFieldType.Date)
+                                    )
+                            )
+                    )
+                    .MultiSelect(true)
+                    .OverItemCls("x-item-over")
+                    .ItemSelector("div.thumb-wrap")
+                    .EmptyText("No images to display")
+                    .TrackOver(true)
+                    .Tpl(
+                        Html.X().XTemplate()
+                            .Html(
+                                @<text>
+                                    <tpl for=".">
+								        <div class="thumb-wrap" id="{name}">
+									        <div class="thumb"><img src="{url}" title="{name}"></div>
+									        <span class="x-editable">{shortName}</span>
+								        </div>
+							        </tpl>
+							        <div class="x-clear"></div>
+                                </text>
+                            )
+                    )
+                    .PrepareData("prepareData")
+                    .Listeners(l =>
+                    {
+                        l.SelectionChange.Fn = "selectionChanged";
+                    })
+            ) 
+            .BottomBar(
+                Html.X().PagingToolbar().StoreID("Store1").HideRefresh(true)
+            )          
+    )  
+}

@@ -1,0 +1,88 @@
+@model System.Collections.IEnumerable
+@{
+    ViewBag.Title = "Simple Array Grid With Local Paging and Remote Reloading - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+
+        var onComboBoxSelect = function (combo) {
+            var store = combo.up("gridpanel").getStore();
+            
+            store.pageSize = parseInt(combo.getValue(), 10); 
+            store.reload();
+        };
+    </script>
+}
+
+@section example
+{    
+    <h1>Array Grid with Local Paging and Remote Reloading</h1>
+        
+    <p>Demonstrates how to create a grid from Array data with Local Paging and Remote Reloading.</p>
+        
+    <p>Notice <b>Last Updated</b> column is revised with a new server-side DateTime stamp when the GridPanel "Refresh" button is clicked.
+    <br />This demonstrates that when the GridPanel is refreshed, the Data is requested again from the server via an AJAX request initiated by AjaxProxy, but the Paging and Sorting is done completely client-side in the browser.</p>
+        
+    @(Html.X().GridPanel()
+        .Title("Array Grid")
+        .Width(700)
+        .Store(
+            Html.X().Store()
+                .PageSize(10)
+                .DataSource(Model)
+                .Model(
+                    Html.X().Model()
+                    .Fields(
+                        new ModelField("company"),
+                        new ModelField("price", ModelFieldType.Float),
+                        new ModelField("change", ModelFieldType.Float),
+                        new ModelField("pctChange", ModelFieldType.Float),
+                        new ModelField("lastChange", ModelFieldType.Date)
+                    )
+                )
+                .ServerProxy(
+                    Html.X().AjaxProxy()
+                        .Url(Url.Action("GetData"))
+                )                
+        )
+        .ColumnModel(
+            Html.X().RowNumbererColumn(),
+            Html.X().Column().Text("Company").DataIndex("company").Flex(1),
+            Html.X().Column().Text("Price").DataIndex("price").Width(75).Renderer(RendererFormat.UsMoney),
+            Html.X().Column().Text("Change").DataIndex("change").Width(75).Renderer("change"),
+            Html.X().Column().Text("Change").DataIndex("pctChange").Width(75).Renderer("pctChange"),
+            Html.X().DateColumn().Text("Last Updated").DataIndex("lastChange").Width(85).Format("H:mm:ss")
+        )
+        .SelectionModel(
+            Html.X().RowSelectionModel().Mode(SelectionMode.Multi)
+        )
+        .View(Html.X().GridView().StripeRows(true))
+        .BottomBar(
+            Html.X().PagingToolbar()
+                .Items(
+                    Html.X().Label("Page size:"),
+                    Html.X().ToolbarSpacer(10),
+                    Html.X().ComboBox()
+                        .Width(80)
+                        .Items("1", "2", "10", "20")
+                        .SelectedItems("10")
+                        .Listeners(l=>{
+                            l.Select.Fn = "onComboBoxSelect";
+                        })
+                )                
+                .Plugins(Html.X().ProgressBarPager())
+        )        
+    )
+}

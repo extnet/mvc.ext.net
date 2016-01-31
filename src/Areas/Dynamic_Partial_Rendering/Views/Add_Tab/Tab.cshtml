@@ -1,0 +1,44 @@
+﻿@{
+    MvcResourceManager.RegisterGlobalStyle(Url.Content("~/Areas/Dynamic_Partial_Rendering/Content/Tab.css"));
+}
+
+@(Html.X().Panel()
+    .Title(DateTime.Now.ToLongTimeString())
+    .Closable(true)
+    .Layout(LayoutType.Fit)
+    .Items(Html.X().DataView()
+        .TrackOver(true)
+        .ItemSelector(".x-newtab-item")
+        .OverItemCls("x-newtab-over-item")
+        .Tpl(Html.X().XTemplate()
+            .Html(
+                @<text>
+                    <tpl for=".">
+                        <div class="x-newtab-item">
+                            <h1>{name}</h1>
+                        </div>
+                    </tpl>
+                </text>
+            )
+        )
+        .Store(Html.X().Store()
+            .DataSource(
+                new List<object> 
+                { 
+                    new {name = "1"},
+                    new {name = "2"},
+                    new {name = "3"},
+                    new {name = "4"},
+                    new {name = "5"},
+                    new {name = "6"}
+                }
+            )
+            .Model(Html.X().Model()
+                .Fields("name")
+            )
+        )
+        .Listeners(l => {
+            l.ItemClick.Handler = "Ext.Msg.alert('Item', '#' + record.data.name);";
+        })
+    )
+)

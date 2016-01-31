@@ -1,0 +1,99 @@
+﻿@(
+ Html.X().Panel()
+        .Region(Region.Center)
+        .AutoScroll(true)
+        .HtmlBin(@<text>
+            <script>
+                function filter (field, value) {
+                    var dataview = this.up('window').down('[cls=img-chooser-view]'),
+                        store = dataview.store;
+                       
+                    if (!Ext.isEmpty(value)) {
+                        store.suspendEvents();
+                        store.clearFilter();
+                        dataview.getSelectionModel().clearSelections();
+                        store.resumeEvents();
+                        store.filter({
+                            property: 'name',
+                            anyMatch: true,
+                            value   : value
+                        });
+                    } else {
+                        store.clearFilter();
+                    }
+                }
+            </script>            
+        </text>)
+        .TopBarItem(
+            Html.X().TextField()
+                .FieldLabel("Filter")
+                .Width(150)
+                .LabelAlign(LabelAlign.Right)
+                .LabelWidth(35)
+                .Listeners(l =>
+                {
+                    l.Change.Fn = "filter";
+                    l.Change.Buffer = 250;
+                }),
+
+             Html.X().ToolbarSpacer(),
+
+             Html.X().ComboBox()
+                 .FieldLabel("Sort By")
+                 .LabelAlign(LabelAlign.Right)
+                 .LabelWidth(45)
+                 .Width(150)
+                 .Editable(false)
+                 .Items("Name", "Size")
+                 .Listeners(l =>
+                 {
+                     l.Select.Handler = "this.up('window').down('[cls=img-chooser-view]').store.sort(this.getValue().toLowerCase());";
+                 })
+        )
+        .Items(
+            Html.X().DataView()
+                .SingleSelect(true)
+                .Cls("img-chooser-view")
+                .OverItemCls("x-view-over")
+                .ItemSelector("div.thumb-wrap")
+                .Store(
+                    Html.X().Store()
+                        .Model(
+                            Html.X().Model()
+                                .Fields(
+                                    Html.X().ModelField().Name("name"),
+                                    Html.X().ModelField().Name("url"),
+                                    Html.X().ModelField().Name("sizeString"),
+                                    Html.X().ModelField().Name("size").Type(ModelFieldType.Int)
+                                )
+                        )
+                        .Proxy(
+                            Html.X().AjaxProxy()
+                                .Url(Url.Action("GetImages"))
+                                .Reader(
+                                    Html.X().JsonReader().RootProperty("data")
+                                )
+                        )
+                )
+                .Tpl(@<text>
+                    <tpl for=".">
+                        <div class="thumb-wrap">
+                            <div class="thumb">
+                                <tpl if="!Ext.isIE6">
+                                    <img src="{url}" />
+                                </tpl>
+                                <tpl if="Ext.isIE6">
+                                    <div style="width:74px;height:74px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{url}')"></div>
+                                </tpl>                    
+                            </div>
+                            <span>{name}</span>
+                        </div>
+                    </tpl>
+                </text>)
+                .Listeners(l =>
+                {
+                    l.SelectionChange.Handler = "if(selected[0]){App.ImgDetailPanel.loadRecord(selected[0]);}";
+                    l.ItemDblClick.Fn = "insertImage";
+                })
+        )
+)

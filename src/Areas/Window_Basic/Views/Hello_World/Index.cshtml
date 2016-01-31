@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Simple Ext.NET Window Sample - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Simple Ext.NET Window Sample</h1>        
+    <p>The following sample demonstrates how to configure a new Window Component and "show" the Window if closed.</p>
+
+    @(X.Button()
+        .Text("Show Window (Client Event)")
+        .Icon(Icon.Application)
+        .Handler("App.Window1.show();")
+    )
+    
+    <br />
+    
+    @(X.Button()
+        .Text("Show Window (Controller Action)")
+        .Icon(Icon.Application)
+        .DirectClickAction("Button2_Click")
+    )
+    
+    @(X.Window()
+        .ID("Window1")
+        .Title("Hello World")
+        .Icon(Icon.Application)
+        .Height(185)
+        .Width(350)
+        .BodyStyle("background-color: #fff;")
+        .BodyPadding(5)
+        .Hidden(true)
+        .Modal(true)
+        .Content(c => "This is my first <a target='_blank' href='http://www.ext.net/'> Ext.NET</a> Window.")
+    )
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<example>
+  <tags></tags>
+  <include>
+    <file zip="true" url="../Shared/EditorTemplates/Customer.cshtml" />
+    <file zip="true" url="../Shared/EditorTemplates/Department.cshtml" />
+    <file zip="true" url="../../Models/Editor_TemplateModel.cs" />
+  </include>
+</example>

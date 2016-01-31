@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Hyperlink Variations - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Hyperlink Variations</h1>
+    
+    <h2>Simple Hyperlink</h2>
+
+    @(X.Hyperlink()
+        .NavigateUrl("http://www.ext.net")
+        .Text("http://www.ext.net")
+        .Target("_blank")
+    )
+    
+    <h2>Hyperlink with Icon</h2>
+    
+    @(X.Hyperlink()
+        .Icon(Icon.Application)
+        .Target("_blank")
+        .NavigateUrl("http://www.ext.net")
+        .Text("http://www.ext.net")
+    )
+    
+    <h2>Hyperlink with Right Aligned Icon</h2>
+    
+    @(X.Hyperlink()
+        .Icon(Icon.Application)
+        .IconAlign(Alignment.Right)
+        .Target("_blank")
+        .NavigateUrl("http://www.ext.net")
+        .Text("http://www.ext.net")
+    )
+    
+    <h2>Image Hyperlink</h2>
+    
+    @(X.Hyperlink()
+        .Target("_blank")
+        .NavigateUrl("http://www.ext.net")
+        .ImageUrl("http://speed.ext.net/identity/extnet-logo-small.png")
+    )
+}

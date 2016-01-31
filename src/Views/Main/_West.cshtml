@@ -1,0 +1,314 @@
+﻿@using System.Linq;
+
+@{
+    Theme theme = Ext.Net.Theme.Crisp;
+
+    if (this.Session["Ext.Net.Theme"] != null)
+    {
+        theme = (Theme)this.Session["Ext.Net.Theme"];
+    }
+
+    List<CheckMenuItem> themeItems = new List<CheckMenuItem>() 
+    { 
+        new CheckMenuItem
+        {
+            ID = "CheckMenuItemThemeAria",
+            Text = "Aria",
+            Group = "theme"
+        },
+        new CheckMenuItem
+        {
+            ID = "CheckMenuItemThemeDefault",
+            Text = "Blue",
+            Group = "theme"
+        },
+        new CheckMenuItem
+        {
+            ID = "CheckMenuItemThemeCrisp",
+            Text = "Crisp",
+            Group = "theme"
+        },
+        new CheckMenuItem
+        {
+            ID = "CheckMenuItemThemeCrispTouch",
+            Text = "Crisp Touch",
+            Group = "theme"
+        },
+        new CheckMenuItem
+        {
+            ID = "CheckMenuItemThemeGray",
+            Text = "Gray",
+            Group = "theme"
+        },
+        new CheckMenuItem
+        {
+            ID = "CheckMenuItemThemeNeptune",
+            Text = "Neptune",
+            Group = "theme"
+        },
+        new CheckMenuItem
+        {
+            ID = "CheckMenuItemThemeNeptuneTouch",
+            Text = "Neptune Touch",
+            Group = "theme"
+        },
+        new CheckMenuItem
+        {
+            ID = "CheckMenuItemThemeTriton",
+            Text = "Triton",
+            Group = "theme"
+        }
+    };
+    
+    string menuItemId = "CheckMenuItemTheme" + theme.ToString();
+
+    themeItems.First<CheckMenuItem>(item => item.ID == menuItemId).Checked = true;
+
+    ResourceManager.RegisterControlResources<TagLabel>();
+}
+
+@(Html.X().Panel()
+    .Region(Region.West)
+    .Layout(LayoutType.Fit)
+    .Width(270)
+    .Header(false)
+    .Border(false)
+    .Items(
+        new TreePanel
+        {
+            ID = "exampleTree",
+            AutoScroll = true,
+            Lines = false,
+            UseArrows = true,
+            CollapseFirst = false,
+            RootVisible = false,
+            HideHeaders = true,
+            Animate = false,
+
+            TopBar = 
+            {
+                new Toolbar
+                {
+                    Cls = "left-header",
+
+                    Items = 
+                    {
+                        new TextField
+                        {
+                            ID = "SearchField",
+                            EnableKeyEvents = true,
+                            Flex = 1,
+                            EmptyText = "Filter Examples...",
+                            RemoveClearTrigger = true,
+                            Triggers = 
+                            {
+                                new FieldTrigger
+                                {
+                                    Hidden = true,
+                                    Icon = TriggerIcon.Clear                                    
+                                }
+                            },
+                            Listeners = 
+                            {
+                                KeyUp = 
+                                {
+                                    Buffer = 500,
+                                    Fn = "keyUp"
+                                },
+                                TriggerClick = 
+                                {
+                                    Fn = "clearFilter"    
+                                },
+                                SpecialKey = 
+                                {
+                                    Fn = "filterSpecialKey",
+                                    Delay = 1
+                                }
+                            }
+                        },
+                        
+                        new Button 
+                        {
+                            ID = "OptionsButton",
+                            IconCls = "fa fa-cog",
+                            ArrowVisible = false,
+                            ToolTip = "Options",
+                            Menu = 
+                            {
+                                new Menu
+                                {
+                                    MinWidth = 200,
+                                    Items = 
+                                    {
+                                        new MenuItem
+                                        {
+                                            Text = "Expand All",
+                                            IconCls = "icon-expand-all",
+                                            Handler = "this.up('treepanel').expandAll(false);"
+                                        },
+                                        new MenuItem
+                                        {
+                                            Text = "Collapse All",
+                                            IconCls = "icon-collapse-all",
+                                            Handler = "this.up('treepanel').collapseAll(false);"
+                                        },
+                                        
+                                        new MenuSeparator(),
+                                        
+                                        new CheckMenuItem
+                                        {
+                                            Text = "NEW Only",
+                                            CheckHandler = "filterNewExamples"
+                                        },
+                                        
+                                        new CheckMenuItem
+                                        {
+                                            Text = "Debug Mode",
+                                            CheckHandler = "function (item, checked) { App.direct.ChangeScriptMode(checked); }",
+                                            Checked = MvcResourceManager.GetInstance().SourceFormatting
+                                        },
+                                        
+                                        new MenuSeparator(),
+                                        
+                                        new MenuItem
+                                        {
+                                            Text = "Theme",
+                                            Icon = Icon.Paintcan,
+                                            Menu = 
+                                            {
+                                                new Menu
+                                                {
+                                                    MinWidth = 200,
+                                                    Items = 
+                                                    {
+                                                        themeItems
+                                                    },
+                                                    
+                                                    Listeners = 
+                                                    {
+                                                        Click = 
+                                                        {
+                                                            Fn = "themeChange"   
+                                                        }   
+                                                    }    
+                                                }
+                                            }
+                                        },
+                                        
+                                        new MenuSeparator(),
+                                        
+                                        new MenuItem() 
+                                        {
+                                            Text = "Search by",
+                                            Icon = Icon.Find,
+                                            Menu = 
+                                            {
+                                                new Menu()  
+                                                {
+                                                    MinWidth = 200,
+                                                    Items = 
+                                                    {
+                                                        new CheckMenuItem() 
+                                                        {
+                                                            ID = "SearchByTitles",
+                                                            Checked = true,
+                                                            Text = "Titles"
+                                                        },
+                                                        new CheckMenuItem() 
+                                                        {
+                                                            ID = "SearchByTags",
+                                                            Checked = true,
+                                                            Text = "Tags"
+                                                        }   
+                                                    }   
+                                                }   
+                                            }
+                                        },
+                                        
+                                        new MenuItem()
+                                        {
+                                            Text = "Tag Cloud",
+                                            Icon = Icon.WeatherClouds,
+                                            Listeners =
+                                            {
+                                                Click =
+                                                {
+                                                    Fn = "showTagCloud"
+                                                }   
+                                            }
+                                        }
+                                    }    
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+
+            Store = 
+            {
+                new TreeStore
+                {
+                    Root = 
+                    {
+                        new Node
+                        {
+                            NodeID = "Root",
+                            Expanded = true
+                        }    
+                    },
+                    
+                    Proxy = 
+                    {
+                        new AjaxProxy
+                        {
+                            API = 
+                            {
+                                Read = Url.Action("GetExamplesNodes")
+                            },
+                            
+                            ActionMethods = 
+                            {
+                                Read = HttpMethod.GET    
+                            }
+                        }
+                    },
+                    
+                    Fields =
+                    {
+                        new ModelField("isNew"),
+                        new ModelField("tags")
+                    }
+                }    
+            },
+
+            ColumnModel =
+            {
+                Columns =
+                {
+                    new TreeColumn()
+                    {
+                        DataIndex = "text",
+                        Flex = 1,
+                        Renderer =
+                        {
+                            Fn = "treeRenderer"
+                        }   
+                    }
+                }
+            },
+
+            Listeners =
+            {
+                ItemClick =
+                {
+                    Handler = "onTreeItemClick(record, e);"
+                },
+
+                AfterRender =
+                {
+                    Fn = "onTreeAfterRender"
+                }
+            }
+      })
+)

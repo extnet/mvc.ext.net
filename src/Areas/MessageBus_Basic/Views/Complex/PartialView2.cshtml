@@ -1,0 +1,27 @@
+﻿@{
+    var X = Html.X();
+}
+
+@(X.Panel()
+    .Title("PartialView2")
+    .Flex(1)
+    .Height(200)
+    .Layout(LayoutType.Fit)
+    .MessageBusListeners(new MessageBusListener
+    {
+        Name = "ToPartialView2.*",
+        Handler = "this.body.createChild({html: name, tag:'p'});"
+    })
+    .Buttons(b => {
+        b.Add(X.Button()
+            .Text("Publish 'FromPartialView.FromPV2'")
+            .Listeners(l => l.Click.BroadcastOnBus = "FromPartialView.FromPV2")
+        );
+        
+        b.Add(X.Button()
+            .Text("Publish 'ToPartialView1.event1'")
+            .Listeners(l => l.Click.BroadcastOnBus = "ToPartialView1.event1")
+        );
+    })
+    
+)

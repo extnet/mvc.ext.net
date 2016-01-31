@@ -1,0 +1,27 @@
+﻿@model Ext.Net.MVC.Examples.Areas.Models.Employee
+@{
+    ViewBag.Title = "StoreFor";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>Store for Model</h1>
+    <p>Automatically build store for a model</p>
+    @(
+        Html.X().GridPanel()
+            .Title("Employees")
+            .Width(500)
+            .Height(200)
+            .ForceFit(true)
+            .Store(
+                Html.X().StoreFor<Ext.Net.MVC.Examples.Areas.Models.Employee>()
+            )            
+            .ColumnModel(
+                Html.X().ColumnFor(m=>m.Id).ToBuilder<Column.Builder>().Width(30),
+                Html.X().Column().DataIndex("FullName").Text("Full Name"),
+                Html.X().ColumnFor(m => m.FirstName),
+                Html.X().ColumnFor(m => m.LastName)
+            )
+    )
+}

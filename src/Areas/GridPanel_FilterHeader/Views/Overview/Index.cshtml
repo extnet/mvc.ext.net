@@ -1,0 +1,140 @@
+﻿@using SortDirection = Ext.Net.SortDirection
+@model List<object>
+
+@{
+    var X = Html.X();
+    ViewBag.Title = "FilterHeader plugin overview  - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var loadFilter = function (plugin) {
+            plugin.setValue({
+                Id : ">5",
+                Company: "!Inc.",
+                Price: ">50<70",
+                Visible: 1
+            });
+        };
+
+        // Preserve the original static method (in order to be able to call it)
+        var tmp = Ext.net.FilterHeader.behaviour.boolean[0].getValue;
+
+        // This override will allow filtering by 'yes' and 'no' on the boolean column.
+        Ext.define('Ext.net.FilterHeader.behaviour.boolean_ovr', {
+            override: 'Ext.net.FilterHeader.behaviour.defaultBooleanBehaviour',
+            getValue: function (value, field) {
+                var bool = null;
+                if (value.length > 0 && value.toLowerCase() === "yes".substr(0, value.length)) {
+                    bool = true;
+                }
+                else if (value.length > 0 && value.toLowerCase() === "no".substr(0, value.length)) {
+                    bool = false;
+                };
+
+                if (bool == null) {
+                    // Fall back to original filtering mechanism
+                    return this.callSuper(value, field);
+                }
+
+                // filter is always valid. if an invalid input is set, it will filter 0 records
+                return { value: bool, valid: true };
+            }
+        });
+
+        // "Emulate" the this.callSuper behavior (will conflict with other methods inside 
+        // FilterHeader.behaviour static block)
+        Ext.net.FilterHeader.behaviour.boolean[0].callSuper = tmp;
+    </script>
+}
+
+@section example {
+    <h1>FilterHeader plugin overview</h1> 
+        
+    <p>FilterHeader plugin allows use the following operators:</p>
+
+    <ul>
+        <li>String: =(equals), +(starts with), -(ends with), *(contains), !(doesn't contain)</li>
+        <li>Date: >, &lt;, >=, &lt;= or date for equals</li>
+        <li>Number: >, &lt;, >=, &lt;= or date for equals</li>
+        <li>Boolean: 1, 0, true, false, yes, no</li>
+    </ul>
+
+    @(X.Window()
+        .ID("Window1")
+        .Width(800)
+        .Height(400)
+        .Closable(false)
+        .Title("Example")
+        .Maximizable(true)
+        .Layout(LayoutType.Fit)
+        .Items(
+            X.GridPanel()
+                .ID("GridPanel1")
+                .Store(X.Store()
+                    .ID("Store1")
+                    .DataSource(Model)
+                    .PageSize(10)
+                    .Model(X.Model()
+                        .Fields(
+                            X.ModelField().Name("Id").Type(ModelFieldType.Int),
+                            X.ModelField().Name("Company").Type(ModelFieldType.String),
+                            X.ModelField().Name("Price").Type(ModelFieldType.Float),
+                            X.ModelField().Name("Date").Type(ModelFieldType.Date),
+                            X.ModelField().Name("Size").Type(ModelFieldType.String),
+                            X.ModelField().Name("Visible").Type(ModelFieldType.Boolean)
+                        )
+                    )
+                    .Sorters(X.DataSorter().Property("Company").Direction(SortDirection.ASC))
+                )
+                .ColumnModel(
+                    X.Column().Text("ID").DataIndex("Id"),
+                    X.Column().Text("Company").DataIndex("Company").Flex(1),
+                    X.Column().Text("Price").DataIndex("Price").Renderer(RendererFormat.UsMoney),
+                    X.DateColumn().Text("Date").DataIndex("Date").Align(Alignment.Center).Format("yyyy-MM-dd"),
+                    X.Column().Text("Size").DataIndex("Size"),
+                    X.Column().Text("Visible").DataIndex("Visible").Align(Alignment.Center)
+                        .Renderer("return (value) ? 'Yes':'No';")
+                )
+                .Plugins(
+                    X.FilterHeader()
+                )
+                .BottomBar(
+                    X.PagingToolbar()
+                        .HideRefresh(true)
+                )
+                .DockedItems(
+                    X.Toolbar()
+                        .Dock(Dock.Bottom)
+                        .Items(
+                            X.Button()
+                                .Text("Case Sensitive")
+                                .EnableToggle(true)
+                                .AllowDepress(true)
+                                .ToggleHandler("var plugin = this.up('grid').filterHeader; plugin.caseSensitive = this.pressed; plugin.applyFilter();"),
+                            X.Button()
+                                .Text("Load Filters")
+                                .Handler("loadFilter(this.up('grid').filterHeader);"),
+                            X.Button()
+                                .Text("Get Fields Values")
+                                .ToolTip("Get Values of Fields")
+                                .Handler("var values = Ext.encode(this.up('grid').filterHeader.getValue()); Ext.Msg.alert('Fields Values', values);"),
+                            X.Button()
+                                .Text("Get Filter Values")
+                                .ToolTip("Get Filter Values of Grid")
+                                .Handler("var filters = Ext.encode(this.up('grid').filterHeader.getFilterValues()); Ext.Msg.alert('Filter Values', filters);"),
+                            X.Button()
+                                .Text("Clear Filters")
+                                .Handler("this.up('grid').filterHeader.clearFilter();")
+                        )
+                )
+                .Listeners(l =>
+                {
+                    l.AfterRender.Handler = "this.filterHeader.fields[0].setIconCls('#Magnifier')";
+                    l.AfterRender.Delay = 10;
+                })
+        )
+    )
+}

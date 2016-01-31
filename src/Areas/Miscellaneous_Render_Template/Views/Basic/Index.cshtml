@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Render Template - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Render Template</h1>
+    <p>This is an custom component render template (not real error)</p>
+
+    <br />
+    <br />
+    
+    @(X.Component()
+        .RenderTpl(X.XTemplate()
+            .Html(@"<div style='border:1px solid gray; padding:10px;'>
+                        <h1 id='{id}-title' data-ref='title'>{title}</h1>
+                        <p>{msg}</p>
+                    </div>")
+        )
+        .RenderData(rd => 
+        {
+            rd.Add(new Parameter("title", "Error"));        
+            rd.Add(new Parameter("msg", "Something went wrong"));        
+        })
+        .ChildEls(ce => ce.Add(new ChildElement("title")))
+        .Listeners(l => l.AfterRender.Handler = "this.title.setStyle({color: 'red'});")
+    )
+}

@@ -1,0 +1,287 @@
+﻿@model Ext.Net.MVC.Examples.Areas.DragDrop_Advanced.Models.Example3Model
+
+@{
+    ViewBag.Title = "Drag&amp;Drop - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .app-header .x-panel-body {
+            background-color: #ddd;
+            padding-left: 5px;
+        }
+
+        .app-header h1 {
+            font-family: verdana,arial,sans-serif;
+            font-size: 20px;
+            color: #15428B;
+        }
+
+        .hospital-target {
+            border: 1px solid red;
+            margin: 5px;
+            padding: 5px;
+            font-size: small;
+            cursor: default;
+        }
+
+            .hospital-target.hospital-target-hover {
+                background-color: #C0C0C0;
+            }
+
+        .patient-source {
+            cursor: pointer;
+        }
+
+        .patient-view table {
+            border-collapse: separate;
+            border-spacing: 2px;
+        }
+
+        .patient-view td {
+            font-family: verdana,arial,sans-serif;
+            font-size: 12px;
+        }
+
+        td.patient-label {
+            background-color: #ddd;
+            border: 1px solid #bbb;
+            font-weight: bold;
+            text-align: right;
+            width: 100px;
+            padding: 0px 3px 0px 0px;
+        }
+
+        .patient-over {
+            background-color: #EFEFEF;
+            cursor: pointer;
+        }
+
+        .patient-selected {
+            background-color: #DFE8F6;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        /*
+         * Here is where we "activate" the DataView.
+         * We have decided that each node with the class "patient-source" encapsulates a single draggable
+         * object.
+         *
+         * So we inject code into the DragZone which, when passed a mousedown event, interrogates
+         * the event to see if it was within an element with the class "patient-source". If so, we
+         * return non-null drag data.
+         *
+         * Returning non-null drag data indicates that the mousedown event has begun a dragging process.
+         * The data must contain a property called "ddel" which is a DOM element which provides an image
+         * of the data being dragged. The actual node clicked on is not dragged, a proxy element is dragged.
+         * We can insert any other data into the data object, and this will be used by a cooperating DropZone
+         * to perform the drop operation.
+         */
+
+
+        //      On receipt of a mousedown event, see if it is within a draggable element.
+        //      Return a drag data object if so. The data object can contain arbitrary application
+        //      data, but it should also contain a DOM element in the ddel property to provide
+        //      a proxy to drag.
+        var getDragData = function (e) {
+            var view = App.PatientView,
+                sourceEl = e.getTarget(view.itemSelector, 10);
+
+            if (sourceEl) {
+                d = sourceEl.cloneNode(true);
+                d.id = Ext.id();
+
+                return (view.dragData = {
+                    sourceEl: sourceEl,
+                    repairXY: Ext.fly(sourceEl).getXY(),
+                    ddel: d,
+                    patientData: view.getRecord(sourceEl).data
+                });
+            }
+        };
+
+        //      Provide coordinates for the proxy to slide back to on failed drag.
+        //      This is the original XY coordinates of the draggable element.
+        var getRepairXY = function () {
+            return this.dragData.repairXY;
+        };
+
+
+
+
+        /*
+         * Here is where we "activate" the GridPanel.
+         * We have decided that the element with class "hospital-target" is the element which can receieve
+         * drop gestures. So we inject a method "getTargetFromEvent" into the DropZone. This is constantly called
+         * while the mouse is moving over the DropZone, and it returns the target DOM element if it detects that
+         * the mouse if over an element which can receieve drop gestures.
+         *
+         * Once the DropZone has been informed by getTargetFromEvent that it is over a target, it will then
+         * call several "onNodeXXXX" methods at various points. These include:
+         *
+         * onNodeEnter
+         * onNodeOut
+         * onNodeOver
+         * onNodeDrop
+         *
+         * We provide implementations of each of these to provide behaviour for these events.
+         */
+
+
+        //      If the mouse is over a target node, return that node. This is
+        //      provided as the "target" parameter in all "onNodeXXXX" node event handling functions
+        var getTargetFromEvent = function (e) {
+            return e.getTarget(".hospital-target");
+        };
+
+
+        //      On entry into a target node, highlight that node.
+        var onNodeEnter = function (target, dd, e, data) {
+            Ext.fly(target).addCls("hospital-target-hover");
+        };
+
+
+        //      On exit from a target node, unhighlight that node.
+        var onNodeOut = function (target, dd, e, data) {
+            Ext.fly(target).removeCls("hospital-target-hover");
+        };
+
+
+        //      While over a target node, return the default drop allowed class which
+        //      places a "tick" icon into the drag proxy.        
+        var onNodeOver = function (target, dd, e, data) {
+            return Ext.dd.DropZone.prototype.dropAllowed;
+        };
+
+
+        //      On node drop, we can interrogate the target node to find the underlying
+        //      application object that is the real target of the dragged data.
+        //      In this case, it is a Record in the GridPanel's Store.
+        //      We can use the data set up by the DragZone's getDragData method to read
+        //      any data we decided to attach.        
+        var onNodeDrop = function (target, dd, e, data) {
+            var rowBody = Ext.fly(target).findParent('.x-grid-rowbody-tr', null, false),
+                mainRow = rowBody.previousSibling,
+                h = App.HospitalGrid.getView().getRecord(mainRow),
+                targetEl = Ext.get(target),
+                html = targetEl.dom.innerHTML;
+
+            if (html == 'Drop Patient Here') {
+                html = data.patientData.Name;
+            } else {
+                html = data.patientData.Name + ', ' + targetEl.dom.innerHTML;
+            }
+
+            targetEl.update(html);
+            Ext.Msg.alert('Drop gesture', 'Dropped patient ' + data.patientData.Name +
+                ' on hospital ' + h.data.Name);
+            return true;
+        };
+    </script>
+}
+
+@section example 
+{
+    @(X.Viewport()
+        .Layout("border")
+        .Items(
+            X.Container()
+                .Cls("app-header")
+                .Height(30)
+                .Region(Region.North)
+                .Html("<h1>Patient Hospital Assignment</h1>")
+                .Margin(5),
+
+            X.Panel()
+                .Title("Patients")
+                .Width(300)
+                .Region(Region.West)
+                .MarginSpec("0 5 5 5")
+                .Items(
+                    X.DataView()
+                        .ID("PatientView")
+                        .Cls("patient-view")
+                        .OverItemCls("patient-over")
+                        .SelectedItemCls("patient-selected")
+                        .SimpleSelect(true)
+                        .ItemSelector("div.patient-source")
+                        .Store(X.Store()
+                            .ID("PatientStore")
+                            .Model(X.Model()
+                                .IDProperty("InsuranceCode")
+                                .Fields("Name", "Address", "Telephone")
+                            )
+                            .DataSource(Model.Patients)
+                        )
+                        .Tpl(X.XTemplate()
+                            .Html(@<text>
+                                <tpl for=".">
+									<div class="patient-source">
+										<table>
+											<tbody>
+												<tr>
+													<td class="patient-label">Name</td>
+													<td class="patient-name">{Name}</td>
+												</tr>
+												<tr>
+													<td class="patient-label">Address</td>
+													<td class="patient-name">{Address}</td>
+												</tr>
+												<tr>
+													<td class="patient-label">Telephone</td>
+													<td class="patient-name">{Telephone}</td>
+												</tr>
+											</tbody>
+											</table>
+										</div>
+									</tpl>
+                            </text>)
+                        )
+                ),
+
+                X.GridPanel()
+                    .ID("HospitalGrid")
+                    .Title("Hospitals")
+                    .Region(Region.Center)
+                    .MarginSpec("0 5 5 0")
+                    .Store(X.Store()
+                        .ID("HospitalStore")
+                        .Model(X.Model()
+                            .IDProperty("Code")
+                            .Fields("Name", "Address", "Telephone")
+                        )
+                        .DataSource(Model.Hospitals)
+                    )
+                    .ColumnModel(
+                        X.Column().DataIndex("Name").Text("NAME").Width(200),
+                        X.Column().DataIndex("Address").Text("Address").Width(300),
+                        X.Column().DataIndex("Telephone").Text("Telephone").Width(100)
+                    )
+                    .Features(
+                        X.RowBody()
+                            .CustomConfig(cc => cc.Add(new { rowBodyDivCls = "hospital-target"}))
+                            .GetAdditionalData("return {rowBody: 'Drop Patient Here', rowBodyDivCls:'hospital-target'};") 
+                    )
+        )
+    )
+
+    @(X.DragZone()
+        .Target("={#{PatientView}.getEl()}")
+        .GetDragData(h => h.Fn = "getDragData")
+        .GetRepairXY(h => h.Fn = "getRepairXY")
+    )
+
+    @(X.DropZone()
+        .Target("={#{HospitalGrid}.getView().el}")
+        .GetTargetFromEvent(h => h.Fn = "getTargetFromEvent")
+        .OnNodeEnter(h => h.Fn = "onNodeEnter")
+        .OnNodeOut(h => h.Fn = "onNodeOut")
+        .OnNodeOver(h => h.Fn = "onNodeOver")
+        .OnNodeDrop(h => h.Fn = "onNodeDrop")
+    )
+}

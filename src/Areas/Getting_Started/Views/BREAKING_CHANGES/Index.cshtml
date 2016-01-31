@@ -1,0 +1,14 @@
+﻿@model object
+@{
+    ViewBag.Title = "BREAKING_CHANGES.txt - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example 
+{
+    <p>
+<pre class="code">
+@Model.ToString()
+</pre>
+    </p>
+}

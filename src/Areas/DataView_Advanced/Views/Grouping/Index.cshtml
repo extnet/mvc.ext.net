@@ -1,0 +1,157 @@
+﻿@model System.Collections.IEnumerable
+@{
+    ViewBag.Title = "Grouping DataView - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <style>
+        div.item-wrap {
+            float: left;
+            border: 1px solid transparent;
+            margin: 5px 25px 5px 25px;
+            width: 100px;
+            cursor: pointer;
+            height: 120px;
+            text-align: center;
+        }
+
+            div.item-wrap img {
+                margin: 5px 0px 0px 5px;
+                width: 61px;
+                height: 77px;
+            }
+
+            div.item-wrap h6 {
+                font-size: 14px;
+                color: #3A4B5B;
+                font-family: tahoma,arial,san-serif;
+                margin: 0px;
+            }
+
+        div.x-view-over {
+            border: solid 1px silver;
+        }
+
+        #items-ct {
+            padding: 0px 30px 24px 30px;
+        }
+
+            #items-ct h2 {
+                border-bottom: 2px solid #3A4B5B;
+                cursor: pointer;
+            }
+
+                #items-ct h2 div {
+                    background  : transparent url(@Url.Content("~/Areas/DataView_Advanced/Content/images/group-expand-sprite.gif")) no-repeat 3px -47px;
+                    padding: 4px 4px 4px 17px;
+                    font-family: tahoma,arial,san-serif;
+                    font-size: 12px;
+                    color: #3A4B5B;
+                }
+
+            #items-ct .collapsed h2 div {
+                background-position: 3px 3px;
+            }
+
+            #items-ct .group-body {
+                margin-left: 2px;
+            }
+
+            #items-ct .collapsed .group-body {
+                display: none;
+            }
+    </style>
+
+    <script>
+        var itemClick = function (view, record, item, index, e) {
+            var group = e.getTarget("h2", 3, true),
+                subItem;
+
+            if (group) {
+                group.up("div").toggleCls("collapsed");
+                return false;
+            }
+
+            subItem = e.getTarget(".item-wrap");
+
+            if (subItem) {
+                Ext.Msg.alert("Click", "The node with id='" + subItem.id + "' has been clicked");
+            }
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>Grouping DataView Example</h1>
+
+    @(Html.X().Panel()
+        .Cls("items-view")
+        .Width(800)
+        .TopBar(
+            Html.X().Toolbar()
+                .Flat(true)
+                .Items(
+                    Html.X().ToolbarFill(),
+
+                    Html.X().Button()
+                        .Icon(Icon.BulletPlus)
+                        .Text("Expand All")
+                        .Handler("this.up('panel').down('dataview').el.select('.group-header').removeCls('collapsed');"),
+
+                    Html.X().Button()
+                        .Icon(Icon.BulletMinus)
+                        .Text("Collapse All")
+                        .Handler("this.up('panel').down('dataview').el.select('.group-header').addCls('collapsed');"),
+
+                    Html.X().ToolbarSpacer().Width(30)
+                )
+        )
+        .Items(
+            Html.X().DataView()
+                .SingleSelect(true)
+                .ItemSelector("div.group-header")
+                .EmptyText("No items to display")
+                .Store(
+                    Html.X().Store()
+                        .DataSource(Model)
+                        .Model(
+                            Html.X().Model()
+                                .Fields(
+                                    Html.X().ModelField().Name("Title"),
+                                    Html.X().ModelField().Name("Items").Type(ModelFieldType.Object)
+                                )
+                        )
+                )
+                .Tpl(@<text>
+                    <div id="items-ct">
+                        <tpl for=".">
+                            <div class="group-header">
+                                <h2><div>{Title}</div></h2>
+                                <div class="group-body">
+                                    <tpl for="Items">
+                                        <div id="{Id}" class="item-wrap">
+                                            <img src="{Icon}" />
+                                            <div>
+                                                <h6>{Title}</h6>
+                                            </div>
+                                        </div>
+                                    </tpl>
+                                    <div style="clear:left"></div>
+                                </div>
+                            </div>
+                        </tpl>
+                    </div>
+                </text>)
+                .Listeners(l =>
+                {
+                    l.ItemClick.Fn = "itemClick";
+
+                    l.Refresh.Handler = "this.el.select('.item-wrap', true).addClsOnOver('x-view-over');";
+                    l.Refresh.Delay = 100;
+                })
+        )
+    )
+}

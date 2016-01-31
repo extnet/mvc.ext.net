@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Ext.Net.MVC.Examples.Areas.Models.GridEmployee>
+@{
+    ViewBag.Title = "GridPanelFor";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>GridPanel for Model</h1>
+    <p>Automatically build a grid for a model</p>
+
+    @(
+        Html.X().GridPanelFor(Model)
+                .Title("Employees")
+                .Width(350)
+                .Height(200)
+                .ForceFit(true)
+    )
+}

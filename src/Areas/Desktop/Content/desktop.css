@@ -1,0 +1,27 @@
+﻿ .x-default-shortcut {
+    background-image : url(window48x48.png);
+} 
+
+.x-grid-shortcut {
+    background-image : url(grid48x48.png);
+} 
+
+.x-im-shortcut {
+    background-image : url(im48x48.gif);
+}
+
+.x-notepad-shortcut {
+    background-image : url(notepadLarge.png);
+}
+
+.x-status-shortcut {
+    background-image : url(statusLarge.png);
+}
+
+.x-bold-text .x-btn-inner{
+    font-weight: bold !important;
+}
+
+.x-long-label{
+    height:auto !important;
+}

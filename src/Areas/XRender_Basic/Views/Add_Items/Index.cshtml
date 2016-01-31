@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Dynamically add a new Panel to a Parent Items Collection - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Dynamically add a new Panel to a Parent Items Collection</h1>
+    
+    @(X.Button()
+        .Text("Add Panel")
+        .Icon(Icon.Add)
+        .DirectEvents(de => {
+            de.Click.Action = "Button1_Click";
+            de.Click.ExtraParams.Add(new Parameter("index", "#{Hidden1}.getValue()", ParameterMode.Raw));
+        })
+    )
+    
+    @X.Hidden().ID("Hidden1").Text("1")
+
+    <h2>Add a Panel to the TabPanel</h2>
+    
+    @(X.TabPanel()
+        .ID("TabPanel1")
+        .Height(185)
+        .Width(350)
+        .Items(
+            X.Panel()
+                .Title("Tab 1")
+                .Html("Tab 1")
+                .BodyPadding(5)
+        )
+    )
+    
+    <h2>Add a Panel to the Accordion Layout</h2>
+    
+    @(X.Panel()
+        .ID("Panel1")
+        .Title("Accordion")
+        .Height(185)
+        .Width(350)
+        .Layout(LayoutType.Accordion)
+        .Items(
+            X.Panel()
+                .Title("Panel 1")
+                .Html("Panel 1")
+                .BodyPadding(5)
+                .Border(false)
+        )
+    )
+}

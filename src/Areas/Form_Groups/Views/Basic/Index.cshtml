@@ -1,0 +1,352 @@
+﻿@{
+    ViewBag.Title = "CheckboxGroup and RadioGroup Configuration Options - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .x-label h1 {
+            margin-top: 20px;
+        }
+    </style>
+
+    <script>
+        var beforeButton1Click = function (extraParams) {
+            if (!this.up('form').isValid()) {
+                return false;
+            }
+
+            Ext.ComponentQuery.query('checkboxgroup').forEach(function (item, index) {
+                if (item.isXType('checkboxgroup', true)) {
+                    var count = 0;
+                    extraParams['groups1[' + index + '].FieldLabel'] = item.fieldLabel;
+                    Ext.ComponentQuery.query('checkbox', item).forEach(function (innerItem) {
+                        if (innerItem.isXType('checkbox') && innerItem.checked) {
+                            extraParams['groups1[' + index + '].CheckedItems[' + count + '].BoxLabel'] = innerItem.boxLabel;
+                            count++;
+                        }
+                    });
+                }
+            });
+
+            Ext.ComponentQuery.query('radiogroup').forEach(function (item, index) {
+                if (item.isXType('radiogroup', true)) {
+                    var count = 0;
+                    extraParams['groups2[' + index + '].FieldLabel'] = item.fieldLabel;
+                    Ext.ComponentQuery.query('checkbox', item).forEach(function (innerItem) {
+                        if (innerItem.isXType('radio') && innerItem.checked) {
+                            extraParams['groups2[' + index + '].CheckedItems[' + count + '].BoxLabel'] = innerItem.boxLabel;
+                            count++;
+                        }
+                    });
+                }
+            });
+
+            return true;
+        };
+
+        var showValues = function () {
+            var form = this.up("form"),
+                values,
+                text = "<h1>Values:</h1>"
+
+            if (form.isValid()) {
+                values = form.getForm().getFieldValues();
+                text += Ext.encode(values).replace(/,/g, ",<br>")
+                App.Label1.setText(text, false);
+            }
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>Checkbox / Radio Groups</h1>
+
+    <p>
+        This demonstrates the flexible layout capabilities of the CheckboxGroup and RadioGroup classes. It also
+        shows that you can validate checkboxes/radios as a group &mdash; try submitting the form before changing
+        any values to see this.
+    </p>
+    <p>
+        This illustrates the cascading configuration <code>fieldDefaults</code>. At the Panel level, it sets the field label
+        color to green, so all ancestor fields have green labels.
+    </p>
+
+    @(X.FormPanel()
+        .ID("FormPanel1")
+        .Title("Check/Radio Groups Example")
+        .Frame(true)
+        .Width(600)
+        .BodyPadding(10)
+        .FieldDefaults(fd => { fd.LabelWidth = 110; fd.LabelStyle = "color:green;padding-left:4px;"; })
+        .Buttons(
+            X.Button()
+                .ID("Button1")
+                .Text("Save")
+                .Icon(Icon.Disk)
+                .DirectEvents(de =>
+                {
+                    de.Click.Url = Url.Action("Button1Click");
+                    de.Click.Before = "beforeButton1Click.call(this, extraParams);";
+                }),
+
+            X.Button()
+                .Text("Show values")
+                .Handler("showValues"),
+
+            X.Button()
+                .Text("Reset")
+                .Handler("this.up('form').reset();")
+        )
+        .Items(
+            X.Container()
+                .Layout(LayoutType.HBox)
+                .MarginSpec("0 0 10")
+                .Items(
+                    X.FieldSet()
+                        .Flex(1)
+                        .Title("Individual Checkboxes")
+                        .Layout(LayoutType.Anchor)
+                        .DefaultAnchor("100%")
+                        .Defaults(X.Parameter().Name("HideEmptyLabel").Value("false").Mode(ParameterMode.Raw))
+                        .Items(
+                            X.TextField().ID("TextField1").FieldLabel("Alignment Test"),
+                            X.Checkbox().ID("CheckboxDog").BoxLabel("Dog").FieldLabel("Favorite Animals"),
+                            X.Checkbox().ID("CheckboxCat").BoxLabel("Cat"),
+                            X.Checkbox().ID("CheckboxMonkey").BoxLabel("Monkey").Checked(true)
+                        ),
+
+                    X.Component().Width(10),
+
+                    X.FieldSet()
+                        .Flex(1)
+                        .Title("Individual Radios")
+                        .Layout(LayoutType.Anchor)
+                        .DefaultAnchor("100%")
+                        .Defaults(X.Parameter().Name("HideEmptyLabel").Value("false").Mode(ParameterMode.Raw))
+                        .Items(
+                            X.TextField().ID("TextField2").FieldLabel("Alignment Test"),
+                            X.Radio().BoxLabel("Red").InputValue("Red").Name("fav-color").FieldLabel("Favorite Color").Checked(true),
+                            X.Radio().BoxLabel("Blue").InputValue("Blue").Name("fav-color"),
+                            X.Radio().BoxLabel("Green").InputValue("Green").Name("fav-color")
+                        )
+                ),
+
+            X.FieldSet()
+                .Title("Checkbox Groups (initially collapsed)")
+                .Layout(LayoutType.Anchor)
+                .Collapsible(true)
+                .Collapsed(true)
+                .DefaultAnchor("100%")
+                .Items(
+                    X.TextField().ID("TextField3").FieldLabel("Alignment Test"),
+
+                    X.CheckboxGroup()
+                        .ID("CheckboxGroup1")
+                        .Cls("x-check-group-alt")
+                        .FieldLabel("Auto Layout")
+                        .Items(
+                            X.Checkbox().ID("Checkbox4").BoxLabel("Item 1"),
+                            X.Checkbox().ID("Checkbox5").BoxLabel("Item 2").Checked(true),
+                            X.Checkbox().ID("Checkbox6").BoxLabel("Item 3"),
+                            X.Checkbox().ID("Checkbox7").BoxLabel("Item 4"),
+                            X.Checkbox().ID("Checkbox8").BoxLabel("Item 5")
+                        ),
+
+                    X.CheckboxGroup()
+                        .ID("CheckboxGroup2")
+                        .FieldLabel("Single Column")
+                        .ColumnsNumber(1)
+                        .Items(
+                            X.Checkbox().ID("Checkbox9").BoxLabel("Item 1"),
+                            X.Checkbox().ID("Checkbox10").BoxLabel("Item 2").Checked(true),
+                            X.Checkbox().ID("Checkbox11").BoxLabel("Item 3")
+                        ),
+
+                    X.CheckboxGroup()
+                        .ID("CheckboxGroup3")
+                        .FieldLabel("Multi-Column (Horizontal)")
+                        .ColumnsNumber(3)
+                        .Cls("x-check-group-alt")
+                        .Items(
+                            X.Checkbox().ID("Checkbox12").BoxLabel("Item 1"),
+                            X.Checkbox().ID("Checkbox13").BoxLabel("Item 2").Checked(true),
+                            X.Checkbox().ID("Checkbox14").BoxLabel("Item 3"),
+                            X.Checkbox().ID("Checkbox15").BoxLabel("Item 4"),
+                            X.Checkbox().ID("Checkbox16").BoxLabel("Item 5")
+                        ),
+
+                    X.CheckboxGroup()
+                        .ID("CheckboxGroup4")
+                        .FieldLabel("Multi-Column (Vertical)")
+                        .ColumnsNumber(3)
+                        .Vertical(true)
+                        .Items(
+                            X.Checkbox().ID("Checkbox17").BoxLabel("Item 1"),
+                            X.Checkbox().ID("Checkbox18").BoxLabel("Item 2").Checked(true),
+                            X.Checkbox().ID("Checkbox19").BoxLabel("Item 3"),
+                            X.Checkbox().ID("Checkbox20").BoxLabel("Item 4"),
+                            X.Checkbox().ID("Checkbox21").BoxLabel("Item 5")
+                        ),
+
+                    X.CheckboxGroup()
+                        .ID("CheckboxGroup5")
+                        .FieldLabel("Multi-Column<br />(Custom Widths)")
+                        .ColumnsWidths(new double[] { 100, 100 })
+                        .Vertical(true)
+                        .Cls("x-check-group-alt")
+                        .Items(
+                            X.Checkbox().ID("Checkbox22").BoxLabel("Item 1"),
+                            X.Checkbox().ID("Checkbox23").BoxLabel("Item 2").Checked(true),
+                            X.Checkbox().ID("Checkbox24").BoxLabel("Item 3"),
+                            X.Checkbox().ID("Checkbox25").BoxLabel("Item 4"),
+                            X.Checkbox().ID("Checkbox26").BoxLabel("Item 5")
+                        ),
+
+                    X.CheckboxGroup()
+                        .ID("CheckboxGroup6")
+                        .MsgTarget(MessageTarget.Side)
+                        .FieldLabel("Custom Layout<br />(w/ validation)")
+                        .AllowBlank(false)
+                        .AutoFitErrors(false)
+                        .Layout(LayoutType.Column)
+                        .AnchorHorizontal("-18")
+                        .Items(
+                            X.Container().ColumnWidth(0.25)
+                                .Items(
+                                    X.Component().Html("Heading 1").Cls("x-form-check-group-label"),
+                                    X.Checkbox().ID("Checkbox27").BoxLabel("Item 1").Checked(true),
+                                    X.Checkbox().ID("Checkbox28").BoxLabel("Item 2").Checked(true)
+                                ),
+
+                            X.Container().ColumnWidth(0.5)
+                                .Items(
+                                    X.Component().Html("Heading 2").Cls("x-form-check-group-label"),
+                                    X.Checkbox().ID("Checkbox29").BoxLabel("A long item just for fun")
+                                ),
+
+                            X.Container().ColumnWidth(0.25)
+                                .Items(
+                                    X.Component().Html("Heading 3").Cls("x-form-check-group-label"),
+                                    X.Checkbox().ID("Checkbox1").BoxLabel("Item 4").Checked(true),
+                                    X.Checkbox().ID("Checkbox2").BoxLabel("Item 5")
+                                )
+                        )
+                ),
+
+            X.FieldSet()
+                .Title("Radio Groups")
+                .Layout(LayoutType.Anchor)
+                .Collapsible(true)
+                .DefaultAnchor("100%")
+                .Items(
+                    X.TextField().ID("TextField4").FieldLabel("Alignment Test"),
+
+                    X.RadioGroup()
+                        .ID("RadioGroup1")
+                        .GroupName("RadioGroup1")
+                        .FieldLabel("Auto Layout")
+                        .Cls("x-check-group-alt")
+                        .Items(
+                            X.Radio().InputValue("1").BoxLabel("Item 1"),
+                            X.Radio().InputValue("2").BoxLabel("Item 2").Checked(true),
+                            X.Radio().InputValue("3").BoxLabel("Item 3"),
+                            X.Radio().InputValue("4").BoxLabel("Item 4"),
+                            X.Radio().InputValue("5").BoxLabel("Item 5")
+                        ),
+
+                    X.RadioGroup()
+                        .ID("RadioGroup2")
+                        .GroupName("RadioGroup2")
+                        .FieldLabel("Single Column")
+                        .ColumnsNumber(1)
+                        .Items(
+                            X.Radio().InputValue("1").BoxLabel("Item 1"),
+                            X.Radio().InputValue("2").BoxLabel("Item 2").Checked(true),
+                            X.Radio().InputValue("3").BoxLabel("Item 3")
+                        ),
+
+                    X.RadioGroup()
+                        .ID("RadioGroup3")
+                        .GroupName("RadioGroup3")
+                        .FieldLabel("Multi-Column (Horizontal)")
+                        .ColumnsNumber(3)
+                        .Cls("x-check-group-alt")
+                        .Items(
+                            X.Radio().InputValue("1").BoxLabel("Item 1"),
+                            X.Radio().InputValue("2").BoxLabel("Item 2").Checked(true),
+                            X.Radio().InputValue("3").BoxLabel("Item 3"),
+                            X.Radio().InputValue("4").BoxLabel("Item 4"),
+                            X.Radio().InputValue("5").BoxLabel("Item 5")
+                        ),
+
+                    X.RadioGroup()
+                        .ID("RadioGroup4")
+                        .GroupName("RadioGroup4")
+                        .FieldLabel("Multi-Column(Vertical)")
+                        .ColumnsNumber(3)
+                        .Vertical(true)
+                        .Items(
+                            X.Radio().InputValue("1").BoxLabel("Item 1"),
+                            X.Radio().InputValue("2").BoxLabel("Item 2").Checked(true),
+                            X.Radio().InputValue("3").BoxLabel("Item 3"),
+                            X.Radio().InputValue("4").BoxLabel("Item 4"),
+                            X.Radio().InputValue("5").BoxLabel("Item 5")
+                        ),
+
+                    X.RadioGroup()
+                        .ID("RadioGroup5")
+                        .GroupName("RadioGroup5")
+                        .FieldLabel("Multi-Column<br />(Custom Widths)")
+                        .ColumnsWidths(new double[] { 100, 100 })
+                        .Vertical(true)
+                        .Cls("x-check-group-alt")
+                        .Items(
+                            X.Radio().InputValue("1").BoxLabel("Item 1"),
+                            X.Radio().InputValue("2").BoxLabel("Item 2").Checked(true),
+                            X.Radio().InputValue("3").BoxLabel("Item 3"),
+                            X.Radio().InputValue("4").BoxLabel("Item 4"),
+                            X.Radio().InputValue("5").BoxLabel("Item 5")
+                        ),
+
+                    X.RadioGroup()
+                        .ID("RadioGroup6")
+                        .GroupName("RadioGroup6")
+                        .MsgTarget(MessageTarget.Side)
+                        .FieldLabel("Custom Layout<br />(w/ validation)")
+                        .AllowBlank(false)
+                        .AutoFitErrors(false)
+                        .Layout(LayoutType.Column)
+                        .AnchorHorizontal("-18")
+                        .Items(
+                            X.Container()
+                                .ColumnWidth(0.25)
+                                .ID("RadioColumn1")
+                                .Items(
+                                    X.Component().Html("Heading 1").Cls("x-form-check-group-label"),
+                                    X.Radio().InputValue("1").BoxLabel("Item 1"),
+                                    X.Radio().InputValue("2").BoxLabel("Item 2").Checked(true)
+                                ),
+
+                            X.Container().ColumnWidth(0.5)
+                                .Items(
+                                    X.Component().Html("Heading 2").Cls("x-form-check-group-label"),
+                                    X.Radio().InputValue("3").BoxLabel("A long item just for fun")
+                                ),
+
+                            X.Container().ColumnWidth(0.25)
+                                .Items(
+                                    X.Component().Html("Heading 3").Cls("x-form-check-group-label"),
+                                    X.Radio().InputValue("4").BoxLabel("Item 4"),
+                                    X.Radio().InputValue("5").BoxLabel("Item 5")
+                                )
+                        )
+                )
+        )
+    )
+
+    @(X.Label().ID("Label1"))
+}

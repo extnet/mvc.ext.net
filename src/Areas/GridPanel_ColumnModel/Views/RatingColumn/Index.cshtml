@@ -1,0 +1,48 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "RatingColumn - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+     <style>
+        .number-selected {
+	        background : transparent url(@Url.Content("~/Areas/GridPanel_ColumnModel/Content/star_n.png")) repeat-x left center;
+        }
+        
+        .number-unselected {
+	        background : transparent url(@Url.Content("~/Areas/GridPanel_ColumnModel/Content/star_fade_n.png")) repeat-x left center;
+        }
+    </style>  
+}
+
+@section example
+{
+    <h1>Rating Column</h1>
+
+    @(Html.X().GridPanel()
+        .Title("RatingColumn")
+        .Width(600)
+        .Height(350)
+        .Store(Html.X().Store()
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("company"),
+                    new ModelField("rating1", ModelFieldType.Float),
+                    new ModelField("rating2", ModelFieldType.Float),
+                    new ModelField("rating3", ModelFieldType.Float)
+                )
+            )
+            .DataSource(Model)
+        )
+        .ColumnModel(
+            Html.X().Column().Text("Company").DataIndex("company"),
+            Html.X().RatingColumn().Text("Rating").DataIndex("rating1"),
+            Html.X().RatingColumn().Text("Editable").DataIndex("rating2").RoundToTick(false).Editable(true), 
+            Html.X().RatingColumn().Text("Custom").DataIndex("rating3").SelectedCls("number-selected").UnselectedCls("number-unselected")
+        )
+    )
+    
+}

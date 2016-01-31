@@ -1,0 +1,123 @@
+﻿@model object[]
+@{
+    ViewBag.Title = "FormPanel - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+    </script>
+}
+
+@section example
+{
+    @(X.FormPanel()
+        .ID("FormPanel1")
+        .Title("Company data")
+        .Width(1000)
+        .BodyPadding(5)
+        .Layout(LayoutType.Column)
+        .FieldDefaults(fd => {
+            fd.LabelAlign = LabelAlign.Left;
+            fd.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+            X.GridPanel()
+                .Title("Company Data")
+                .ColumnWidth(0.6)
+                .Height(400)
+                .Store(X.Store()
+                    .ID("Store1")
+                    .Data(Model)
+                    .Reader(new ArrayReader())
+                    .Model(X.Model()
+                        .Fields(f => {
+                            f.Add(X.ModelField().Name("company"));
+                            f.Add(X.ModelField().Name("price").Type(ModelFieldType.Float));
+                            f.Add(X.ModelField().Name("change").Type(ModelFieldType.Float));
+                            f.Add(X.ModelField().Name("pctChange").Type(ModelFieldType.Float));
+                            f.Add(X.ModelField().Name("lastChange").Type(ModelFieldType.Date).DateFormat("M/d hh:mmtt"));
+                            f.Add(X.ModelField().Name("rating").Type(ModelFieldType.Int).Convert(j => j.Handler = "var pct = record.get('pctChange'); if (pct < 0) return 2; if (pct < 1) return 1; return 0;"));
+                        })
+                    )
+                )
+                .ColumnModel(
+                    X.Column().Text("Company").DataIndex("company").Flex(1),
+                    X.Column().Text("Price").Width(75).DataIndex("price").Renderer(RendererFormat.UsMoney),
+                    X.Column().Text("Change").Width(75).DataIndex("change").Renderer("change"),
+                    X.Column().Text("Change").Width(75).DataIndex("pctChange").Renderer("pctChange"),
+                    X.DateColumn().Text("Last Updated").Width(95).DataIndex("lastChange"),
+                    X.Column().Text("Rating").Width(50).Sortable(true).DataIndex("rating").Renderer("if (value == 0) return 'A'; if (value == 1) return 'B'; if (value == 2) return 'C';")
+                )
+                .Listeners(l => l.SelectionChange.Handler = "if (selected[0]) { this.up('form').getForm().loadRecord(selected[0]); }"),
+        
+        X.FieldSet()
+            .ColumnWidth(0.4)
+            .Title("Company details")
+            .MarginSpec("0 0 0 10")
+            .Defaults(d => {
+                d.Add(new Parameter("LabelWidth", "115"));
+            })
+            .Items(
+                X.TextField()
+                    .Name("company")
+                    .FieldLabel("Name"),
+                X.TextField()
+                    .Name("price")
+                    .FieldLabel("Price"),
+                X.TextField()
+                    .Name("pctChange")
+                    .FieldLabel("Change (%)"),
+                X.DateField()
+                    .Name("lastChange")
+                    .FieldLabel("Last Updated"),
+                X.RadioGroup()
+                    .FieldLabel("Rating (read-only)")
+                    .ColumnsNumber(3)
+                    .AutomaticGrouping(false)
+                    .Items(
+                        X.Radio().Name("rating").InputValue("0").BoxLabel("A").ReadOnly(true),
+                        X.Radio().Name("rating").InputValue("1").BoxLabel("B").ReadOnly(true),
+                        X.Radio().Name("rating").InputValue("2").BoxLabel("C").ReadOnly(true)
+                    )
+            )
+        )
+        .Buttons(
+            X.Button()
+                .Text("Save To Grid")
+                .OnClientClick(@"var form = this.up('form'), 
+                                     r = form.getForm().getRecord(); 
+    
+                                 if (r) {
+                                     form.getForm().updateRecord(form.down('grid').getSelectionModel().getLastSelected());
+                                 }"),
+                                                                                                                        
+            X.Button()
+                .Text("Reset Fields")
+                .OnClientClick("this.up('form').getForm().reset();"),
+            X.Button()
+                .Text("Get Values...")
+                .Menu(X.Menu()
+                    .Items(
+                        X.MenuItem()
+                            .Text("Object")
+                            .OnClientClick("alert(Ext.encode(this.up('form').getForm().getValues()));"),
+                        X.MenuItem()
+                            .Text("String")
+                            .OnClientClick("alert(this.up('form').getForm().getValues(true));")
+                    )
+                )
+        )
+    )
+}

@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "ImageButton Control Variations - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example 
+{
+    <h2>Simple ImageButton</h2> 
+
+    @(X.ImageButton()
+        .ImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/button.gif"))
+        .OverImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/overButton.gif"))
+        .DisabledImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/disabled.gif"))
+        .PressedImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/pressed.gif"))
+        .DirectEvents(de => {
+                de.Click.Url = Url.Action("Button_Click");
+            }
+        )
+    )
+    
+    <h2>Disabled ImageButton</h2>
+    
+    @(X.ImageButton()
+        .Disabled(true)
+        .ImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/button.gif"))
+        .OverImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/overButton.gif"))
+        .DisabledImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/disabled.gif"))
+        .PressedImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/pressed.gif"))
+    )
+    
+    <h2>Toggling ImageButton</h2>
+    
+    @(X.ImageButton()
+        .EnableToggle(true)
+        .ImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/button.gif"))
+        .OverImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/overButton.gif"))
+        .DisabledImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/disabled.gif"))
+        .PressedImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/pressed.gif"))
+    )
+    
+    <h2>ImageButton with Menu</h2> 
+    
+    @(X.ImageButton()
+       .ImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/button.gif"))
+       .OverImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/overButton.gif"))
+       .DisabledImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/disabled.gif"))
+       .PressedImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/pressed.gif"))
+       .Menu(X.Menu()
+              .Items(
+                  X.MenuItem()
+                   .Text("Add")
+                   .Icon(Icon.Add),
+                  X.MenuItem()
+                   .Text("Accept")
+                   .Icon(Icon.Accept)
+           )
+       )
+    )
+    
+    <h2>ImageButton in ToggleGroup</h2>
+    
+    @(X.ImageButton()
+        .ToggleGroup("Group1")
+        .ImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/button.gif"))
+        .OverImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/overButton.gif"))
+        .DisabledImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/disabled.gif"))
+        .PressedImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/pressed.gif"))
+    )
+    
+    @(X.ImageButton()
+        .ToggleGroup("Group1")
+        .ImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/button.gif"))
+        .OverImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/overButton.gif"))
+        .DisabledImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/disabled.gif"))
+        .PressedImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/pressed.gif"))
+    )
+    
+    @(X.ImageButton()
+        .ToggleGroup("Group1")
+        .ImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/button.gif"))
+        .OverImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/overButton.gif"))
+        .DisabledImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/disabled.gif"))
+        .PressedImageUrl(@Url.Content("~/Areas/Buttons_Basic/Content/images/pressed.gif"))
+    )
+}

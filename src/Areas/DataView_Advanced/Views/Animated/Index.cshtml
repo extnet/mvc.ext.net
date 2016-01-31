@@ -1,0 +1,107 @@
+﻿@model System.Collections.IEnumerable
+@{
+    ViewBag.Title = "Animated DataView - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <link href="@Url.Content("~/Areas/DataView_Advanced/Content/animated-dataview.css")" rel="stylesheet" />
+
+    <script>
+        var filterData = function (slider) {
+            var store = App.Store1,
+                values  = slider.getValues();
+
+            store.suspendEvents();
+            store.clearFilter();                
+            store.resumeEvents();
+            store.filter([{
+                fn : function (record) {
+                    return record.get('price') >= values[0] && record.get('price') <= values[1];
+                }
+            }]);
+                
+            store.sort('name', 'ASC');                
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>Animated DataView Example</h1>
+    <p>This example uses the DataViewAnimated plugin to animate the changes to a DataView.</p>
+     
+    @(
+        Html.X().Panel()
+            .Title("Animated DataView")
+            .Height(555)
+            .Width(650)
+            .Layout(LayoutType.Fit)
+            .TopBarItem(
+                Html.X().DisplayField().Text("Filter phone price:&nbsp;"),
+                Html.X().Slider()
+                    .HideLabel(true)
+                    .Width(300)
+                    .MaxValue(500)
+                    .Numbers(new double[] { 100, 200 })
+                    .Listeners(l =>{
+                        l.AfterRender.Fn = "filterData";
+                        l.AfterRender.Delay = 10;
+
+                        l.Change.Fn = "filterData";
+                        l.Change.Buffer = 70;
+                    })
+            )
+            .Items(
+                Html.X().DataView()
+                    .ID("phones")
+                    .DeferInitialRefresh(false)
+                    .ItemSelector("div.phone")
+                    .OverItemCls("phone-hover")
+                    .MultiSelect(true)
+                    .AutoScroll(true)
+                    .Cls("phones-view")
+                    .Store(
+                        Html.X().Store()
+                            .ID("Store1")
+                            .DataSource(Model)
+                            .Model(
+                                Html.X().Model()
+                                    .IDProperty("id")                                    
+                                    .Fields(
+                                        Html.X().ModelField().Name("hasEmail").Type(ModelFieldType.Boolean),
+                                        Html.X().ModelField().Name("hasCamera").Type(ModelFieldType.Boolean),
+                                        Html.X().ModelField().Name("id").Type(ModelFieldType.Int),
+                                        Html.X().ModelField().Name("name"),
+                                        Html.X().ModelField().Name("price").Type(ModelFieldType.Int),
+                                        Html.X().ModelField().Name("screen"),
+                                        Html.X().ModelField().Name("camera"),
+                                        Html.X().ModelField().Name("color"),
+                                        Html.X().ModelField().Name("type"),
+                                        Html.X().ModelField().Name("reviews").Type(ModelFieldType.Int),
+                                        Html.X().ModelField().Name("screen-size").Type(ModelFieldType.Int)
+                                    )
+                            )
+                            .Sorters("name", Ext.Net.SortDirection.ASC)
+                    )
+                    .Tpl(@<text>
+                        <tpl for=".">
+                            <div class="phone">
+                                <tpl if="!Ext.isIE6">                                    
+                                    <img width="64" height="64" src="@Url.Content("~/Areas/DataView_Basic/Content/")images/phones/{[values.name.replace(/ /g, "-")]}.png" />
+                                </tpl>
+                                <tpl if="Ext.isIE6">
+                                    <div style="width:74px;height:74px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='@Url.Content("~/Areas/DataView_Basic/Content/")images/phones/{[values.name.replace(/ /g, "-")]}.png',sizingMethod='scale');"></div>
+                                </tpl>
+                                <strong>{name}</strong>
+                                <span>{price:usMoney} ({reviews} Review{[values.reviews == 1 ? "" : "s"]})</span>
+                            </div>
+                        </tpl>
+                    </text>)
+                    .Plugins(
+                        Html.X().DataViewAnimated().Duration(550).IDProperty("id")
+                    )
+            )
+    )        
+}

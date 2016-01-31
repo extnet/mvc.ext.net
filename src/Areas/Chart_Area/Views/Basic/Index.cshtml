@@ -1,0 +1,152 @@
+﻿@model object[]
+
+@{
+    ViewBag.Title = "Area Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var downloadWithOptions = function (chart, form) {
+            var opts = form.getForm().getValues(false, false, false, true);
+
+            // simple empty values remove, optimize it if it is required
+            Ext.Object.each(opts, function (key, value, myself) {
+                if (Ext.isObject(value)) {
+                    Ext.Object.each(value, function (key, value, myself) {
+                        if (Ext.isEmpty(value)) {
+                            delete myself[key];
+                        }
+                    });
+
+                    if (Ext.Object.isEmpty(value)) {
+                        delete myself[key];
+                    }
+                }
+                else if (Ext.isEmpty(value)) {
+                    delete myself[key];
+                }
+            });
+            chart.download(opts);
+        };
+    </script>
+}
+
+@section example 
+{
+    @(X.Viewport()
+        .Layout("fit")
+        .Items(X.Container()
+            .OverflowY(Overflow.Auto)
+            .LayoutConfig(new VBoxLayoutConfig { Pack = BoxPack.Center, Align = VBoxAlign.Center })
+            .Items(X.Panel()
+                .Width(650)
+                .BodyStyle("background: transparent !important;")
+                .LayoutConfig(new VBoxLayoutConfig { Pack = BoxPack.Center, Align = VBoxAlign.Center })
+                .TopBar(X.Toolbar()
+                    .Items(
+                        X.ToolbarFill(),
+                        
+                        X.Button()
+                            .Text("Preview")
+                            .Icon(Icon.Magnifier)
+                            .Handler("App.Chart1.preview();"),
+                            
+                        X.SplitButton()
+                            .Text("Download as PNG")
+                            .Icon(Icon.DiskUpload)
+                            .Handler("App.Chart1.download();")
+                            .Menu(X.Menu()
+                                .Plain(true)
+                                .ItemsFromPartial("DownloadOptions")
+                            )
+                    )
+                )
+                .Items(
+                    X.CartesianChart()
+                        .ID("Chart1")
+                        .Height(500)
+                        .Width(650)
+                        .StyleSpec("background:#fff;")
+                        .InsetPadding(40)
+                        .Store(X.Store()
+                            .ID("Store1")
+                            .Model(X.Model().Fields("month", "data1"))
+                            .DataSource(Model)
+                        )
+                        .Items(
+                            X.TextSprite()
+                                .Text("Area Charts - Basic Area")
+                                .FontSize("22")
+                                .Width(100)
+                                .Height(30)
+                                .X(40)
+                                .Y(20),
+                            
+                            X.TextSprite()
+                                .Text("Data: Browser Stats 2012 - Internet Explorer")
+                                .FontSize("10")
+                                .X(12)
+                                .Y(480),
+                            
+                            X.TextSprite()
+                                .Text("Source: http://www.w3schools.com/")
+                                .FontSize("10")
+                                .X(12)
+                                .Y(495)
+                        )
+                        .Axes(
+                            X.NumericAxis()
+                                .Fields("data1")
+                                .Position(Position.Left)
+                                .Grid(true)
+                                .Minimum(0)
+                                .Maximum(24)
+                                .Renderer(r => r.Handler = "return layoutContext.renderer(label) + '%';"),
+                            
+                            X.CategoryAxis()
+                                .Position(Position.Bottom)
+                                .Fields("month")
+                                .Grid(true)
+                                .Label(X.ChartLabel().RotationDegrees(-45))
+                        )
+                        .Series(
+                            X.AreaSeries()
+                                .XField("month")
+                                .YField("data1")
+                                .StyleSpec(X.Sprite().GlobalAlpha(0.8))
+                                .Marker(X.CircleSprite().GlobalAlpha(0).Scaling(0.01).Duration(200).Easing(Easing.EaseInOut))
+                                .HighlightDefaults(X.CircleSprite().GlobalAlpha(1).Scaling(1.5))
+                                .Tooltip(X.ChartTip()
+                                    .TrackMouse(true)
+                                    .StyleSpec("background: #fff;")
+                                            .Renderer(r => r.Handler = "toolTip.setHtml(record.get('month') + ': ' + record.get('data1') + ' %');")
+                                )
+                        ),
+                        
+                    X.GridPanel()
+                        .StoreID("Store1")
+                        .StyleSpec("margin-top: 10px;")
+                        .Width(250)
+                        .ColumnModel(
+                            X.Column()
+                                .Text("Month")
+                                .DataIndex("month")
+                                .Sortable(false)
+                                .MenuDisabled(true),
+                           
+                            X.Column()
+                                .Text("IE")
+                                .DataIndex("data1")
+                                .Sortable(false)
+                                .MenuDisabled(true)
+                                .Renderer("return value + '%';")
+                        )
+                    
+                )
+            )
+        )
+    )
+}

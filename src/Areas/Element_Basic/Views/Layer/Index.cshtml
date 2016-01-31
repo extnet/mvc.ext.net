@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "FormPanel Labels with Editor - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .layer {  
+             position: absolute;           
+             width   : 100px;
+             height  : 270px;
+             padding : 5px;
+             border  : solid 1px silver;
+        }
+        
+        .layer div {
+            height : 258px;
+            background-color : silver;
+            padding : 5px;
+        }
+    </style>
+}
+
+@section example
+{
+    @(X.Panel()
+        .ID("Panel1")
+        .Title("Panel")
+        .Width(300)
+        .Height(300)
+        .Buttons(
+            X.Button()
+                .ID("Button1")
+                .Text("Show Right")
+                .DirectEvents(de => {
+                        de.Click.Url = Url.Action("ShowRight");
+                        de.Click.ExtraParams.Add(new Parameter("sender", "this.id", ParameterMode.Raw));
+                        de.Click.EventMask.MinDelay = 250;
+                        de.Click.EventMask.ShowMask = true;
+                        de.Click.EventMask.CustomTarget = "={#{Panel1}.getBody()}";
+                }),
+            X.Button()
+                .ID("Button2")
+                .Text("Show Bottom")
+                .DirectEvents(de => {
+                        de.Click.Url = Url.Action("ShowBottom");
+                        de.Click.ExtraParams.Add(new Parameter("sender", "this.id", ParameterMode.Raw));
+                        de.Click.EventMask.MinDelay = 250;
+                        de.Click.EventMask.ShowMask = true;
+                        de.Click.EventMask.CustomTarget = "={#{Panel1}.getBody()}";
+                })
+        )
+    )
+}

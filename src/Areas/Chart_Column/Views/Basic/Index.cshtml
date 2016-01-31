@@ -1,0 +1,88 @@
+﻿@model List<Ext.Net.MVC.Examples.ChartModel>
+
+@{
+    ViewBag.Title = "Column Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+     <script>
+        var saveChart = function (btn) {
+            Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as an image?', function (choice) {
+                if (choice === 'yes') {
+                    btn.up('panel').down('chart').download();
+                }
+            });
+        };
+    </script>
+}
+
+@section example 
+{
+    <h1>Column Chart Sample</h1>
+
+    <p>Display a sets of random data in a column series. Reload data will randomly generate a new set of data in the store.</p>
+
+    @(X.Panel()
+        .Width(800)
+        .Height(600)
+        .Layout("fit")
+        .TopBar(X.Toolbar()
+            .Items(
+                X.ToolbarFill(),
+
+                X.Button()
+                    .Text("Reload Data")
+                    .Icon(Icon.ArrowRefresh)
+                    .Handler("App.Store1.reload();"),
+
+                X.Button()
+                    .Text("Save Chart")
+                    .Icon(Icon.Disk)
+                    .Handler("saveChart")
+            )
+        )
+        .Items(X.CartesianChart()
+            .Store(X.Store()
+                .ID("Store1")
+                .Data(Model)
+                .Model(X.Model().Fields("Name", "Data1"))
+                .ServerProxy(X.AjaxProxy().Url(Url.Action("GetData")))
+            )
+            .Axes(
+                X.NumericAxis()
+                    .Position(Position.Left)
+                    .Fields("Data1")
+                    .Grid(true)
+                    .Title("Number of Hits")
+                    .Minimum(0)
+                    .Renderer(r => r.Handler="return Ext.util.Format.number(label, '0,0');"),
+
+                X.CategoryAxis()
+                    .Position(Position.Bottom)
+                    .Fields("Name")
+                    .Title("Month of the Year")
+                    .Label(X.ChartLabel().RotationDegrees(-45))
+            )
+            .Series(X.BarSeries()
+                .Highlight(true)
+                .XField("Name")
+                .YField("Data1")
+                .Tooltip(X.ChartTip()
+                    .TrackMouse(true)
+                    .Renderer(r => r.Handler = "this.setTitle(storeItem.get('Name') + ': ' + storeItem.get('Data1'));")
+                )
+                .Label(X.ChartLabel()
+                    .Display(SeriesLabelDisplay.InsideEnd)
+                    .Field("Data1")
+                    .Orientation(Orientation.Horizontal)
+                    .Color("#333")
+                    .TextAlign(TextSpriteAlign.Center)
+                    .Renderer(r => r.Handler = "return Ext.util.Format.number(text, '0');")
+                )
+            )
+        )
+    )
+}

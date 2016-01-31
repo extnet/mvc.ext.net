@@ -1,0 +1,26 @@
+﻿@model Ext.Net.MVC.Examples.Areas.Models.TimeCard
+           
+@{
+    MvcResourceManager.RegisterGlobalScript(Url.Content("~/Areas/Models/Content/VType.greater.js"));
+}
+
+@(
+ Html.X().FormPanel()
+        .Url(Url.Action("Submit"))
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .Items(
+            Html.X().HiddenFor(tc => tc.Id),
+            Html.X().TextFieldFor(tc => tc.Username),
+            Html.X().NumberFieldFor(tc => tc.Hours),
+            Html.X().NumberFieldFor(tc => tc.ConfirmHours).Note("Please confirm the number of hours you worked"),
+            Html.X().DateFieldFor(tc => tc.StartDate),
+            Html.X().DateFieldFor(tc => tc.EndDate)
+        )
+        .Buttons(
+            Html.X().Button()
+                .Text("Save")
+                .FormBind(ViewData.ContainsKey("FormBind") ? Convert.ToBoolean(ViewData["FormBind"]) : true)
+                .Handler(ViewData.ContainsKey("Handler") ? ViewData["Handler"].ToString() : "this.up('form').submit();")
+        )
+)

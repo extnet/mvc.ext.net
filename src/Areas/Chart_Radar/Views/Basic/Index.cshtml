@@ -1,0 +1,76 @@
+﻿@model object[]
+
+@{
+    ViewBag.Title = "Radar Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example 
+{
+        @(X.Panel()
+        .BodyStyle("background: transparent !important")
+        .Width(650)
+        .LayoutConfig(new VBoxLayoutConfig { Pack = BoxPack.Center, Align = VBoxAlign.Stretch })
+        .TopBar(X.Toolbar()
+            .Items(
+                X.ToolbarFill(),
+                X.Button().Text("Preview").Handler("this.up('panel').down('polar').preview();")
+            )
+        )
+        .Items(X.PolarChart()
+            .ID("Chart1")
+            .Height(500)
+            .InsetPaddingSpec("40 40 60 40")
+            .Store(X.Store()
+                .Model(X.Model().Fields("month", "data1"))
+                .Data(Model)
+            )
+            .Interactions(X.RotateInteraction())
+            .Items(
+                X.TextSprite()
+                    .Text("Radial Charts - Basic")
+                    .FontSize("22")
+                    .Width(100)
+                    .Height(30)
+                    .X(40)
+                    .Y(20),
+
+                X.TextSprite()
+                    .Text("Data: Browser Stats 2012 - Internet Explorer")
+                    .FontSize("10")
+                    .X(12)
+                    .Y(480),
+
+                X.TextSprite()
+                    .Text("Source: http://www.w3schools.com/")
+                    .FontSize("10")
+                    .X(12)
+                    .Y(495)
+            )
+            .Axes(
+                X.NumericAxis()
+                    .Position(Position.Radial)
+                    .Fields("data1")
+                    .Grid(true)
+                    .Minimum(0)
+                    .Maximum(25)
+                    .MajorTickSteps(4)
+                    .Renderer(r => r.Handler = "return label + '%';"),
+
+                X.CategoryAxis().Position(Position.Angular).Grid(true)
+            )
+            .Series(X.RadarSeries()
+                .AngleField("month")
+                .RadiusField("data1")
+                .StyleSpec(X.Sprite().Opacity(0.8))
+                .HighlightConfig(X.Sprite().FillStyle("#000").LineWidth(2).StrokeStyle("#fff"))
+                .Tooltip(X.ChartTip()
+                    .TrackMouse(true)
+                    .StyleSpec("background: #fff;")
+                    .Renderer(r => r.Handler = "toolTip.setHtml(record.get('month') + ': ' + record.get('data1') + '%');")
+                )
+            )
+        )
+    )
+}

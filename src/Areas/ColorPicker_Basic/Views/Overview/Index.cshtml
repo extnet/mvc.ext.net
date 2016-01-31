@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "ColorPalate Overview - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example 
+{
+    <h2>1. DirectMethod model</h2>
+
+    @(X.ColorPicker()
+        .ID("ColorPalette1")
+        .Listeners(l => l.Select.Handler = "#{DirectMethods}.ColorSelect(this.getValue())")
+    )
+    
+    @(X.Label()
+        .ID("Label1")
+    )
+
+    <h2>2. DirectEvent model</h2>
+
+    @(X.ColorPicker()
+        .ID("ColorPalette2")
+        .DirectEvents(de => {
+            de.Select.Url = Url.Action("Color_Changed");
+            de.Select.ExtraParams.Add(new Parameter("value", "this.getValue()", ParameterMode.Raw));
+        })
+    )
+    
+    @(X.Label()
+        .ID("Label2")
+    )
+}

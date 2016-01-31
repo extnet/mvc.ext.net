@@ -1,0 +1,37 @@
+﻿@model Ext.Net.MVC.Examples.Areas.Models.Address
+
+@{
+    string title = ViewData.ContainsKey("title") ? ViewData["title"].ToString() : "";
+    string itemId = ViewData.ContainsKey("itemId") ? ViewData["itemId"].ToString() : "";
+    string url = ViewData.ContainsKey("url") ? ViewData["url"].ToString() : "";
+}
+
+@(
+ Html.X().FormPanel()
+        .ItemID(itemId)
+        .Title(title)
+        .Url(url)
+        .DefaultAnchor("100%")
+        .StyleSpec("margin-bottom:5px;")
+        .Frame(true)
+        .Items(
+            Html.X().TextFieldFor(a => a.StreetAddress),
+            Html.X().TextFieldFor(a => a.ZipPostalCode),
+            Html.X().TextFieldFor(a => a.City),
+            Html.X().MvcItem(() => Html.EditorFor(a => a.Country))
+        )
+        .Tools(tools => {
+            if (ViewData.ContainsKey("copy"))
+            {
+                tools.Add(new Tool
+                {
+                    Type = ToolType.Refresh,
+                    ToolTip = "Copy from Shipping Address",
+                    Handler = "var form = owner.ownerCt; form.getForm().setValues(form.up().down('#shippingAddress').getValues());"
+                });
+            }
+        })
+        .Buttons(
+             Html.X().Button().Text("Submit " + title).Handler("this.up('form').submit();")
+        )
+)

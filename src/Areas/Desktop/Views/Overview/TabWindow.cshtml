@@ -1,0 +1,45 @@
+﻿@(
+    Html.X().DesktopModuleProxy()
+        .Module(
+            Html.X().DesktopModule()
+                .ModuleID("tab-win")
+                .Shortcut(
+                    Html.X().DesktopShortcut()
+                        .Name("Tab Window")
+                )
+                .Launcher(
+                    Html.X().MenuItem()
+                        .Text("Tab Window")
+                        .Icon(Icon.Tab)
+                )
+                .Window(
+                    Html.X().Window()
+                        .Icon(Icon.Tab)
+                        .Width(740)
+                        .Height(480)
+                        .ConstrainHeader(true)                        
+                        .Title("Tab Window")                                      
+                        .Items(
+                            Html.X().TabPanel()
+                                .BodyPadding(5)
+                                .Items(
+                                    Html.X().Panel()
+                                        .Title("Tab Text 1")
+                                        .Html("<p>Something useful would be in here.</p>"),
+                                        
+                                    Html.X().Panel()
+                                        .Title("Tab Text 2")
+                                        .Html("<p>Something useful would be in here.</p>"),
+                                        
+                                    Html.X().Panel()
+                                        .Title("Tab Text 3")
+                                        .Html("<p>Something useful would be in here.</p>"),
+                                        
+                                    Html.X().Panel()
+                                        .Title("Tab Text 4")
+                                        .Html("<p>Something useful would be in here.</p>")
+                                )
+                        )
+                )
+        )
+)

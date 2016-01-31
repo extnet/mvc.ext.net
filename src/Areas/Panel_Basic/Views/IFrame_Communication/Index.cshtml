@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "IFrame Communication - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>IFrame Communication</h1>
+    
+    @(X.Window()
+        .Width(450)
+        .Title("Parent")
+        .Height(200)
+        .Layout(LayoutType.HBox)
+        .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Stretch }
+        )
+        .Items(
+            X.Panel()
+                .ID("Panel1")
+                .Title("A")
+                .BodyPadding(10)
+                .Flex(1)
+                .Loader(X.ComponentLoader()
+                    .Url(Url.Action("A"))
+                    .Mode(LoadMode.Frame)
+                    .LoadMask(lm => lm.ShowMask = true)
+                ),
+            
+
+            X.Panel()
+                .ID("Panel2")
+                .Title("B")
+                .BodyPadding(10)
+                .Flex(1)
+                .Loader(X.ComponentLoader()
+                    .Url(Url.Action("B"))
+                    .Mode(LoadMode.Frame)
+                    .LoadMask(lm => lm.ShowMask = true)
+                )
+        )
+    )
+}

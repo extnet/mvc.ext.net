@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Direct methods";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>DirectMethod Overview</h1>
+    <p>A DirectMethod provides the ability to call controller actions from client-side JavaScript code.</p>
+        
+    <h2>1. Basic DirectMethod</h2>
+    <p>The following demonstrates a simple [DirectMethod] which updates an Label control.</p>
+
+     @Html.X().Button().Text("Click Me").Icon(Icon.Lightning).Handler("App.direct.Events.SetTimeStamp();")
+     <br />
+     @Html.X().Label().ID("Label1").Format("Server Time: {0}").Text(DateTime.Now.ToLongTimeString())
+
+     <br />
+
+     <h2>2. DirectMethod from another controller</h2>
+     <p>The following demonstrates a simple [DirectMethod] from another controller.</p>
+
+     @(
+        Html.X().Button()
+            .Text("Click Me")
+            .Icon(Icon.Lightning)
+            .Handler(@"App.direct.GetTime({success : function(result){
+                Ext.Msg.alert('Server Time', result);
+            }});")
+     )
+     <br />
+
+     <h2>3. Pass multiple arguments to a DirectMethod</h2>
+
+     <p>If the server-side DirectMethod requires parameters, the client-side DirectMethod will also be created and expect to be passed values for the two arguments.</p>
+     <p>For example, if the server-side Method requires a <code>string</code> and <code>int</code> argument, both a valid <code>string</code> and <code>number</code> must be passed to the client-side function.</p>
+
+     @(
+        Html.X().FormPanel()
+            .Title("Company Information")
+            .Width(350)
+            .BodyPadding(5)
+            .Frame(true)
+            .Layout(LayoutType.Form)
+            .FormBind(true)
+            .Items(
+                  Html.X().TextField().ID("TextField3").FieldLabel("Company Name").AllowBlank(false),
+                  Html.X().ComboBox().ID("ComboBox3").FieldLabel("# of Employees").AllowBlank(false)
+                      .Items(
+                          new ListItem("1-5", "0"),
+                          new ListItem("6-25", "1"),
+                          new ListItem("26-100", "2"),
+                          new ListItem("101+", "3")
+                      )
+            )
+            .Buttons(
+                Html.X().Button()
+                    .Text("Submit")
+                    .Icon(Icon.Lightning)
+                    .FormBind(true)
+                    .Handler("#{DirectMethods}.LogCompanyInfo(App.TextField3.getValue(), App.ComboBox3.getValue());")
+            )
+     )
+
+     @Html.X().Label().ID("Label3").Text("Write Company Information Here")
+
+}

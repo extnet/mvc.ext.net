@@ -1,0 +1,258 @@
+html body {
+	padding: 20px;
+    font-family: 'OpenSansRegular';
+    color: #222222;
+    font-size: 15px;
+}
+
+p {
+	margin-bottom: 15px;
+    font-size: 15px;
+}
+
+blockquote {
+    padding-left: 30px;
+}
+
+h1 {
+	margin-top: 0;
+    margin-bottom : 20px;
+    font-family: 'TitilliumText25L400wt';
+    font-size: 40px;
+	font-weight: normal;
+    line-height: normal;
+    -webkit-transform : rotate(-0.0000000001deg);
+}
+
+h2 {
+    margin-bottom: 20px;
+    margin-top: 35px;
+	font-size: 20px;
+	font-family: 'TitilliumText25L400wt';
+}
+
+h3 {
+    margin: 12px 0px;
+    font-family: 'TitilliumText25L400wt';
+    font-size: 12px;
+}
+
+li ol li {
+    margin-left: 24px; 
+}
+
+code {
+    border: 1px solid #e5e5e5;
+    padding: 2px 4px;
+    margin: 0 2px 0 1px;
+    background-color: #f2f2f2;
+    color: #0077aa;
+    font-family: Consolas, monospace;
+    font-size: 90%;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+pre {
+    font-family: Consolas, monospace;
+}
+
+pre.code {
+    border: 1px solid #e5e5e5;    
+	padding: 10px;
+	margin: 10px;
+	margin-left: 0px;
+    background-color: #f7f7f7;
+    color: #045D87;
+    font-family: Consolas, monospace;
+	font-size: 15px !important;
+	line-height: 19px !important;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px
+}
+
+.example-info {
+    width       : 150px;
+    border      : 1px solid #E5E5E5;
+    background  : #ffffff url( info-bg.gif ) repeat-x;
+    font-size   : 11px;
+    padding     : 8px;
+}
+
+.msg .x-box-mc {
+    font-size : 14px;
+}
+
+#msg-div {
+    position : absolute;
+    left     : 35%;
+    top      : 10px;
+    width    : 250px;
+    z-index  : 20000;
+}
+
+.x-grid3-row-body p { margin : 5px 5px 10px 5px !important; }
+
+.sandbox-wrapper { padding : 12px; }
+
+.sandbox-toolbar {
+	text-align       : right;
+	display          : block;
+	border           : none;
+	padding          : 4px;
+	background-color : #F2F2F2;
+	border-bottom    : 1px solid #0589C7;
+}
+
+.sandbox-toolbar table { display : inline; }
+
+
+/*  Icons
+    -----------------------------------------------------------------------------------------------*/
+
+div.information {
+   border       : 1px solid #0589C7;
+   padding      : 8px 12px 0px 12px;
+   padding-left : 36px;
+   background   : #F2F2F2 url(../../icons/information-png/ext.axd) no-repeat 10px 10px; 
+   margin       : 12px 0px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px
+}
+
+p {
+    padding        : 0px;
+    margin         : 0px;
+    line-height    : 20px;
+    padding-bottom : 12px;
+}
+
+ol.expanded li { line-height : 25px; }
+
+ol.expanded {
+    list-style-type : decimal;
+    padding-left    : 40px;
+}
+
+/*  Docs
+    -----------------------------------------------------------------------------------------------*/
+
+.doc-member, .doc-prop {
+    font-weight : bold;
+}
+
+.doc-item {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #e5e5e5;
+    padding : 10px;
+}
+
+.doc-item strong {
+    font-weight : bold;
+}
+
+.doc-desc, .doc-params {
+    padding : 8px;
+}
+
+.doc-params strong {
+    font-size : 12px;
+}
+
+.doc-params ul {
+    margin          : 4px;
+    list-style-type : disc;
+    padding-left    : 25px;
+}
+
+.doc-params ul li {
+    margin-bottom : 5px;
+}
+
+.doc-optional {
+    font-family: Consolas, monospace;
+}
+
+
+/*  Fonts
+    -----------------------------------------------------------------------------------------------*/
+
+@font-face {
+    font-family: 'TitilliumText25L400wt';
+    src: url('../fonts/TitilliumText25L003-webfont.eot');
+    src: url('../fonts/TitilliumText25L003-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/TitilliumText25L003-webfont.woff') format('woff'),
+         url('../fonts/TitilliumText25L003-webfont.ttf') format('truetype'),
+         url('../fonts/TitilliumText25L003-webfont.svg#TitilliumText25L400wt') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TitilliumText25L1wt';
+    src: url('../fonts/TitilliumText25L005-webfont.eot');
+    src: url('../fonts/TitilliumText25L005-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/TitilliumText25L005-webfont.woff') format('woff'),
+         url('../fonts/TitilliumText25L005-webfont.ttf') format('truetype'),
+         url('../fonts/TitilliumText25L005-webfont.svg#TitilliumText25L1wt') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'OpenSansRegular';
+    src: url('../fonts/OpenSans-Regular-webfont.eot');
+    src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
+         url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/OpenSans-Regular-webfont.svg#OpenSansRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSansLight';
+    src: url('../fonts/OpenSans-Light-webfont.eot');
+    src: url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/OpenSans-Light-webfont.woff') format('woff'),
+         url('../fonts/OpenSans-Light-webfont.ttf') format('truetype'),
+         url('../fonts/OpenSans-Light-webfont.svg#OpenSansLight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSansSemibold';
+    src: url('../fonts/OpenSans-Semibold-webfont.eot');
+    src: url('../fonts/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/OpenSans-Semibold-webfont.woff') format('woff'),
+         url('../fonts/OpenSans-Semibold-webfont.ttf') format('truetype'),
+         url('../fonts/OpenSans-Semibold-webfont.svg#OpenSansSemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSansItalic';
+    src: url('../fonts/OpenSans-Italic-webfont.eot');
+    src: url('../fonts/OpenSans-Italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/OpenSans-Italic-webfont.woff') format('woff'),
+         url('../fonts/OpenSans-Italic-webfont.ttf') format('truetype'),
+         url('../fonts/OpenSans-Italic-webfont.svg#OpenSansItalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/*  Aria theme specific styles
+    -----------------------------------------------------------------------------------------------*/
+
+.x-theme-aria html body {
+    color:#f2f2f2;
+}

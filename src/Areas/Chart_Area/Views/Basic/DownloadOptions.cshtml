@@ -1,0 +1,61 @@
+﻿@{    
+    var X = Html.X();    
+}
+
+@(X.FormPanel()
+    .Width(250)
+    .BodyPadding(10)
+    .FieldDefaults(fd => fd.LabelAlign = LabelAlign.Top)
+    .Items(
+        X.ComboBox()
+            .Name("format")
+            .FieldLabel("Format")
+            .Items(
+                new ListItem("PNG", "png"),
+                new ListItem("PDF", "pdf"),
+                new ListItem("JPEG", "jpeg"),
+                new ListItem("GIF", "gif")
+            )
+            .SelectedItems("png"),
+
+        X.NumberField().Name("width").FieldLabel("Width"),
+        X.NumberField().Name("height").FieldLabel("Height"),
+        X.TextField().Name("filename").FieldLabel("Filename"),
+        X.NumberField().Name("scale").FieldLabel("Scale"),
+
+        X.FieldSet()
+            .Title("PDF")
+            .Items(
+                X.ComboBox()
+                    .DataIndex("pdf.format")
+                    .FieldLabel("Format")
+                    .Items("A3", "A4", "A5", "Legal", "Letter", "Tabloid"),
+
+                X.ComboBox()
+                    .DataIndex("pdf.orientation")
+                    .FieldLabel("Orientation")
+                    .Items(
+                        new ListItem("Portrait", "portrait"),
+                        new ListItem("Landscape", "landscape")
+                    ),
+
+                X.TextField().DataIndex("pdf.border").FieldLabel("Border")
+            ),
+
+        X.FieldSet()
+            .Title("JPEG")
+            .Items(X.NumberField()
+                .DataIndex("jpeg.quality")
+                .FieldLabel("Quality")
+                .MinValue(0)
+                .MaxValue(100)
+                .AllowDecimals(false)
+            )
+    )
+)
+
+@(X.Button()
+    .Text("Download with options")
+    .Margin(10)
+    .Handler("downloadWithOptions(App.Chart1, this.prev());")
+)

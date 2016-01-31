@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "ColorPalate Overview - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .x-color-picker {
+            width: 350px !important;
+        }
+        
+        .x-color-picker a {
+            border: 1px solid #FFFFFF;
+            cursor: pointer;
+            float: left;
+            outline: 0 none;
+            padding: 2px;
+            text-decoration: none;
+        }
+        
+        .x-color-picker em {
+            border: 1px solid #ACA899;
+            display: block;
+            font-style: normal;
+        }
+        
+        .x-color-picker em span {
+            cursor: pointer;
+            display: block;
+            height: 10px;
+            line-height: 10px;
+            width: 10px;
+        }
+    </style>
+}
+
+@section example 
+{
+    @(X.ColorPicker()
+        .Template(t => t.Html = @"
+            <tpl for='colors'>
+				<a href='#' class='color-{.}' hidefocus='on'>
+					<em style='padding:2px;'>
+						<span style='background:#{.}; width:50px; height:20px; border:1px solid black;' unselectable='on'>
+							&#160;
+						</span>
+						<div style='font-size:10px;text-align:center;'>#{.}</div>
+					</em>
+				</a>
+			</tpl>")
+    )
+}

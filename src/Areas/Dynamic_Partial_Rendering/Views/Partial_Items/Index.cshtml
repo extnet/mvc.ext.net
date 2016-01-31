@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Partial Items";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>Partial Items</h1>
+    <p>In this example, View is loaded as Items</p>
+
+    @(
+        Html.X().Window()
+            .Title("Items")
+            .Width(400)
+            .Height(300)
+            .Closable(false)
+            .Resizable(false)
+            .Layout(LayoutType.Border)
+            .Items(i=>{
+                i.Add(new Panel{
+                    ID = "West1",
+                    Title = "West",
+                    Width=200,           
+                    Layout = "Accordion",         
+                    Region = Region.West,                    
+                    Loader = Html.X().ComponentLoader()                        
+                        .Url(Url.Action("WestItems"))                        
+                        .Mode(LoadMode.Script)
+                        .Params(new { containerId = "West1" })
+                });
+                
+                i.Add(new Panel{
+                    ID = "Center1",
+                    Region = Region.Center,
+                    BodyPadding = 10,
+                    Header = false
+                });
+            })
+     )
+}

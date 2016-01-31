@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>Items from page</h1>
+    <p>Items of panels are loaded from a separate page</p>
+    @(
+        Html.X().Panel()     
+            .Title("Items from page")
+            .Width(400)
+            .Height(250)
+            .Icon(Icon.Add)
+            .Layout(LayoutType.Accordion)
+            .ItemsFromPage(this, "SubPage.cshtml")
+     )    
+     
+     <br />
+    
+    @(
+        Html.X().Panel()
+            .Title("Items from page with data")
+            .Width(400)
+            .Height(250)
+            .Icon(Icon.Add)
+            .Layout(LayoutType.Accordion)
+            .ItemsFromPage(this, "SubPage.cshtml", new { Title1 = "Title1", Title2 = "Title2", Title3 = "Title3" })
+     )    
+
+     <br />
+    
+    @(
+        Html.X().Panel()
+            .Title("Items from partial view")
+            .Width(400)
+            .Height(250)
+            .Icon(Icon.Add)
+            .Layout(LayoutType.Accordion)
+            .ItemsFromPartial("SubPage")
+     )  
+}

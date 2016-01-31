@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Dynamically create a new Window during a DirectEvent - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Dynamically create a new Window during a DirectEvent</h1>
+    
+    @(X.Button()
+        .ID("Button1")
+        .Text("Add Window")
+        .Icon(Icon.Add)
+        .DirectClickAction("Button1_Click")
+    )
+}

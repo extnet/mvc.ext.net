@@ -1,0 +1,136 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Menu Row Command - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+    </script>
+}
+
+@section example
+{    
+    @(Html.X().GridPanel()
+        .Title("Menu Row Command")
+        .Width(700)
+        .Height(420)
+        .Store(Html.X().Store()
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("company"),
+                    new ModelField("price", ModelFieldType.Float),
+                    new ModelField("change", ModelFieldType.Float),
+                    new ModelField("pctChange", ModelFieldType.Float),
+                    new ModelField("lastChange", ModelFieldType.Date, "M/d hh:mmtt")
+                )
+            )
+            .DataSource(Model)
+        )
+        .ColumnModel(
+            Html.X().Column()
+                .Text("Company")
+                .DataIndex("company")
+                .Flex(1),
+            Html.X().Column()
+                .Text("Price")
+                .DataIndex("price")
+                .Width(75)
+                .Renderer(RendererFormat.UsMoney),
+            Html.X().Column()
+                .Text("Change")
+                .DataIndex("change")
+                .Width(75)
+                .Renderer("change"),
+            Html.X().Column()
+                .Text("Change")
+                .DataIndex("pctChange")                
+                .Width(75)
+                .Renderer("pctChange"),
+            Html.X().DateColumn()
+                .Text("Last Updated")
+                .DataIndex("lastChange")
+                .Width(85),
+            Html.X().CommandColumn()
+                .Width(120)
+                .Commands(
+                    Html.X().GridCommand()
+                        .Icon(Icon.ArrowDown)
+                        .Menu(menu =>
+                        {
+                            menu.EnableScrolling = false;
+                            menu.Items.Add(Html.X().MenuCommand()
+                                .Text("Item1")
+                                .Icon(Icon.ArrowRight)
+                                .CommandName("Item1")    
+                            );
+                            menu.Items.Add(Html.X().MenuCommand()
+                                .Text("Submenu")
+                                .Icon(Icon.ArrowRight)
+                                .Menu(submenu =>
+                                {
+                                    submenu.EnableScrolling = false;
+                                    submenu.Items.Add(Html.X().MenuCommand()
+                                        .Text("Item11")
+                                        .Icon(Icon.ArrowRight)
+                                        .CommandName("Item11")
+                                    );
+                                    submenu.Items.Add(Html.X().MenuCommand()
+                                        .Text("Item12")
+                                        .Icon(Icon.ArrowRight)
+                                        .CommandName("Item12")
+                                    );
+                                })
+                            );
+                        })
+                        .ToolTip(tt => tt.Text = "Menu"),
+                    
+                    Html.X().CommandSeparator(),
+                    
+                    Html.X().SplitCommand()
+                        .Icon(Icon.ArrowDown)
+                        .CommandName("Split")
+                        .Menu(menu =>
+                        {
+                            menu.EnableScrolling = false;
+                            menu.Items.Add(Html.X().MenuCommand()
+                                .Text("Item")
+                                .Icon(Icon.ArrowRight)
+                                .CommandName("Item2")
+                            );
+                            menu.Items.Add(Html.X().MenuCommand()
+                                .Text("Submenu")
+                                .Icon(Icon.ArrowRight)
+                                .Menu(subMenu =>
+                                {
+                                    subMenu.EnableScrolling = false;
+                                    subMenu.Items.Add(Html.X().MenuCommand()
+                                        .Text("Item21")
+                                        .Icon(Icon.ArrowRight)
+                                        .CommandName("Item21")
+                                    );
+                                    subMenu.Items.Add(Html.X().MenuCommand()
+                                        .Text("Item22")
+                                        .Icon(Icon.ArrowRight)
+                                        .CommandName("Item22")
+                                    );
+                                })
+                            );
+                        })
+                )
+                .Listeners(ls => ls.Command.Handler = "Ext.Msg.alert(command, record.data.company);")
+        )
+    )   
+}
+

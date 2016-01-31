@@ -1,0 +1,78 @@
+﻿@model object[]
+@{
+    ViewBag.Title = "Scatter Chart Basic - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+     <script>
+        var resetPanZoom = function () {
+            var panel = this.up('panel'),
+                chart = panel.down('cartesian'),
+                axes = chart.getAxes();
+
+            axes[0].setVisibleRange([0, 1]);
+            axes[1].setVisibleRange([0, 1]);
+            chart.redraw();
+        };
+    </script>
+}
+
+@section example 
+{
+    @(X.Panel()
+        .BodyStyle("background: transparent !important;") 
+        .Width(650)
+        .LayoutConfig(new VBoxLayoutConfig { Pack = BoxPack.Center, Align = VBoxAlign.Stretch })
+        .TopBar(X.Toolbar()
+            .Items(
+                X.ToolbarFill(),
+                X.Button().Text("Preview").Handler("this.up('panel').down('cartesian').preview();"),
+                X.Button().Text("Reset pan/zoom").Handler("resetPanZoom")
+            )
+        )
+        .Items(X.CartesianChart()
+            .ID("Chart1")
+            .Height(500)
+            .InsetPadding(40)
+            .Store(X.Store()
+                .Model(X.Model().Fields("x", "y"))
+                .Data(Model)
+            )
+            .Interactions(
+                X.PanZoomInteraction().ZoomOnPanGesture(true),
+                X.ItemHighlightInteraction()
+            )
+            .Axes(
+                X.NumericAxis().Position(Position.Bottom).Fields("x").Grid(true),
+                X.NumericAxis().Position(Position.Left).Fields("y").Grid(true)
+            )
+            .Items(X.TextSprite() 
+                .Text("Scatter Charts - Basic")
+                .FontSize("22")
+                .Width(100)
+                .Height(10)
+                .X(40)
+                .Y(20)
+            )
+            .Series(X.ScatterSeries()
+                .XField("x")
+                .YField("y")
+                .Marker(X.CircleSprite().Radius(4))
+                .HighlightDefaults(X.CircleSprite().FillStyle("yellow").Radius(7).LineWidth(2))
+                .Label(X.ChartLabel()
+                    .Field("x")
+                    .Display(SeriesLabelDisplay.Over)
+                    .Renderer(r => r.Fn = @"function(text, label, labelCfg, data, index) {
+                                                var record = data.store.getAt(index);
+                                                return record.get('x') + ',' + record.get('y');
+                                            }")
+                )
+            )
+        )
+        .Listeners(events => events.BeforeRender.Handler = @"var panzoom = this.down('cartesian').getInteractions()[0];
+                                                             this.down('toolbar').add(panzoom.getModeToggleButton());")
+    )
+}

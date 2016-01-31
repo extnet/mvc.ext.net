@@ -1,0 +1,56 @@
+﻿@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Dynamic GridPanels";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    <h1>Row Expander Plugin with GridPanel</h1>
+    <p>The caching is presented, GridPanel renders once only (until view refresh)</p>
+
+    <p>The nested GridPanels support is limited.</p>
+
+    <p>Here are some known issues:</p>
+
+    <ul>
+        <li>1. No horizontal lines and no stripeRows effect in nested GridPanels (unless a nested GridPanel contains a RowExpander).<br /></li>
+        <li>2. No tracking mouse over functionality for nested GridPanels. So, for instance, the rows are not highlighted when the mouse hovers them.<br /></li>
+        <li>3. A parent and a nested GridPanels must not use row and checkbox selection models at the same time.<br /></li>
+        <li>4. The Columns option of a header menu of nested GridPanels doesn't work. It must be disabled. To disable set the GridPanel's EnableColumnHide property to false.<br /></li>
+        <li>5. No auto height for nested GridPanels.<br /></li>
+        <li>6. If a nested GridPanel has a RowExpander, then over mouse CSS rules from a parent GridPanel will be applied to a nested GridPanel.</li>
+        <li>etc. More issues are possible.<br /></li>
+    </ul>
+
+    <br />
+
+    @(Html.X().GridPanel()
+        .Title("Expander Rows with GridPanel")
+        .Icon(Icon.Table)
+        .Width(600)
+        .Height(450)
+        .DisableSelection(true)
+        .Store(Html.X().Store()
+            .DataSource(Model)
+            .Model(Html.X().Model()
+                .Fields(
+                    Html.X().ModelField().Name("ID"),
+                    Html.X().ModelField().Name("Name")
+                )
+            )
+        )
+        .ColumnModel(
+            Html.X().Column().Text("Supplier").DataIndex("Name").Flex(1)
+        )
+        .Plugins(Html.X().RowExpander()
+            .Loader(Html.X().ComponentLoader()
+                .Url(Url.Action("GetGrid"))
+                .Mode(LoadMode.Component)
+                .LoadMask(mask => mask.ShowMask = true)
+                .Params(new { id = JRawValue.From("this.record.getId()") })
+            )
+        )
+    )
+}

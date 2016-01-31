@@ -1,0 +1,59 @@
+﻿@(Html.X().Window()
+    .Title("Events")
+    .Modal(true)
+    .BodyStyle("background: #fff;")
+    .CloseAction(CloseAction.Destroy)
+    .Width(600)
+    .Height(400)
+    .Layout("fit")
+    .Items(
+        Html.X().DataView()
+        .ItemSelector("div.event")
+        .AutoScroll(true)
+        .Store(Html.X().Store()
+            .Model(Html.X().Model()
+                .Fields("EventId", "CalendarId", "Title", "Location", "Notes", "Url", "IsAllDay", "Reminder")
+                .Fields("StartDate", ModelFieldType.Date)
+                .Fields("EndDate", ModelFieldType.Date)
+            )
+            .DataSource(ViewBag.Events as List<EventModel>)
+        )
+        .Tpl(@<text>
+            <tpl for=".">
+                <div class="event">
+                    <table>
+                        <caption>{Title} ({CalendarId}-{EventId})</caption>
+                        <tr>
+                            <th>Start Date</th>
+                            <td>{StartDate:date("Y-m-d H:i:s")}</td>
+                        </tr>
+                        <tr>
+                            <th>End Date</th>
+                            <td>{EndDate:date("Y-m-d H:i:s")}</td>
+                        </tr>
+                        <tr>
+                            <th>Location</th>
+                            <td>{Location}</td>
+                        </tr>
+                        <tr>
+                            <th>Notes</th>
+                            <td>{Notes}</td>
+                        </tr>
+                        <tr>
+                            <th>Url</th>
+                            <td>{Url}</td>
+                        </tr>
+                        <tr>
+                            <th>IsAllDay</th>
+                            <td>{IsAllDay}</td>
+                        </tr>
+                        <tr>
+                            <th>Reminder</th>
+                            <td>{Reminder}</td>
+                        </tr>                                
+                    </table>
+                </div>
+            </tpl>
+        </text>)            
+    )
+)

@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Fit Layout - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(X.Viewport()
+        .Layout(LayoutType.Fit)
+        .Items(X.Panel()
+            .BodyPadding(15)
+            .Title("Inner panel")
+            .Html("This panel is fit 100% Height and 100% Width within its container.")
+        )
+    )
+}

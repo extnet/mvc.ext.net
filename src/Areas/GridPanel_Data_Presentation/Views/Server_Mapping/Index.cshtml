@@ -1,0 +1,64 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Server Mapping - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{    
+    @(Html.X().GridPanel()
+        .Title("List")
+        .Icon(Icon.Application)
+        .Store(Html.X().Store()
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("ID", ModelFieldType.Int),
+                    new ModelField("Name"),
+                    new ModelField() 
+                    { 
+                        Name = "Surname", 
+                        ServerMapping = "Surname.ToUpper()" 
+                    },
+                    new ModelField() 
+                    { 
+                        Name = "Fullname", 
+                        ServerMapping = "GetFullName()" 
+                    },
+                    new ModelField() 
+                    {
+                        Name = "Department",
+                        ServerMapping = "Department.Name"
+                    },
+                    new ModelField() 
+                    {
+                        Name = "DepartmentIdPlusName",
+                        ServerMapping = "Department.GetIdPlusName()"
+                    },
+                    new ModelField() 
+                    {
+                        Name = "PhoneHome",
+                        ServerMapping = "Phone[0]"
+                    },
+                    new ModelField() 
+                    {
+                        Name = "PhoneWork",
+                        ServerMapping = "Phone[1]"
+                    }
+                )
+            )
+            .DataSource(Model)
+        )
+        .ColumnModel(
+            Html.X().Column().Text("ID").DataIndex("ID"),
+            Html.X().Column().Text("NAME").DataIndex("Name"),
+            Html.X().Column().Text("SURNAME").DataIndex("Surname"),
+            Html.X().Column().Text("FULL NAME").DataIndex("Fullname"),
+            Html.X().Column().Text("DEPARTMENT").DataIndex("Department"),
+            Html.X().Column().Text("DEPARTMENT ID:NAME").DataIndex("DepartmentIdPlusName").Width(125),
+            Html.X().Column().Text("PHONE HOME").DataIndex("PhoneHome"),
+            Html.X().Column().Text("PHONE WORK").DataIndex("PhoneWork")
+        )
+    )
+}
+

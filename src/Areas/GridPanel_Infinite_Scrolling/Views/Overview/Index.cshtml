@@ -1,0 +1,55 @@
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Infinite Scrolling - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{    
+    <h1>Infinite Scrolling</h1>
+
+    <p>Introduced with Ext.Net 2.0, grid supports infinite scrolling, which enables you to load any number of records into a grid without paging.</p>
+
+    <p>This grid approach uses a virtualized scrolling system to handle potentially infinite data sets without any impact on client side performance.</p>
+
+    @(Html.X().GridPanel()
+        .Width(500)
+        .Height(500)
+        .DisableSelection(true)
+        .Title("Stock Price")
+        .Store(Html.X().Store()
+            .Buffered(true)
+            .PageSize(100)
+            .LeadingBufferZone(300)
+            .Model(Html.X().Model()
+                .Fields(
+                    new ModelField("Company"),
+                    new ModelField("Price"),
+                    new ModelField("LastUpdate")
+                )
+            )
+            .Proxy(Html.X().AjaxProxy()
+                .Url(Url.Action("GetStockQuotations"))
+                .Reader(Html.X().JsonReader().RootProperty("data"))
+            )
+        )
+        .ColumnModel(
+            Html.X().RowNumbererColumn().Width(50).Sortable(false),
+            Html.X().Column().Text("Company").DataIndex("Company").Flex(1).Sortable(false),
+            Html.X().Column()
+                .Text("Price, $")
+                .DataIndex("Price")
+                .Width(70)
+                .Align(Alignment.Center)
+                .Sortable(false),
+            Html.X().Column()
+                .Text("Last Update")
+                .DataIndex("LastUpdate")
+                .Width(140)
+                .Renderer(RendererFormat.Date, new string[] { "'n/j/Y g:i:s A'" })
+                .Sortable(false)
+        )
+        .View(Html.X().GridView().TrackOver(false))
+    )
+}

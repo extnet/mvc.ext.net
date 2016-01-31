@@ -1,0 +1,47 @@
+@{
+    ViewBag.Title = "Create GridPanel and Store during DirectEvent - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>Creation of a GridPanel and Store during a DirectEvent</h1>
+    
+    @(Html.X().Window()
+        .ID("Window1")
+        .Title("Dynamic GridPanel")
+        .Layout(LayoutType.Fit)
+        .Height(350)
+        .Width(600)
+        .TopBar(Html.X().Toolbar()
+            .Items(Html.X().Button()
+                .Text("Add GridPanel")
+                .Icon(Icon.Add)
+                .DirectEvents(de => 
+                {
+                    de.Click.Url = Url.Action("GetGridPanel");
+                    de.Click.ExtraParams.Add(new { containerId = "Window1" });
+                    de.Click.EventMask.ShowMask = true;
+                    de.Click.EventMask.Target = MaskTarget.CustomTarget;
+                    de.Click.EventMask.CustomTarget = "Window1";
+                    de.Click.Before = "this.disable()";
+                })
+            )
+        )
+    )
+}

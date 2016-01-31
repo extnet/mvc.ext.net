@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "ColorPalate Overview - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        body {
+        	padding:20px;
+        }
+        
+        .column {
+        	 float: left;
+        }
+        
+        .palette {
+            color: #fff; 
+            text-align: center;
+            width: 138px;
+            height: 45px;
+            margin: 0px 9px 0px 3px;
+        }
+        
+        #swatch {
+        	margin-top: 2px;
+        	height: 570px;
+        	border: 1px solid black;
+        }
+    </style>
+    
+    <script>
+        var setColor = function (el, color) {
+            if (Ext.isEmpty(color, false)) {
+                return;
+            }
+            var div = Ext.get('swatch');
+            div.setStyle('background-color', '#' + color);
+        };
+    </script>
+}
+
+@section example 
+{
+   <h1>Custom Colors using ColorPalette</h1>
+   
+   <div class="column">
+        <div class="palette" style="background-color:Blue;">Blue Palette<br />(Listener)</div>
+        @(X.ColorPicker()
+            .ID("ColorPalette1")
+            .Colors((string[])ViewData["customColorsBlue"])
+            .Listeners(l => l.Select.Fn = "setColor")
+        )
+    </div>
+    
+    <div class="column">
+        <div class="palette" style="background-color:Green;">Green Palette<br />(DirectEvent)</div>
+        @(X.ColorPicker()
+            .ID("ColorPalette2")
+            .Colors((string[])ViewData["customColorsGreen"])
+            .DirectEvents(de => {
+                de.Select.Url = Url.Action("ColorPalette2_Select");
+                de.Select.ExtraParams.Add(new Parameter("value", "this.getValue()", ParameterMode.Raw));
+                de.Select.EventMask.ShowMask = true;
+                de.Select.EventMask.MinDelay = 500;
+                de.Select.EventMask.Msg = "Updating Color Swatch...";
+            })
+        )
+    </div>
+    
+    <div class="column">
+        <div class="palette" style="background-color:black;width:80px;margin:0;">Swatch</div>
+        <div id="swatch" style="width:78px;"></div>
+    </div>
+}

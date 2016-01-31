@@ -1,0 +1,251 @@
+﻿@model object
+@{
+    ViewBag.Title = "GridPanel with MultiHeader Row Filters - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+ 
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+ 
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+
+        var applyFilter = function (field) {                
+                var store = App.GridPanel1.getStore();
+                store.filterBy(getRecordFilter());                                                
+            };
+             
+            var clearFilter = function () {
+                App.ComboBox1.reset();
+                App.PriceFilter.reset();
+                App.ChangeFilter.reset();
+                App.PctChangeFilter.reset();
+                App.LastChangeFilter.reset();
+                 
+                App.Store1.clearFilter();
+            }
+ 
+            var filterString = function (value, dataIndex, record) {
+                var val = record.get(dataIndex);
+                
+                if (typeof val != "string") {
+                    return value.length == 0;
+                }
+                
+                return val.toLowerCase().indexOf(value.toLowerCase()) > -1;
+            };
+ 
+            var filterDate = function (value, dataIndex, record) {
+                var val = Ext.Date.clearTime(record.get(dataIndex), true).getTime();
+ 
+                if (!Ext.isEmpty(value, false) && val != Ext.Date.clearTime(value, true).getTime()) {
+                    return false;
+                }
+                return true;
+            };
+ 
+            var filterNumber = function (value, dataIndex, record) {
+                var val = record.get(dataIndex);                
+ 
+                if (!Ext.isEmpty(value, false) && val != value) {
+                    return false;
+                }
+                
+                return true;
+            };
+ 
+            var getRecordFilter = function () {
+                var f = [];
+ 
+                f.push({
+                    filter: function (record) {                         
+                        return filterString(App.ComboBox1.getValue()||"", "company", record);
+                    }
+                });
+                 
+                f.push({
+                    filter: function (record) {                         
+                        return filterNumber(App.PriceFilter.getValue(), "price", record);
+                    }
+                });
+                 
+                f.push({
+                    filter: function (record) {                         
+                        return filterNumber(App.ChangeFilter.getValue(), "change", record);
+                    }
+                });
+                 
+                f.push({
+                    filter: function (record) {                         
+                        return filterNumber(App.PctChangeFilter.getValue(), "pctChange", record);
+                    }
+                });
+                 
+                f.push({
+                    filter: function (record) {                         
+                        return filterDate(App.LastChangeFilter.getValue(), "lastChange", record);
+                    }
+                });
+ 
+                var len = f.length;
+                 
+                return function (record) {
+                    for (var i = 0; i < len; i++) {
+                        if (!f[i].filter(record)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                };
+            };
+    </script>
+
+
+}
+
+@section example
+{
+    @(
+        Html.X().GridPanel()
+            .ID("GridPanel1")
+            .Title("Filter Grid")
+            .Width(600)
+            .Height(350)
+            .ResizableConfig(new Resizer { Handles = ResizeHandle.East })
+            .Store(
+                Html.X().Store()
+                    .ID("Store1")
+                    .DataSource(Model)
+                    .Model(Html.X().Model()
+                        .Fields(
+                            Html.X().ModelField().Name("company"),
+                            Html.X().ModelField().Name("price").Type(ModelFieldType.Float),
+                            Html.X().ModelField().Name("change").Type(ModelFieldType.Float),
+                            Html.X().ModelField().Name("pctChange").Type(ModelFieldType.Float),
+                            Html.X().ModelField().Name("lastChange").Type(ModelFieldType.Date).DateFormat("MM/dd/yyyy")
+                        )
+                    )
+            )
+            .ColumnModel(
+                Html.X().Column()
+                    .Text("Company")
+                    .DataIndex("company")
+                    .Flex(1)
+                    .Items(
+                        Html.X().ComboBox()
+                            .ID("ComboBox1")
+                            .Icon(Icon.Magnifier)
+                            .TriggerAction(TriggerAction.All)
+                            .QueryMode(DataLoadMode.Local)
+                            .DisplayField("company")
+                            .ValueField("company")
+                            .Store(
+                                Html.X().Store()
+                                    .DataSource(Model)
+                                    .Model(Html.X().Model()
+                                        .Fields(
+                                            Html.X().ModelField().Name("company")
+                                        )
+                                    )
+                            )
+                            .Listeners(l =>
+                            {
+                                l.Change.Handler = "applyFilter(this);";
+                                l.Change.Buffer = 250;
+                            })                    
+                            .Plugins(Html.X().ClearButton())    
+                    ),
+
+                Html.X().Column()
+                    .Text("Price")
+                    .DataIndex("price")
+                    .Width(75)
+                    .Renderer(RendererFormat.UsMoney)
+                    .Items(
+                        Html.X().TextField()
+                            .ID("PriceFilter")
+                            .Listeners(l => {
+                                l.Change.Handler = "applyFilter(this);";
+                                l.Change.Buffer = 250;
+                            })
+                            .Plugins(Html.X().ClearButton())    
+                    ),
+                    
+               Html.X().Column()
+                    .Text("Changes")
+                    .Columns(
+                        Html.X().Column()
+                            .Text("Change")
+                            .DataIndex("change")
+                            .Width(75)
+                            .HideTitleEl(true)
+                            .Renderer("change")
+                            .Items(
+                                Html.X().TextField()
+                                    .ID("ChangeFilter")
+                                    .Listeners(l => {
+                                        l.Change.Handler = "applyFilter(this);";
+                                        l.Change.Buffer = 250;
+                                    })
+                                    .Plugins(Html.X().ClearButton())    
+                            ),
+                            
+                        Html.X().Column()
+                            .Text("Change %")
+                            .DataIndex("pctChange")
+                            .Width(75)
+                            .HideTitleEl(true)
+                            .Renderer("pctChange")
+                            .Items(
+                                Html.X().TextField()
+                                    .ID("PctChangeFilter")
+                                    .Listeners(l => {
+                                        l.Change.Handler = "applyFilter(this);";
+                                        l.Change.Buffer = 250;
+                                    })
+                                    .Plugins(Html.X().ClearButton())    
+                            )
+                    ),
+                    
+                Html.X().DateColumn()
+                    .Text("Last Updated")
+                    .Width(95)
+                    .DataIndex("lastChange")
+                    .Items(
+                        Html.X().DateField()
+                            .ID("LastChangeFilter")
+                            .Editable(false)
+                            .Listeners(l => {
+                                l.Change.Handler = "applyFilter(this);";
+                            })
+                            .Plugins(Html.X().ClearButton())    
+                    ),
+                    
+                Html.X().Column()
+                    .Width(25)
+                    .DataIndex("company")
+                    .Sortable(false)
+                    .MenuDisabled(true)
+                    .Text("&nbsp;")
+                    .Resizable(false)
+                    .Renderer("return '';")
+                    .Items(
+                        Html.X().Container()
+                            .Items(
+                                Html.X().Button()
+                                    .ID("ClearFilterButton")
+                                    .Icon(Icon.Cancel)
+                                    .ToolTip("Clear filter")
+                                    .Handler("clearFilter")
+                            )
+                    )
+           )
+    )
+}

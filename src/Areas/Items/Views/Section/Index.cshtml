@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Items from section";
+    Layout = "_LayoutSection.cshtml";
+}
+
+@section section1{
+     @(Html.X().Panel()
+        .Title("Section 1 - Panel 1")       
+        .Height(150) 
+        .Icon(Icon.BulletPlus)
+     )
+
+     @(Html.X().Panel()
+        .Title("Section 1 - Panel 2")       
+        .Height(150) 
+        .Icon(Icon.BulletMinus)
+     )
+     
+     @(Html.X().Panel()
+        .Title("Section 1 - Panel 3")       
+        .Height(150) 
+        .Icon(Icon.BulletStar)
+     )
+}
+
+
+@section section2{
+     @(Html.X().Panel()
+        .Title("Section 2 - Panel 1")
+        .Height(150) 
+        .Icon(Icon.BulletPlus)
+     )
+     
+     @(Html.X().Panel()
+        .Title("Section 2 - Panel 2")
+        .Height(150) 
+        .Icon(Icon.BulletMinus)
+     )
+     
+     @(Html.X().Panel()
+        .Title("Section 2 - Panel 3")
+        .Height(150) 
+        .Icon(Icon.BulletStar)
+     )
+}

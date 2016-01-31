@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Items (nested layouts)";
+    Layout = "_LayoutLevel3.cshtml";
+}
+
+@section section3{
+     @(Html.X().Panel()
+        .Title("Nested layout - Panel 1")       
+        .Height(150) 
+        .Icon(Icon.BulletPlus)
+     )
+
+     @(Html.X().Panel()
+        .Title("Nested layout - Panel 2")       
+        .Height(150) 
+        .Icon(Icon.BulletMinus)
+     )
+
+     @(Html.X().Panel()
+        .Title("Nested layout - Panel 3")       
+        .Height(150) 
+        .Icon(Icon.BulletStar)
+     )
+}
