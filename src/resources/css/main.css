@@ -696,6 +696,7 @@ td.alt2{
     font-size: 15px;
     float: right;
     margin-right: 0;
+    display: none !important;
 }
 
 .x-grid-item-selected .x-tree-arrows .x-tree-expander {
