@@ -1075,6 +1075,8 @@
     <Content Include="resources\images\ee-ad-store-bg.png" />
     <Content Include="resources\images\expand-all.gif" />
     <Content Include="resources\images\ext.net-logo.png" />
+    <Content Include="resources\images\extdotnet4-preview-background.png" />
+    <Content Include="resources\images\extdotnet4-preview.svg" />
     <Content Include="resources\images\ext_net_badge.gif" />
     <Content Include="resources\images\ext_net_logo_small.gif" />
     <Content Include="resources\images\grid-badge-bg.png" />
