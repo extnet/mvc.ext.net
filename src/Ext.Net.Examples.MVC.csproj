@@ -47,7 +47,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ext.Net, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ext.NET.MVC.4.0.0\lib\net45\Ext.Net.dll</HintPath>
+      <HintPath>..\packages\Ext.NET.MVC.4.0.0-preview\lib\net45\Ext.Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ext.Net.Utilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=2c34ac34702a3c23, processorArchitecture=MSIL">
@@ -508,10 +508,6 @@
     <Content Include="App_Readme\Ext.NET.Utilities\BREAKING_CHANGES.txt" />
     <Content Include="App_Readme\Ext.NET.Utilities\LICENSE.txt" />
     <Content Include="App_Readme\Ext.NET.Utilities\README.txt" />
-    <Content Include="App_Readme\Ext.NET\BREAKING_CHANGES.txt" />
-    <Content Include="App_Readme\Ext.NET\CHANGELOG.txt" />
-    <Content Include="App_Readme\Ext.NET\LICENSE.txt" />
-    <Content Include="App_Readme\Ext.NET\README.txt" />
     <Content Include="App_Readme\Transformer.NET\LICENSE.txt" />
     <Content Include="App_Readme\Transformer.NET\README.txt" />
     <Content Include="Areas\Associations_HasMany\Views\Simple\config.xml" />
@@ -885,9 +881,12 @@
     <Content Include="Areas\Associations_HasMany\Views\Simple\Index.cshtml" />
     <Content Include="Areas\Associations_HasOne\Views\Web.config" />
     <Content Include="Areas\Associations_HasOne\Views\Simple\Index.cshtml" />
-    <Content Include="App_Readme\Ext.NET\Sample.Web.config" />
     <Content Include="Areas\Chart_Area\Views\Basic\DownloadOptions.cshtml" />
     <Content Include="Areas\Chart_Bar\Views\Basic_3D\Index.cshtml" />
+    <Content Include="App_Readme\Ext.NET\Sample.Web.config" />
+    <Content Include="App_Readme\Ext.NET\README.md" />
+    <Content Include="App_Readme\Ext.NET\LICENSE" />
+    <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
     <None Include="Areas\DataView_Basic\Content\sencha-touch-examples.json" />
     <Content Include="Areas\Desktop\Views\Web.config" />
     <Content Include="Areas\Desktop\Views\Overview\Desktop.cshtml" />
