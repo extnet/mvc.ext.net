@@ -1206,6 +1206,7 @@
     <None Include="resources\fonts\TitilliumText25L005-webfont.woff" />
     <Content Include="Views\Shared\_BaseLayoutClean.cshtml" />
     <Content Include="Views\ExtNet\Index.cshtml" />
+    <Content Include="Views\Main\_East.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Dynamic_Partial_Rendering\Views\Web.config" />
