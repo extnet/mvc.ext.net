@@ -3,45 +3,43 @@
     ViewBag.Title = "Report DataView - Ext.NET MVC Examples";
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 }
-
 @section headtag
 {
     <style>
         body  {
             font : normal 11px tahoma, arial, helvetica, sans-serif;
         }
-        
+
         #customers-ct table { width : 100% !important; }
-        
+
         #customers-ct th {
-            background  : #F0F4F5 url(@Url.Content("~/extjs/packages/ext_theme_classic/build/resources/images/toolbar/toolbar-default-bg-gif/ext.axd")) repeat-x scroll left top;            
+            background  : #F0F4F5 url(@Url.Content("~/extjs/packages/ext_theme_classic/build/resources/images/toolbar/toolbar-default-bg-gif/ext.axd")) repeat-x scroll left top;
             font-weight : bold;
             padding     : 8px 5px;
         }
-       
+
         #customers-ct td {
             padding : 5px;
-            border-bottom : 1px solid silver;
         }
-        
+
         #customers-ct .letter-row {
             padding-top : 15px;
             border : none;
         }
-        
+
         #customers-ct .letter-row h2 { font-size : 2em; }
-        
+
         #customers-ct .header { padding : 10px 0px 10px 5px; }
-        
+
         #customers-ct .header p { font-size : 2em; }
 
         #customers-ct .header a { margin-bottom : 10px; }
-        
+
         .cust-name-over {
             cursor : pointer;
             background-color : #efefef;
         }
-        
+
         #customers-ct .letter-row div {
             border-bottom : 2px solid #99bbe8;
             cursor        : pointer;
@@ -52,21 +50,23 @@
         #customers-ct .letter-row div h2  { padding-left : 18px; }
 
         #customers-ct .letter-row div.collapsed { background-position : 0px 8px; }
-        
+
+        #customers-ct .customer-record { border-bottom : 1px solid silver; }
+
         #customers-ct table.collapsed { display : none; }
-        
+
         .customer-label {
             font-weight : bold;
             font-size:12px;
-            padding     : 0px 0px 0px 32px;            
+            padding     : 0px 0px 0px 32px;
             width       : 150px;
         }
     </style>
-    
+
     <script>
         var itemClick = function (view, record, item, index, e) {
             var group = e.getTarget("h2.letter-selector");
-            
+
             if (group) {
                 Ext.get(group)
                     .up("div")
@@ -76,27 +76,26 @@
                     .toggleCls("collapsed");
             }
 
-            var row = e.getTarget("tr.customer-record"),
+            var row = e.getTarget("tr.customer-record-row"),
                 nd = row && Ext.get(row).child("td.cust-name");
-                
-            if(nd){
+
+            if (nd) {
                 App.DataViewContextMenu.node = {
-                    id    : nd.getAttribute("custID"),
-                    name  : nd.getAttribute("custName"),
-                    email : nd.getAttribute("email"),
-                    contact : nd.dom.innerHTML
+                    id: nd.getAttribute("custID"),
+                    name: nd.getAttribute("custName"),
+                    email: nd.getAttribute("email"),
+                    contact: nd.dom.innerHTML
                 };
-            
+
                 App.DataViewContextMenu.showAt(e.getXY());
             }
         };
     </script>
 }
-
 @section example
 {
     @(
-        Html.X().Menu()
+ Html.X().Menu()
             .ID("DataViewContextMenu")
             .Items(
                 Html.X().Label().Cls("customer-label"),
@@ -116,9 +115,8 @@
                 l.BeforeShow.Handler = "this.getComponent(0).setText(this.node.contact);";
             })
     )
-
     @(
-        Html.X().Toolbar()
+ Html.X().Toolbar()
             .Items(
                 Html.X().Button()
                     .Text("Print")
@@ -126,7 +124,6 @@
                     .Handler("window.print();")
             )
     )
-
     @(
  Html.X().DataView()
             .DisableSelection(true)
@@ -145,45 +142,46 @@
             )
             .Tpl(@<text>
                 <div id="customers-ct">
-					<div class="header">
-						<p>Customer Address Book</p>                                                                        
-					</div>
-					<table>
-						<tr>
-							<th style="width:10%">Contact Name</th>
-							<th style="width:18%">Address</th>
-							<th style="width:18%">City</th>
-							<th style="width:18%">State/Province</th>
-							<th style="width:18%">Zip/Postal Code</th>
-							<th style="width:18%">Country/Region</th>
-						</tr>
-					
-						<tpl for=".">
-								<tr>
-									<td class="letter-row" colspan="6">
-										<div><h2 class="letter-selector">{Letter}</h2></div>
-                                        <tpl for="Customers">
-									        <table>                                                
-                                                <tr class="customer-record">
-										            <td class="cust-name" custID="{CustomerID}" custName="{CompanyName}" email="{Email}" style="width:10%">{ContactName}</td>
-										            <td style="width:18%">&nbsp;{Address}</td>
-										            <td style="width:18%">&nbsp;{City}</td>
-										            <td style="width:18%">&nbsp;{Region}</td>
-										            <td style="width:18%">&nbsp;{PostalCode}</td>
-										            <td style="width:18%">&nbsp;{Country}</td>
-									            </tr>
-                                            </table>
-								        </tpl>
-									</td>
-								</tr>								
-						</tpl>                    
-					</table>
-				</div>
+                    <div class="header">
+                        <p>Customer Address Book</p>
+                    </div>
+                    <table>
+                        <tr>
+                            <th style="width:10%">Contact Name</th>
+                            <th style="width:18%">Address</th>
+                            <th style="width:18%">City</th>
+                            <th style="width:18%">State/Province</th>
+                            <th style="width:18%">Zip/Postal Code</th>
+                            <th style="width:18%">Country/Region</th>
+                        </tr>
+
+                        <tpl for=".">
+                            <tr>
+                                <td class="letter-row" colspan="6">
+                                    <div><h2 class="letter-selector">{Letter}</h2></div>
+                                    <tpl for="Customers">
+                                        <table class="customer-record">
+                                            <tr class="customer-record-row">
+                                                <td class="cust-name" custid="{CustomerID}" custname="{CompanyName}" email="{Email}" style="width:10%">{ContactName}</td>
+                                                <td style="width:18%">&nbsp;{Address}</td>
+                                                <td style="width:18%">&nbsp;{City}</td>
+                                                <td style="width:18%">&nbsp;{Region}</td>
+                                                <td style="width:18%">&nbsp;{PostalCode}</td>
+                                                <td style="width:18%">&nbsp;{Country}</td>
+                                            </tr>
+                                        </table>
+                                    </tpl>
+                                </td>
+                            </tr>
+                        </tpl>
+                    </table>
+                </div>
             </text>)
-            .Listeners(l => {
-                l.ItemClick.Fn = "itemClick";
-                l.Refresh.Handler = "this.el.select('tr.customer-record', true).addClsOnOver('cust-name-over');";
-                l.Refresh.Delay = 100;
-            })
+                .Listeners(l =>
+                {
+                    l.ItemClick.Fn = "itemClick";
+                    l.Refresh.Handler = "this.el.select('table.customer-record', true).addClsOnOver('cust-name-over');";
+                    l.Refresh.Delay = 100;
+                })
     )
 }

@@ -162,7 +162,7 @@
 
                         @(
                             Html.X().Toolbar()
-                                .Width(520)
+                                .Width(545)
                                 .Floating(true)
                                 .ClassicButtonStyle(true)
                                 .Flat(true)
@@ -171,7 +171,7 @@
                                 .Defaults(new
                                 {
                                     IconAlign = "top",
-                                    Width = 100,
+                                    Width = 105,
                                     Icon = Url.Content("~/Areas/Desktop/Content/cmd.png"),
                                     Scale = "large",
                                     Handler = JRawValue.From("function(){Ext.Msg.alert('Launch', this.text);}")
@@ -225,6 +225,7 @@
                     .TrayWidth(110)
                     .QuickStart(
                         Html.X().Toolbar()
+                            .Width(80)
                             .Items(
                                 Html.X().Button()
                                     .Handler("tile")

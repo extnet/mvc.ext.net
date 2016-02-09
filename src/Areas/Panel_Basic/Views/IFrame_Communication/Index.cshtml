@@ -9,7 +9,7 @@
     <h1>IFrame Communication</h1>
     
     @(X.Window()
-        .Width(450)
+        .Width(400)
         .Title("Parent")
         .Height(200)
         .Layout(LayoutType.HBox)
@@ -19,7 +19,6 @@
             X.Panel()
                 .ID("Panel1")
                 .Title("A")
-                .BodyPadding(10)
                 .Flex(1)
                 .Loader(X.ComponentLoader()
                     .Url(Url.Action("A"))
@@ -31,7 +30,6 @@
             X.Panel()
                 .ID("Panel2")
                 .Title("B")
-                .BodyPadding(10)
                 .Flex(1)
                 .Loader(X.ComponentLoader()
                     .Url(Url.Action("B"))
