@@ -8,14 +8,14 @@
 @section headtag
 {
     <script>
-        var tipRenderer = function (toolTip, storeItem, item) {
+        var tipRenderer = function (storeItem, item) {
             var total = 0;
 
             App.Chart1.getStore().each(function (rec) {
                 total += rec.get('Data1');
             });
 
-            toolTip.setTitle(storeItem.get('Name') + ': ' + Math.round(storeItem.get('Data1') / total * 100) + '%');
+            this.setTitle(storeItem.get('Name') + ': ' + Math.round(storeItem.get('Data1') / total * 100) + '%');
         };
 
         var saveChart = function (btn) {
@@ -64,7 +64,7 @@
                 X.Button()
                     .Text("Donut")
                     .EnableToggle(true)
-                            .Listeners(events => events.Toggle.Handler = "App.Chart1.series[0].setDonut(pressed ? 35 : false); App.Chart1.redraw();")
+                    .Listeners(events => events.Toggle.Handler = "App.Chart1.series[0].setDonut(pressed ? 35 : false);")
             )
         )
         .Items(X.PolarChart()
@@ -86,7 +86,7 @@
                 X.RotateInteraction()
             )
             .Series(X.PieSeries()
-                .AngleField("Data1")
+                .XField("Data1")
                 .ShowInLegend(true)
                 .Donut(0)
                 .HighlightMargin(20)

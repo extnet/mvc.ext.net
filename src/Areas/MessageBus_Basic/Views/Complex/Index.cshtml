@@ -7,13 +7,13 @@
 @section example
 {
     @(X.Panel()
-        .Title("Container In Content Page")
+        .Title("Container in the content page")
         .Layout(LayoutType.VBox)
         .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Stretch })
         .Items(i => 
         {
             i.Add(X.Panel()
-                .Height(200)
+                .Height(150)
                 .Layout(LayoutType.Fit)
                 .Header(false)
                 .MessageBusListeners(new MessageBusListener()

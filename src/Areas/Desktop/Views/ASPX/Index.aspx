@@ -15,7 +15,7 @@
         runat="server" 
         Closable="false"
         Resizable="false"
-        Height="200" 
+        Height="150" 
         Icon="Lock" 
         Title="Login"
         Draggable="false"

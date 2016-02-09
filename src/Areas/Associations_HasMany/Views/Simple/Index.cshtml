@@ -5,10 +5,10 @@
     var X = Html.X();
 }
 
-@section example 
+@section example
 {
     <h1>Simple HasMany Association</h1>
-    
+
     @(X.Model()
         .Name("Product")
         .IDProperty("Id")
@@ -21,7 +21,7 @@
                 .Type(ModelFieldType.String)
         )
     )
-    
+
     @(X.Store()
         .ID("Store1")
         .Data(Model)
@@ -75,9 +75,9 @@
                 )
         )
     )
-    
+
     <br />
-    
+
     @(X.GridPanel()
         .StoreID("Store1")
         .Title("Users with RowExpander")
@@ -100,7 +100,7 @@
                             .DataIndex("Name")
                             .Flex(1)
                     )
-                    .Listeners(l => 
+                    .Listeners(l =>
                     {
                         l.ViewReady.Handler = "this.bindStore(this.record.products());";
                         l.ViewReady.Delay = 1;

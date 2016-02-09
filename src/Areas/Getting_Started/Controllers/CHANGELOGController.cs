@@ -11,7 +11,7 @@ namespace Ext.Net.MVC.Examples.Areas.Getting_Started.Controllers
     {
         public ActionResult Index()
         {
-            StreamReader streamReader = System.IO.File.OpenText(Server.MapPath("~/App_Readme/Ext.NET/CHANGELOG.md"));
+            StreamReader streamReader = System.IO.File.OpenText(Server.MapPath("~/App_Readme/Ext.NET/CHANGELOG.txt"));
             return View("Index", (object)streamReader.ReadToEnd());
         }
     }

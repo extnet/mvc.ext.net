@@ -2,43 +2,42 @@
     .Header(false)
     .Region(Region.North)
     .Border(false)
-    .Height(70)
+    .Height(90)
     .Content(
-    @<text>
-        <header class="site-header" role="banner">
-            <nav class="top-navigation">
-                <div class="logo-container">
-                    <img src="../../resources/images/extdotnet-logo.svg" />
-                </div>
-                <div class="navigation-bar">
-                    <div class="platform-selector-container">
-                        @(Html.X().Button()
-                            .Cls("platform-selector")
-                            .Width(450)
-                            .Text("MVC Examples Explorer (4.0 Preview)")
-                            .Height(70)
-                            .ArrowVisible(false)
-                            .Menu(Html.X().Menu()
-                                .Cls("platform-selector-dropdown")
-                                .Plain(true)
-                                    .Items(
-                                        Html.X().MenuItem()
-                                        .Text("Web Forms Examples Explorer (4.0 Preview)")
-                                        .Href("http://examples.ext.net/")
-                                        .Height(70)
-                                        .Width(448)
-                                        .Padding(12)
-                                )
-                            )
-                        )
+        @<text>
+			<header class="site-header" role="banner">
+                <nav class="top-navigation">
+                    <div class="logo-container">
+                        <img src="../../resources/images/ext.net-logo.png" />
                     </div>
-                    <input type="checkbox" id="menu-button-checkbox" />
-                    <label id="menu-button" for="menu-button-checkbox">
-                        <span></span>
-                    </label>
-                </div>
-            </nav>
-        </header>
-    </text>
+                    <div class="navigation-bar">
+                        <h1 class="nav-title">
+                            MVC Examples Explorer
+                            <span>(3.2.1)</span>
+                        </h1>
+                        <ul id="nav-menu" class="nav-menu">
+                            <li>
+                                <div class="menu-button"><span class="f-icon-reorder"></span></div>
+                                <ul>
+                                    <li><a href="http://examples.ext.net/">Web Forms Examples (3.2)</a></li>
+                                    <li class="separator"></li>
+                                    <li><a href="http://examples2.ext.net/">Web Forms Examples (2.5)</a></li>
+                                    <li><a href="http://mvc2.ext.net/">MVC Examples (2.5)</a></li>
+                                    <li><a href="http://examples1.ext.net/">Web Forms Examples (1.7)</a></li>
+                                    <li class="separator"></li>
+                                    <li><a href="http://docs.sencha.com/extjs/5.1">EXT JS Documentation</a></li>
+                                    <li><a href="http://docs.ext.net/">Ext.NET Documentation</a></li>
+                                    <li class="separator"></li>
+                                    <li><a href="http://forums.ext.net/">Community Forums</a></li>
+                                    <li><a href="http://ext.net/faq/">FAQ</a></li>
+                                    <li><a href="http://ext.net/contact/">Contact</a></li>
+                                    <li><a href="http://ext.net/">Ext.NET Home</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+        </text>
     )
 )

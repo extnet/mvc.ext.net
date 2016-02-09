@@ -1,0 +1,48 @@
+﻿@(
+ Html.X().Window()
+       .ID("LinkWindow")
+       .Modal(true)
+       .Hidden(true)
+       .Icon(Icon.Link)
+       .Layout(LayoutType.Absolute)
+       .Width(400)
+       .Height(110)
+       .Title("Direct Link")
+       .Closable(false)
+       .Resizable(false)
+       .Items(items => {
+           items.Add(new TextField { 
+                ID = "exampleLink",
+				Width = 364,
+				Cls = "dlText",
+				X = 10,
+				Y = 10,
+				SelectOnFocus = true,
+				ReadOnly = true
+           });
+       })
+       .Listeners(l=>l.Show.Handler="App.exampleLink.setValue(this.exampleName);")
+       .Buttons(buttons => {
+           buttons.Add(new Button { 
+                Text = "Open",
+                Icon = Icon.ApplicationDouble,
+                ToolTip = "Open Example in the separate window",
+                Handler = "window.open(App.LinkWindow.exampleName);"
+           });
+
+           buttons.Add(new Button
+           {
+               Text = " Open (Direct)",
+               Icon = Icon.ApplicationGo,
+               ToolTip = "Open Example in the separate window using a direct link",
+               Handler = "window.open(App.LinkWindow.exampleUrl, '_blank');"
+           });
+
+           buttons.Add(new Button
+           {
+               Text = "Close",
+               Icon = Icon.ApplicationGo,
+               Handler = "this.up('window').hide();"
+           });
+       })
+)

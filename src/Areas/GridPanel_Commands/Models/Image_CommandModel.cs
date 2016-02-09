@@ -59,7 +59,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Commands.Image_Command
                     plant.ColorCode = plantNode.SelectSingleNode("colorCode").InnerText;
                     plant.Light = plantNode.SelectSingleNode("light").InnerText;
                     plant.Price = decimal.Parse(plantNode.SelectSingleNode("price").InnerText, culture);
-                    plant.Availability = DateTime.ParseExact(plantNode.SelectSingleNode("availability").InnerText, "MM/dd/yyyy", culture);
+                    plant.Availability = DateTime.Parse(plantNode.SelectSingleNode("availability").InnerText, culture);
                     plant.Indoor = bool.Parse(plantNode.SelectSingleNode("indoor").InnerText);
 
                     data.Add(plant);

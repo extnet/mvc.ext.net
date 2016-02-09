@@ -1,6 +1,6 @@
 EXT.NET Software License Agreement
 
-Version 4.0.0-preview
+Version 3.2.1
 
 THIS DOCUMENT IS A LEGAL AGREEMENT (the "License Agreement") BETWEEN OBJECT.NET, INC. ("We," "Us") AND
 YOU OR THE ORGANIZATION ON WHOSE BEHALF YOU ARE UNDERTAKING THE LICENSE DESCRIBED BELOW ("You", 
@@ -244,12 +244,12 @@ Edmonton, Alberta, Canada.
 
 If the Software or any related documentation is licensed to the U.S. Government or any agency 
 thereof, it will be considered to be "commercial computer software" or "commercial computer 
-software documentation," as those terms are used in 48 CFR ยง 12.212 or 48 CFR ยง 227.7202, and is 
+software documentation," as those terms are used in 48 CFR ง 12.212 or 48 CFR ง 227.7202, and is 
 being licensed with only those rights as are granted to all other licensees as set forth in this 
 Agreement.
 
 
-                     Copyright 2008-2016 Object.NET, Inc., All rights reserved.
+                     Copyright 2008-2015 Object.NET, Inc., All rights reserved.
                   
                                        Object.NET, Inc.
                                        +1(888)775-5888

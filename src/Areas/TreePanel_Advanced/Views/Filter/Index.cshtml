@@ -19,7 +19,7 @@
                 return;
             }
 
-            if (e.getKey() === e.ESC) {
+            if (e.getKey() === Ext.EventObject.ESC) {
                 clearFilter();
             } else {
                 var re = new RegExp(".*" + text + ".*", "i");

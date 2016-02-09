@@ -349,8 +349,8 @@
                             )
                             .Series(
                                 X.RadarSeries()
-                                    .AngleField("Name")
-                                    .RadiusField("Data")
+                                    .XField("Name")
+                                    .YField("Data")
                                     .ShowMarkers(true)
                                     .Marker(X.CircleSprite().Radius(4).FillStyle("rgb(69,109,159)"))
                                     .StyleSpec(X.Sprite().FillStyle("rgb(194,214,240)").Opacity(0.5).LineWidth(0.5))

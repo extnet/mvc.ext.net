@@ -5,30 +5,30 @@
   </order>
 
   <icons>
-    <folder name="Action" iconCls="fa fa-play" />
-    <folder name="Associations" iconCls="fa fa-cogs" />
-    <folder name="Buttons" iconCls="fa fa-hand-pointer-o" />
-    <folder name="Calendar" iconCls="fa fa-calendar-o" />
-    <folder name="Chart" iconCls="fa fa-pie-chart" />
-    <folder name="ColorPicker" iconCls="fa fa-paint-brush" />
-    <folder name="Combination_Samples" iconCls="fa fa-random" />
-    <folder name="Data" iconCls="fa fa-database" />
-    <folder name="DataView" iconCls="fa fa-eye-slash" />
-    <folder name="Desktop" iconCls="fa fa-desktop" />
-    <folder name="DragDrop" iconCls="fa fa-arrows" />
-    <folder name="Draw" iconCls="fa fa-pencil-square-o" />
-    <folder name="Dynamic_Partial_Rendering" iconCls="fa fa-bullseye" />
-    <folder name="Editor" iconCls="fa fa-pencil" />
-    <folder name="Element" iconCls="fa fa-puzzle-piece" />
-    <folder name="Events" iconCls="fa fa-bolt" />
-    <folder name="Form" iconCls="fa fa-check-square-o" />
-    <folder name="Getting_Started" iconCls="fa fa-info-circle" />
-    <folder name="GridPanel" iconCls="fa fa-th">
+    <folder name="Action" iconCls="#Transmit" />
+    <folder name="Associations" iconCls="#ArrowJoin" />
+    <folder name="Buttons" iconCls="#Button" />
+    <folder name="Calendar" iconCls="#Calendar" />
+    <folder name="Chart" iconCls="#ChartBar" />
+    <folder name="ColorPicker" iconCls="#ColorSwatch" />
+    <folder name="Combination_Samples" iconCls="#ApplicationGo" />
+    <folder name="Data" iconCls="#DatabaseTable" />
+    <folder name="DataView" iconCls="#TableMultiple" />
+    <folder name="Desktop" iconCls="#Desktop" />
+    <folder name="DragDrop" iconCls="#ShapeSquareSelect" />
+    <folder name="Draw" iconCls="#Pencil" />
+    <folder name="Dynamic_Partial_Rendering" iconCls="#ApplicationOsxDouble" />
+    <folder name="Editor" iconCls="#TextfieldRename" />
+    <folder name="Element" iconCls="#Brick" />
+    <folder name="Events" iconCls="#Lightning" />
+    <folder name="Form" iconCls="#ApplicationForm" />
+    <folder name="Getting_Started" iconCls="#Information" />
+    <folder name="GridPanel" iconCls="#ApplicationViewColumns">
       <folder name="Plugins" iconCls="icon-plugin" />
     </folder>
-    <folder name="Items" iconCls="fa fa-cubes" />
-    <folder name="Keys" iconCls="fa fa-keyboard-o" />
-    <folder name="Kitchen_Sink" iconCls="fa fa-home">
+    <folder name="Items" iconCls="#Outline" />
+    <folder name="Keys" iconCls="#Keyboard" />
+    <folder name="Kitchen_Sink" iconCls="#House">
       <folder name="Forms" iconCls="#ApplicationForm" />
       <folder name="GridPanels" iconCls="#ApplicationViewColumns" />
       <folder name="Panels" iconCls="#Application" />
@@ -37,40 +37,31 @@
       <folder name="TreePanels" iconCls="#ApplicationSideTree" />
       <folder name="Windows" iconCls="#ApplicationDouble" />
     </folder>
-    <folder name="Layout" iconCls="fa fa-th-large" />
-    <folder name="Loaders" iconCls="fa fa-spinner" />
-    <folder name="MessageBox" iconCls="fa fa-envelope-o" />
-    <folder name="MessageBus" iconCls="fa fa-bus" />
-    <folder name="Miscellaneous" iconCls="fa fa-asterisk" />
-    <folder name="Models" iconCls="fa fa-building-o" />
-    <folder name="MultiUpload" iconCls="fa fa-upload" />
-    <folder name="Panel" iconCls="fa fa-clone" />
-    <folder name="Portal" iconCls="fa fa-laptop" />
-    <folder name="PropertyGrid" iconCls="fa fa-columns" />
-    <folder name="SignalR" iconCls="fa fa-wifi" />
-    <folder name="TabPanel" iconCls="fa fa-list-alt" />
-    <folder name="TaskManager" iconCls="fa fa-hourglass-o" />
-    <folder name="Toolbar" iconCls="fa fa-wrench" />
-    <folder name="TreePanel" iconCls="fa fa-tree" />
-    <folder name="Viewport" iconCls="fa fa-object-group" />
-    <folder name="Window" iconCls="fa fa-object-ungroup" />
-    <folder name="XRender" iconCls="fa fa-magic" />
+    <folder name="Layout" iconCls="#Layout" />
+    <folder name="Loaders" iconCls="#Connect" />
+    <folder name="MessageBox" iconCls="#ApplicationError" />
+    <folder name="MessageBus" iconCls="#ArrowOut" />
+    <folder name="Miscellaneous" iconCls="#AsteriskOrange" />
+    <folder name="Models" iconCls="#Images" />
+    <folder name="MultiUpload" iconCls="#DiskUpload" />
+    <folder name="Panel" iconCls="#Application" />
+    <folder name="Portal" iconCls="#ApplicationViewTile" />
+    <folder name="PropertyGrid" iconCls="#ApplicationViewDetail" />
+    <folder name="SignalR" iconCls="#ArrowEw" />
+    <folder name="TabPanel" iconCls="#TabPanel" />
+    <folder name="TaskManager" iconCls="#Hourglass" />
+    <folder name="Toolbar" iconCls="#Toolbar" />
+    <folder name="TreePanel" iconCls="#ApplicationSideTree" />
+    <folder name="Viewport" iconCls="#Viewport" />
+    <folder name="Window" iconCls="#ApplicationDouble" />
+    <folder name="XRender" iconCls="#Wand" />
   </icons>
 
-  <new version="4.0.0">
-  </new>
-
-  <updated version="4.0.0">
-  </updated>
-
-  <!--
   <new version="3.3.0">
     <folder name="Chart_Bar\Views\Basic_3D" />
     <folder name="Form_Login\Views\Auto_Complete" />
   </new>
-  -->
 
-  <!--
   <new version="3.0">
     <folder name="GridPanel_ColumnModel\Views\HyperlinkColumn" />
     <folder name="Miscellaneous_Factory\Views\Basic" />
@@ -79,7 +70,6 @@
   <update version="3.0">
     <folder name="GridPanel_ColumnModel\Views\Ajax_Configuration" />
   </update>
-  -->
 
   <!--<new version="2.5.3">
     <folder name="Form_ComboBox\Views\Linked_Combos_In_Grid" />

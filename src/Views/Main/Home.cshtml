@@ -22,80 +22,51 @@
     </script>
 </head>
 <body class="welcome">
-    @Html.X().ResourceManager().Theme(Theme.Triton)
+    @Html.X().ResourceManager().Theme(Theme.Crisp)
 
     @(Html.X().Container()
         .Content(
             @<text>
-                <div class="container">
-                    <div class="ext4-notification">
-                        <div class="notification-container">
-                            <div class="notification-img">
-                                <img src="@Url.Content("~/resources/images/extdotnet4-preview.svg")">
-                            </div>
-                            <div class="notification-text">
-                                We’re super excited to announce the immediate availability of Ext.NET 4 Preview! This release includes many new features and improvements and of course one of the biggest changes includes the upgrade to Sencha Ext JS 6.
-                            </div>
-                            <div class="notification-action">
-                                <a href="http://ext.net/ext-net-4-preview-now-available/" class="btn-notification">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h1>BUILD ASP.NET MVC APPLICATIONS FASTER <span>WITH <span class="blue">100+ COMPONENTS AND 600+ EXAMPLES</span></span></h1>
-                    <div class="welcome-cards">
-
-                        <div class="welcome-card">
-                            <div class="welcome-card-icon">
-                                <img src="@Url.Content("~/resources/icons/docs.svg")" />
-                            </div>
-                            <div class="welcome-card-title">Getting Started</div>
-                            <div class="welcome-card-body">
-                                <p>
-                                    <a href="http://ext.net/#learn">Ext.NET Web Application Development</a> makes learning Ext.NET easier than ever. 
-                                    Pick up a copy and start building ASP.NET applications.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="welcome-card">
-                            <div class="welcome-card-icon">
-                                <img src="@Url.Content("~/resources/icons/support.svg")" />
-                            </div>
-                            <div class="welcome-card-title">Support</div>
-                            <div class="welcome-card-body">
-                                <p>
-                                    We are proud to have a large <a href="http://forums.ext.net/">developer community</a> for exchanging information as well
-                                    as <a href="http://ext.net/store/#benefits">Premium Support</a> with a maximum 24h response time.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="welcome-card">
-                            <div class="welcome-card-icon">
-                                <img src="@Url.Content("~/resources/icons/download.svg")" />
-                            </div>
-                            <div class="welcome-card-title">Download</div>
-                            <div class="welcome-card-body">
-                                <p>
-                                    You can <a href="http://ext.net/download/">download</a> Ext.NET and start testing it locally right away. In order to deploy and use it
-                                    for commercial projects, you will need to <a href="http://ext.net/store/">get a license</a>.
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <h2>Popular Examples</h2>
-
-                    <ul class="popular-links">
-                        <li><a href="/#/Events/DirectMethod/">Events</a></li>
-                        <li><a href="/#/Portal/Complex/">Portal</a></li>
-                        <li><a href="/#/Models/FormPanelFor/">Models</a></li>
-                        <li><a href="/#/Chart_Area/Basic/">Chart</a></li>
-                    </ul>
-
+                @*<a class="exclude" href="http://www.ext.net/store/" target="_top">
+                    <img src="http://speed.ext.net/www/images/ext.net.sale.banner.png" alt="Ext.NET Sale Banner" class="banner" title="Ext.NET Sale Banner">
+                </a>*@
+                <div id="welcome-title">
+                    Build ASP.NET MVC Applications with Ease
                 </div>
+
+                <div class="ext4-notification">
+                    <div class="notification-container">
+                        <div class="notification-img">
+                            <img src="@Url.Content("~/resources/images/extdotnet4-preview.svg")">
+                        </div>
+                        <div class="notification-text">
+                            We’re super excited to announce the immediate availability of Ext.NET 4 Preview! This release includes many new features and improvements and of course one of the biggest changes includes the upgrade to Sencha Ext JS 6.
+                        </div>
+                        <div class="notification-action">
+                            <a href="http://ext.net/ext-net-4-preview-now-available/" class="btn-notification">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="welcome-text">
+                    Ext.NET provides full support for ASP.NET MVC, including the Razor View Engine.<br />
+                    Browse the examples using the sidebar menu on the left, check their source code, open in a separate window if you like.<br />
+                    If you have any questions feel free to <a href="http://ext.net/contact/">get in touch with us</a> or check our <a href="http://forums.ext.net/">community forums</a>.
+                </p>
+            </text>
+        )
+    )
+
+    @(Html.X().Container()
+        .Content(
+            @<text>
+                <div id="welcome-grid">
+  		            <div id="screens"></div>
+                    <div class="popular-links">
+                        <a class="button" href="/#/Events/DirectMethod/">Events</a>
+                        <a class="button" href="/#/Portal/Complex/">Portal</a>
+                        <a class="button" href="/#/Models/FormPanelFor/">Models</a>
+                    </div>
             </text>
         )
     )

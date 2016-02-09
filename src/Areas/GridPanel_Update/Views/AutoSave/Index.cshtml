@@ -45,7 +45,7 @@
 
             Ext.net.Notification.show({
                 iconCls: 'icon-exclamation',
-                html: message + "\n<br /><b>Proxy type:</b> " + proxy.type,
+                html: message,
                 title: 'EXCEPTION',
                 autoScroll: true,
                 hideDelay: 5000,
@@ -68,7 +68,6 @@
             .Title("User -- All fields are required")
             .Width(500)
             .DefaultAnchor("100%")
-            .DefaultButton("1")
             .FieldDefaults(d =>
             {
                 d.LabelAlign = LabelAlign.Right;
@@ -82,11 +81,11 @@
                 Html.X().Button()
                     .Text("Create")
                     .Icon(Icon.UserAdd)
-                    .Handler("addRecord(this.up('form'), App.GridPanel1); this.up('form').defaultButton='1';"),
+                    .Handler("addRecord(this.up('form'), App.GridPanel1);"),
 
                 Html.X().Button()
                     .Text("Reset")
-                    .Handler("this.up('form').getForm().reset(); this.up('form').defaultButton='1';")
+                    .Handler("this.up('form').getForm().reset();")
             )
     )
 
@@ -184,7 +183,7 @@
                     .Mode(SelectionMode.Single)
                     .Listeners(l =>
                     {
-                        l.Select.Handler = "App.UserForm.getForm().loadRecord(record); App.UserForm.defaultButton='0';";
+                        l.Select.Handler = "App.UserForm.getForm().loadRecord(record);";
                     })
             )
             .Buttons(

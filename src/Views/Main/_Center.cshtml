@@ -1,8 +1,8 @@
 ﻿@(
  Html.X().TabPanel()
-        .ID("ExampleTabs")
+        .ID("ExampleTabs")        
         .Region(Region.Center)
-        .MarginSpec("0")
+        .MarginSpec("0 4 4 0")
         .Cls("tabs")
         .MinTabWidth(115)
         .Items(items =>
@@ -12,7 +12,7 @@
                 ID = "tabHome",
                 Title = "Home",
                 HideMode = HideMode.Offsets,
-                IconCls = "fa fa-home",
+                Icon = Icon.Application,
                 Loader = new ComponentLoader
                 {
                     Mode = LoadMode.Frame,

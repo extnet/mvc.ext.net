@@ -51,12 +51,6 @@
             ID = "CheckMenuItemThemeNeptuneTouch",
             Text = "Neptune Touch",
             Group = "theme"
-        },
-        new CheckMenuItem
-        {
-            ID = "CheckMenuItemThemeTriton",
-            Text = "Triton",
-            Group = "theme"
         }
     };
     
@@ -70,8 +64,12 @@
 @(Html.X().Panel()
     .Region(Region.West)
     .Layout(LayoutType.Fit)
-    .Width(270)
+    .Width(240)
     .Header(false)
+    .Collapsible(true)
+    .Split(true)
+    .CollapseMode(CollapseMode.Mini)
+    .MarginSpec("0 0 4 4")
     .Border(false)
     .Items(
         new TreePanel
@@ -89,8 +87,6 @@
             {
                 new Toolbar
                 {
-                    Cls = "left-header",
-
                     Items = 
                     {
                         new TextField
@@ -129,15 +125,12 @@
                         
                         new Button 
                         {
-                            ID = "OptionsButton",
-                            IconCls = "fa fa-cog",
-                            ArrowVisible = false,
+                            Icon = Icon.Cog,
                             ToolTip = "Options",
                             Menu = 
                             {
                                 new Menu
                                 {
-                                    MinWidth = 200,
                                     Items = 
                                     {
                                         new MenuItem
@@ -178,8 +171,7 @@
                                             {
                                                 new Menu
                                                 {
-                                                    MinWidth = 200,
-                                                    Items = 
+                                                    Items= 
                                                     {
                                                         themeItems
                                                     },
@@ -205,7 +197,6 @@
                                             {
                                                 new Menu()  
                                                 {
-                                                    MinWidth = 200,
                                                     Items = 
                                                     {
                                                         new CheckMenuItem() 

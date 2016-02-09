@@ -104,7 +104,7 @@
                                 .Grid(true)
                                 .Minimum(0)
                                 .Maximum(24)
-                                .Renderer(r => r.Handler = "return layoutContext.renderer(label) + '%';"),
+                                .Renderer(r => r.Handler = "return layout.renderer(label) + '%';"),
                             
                             X.CategoryAxis()
                                 .Position(Position.Bottom)
@@ -122,7 +122,7 @@
                                 .Tooltip(X.ChartTip()
                                     .TrackMouse(true)
                                     .StyleSpec("background: #fff;")
-                                            .Renderer(r => r.Handler = "toolTip.setHtml(record.get('month') + ': ' + record.get('data1') + ' %');")
+                                    .Renderer(r => r.Handler = "this.setHtml(storeItem.get('month') + ': ' + storeItem.get('data1') + ' %');")
                                 )
                         ),
                         

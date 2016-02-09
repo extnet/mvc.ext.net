@@ -22,54 +22,6 @@
                 icon: 'Error'
             });
         };
-
-        var handleLogin = function () {
-            var form = App.Window1.el.dom;
-
-            App.Window1.close();
-
-            // Restore form submit destinations
-            if (Ext.isIE) {
-                form.action = orgFormAction;
-                form.target = orgFormTarget;
-            }
-
-            // Now this would work for Chrome, and we already triggered autoComplete for IE.
-            // Chrome's is only triggered after the destination page is loaded.
-            form.submit();
-        };
-
-        var orgFormAction, orgFormTarget,
-            btn = null, iframe = null;
-
-        // If we are on IE, we will create a button and click it (at once),
-        // so autoComplete is triggered.
-        var handleClientClick = function () {
-            var form = App.Window1.el.dom;
-
-            if (Ext.isIE) {
-                if (iframe == null) {
-                    iframe = document.createElement("IFRAME");
-                    iframe.name = "ie_login_flush";
-                    form.appendChild(iframe);
-                }
-
-                if (btn == null) {
-                    btn = document.createElement("BUTTON");
-                    btn.type = "submit";
-                    btn.id = "submitButton";
-                    btn.style = "display: none";
-                    orgFormAction = form.action;
-                    form.action = "about:blank";
-                    orgFormTarget = form.target;
-                    form.target = "ie_login_flush";
-                    form.appendChild(btn);
-                }
-
-                // At this time, AutoComplete for IE is triggered.
-                btn.click();
-            }
-        }
     </script>
 }
 
@@ -88,7 +40,7 @@
             .ID("Window1")
             .Closable(false)
             .Resizable(false)
-            .Height(200)
+            .Height(150)
             .Icon(Icon.Lock)
             .Title("Login")
             .Draggable(true)
@@ -108,7 +60,13 @@
                 el.CustomConfig.Add(new ConfigItem()
                 {
                     Name = "action",
-                    Value = "../../Desktop/Overview/Desktop",
+                    Value = "about::blank",
+                    Mode = ParameterMode.Value
+                });
+                el.CustomConfig.Add(new ConfigItem()
+                {
+                    Name = "target",
+                    Value = "submitTarget",
                     Mode = ParameterMode.Value
                 });
             })
@@ -118,7 +76,15 @@
                     .Name("username")
                     .FieldLabel("Username")
                     .AllowBlank(false)
-                    .BlankText("Your username is required"),
+                    .BlankText("Your username is required")
+                    .CustomConfig(ccf =>
+                        ccf.Add(new ConfigItem()
+                        {
+                            Name = "inputAttrTpl",
+                            Value = "['autocomplete=\"on\"']",
+                            Mode = ParameterMode.Raw
+                        })
+                    ),
                 X.TextField()
                     .ID("txtPassword")
                     .Name("password")
@@ -126,17 +92,27 @@
                     .FieldLabel("Password")
                     .AllowBlank(false)
                     .BlankText("Your password is required")
+                    .CustomConfig(ccf =>
+                        ccf.Add(new ConfigItem()
+                        {
+                            Name = "inputAttrTpl",
+                            Value = "['autocomplete=\"on\"']",
+                            Mode = ParameterMode.Raw
+                        })
+                    ),
+                X.Component().Html("<iframe id='submitTarget' name='submitTarget' style='display:none'></iframe>"),
+                X.Component().Html("<input type='submit' id='submitButton' style='display:none'  onclick=\"console.log('click click!');\" />")
             )
             .Buttons(
                 X.Button()
                     .Text("Login")
                     .Icon(Icon.Accept)
                     .FormBind(true)
-                    .Handler("handleClientClick")
+                    .Handler("Ext.getElementById('submitButton').click();")
                     .DirectEvents(de =>
                     {
                         de.Click.Url = Url.Action("Button1_Click");
-                        de.Click.Success = "handleLogin";
+                        de.Click.Success = "App.Window1.close();";
                         de.Click.Failure = "invalidateLogin(result.errorMessage);";
                         de.Click.ShowWarningOnFailure = false;
                         de.Click.EventMask.ShowMask = true;

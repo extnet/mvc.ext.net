@@ -15,8 +15,8 @@
     
     @(X.Panel()
         .ID("Panel1")
+        .Height(150)
         .Width(350)
-        .Height(200)
         .Title("Html")
         .BodyPadding(5)
         .Content(c => DateTime.Now.ToLongTimeString())
@@ -30,12 +30,12 @@
         )
     )
     
-    <h2>Loader with Html Mode</h2>
+    <h2>Loader Property</h2>
     
     @(X.Panel()
         .ID("Panel2")
+        .Height(150)
         .Width(350)
-        .Height(200)
         .Title("Html Mode")
         .BodyPadding(5)
         .Loader(X.ComponentLoader()
@@ -60,13 +60,11 @@
                 })
         )
     )
-
-    <h2>Loader with Frame Mode</h2>
     
     @(X.Panel()
         .ID("Panel3")
+        .Height(150)
         .Width(350)
-        .Height(200)
         .Title("Frame Mode")
         .Loader(X.ComponentLoader()
             .Url(Url.Action("RenderChild"))

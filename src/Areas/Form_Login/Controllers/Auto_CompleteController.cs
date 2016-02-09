@@ -19,6 +19,11 @@ namespace Ext.Net.MVC.Examples.Areas.Form_Login.Auto_Complete.Controllers
                 r.Success = false;
                 r.ErrorMessage = "Invalid username or password.";
             }
+            else
+            {
+                // Then user send to application
+                Response.Redirect("../../Desktop/Overview/Desktop");
+            }
 
             return r;
         }

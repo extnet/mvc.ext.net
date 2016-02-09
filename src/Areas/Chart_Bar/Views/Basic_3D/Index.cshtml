@@ -142,7 +142,7 @@
                     .Tooltip(X.ChartTip()
                         .TrackMouse(true)
                         .StyleSpec("background: #fff")
-                        .Renderer(r => r.Handler = "toolTip.setHtml(record.get('Name') + ': ' + record.get('Data1') + '%');")
+                        .Renderer(r => r.Handler = "this.setHtml(storeItem.get('Name') + ': ' + storeItem.get('Data1') + '%');")
                     )
                     .Label(X.ChartLabel()
                         .Display(SeriesLabelDisplay.InsideEnd)

@@ -197,7 +197,7 @@
                                                 .Series(
                                                     Html.X().PieSeries()
                                                         .Donut(30)
-                                                        .AngleField("Memory")
+                                                        .XField("Memory")
                                                         .ShowInLegend(true)
                                                         .HighlightMargin(20)
                                                         .Tooltip(new ChartTip
@@ -207,7 +207,7 @@
                                                             Height = 28,
                                                             Renderer =
                                                             {
-                                                                Handler = "toolTip.setTitle(record.get('Name') + ': ' + Math.round(record.get('Memory') / #{MemoryStore}.sum('Memory') * 100) + '%');"
+                                                                Handler = "this.setTitle(storeItem.get('Name') + ': ' + Math.round(storeItem.get('Memory') / #{MemoryStore}.sum('Memory') * 100) + '%');"
                                                             }
                                                         })
                                                         .Label(new ChartLabel
