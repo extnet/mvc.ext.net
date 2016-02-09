@@ -1,10 +1,8 @@
 @model System.Collections.IEnumerable
-
 @{
     ViewBag.Title = "Over Row Commands - Ext.NET MVC Examples";
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 }
-
 @section headtag
 {
     <script>
@@ -19,15 +17,13 @@
         };
     </script>
 }
-
 @section example
-{    
+{
     <h1>Over Row Commands</h1>
-
     @(Html.X().GridPanel()
         .Title("Over Row Commands")
-        .Width(600)
-        .Height(300)
+        .Width(700)
+        .Height(420)
         .Store(Html.X().Store()
             .Model(Html.X().Model()
                 .Fields(
@@ -57,15 +53,15 @@
                 .Renderer("change"),
             Html.X().Column()
                 .Text("Change")
-                .DataIndex("pctChange")                
+                .DataIndex("pctChange")
                 .Width(75)
                 .Renderer("pctChange"),
             Html.X().DateColumn()
                 .Text("Last Updated")
                 .DataIndex("lastChange")
-                .Width(85),
+                .Width(110),
             Html.X().CommandColumn()
-                .Width(80)
+                .Width(115)
                 .OverOnly(true)
                 .Commands(cs =>
                 {
@@ -77,7 +73,7 @@
                             menu.Items.Add(Html.X().MenuCommand()
                                 .Text("Item1")
                                 .Icon(Icon.ArrowRight)
-                                .CommandName("Item1")    
+                                .CommandName("Item1")
                             );
                             menu.Items.Add(Html.X().MenuCommand()
                                 .Text("Submenu")
@@ -131,10 +127,9 @@
                                 })
                             );
                         })
-                    );    
+                    );
                 })
                 .Listeners(ls => ls.Command.Handler = "Ext.Msg.alert(command, record.data.company);")
         )
-    )   
+    )
 }
-

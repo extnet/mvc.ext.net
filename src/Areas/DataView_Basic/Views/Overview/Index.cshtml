@@ -29,12 +29,11 @@
     <p>This example shows how to use an Ext.view.View.  It demonstrates editable labels (click<br />
     any of the photo labels), basic multi-select (using ctrl or shift) and drag selection.</p>
     
-    @(
- Html.X().Panel()
+    @(Html.X().Panel()
             .ID("Panel1")
             .Cls("images-view")
             .Frame(true)
-            .Width(600)
+            .Width(800)
             .Collapsible(true)
             .Layout(LayoutType.Fit)
             .Title("Simple DataView (0 items selected)")
@@ -109,7 +108,7 @@
             )
     )    
 
-    <div style="width:600px; border:1px solid gray; padding:5px;">
+    <div style="width:788px; border:1px solid gray; padding:5px;">
         @Html.X().Label().ID("Label1")
     </div>
 }

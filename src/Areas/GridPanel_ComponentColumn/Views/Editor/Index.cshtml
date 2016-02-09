@@ -1,18 +1,15 @@
 @model System.Collections.IEnumerable
-
 @{
     ViewBag.Title = "ComponentColumn Editor - Ext.NET MVC Examples";
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 }
-
 @section example
-{    
+{
     <h1>ComponentColumn as Editor</h1>
-
     @(Html.X().GridPanel()
         .Title("ComponentColumn Editor")
         .Width(600)
-        .Height(300)
+        .Height(350)
         .Store(Html.X().Store()
             .Model(Html.X().Model()
                 .Fields(
@@ -31,7 +28,7 @@
                 .Flex(1)
                 .Text("Integer")
                 .Component(Html.X().NumberField()),
-                
+
             Html.X().ComponentColumn()
                 .Editor(true)
                 .DataIndex("ComboField")
@@ -50,14 +47,14 @@
                         new ListItem("Item 9", 9)
                     )
                 ),
-                
+
             Html.X().ComponentColumn()
                 .Editor(true)
                 .DataIndex("TextField")
                 .Flex(1)
                 .Text("Text")
                 .Component(Html.X().TextField()),
-                
+
             Html.X().ComponentColumn()
                 .Editor(true)
                 .DataIndex("DateField")

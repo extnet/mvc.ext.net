@@ -21,7 +21,6 @@
        
         #customers-ct td {
             padding : 5px;
-            border-bottom : 1px solid silver;
         }
         
         #customers-ct .letter-row {
@@ -52,6 +51,8 @@
         #customers-ct .letter-row div h2  { padding-left : 18px; }
 
         #customers-ct .letter-row div.collapsed { background-position : 0px 8px; }
+
+        #customers-ct .customer-record { border-bottom : 1px solid silver; }
         
         #customers-ct table.collapsed { display : none; }
         
@@ -76,7 +77,7 @@
                     .toggleCls("collapsed");
             }
 
-            var row = e.getTarget("tr.customer-record"),
+            var row = e.getTarget("tr.customer-record-row"),
                 nd = row && Ext.get(row).child("td.cust-name");
                 
             if(nd){
@@ -128,7 +129,7 @@
     )
 
     @(
- Html.X().DataView()
+        Html.X().DataView()
             .DisableSelection(true)
             .ItemSelector("td.letter-row")
             .EmptyText("No customers to display")
@@ -163,15 +164,15 @@
 									<td class="letter-row" colspan="6">
 										<div><h2 class="letter-selector">{Letter}</h2></div>
                                         <tpl for="Customers">
-									        <table>                                                
-                                                <tr class="customer-record">
-										            <td class="cust-name" custID="{CustomerID}" custName="{CompanyName}" email="{Email}" style="width:10%">{ContactName}</td>
-										            <td style="width:18%">&nbsp;{Address}</td>
-										            <td style="width:18%">&nbsp;{City}</td>
-										            <td style="width:18%">&nbsp;{Region}</td>
-										            <td style="width:18%">&nbsp;{PostalCode}</td>
-										            <td style="width:18%">&nbsp;{Country}</td>
-									            </tr>
+                                            <table class="customer-record">
+                                                <tr class="customer-record-row">
+                                                    <td class="cust-name" custid="{CustomerID}" custname="{CompanyName}" email="{Email}" style="width:10%">{ContactName}</td>
+                                                    <td style="width:18%">&nbsp;{Address}</td>
+                                                    <td style="width:18%">&nbsp;{City}</td>
+                                                    <td style="width:18%">&nbsp;{Region}</td>
+                                                    <td style="width:18%">&nbsp;{PostalCode}</td>
+                                                    <td style="width:18%">&nbsp;{Country}</td>
+                                                </tr>
                                             </table>
 								        </tpl>
 									</td>
@@ -182,7 +183,7 @@
             </text>)
             .Listeners(l => {
                 l.ItemClick.Fn = "itemClick";
-                l.Refresh.Handler = "this.el.select('tr.customer-record', true).addClsOnOver('cust-name-over');";
+                l.Refresh.Handler = "this.el.select('table.customer-record', true).addClsOnOver('cust-name-over');";
                 l.Refresh.Delay = 100;
             })
     )

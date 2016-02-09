@@ -44,14 +44,18 @@
             .Layout(LayoutType.Form)
             .FormBind(true)
             .Items(
-                  Html.X().TextField().ID("TextField3").FieldLabel("Company Name").AllowBlank(false),
-                  Html.X().ComboBox().ID("ComboBox3").FieldLabel("# of Employees").AllowBlank(false)
-                      .Items(
-                          new ListItem("1-5", "0"),
-                          new ListItem("6-25", "1"),
-                          new ListItem("26-100", "2"),
-                          new ListItem("101+", "3")
-                      )
+                Html.X().TextField().ID("TextField3").FieldLabel("Company Name").AllowBlank(false),
+                Html.X().ComboBox()
+                    .ID("ComboBox3")
+                    .FieldLabel("# of Employees")
+                    .AllowBlank(false)
+                    .Editable(false)
+                    .Items(
+                        new ListItem("1-5", "0"),
+                        new ListItem("6-25", "1"),
+                        new ListItem("26-100", "2"),
+                        new ListItem("101+", "3")
+                    )
             )
             .Buttons(
                 Html.X().Button()

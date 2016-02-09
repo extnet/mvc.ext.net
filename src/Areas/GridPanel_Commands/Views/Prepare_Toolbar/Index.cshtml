@@ -1,10 +1,8 @@
 @model System.Collections.IEnumerable
-
 @{
     ViewBag.Title = "Prepare Toolbar - Ext.NET MVC Examples";
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 }
-
 @section headtag
 {
     <script>
@@ -17,7 +15,7 @@
         var pctChange = function (value) {
             return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
         };
-        
+
         var prepare = function (grid, toolbar, rowIndex, record) {
             var firstButton = toolbar.items.get(0);
 
@@ -25,20 +23,18 @@
                 firstButton.setDisabled(true);
                 firstButton.setTooltip("Disabled");
             }
-            
+
             //you can return false to cancel toolbar for this record
-        };       
+        };
     </script>
 }
-
 @section example
-{    
+{
     <h1>Prepare Toolbar</h1>
-
     @(Html.X().GridPanel()
         .Title("Prepare toolbar")
-        .Width(600)
-        .Height(300)
+        .Width(750)
+        .Height(420)
         .Store(Html.X().Store()
             .Model(Html.X().Model()
                 .Fields(
@@ -73,16 +69,16 @@
                 .Renderer("pctChange"),
             Html.X().DateColumn()
                 .Text("Last Updated")
-                .Width(85)
+                .Width(110)
                 .DataIndex("lastChange"),
             Html.X().CommandColumn()
-                .Width(120)
+                .Width(160)
                 .Commands(
                     Html.X().GridCommand()
                         .CommandName("Delete")
                         .Icon(Icon.Delete)
                         .Text("Delete"),
-                    
+
                     Html.X().GridCommand()
                         .CommandName("Edit")
                         .Icon(Icon.NoteEdit)
@@ -90,8 +86,8 @@
                 )
                 .PrepareToolbar("prepare")
                 .Listeners(ls => ls.Command.Handler = "Ext.Msg.alert(command, record.data.company);")
-            
-            
+
+
         )
     )
 }

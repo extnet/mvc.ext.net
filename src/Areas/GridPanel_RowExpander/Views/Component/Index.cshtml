@@ -30,12 +30,10 @@
 {
     <h1>RowExpander Plugin with FormPanel Detail</h1>
 
-    @(
- Html.X().GridPanel()
+    @(Html.X().GridPanel()
             .Title("Expander Rows with control")
             .Icon(Icon.Table)
-            .Width(600)
-            .Height(350)
+            .Width(800)
             .Store(Html.X().Store()
                 .DataSource(Model)
                 .PageSize(10)
@@ -55,7 +53,7 @@
                 Html.X().Column().DataIndex("price").Text("Price").Renderer(RendererFormat.UsMoney),
                 Html.X().Column().DataIndex("change").Text("Change").Renderer("change"),
                 Html.X().Column().DataIndex("pctChange").Text("Change").Renderer("pctChange"),
-                Html.X().DateColumn().DataIndex("lastChange").Text("Last Updated")
+                Html.X().DateColumn().DataIndex("lastChange").Text("Last Updated").Width(105)
             )
             .BottomBar(Html.X().PagingToolbar().HideRefresh(true))
             .Plugins(
@@ -64,7 +62,6 @@
                     .Component(
                         Html.X().FormPanel()
                             .BodyPadding(6)
-                            .Height(180)
                             .Border(false)
                             .DefaultAnchor("-5")
                             .Cls("white-footer")
