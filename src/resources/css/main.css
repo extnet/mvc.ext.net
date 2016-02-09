@@ -855,6 +855,88 @@ td.alt2{
     content: none;
 }
 
+/* Notification Banner */
+
+.ext4-notification {
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.5;
+    width: 930px;
+    margin: 15px;
+}
+
+.ext4-notification .notification-container {
+    background: #364043 url('../images/extdotnet4-preview-background.png') center right no-repeat;
+    width: 100%;
+    display: block;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.ext4-notification .notification-img,
+.ext4-notification .notification-text,
+.ext4-notification .notification-action {
+    display: inline-block;
+    box-sizing: border-box;
+    float: left;
+}
+
+.ext4-notification .notification-img {
+    text-align: center;
+    position: relative;
+    width: 275px;
+}
+
+.ext4-notification .notification-img::after {
+    content: "";
+    background-color: #fff;
+    opacity: 0.6;
+    display: block;
+    width: 1px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -40px;
+}
+
+.ext4-notification .notification-text {
+    text-align: left;
+    width: 470px;
+    padding: 33px 0 33px 30px;
+}
+
+.ext4-notification .notification-action {
+    text-align: center;
+    width: 185px;
+    padding: 64px 0px;
+}
+
+.ext4-notification .btn-notification {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+    border: 1px solid #fff;
+    padding: 10px 20px;
+    margin-right: 20px;
+    -webkit-transition: all .3s ease-in-out;
+         -o-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.ext4-notification .btn-notification:hover,
+.ext4-notification .btn-notification:active,
+.ext4-notification .btn-notification:focus {
+    background: #fff;
+    color: #364043;
+}
+
 
 /*  Fonts
     -----------------------------------------------------------------------------------------------*/

@@ -304,7 +304,6 @@
     <Compile Include="Areas\Desktop\Controllers\ASPXController.cs" />
     <Compile Include="Areas\Form_ComboBox\Controllers\Custom_SearchController.cs" />
     <Compile Include="Areas\Form_ComboBox\Models\Custom_SearchModel.cs" />
-    <Compile Include="Areas\Getting_Started\Controllers\BREAKING_CHANGESController.cs" />
     <Compile Include="Areas\Getting_Started\Controllers\CHANGELOGController.cs" />
     <Compile Include="Areas\Getting_Started\Getting_StartedAreaRegistration.cs" />
     <Compile Include="Areas\GridPanel_MultiHeader\Controllers\FilterController.cs" />
@@ -718,7 +717,6 @@
     <Content Include="Areas\Form_Label\Views\Basic\config.xml" />
     <Content Include="Areas\Form_MultiSelect\Views\Overview\config.xml" />
     <Content Include="Areas\Getting_Started\config.xml" />
-    <Content Include="Areas\Getting_Started\Views\BREAKING_CHANGES\config.xml" />
     <Content Include="Areas\Getting_Started\Views\CHANGELOG\config.xml" />
     <Content Include="Areas\GridPanel_ArrayGrid\Views\ArrayWithPaging\config.xml" />
     <Content Include="Areas\GridPanel_ArrayGrid\Views\DirectEvent_Creation\config.xml" />
@@ -883,7 +881,6 @@
     <Content Include="Areas\Associations_HasOne\Views\Simple\Index.cshtml" />
     <Content Include="Areas\Chart_Area\Views\Basic\DownloadOptions.cshtml" />
     <Content Include="Areas\Chart_Bar\Views\Basic_3D\Index.cshtml" />
-    <Content Include="App_Readme\Ext.NET\Sample.Web.config" />
     <Content Include="App_Readme\Ext.NET\README.md" />
     <Content Include="App_Readme\Ext.NET\LICENSE" />
     <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
@@ -899,7 +896,6 @@
     <Content Include="Areas\DataView_Basic\Views\Overview\Index.cshtml" />
     <Content Include="Areas\DataView_Basic\Views\Paging\Index.cshtml" />
     <Content Include="Areas\Form_ComboBox\Views\Custom_Search\Index.cshtml" />
-    <Content Include="Areas\Getting_Started\Views\BREAKING_CHANGES\Index.cshtml" />
     <Content Include="Areas\Getting_Started\Views\CHANGELOG\Index.cshtml" />
     <Content Include="Areas\Getting_Started\Views\Web.config" />
     <Content Include="Areas\DragDrop_Basic\Views\Web.config" />
@@ -1075,6 +1071,8 @@
     <Content Include="resources\images\ee-ad-store-bg.png" />
     <Content Include="resources\images\expand-all.gif" />
     <Content Include="resources\images\ext.net-logo.png" />
+    <Content Include="resources\images\extdotnet4-preview-background.png" />
+    <Content Include="resources\images\extdotnet4-preview.svg" />
     <Content Include="resources\images\ext_net_badge.gif" />
     <Content Include="resources\images\ext_net_logo_small.gif" />
     <Content Include="resources\images\grid-badge-bg.png" />
@@ -1208,6 +1206,7 @@
     <None Include="resources\fonts\TitilliumText25L005-webfont.woff" />
     <Content Include="Views\Shared\_BaseLayoutClean.cshtml" />
     <Content Include="Views\ExtNet\Index.cshtml" />
+    <Content Include="Views\Main\_East.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Dynamic_Partial_Rendering\Views\Web.config" />
