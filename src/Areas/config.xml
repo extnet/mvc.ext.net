@@ -62,14 +62,14 @@
     <folder name="Form_Login\Views\Auto_Complete" />
   </new>
 
-  <new version="3.0">
+  <!--<new version="3.0">
     <folder name="GridPanel_ColumnModel\Views\HyperlinkColumn" />
     <folder name="Miscellaneous_Factory\Views\Basic" />
   </new>
 
   <update version="3.0">
     <folder name="GridPanel_ColumnModel\Views\Ajax_Configuration" />
-  </update>
+  </update>-->
 
   <!--<new version="2.5.3">
     <folder name="Form_ComboBox\Views\Linked_Combos_In_Grid" />
