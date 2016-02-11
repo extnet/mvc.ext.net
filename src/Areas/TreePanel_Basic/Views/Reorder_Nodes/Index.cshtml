@@ -36,7 +36,11 @@
             .Height(300)
             .Width(250)
             .UseArrows(true)
-            .Listeners(l=>l.ItemMove.Fn = "moveNode")
+            .Listeners(l => 
+            {
+                l.ItemMove.Fn = "moveNode";
+                l.ItemMove.Delay = 1;
+            })
             .View(
                 Html.X().TreeView()
                     .Plugins(

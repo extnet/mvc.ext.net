@@ -28,6 +28,7 @@
                     X.Button().Icon(Icon.Disk),
                     X.ToolbarFill(),
                     X.TabStrip()
+                        .Width(155)
                         .Items(t => {
                             t.Add(X.Tab().ActionItemID("pnlSummary").Text("Summary"));
                             t.Add(X.Tab().ActionItemID("pnlData").Text("Data"));
@@ -67,6 +68,7 @@
                 .Items(
                     X.TabStrip()
                         .ActionContainerID("Panel2")
+                        .Width(155)
                         .Items(t => {
                             t.Add(X.Tab().Text("Summary"));
                             t.Add(X.Tab().Text("Data"));
@@ -88,7 +90,7 @@
     <h1>Setting ActionItemID with Divs</h1>
     
     @(X.TabStrip()
-        .ActionContainerID("Panel2")
+        .Width(155)
         .Items(t => {
             t.Add(X.Tab().Text("Summary").ActionItemID("elm1"));
             t.Add(X.Tab().Text("Data").ActionItemID("elm2"));
