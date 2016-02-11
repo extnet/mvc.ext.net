@@ -98,6 +98,7 @@
                     .Listeners(l =>
                     {
                         l.Exception.Fn = "onStoreException";
+                        l.Exception.Buffer = 10;
                     })
                     .SyncUrl(Url.Action("HandleChanges"))
             )
@@ -122,14 +123,12 @@
 
                Html.X().ColumnFor(Model, m => m.First)
                     .ToBuilder<Column.Builder>()
-                    .Flex(1)
                     .Editor(
                         Html.X().TextField().AllowBlank(false)
                     ),
 
                Html.X().ColumnFor(Model, m => m.Last)
                     .ToBuilder<Column.Builder>()
-                    .Flex(1)
                     .Editor(
                         Html.X().TextField().AllowBlank(false)
                     ),

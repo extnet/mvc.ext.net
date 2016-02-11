@@ -32,17 +32,21 @@
     <p>In order to demonstrate drag and drop insertion points, sorting was <b>not</b> enabled.</p>
 
     @(
-        Html.X().TreePanel()
+ Html.X().TreePanel()
             .Height(300)
             .Width(250)
             .UseArrows(true)
-            .Listeners(l=>l.ItemMove.Fn = "moveNode")
+            .Listeners(l =>
+            {
+                l.ItemMove.Fn = "moveNode";
+                l.ItemMove.Delay = 1;
+            })
             .View(
                 Html.X().TreeView()
                     .Plugins(
                         Html.X().TreeViewDragDrop().ContainerScroll(true)
-                    )   
-            )            
+                    )
+            )
             .Root(Model)
     )
 }

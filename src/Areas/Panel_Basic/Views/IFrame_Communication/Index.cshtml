@@ -12,7 +12,6 @@
         .Width(400)
         .Title("Parent")
         .Height(200)
-        .Layout(LayoutType.HBox)
         .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Stretch }
         )
         .Items(
@@ -20,17 +19,18 @@
                 .ID("Panel1")
                 .Title("A")
                 .Flex(1)
+                .BodyPadding(10)
                 .Loader(X.ComponentLoader()
                     .Url(Url.Action("A"))
                     .Mode(LoadMode.Frame)
                     .LoadMask(lm => lm.ShowMask = true)
                 ),
             
-
             X.Panel()
                 .ID("Panel2")
                 .Title("B")
                 .Flex(1)
+                .BodyPadding(10)
                 .Loader(X.ComponentLoader()
                     .Url(Url.Action("B"))
                     .Mode(LoadMode.Frame)
