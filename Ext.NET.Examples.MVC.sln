@@ -7,12 +7,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ext.Net.Examples.MVC", "src
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug NuGet|Any CPU = Debug NuGet|Any CPU
 		Debug|Any CPU = Debug|Any CPU
+		Release NuGet|Any CPU = Release NuGet|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D4BEEAD-B980-4E43-BBEB-B0BADE9D328C}.Debug NuGet|Any CPU.ActiveCfg = Debug NuGet|Any CPU
+		{0D4BEEAD-B980-4E43-BBEB-B0BADE9D328C}.Debug NuGet|Any CPU.Build.0 = Debug NuGet|Any CPU
 		{0D4BEEAD-B980-4E43-BBEB-B0BADE9D328C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0D4BEEAD-B980-4E43-BBEB-B0BADE9D328C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D4BEEAD-B980-4E43-BBEB-B0BADE9D328C}.Release NuGet|Any CPU.ActiveCfg = Release NuGet|Any CPU
+		{0D4BEEAD-B980-4E43-BBEB-B0BADE9D328C}.Release NuGet|Any CPU.Build.0 = Release NuGet|Any CPU
 		{0D4BEEAD-B980-4E43-BBEB-B0BADE9D328C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D4BEEAD-B980-4E43-BBEB-B0BADE9D328C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
