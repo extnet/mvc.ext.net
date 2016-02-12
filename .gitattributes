@@ -1,0 +1,37 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Text files: force them to be committed as native line ending (LF/Unix)
+*.asax text eol=lf
+*.ashx text eol=lf
+*.aspx text eol=lf
+*.bat text eol=lf
+*.config text eol=lf
+*.cs text eol=lf
+*.cshtml text eol=lf
+*.csproj text eol=lf
+*.htm text eol=lf
+*.html text eol=lf
+*.js text eol=lf
+*.jsb text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.php text eol=lf
+*.ps1 text eol=lf
+*.py text eol=lf
+*.sln text eol=lf
+*.sql text eol=lf
+*.d.ts text eol=lf
+*.target text eol=lf
+*.txt text eol=lf
+*.xml text eol=lf
+
+# These are expected to be always treated as binary files.
+*.bmp binary
+*.dat binary
+*.dll binary
+*.exe binary
+*.ico binary
+*.jar binary
+*.jpg binary
+*.png binary
