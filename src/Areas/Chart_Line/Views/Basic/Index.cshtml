@@ -18,7 +18,7 @@
     </script>
 }
 
-@section example 
+@section example
 {
     <h1>Line Chart Example</h1>
 
@@ -31,12 +31,12 @@
         .TopBar(X.Toolbar()
             .Items(
                 X.ToolbarFill(),
-                
+
                 X.Button()
                     .Text("Reload Data")
                     .Icon(Icon.ArrowRefresh)
                     .Handler("App.Chart1.getStore().reload()"),
-                    
+
                 X.Button()
                     .Text("Save Chart")
                     .Icon(Icon.Disk)
@@ -79,14 +79,14 @@
                     .YField("Data1")
                     .HighlightConfig(X.Sprite().Scaling(2))
                     .Marker(X.Sprite().SpriteType(SpriteType.Cross).Radius(4).LineWidth(0)),
-                
+
                 X.LineSeries()
                     .XField("Name")
                     .YField("Data2")
                     .Smooth(3)
                     .HighlightConfig(X.Sprite().Radius(7))
                     .Marker(X.CircleSprite().Radius(4).LineWidth(0)),
-                
+
                 X.LineSeries()
                     .XField("Name")
                     .YField("Data3")

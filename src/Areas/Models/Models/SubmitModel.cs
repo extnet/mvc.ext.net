@@ -29,8 +29,8 @@ namespace Ext.Net.MVC.Examples.Areas.Models
     }
 
     public enum Sex
-	{
-	   Male,
+    {
+       Male,
        Female
-	}
+    }
 }

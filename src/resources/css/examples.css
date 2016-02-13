@@ -1,12 +1,12 @@
 html body {
-	padding: 20px;
+    padding: 20px;
     font-family: 'OpenSansRegular';
     color: #222222;
     font-size: 15px;
 }
 
 p {
-	margin-bottom: 15px;
+    margin-bottom: 15px;
     font-size: 15px;
 }
 
@@ -15,11 +15,11 @@ blockquote {
 }
 
 h1 {
-	margin-top: 0;
+    margin-top: 0;
     margin-bottom : 20px;
     font-family: 'TitilliumText25L400wt';
     font-size: 40px;
-	font-weight: normal;
+    font-weight: normal;
     line-height: normal;
     -webkit-transform : rotate(-0.0000000001deg);
 }
@@ -27,8 +27,8 @@ h1 {
 h2 {
     margin-bottom: 20px;
     margin-top: 35px;
-	font-size: 20px;
-	font-family: 'TitilliumText25L400wt';
+    font-size: 20px;
+    font-family: 'TitilliumText25L400wt';
 }
 
 h3 {
@@ -38,7 +38,7 @@ h3 {
 }
 
 li ol li {
-    margin-left: 24px; 
+    margin-left: 24px;
 }
 
 code {
@@ -59,15 +59,15 @@ pre {
 }
 
 pre.code {
-    border: 1px solid #e5e5e5;    
-	padding: 10px;
-	margin: 10px;
-	margin-left: 0px;
+    border: 1px solid #e5e5e5;
+    padding: 10px;
+    margin: 10px;
+    margin-left: 0px;
     background-color: #f7f7f7;
     color: #045D87;
     font-family: Consolas, monospace;
-	font-size: 15px !important;
-	line-height: 19px !important;
+    font-size: 15px !important;
+    line-height: 19px !important;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px
@@ -98,12 +98,12 @@ pre.code {
 .sandbox-wrapper { padding : 12px; }
 
 .sandbox-toolbar {
-	text-align       : right;
-	display          : block;
-	border           : none;
-	padding          : 4px;
-	background-color : #F2F2F2;
-	border-bottom    : 1px solid #0589C7;
+    text-align       : right;
+    display          : block;
+    border           : none;
+    padding          : 4px;
+    background-color : #F2F2F2;
+    border-bottom    : 1px solid #0589C7;
 }
 
 .sandbox-toolbar table { display : inline; }
@@ -116,7 +116,7 @@ div.information {
    border       : 1px solid #0589C7;
    padding      : 8px 12px 0px 12px;
    padding-left : 36px;
-   background   : #F2F2F2 url(../../icons/information-png/ext.axd) no-repeat 10px 10px; 
+   background   : #F2F2F2 url(../../icons/information-png/ext.axd) no-repeat 10px 10px;
    margin       : 12px 0px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;

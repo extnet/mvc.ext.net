@@ -47,17 +47,17 @@
             tabs.Items.Add(tab);
             index++;
         }
-        
+
         win.Items.Add(tabs);
 
         return win.ToScript();
     }
 }
-    
-@section example 
+
+@section example
 {
     <h1>Scrollable Tabs with TabScrollerMenu Plugin</h1>
-    
+
     <script>
         Ext.onReady(function () {
             @Html.Raw(GenerateWindow());

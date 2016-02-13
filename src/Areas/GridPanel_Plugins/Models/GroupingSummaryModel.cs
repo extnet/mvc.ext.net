@@ -31,8 +31,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Plugins.Models
         {
             get
             {
-                return new List<Project> 
-                 { 
+                return new List<Project>
+                 {
                     new Project(100, "Ext Forms: Field Anchoring", 112, "Integrate 2.0 Forms with 2.0 Layouts", 6, 150, 0, new DateTime(2007, 06, 24)),
                     new Project(100, "Ext Forms: Field Anchoring", 113, "Implement AnchorLayout", 4, 150, 0, new DateTime(2007, 06, 25)),
                     new Project(100, "Ext Forms: Field Anchoring", 114, "Add support for multiple types of anchors", 4, 150, 0, new DateTime(2007, 06, 27)),

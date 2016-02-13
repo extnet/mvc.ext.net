@@ -4,7 +4,7 @@ using System.Collections;
 namespace Ext.Net.MVC.Examples.Areas.GridPanel_Miscellaneous.Models
 {
     public class Marking_RecordsModel
-    {      
+    {
         public IEnumerable TestData
         {
             get

@@ -7,7 +7,7 @@
                 function filter (field, value) {
                     var dataview = this.up('window').down('[cls=img-chooser-view]'),
                         store = dataview.store;
-                       
+
                     if (!Ext.isEmpty(value)) {
                         store.suspendEvents();
                         store.clearFilter();
@@ -22,7 +22,7 @@
                         store.clearFilter();
                     }
                 }
-            </script>            
+            </script>
         </text>)
         .TopBarItem(
             Html.X().TextField()
@@ -84,7 +84,7 @@
                                 </tpl>
                                 <tpl if="Ext.isIE6">
                                     <div style="width:74px;height:74px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{url}')"></div>
-                                </tpl>                    
+                                </tpl>
                             </div>
                             <span>{name}</span>
                         </div>

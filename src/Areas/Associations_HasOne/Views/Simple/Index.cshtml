@@ -5,10 +5,10 @@
     var X = Html.X();
 }
 
-@section example 
+@section example
 {
     <h1>Simple HasOne Association</h1>
-    
+
     @(X.Model()
         .Name("Address")
         .IDProperty("Id")
@@ -26,7 +26,7 @@
                 .Name("Zip")
         )
     )
-    
+
     @(X.Store()
         .ID("PersonsStore")
         .Data(Model)
@@ -38,7 +38,7 @@
                 X.ModelField()
                     .Name("Id")
                     .Type(ModelFieldType.Int),
-                
+
                 X.ModelField()
                     .Name("Name")
                     .Type(ModelFieldType.String)
@@ -67,7 +67,7 @@
                     .Flex(1)
                 )
                 .Listeners(l => l.SelectionChange.Handler = "selected.length && selected[0].getAddress(function(address){#{AddressPanel}.loadRecord(address);});"),
-            
+
             X.FormPanel()
                 .ID("AddressPanel")
                 .Title("Address")
@@ -92,9 +92,9 @@
                 )
         )
     )
-    
+
     <br />
-    
+
     @(X.GridPanel()
         .StoreID("PersonsStore")
         .Title("Persons with RowExpander")

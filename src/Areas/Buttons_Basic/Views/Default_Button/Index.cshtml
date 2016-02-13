@@ -4,7 +4,7 @@
     var X = Html.X();
 }
 
-@section example 
+@section example
 {
     @(X.Container()
         .Layout(LayoutType.VBox)
@@ -27,7 +27,7 @@
                         .Text("Button 2")
                         .OnClientClick("Ext.Msg.alert('ENTER', 'ENTER is intercepted by Button2');")
                 ),
-                
+
             X.FormPanel()
                 .Title("Button by Index")
                 .DefaultButton("1")
@@ -50,7 +50,7 @@
                     X.Button().
                         Text("Button 4")
                 ),
-                
+
             X.FormPanel()
                 .Title("Button by ID")
                 .DefaultButton("Button2")
@@ -74,7 +74,7 @@
                     X.Button().
                         Text("Button 4")
                 ),
-                
+
             X.FormPanel()
                 .Title("Button by Selector")
                 .DefaultButton("button[text=Button 2]")

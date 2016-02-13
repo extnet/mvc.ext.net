@@ -2,9 +2,9 @@
 
 namespace Ext.Net.MVC.Examples.Areas.Associations_HasMany.Models
 {
-	public class User
-	{
-		public User(int id, string name, List<Product> products)
+    public class User
+    {
+        public User(int id, string name, List<Product> products)
         {
             this.Id = id;
             this.Name = name;
@@ -28,5 +28,5 @@ namespace Ext.Net.MVC.Examples.Areas.Associations_HasMany.Models
             get;
             private set;
         }
-	}
+    }
 }

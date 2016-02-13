@@ -8,11 +8,11 @@
 @section example
 {
     <h1>Setting Html and Loader Properties</h1>
-    
+
     <h2>Html Property</h2>
-    
+
     <p>Setting the &lt;Content> region or setting the .Html property will add the text directly to the "body" of the Panel.</p>
-    
+
     @(X.Panel()
         .ID("Panel1")
         .Height(150)
@@ -29,9 +29,9 @@
                 })
         )
     )
-    
+
     <h2>Loader Property</h2>
-    
+
     @(X.Panel()
         .ID("Panel2")
         .Height(150)
@@ -51,7 +51,7 @@
                     de.Click.Method = HttpMethod.GET;
                     de.Click.ExtraParams.Add(new Parameter("containerId", "Panel2"));
                 }),
-                
+
             X.Button()
                 .Text("Load")
                 .DirectEvents(de => {
@@ -60,7 +60,7 @@
                 })
         )
     )
-    
+
     @(X.Panel()
         .ID("Panel3")
         .Height(150)
@@ -79,7 +79,7 @@
                     de.Click.Method = HttpMethod.GET;
                     de.Click.ExtraParams.Add(new Parameter("containerId", "Panel3"));
                 }),
-            
+
             X.Button()
                 .Text("Load")
                 .DirectEvents(de => {

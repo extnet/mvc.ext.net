@@ -7,19 +7,19 @@
 @section example
 {
     <h1>Animation with a Draw Component</h1>
-    
+
     @(X.Button()
         .Text("Animate circles (client side)")
         .Handler("#{Draw1}.getSurface().get('circles').setAttributes({translationX: 150}); #{Draw1}.getSurface().renderFrame();")
     )
-    
+
     @(X.Button()
         .Text("Animate rectangles (server side)")
         .DirectClickAction("AnimateRect")
     )
-    
+
     <br />
-    
+
     @(X.DrawContainer()
         .ID("Draw1")
         .Width(800)

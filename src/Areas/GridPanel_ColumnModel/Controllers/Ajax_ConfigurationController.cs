@@ -50,7 +50,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_ColumnModel.Ajax_Configuration.Co
         public ActionResult AddColumn()
         {
             Store store = this.GetCmp<Store>("Store1");
-            Ext.Net.GridPanel grid = this.GetCmp<Ext.Net.GridPanel>("GridPanel1"); 
+            Ext.Net.GridPanel grid = this.GetCmp<Ext.Net.GridPanel>("GridPanel1");
 
             ModelField field = new ModelField("pctChange", ModelFieldType.Float);
 

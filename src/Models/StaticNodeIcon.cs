@@ -39,7 +39,7 @@ namespace Ext.Net.MVC.Examples.Models
                     foreach (XmlNode firstLevelNode in firstLevelNodes)
                     {
                         subEntries = new Dictionary<string, string>();
-                        
+
                         nodeAttribute = firstLevelNode.Attributes["name"];
 
                         if (nodeAttribute != null && !String.IsNullOrWhiteSpace(nodeAttribute.Value))

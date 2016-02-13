@@ -12,7 +12,7 @@
             if (form.getForm()._record == null) {
                 return;
             }
-            
+
             if (!form.getForm().isValid()) {
                 Ext.net.Notification.show({
                     iconCls  : "icon-exclamation",
@@ -21,10 +21,10 @@
                 });
                 return false;
             }
-            
+
             form.getForm().updateRecord();
        };
-       
+
        var addRecord = function (form, grid) {
             if (!form.getForm().isValid()) {
                 Ext.net.Notification.show({
@@ -32,10 +32,10 @@
                     html     : "Form is invalid",
                     title    : "Error"
                 });
-            
+
                 return false;
             }
-            
+
             grid.store.insert(0, new Person(form.getForm().getValues()));
             form.getForm().reset();
        };
@@ -45,7 +45,7 @@
 @section example
 {
     <h1>Grid with batch saving</h1>
-    
+
     @(Html.X().FormPanelForModel()
             .ID("UserForm")
             .Icon(Icon.User)
@@ -66,13 +66,13 @@
                     .Text("Create")
                     .Icon(Icon.UserAdd)
                     .Handler("addRecord(this.up('form'), App.GridPanel1);"),
-                    
+
                 Html.X().Button()
                     .Text("Reset")
                     .Handler("this.up('form').getForm().reset();")
             )
     )
-    
+
     @(Html.X().GridPanel()
             .ID("GridPanel1")
             .Store(
@@ -160,7 +160,7 @@
                     .Icon(Icon.Disk)
                     .DirectEvents(de => {
                         de.Click.Url = Url.Action("HandleChanges");
-                        de.Click.ExtraParams.Add(new Parameter { 
+                        de.Click.ExtraParams.Add(new Parameter {
                             Name = "data",
                             Value = "this.up('grid').store.getChangedData()",
                             Mode = ParameterMode.Raw,

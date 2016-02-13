@@ -30,8 +30,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Selection_Models.Models
             {
                 DateTime now = DateTime.Now;
 
-                return new List<Company> 
-                { 
+                return new List<Company>
+                {
                     new Company(0, "3m Co", 71.72, 0.02, 0.03),
                     new Company(1, "Alcoa Inc", 29.01, 0.42, 1.47),
                     new Company(2, "Altria Group Inc", 83.81, 0.28, 0.34),

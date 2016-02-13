@@ -44,7 +44,7 @@ namespace Ext.Net.MVC.Examples.Areas.Form_Groups.Models
     }
 
     public class StringModel
-    {        
+    {
         public string Borders
         {
             get;

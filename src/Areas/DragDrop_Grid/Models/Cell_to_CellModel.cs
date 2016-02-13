@@ -42,7 +42,7 @@ namespace Ext.Net.MVC.Examples.Areas.DragDrop_Grid.Models
                     new object[] { "United Technologies Corporation", "1/1 12:00am", "Up", 63.26, 0.55, 0.88, now },
                     new object[] { "Verizon Communications", "1/1 12:00am", "Up", 35.57, 0.39, 1.11, now },
                     new object[] { "Wal-Mart Stores, Inc.", "1/1 12:00am", "Up", 45.45, 0.73, 1.63, now }
-                }; 
+                };
             }
         }
     }

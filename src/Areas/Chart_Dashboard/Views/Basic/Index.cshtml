@@ -121,7 +121,7 @@
         data. A radar chart will show the company information. You can update the
         information in the form to see it change live in the grid, bar chart and radar charts.
     </p>
-    
+
     @(X.FormPanel()
         .Title("Company data")
         .Frame(true)
@@ -186,7 +186,7 @@
                         )
                         .Plugins(p => p.Add(X.ChartItemEvents()))
                 ),
-                
+
             X.Panel()
                 .Flex(1)
                 .Border(false)
@@ -204,35 +204,35 @@
                                 .Text("Company")
                                 .Flex(1)
                                 .DataIndex("company"),
-                                    
+
                             X.Column()
                                 .Text("Price")
                                 .Width(75)
                                 .DataIndex("price")
                                 .Align(Alignment.Right)
                                 .Renderer(RendererFormat.UsMoney),
-                                    
+
                             X.Column()
                                 .Text("Revenue")
                                 .Width(75)
                                 .DataIndex("revenue")
                                 .Align(Alignment.Right)
                                 .Renderer("return value + '%';"),
-                                    
+
                             X.Column()
                                 .Text("Growth")
                                 .Width(75)
                                 .DataIndex("growth")
                                 .Align(Alignment.Right)
                                 .Renderer("return value + '%';"),
-                                    
+
                             X.Column()
                                 .Text("Product")
                                 .Width(75)
                                 .DataIndex("product")
                                 .Align(Alignment.Right)
                                 .Renderer("return value + '%';"),
-                                    
+
                             X.Column()
                                 .Text("Market")
                                 .Width(75)
@@ -241,8 +241,8 @@
                                 .Renderer("return value + '%';")
                         )
                         .Listeners(l => l.SelectionChange.Fn = "onSelectionChange"),
-                
-                    
+
+
                 X.Panel()
                     .Flex(4)
                     .Title("Company Details")
@@ -262,7 +262,7 @@
                                 X.TextField()
                                     .FieldLabel("Name")
                                     .Name("company"),
-                                
+
                                 X.NumberField()
                                     .FieldLabel("Price")
                                     .Name("price")
@@ -274,7 +274,7 @@
                                         l.Change.Fn = "afterEdit";
                                         l.Change.Buffer = 200;
                                     }),
-                                
+
                                 X.NumberField()
                                     .FieldLabel("Revenue %")
                                     .Name("revenue")
@@ -286,7 +286,7 @@
                                         l.Change.Fn = "afterEdit";
                                         l.Change.Buffer = 200;
                                     }),
-                                
+
                                 X.NumberField()
                                     .FieldLabel("Growth %")
                                     .Name("growth")
@@ -298,7 +298,7 @@
                                         l.Change.Fn = "afterEdit";
                                         l.Change.Buffer = 200;
                                     }),
-                                
+
                                 X.NumberField()
                                     .FieldLabel("Product %")
                                     .Name("product")
@@ -310,7 +310,7 @@
                                         l.Change.Fn = "afterEdit";
                                         l.Change.Buffer = 200;
                                     }),
-                                
+
                                 X.NumberField()
                                     .FieldLabel("Market %")
                                     .Name("market")
@@ -323,7 +323,7 @@
                                         l.Change.Buffer = 200;
                                     })
                             ),
-                    
+
                         X.PolarChart()
                             .Margin(0)
                             .InsetPadding(20)
@@ -339,7 +339,7 @@
                                     .Position(Position.Angular)
                                     .Grid(true)
                                     .Label(X.ChartLabel().FontSize("10")),
-                                    
+
                                 X.NumericAxis()
                                     .MajorTickSteps(5)
                                     .Minimum(0)

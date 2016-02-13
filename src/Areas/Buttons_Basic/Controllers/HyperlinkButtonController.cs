@@ -10,10 +10,10 @@ namespace Ext.Net.MVC.Examples.Areas.Buttons_Basic.Controllers
             return View();
         }
 
-		public ActionResult Button_Click()
-		{
-			X.Msg.Alert("Server Time", DateTime.Now.ToLongTimeString()).Show();
-			return this.Direct();
-		}
+        public ActionResult Button_Click()
+        {
+            X.Msg.Alert("Server Time", DateTime.Now.ToLongTimeString()).Show();
+            return this.Direct();
+        }
     }
 }

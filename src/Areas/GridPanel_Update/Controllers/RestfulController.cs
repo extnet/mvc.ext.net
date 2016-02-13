@@ -14,7 +14,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Update.Controllers
             return View();
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]        
+        [AcceptVerbs(HttpVerbs.Post)]
         public RestResult Create(TestPerson person)
         {
             try

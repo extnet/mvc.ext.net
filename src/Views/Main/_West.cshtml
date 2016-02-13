@@ -8,8 +8,8 @@
         theme = (Theme)this.Session["Ext.Net.Theme"];
     }
 
-    List<CheckMenuItem> themeItems = new List<CheckMenuItem>() 
-    { 
+    List<CheckMenuItem> themeItems = new List<CheckMenuItem>()
+    {
         new CheckMenuItem
         {
             ID = "CheckMenuItemThemeAria",
@@ -53,7 +53,7 @@
             Group = "theme"
         }
     };
-    
+
     string menuItemId = "CheckMenuItemTheme" + theme.ToString();
 
     themeItems.First<CheckMenuItem>(item => item.ID == menuItemId).Checked = true;
@@ -83,11 +83,11 @@
             HideHeaders = true,
             Animate = false,
 
-            TopBar = 
+            TopBar =
             {
                 new Toolbar
                 {
-                    Items = 
+                    Items =
                     {
                         new TextField
                         {
@@ -96,42 +96,42 @@
                             Flex = 1,
                             EmptyText = "Filter Examples...",
                             RemoveClearTrigger = true,
-                            Triggers = 
+                            Triggers =
                             {
                                 new FieldTrigger
                                 {
                                     Hidden = true,
-                                    Icon = TriggerIcon.Clear                                    
+                                    Icon = TriggerIcon.Clear
                                 }
                             },
-                            Listeners = 
+                            Listeners =
                             {
-                                KeyUp = 
+                                KeyUp =
                                 {
                                     Buffer = 500,
                                     Fn = "keyUp"
                                 },
-                                TriggerClick = 
+                                TriggerClick =
                                 {
-                                    Fn = "clearFilter"    
+                                    Fn = "clearFilter"
                                 },
-                                SpecialKey = 
+                                SpecialKey =
                                 {
                                     Fn = "filterSpecialKey",
                                     Delay = 1
                                 }
                             }
                         },
-                        
-                        new Button 
+
+                        new Button
                         {
                             Icon = Icon.Cog,
                             ToolTip = "Options",
-                            Menu = 
+                            Menu =
                             {
                                 new Menu
                                 {
-                                    Items = 
+                                    Items =
                                     {
                                         new MenuItem
                                         {
@@ -145,77 +145,77 @@
                                             IconCls = "icon-collapse-all",
                                             Handler = "this.up('treepanel').collapseAll(false);"
                                         },
-                                        
+
                                         new MenuSeparator(),
-                                        
+
                                         new CheckMenuItem
                                         {
                                             Text = "NEW Only",
                                             CheckHandler = "filterNewExamples"
                                         },
-                                        
+
                                         new CheckMenuItem
                                         {
                                             Text = "Debug Mode",
                                             CheckHandler = "function (item, checked) { App.direct.ChangeScriptMode(checked); }",
                                             Checked = MvcResourceManager.GetInstance().SourceFormatting
                                         },
-                                        
+
                                         new MenuSeparator(),
-                                        
+
                                         new MenuItem
                                         {
                                             Text = "Theme",
                                             Icon = Icon.Paintcan,
-                                            Menu = 
+                                            Menu =
                                             {
                                                 new Menu
                                                 {
-                                                    Items= 
+                                                    Items=
                                                     {
                                                         themeItems
                                                     },
-                                                    
-                                                    Listeners = 
+
+                                                    Listeners =
                                                     {
-                                                        Click = 
+                                                        Click =
                                                         {
-                                                            Fn = "themeChange"   
-                                                        }   
-                                                    }    
+                                                            Fn = "themeChange"
+                                                        }
+                                                    }
                                                 }
                                             }
                                         },
-                                        
+
                                         new MenuSeparator(),
-                                        
-                                        new MenuItem() 
+
+                                        new MenuItem()
                                         {
                                             Text = "Search by",
                                             Icon = Icon.Find,
-                                            Menu = 
+                                            Menu =
                                             {
-                                                new Menu()  
+                                                new Menu()
                                                 {
-                                                    Items = 
+                                                    Items =
                                                     {
-                                                        new CheckMenuItem() 
+                                                        new CheckMenuItem()
                                                         {
                                                             ID = "SearchByTitles",
                                                             Checked = true,
                                                             Text = "Titles"
                                                         },
-                                                        new CheckMenuItem() 
+                                                        new CheckMenuItem()
                                                         {
                                                             ID = "SearchByTags",
                                                             Checked = true,
                                                             Text = "Tags"
-                                                        }   
-                                                    }   
-                                                }   
+                                                        }
+                                                    }
+                                                }
                                             }
                                         },
-                                        
+
                                         new MenuItem()
                                         {
                                             Text = "Tag Cloud",
@@ -225,10 +225,10 @@
                                                 Click =
                                                 {
                                                     Fn = "showTagCloud"
-                                                }   
+                                                }
                                             }
                                         }
-                                    }    
+                                    }
                                 }
                             }
                         }
@@ -236,41 +236,41 @@
                 }
             },
 
-            Store = 
+            Store =
             {
                 new TreeStore
                 {
-                    Root = 
+                    Root =
                     {
                         new Node
                         {
                             NodeID = "Root",
                             Expanded = true
-                        }    
+                        }
                     },
-                    
-                    Proxy = 
+
+                    Proxy =
                     {
                         new AjaxProxy
                         {
-                            API = 
+                            API =
                             {
                                 Read = Url.Action("GetExamplesNodes")
                             },
-                            
-                            ActionMethods = 
+
+                            ActionMethods =
                             {
-                                Read = HttpMethod.GET    
+                                Read = HttpMethod.GET
                             }
                         }
                     },
-                    
+
                     Fields =
                     {
                         new ModelField("isNew"),
                         new ModelField("tags")
                     }
-                }    
+                }
             },
 
             ColumnModel =
@@ -284,7 +284,7 @@
                         Renderer =
                         {
                             Fn = "treeRenderer"
-                        }   
+                        }
                     }
                 }
             },

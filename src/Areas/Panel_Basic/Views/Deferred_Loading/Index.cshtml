@@ -8,17 +8,17 @@
 {
     <style>
          .msg {
-        	border  : 1px solid #999;
-        	padding : 6px;
-        	width   : 250px;
-        	font-weight   : bold;
+            border  : 1px solid #999;
+            padding : 6px;
+            width   : 250px;
+            font-weight   : bold;
             text-align    : center;
             margin-bottom : 30px;
         }
-        
+
         .msg em {
-        	font-style  : italic;
-        	font-weight : bold;
+            font-style  : italic;
+            font-weight : bold;
         }
     </style>
 }
@@ -28,14 +28,14 @@
     <div class="msg x-box-mc">
         Main page creation time: <em><ext:Label ID="Label1" runat="server" />@DateTime.Now.ToLongTimeString()</em>
     </div>
-         
+
     <hr />
-         
+
     <br />
     <br />
-    
+
     <h3>1. TabPanel</h3>
-    
+
     @(X.TabPanel()
         .Width(500)
         .Height(200)
@@ -50,7 +50,7 @@
                     .Params(new { containerId = "LoadingOnRenderTab" })
                     .LoadMask(lm => lm.ShowMask = true)
                 ),
-            
+
             X.Panel()
                 .ID("LoadingOnShowTab")
                 .Title("Loading on show")
@@ -61,7 +61,7 @@
                     .Params(new { containerId = "LoadingOnShowTab" })
                     .LoadMask(lm => lm.ShowMask = true)
                 ),
-            
+
             X.Panel()
                 .ID("ManuallyLoadTab")
                 .Title("Manual Load")
@@ -80,7 +80,7 @@
                     .Params(new { containerId = "ManuallyLoadTab" })
                     .LoadMask(lm => lm.ShowMask = true)
                 ),
-            
+
             X.Panel()
                 .ID("LoadingOnShowWithReloading")
                 .Title("Loading on Show with Reloading")
@@ -93,7 +93,7 @@
                     .Params(new { containerId = "LoadingOnShowWithReloading" })
                     .LoadMask(lm => lm.ShowMask = true)
                 ),
-            
+
             X.Panel()
                 .ID("ParentPanel")
                 .Title("Deferred Loading of Internal Panels")
@@ -114,12 +114,12 @@
                 )
         )
     )
-    
+
     <br />
     <br />
-         
+
     <h3>2. Accordion</h3>
-    
+
     @(X.Panel()
         .Title("Accordion with Deferred Loaded Panels")
         .Width(500)
@@ -157,12 +157,12 @@
             )
         )
     )
-    
+
     <br />
     <br />
-         
+
     <h3>3. Panel - loading on render and on each expand event, clear content on collapse</h3>
-    
+
     @(X.Panel()
         .ID("ExpandablePanel")
         .Title("Panel")
@@ -181,14 +181,14 @@
             l.Collapse.Handler = "this.clearContent();";
         })
     )
-    
+
     <h3>4. Window - loading on show with reloading, clear content on close</h3>
-    
+
     @(X.Button()
         .Text("Show window")
         .Handler("App.Window1.show();")
     )
-    
+
     @(X.Window()
         .ID("Window1")
         .Title("Window")
@@ -208,5 +208,5 @@
             l.Hide.Handler = "this.clearContent();";
         })
     )
-    
+
 }

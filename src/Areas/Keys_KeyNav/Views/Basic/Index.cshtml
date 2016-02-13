@@ -8,7 +8,7 @@
 {
     <script>
         var isCenter = true;
-        
+
         var move = function (win, dir) {
             var el = win.getEl();
 
@@ -41,12 +41,12 @@
 
                 case "home":
                     el.center();
-                    isCenter = true;               
+                    isCenter = true;
                     break;
             }
         };
 
-        var COLOUMN2 = function (value) { 
+        var COLOUMN2 = function (value) {
             return Ext.String.format('<img src="article_image.aspx?id={0}" id="myID" />', value);
         };
     </script>
@@ -74,7 +74,7 @@
             </text>
         )
     )
-    
+
     @(X.KeyNav()
         .Target("={document.body}")
         .Left(a => a.Handler = "move(#{Window1}, 'left');")

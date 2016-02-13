@@ -34,7 +34,7 @@
     </script>
 }
 
-@section example 
+@section example
 {
     @(X.Viewport()
         .Layout("fit")
@@ -48,12 +48,12 @@
                 .TopBar(X.Toolbar()
                     .Items(
                         X.ToolbarFill(),
-                        
+
                         X.Button()
                             .Text("Preview")
                             .Icon(Icon.Magnifier)
                             .Handler("App.Chart1.preview();"),
-                            
+
                         X.SplitButton()
                             .Text("Download as PNG")
                             .Icon(Icon.DiskUpload)
@@ -84,13 +84,13 @@
                                 .Height(30)
                                 .X(40)
                                 .Y(20),
-                            
+
                             X.TextSprite()
                                 .Text("Data: Browser Stats 2012 - Internet Explorer")
                                 .FontSize("10")
                                 .X(12)
                                 .Y(480),
-                            
+
                             X.TextSprite()
                                 .Text("Source: http://www.w3schools.com/")
                                 .FontSize("10")
@@ -105,7 +105,7 @@
                                 .Minimum(0)
                                 .Maximum(24)
                                 .Renderer(r => r.Handler = "return layout.renderer(label) + '%';"),
-                            
+
                             X.CategoryAxis()
                                 .Position(Position.Bottom)
                                 .Fields("month")
@@ -125,7 +125,7 @@
                                     .Renderer(r => r.Handler = "this.setHtml(storeItem.get('month') + ': ' + storeItem.get('data1') + ' %');")
                                 )
                         ),
-                        
+
                     X.GridPanel()
                         .StoreID("Store1")
                         .StyleSpec("margin-top: 10px;")
@@ -136,7 +136,7 @@
                                 .DataIndex("month")
                                 .Sortable(false)
                                 .MenuDisabled(true),
-                           
+
                             X.Column()
                                 .Text("IE")
                                 .DataIndex("data1")
@@ -144,7 +144,7 @@
                                 .MenuDisabled(true)
                                 .Renderer("return value + '%';")
                         )
-                    
+
                 )
             )
         )

@@ -9,7 +9,7 @@ namespace Ext.Net.MVC.Examples.Areas.Chart_Pie.Controllers
             return View(ChartModel.GenerateData(6));
         }
 
-		public StoreResult GetData()
+        public StoreResult GetData()
         {
             return new StoreResult(ChartModel.GenerateData(6));
         }

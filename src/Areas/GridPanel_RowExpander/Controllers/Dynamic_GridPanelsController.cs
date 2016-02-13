@@ -32,11 +32,11 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_RowExpander.Controllers
             {
                 Height = 200,
                 EnableColumnHide = false,
-                Store = 
-                { 
-                    new Store 
-                    { 
-                        Model = 
+                Store =
+                {
+                    new Store
+                    {
+                        Model =
                         {
                             new Model {
                                 IDProperty = "ID",
@@ -51,8 +51,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_RowExpander.Controllers
                 },
                 ColumnModel =
                 {
-                    Columns = 
-                    { 
+                    Columns =
+                    {
                         new Column { Text = "Products's Name", DataIndex = "Name", Width = 150 }
                     }
                 }

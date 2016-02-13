@@ -10,26 +10,26 @@
 {
     <script>
         var notifyEnter = function (ddSource, e, data) {
-			App.FormPanel1.body.stopAnimation();
-			App.FormPanel1.body.highlight();
-		};
-		
-		var notifyDrop = function (ddSource, e, data) {
-			var selectedRecord = ddSource.dragData.records[0];
-			App.FormPanel1.getForm().loadRecord(selectedRecord);
-			
-			// Delete record from the grid.  not really required.
-    		ddSource.view.store.remove(selectedRecord);
-			return true;
-		};
+            App.FormPanel1.body.stopAnimation();
+            App.FormPanel1.body.highlight();
+        };
+
+        var notifyDrop = function (ddSource, e, data) {
+            var selectedRecord = ddSource.dragData.records[0];
+            App.FormPanel1.getForm().loadRecord(selectedRecord);
+
+            // Delete record from the grid.  not really required.
+            ddSource.view.store.remove(selectedRecord);
+            return true;
+        };
     </script>
 }
 
-@section example 
+@section example
 {
     <h1>Drag and Drop from a Data Grid to a Form Panel</h1>
-        
-    <p>This example shows how to setup a one way drag and drop from a grid to an instance of a FormPanel.</p>    
+
+    <p>This example shows how to setup a one way drag and drop from a grid to an instance of a FormPanel.</p>
 
     @(X.Panel()
         .Width(650)
@@ -58,7 +58,7 @@
                 .View(X.GridView()
                     .Plugins(X.GridDragDrop().EnableDrop(false).DDGroup("gridDDGroup"))
                 ),
-                
+
             X.FormPanel()
                 .ID("FormPanel1")
                 .Region(Region.Center)

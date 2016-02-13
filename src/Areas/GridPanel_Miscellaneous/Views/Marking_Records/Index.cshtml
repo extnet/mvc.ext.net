@@ -10,12 +10,12 @@
 {
     <style>
         .dirty-row .x-grid-cell, .dirty-row .x-grid-rowwrap-div {
-	        background-color: #FFFDD8 !important;
+            background-color: #FFFDD8 !important;
         }
-        
+
         .new-row .x-grid-cell, .new-row .x-grid-rowwrap-div {
-	        background: #c8ffc8 !important;
-        } 
+            background: #c8ffc8 !important;
+        }
     </style>
 
     <script>
@@ -23,7 +23,7 @@
             if (record.phantom) {
                 return "new-row";
             }
-                
+
             if (record.dirty) {
                 return "dirty-row";
             }
@@ -31,18 +31,18 @@
 
         var insertRecord = function () {
             var grid = App.GridPanel1;
-                
+
             grid.store.insert(0, {});
             grid.getView().focusRow(0);
             grid.editingPlugin.startEdit(grid.store.getAt(0), grid.columns[0]);
         };
-    </script>  
+    </script>
 }
 
 @section example
 {
     <h1>Marking Records</h1>
-        
+
     <p>Demonstrates how to mark rows with custom colors. Edit any cell or insert new record.</p>
 
     @(X.GridPanel()
@@ -77,6 +77,6 @@
                 .Icon(Icon.Add)
                 .Handler("insertRecord")
         )
-    
+
     )
 }

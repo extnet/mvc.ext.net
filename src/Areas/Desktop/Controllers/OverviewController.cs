@@ -24,7 +24,7 @@ namespace Ext.Net.MVC.Examples.Areas.Desktop.Controllers
         {
             // Do some Authentication...
 
-            // Then user send to application            
+            // Then user send to application
             return this.RedirectToAction("Desktop");
         }
 
@@ -73,15 +73,15 @@ namespace Ext.Net.MVC.Examples.Areas.Desktop.Controllers
                     Text = "Dynamic module"
                 },
 
-                Window = 
+                Window =
                 {
-                    new Window 
-                    { 
+                    new Window
+                    {
                         Title = "Dynamic Window",
                         Width = 300,
                         Height = 300,
                         DefaultRenderTo = Ext.Net.DefaultRenderTo.Form,
-                        Icon = Icon.ApplicationAdd                    
+                        Icon = Icon.ApplicationAdd
                     }
                 },
 

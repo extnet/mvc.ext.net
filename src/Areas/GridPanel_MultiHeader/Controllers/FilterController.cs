@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace Ext.Net.MVC.Examples.Areas.GridPanel_MultiHeader.Controllers
 {
     public class FilterController : Controller
-    {      
+    {
         public ActionResult Index()
         {
             return View(new object[] {

@@ -24,16 +24,16 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_RowExpander.Models
                 Height = 215,
                 HideHeaders = level != 1,
                 DisableSelection = true,
-                Store = 
-                { 
-                    new Store 
-                    {                        
-                        Model = 
+                Store =
+                {
+                    new Store
+                    {
+                        Model =
                         {
-                            new Model 
+                            new Model
                             {
                                 IDProperty = "ID",
-                                Fields = 
+                                Fields =
                                 {
                                     new ModelField("ID"),
                                     new ModelField("Name"),
@@ -43,9 +43,9 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_RowExpander.Models
                                         DefaultValue = level.ToString()
                                     }
                                 }
-                            }   
-                        },                        
-                        DataSource = data   
+                            }
+                        },
+                        DataSource = data
                     }
                 },
                 ColumnModel =

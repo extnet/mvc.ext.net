@@ -16,7 +16,7 @@
             .ForceFit(true)
             .Store(
                 Html.X().StoreFor<Ext.Net.MVC.Examples.Areas.Models.Employee>()
-            )            
+            )
             .ColumnModel(
                 Html.X().ColumnFor(m=>m.Id).ToBuilder<Column.Builder>().Width(30),
                 Html.X().Column().DataIndex("FullName").Text("Full Name"),

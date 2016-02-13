@@ -14,15 +14,15 @@
                 values  = slider.getValues();
 
             store.suspendEvents();
-            store.clearFilter();                
+            store.clearFilter();
             store.resumeEvents();
             store.filter([{
                 fn : function (record) {
                     return record.get('price') >= values[0] && record.get('price') <= values[1];
                 }
             }]);
-                
-            store.sort('name', 'ASC');                
+
+            store.sort('name', 'ASC');
         };
     </script>
 }
@@ -31,7 +31,7 @@
 {
     <h1>Animated DataView Example</h1>
     <p>This example uses the DataViewAnimated plugin to animate the changes to a DataView.</p>
-     
+
     @(
         Html.X().Panel()
             .Title("Animated DataView")
@@ -68,7 +68,7 @@
                             .DataSource(Model)
                             .Model(
                                 Html.X().Model()
-                                    .IDProperty("id")                                    
+                                    .IDProperty("id")
                                     .Fields(
                                         Html.X().ModelField().Name("hasEmail").Type(ModelFieldType.Boolean),
                                         Html.X().ModelField().Name("hasCamera").Type(ModelFieldType.Boolean),
@@ -88,7 +88,7 @@
                     .Tpl(@<text>
                         <tpl for=".">
                             <div class="phone">
-                                <tpl if="!Ext.isIE6">                                    
+                                <tpl if="!Ext.isIE6">
                                     <img width="64" height="64" src="@Url.Content("~/Areas/DataView_Basic/Content/")images/phones/{[values.name.replace(/ /g, "-")]}.png" />
                                 </tpl>
                                 <tpl if="Ext.isIE6">
@@ -103,5 +103,5 @@
                         Html.X().DataViewAnimated().Duration(550).IDProperty("id")
                     )
             )
-    )        
+    )
 }

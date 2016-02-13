@@ -32,7 +32,7 @@
 }
 
 @section example
-{    
+{
     @(Html.X().GridPanel()
         .Title("Cell commands")
         .Width(700)
@@ -57,12 +57,12 @@
                     .CommandName("Edit")
                     .Icon(Icon.NoteEdit)
                     .Text("Edit")
-                    .ToolTip(tt => tt.Text = "Edit")  
+                    .ToolTip(tt => tt.Text = "Edit")
                 )
                 .Listeners(ls =>
                     ls.Command.Fn = "onCommand"
                 ),
-                
+
             Html.X().Column()
                 .Text("Price")
                 .DataIndex("price")
@@ -73,7 +73,7 @@
                     Html.X().ImageCommand()
                         .CommandName("Dollar")
                         .Icon(Icon.MoneyDollar),
-                    
+
                     Html.X().ImageCommand()
                         .CommandName("Euro")
                         .Icon(Icon.MoneyEuro)
@@ -81,7 +81,7 @@
                 .Listeners(ls =>
                     ls.Command.Fn = "onCommand"
                 ),
-                
+
             Html.X().Column()
                 .Text("Change")
                 .DataIndex("change")
@@ -92,7 +92,7 @@
                     Html.X().ImageCommand()
                         .CommandName("Dollar")
                         .Icon(Icon.MoneyDollar),
-                        
+
                     Html.X().ImageCommand()
                         .CommandName("Euro")
                         .Icon(Icon.MoneyEuro)
@@ -115,5 +115,5 @@
                 )
         )
         .SelectionModel(Html.X().RowSelectionModel().Mode(SelectionMode.Multi))
-    )   
+    )
 }

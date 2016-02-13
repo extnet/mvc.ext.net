@@ -6,12 +6,12 @@
     var X = Html.X();
 }
 
-@section headtag 
+@section headtag
 {
     <script>
         var beforeEdit = function (ed, e) {
             var field = this.getEditor(e.record, e.column).field;
-            
+
             switch(e.field) {
                 case "state":
                     field.allQuery = e.record.get('country');
@@ -142,7 +142,7 @@
                     .DisplayField("text")
                     .CustomConfig(cc => cc.Add(new ConfigItem { Name = "initQuery", Value = "Ext.emptyFn", Mode = ParameterMode.Raw }))
                 ),
-                
+
             X.Column()
                 .DataIndex("city")
                 .Text("City")
@@ -154,7 +154,7 @@
                     .DisplayField("text")
                     .CustomConfig(cc => cc.Add(new ConfigItem { Name = "initQuery", Value = "Ext.emptyFn", Mode = ParameterMode.Raw }))
                 ),
-                
+
             X.Column()
                 .DataIndex("region")
                 .Text("Region")
@@ -169,7 +169,7 @@
         )
         .Plugins(X.CellEditing()
             .Listeners(events => events.BeforeEdit.Fn = "beforeEdit")
-            .DirectEvents(events => 
+            .DirectEvents(events =>
             {
                 events.Edit.Action = "Edit";
                 events.Edit.EventMask.ShowMask = true;

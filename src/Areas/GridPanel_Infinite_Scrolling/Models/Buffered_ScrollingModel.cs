@@ -9,7 +9,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Infinite_Scrolling.Models
         {
             var firstNames = new string[] { "Russel", "Clark", "Steve", "Sam", "Lance", "Robert", "Sean", "David", "Justin", "Nicolas", "Brent" };
             var lastNames = new string[] { "Wood", "Lewis", "Scott", "Parker", "Ross", "Garcia", "Bell", "Kelly", "Powell", "Moore", "Cook" };
-           
+
             var ratings = new int[] { 1, 2, 3, 4, 5 };
             var salaries = new int[] { 100, 400, 900, 1500, 1000000 };
 

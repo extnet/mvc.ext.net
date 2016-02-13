@@ -32,7 +32,7 @@ namespace Ext.Net.MVC.Examples.Areas.Dynamic_Partial_Rendering.Controllers
         {
             PartialViewResult pr = new PartialViewResult(containerId);
             pr.RenderMode = RenderMode.AddTo;
-            pr.SingleControl = true;            
+            pr.SingleControl = true;
             pr.ViewData["title"] = DateTime.Now.ToLongTimeString();
             pr.ViewData["html"] = DateTime.Now.ToLongTimeString();
             return pr;

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace Ext.Net.MVC.Examples.Areas.DataView_Advanced.Controllers
 {
     public class ChooserController : Controller
-    {       
+    {
         public ActionResult Index()
         {
             return View();

@@ -36,19 +36,19 @@
                         .Height(200)
                         .FillStyle("url(#reflectGrd)")
                 )
-                .Gradients(g => 
+                .Gradients(g =>
                     g.Add(X.LinearGradient()
                         .GradientID("reflectGrd")
                         .Degrees(90)
                         .Stops(s => {
-                            s.Add(new GradientStop 
-                            { 
-                                Offset = 0.35, 
+                            s.Add(new GradientStop
+                            {
+                                Offset = 0.35,
                                 Color = "white"
                             });
 
-                            s.Add(new GradientStop 
-                            { 
+                            s.Add(new GradientStop
+                            {
                                 Offset = 1.0
                             });
                         })

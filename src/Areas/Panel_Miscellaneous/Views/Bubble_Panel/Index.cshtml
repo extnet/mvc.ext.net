@@ -7,15 +7,15 @@
 @section headtag
 {
     <link href="@Url.Content("~/Areas/Panel_Miscellaneous/Content/css/bubble.css")" rel="stylesheet" />
-    
+
     <style>
-	    body {
-	        background-color : #4E79B2 !important;
-	    }
-	    
-	    #bubble-markup em {
-		    font-style : italic
-	    }
+        body {
+            background-color : #4E79B2 !important;
+        }
+
+        #bubble-markup em {
+            font-style : italic
+        }
     </style>
 }
 
@@ -36,25 +36,25 @@
             var panel = App.Panel1,
                 uis = ['default-framed', 'bubble'],
                 index = Ext.Array.indexOf(uis, panel.ui);
-            
+
             if ((index + 1) >= uis.length) {
                 panel.setUI(uis[0]);
             } else {
                 panel.setUI(uis[index + 1]);
             }
-            
+
             panel.doLayout();
-            
+
             App.ToggleButton.setText('Toggle UI: ' + panel.ui);
         };
     </script>
-    
+
     @(X.Button()
         .ID("ToggleButton")
         .Text("Toggle UI: default-framed")
         .Handler("changeUI();")
     )
-    
+
     <br />
 
     @(X.Panel()

@@ -22,11 +22,11 @@
                 Html.X().Button()
                     .Text("Simple Submit")
                     .Handler("this.up('treepanel').submitNodes();"),
-                    
+
                 Html.X().Button()
                     .Text("Submit with Callback")
                     .Handler("this.up('treepanel').submitNodes({text : 'Submit finish', callback : function (o, success, r) { alert(o.text + ', Status : ' + success); }});"),
-                    
+
                 Html.X().Button()
                     .Text("Submit with Node Filter")
                     .Handler("this.up('treepanel').submitNodes({ nodeFilter : function (node) { return node.data.submit || node.isRoot();}});")

@@ -61,7 +61,7 @@
                     X.Column().Text("Rating").Width(50).Sortable(true).DataIndex("rating").Renderer("if (value == 0) return 'A'; if (value == 1) return 'B'; if (value == 2) return 'C';")
                 )
                 .Listeners(l => l.SelectionChange.Handler = "if (selected[0]) { this.up('form').getForm().loadRecord(selected[0]); }"),
-        
+
         X.FieldSet()
             .ColumnWidth(0.4)
             .Title("Company details")
@@ -96,13 +96,13 @@
         .Buttons(
             X.Button()
                 .Text("Save To Grid")
-                .OnClientClick(@"var form = this.up('form'), 
-                                     r = form.getForm().getRecord(); 
-    
+                .OnClientClick(@"var form = this.up('form'),
+                                     r = form.getForm().getRecord();
+
                                  if (r) {
                                      form.getForm().updateRecord(form.down('grid').getSelectionModel().getLastSelected());
                                  }"),
-                                                                                                                        
+
             X.Button()
                 .Text("Reset Fields")
                 .OnClientClick("this.up('form').getForm().reset();"),

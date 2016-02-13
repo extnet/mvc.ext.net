@@ -27,7 +27,7 @@
                     var portal,
                         menu,
                         breadcrumb,
-                        wide, 
+                        wide,
                         narrow,
                         north;
                     viewPort = viewPort || Ext.ComponentQuery.query("viewport")[0];
@@ -44,7 +44,7 @@
                         menu = viewPort.down("#managementMenu");
                         breadcrumb = viewPort.down("#breadcrumb");
 
-                        if (narrow) {                            
+                        if (narrow) {
                             portal.items.each(function(column){
                                 column._columnWidth = column.columnWidth;
                                 column.columnWidth = 1;
@@ -65,16 +65,16 @@
                                             this.up("button").setText(item.text);
                                         }
                                     }
-                               }                            
+                               }
                             });
 
                             menu.hide();
                             north = viewPort.down("#north");
                             north.setHeight(150);
                             north.getLayout().setActiveItem(1);
-                            north.getComponent(1).add(north.getComponent(0).removeAll(false));                            
+                            north.getComponent(1).add(north.getComponent(0).removeAll(false));
                         }
-                        else if (wide) {                            
+                        else if (wide) {
                             portal.items.each(function(column){
                                 column.columnWidth = column._columnWidth;
 
@@ -94,9 +94,9 @@
 
                         Ext.resumeLayouts(false);
                         viewPort.updateLayout();
-                    }                    
+                    }
 
-                    prevWidth = width;                    
+                    prevWidth = width;
                 };
 
                 Ext.on("resize", resizeHandler, window, {buffer : 100});
@@ -104,8 +104,8 @@
                     resizeHandler(Ext.Element.getViewportWidth());
                 });
         })();
-        
-    </script> 
+
+    </script>
 }
 
 @section example
@@ -170,7 +170,7 @@
                         Menu =
                         {
                             new Menu{
-                                Items = { 
+                                Items = {
                                     new MenuItem { Text =  "Settings", Icon = Icon.Cog },
                                     new MenuItem { Text =  "About", Icon = Icon.Information }
                                 }
@@ -200,17 +200,17 @@
                                 },
                                 Width = 280,
                                 Height = 40,
-                                Items = { 
+                                Items = {
                                     X.TextField()
                                         .ID("txtSearch")
                                         .MarginSpec("0 10 0 0")
                                         .EmptyText("Search...")
                                         .Width(215),
-                                            
+
                                     X.Button()
                                         .Icon(Icon.Magnifier)
                                         .MarginSpec("0 20 0 0")
-                                        .OnClientClick("Ext.Msg.notify('Search', 'Term : ' + App.txtSearch.getValue());")    
+                                        .OnClientClick("Ext.Msg.notify('Search', 'Term : ' + App.txtSearch.getValue());")
                                 }
                             });
                         }),
@@ -250,7 +250,7 @@
                                 .TopBar(new Toolbar
                                 {
                                     ItemID = "breadcrumb",
-                                    Items = { 
+                                    Items = {
                                             new Hyperlink { Text = "Management", MarginSpec = "5 0 5 20" },
                                             new ToolbarSpacer(),
                                             new ToolbarTextItem { Text = "/" },
@@ -278,7 +278,7 @@
                                                 .Icon(Icon.Cog)
                                                 .MarginSpec("0 20 0 0")
                                         ),
-                                                                    
+
                                     X.Portal()
                                         .Border(false)
                                         .Flex(1)
@@ -295,8 +295,8 @@
                                                         .Height(350)
                                                         .TopBar(new Toolbar
                                                         {
-                                                            Items = { 
-                                                                new Button { 
+                                                            Items = {
+                                                                new Button {
                                                                     Text = "Reload",
                                                                     Icon = Icon.ArrowRefresh,
                                                                     OnClientClick = "App.Store1.load()"
@@ -353,8 +353,8 @@
                                                         .Height(350)
                                                         .TopBar(new Toolbar
                                                         {
-                                                            Items = { 
-                                                                new Button { 
+                                                            Items = {
+                                                                new Button {
                                                                     Text = "Reload",
                                                                     Icon = Icon.ArrowRefresh,
                                                                     OnClientClick = "App.Store1.load()"
@@ -381,7 +381,7 @@
                                                                         .Title("Number of Hits")
                                                                         .MinorTickSteps(1)
                                                                         .Minimum(0),
-            
+
                                                                     Html.X().CategoryAxis()
                                                                         .Position(Position.Bottom)
                                                                         .Fields("Name")
@@ -400,7 +400,7 @@
 
                                             X.PortalColumn()
                                                 .Cls("x-column-padding")
-                                                .MarginSpec("0 10 0 10")                                                    
+                                                .MarginSpec("0 10 0 10")
                                                 .Items(
                                                     X.Portlet()
                                                         .Title("Employees")

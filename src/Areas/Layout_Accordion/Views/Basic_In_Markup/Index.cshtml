@@ -7,7 +7,7 @@
 @section example
 {
     <h1>Accordion Layout in Markup</h1>
-    
+
     @(X.Window()
         .Title("Accordion")
         .Width(250)
@@ -25,12 +25,12 @@
                             .Title("Rich ToolTips")
                             .Html("Let your users know what they can do!"))
                     ),
-                    
+
                     X.Button()
                         .ID("Button2")
                         .Icon(Icon.UserAdd)
                     ,
-                    
+
                     X.Button()
                         .ID("Button3")
                         .Icon(Icon.UserDelete)
@@ -58,7 +58,7 @@
                             X.Node().Text("Fred").Icon(Icon.User).Leaf(true),
                             X.Node().Text("Bob").Icon(Icon.User).Leaf(true)
                         ),
-                        
+
                     X.Node()
                         .Text("Family")
                         .Expanded(true)
@@ -70,7 +70,7 @@
                         )
                 )
             ),
-            
+
             X.Panel().Title("Settings"),
             X.Panel().Title("Even More Stuff"),
             X.Panel().Title("My Stuff")

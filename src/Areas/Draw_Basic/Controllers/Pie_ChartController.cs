@@ -17,8 +17,8 @@ namespace Ext.Net.MVC.Examples.Areas.Draw_Basic.Controllers
 
         public ActionResult GetChart()
         {
-            List<Pair> data = new List<Pair> 
-            { 
+            List<Pair> data = new List<Pair>
+            {
                 new Pair("Ruby", 40),
                 new Pair("JavaScript", 26),
                 new Pair("Shell", 5),

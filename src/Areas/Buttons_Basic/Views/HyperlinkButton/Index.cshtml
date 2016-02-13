@@ -4,17 +4,17 @@
     var X = Html.X();
 }
 
-@section example 
+@section example
 {
     <h2>Simple HyperlinkButton</h2>
-    
+
     @(X.HyperlinkButton()
         .Text("Click")
         .OnClientClick("Ext.Msg.alert('Clicked', 'HyperlinkButton');")
     )
-    
+
     <h2>HyperlinkButton with Icon and Click DirectEvent</h2>
-    
+
     @(X.HyperlinkButton()
         .Icon(Icon.Accept)
         .Text("Click")
@@ -22,17 +22,17 @@
             de.Click.Url = Url.Action("Button_Click")
         )
     )
-    
+
     <h2>HyperlinkButton with Right Aligned Icon</h2>
-    
+
     @(X.HyperlinkButton()
        .Icon(Icon.Accept)
        .IconAlign(IconAlign.Right)
        .Text("Click")
     )
-    
+
     <h2>HyperlinkButton with Menu</h2>
-    
+
     @(X.HyperlinkButton()
        .Icon(Icon.Accept)
        .IconAlign(IconAlign.Right)
@@ -48,9 +48,9 @@
            )
        )
     )
-    
+
     <h2>HyperlinkButton in a ToggleGroup</h2>
-    
+
     @(X.HyperlinkButton()
        .Icon(Icon.GroupAdd)
        .Text("Add group")

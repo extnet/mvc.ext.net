@@ -6,7 +6,7 @@
 }
 
 @section example
-{    
+{
     <h1>ComponentColumn as Over Editor</h1>
 
     @(Html.X().GridPanel()
@@ -32,7 +32,7 @@
                 .Flex(1)
                 .Text("Integer")
                 .Component(Html.X().NumberField()),
-                
+
             Html.X().ComponentColumn()
                 .Editor(true)
                 .OverOnly(true)
@@ -54,7 +54,7 @@
                                 new ListItem("Item 9", 9)
                     )
                 ),
-                
+
             Html.X().ComponentColumn()
                 .Editor(true)
                 .OverOnly(true)
@@ -62,7 +62,7 @@
                 .Flex(1)
                 .Text("Text")
                 .Component(Html.X().TextField()),
-                
+
             Html.X().ComponentColumn()
                 .Editor(true)
                 .OverOnly(true)
@@ -71,10 +71,10 @@
                 .PinEvents("expand")
                 .UnpinEvents("collapse")
                 .Text("Date")
-                .Renderer(new Renderer() 
-                    { 
-                        Format = RendererFormat.Date, 
-                        FormatArgs = new string[] { "'d/m/Y'" } 
+                .Renderer(new Renderer()
+                    {
+                        Format = RendererFormat.Date,
+                        FormatArgs = new string[] { "'d/m/Y'" }
                     })
                 .Component(Html.X().DateField().Format("dd/MM/yyyy"))
         )

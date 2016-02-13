@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 }
 
-@section headtag 
+@section headtag
 {
     <style>
         .search-item {
@@ -16,7 +16,7 @@
             white-space   : normal;
             color         : #555;
         }
-        
+
         .search-item h3 {
             display     : block;
             font        : inherit;
@@ -32,12 +32,12 @@
             width       : 100px;
             display     : block;
             clear       : none;
-        } 
-        
+        }
+
         p { width: 650px; }
-        
+
         .ext-ie .x-form-text { position : static !important; }
-    </style>    
+    </style>
 }
 
 @section example
@@ -45,7 +45,7 @@
     <h1>ComboBox with Templates and AJAX</h1>
 
     <p>This is a more advanced example demonstrating how to combine Store Paging and a Template to create "live search" functionality.</p>
-    
+
     <div style="width:600px;">
         <div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
         <div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
@@ -65,9 +65,9 @@
                     .ItemTpl(Html.X().XTemplate()
                         .Html(@<text>
                             <div class="search-item">
-							    <h3><span>${Price}</span>{Common}</h3>
-							    {Botanical}
-						    </div>
+                                <h3><span>${Price}</span>{Common}</h3>
+                                {Botanical}
+                            </div>
                         </text>)
                     )
                 )

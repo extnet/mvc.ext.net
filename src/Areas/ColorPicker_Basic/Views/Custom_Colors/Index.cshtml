@@ -8,28 +8,28 @@
 {
     <style>
         body {
-        	padding:20px;
+            padding:20px;
         }
-        
+
         .column {
-        	 float: left;
+             float: left;
         }
-        
+
         .palette {
-            color: #fff; 
+            color: #fff;
             text-align: center;
             width: 138px;
             height: 45px;
             margin: 0px 9px 0px 3px;
         }
-        
+
         #swatch {
-        	margin-top: 2px;
-        	height: 570px;
-        	border: 1px solid black;
+            margin-top: 2px;
+            height: 570px;
+            border: 1px solid black;
         }
     </style>
-    
+
     <script>
         var setColor = function (el, color) {
             if (Ext.isEmpty(color, false)) {
@@ -41,10 +41,10 @@
     </script>
 }
 
-@section example 
+@section example
 {
    <h1>Custom Colors using ColorPalette</h1>
-   
+
    <div class="column">
         <div class="palette" style="background-color:Blue;">Blue Palette<br />(Listener)</div>
         @(X.ColorPicker()
@@ -53,7 +53,7 @@
             .Listeners(l => l.Select.Fn = "setColor")
         )
     </div>
-    
+
     <div class="column">
         <div class="palette" style="background-color:Green;">Green Palette<br />(DirectEvent)</div>
         @(X.ColorPicker()
@@ -68,7 +68,7 @@
             })
         )
     </div>
-    
+
     <div class="column">
         <div class="palette" style="background-color:black;width:80px;margin:0;">Swatch</div>
         <div id="swatch" style="width:78px;"></div>

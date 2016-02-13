@@ -13,25 +13,25 @@
             }, null, {
                 delegate : "label.x-form-item-label"
             });
-            
+
             this.header.titleCmp.textEl.on("dblclick", function (e, t) {
                 App.Editor2.startEdit(t);
             });
         };
-        
+
         var beforeComplete = function (editor, value, startValue) {
             // Just ensure we have a ':' as the last char of label.
-            
-            if (value.charAt(value.length - 1) != ":") { 
+
+            if (value.charAt(value.length - 1) != ":") {
                 editor.setValue(editor.getValue() + ":");
-            } 
-            
+            }
+
             return true;
         };
-        
+
         var complete = function (editor, value, startValue) {
             // Notify user the Editor value has changed.
-            Ext.Msg.notify("Editor Changed", 
+            Ext.Msg.notify("Editor Changed",
                 Ext.String.format("<b>{0}</b><br />changed to<br /><b>{1}</b>", startValue, value));
         };
     </script>
@@ -40,9 +40,9 @@
 @section example
 {
     <h1>FormPanel Labels with Editor</h1>
-        
+
     <p>Double-click on the Field Labels and the Panel Title to activate the Editor.</p>
-    
+
     @(X.FormPanel()
         .Title("User Details")
         .Width(350)
@@ -67,7 +67,7 @@
         )
         .Listeners(l => l.AfterRender.Fn = "bodyInit")
     )
-    
+
     @(X.Editor()
         .ID("Editor1")
         .Shadow(false)
@@ -85,7 +85,7 @@
             l.Complete.Fn = "complete";
         })
     )
-    
+
     @(X.Editor()
         .ID("Editor2")
         .Shadow(false)

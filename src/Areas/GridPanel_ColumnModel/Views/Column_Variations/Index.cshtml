@@ -6,7 +6,7 @@
 }
 
 @section example
-{    
+{
     @(Html.X().GridPanel()
         .Title("Column Variations")
         .DisableSelection(true)
@@ -27,7 +27,7 @@
             Html.X().BooleanColumn().DataIndex("booleanCol").Text("Boolean"),
             Html.X().CheckColumn().DataIndex("booleanCol").Text("Check"),
             Html.X().DateColumn().DataIndex("dateCol").Text("Date"),
-            Html.X().NumberColumn().DataIndex("numberCol").Text("Number").Format("0.00"),            
+            Html.X().NumberColumn().DataIndex("numberCol").Text("Number").Format("0.00"),
             Html.X().TemplateColumn().MenuDisabled(true).Text("Template")
                 .TemplateString("<tpl for=\".\">{booleanCol}<br />{dateCol:date(\"d/m/Y\")}<br />{numberCol}<br /></tpl>")
         )

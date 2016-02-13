@@ -10,54 +10,54 @@ namespace Ext.Net.MVC.Examples.Areas.Models
     public class TimeCard : IValidatableObject
     {
         public TimeCard()
-        {            
+        {
         }
 
-        public Guid Id 
-        { 
-            get; 
-            set; 
+        public Guid Id
+        {
+            get;
+            set;
         }
-        
+
         [Required]
         [StringLength(25)]
         [Remote("CheckUsername", "Data_Annotations", "Models")]
-        public string Username 
-        { 
-            get; 
-            set; 
+        public string Username
+        {
+            get;
+            set;
         }
 
         [Required]
         [Range(1, 120)]
-        public int? Hours 
-        { 
-            get; 
-            set; 
+        public int? Hours
+        {
+            get;
+            set;
         }
 
         [Required]
         [Range(1, 120)]
         [System.Web.Mvc.CompareAttribute("Hours")]
-        public int? ConfirmHours 
-        { 
-            get; 
-            set; 
+        public int? ConfirmHours
+        {
+            get;
+            set;
         }
 
         [Required]
-        public DateTime? StartDate 
-        { 
-            get; 
-            set; 
+        public DateTime? StartDate
+        {
+            get;
+            set;
         }
 
         [GreaterThanDate("StartDate")]
         [Required]
-        public DateTime? EndDate 
-        { 
-            get; 
-            set; 
+        public DateTime? EndDate
+        {
+            get;
+            set;
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -82,10 +82,10 @@ namespace Ext.Net.MVC.Examples.Areas.Models
             this.OtherPropertyName = otherPropertyName;
         }
 
-        public string OtherPropertyName 
-        { 
-            get; 
-            set; 
+        public string OtherPropertyName
+        {
+            get;
+            set;
         }
 
         public override string FormatErrorMessage(string name)

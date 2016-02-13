@@ -20,10 +20,10 @@
     </script>
 }
 
-@section example 
+@section example
 {
     @(X.Panel()
-        .BodyStyle("background: transparent !important;") 
+        .BodyStyle("background: transparent !important;")
         .Width(650)
         .LayoutConfig(new VBoxLayoutConfig { Pack = BoxPack.Center, Align = VBoxAlign.Stretch })
         .TopBar(X.Toolbar()
@@ -49,7 +49,7 @@
                 X.NumericAxis().Position(Position.Bottom).Fields("x").Grid(true),
                 X.NumericAxis().Position(Position.Left).Fields("y").Grid(true)
             )
-            .Items(X.TextSprite() 
+            .Items(X.TextSprite()
                 .Text("Scatter Charts - Basic")
                 .FontSize("22")
                 .Width(100)

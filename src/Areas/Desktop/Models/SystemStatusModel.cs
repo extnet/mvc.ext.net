@@ -15,7 +15,7 @@ namespace Ext.Net.MVC.Examples.Areas.Desktop.Models
                 return HttpContext.Current.Session;
             }
         }
-        
+
         private static int Pass
         {
             get
@@ -61,7 +61,7 @@ namespace Ext.Net.MVC.Examples.Areas.Desktop.Models
             {
                 SystemStatusModel.Init();
             }
-            
+
             int pass = SystemStatusModel.Pass;
 
             var store = data.Memory;
@@ -100,7 +100,7 @@ namespace Ext.Net.MVC.Examples.Areas.Desktop.Models
 
             SystemStatusModel.GenerateCPULoad(data);
             SystemStatusModel.Pass++;
-        } 
+        }
 
         private static void Init()
         {
@@ -147,7 +147,7 @@ namespace Ext.Net.MVC.Examples.Areas.Desktop.Models
             double core2 = SystemStatusModel.LastCore2;
             int pass = 99;
             Random random = new Random();
-            
+
             if (!data.Init)
             {
                 data.CPULoad.RemoveAt(0);
@@ -191,7 +191,7 @@ namespace Ext.Net.MVC.Examples.Areas.Desktop.Models
 
             SystemStatusModel.LastCore1 = core1;
             SystemStatusModel.LastCore2 = core2;
-        }         
+        }
     }
 
     public class SystemStatusData

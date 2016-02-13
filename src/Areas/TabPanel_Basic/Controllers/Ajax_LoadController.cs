@@ -11,7 +11,7 @@ namespace Ext.Net.MVC.Examples.Areas.TabPanel_Basic.Controllers
 
         public ActionResult Ajax(string containerId)
         {
-			System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(2000);
 
             return View("Ajax");
         }

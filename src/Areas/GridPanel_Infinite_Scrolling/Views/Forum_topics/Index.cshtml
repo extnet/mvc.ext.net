@@ -22,9 +22,9 @@
             var sortable = !store.isGrouped(),
                 grid = App.GridPanel1,
                 headers = grid.headerCt.getVisibleGridColumns(),
-                i, 
+                i,
                 len = headers.length;
-                
+
             for (i = 0; i < len; i++) {
                 headers[i].sortable = (headers[i].sortable !== undefined) ? headers[i].sortable : sortable;
             }
@@ -40,11 +40,11 @@
 }
 
 @section example
-{    
+{
     <h1>Infinite Scrolling</h1>
 
     <p>Introduced with Ext.NET 2, grid supports infinite scrolling, which enables you to load any number of records into a grid without paging.</p>
-        
+
     <p>This grid approach uses a virtualized scrolling system to handle potentially infinite data sets without any impact on client side performance.</p>
 
     @(Html.X().GridPanel()
@@ -113,6 +113,6 @@
         )
         .View(Html.X().GridView().TrackOver(false))
         .SelectionModel(Html.X().RowSelectionModel().PruneRemoved(false).Mode(SelectionMode.Multi))
-        .Features(Html.X().Grouping().HideGroupedHeader(false))        
+        .Features(Html.X().Grouping().HideGroupedHeader(false))
     )
 }

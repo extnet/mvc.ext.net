@@ -64,7 +64,7 @@ namespace Ext.Net.MVC.Examples
                     node.Text = folder.Name.Replace("_", " ");
 
                     nodes.Add(node);
-                    
+
                     if (String.IsNullOrWhiteSpace(iconCls)) {
                         staticIcons.TryGetIconCLS(out iconCls, folder.Name);
                     }

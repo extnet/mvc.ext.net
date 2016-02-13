@@ -26,21 +26,21 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_ArrayGrid.DirectEvent_Creation.Co
             return new Ext.Net.GridPanel
             {
                 Border = false,
-                Store =  
+                Store =
                 {
                     this.BuildStore()
                 },
-                SelectionModel = 
-                { 
+                SelectionModel =
+                {
                     new RowSelectionModel() { Mode = SelectionMode.Single }
                 },
                 ColumnModel =
                 {
                     Columns =
                     {
-                        new Column 
+                        new Column
                         {
-                            Text = "Company", 
+                            Text = "Company",
                             DataIndex = "company",
                             Flex = 1
                         },
@@ -74,7 +74,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_ArrayGrid.DirectEvent_Creation.Co
                    new Ext.Net.GridView()
                    {
                         StripeRows = true,
-                        TrackOver = true 
+                        TrackOver = true
                    }
                 }
             };
@@ -84,11 +84,11 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_ArrayGrid.DirectEvent_Creation.Co
         {
             Store store = new Store
             {
-                Model = 
-                { 
-                    new Model 
+                Model =
+                {
+                    new Model
                     {
-                        Fields = 
+                        Fields =
                         {
                             new ModelField("company"),
                             new ModelField("price", ModelFieldType.Float),

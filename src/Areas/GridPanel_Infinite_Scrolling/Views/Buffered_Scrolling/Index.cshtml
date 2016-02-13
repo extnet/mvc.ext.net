@@ -18,9 +18,9 @@
     <script>
         var go = function () {
             var me = this,
-                field = me.up('toolbar').down('#gotoLine'); 
-            
-            if (field.isValid()) { 
+                field = me.up('toolbar').down('#gotoLine');
+
+            if (field.isValid()) {
                 me.up('grid').view.bufferedRenderer.scrollTo(field.getValue() - 1, true);
             }
         };
@@ -28,7 +28,7 @@
 }
 
 @section example
-{    
+{
     @(Html.X().GridPanel()
         .Title("Buffered Grid of 5,000 random records")
         .Width(700)
@@ -75,7 +75,7 @@
                     )
             )
         )
-        
+
     )
 }
 

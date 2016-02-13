@@ -148,40 +148,40 @@ var makeTab = function (id, url, title) {
             }
         },
         "->",
-	    {
-	        text: "Direct Link",
-	        iconCls: "#Link",
-	        handler: function () {
-	            new Ext.window.Window({
-	                modal: true,
-	                iconCls: "#Link",
-	                layout: "absolute",
-	                defaultButton: "dl" + id,
-	                width: 400,
-	                height: 110,
-	                title: "Direct Link",
-	                closable: false,
-	                resizable: false,
-	                items: [{
-	                    id: "dl" + id,
-	                    xtype: "textfield",
-	                    cls: "dlText",
-	                    width: 364,
-	                    x: 10,
-	                    y: 10,
-	                    selectOnFocus: true,
-	                    readOnly: true,
-	                    value: hostName + "/#" + exampleName
-	                }],
-	                buttons: [{
-	                    xtype: "button",
-	                    text: " Open",
-	                    iconCls: "#ApplicationDouble",
-	                    tooltip: "Open Example in the separate window",
-	                    handler: function () {
-	                        window.open(hostName + "/#" + exampleName);
-	                    }
-	                },
+        {
+            text: "Direct Link",
+            iconCls: "#Link",
+            handler: function () {
+                new Ext.window.Window({
+                    modal: true,
+                    iconCls: "#Link",
+                    layout: "absolute",
+                    defaultButton: "dl" + id,
+                    width: 400,
+                    height: 110,
+                    title: "Direct Link",
+                    closable: false,
+                    resizable: false,
+                    items: [{
+                        id: "dl" + id,
+                        xtype: "textfield",
+                        cls: "dlText",
+                        width: 364,
+                        x: 10,
+                        y: 10,
+                        selectOnFocus: true,
+                        readOnly: true,
+                        value: hostName + "/#" + exampleName
+                    }],
+                    buttons: [{
+                        xtype: "button",
+                        text: " Open",
+                        iconCls: "#ApplicationDouble",
+                        tooltip: "Open Example in the separate window",
+                        handler: function () {
+                            window.open(hostName + "/#" + exampleName);
+                        }
+                    },
                     {
                         xtype: "button",
                         text: " Open (Direct)",
@@ -198,9 +198,9 @@ var makeTab = function (id, url, title) {
                             this.findParentByType("window").hide(null);
                         }
                     }]
-	            }).show(null);
-	        }
-	    },
+                }).show(null);
+            }
+        },
         "-",
         {
             text: "Refresh",

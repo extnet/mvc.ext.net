@@ -79,7 +79,7 @@
     <folder name="GridPanel_FilterHeader\Views\Overview" />
     <folder name="GridPanel_Paging_and_Sorting\Views\Multiple_Sorting_Local" />
   </new>-->
-  
+
   <!--<new version="2.3.0">
     <folder name="Associations_HasMany\Views\Simple" />
     <folder name="Associations_HasOne\Views\Simple" />
@@ -117,8 +117,8 @@
     <folder name="Viewport_Basic\Views\Built_in_Markup" />
     <folder name="XRender_Basic\Views\Add_Items" />
     <folder name="XRender_Basic\Views\New_Window" />
-  </new>-->  
-  
+  </new>-->
+
   <!--<new version="2.2">
     <folder name="Buttons_Basic\Views\Default_Button" />
     <folder name="Buttons_Basic\Views\ImageButton" />
@@ -198,8 +198,8 @@
     <folder name="Window_Basic\Views\Hello_World" />
     <folder name="Window_Basic\Views\Load_External_Website" />
     <folder name="Window_Basic\Views\Show" />
-    <folder name="Window_Basic\Views\Window_Variations" />        
-    <folder name="XRender_Basic\Views\Add_Items" />        
-    <folder name="XRender_Basic\Views\New_Window" />     
+    <folder name="Window_Basic\Views\Window_Variations" />
+    <folder name="XRender_Basic\Views\Add_Items" />
+    <folder name="XRender_Basic\Views\New_Window" />
   </new>-->
 </example>

@@ -15,18 +15,18 @@
 
             return data;
         };
-            
+
         var selectionChanged = function (selModel, selected) {
-			var l = selected.length, s = l != 1 ? 's' : '';
-			App.ImagePanel.setTitle('Simple DataView (' + l + ' item' + s + ' selected)');
-		};
+            var l = selected.length, s = l != 1 ? 's' : '';
+            App.ImagePanel.setTitle('Simple DataView (' + l + ' item' + s + ' selected)');
+        };
     </script>
 }
 
 @section example
 {
     <h1>DataView Example with paging</h1>
-    
+
     @(
         Html.X().Panel()
             .ID("ImagePanel")
@@ -64,12 +64,12 @@
                             .Html(
                                 @<text>
                                     <tpl for=".">
-								        <div class="thumb-wrap" id="{name}">
-									        <div class="thumb"><img src="{url}" title="{name}"></div>
-									        <span class="x-editable">{shortName}</span>
-								        </div>
-							        </tpl>
-							        <div class="x-clear"></div>
+                                        <div class="thumb-wrap" id="{name}">
+                                            <div class="thumb"><img src="{url}" title="{name}"></div>
+                                            <span class="x-editable">{shortName}</span>
+                                        </div>
+                                    </tpl>
+                                    <div class="x-clear"></div>
                                 </text>
                             )
                     )
@@ -78,9 +78,9 @@
                     {
                         l.SelectionChange.Fn = "selectionChanged";
                     })
-            ) 
+            )
             .BottomBar(
                 Html.X().PagingToolbar().StoreID("Store1").HideRefresh(true)
-            )          
-    )  
+            )
+    )
 }

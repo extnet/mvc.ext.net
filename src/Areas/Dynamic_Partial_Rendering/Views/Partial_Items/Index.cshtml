@@ -20,15 +20,15 @@
                 i.Add(new Panel{
                     ID = "West1",
                     Title = "West",
-                    Width=200,           
-                    Layout = "Accordion",         
-                    Region = Region.West,                    
-                    Loader = Html.X().ComponentLoader()                        
-                        .Url(Url.Action("WestItems"))                        
+                    Width=200,
+                    Layout = "Accordion",
+                    Region = Region.West,
+                    Loader = Html.X().ComponentLoader()
+                        .Url(Url.Action("WestItems"))
                         .Mode(LoadMode.Script)
                         .Params(new { containerId = "West1" })
                 });
-                
+
                 i.Add(new Panel{
                     ID = "Center1",
                     Region = Region.Center,

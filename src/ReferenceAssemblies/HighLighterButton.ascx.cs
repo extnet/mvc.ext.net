@@ -11,7 +11,7 @@ using xWindow = Ext.Net.Window;
 namespace Ext.Net.Examples
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [ParseChildren(true)]
     [PersistChildren(false)]
@@ -19,7 +19,7 @@ namespace Ext.Net.Examples
     public partial class HighLighterButton : System.Web.UI.UserControl
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -27,7 +27,7 @@ namespace Ext.Net.Examples
         protected void Page_Load(object sender, EventArgs e) { }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [Description("")]
         public string Url
@@ -43,7 +43,7 @@ namespace Ext.Net.Examples
         private xButton button;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [PersistenceMode(PersistenceMode.InnerProperty)]
         [Description("")]

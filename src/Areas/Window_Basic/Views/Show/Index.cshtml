@@ -6,16 +6,16 @@
 
 @section example
 {
-    <h1>Show a Hidden Window</h1>        
-    
+    <h1>Show a Hidden Window</h1>
+
     <p>This sample demonstrates several client-side and server-side techniques for triggering the &lt;ext:Window> to "show" if hidden.</p>
-        
+
     <p>Within server-side code, the .Show() Method should be used. Within client-side code, the .show() function should be used.</p>
-    
+
     <h2>Example</h2>
-        
+
     <h3>ext:Button's</h3>
-    
+
     <p>
     @(X.Button()
         .ID("Button1")
@@ -24,7 +24,7 @@
         .Handler("App.Window1.show(this)")
     )
     </p>
-    
+
     <p>
     @(X.Button()
         .ID("Button2")
@@ -33,7 +33,7 @@
         .DirectClickAction("Button2_Click")
     )
     </p>
-        
+
     <p>
     @(X.Button()
         .ID("Button3")
@@ -42,7 +42,7 @@
         .Handler("#{DirectMethods}.Button3_Click();")
     )
     </p>
-    
+
     @(X.Window()
         .ID("Window1")
         .Icon(Icon.House)
@@ -51,7 +51,7 @@
         .X(205)
         .Y(100)
     )
-    
+
     @(X.Window()
         .ID("Window2")
         .Icon(Icon.House)
@@ -60,7 +60,7 @@
         .X(275)
         .Y(150)
     )
-    
+
     @(X.Window()
         .ID("Window3")
         .Icon(Icon.House)

@@ -23,11 +23,11 @@
         var pctChange = function (value) {
             return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
         };
-    </script>  
+    </script>
 }
 
 @section example
-{    
+{
     @(Html.X().Viewport()
         .Layout(LayoutType.Border)
         .Items(
@@ -36,7 +36,7 @@
                 .Height(75)
                 .BodyPadding(20)
                 .Html("<h1>Mouse Sensor Distance</h1>"),
-                
+
             Html.X().GridPanel()
                 .ID("GridPanel1")
                 .Region(Region.Center)
@@ -70,7 +70,7 @@
                 )
         )
     )
-    
+
     @(Html.X().Window()
           .Title("Record")
           .Width(300)
@@ -94,7 +94,7 @@
           )
           .Listeners(l =>
               {
-                  l.AfterRender.Handler = "this.show();this.el.alignTo(document, 'br-br', [-20,-20]);"; 
+                  l.AfterRender.Handler = "this.show();this.el.alignTo(document, 'br-br', [-20,-20]);";
                   l.AfterRender.Delay = 1;
               })
           .Plugins(Html.X().MouseDistanceSensor().MinOpacity((decimal)0.3)))

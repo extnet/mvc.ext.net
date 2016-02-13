@@ -77,7 +77,7 @@ namespace Ext.Net.MVC.Examples
                     hb = new CSSHighlighter();
                     break;
                 default:
-                    return Content(System.IO.File.ReadAllText(fi.FullName), "text/plain");                    
+                    return Content(System.IO.File.ReadAllText(fi.FullName), "text/plain");
             }
 
             string source = System.IO.File.ReadAllText(fi.FullName);
@@ -122,12 +122,12 @@ namespace Ext.Net.MVC.Examples
         [DirectMethod]
         [OutputCache(Duration = 3600, VaryByParam = "url")]
         public ActionResult DownloadExample(string url)
-        {            
+        {
             if (string.IsNullOrEmpty(url))
             {
                 return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
-            }            
-            
+            }
+
             string path = this.HttpContext.Server.MapPath("~/Areas" + url);
             string examplesRoot = this.HttpContext.Server.MapPath(ExamplesModel.ApplicationRoot + "/Areas/");
 

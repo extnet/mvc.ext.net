@@ -2,7 +2,7 @@
 
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -12,23 +12,23 @@
 </head>
 <body>
     <ext:ResourceManager runat="server" />
-    
+
     <ext:Viewport runat="server" Layout="fit">
         <Items>
             <ext:TabPanel runat="server">
                 <Items>
-                    <ext:Panel runat="server" Title="Load View as Content">                        
+                    <ext:Panel runat="server" Title="Load View as Content">
                         <Content>
                             <%= Html.ExtPartial("View1") %>
                         </Content>
                     </ext:Panel>
-                    
+
                     <ext:Panel runat="server" Title="Load View as Items" AutoDataBind="true">
                         <Items>
-                            <ext:Window ID="Tab2_Window" runat="server" 
-                                Title="Items" 
+                            <ext:Window ID="Tab2_Window" runat="server"
+                                Title="Items"
                                 Height="400"
-                                Width="250" 
+                                Width="250"
                                 Constrain="true"
                                 Layout="AccordionLayout">
                             </ext:Window>
@@ -37,13 +37,13 @@
                             <%# Html.ExtPartial("View2", mode: RenderMode.AddTo, items:true, containerId: "Tab2_Window", model: new Tuple<string>("Title "))%>
                         </HtmlBin>
                     </ext:Panel>
-                    
+
                    <ext:Panel runat="server" Title="Load View from Action" AutoDataBind="true">
                         <Items>
-                            <ext:Window ID="Tab3_Window" runat="server" 
-                                Title="Items" 
+                            <ext:Window ID="Tab3_Window" runat="server"
+                                Title="Items"
                                 Height="400"
-                                Width="250" 
+                                Width="250"
                                 Constrain="true"
                                 Layout="AccordionLayout">
                             </ext:Window>

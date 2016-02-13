@@ -7,25 +7,25 @@
 
 @section headtag
 {
-    <script>        
+    <script>
         var doSort = function () {
             App.Store1.sort(getSorters());
         };
 
         var getSorters = function () {
             var sorters = [];
-            
+
             Ext.each(App.Toolbar1.query('button'), function (button) {
                 sorters.push(button.sortData);
             }, this);
-            
+
             return sorters;
         };
 
         var changeSortDirection = function (button, changeDirection) {
             var sortData = button.sortData,
                 iconCls  = button.iconCls;
-        
+
             if (sortData) {
                 if (changeDirection !== false) {
                     button.sortData.direction = Ext.String.toggle(button.sortData.direction, "ASC", "DESC");
@@ -35,15 +35,15 @@
                 doSort();
             }
         };
-       
-        
+
+
         var createItem = function (data) {
             var header = data.header,
                 headerCt = header.ownerCt,
                 reorderer = headerCt.reorderer;
-            
+
             // Hide the drop indicators of the standard HeaderDropZone
-            // in case user had a pending valid drop in 
+            // in case user had a pending valid drop in
             if (reorderer) {
                 reorderer.dropZone.invalidateDrop();
             }
@@ -56,14 +56,14 @@
                 }
             });
         };
-        
+
         var createSorterButtonConfig = function (config) {
             config = config || {};
-                  
+
             Ext.applyIf(config, {
                 listeners : {
                     click : function (button, e) {
-                        changeSortDirection(button, true);             
+                        changeSortDirection(button, true);
                     }
                 },
                 iconCls     : config.sortData.direction.toLowerCase() == "asc" ? "icon-sortascending" : "icon-sortdescending",
@@ -79,10 +79,10 @@
                     ]
                 }
             });
-            
+
             return config;
         };
-        
+
         var canDrop = function (dragSource, event, data) {
             var sorters = getSorters(),
                 header  = data.header,
@@ -105,9 +105,9 @@
 
             return true;
         };
-        
+
         var remove = function (menu) {
-            App.Toolbar1.remove(menu.up('button'));            
+            App.Toolbar1.remove(menu.up('button'));
             App.Store1.clearFilter();
             doSort();
         };
@@ -117,16 +117,16 @@
 @section example
 {
     <h1>Multiple Grid Sorting Example</h1>
-        
+
     <p>This example demontrates how to sort a grid by more than a single field.</p>
-        
+
     <p>The store is initially sorted by Rating DESC then by Salary ASC, as indicated in the toolbar.</p>
-        
+
     <p>Click a button to change sorting direction, drag buttons to reorder them.</p>
-        
-    <p>This example also uses the ToolbarDroppable plugin to allow column headers to be dropped onto the toolbar. Try it with 
+
+    <p>This example also uses the ToolbarDroppable plugin to allow column headers to be dropped onto the toolbar. Try it with
         Name column header. Each column is only allowed one button, so Rating and Salary cannot be dropped in this example.</p>
-    
+
     @(X.GridPanel()
         .ID("GridPanel1")
         .Title("Array Grid")

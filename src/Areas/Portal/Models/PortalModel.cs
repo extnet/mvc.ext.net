@@ -91,7 +91,7 @@ namespace Ext.Net.MVC.Examples.Areas.Portal.Models
 
     public class Person
     {
-        public Person (string name, Status status) 
+        public Person (string name, Status status)
         {
             var parts = name.Split();
             this.FirstName = parts[0];

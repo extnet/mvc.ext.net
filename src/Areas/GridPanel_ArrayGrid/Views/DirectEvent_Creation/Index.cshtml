@@ -21,7 +21,7 @@
 @section example
 {
     <h1>Creation of a GridPanel and Store during a DirectEvent</h1>
-    
+
     @(Html.X().Window()
         .ID("Window1")
         .Title("Dynamic GridPanel")
@@ -32,7 +32,7 @@
             .Items(Html.X().Button()
                 .Text("Add GridPanel")
                 .Icon(Icon.Add)
-                .DirectEvents(de => 
+                .DirectEvents(de =>
                 {
                     de.Click.Url = Url.Action("GetGridPanel");
                     de.Click.ExtraParams.Add(new { containerId = "Window1" });

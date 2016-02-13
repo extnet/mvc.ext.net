@@ -10,8 +10,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Data_Presentation.Editor_Field_Ma
     {
         public ActionResult Index()
         {
-            return View(new object[] 
-                { 
+            return View(new object[]
+                {
                     Employee.GetAll(),
                     Department.GetAll()
                 });

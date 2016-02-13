@@ -15,7 +15,7 @@ namespace Ext.Net.MVC.Examples.Areas.Items.Controllers
 
         public PartialViewResult LoadView(string containerId, string titlePrefix)
         {
-            return new PartialViewResult { 
+            return new PartialViewResult {
                 ViewName = "View2",
                 RenderMode = RenderMode.AddTo,
                 ContainerId = containerId,

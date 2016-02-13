@@ -7,7 +7,7 @@
 <%@ Register Src="SystemStatus.ascx" TagPrefix="mod" TagName="SystemStatus" %>
 
 <!DOCTYPE html>
-    
+
 <html>
 <head runat="server">
     <title>Ext.NET Examples</title>
@@ -24,32 +24,32 @@
         };
 
         var initSlidePanel = function () {
-            this.setHeight(Ext.net.Desktop.desktop.body.getHeight());            
+            this.setHeight(Ext.net.Desktop.desktop.body.getHeight());
 
-            if (!this.windowListen) {                
+            if (!this.windowListen) {
                 this.windowListen = true;
 
-                this.el.alignTo(Ext.net.Desktop.desktop.body, 'tl-tr', [0, 0]);                
+                this.el.alignTo(Ext.net.Desktop.desktop.body, 'tl-tr', [0, 0]);
                 Ext.on("resize", initSlidePanel, this);
             }
         };
     </script>
 </head>
 <body>
-        <ext:ResourceManager runat="server" /> 
+        <ext:ResourceManager runat="server" />
 
-        <ext:Desktop ID="Desktop1" runat="server">            
+        <ext:Desktop ID="Desktop1" runat="server">
             <Modules>
                 <ext:DesktopModule ModuleID="Hello" AutoRun="true">
                     <Window>
-                        <ext:Window runat="server" 
+                        <ext:Window runat="server"
                             Plain="true"
                             Padding="10"
                             Width="150"
-                            Height="100"                                                        
-                            Title="Greeting" 
-                            CloseAction="Destroy" 
-                            Maximizable="false" 
+                            Height="100"
+                            Title="Greeting"
+                            CloseAction="Destroy"
+                            Maximizable="false"
                             Minimizable="false">
                             <Content>
                                 Welcome to Ext.Net desktop!
@@ -59,7 +59,7 @@
                 </ext:DesktopModule>
 
                 <ext:DesktopModule ModuleID="notepad">
-                    <Shortcut Name="Notepad" IconCls="x-notepad-shortcut"  SortIndex="2" />                       
+                    <Shortcut Name="Notepad" IconCls="x-notepad-shortcut"  SortIndex="2" />
                     <Launcher Text="Notepad" Icon="ApplicationForm" />
                     <Window>
                         <ext:Window runat="server"
@@ -86,12 +86,12 @@
                 </ext:DesktopModule>
 
                 <ext:DesktopModule ModuleID="add-module">
-                    <Shortcut Name="Render dynamic module" Handler="function() {#{DirectMethods}.AddNewModule();}" X="200" Y="100" TextCls="x-long-label">                        
+                    <Shortcut Name="Render dynamic module" Handler="function() {#{DirectMethods}.AddNewModule();}" X="200" Y="100" TextCls="x-long-label">
                     </Shortcut>
                 </ext:DesktopModule>
 
                 <ext:DesktopModule ModuleID="add1-module">
-                    <Shortcut Name="Render another module" Handler="function() {#{DirectMethods}.AddAnotherModule();}" X="200" Y="300" TextCls="x-long-label">                        
+                    <Shortcut Name="Render another module" Handler="function() {#{DirectMethods}.AddAnotherModule();}" X="200" Y="300" TextCls="x-long-label">
                     </Shortcut>
                 </ext:DesktopModule>
             </Modules>
@@ -110,15 +110,15 @@
                 </ContextMenu>
 
                 <Content>
-                   <ext:Image runat="server" ImageUrl="~/Areas/Desktop/Content/logo.png" StyleSpec="position:absolute;top: 50%;left: 50%;width: 77px; height: 78px;margin-top: -39px; margin-left: -39px;"/> 
-                   <ext:Image runat="server" ImageUrl="~/Areas/Desktop/Content/powered.png" StyleSpec="position:absolute;right:10px;bottom:20px;width:300px;height:39px;"/> 
+                   <ext:Image runat="server" ImageUrl="~/Areas/Desktop/Content/logo.png" StyleSpec="position:absolute;top: 50%;left: 50%;width: 77px; height: 78px;margin-top: -39px; margin-left: -39px;"/>
+                   <ext:Image runat="server" ImageUrl="~/Areas/Desktop/Content/powered.png" StyleSpec="position:absolute;right:10px;bottom:20px;width:300px;height:39px;"/>
 
-                    <ext:DisplayField runat="server" Text="You can place controls to desktop" FieldStyle="color:white;font-size:24px;" StyleSpec="position:absolute;left: 50%; bottom: 100px;margin-left: -180px;"/> 
-                   <ext:DisplayField runat="server" Text="Move mouse to the right edge -->" FieldStyle="color:white;font-size:24px;" StyleSpec="position:absolute;right:50px;top:50px;"/> 
+                    <ext:DisplayField runat="server" Text="You can place controls to desktop" FieldStyle="color:white;font-size:24px;" StyleSpec="position:absolute;left: 50%; bottom: 100px;margin-left: -180px;"/>
+                   <ext:DisplayField runat="server" Text="Move mouse to the right edge -->" FieldStyle="color:white;font-size:24px;" StyleSpec="position:absolute;right:50px;top:50px;"/>
 
                    <ext:Toolbar runat="server" Width="520" Floating="true" ClassicButtonStyle="true" Flat="true" Border="false" Shadow="false">
                         <Defaults>
-                            <ext:Parameter Name="IconAlign" Value="top" />                            
+                            <ext:Parameter Name="IconAlign" Value="top" />
                             <ext:Parameter Name="Width" Value="100" />
                             <ext:Parameter Name="Icon" Value='<%# Url.Content("~/Areas/Desktop/Content/cmd.png") %>' AutoDataBind="true" />
                             <ext:Parameter Name="Scale" Value="large" />
@@ -130,11 +130,11 @@
                             <ext:Button runat="server" Text="Notepad" />
                             <ext:Button runat="server" Text="Paint" />
                             <ext:Button runat="server" Text="Explorer" />
-                        </Items>                        
+                        </Items>
                         <MessageBusListeners>
                             <ext:MessageBusListener Name="App.Desktop.ready" Handler="this.el.anchorTo(Ext.net.Desktop.desktop.body, 'c-b', [0, -50]);" />
                         </MessageBusListeners>
-                    </ext:Toolbar>                    
+                    </ext:Toolbar>
                 </Content>
             </DesktopConfig>
 

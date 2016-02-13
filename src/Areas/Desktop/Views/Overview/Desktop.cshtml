@@ -17,12 +17,12 @@
         };
 
         var initSlidePanel = function () {
-            this.setHeight(Ext.net.Desktop.desktop.body.getHeight());            
+            this.setHeight(Ext.net.Desktop.desktop.body.getHeight());
 
-            if (!this.windowListen) {                
+            if (!this.windowListen) {
                 this.windowListen = true;
 
-                this.el.alignTo(Ext.net.Desktop.desktop.body, 'tl-tr', [0, 0]);                
+                this.el.alignTo(Ext.net.Desktop.desktop.body, 'tl-tr', [0, 0]);
                 Ext.on("resize", initSlidePanel, this);
             }
         };
@@ -190,7 +190,7 @@
                                         Handler = "this.el.anchorTo(Ext.net.Desktop.desktop.body, 'c-b', [0, -50]);"
                                     }
                                 )
-                        )                       
+                        )
                     </text>
                     )
             )

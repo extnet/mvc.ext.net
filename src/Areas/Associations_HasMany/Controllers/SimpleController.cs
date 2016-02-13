@@ -8,7 +8,7 @@ namespace Ext.Net.MVC.Examples.Areas.Associations_HasMany.Controllers
     {
         public ActionResult Index()
         {
-			List<User> data = new List<User>
+            List<User> data = new List<User>
             {
                 new User(1, "User1", new List<Product>{
                     new Product(1, "Product1 of User1"),

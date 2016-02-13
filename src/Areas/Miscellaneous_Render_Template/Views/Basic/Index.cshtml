@@ -11,7 +11,7 @@
 
     <br />
     <br />
-    
+
     @(X.Component()
         .RenderTpl(X.XTemplate()
             .Html(@"<div style='border:1px solid gray; padding:10px;'>
@@ -19,10 +19,10 @@
                         <p>{msg}</p>
                     </div>")
         )
-        .RenderData(rd => 
+        .RenderData(rd =>
         {
-            rd.Add(new Parameter("title", "Error"));        
-            rd.Add(new Parameter("msg", "Something went wrong"));        
+            rd.Add(new Parameter("title", "Error"));
+            rd.Add(new Parameter("msg", "Something went wrong"));
         })
         .ChildEls(ce => ce.Add(new ChildElement("title")))
         .Listeners(l => l.AfterRender.Handler = "this.title.setStyle({color: 'red'});")

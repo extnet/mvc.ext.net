@@ -19,13 +19,13 @@
                             tag: 'img',
                             src: image.get('url')
                         });
-                    
-                        imageEl.hide().show({duration: 500}).frame();                    
+
+                        imageEl.hide().show({duration: 500}).frame();
                         win.animateTarget = imageEl;
                         win.hide();
                     }
                 }
-            </script>            
+            </script>
         </text>)
         .Buttons(
             Html.X().Button().Text("OK").Handler("insertImage"),

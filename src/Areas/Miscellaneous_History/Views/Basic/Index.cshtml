@@ -9,7 +9,7 @@
     <script>
         if (window.parent.frames.length > 0) {
             window.open(window.location.pathname);
-            window.location = "@Url.Content("/Areas/Miscellaneous_History/Content/Warning.html")";            
+            window.location = "@Url.Content("/Areas/Miscellaneous_History/Content/Warning.html")";
         }
 
         var change = function (token) {
@@ -17,11 +17,11 @@
                 var parts = token.split(":"),
                     tabPanel = Ext.getCmp(parts[0]),
                     tabId = parts[1];
-                
+
                 if (tabPanel.id == "TabPanel2") {
                     App.TabPanel1.setActiveTab(0);
                 }
-                
+
                 tabPanel.show();
                 tabPanel.setActiveTab(tabId);
             } else {
@@ -37,7 +37,7 @@
 @section example
 {
     <p>Please review this example in the separate browser's window because the example can conflicts with History control of the Examples Explorer</p>
-    
+
     @X.History().ID("History1").Listeners(l => l.Change.Fn = "change")
 
     @(X.TabPanel()
@@ -64,7 +64,7 @@
                     .Listeners(l => l.TabChange.Handler = "Ext.History.add(this.id + ':' + newTab.id);")
                 )
             );
-            
+
             i.Add(X.Panel().ID("Tab2").Title("Tab 2"));
             i.Add(X.Panel().ID("Tab3").Title("Tab 3"));
             i.Add(X.Panel().ID("Tab4").Title("Tab 4"));

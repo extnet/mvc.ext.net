@@ -8,18 +8,18 @@
 {
     <style>
         .data th {
-        	font-weight : bold;
+            font-weight : bold;
         }
-        
+
         .data th, .data td {
             padding : 4px;
             border  : 1px solid black;
         }
-        
+
         .red-label{
             color:Red;
         }
-        
+
         .blue-label{
             color:Blue;
         }
@@ -30,7 +30,7 @@
 @section example
 {
     <h1>PropertyGrid with Button DirectEvent</h1>
-    
+
     @(X.PropertyGrid()
         .ID("PropertyGrid1")
         .Width(300)
@@ -41,21 +41,21 @@
             s.Add(new PropertyGridParameter { Name = "grouping", Value = "false", Mode = ParameterMode.Raw });
             s.Add(new PropertyGridParameter { Name = "autoFitColumns", Value = "true", Mode = ParameterMode.Raw });
             s.Add(new PropertyGridParameter { Name = "productionQuality", Value = "false", Mode = ParameterMode.Raw });
-            
+
             PropertyGridParameter createdParameter = new PropertyGridParameter { Name = "created", Value = "10/15/2006" };
             createdParameter.Editor.Add(new DateField { Format = "MM/dd/yyyy" });
             s.Add(createdParameter);
-            
+
             PropertyGridParameter testedParameter = new PropertyGridParameter { Name = "tested", Value = "false", Mode = ParameterMode.Raw };
             testedParameter.Renderer.Handler = "metadata.tdCls = 'red-label'; return value;";
             s.Add(testedParameter);
-            
+
             s.Add(new PropertyGridParameter { Name = "version", Value = "0.01", EditorType = PropertyGridEditorType.Number });
-            
-            PropertyGridParameter borderWidthParameter = new PropertyGridParameter { Name = "borderWidth", Value = "5", Mode = ParameterMode.Raw }; 
+
+            PropertyGridParameter borderWidthParameter = new PropertyGridParameter { Name = "borderWidth", Value = "5", Mode = ParameterMode.Raw };
             borderWidthParameter.Editor.Add(new NumberField());
             s.Add(borderWidthParameter);
-            
+
             ComboBox colorComboBox = new ComboBox { ForceSelection = true };
             colorComboBox.Items.Add(new ListItem("Red"));
             colorComboBox.Items.Add(new ListItem("Green"));
@@ -77,16 +77,16 @@
             X.Button()
                 .Text("Add property")
                 .DirectClickAction("AddPropertyClick"),
-                
+
             X.Button()
                 .Text("Remove property")
                 .DirectClickAction("RemovePropertyClick"),
-                
+
             X.Button()
                 .ID("Button1")
                 .Text("Save")
                 .Icon(Icon.Disk)
-                .DirectEvents(de => 
+                .DirectEvents(de =>
                 {
                     de.Click.Action = "Button1_Click";
                     de.Click.ExtraParams.Add(new Parameter("rawSourceValues", "#{PropertyGrid1}.store.getRecordsValues()", ParameterMode.Raw));

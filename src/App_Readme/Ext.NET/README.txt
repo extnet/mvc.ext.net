@@ -32,8 +32,8 @@ II. INSTALLATION INSTRUCTIONS
 
 Getting Started (NuGet)
 
-The easiest and quickest way to install Ext.NET is using NuGet. Run the 
-following command in Visual Studio Command panel, or seach for "Ext.NET" 
+The easiest and quickest way to install Ext.NET is using NuGet. Run the
+following command in Visual Studio Command panel, or seach for "Ext.NET"
 in NuGet Package Manager.
 
     Install-Package Ext.NET
@@ -66,7 +66,7 @@ IV. SAMPLE WEB.CONFIG
       </configSections>
 
       <extnet theme="Crisp" licenseKey="** Ext.NET LICENSE KEY HERE **" initScriptMode="Linked" />
-  
+
       <system.web>
         <!-- This httpHandlers config only required if using IIS6 (or lower) -->
         <!--
@@ -89,17 +89,17 @@ IV. SAMPLE WEB.CONFIG
           <namespaces>
             <add namespace="Ext.Net"/>
             <!--<add namespace="Ext.Net.MVC"/>-->
-          </namespaces>          
+          </namespaces>
         </pages>
       </system.web>
 
       <system.webServer>
         <validation validateIntegratedModeConfiguration="false" />
-        
+
         <modules>
           <add name="DirectRequestModule" preCondition="managedHandler" type="Ext.Net.DirectRequestModule, Ext.Net" />
         </modules>
-        
+
         <handlers>
           <add name="DirectRequestHandler" verb="*" path="*/ext.axd" preCondition="integratedMode" type="Ext.Net.ResourceHandler" />
         </handlers>
@@ -152,7 +152,7 @@ IV. SAMPLE WEB.CONFIG
           </dependentAssembly>
           -->
         </assemblyBinding>
-      </runtime>  
+      </runtime>
     </configuration>
 
 
@@ -165,7 +165,7 @@ V. <extnet> WEB.CONFIG GLOBAL CONFIGURATION PROPERTIES
         Default is 30000.
 
     ajaxViewStateMode : ViewStateMode
-        Specifies whether the ViewState should be returned and updated on the client during an DirectEvent. 
+        Specifies whether the ViewState should be returned and updated on the client during an DirectEvent.
         The Default value is to Exclude the ViewState from the Response.
         Default is 'Default'. Options include [Default|Exclude|Include]
 
@@ -174,7 +174,7 @@ V. <extnet> WEB.CONFIG GLOBAL CONFIGURATION PROPERTIES
         Default is 'true'. Options include [true|false]
 
     dateTimeZoneHandling : DateTimeZoneHandling
-        Specifies how to treat the time value when converting between string and DateTime. 
+        Specifies how to treat the time value when converting between string and DateTime.
         It is a Json.NET setting. More details: http://james.newtonking.com/json/help/index.html?topic=html/SerializeDateTimeZoneHandling.htm
 
     disableViewState : bool
@@ -185,12 +185,12 @@ V. <extnet> WEB.CONFIG GLOBAL CONFIGURATION PROPERTIES
         Default is "".
 
     directMethodProxy : ClientProxy
-        Specifies whether server-side Methods marked with the [DirectMethod] attribute will output configuration script to the client. 
-        If not, the DirectMethods can still be called, but the DirectMethod proxies are not automatically generated. 
+        Specifies whether server-side Methods marked with the [DirectMethod] attribute will output configuration script to the client.
+        If not, the DirectMethods can still be called, but the DirectMethod proxies are not automatically generated.
         Default is 'Default' (it creates the proxy for each DirectMethod). Options include [Default|Include|Ignore]
 
     directMethodNamespace : string
-        Specifies a custom namespace prefix to use for the DirectMethods. 
+        Specifies a custom namespace prefix to use for the DirectMethods.
         Defaults to App.direct.
 
     glyphFontFamily : string
@@ -214,17 +214,17 @@ V. <extnet> WEB.CONFIG GLOBAL CONFIGURATION PROPERTIES
         The Ext.NET License key.
 
     locale : string
-        Specifies the language of the Ext.NET localization resources to use. For example, "en-GB", "fr-CA", "ru". 
+        Specifies the language of the Ext.NET localization resources to use. For example, "en-GB", "fr-CA", "ru".
         Default is English.
 
     namespace : string
-        The application's JavaScript namespace. 
+        The application's JavaScript namespace.
         Default is "App".
 
     renderScripts : ResourceLocationType
         Whether to have the Ext.NET controls output the required JavaScript includes or not.
         Gives a developer the option of manually including the required <script> files.
-        Default is Embedded. Options include [Embedded|File|CDN|None] 
+        Default is Embedded. Options include [Embedded|File|CDN|None]
 
     renderStyles : ResourceLocationType
         Whether to have the Ext.NET controls output the required StyleSheet includes or not.
@@ -232,11 +232,11 @@ V. <extnet> WEB.CONFIG GLOBAL CONFIGURATION PROPERTIES
         Default is Embedded. Options include [Embedded|File|CDN|None]
 
     resourcePath : string
-        Specifies the prefix of the URL path to the base ~/Ext.Net/ folder containing the resources files for this project. 
+        Specifies the prefix of the URL path to the base ~/Ext.Net/ folder containing the resources files for this project.
         The path can be Absolute or Relative.
 
     resourcesStrategyType : string
-        The class name with the logic to map Ext.NET resources to arbitrary URLs, i.e. to provide custom functionality for registering of resources (JavaScript, CSS). 
+        The class name with the logic to map Ext.NET resources to arbitrary URLs, i.e. to provide custom functionality for registering of resources (JavaScript, CSS).
         Returning "null" for a specific resource means the default URL. Returning an empty string means to prevent registering of a specific resource at all.
         The default strategy is in this file: Ext.Net\Core\ResourcesStrategy.cs.
 
@@ -245,7 +245,7 @@ V. <extnet> WEB.CONFIG GLOBAL CONFIGURATION PROPERTIES
         Default is false. Options include [true|false]
 
     rethrowAjaxExceptions : bool
-        Rethrow AJAX exceptions from catch sections. 
+        Rethrow AJAX exceptions from catch sections.
         Default is false. Options include [true|false]
 
     rtl : bool
@@ -282,10 +282,10 @@ V. <extnet> WEB.CONFIG GLOBAL CONFIGURATION PROPERTIES
         Default is "Default" (blue theme). Options include [Aria|Crisp|CrispTouch|Default|Gray|Neptune|NeptuneTouch|None]
 
     themePath : string
-        Configure the path to the custom theme .css and .js (if required) file globally across the entire application. This will override any .Theme setting. 
+        Configure the path to the custom theme .css and .js (if required) file globally across the entire application. This will override any .Theme setting.
         You can specify several files by delimiting them with "|". For example, "some.css|another.css|some.js|another.js".
         Regularly, you will need to specify the only .css file, for example, "some.css" or two files - one .css and one .js - "some.js|some.css".
-        Default is "". 
+        Default is "".
 
     quickTips : bool
         Specifies whether to render the QuickTips. Provides attractive and customizable tooltips for any element.
@@ -305,22 +305,22 @@ config is required.
         routes.IgnoreRoute("{extnet-root}/{extnet-file}/ext.axd");
     }
 
-This IgnoreRoute is automatically inserted if using the NuGet package installer. 
+This IgnoreRoute is automatically inserted if using the NuGet package installer.
 
 
 --------------------------------------------------------------------------
 VII. CREDITS
 --------------------------------------------------------------------------
 
-1.  FamFamFam Icons provided by Mark James 
+1.  FamFamFam Icons provided by Mark James
     http://www.famfamfam.com/lab/icons/silk/
-    
+
     See \Build\Resources\Ext\Licenses\FamFamFam.txt for more information.
 
-2.  Flag icons provided by Mark James 
+2.  Flag icons provided by Mark James
     http://www.famfamfam.com/lab/icons/flags/
 
-    These icons are public domain, and as such are free for any use 
+    These icons are public domain, and as such are free for any use
     (attribution appreciated but not required).
 
     See \Build\Resources\Ext\Licenses\FlagIcons.txt for more information.
@@ -336,7 +336,7 @@ VII. CREDITS
     See \Build\Ext.Net\Licenses\Newtonsoft.Json.txt
 
 4.  Ext JS JavaScript Library with Commercial License provided by Sencha, Inc.
-    http://www.sencha.com/products/js/   
+    http://www.sencha.com/products/js/
 
     See \Build\Ext.Net\Licenses\ExtJS.txt
 
@@ -344,7 +344,7 @@ VII. CREDITS
 --------------------------------------------------------------------------
 
         Copyright 2008-2015 Object.NET, Inc., All rights reserved.
-                  
+
                         Object.NET, Inc.
                         +1(888)775-5888
                         hello@object.net

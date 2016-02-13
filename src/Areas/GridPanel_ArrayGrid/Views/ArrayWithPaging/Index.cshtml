@@ -19,22 +19,22 @@
 
         var onComboBoxSelect = function (combo) {
             var store = combo.up("gridpanel").getStore();
-            
-            store.pageSize = parseInt(combo.getValue(), 10); 
+
+            store.pageSize = parseInt(combo.getValue(), 10);
             store.reload();
         };
     </script>
 }
 
 @section example
-{    
+{
     <h1>Array Grid with Local Paging and Remote Reloading</h1>
-        
+
     <p>Demonstrates how to create a grid from Array data with Local Paging and Remote Reloading.</p>
-        
+
     <p>Notice <b>Last Updated</b> column is revised with a new server-side DateTime stamp when the GridPanel "Refresh" button is clicked.
     <br />This demonstrates that when the GridPanel is refreshed, the Data is requested again from the server via an AJAX request initiated by AjaxProxy, but the Paging and Sorting is done completely client-side in the browser.</p>
-        
+
     @(Html.X().GridPanel()
         .Title("Array Grid")
         .Width(700)
@@ -55,7 +55,7 @@
                 .ServerProxy(
                     Html.X().AjaxProxy()
                         .Url(Url.Action("GetData"))
-                )                
+                )
         )
         .ColumnModel(
             Html.X().RowNumbererColumn(),
@@ -81,8 +81,8 @@
                         .Listeners(l=>{
                             l.Select.Fn = "onComboBoxSelect";
                         })
-                )                
+                )
                 .Plugins(Html.X().ProgressBarPager())
-        )        
+        )
     )
 }

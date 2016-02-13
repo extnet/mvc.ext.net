@@ -5,7 +5,7 @@
 
 @section headtag
 {
-    <link href="/Areas/TreePanel_Advanced/Content/organizer.css" rel="stylesheet" />    
+    <link href="/Areas/TreePanel_Advanced/Content/organizer.css" rel="stylesheet" />
 }
 
 @section example
@@ -18,7 +18,7 @@
     <p>For simplicity, there is no validation on the names you enter in the tree node editor and you can drag the same picture
     into an album as many times as you want.</p>
     <p>Hold shift/control to select multiple images in the main images view. You can drag those images into the tree.</p>
-    
+
     @(
  Html.X().Panel()
             .Width(700)
@@ -78,7 +78,7 @@
                     .Plugins(
                         Html.X().CellEditing()
                     ),
-                    
+
                     Html.X().Panel()
                         .Region(Region.Center)
                         .Title("My Images")
@@ -101,7 +101,7 @@
                                                 </tpl>
                                                 <tpl if="Ext.isIE6">
                                                     <div style="width:76px;height:76px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\"{url}\")"></div>
-                                                </tpl>              
+                                                </tpl>
                                             </div>
                                             <span>{name}</span>
                                         </div>
@@ -136,7 +136,7 @@
                                             <div>
                                         </text>)
                                 )
-                        )                        
+                        )
             )
-    )    
+    )
 }

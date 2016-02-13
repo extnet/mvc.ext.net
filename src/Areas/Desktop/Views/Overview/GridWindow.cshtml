@@ -30,7 +30,7 @@
         new object[] { "United Technologies Corporation", 63.26, 0.55, 0.88 },
         new object[] { "Verizon Communications", 35.57, 0.39, 1.11 },
         new object[] { "Wal-Mart Stores, Inc.", 45.45, 0.73, 1.63 }
-    };    
+    };
 }
 
 @(
@@ -42,12 +42,12 @@
                     Html.X().DesktopShortcut()
                         .Name("Grid Window")
                         .IconCls("x-grid-shortcut")
-                        .SortIndex(1)                        
+                        .SortIndex(1)
                 )
                 .Launcher(
                     Html.X().MenuItem()
                         .Text("Grid Window")
-                        .Icon(Icon.Table)                        
+                        .Icon(Icon.Table)
                 )
                 .Window(
                     Html.X().Window()
@@ -61,15 +61,15 @@
                                 .Text("Add Something")
                                 .Icon(Icon.Add)
                                 .ToolTip("Add a new row"),
-                                
+
                             Html.X().ToolbarSeparator(),
-                                
+
                             Html.X().Button()
                                 .Text("Options")
                                 .Icon(Icon.Plugin),
-                                
+
                             Html.X().ToolbarSeparator(),
-                            
+
                             Html.X().Button()
                                 .Text("Remove Something")
                                 .Icon(Icon.Decline)
@@ -96,23 +96,23 @@
                                 )
                                 .ColumnModel(
                                     Html.X().RowNumbererColumn(),
-                                    
+
                                     Html.X().Column()
                                         .Text("Company")
                                         .Flex(1)
                                         .DataIndex("Company"),
-                                        
+
                                     Html.X().Column()
                                         .Text("Price")
                                         .Width(70)
                                         .DataIndex("Price")
                                         .Renderer(RendererFormat.UsMoney),
-                                        
+
                                     Html.X().Column()
                                         .Text("Change")
                                         .Width(70)
                                         .DataIndex("Change"),
-                                        
+
                                     Html.X().Column()
                                         .Text("% Change")
                                         .Width(70)

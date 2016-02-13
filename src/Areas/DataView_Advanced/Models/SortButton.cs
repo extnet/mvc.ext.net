@@ -55,8 +55,8 @@ namespace Ext.Net.MVC.Examples.Areas.DataView_Advanced.Models
             }
             set
             {
-                this.dataIndex = value; 
-            } 
+                this.dataIndex = value;
+            }
         }
 
         public override ConfigOptionsCollection ConfigOptions

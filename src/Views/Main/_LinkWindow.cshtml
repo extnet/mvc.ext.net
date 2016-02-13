@@ -11,19 +11,19 @@
        .Closable(false)
        .Resizable(false)
        .Items(items => {
-           items.Add(new TextField { 
+           items.Add(new TextField {
                 ID = "exampleLink",
-				Width = 364,
-				Cls = "dlText",
-				X = 10,
-				Y = 10,
-				SelectOnFocus = true,
-				ReadOnly = true
+                Width = 364,
+                Cls = "dlText",
+                X = 10,
+                Y = 10,
+                SelectOnFocus = true,
+                ReadOnly = true
            });
        })
        .Listeners(l=>l.Show.Handler="App.exampleLink.setValue(this.exampleName);")
        .Buttons(buttons => {
-           buttons.Add(new Button { 
+           buttons.Add(new Button {
                 Text = "Open",
                 Icon = Icon.ApplicationDouble,
                 ToolTip = "Open Example in the separate window",

@@ -29,7 +29,7 @@ namespace Ext.Net.MVC.Examples
                 object marker = HttpContext.Current.Items[ResourceManager.FilterMarker];
                 string url = HttpContext.Current.Request.FilePath;
                 bool isExample = HttpContext.Current.Items.Contains("ext.net.mvc.example");
-                
+
                 if (marker != null && (bool)marker && isExample)
                 {
                     if (response.ContentType.IsNotEmpty() && response.ContentType.Equals("text/html", StringComparison.InvariantCultureIgnoreCase))

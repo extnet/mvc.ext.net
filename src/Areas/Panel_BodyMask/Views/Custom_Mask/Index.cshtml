@@ -6,7 +6,7 @@
 
 @section headtag
 {
-<style>      
+<style>
         div.botright {
         display    : block;
         position   : absolute;
@@ -17,7 +17,7 @@
         border     : 1px solid #ddd;
         background : #eee;
         }
-</style> 
+</style>
 }
 
 @section example
@@ -25,7 +25,7 @@
     <h1>Demonstrates how to show custom load mask while frame loading.</h1>
 
     <p>The animation will be shown at the right bottom corner of page</p>
-    
+
     @(X.Window()
         .ID("Window1")
         .Width(500)
@@ -44,12 +44,12 @@
         .TopBar(X.Toolbar()
             .Items(
                 X.ToolbarFill(),
-                
+
                 X.Button()
                     .Text("Load Ext.NET forums")
                     .Icon(Icon.Application)
                     .Handler("#{Window1}.load('http://forums.ext.net');"),
-                
+
                 X.Button()
                     .Text("Refresh")
                     .Icon(Icon.ArrowRotateAnticlockwise)
@@ -57,8 +57,8 @@
             )
         )
     )
-    
-    <div id="maskDiv" class="botright x-hidden-display">     
+
+    <div id="maskDiv" class="botright x-hidden-display">
         <img src="@Url.Content("~/Areas/Panel_BodyMask/Content/loading.gif")" />
     </div>
 }

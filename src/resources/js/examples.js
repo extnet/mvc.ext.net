@@ -2,7 +2,7 @@
  * Ext JS Library 2.2
  * Copyright(c) 2006-2008, Ext JS, LLC.
  * licensing@extjs.com
- * 
+ *
  * http://extjs.com/license
  */
 
@@ -23,10 +23,10 @@ Ext.example = function () {
             }
 
             msgCt.alignTo(document, 't-t');
-            
+
             var s = String.format.apply(String, Array.prototype.slice.call(arguments, 1));
             var m = Ext.DomHelper.append(msgCt, {html:createBox(title, s)}, true);
-            
+
             m.slideIn('t').pause(1).ghost("t", {remove:true});
         },
 
@@ -36,14 +36,14 @@ Ext.example = function () {
             if (!t) { // run locally?
                 return;
             }
-            
+
             var theme = Cookies.get('exttheme') || 'aero';
 
             if (theme) {
                 t.dom.value = theme;
                 Ext.getBody().addClass('x-'+theme);
             }
-            
+
             t.on('change', function () {
                 Cookies.set('exttheme', t.getValue());
                 setTimeout(function () {
@@ -85,26 +85,26 @@ Cookies.set = function (name, value) {
 };
 
 Cookies.get = function (name) {
-	var arg = name + "=",
+    var arg = name + "=",
         alen = arg.length,
         clen = document.cookie.length,
         i = 0,
         j = 0;
 
-	while (i < clen) {
-		j = i + alen;
+    while (i < clen) {
+        j = i + alen;
 
-		if (document.cookie.substring(i, j) == arg) {
-			return Cookies.getCookieVal(j);
+        if (document.cookie.substring(i, j) == arg) {
+            return Cookies.getCookieVal(j);
         }
-		
+
         i = document.cookie.indexOf(" ", i) + 1;
-		
+
         if (i == 0) {
-			break;
+            break;
         }
-	}
-	return null;
+    }
+    return null;
 };
 
 Cookies.clear = function (name) {
@@ -115,10 +115,10 @@ Cookies.clear = function (name) {
 
 Cookies.getCookieVal = function (offset) {
    var endstr = document.cookie.indexOf(";", offset);
-   
+
    if (endstr == -1) {
        endstr = document.cookie.length;
    }
-   
+
    return unescape(document.cookie.substring(offset, endstr));
 };

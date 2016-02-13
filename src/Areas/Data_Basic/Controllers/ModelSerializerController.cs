@@ -18,7 +18,7 @@ namespace Ext.Net.MVC.Examples.Areas.Data_Basic.Controllers
 
         public ActionResult GetPartialData()
         {
-            return this.Store(ModelSerializerModel.Data, new ModelFieldCollection() 
+            return this.Store(ModelSerializerModel.Data, new ModelFieldCollection()
             {
                 new ModelField("Company"),
                 new ModelField("Price")
@@ -27,7 +27,7 @@ namespace Ext.Net.MVC.Examples.Areas.Data_Basic.Controllers
 
         public ActionResult GetListOfCompaniesWithSizes()
         {
-            string data = ModelSerializer.Serialize(ModelSerializerModel.Data, new ModelFieldCollection() 
+            string data = ModelSerializer.Serialize(ModelSerializerModel.Data, new ModelFieldCollection()
             {
                 new ModelField("Company"),
                 new ModelField("Size")

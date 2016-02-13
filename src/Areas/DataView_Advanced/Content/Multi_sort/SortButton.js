@@ -1,16 +1,16 @@
 Ext.define('Ext.multisort.SortButton', {
     extend : 'Ext.button.Button',
     alias  : 'widget.sortbutton',
-    
+
     config : {
         direction : "ASC",
         dataIndex : undefined
     },
-    
+
     handler : function () {
         this.toggleDirection();
     },
-    
+
     /**
      * Updates the new direction of this button
      * @param {String} direction The new direction
@@ -19,7 +19,7 @@ Ext.define('Ext.multisort.SortButton', {
         this.setIconCls('direction-' + direction.toLowerCase());
         this.fireEvent('changeDirection', direction);
     },
-    
+
     /**
      * Toggles between ASC and DESC directions
      */

@@ -19,15 +19,15 @@
             top    : 40px;
             background-color : #ffffc0;
         }
-        
+
         #dd1-ct {
             left : 64px;
         }
-        
+
         #dd2-ct {
             left : 256px;
         }
-        
+
         .dd-item {
             height : 18px;
             border : 1px solid #a0a0a0;
@@ -37,27 +37,27 @@
             padding : 2px;
             z-index : 1000;
         }
-        
+
         .dd-ct .dd-item {
             margin : 2px;
         }
-        
+
         .dd-proxy {
             opacity : 0.4;
             -moz-opacity : 0.4;
             filter : alpha(opacity=40);
         }
-        
+
         .dd-over {
             background-color : #ffff60;
         }
     </style>
-    
+
     <script>
         var startDrag = function (x, y) {
             var dragEl = Ext.get(this.getDragEl());
             var el = Ext.get(this.getEl());
-     
+
             dragEl.applyStyles({border:'','z-index':2000});
             dragEl.update(el.dom.innerHTML);
             dragEl.addCls(el.dom.className + ' dd-proxy');
@@ -65,10 +65,10 @@
     </script>
 }
 
-@section example 
+@section example
 {
     @*<a href="http://www.extjs.com/learn/Tutorial:Custom_Drag_and_Drop_Part_1">Tutorial:Custom Drag and Drop Part 1</a>*@
-    
+
     @(X.DDProxy()
         .Target("dd1-item1")
         .Group("group")
@@ -86,7 +86,7 @@
         .Group("group")
         .StartDrag(a => a.Fn = "startDrag")
     )
-    
+
     <div class="dd-ct" id="dd1-ct">
         <div class="dd-item" id="dd1-item1">Item 1.1</div>
         <div class="dd-item" id="dd1-item2">Item 1.2</div>
