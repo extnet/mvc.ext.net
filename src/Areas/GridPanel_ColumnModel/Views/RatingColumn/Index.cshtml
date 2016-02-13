@@ -9,13 +9,13 @@
 {
      <style>
         .number-selected {
-	        background : transparent url(@Url.Content("~/Areas/GridPanel_ColumnModel/Content/star_n.png")) repeat-x left center;
+            background : transparent url(@Url.Content("~/Areas/GridPanel_ColumnModel/Content/star_n.png")) repeat-x left center;
         }
-        
+
         .number-unselected {
-	        background : transparent url(@Url.Content("~/Areas/GridPanel_ColumnModel/Content/star_fade_n.png")) repeat-x left center;
+            background : transparent url(@Url.Content("~/Areas/GridPanel_ColumnModel/Content/star_fade_n.png")) repeat-x left center;
         }
-    </style>  
+    </style>
 }
 
 @section example
@@ -40,9 +40,9 @@
         .ColumnModel(
             Html.X().Column().Text("Company").DataIndex("company"),
             Html.X().RatingColumn().Text("Rating").DataIndex("rating1"),
-            Html.X().RatingColumn().Text("Editable").DataIndex("rating2").RoundToTick(false).Editable(true), 
+            Html.X().RatingColumn().Text("Editable").DataIndex("rating2").RoundToTick(false).Editable(true),
             Html.X().RatingColumn().Text("Custom").DataIndex("rating3").SelectedCls("number-selected").UnselectedCls("number-unselected")
         )
     )
-    
+
 }

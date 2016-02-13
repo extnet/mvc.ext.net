@@ -26,7 +26,7 @@ namespace Ext.Net.MVC.Examples.Areas.Dynamic_Partial_Rendering.Controllers
         public PartialViewResult LoadView(string containerId, string text)
         {
             // view is loaded via ajax request (DirectEvent) therefore script tags will be deactivated automatically
-            return new PartialViewResult { 
+            return new PartialViewResult {
                 ViewName = "CenterView",
                 ContainerId = containerId,
                 Model = text,

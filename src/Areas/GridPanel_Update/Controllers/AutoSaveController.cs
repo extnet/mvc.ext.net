@@ -25,7 +25,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Update.Controllers
                 foreach (TestPerson created in persons)
                 {
                     TestPerson.AddPerson(created);
-                }                
+                }
             }
             else if (handler.Action == StoreAction.Destroy)
             {
@@ -46,7 +46,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Update.Controllers
                     {
                         errorMessage = e.Message;
                     }
-                }                
+                }
             }
 
             if (errorMessage != null)

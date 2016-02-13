@@ -17,7 +17,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_ComponentColumn.Overview
                         new object[] { 4, 0.8 },
                         new object[] { 5, 1.0 }
                     },
-                    
+
                     new object[]
                     {
                         new object[] { 0, "Task 1", 0, 0 },

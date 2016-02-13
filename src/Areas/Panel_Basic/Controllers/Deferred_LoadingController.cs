@@ -9,9 +9,9 @@ namespace Ext.Net.MVC.Examples.Areas.Panel_Basic.Controllers
             return View();
         }
 
-		public ActionResult RenderChild(string containerId)
-		{
-			return PartialView("Child");
-		}
+        public ActionResult RenderChild(string containerId)
+        {
+            return PartialView("Child");
+        }
     }
 }

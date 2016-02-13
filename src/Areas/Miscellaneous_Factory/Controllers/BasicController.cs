@@ -15,7 +15,7 @@ namespace Ext.Net.MVC.Examples.Areas.Miscellaneous_Factory.Controllers
                     {
                         Text = "Factory button",
                         Handler = "Ext.Msg.alert('Factory button', 'The button is clicked');",
-                        Plugins = 
+                        Plugins =
                     {
                         new Badge
                         {
@@ -48,7 +48,7 @@ namespace Ext.Net.MVC.Examples.Areas.Miscellaneous_Factory.Controllers
         public ActionResult Index()
         {
             return View();
-        }        
+        }
 
         public ActionResult RenderWindow1()
         {
@@ -58,7 +58,7 @@ namespace Ext.Net.MVC.Examples.Areas.Miscellaneous_Factory.Controllers
         public ActionResult RenderWindow2()
         {
             Window win = new Window
-            {                
+            {
                 FactoryAlias = "mywindow2"
             };
 

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace Ext.Net.MVC.Examples.Areas.GridPanel_Plugins.Controllers
 {
     public class CellEditingController : Controller
-    {        
+    {
         public ActionResult Index()
         {
             return View();

@@ -4,7 +4,7 @@
     var X = Html.X();
 }
 
-@section example 
+@section example
 {
     @(X.Viewport()
         .Layout(LayoutType.Border)
@@ -17,7 +17,7 @@
                 .BodyPadding(6)
                 .Html("North")
                 .Collapsible(true),
-            
+
             X.Panel()
                 .Title("West")
                 .Region(Region.West)
@@ -34,7 +34,7 @@
                         .BodyPadding(6)
                         .Icon(Icon.FolderGo)
                         .Html("West"),
-                    
+
                     X.Panel()
                         .Title("Settings")
                         .Border(false)
@@ -42,7 +42,7 @@
                         .Icon(Icon.FolderWrench)
                         .Html("Some settings in here")
                 ),
-            
+
             X.TabPanel()
                 .Region(Region.Center)
                 .Items(
@@ -51,7 +51,7 @@
                         .Border(false)
                         .BodyPadding(6)
                         .Html("<h1>Viewport with BorderLayout</h1>"),
-                    
+
                     X.Panel()
                         .Title("Close Me")
                         .Closable(true)
@@ -59,7 +59,7 @@
                         .BodyPadding(6)
                         .Html("Closeable Tab")
                 ),
-            
+
             X.Panel()
                 .Title("East")
                 .Region(Region.East)
@@ -79,7 +79,7 @@
                                 .Border(false)
                                 .BodyPadding(6)
                                 .Html("East Tab 1"),
-                    
+
                             X.Panel()
                                 .Title("Tab 2")
                                 .Closable(true)
@@ -88,7 +88,7 @@
                                 .Html("East Tab 2")
                         )
                 ),
-            
+
             X.Panel()
                 .Title("South")
                 .Region(Region.South)

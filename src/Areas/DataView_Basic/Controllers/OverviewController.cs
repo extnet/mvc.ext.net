@@ -8,7 +8,7 @@ using System.Web.Mvc;
 namespace Ext.Net.MVC.Examples.Areas.DataView_Basic.Controllers
 {
     public class OverviewController : Controller
-    {       
+    {
         public ActionResult Index()
         {
             string path = Server.MapPath("~/Areas/DataView_Basic/Content/images/thumbs");

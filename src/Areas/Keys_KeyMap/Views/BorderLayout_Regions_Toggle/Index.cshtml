@@ -16,7 +16,7 @@
                 .Frame(true)
                 .Height(200)
                 .Collapsible(true),
-                
+
             X.Panel()
                 .ID("West")
                 .Region(Region.West)
@@ -24,7 +24,7 @@
                 .Frame(true)
                 .Width(200)
                 .Collapsible(true),
-                
+
             X.Panel()
                 .Region(Region.Center)
                 .BodyPadding(5)
@@ -35,7 +35,7 @@
                         <li>EAST toggle: E</li>
                         <li>SOUTH toggle: S</li>
                     </ul>"),
-                
+
             X.Panel()
                 .ID("East")
                 .Region(Region.East)
@@ -43,7 +43,7 @@
                 .Frame(true)
                 .Width(200)
                 .Collapsible(true),
-                
+
             X.Panel()
                 .ID("South")
                 .Region(Region.South)
@@ -53,7 +53,7 @@
                 .Collapsible(true)
         )
     )
-        
+
     @(X.KeyMap()
         .Target("={Ext.isGecko ? Ext.getDoc() : Ext.getBody()}")
         .Binding(b => {
@@ -61,21 +61,21 @@
                 .Handler("#{North}.toggleCollapse();")
                 .KeysString("N")
             );
-                
+
             b.Add(X.KeyBinding()
                 .Handler("#{West}.toggleCollapse();")
                 .KeysString("W")
             );
-                
+
             b.Add(X.KeyBinding()
                 .Handler("#{East}.toggleCollapse();")
                 .KeysString("E")
             );
-                
+
             b.Add(X.KeyBinding()
                 .Handler("#{South}.toggleCollapse();")
                 .KeysString("S")
             );
-        })    
+        })
     )
 }

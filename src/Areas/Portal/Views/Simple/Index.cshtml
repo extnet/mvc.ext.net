@@ -10,14 +10,14 @@
     </script>
 }
 
-@functions 
+@functions
 {
-    private void InitPortlet(Portlet portlet) 
+    private void InitPortlet(Portlet portlet)
     {
         portlet.Html = "={text}";
         portlet.BodyPadding = 5;
         portlet.CloseAction = CloseAction.Hide;
-        
+
         portlet.DirectEvents.Hide.Action =  "PortletHide";
         portlet.DirectEvents.Hide.EventMask.ShowMask = true;
         portlet.DirectEvents.Hide.EventMask.Msg = "Saving...";
@@ -51,7 +51,7 @@
                             .Title("Content")
                             .Html("={text}")
                             .BodyPadding(5),
-                            
+
                         Html.X().Panel()
                             .Collapsed(true)
                             .Icon(Icon.FolderWrench)
@@ -60,7 +60,7 @@
                             .Html("={text}")
                             .BodyPadding(5)
                     ),
-                    
+
                Html.X().TabPanel()
                     .Region(Region.Center)
                     .Title("TabPanel")
@@ -82,7 +82,7 @@
                                                         this.InitPortlet(portlet);
                                                     })
                                             ),
-                                            
+
                                         Html.X().PortalColumn()
                                             .Items(
                                                 Html.X().Portlet()
@@ -91,7 +91,7 @@
                                                     .Control(portlet => {
                                                         this.InitPortlet(portlet);
                                                     }),
-                                                    
+
                                                 Html.X().Portlet()
                                                     .ID("Portlet3")
                                                     .Title("Another Panel 2")
@@ -99,7 +99,7 @@
                                                         this.InitPortlet(portlet);
                                                     })
                                             ),
-                                            
+
                                          Html.X().PortalColumn()
                                             .Items(
                                                 Html.X().Portlet()
@@ -108,7 +108,7 @@
                                                     .Control(portlet => {
                                                         this.InitPortlet(portlet);
                                                     }),
-                                                    
+
                                                 Html.X().Portlet()
                                                     .ID("Portlet5")
                                                     .Title("Another Panel 3")
@@ -116,9 +116,9 @@
                                                         this.InitPortlet(portlet);
                                                     })
                                             )
-                                    )                                    
+                                    )
                             ),
-                            
+
                        Html.X().Panel()
                             .Title("Tab 2")
                             .Layout(LayoutType.Fit)
@@ -134,7 +134,7 @@
                                                         this.InitPortlet(portlet);
                                                     })
                                             ),
-                                            
+
                                         Html.X().PortalColumn()
                                             .Items(
                                                 Html.X().Portlet()
@@ -144,7 +144,7 @@
                                                     .Control(portlet => {
                                                         this.InitPortlet(portlet);
                                                     }),
-                                                    
+
                                                 Html.X().Portlet()
                                                     .ID("Portlet9")
                                                     .Title("Another Panel 2")
@@ -153,7 +153,7 @@
                                                         this.InitPortlet(portlet);
                                                     })
                                             ),
-                                            
+
                                          Html.X().PortalColumn()
                                             .Items(
                                                 Html.X().Portlet()
@@ -164,7 +164,7 @@
                                                         this.InitPortlet(portlet);
                                                     })
                                             )
-                                    )                                    
+                                    )
                             )
                     )
             )

@@ -4,11 +4,11 @@
     var X = Html.X();
 }
 
-@section headtag 
+@section headtag
 {
     <style>
         .x-drop-target-active {
-	        background-color : #D88;
+            background-color : #D88;
         }
     </style>
 
@@ -22,9 +22,9 @@
         var pctChange = function (value) {
             return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
         };
-        
+
         //---DD-------------------
-        
+
         var getTargetFromEvent = function (e) {
             var grid = App.GridPanel1,
                 t = e.getTarget(grid.view.getCellSelector());
@@ -96,7 +96,7 @@
                 App.Store1.sort();
             }
         };
-        
+
         var getDragData = function (e) {
             var targetLabel = e.getTarget('label', null, true),
                 field,
@@ -135,7 +135,7 @@
     </script>
 }
 
-@section example 
+@section example
 {
     <h1>Using a GridPanel as a DropZone managing each grid cell as a target</h1>
     <p>This example assumes prior knowledge of using a GridPanel.</p>
@@ -200,6 +200,6 @@
         .Target("={#{Panel1}.getEl()}")
         .GetDragData(h => h.Fn = "getDragData")
         .GetRepairXY(h => h.Fn = "getRepairXY")
-        
+
     )
 }

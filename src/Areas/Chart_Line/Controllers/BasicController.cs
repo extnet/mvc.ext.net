@@ -9,7 +9,7 @@ namespace Ext.Net.MVC.Examples.Areas.Chart_Line.Controllers
             return View(ChartModel.GenerateData());
         }
 
-		public StoreResult GetData()
+        public StoreResult GetData()
         {
             return new StoreResult(ChartModel.GenerateData());
         }

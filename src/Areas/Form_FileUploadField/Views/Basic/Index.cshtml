@@ -15,7 +15,7 @@
             float: left;
         }
     </style>
-    
+
     <script>
         var showFile = function (fb, v) {
             if (v) {
@@ -38,44 +38,44 @@
     </script>
 }
 
-@section example 
+@section example
 {
     <h1>File Upload Field</h1>
 
     <h2>Basic FileUpload</h2>
-        
-    <p>A typical file upload field with Ext style.  Direct editing of the text field cannot be done in a 
+
+    <p>A typical file upload field with Ext style.  Direct editing of the text field cannot be done in a
         consistent, cross-browser way, so it is always read-only in this implementation.</p>
-        
+
     @(X.FileUploadField()
         .ID("BasicField")
         .Width(400)
         .Icon(Icon.Attach)
     )
-    
+
     @(X.Button()
         .Text("Get File Path")
         .OnClientClick("var v = #{BasicField}.getValue(); Ext.Msg.alert('Selected&nbsp;File', v && v != '' ? v : 'None');")
     )
-    
+
     <h2>Basic FileUpload (Button-only)</h2>
-    
-    <p>You can also render the file input as a button without the text field, with access to the field's value via the 
+
+    <p>You can also render the file input as a button without the text field, with access to the field's value via the
             standard <tt>TextField</tt> interface or by handling the <tt>FileSelected</tt> event (as in this example).</p>
-        
+
     @(X.FileUploadField()
         .ButtonOnly(true)
         .Listeners(l => l.Change.Fn = "showFile")
     )
-    
+
     <div id="fi-button-msg" style="display:none;"></div>
     <div class="x-clear"></div>
-        
+
     <h2>Form Example</h2>
-        
+
     <p>The FileUploadField can also be used in standard form layouts, with support for anchoring, validation (the
         field is required in this example), empty text, etc.</p>
-     
+
     <form id="fileUpload" enctype="multipart/form-data">
         @(X.FormPanel()
             .ID("BasicForm")
@@ -93,7 +93,7 @@
                 X.TextField()
                     .ID("PhotoName")
                     .FieldLabel("Name"),
-                
+
                 X.FileUploadField()
                     .ID("FileUploadField1")
                     .EmptyText("Select an image")
@@ -110,18 +110,18 @@
                     .DirectEvents(de => {
                         de.Click.Url = Url.Action("UploadClick");
                         de.Click.FormID = "fileUpload";
-                        de.Click.Before = @"if (!#{BasicForm}.getForm().isValid()) { return false; } 
+                        de.Click.Before = @"if (!#{BasicForm}.getForm().isValid()) { return false; }
                             Ext.Msg.wait('Uploading your photo...', 'Uploading');";
-                        de.Click.Failure = @"Ext.Msg.show({ 
-                                title   : 'Error', 
-                                msg     : 'Error during uploading', 
-                                minWidth: 200, 
-                                modal   : true, 
-                                icon    : Ext.Msg.ERROR, 
-                                buttons : Ext.Msg.OK 
+                        de.Click.Failure = @"Ext.Msg.show({
+                                title   : 'Error',
+                                msg     : 'Error during uploading',
+                                minWidth: 200,
+                                modal   : true,
+                                icon    : Ext.Msg.ERROR,
+                                buttons : Ext.Msg.OK
                             });";
                     }),
-                
+
                 X.Button()
                     .Text("Reset")
                     .OnClientClick("#{BasicForm}.getForm().reset();")

@@ -15,9 +15,9 @@ namespace Ext.Net.MVC.Examples.Areas.Models.Controllers
                 TextValue = "TextValue",
                 DateTimeValue = DateTime.Now,
                 ComboValue1 = new ListItem("Item 1", "1"),
-                ComboValue2 = new ListItem[] { 
-                    new ListItem("Item 1", "1"), 
-                    new ListItem("Item 3", "3") 
+                ComboValue2 = new ListItem[] {
+                    new ListItem("Item 1", "1"),
+                    new ListItem("Item 3", "3")
                 },
                 ComboValue3 = "1",
                 CheckboxValue = true,

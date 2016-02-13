@@ -29,7 +29,7 @@
 }
 
 #custom-rzwrap .x-resizable-handle-east, #custom-rzwrap .x-resizable-handle-northeast, #custom-rzwrap .x-resizable-handle-southeast{
-	right: -11px;
+    right: -11px;
 }
 #custom-rzwrap .x-resizable-handle-west, #custom-rzwrap .x-resizable-handle-northwest, #custom-rzwrap .x-resizable-handle-southwest{
     left: -11px;

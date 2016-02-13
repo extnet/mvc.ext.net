@@ -48,7 +48,7 @@
                     .Items(
                         Html.X().ToolbarTextItem().Text("Remote Pager:"),
                         Html.X().ToolbarSpacer().Width(20),
-                        
+
                         Html.X().Slider()
                             .ID("Slider1")
                             .MinValue(0)
@@ -61,8 +61,8 @@
                             .Listeners(l=>{
                                 l.Change.Handler = "this.nextSibling('tbtext').setText((newValue+1) + '-' + (newValue + 1000));";
                                 l.ChangeComplete.Handler = "this.up('grid').store.load();";
-                            }),                            
-                        
+                            }),
+
                         Html.X().ToolbarSpacer().Width(20),
                         Html.X().ToolbarTextItem().Text("(1-1000)")
                     )

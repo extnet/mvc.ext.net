@@ -19,13 +19,13 @@
                 Html.X().Container()
                     .Flex(2)
                     .Layout(LayoutType.Fit)
-                    .ItemsFrom(b => Html.EditorForModel(new 
-                    { 
-                        Handler = @"this.up('window').child('dataview').getStore().removeAll(); 
+                    .ItemsFrom(b => Html.EditorForModel(new
+                    {
+                        Handler = @"this.up('window').child('dataview').getStore().removeAll();
                                     this.up('form').submit({clientValidation: false});", //prevent validation for demo purpose
-                        FormBind = false 
-                    })), 
-                    
+                        FormBind = false
+                    })),
+
                 Html.X().DataView()
                     .StyleHtmlContent(true)
                     .Flex(1)

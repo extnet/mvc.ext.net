@@ -10,10 +10,10 @@
             // you can prepare group command
             if (command.command == 'Delete' && record.data.Price < 5) {
                 command.hidden = true;
-                command.hideMode = 'visibility'; //you can try 'display' also                 
+                command.hideMode = 'visibility'; //you can try 'display' also
             }
         };
-        
+
         var prepareGroupCommand = function (grid, command, groupId, group) {
             // you can prepare group command
         };
@@ -28,15 +28,15 @@
 }
 
 @section example
-{    
+{
     <h1>ImageCommandColumn is a simpler and faster version of CommandColumn</h1>
-    
+
     @(Html.X().GridPanel()
         .Title("Plants")
         .Width(650)
         .Height(350)
         .Frame(true)
-        .Collapsible(true)        
+        .Collapsible(true)
         .Store(Html.X().Store()
             .GroupField("Light")
             .Model(Html.X().Model()
@@ -99,7 +99,7 @@
                         .Icon(Icon.Delete)
                         .Text("Delete")
                         .ToolTip(tt => tt.Text = "Delete"),
-                    
+
                     Html.X().ImageCommand()
                         .CommandName("Edit")
                         .Icon(Icon.TableEdit)
@@ -112,13 +112,13 @@
                         .Icon(Icon.Delete)
                         .Text("Delete")
                         .ToolTip(tt => tt.Text = "Delete"),
-                    
+
                     Html.X().GroupImageCommand()
                         .CommandName("Edit")
                         .Icon(Icon.TableEdit)
                         .Text("Edit")
                         .ToolTip(tt => tt.Text = "Edit"),
-                    
+
                     Html.X().GroupImageCommand()
                         .CommandName("Chart")
                         .Icon(Icon.ChartBar)
@@ -139,8 +139,8 @@
         .Features(
             Html.X().Grouping()
                 .HideGroupedHeader(true)
-                .GroupHeaderTplString("{columnName}: {name} ({[values.rows.length]} {[values.rows.length > 1 ? \"Items\" : \"Item\"]})"),    
-            
+                .GroupHeaderTplString("{columnName}: {name} ({[values.rows.length]} {[values.rows.length > 1 ? \"Items\" : \"Item\"]})"),
+
             Html.X().RowBody().GetAdditionalData("getAdditionalData")
         )
     )

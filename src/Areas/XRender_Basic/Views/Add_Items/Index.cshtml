@@ -7,7 +7,7 @@
 @section example
 {
     <h1>Dynamically add a new Panel to a Parent Items Collection</h1>
-    
+
     @(X.Button()
         .Text("Add Panel")
         .Icon(Icon.Add)
@@ -16,11 +16,11 @@
             de.Click.ExtraParams.Add(new Parameter("index", "#{Hidden1}.getValue()", ParameterMode.Raw));
         })
     )
-    
+
     @X.Hidden().ID("Hidden1").Text("1")
 
     <h2>Add a Panel to the TabPanel</h2>
-    
+
     @(X.TabPanel()
         .ID("TabPanel1")
         .Height(185)
@@ -32,9 +32,9 @@
                 .BodyPadding(5)
         )
     )
-    
+
     <h2>Add a Panel to the Accordion Layout</h2>
-    
+
     @(X.Panel()
         .ID("Panel1")
         .Title("Accordion")

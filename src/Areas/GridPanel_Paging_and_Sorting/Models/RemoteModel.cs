@@ -6,13 +6,13 @@ using System.Collections;
 using Ext.Net.MVC;
 
 namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
-{    
+{
     public class Plant
     {
-        public string Common 
-        { 
-            get; 
-            set; 
+        public string Common
+        {
+            get;
+            set;
         }
 
         public string Botanical
@@ -99,8 +99,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
 
         public static List<Plant> GetPlants()
         {
-            return new List<Plant> { 
-                new Plant 
+            return new List<Plant> {
+                new Plant
                 {
                     Common = "Bloodroot",
                     Botanical = "Sanguinaria canadensis",
@@ -110,9 +110,9 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 2.44,
                     Availability = new DateTime(2006, 03, 15),
                     Indoor = true
-                }, 
+                },
 
-                new Plant 
+                new Plant
                 {
                     Common = "Columbine",
                     Botanical = "Aquilegia canadensis",
@@ -122,7 +122,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 9.37,
                     Availability = new DateTime(2006, 03, 06),
                     Indoor = true
-                }, 
+                },
 
                 new Plant
                 {
@@ -134,8 +134,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 6.81,
                     Availability = new DateTime(2006, 05, 17),
                     Indoor = false
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Cowslip",
@@ -146,8 +146,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 9.90,
                     Availability = new DateTime(2006, 03, 06),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Dutchman's-Breeches",
@@ -158,8 +158,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 6.44,
                     Availability = new DateTime(2006, 01, 20),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Ginger, Wild",
@@ -170,8 +170,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 9.03,
                     Availability = new DateTime(2006, 04, 18),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Hepatica",
@@ -182,8 +182,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 4.45,
                     Availability = new DateTime(2006, 01, 26),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Liverleaf",
@@ -194,8 +194,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 3.99,
                     Availability = new DateTime(2006, 01, 02),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Jack-In-The-Pulpit",
@@ -206,8 +206,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 3.23,
                     Availability = new DateTime(2006, 02, 01),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Mayapple",
@@ -218,8 +218,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 2.98,
                     Availability = new DateTime(2006, 06, 05),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Phlox, Woodland",
@@ -230,8 +230,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 2.80,
                     Availability = new DateTime(2006, 01, 22),
                     Indoor = false
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Phlox, Blue",
@@ -242,8 +242,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 5.59,
                     Availability = new DateTime(2006, 02, 16),
                     Indoor = false
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Spring-Beauty",
@@ -254,8 +254,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 6.59,
                     Availability = new DateTime(2006, 02, 01),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Trillium",
@@ -266,8 +266,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 3.90,
                     Availability = new DateTime(2006, 04, 29),
                     Indoor = false
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Wake Robin",
@@ -278,8 +278,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 3.20,
                     Availability = new DateTime(2006, 02, 21),
                     Indoor = false
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Violet, Dog-Tooth",
@@ -290,8 +290,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 9.04,
                     Availability = new DateTime(2006, 02, 01),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Trout Lily",
@@ -302,8 +302,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 6.94,
                     Availability = new DateTime(2006, 03, 24),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Adder's-Tongue",
@@ -314,8 +314,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 9.58,
                     Availability = new DateTime(2006, 04, 13),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Anemone",
@@ -326,8 +326,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 8.86,
                     Availability = new DateTime(2006, 12, 26),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Grecian Windflower",
@@ -338,8 +338,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 9.16,
                     Availability = new DateTime(2006, 07, 10),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Bee Balm",
@@ -350,8 +350,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 4.59,
                     Availability = new DateTime(2006, 05, 03),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Bergamot",
@@ -362,8 +362,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 7.16,
                     Availability = new DateTime(2006, 04, 27),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Black-Eyed Susan",
@@ -374,8 +374,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 9.80,
                     Availability = new DateTime(2006, 06, 18),
                     Indoor = false
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Buttercup",
@@ -386,8 +386,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 2.57,
                     Availability = new DateTime(2006, 06, 10),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Crowfoot",
@@ -398,8 +398,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 9.34,
                     Availability = new DateTime(2006, 04, 03),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Butterfly Weed",
@@ -410,8 +410,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 2.78,
                     Availability = new DateTime(2006, 06, 30),
                     Indoor = false
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Cinquefoil",
@@ -422,8 +422,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 7.06,
                     Availability = new DateTime(2006, 05, 25),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Primrose",
@@ -434,8 +434,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 6.56,
                     Availability = new DateTime(2006, 01, 30),
                     Indoor = false
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Gentian",
@@ -446,8 +446,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 7.81,
                     Availability = new DateTime(2006, 05, 18),
                     Indoor = false
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Blue Gentian",
@@ -458,8 +458,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 8.56,
                     Availability = new DateTime(2006, 05, 02),
                     Indoor = false
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Jacob's Ladder",
@@ -470,8 +470,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 9.26,
                     Availability = new DateTime(2006, 02, 21),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Greek Valerian",
@@ -482,8 +482,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 4.36,
                     Availability = new DateTime(2006, 07, 14),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "California Poppy",
@@ -494,8 +494,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 7.89,
                     Availability = new DateTime(2006, 03, 27),
                     Indoor = false
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Shooting Star",
@@ -506,8 +506,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 8.60,
                     Availability = new DateTime(2006, 05, 13),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Snakeroot",
@@ -518,8 +518,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Paging_and_Sorting.Models
                     Price = 5.63,
                     Availability = new DateTime(2006, 07, 11),
                     Indoor = true
-                }, 
-                
+                },
+
                 new Plant
                 {
                     Common = "Cardinal Flower",

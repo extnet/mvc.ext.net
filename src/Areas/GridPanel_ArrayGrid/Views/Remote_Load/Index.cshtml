@@ -17,16 +17,16 @@
         };
 
         var onSuccess = function (grid, data) {
-            grid.show(); 
+            grid.show();
             grid.getStore().loadData(data);
         };
     </script>
 }
 
 @section example
-{    
+{
     <h1>Load GridPanel with DirectEvent</h1>
-    
+
     <p>Demonstrates how to show and load a GridPanel with data during a DirectEvent.</p>
 
     @(Html.X().Panel()
@@ -60,7 +60,7 @@
                     )
                 )
                 .Reader(reader =>
-                    reader.Add(Html.X().ArrayReader())    
+                    reader.Add(Html.X().ArrayReader())
                 )
             )
             .ColumnModel(
@@ -74,5 +74,4 @@
         )
     )
 }
-    
-        
+

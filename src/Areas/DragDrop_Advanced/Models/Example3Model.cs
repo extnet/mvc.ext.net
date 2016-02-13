@@ -16,7 +16,7 @@ namespace Ext.Net.MVC.Examples.Areas.DragDrop_Advanced.Models
                     new { InsuranceCode="44444", Name="Fred Forsyth", Address="Blimp Street", Telephone="555 111 2222" },
                     new { InsuranceCode="55555", Name="Fred Douglass", Address="Talbot County, Maryland", Telephone="N/A" }
                 };
-            }            
+            }
         }
 
         public IEnumerable<object> Hospitals

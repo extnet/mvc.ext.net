@@ -9,36 +9,36 @@ namespace Ext.Net.MVC.Examples.Areas.Layout_CardLayout.Controllers
             return View();
         }
 
-		public ActionResult Next_Click(int index)
-		{
-			if ((index + 1) < 3)
-			{
-				this.GetCmp<Panel>("WizardPanel").ActiveIndex = index + 1;
-				this.CheckButtons(index + 1);
-			} else
-				this.CheckButtons(index);
+        public ActionResult Next_Click(int index)
+        {
+            if ((index + 1) < 3)
+            {
+                this.GetCmp<Panel>("WizardPanel").ActiveIndex = index + 1;
+                this.CheckButtons(index + 1);
+            } else
+                this.CheckButtons(index);
 
 
-			return this.Direct();
-		}
+            return this.Direct();
+        }
 
-		public ActionResult Prev_Click(int index)
-		{
-			if ((index - 1) >= 0)
-			{
-				this.GetCmp<Panel>("WizardPanel").ActiveIndex = index - 1;
+        public ActionResult Prev_Click(int index)
+        {
+            if ((index - 1) >= 0)
+            {
+                this.GetCmp<Panel>("WizardPanel").ActiveIndex = index - 1;
 
-				this.CheckButtons(index - 1);
-			} else
-				this.CheckButtons(index);
+                this.CheckButtons(index - 1);
+            } else
+                this.CheckButtons(index);
 
-			return this.Direct();
-		}
+            return this.Direct();
+        }
 
-		private void CheckButtons(int index)
-		{
-			this.GetCmp<Button>("btnNext").Disabled = index == 2;
-			this.GetCmp<Button>("btnPrev").Disabled = index == 0;
-		}
+        private void CheckButtons(int index)
+        {
+            this.GetCmp<Button>("btnNext").Disabled = index == 2;
+            this.GetCmp<Button>("btnPrev").Disabled = index == 0;
+        }
     }
 }

@@ -24,9 +24,9 @@
                         }
                     },
                     autoScroll : true
-                });                
+                });
             }
-            
+
             tabPanel.setActiveTab(tab);
         };
     </script>
@@ -48,10 +48,10 @@
                     })
                     .RootVisible(false)
                     .Root(Model),
-                    
+
                 Html.X().TabPanel()
                     .Region(Region.Center),
-                    
+
                 Html.X().TreePanel()
                     .Region(Region.East)
                     .Width(300)
@@ -67,7 +67,7 @@
                             .Proxy(
                                 Html.X().AjaxProxy().Url(Url.Action("LoadPages"))
                             )
-                    )    
+                    )
             )
     )
 }

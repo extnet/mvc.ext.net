@@ -30,44 +30,44 @@
                 toolbar.updateLayout();
             }
         };
-        
+
         //in PrepareCommands we can modify commands collection
         var prepareCommands = function (grid, commands, record, row) {
             if (record.get("price") >= 50) {
                 commands.push({
-                        command : "accept",                        
-                        iconCls : "icon-accept"                                         
-                });               
-            }            
+                        command : "accept",
+                        iconCls : "icon-accept"
+                });
+            }
         };
-        
+
         //in PrepareCommand we can modify command
         var prepareCommand = function (grid, command, record, row) {
             if (command.command == 'Edit' && record.get("price") < 50) {
                 command.hidden = true;
-                command.hideMode = 'display'; //you can try 'visibility' also                 
-            }            
+                command.hideMode = 'display'; //you can try 'visibility' also
+            }
         };
-        
+
         var prepareCellCommand = function (grid, command, record, row, col, value) {
             if (command.command == 'Dollar' && record.get("price") < 50) {
-                command.iconCls = "icon-moneyeuro";               
-            }   
+                command.iconCls = "icon-moneyeuro";
+            }
         };
-        
+
         var prepareCellCommands = function (grid, commands, record, row, col, value) {
             if (record.get("price") >= 50) {
                commands.push({
                    iconCls: "icon-moneyadd",
                    command: "moneyadd"
-               });                
-            }   
+               });
+            }
         };
     </script>
 }
 
 @section example
-{    
+{
      @(Html.X().GridPanel()
         .Title("Row commands")
         .Width(800)
@@ -89,7 +89,7 @@
                 .Text("Company")
                 .DataIndex("company")
                 .Flex(1),
-                
+
             Html.X().Column()
                 .Text("Price")
                 .DataIndex("price")
@@ -98,22 +98,22 @@
                 .PrepareCommand("prepareCellCommand")
                 .PrepareCommands("prepareCellCommands")
                 .Listeners(ls => ls.Command.Handler = "Ext.Msg.alert(command, record.data.company);"),
-                
+
             Html.X().Column()
                 .Text("Change")
                 .DataIndex("change")
                 .Width(75),
-                
+
             Html.X().Column()
                 .Text("Change")
                 .DataIndex("pctChange")
                 .Width(75),
-                
+
             Html.X().DateColumn()
                 .Text("Last Updated")
                 .DataIndex("lastChange")
                 .Width(85),
-                
+
             Html.X().ImageCommandColumn()
                 .Text("Image Cmds")
                 .Commands(
@@ -121,7 +121,7 @@
                         .Icon(Icon.Delete)
                         .CommandName("Delete")
                         .ToolTip(tt => tt.Text = "Delete"),
-                    
+
                     Html.X().ImageCommand()
                         .Icon(Icon.NoteEdit)
                         .CommandName("Edit")
@@ -130,7 +130,7 @@
                 .PrepareCommand("prepareCommand")
                 .PrepareCommands("prepareCommands")
                 .Listeners(ls => ls.Command.Handler = "Ext.Msg.alert(command, record.data.company);"),
-                
+
             Html.X().CommandColumn()
                 .Text("Toolbar Cmds")
                 .Commands(
@@ -138,9 +138,9 @@
                         .Icon(Icon.Delete)
                         .CommandName("Delete")
                         .ToolTip(tt => tt.Text = "Delete"),
-                    
+
                     Html.X().CommandSeparator(),
-                    
+
                     Html.X().GridCommand()
                         .Icon(Icon.NoteEdit)
                         .CommandName("Edit")

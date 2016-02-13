@@ -15,11 +15,11 @@
 
             return data;
         };
-            
+
         var selectionChanged = function (selModel, selected) {
-			var l = selected.length, s = l != 1 ? 's' : '';
-			App.Panel1.setTitle('Simple DataView (' + l + ' item' + s + ' selected)');
-		};
+            var l = selected.length, s = l != 1 ? 's' : '';
+            App.Panel1.setTitle('Simple DataView (' + l + ' item' + s + ' selected)');
+        };
     </script>
 }
 
@@ -28,7 +28,7 @@
     <h1>DataView Example</h1>
     <p>This example shows how to use an Ext.view.View.  It demonstrates editable labels (click<br />
     any of the photo labels), basic multi-select (using ctrl or shift) and drag selection.</p>
-    
+
     @(Html.X().Panel()
             .ID("Panel1")
             .Cls("images-view")
@@ -64,12 +64,12 @@
                             .Html(
                                 @<text>
                                     <tpl for=".">
-								        <div class="thumb-wrap" id="{name}">
-									        <div class="thumb"><img src="{url}" title="{name}"></div>
-									        <span class="x-editable">{shortName}</span>
-								        </div>
-							        </tpl>
-							        <div class="x-clear"></div>
+                                        <div class="thumb-wrap" id="{name}">
+                                            <div class="thumb"><img src="{url}" title="{name}"></div>
+                                            <span class="x-editable">{shortName}</span>
+                                        </div>
+                                    </tpl>
+                                    <div class="x-clear"></div>
                                 </text>
                             )
                     )
@@ -97,16 +97,16 @@
                         de.Click.Action = "SubmitSelectionWithValues";
                         de.Click.ExtraParams.Add(new Parameter("images", "App.ImageView.getRowsValues({ selectedOnly : true })", ParameterMode.Raw));
                     }),
-                    
+
                  Html.X().Button()
                     .Text("Clear Selection")
-                    .Handler("App.ImageView.getSelectionModel().deselectAll();"),                    
-                    
+                    .Handler("App.ImageView.getSelectionModel().deselectAll();"),
+
                  Html.X().Button()
                     .Text("Add 'Zack' to selection")
                     .DirectClickAction("AddZack")
             )
-    )    
+    )
 
     <div style="width:788px; padding:10px;">
         @Html.X().Label().ID("Label1")

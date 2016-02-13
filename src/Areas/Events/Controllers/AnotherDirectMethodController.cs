@@ -12,7 +12,7 @@ namespace Ext.Net.MVC.Examples.Areas.Events.Controllers
     // App.direct.GetTime()
     [DirectController(AreaName="Events", IDMode=DirectMethodProxyIDMode.None)]
     public class AnotherDirectMethodController : Controller
-    {        
+    {
         [DirectMethod]
         public ActionResult GetTime()
         {

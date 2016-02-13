@@ -133,7 +133,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Update.Models.Restful
         public static void UpdatePerson(TestPerson person)
         {
             lock (lockObj)
-            {                
+            {
                 var persons = TestPerson.Storage;
                 TestPerson updatingPerson = null;
 

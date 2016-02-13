@@ -7,9 +7,9 @@
 @section headtag
 {
     <script>
-        var refreshTree = function (tree) {            
+        var refreshTree = function (tree) {
             App.direct.RefreshMenu({
-                success : function (node) {   
+                success : function (node) {
                     if (!Ext.isEmpty(node)) {
                         tree.setRootNode(node);
                     }

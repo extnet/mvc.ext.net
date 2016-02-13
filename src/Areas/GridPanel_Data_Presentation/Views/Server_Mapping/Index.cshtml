@@ -6,7 +6,7 @@
 }
 
 @section example
-{    
+{
     @(Html.X().GridPanel()
         .Title("List")
         .Icon(Icon.Application)
@@ -15,32 +15,32 @@
                 .Fields(
                     new ModelField("ID", ModelFieldType.Int),
                     new ModelField("Name"),
-                    new ModelField() 
-                    { 
-                        Name = "Surname", 
-                        ServerMapping = "Surname.ToUpper()" 
+                    new ModelField()
+                    {
+                        Name = "Surname",
+                        ServerMapping = "Surname.ToUpper()"
                     },
-                    new ModelField() 
-                    { 
-                        Name = "Fullname", 
-                        ServerMapping = "GetFullName()" 
+                    new ModelField()
+                    {
+                        Name = "Fullname",
+                        ServerMapping = "GetFullName()"
                     },
-                    new ModelField() 
+                    new ModelField()
                     {
                         Name = "Department",
                         ServerMapping = "Department.Name"
                     },
-                    new ModelField() 
+                    new ModelField()
                     {
                         Name = "DepartmentIdPlusName",
                         ServerMapping = "Department.GetIdPlusName()"
                     },
-                    new ModelField() 
+                    new ModelField()
                     {
                         Name = "PhoneHome",
                         ServerMapping = "Phone[0]"
                     },
-                    new ModelField() 
+                    new ModelField()
                     {
                         Name = "PhoneWork",
                         ServerMapping = "Phone[1]"

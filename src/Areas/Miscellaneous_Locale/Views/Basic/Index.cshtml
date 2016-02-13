@@ -9,8 +9,8 @@
 {
     <style>
         .spacer {
-            width  : 176px; 
-            height : 5px; 
+            width  : 176px;
+            height : 5px;
             border-bottom : dotted 1px gray;
             margin-bottom : 5px;
         }
@@ -19,7 +19,7 @@
     <script>
         var onSelect = function (comboBox) {
             var query = Ext.Object.fromQueryString(window.location.search);
-            
+
             query.lang = comboBox.getValue();
             window.location.search = Ext.Object.toQueryString(query);
         };
@@ -29,7 +29,7 @@
 @section example
 {
     <h1>Auto detect language (depending UI Culture)</h1>
-    
+
     @(X.ComboBox()
         .ID("ComboBox1")
         .Listeners(l => l.Select.Fn = "onSelect")
@@ -38,8 +38,8 @@
         .Items(Model.Select(o => new ListItem(o.Key, o.Value)))
         .SelectedItems(new ListItem(ViewData["lang"]))
     )
-    
+
     <div class="spacer" />
-    
+
     @X.DatePicker()
 }

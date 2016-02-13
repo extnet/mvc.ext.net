@@ -347,7 +347,7 @@ body {
 }
 
 .nav-menu > li > a:hover {
-    color: #8fcbff; 
+    color: #8fcbff;
 }
 
 .nav-menu .separator,
@@ -1127,13 +1127,13 @@ td.alt2{
 
 .x-theme-aria body
 {
-	color:#f2f2f2;
+    color:#f2f2f2;
 }
 
 .x-theme-aria #exampleTree-body div,
 .x-theme-aria #exampleTree-body .x-tree-node-text
 {
-	color:#0589C7;
+    color:#0589C7;
 }
 
 .x-theme-aria #welcome-title {

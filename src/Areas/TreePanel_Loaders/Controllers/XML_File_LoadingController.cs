@@ -18,7 +18,7 @@ namespace Ext.Net.MVC.Examples.Areas.TreePanel_Loaders.Controllers
             XmlDataSource xmldataSource = new XmlDataSource();
             xmldataSource.Data = doc.OuterXml;
             xmldataSource.ID = DateTime.Now.Ticks.ToString();  // unique ID is required
-            
+
             return View(xmldataSource);
         }
     }

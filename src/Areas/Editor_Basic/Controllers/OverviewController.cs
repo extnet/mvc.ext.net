@@ -9,10 +9,10 @@ namespace Ext.Net.MVC.Examples.Areas.Editor_Basic.Controllers
             return View();
         }
 
-		public ActionResult CompleteEdit(string value)
-		{
-			this.GetCmp<Label>("AjaxLabel").Html = value;
-			return this.Direct();
-		}
+        public ActionResult CompleteEdit(string value)
+        {
+            this.GetCmp<Label>("AjaxLabel").Html = value;
+            return this.Direct();
+        }
     }
 }

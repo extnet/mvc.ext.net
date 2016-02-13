@@ -17,7 +17,7 @@
         var pctChange = function (value) {
             return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
         };
-        
+
         var prepare = function (grid, toolbar, rowIndex, record) {
             var firstButton = toolbar.items.get(0);
 
@@ -25,14 +25,14 @@
                 firstButton.setDisabled(true);
                 firstButton.setTooltip("Disabled");
             }
-            
+
             //you can return false to cancel toolbar for this record
-        };       
+        };
     </script>
 }
 
 @section example
-{    
+{
     <h1>Prepare Toolbar</h1>
 
     @(Html.X().GridPanel()
@@ -82,7 +82,7 @@
                         .CommandName("Delete")
                         .Icon(Icon.Delete)
                         .Text("Delete"),
-                    
+
                     Html.X().GridCommand()
                         .CommandName("Edit")
                         .Icon(Icon.NoteEdit)
@@ -90,8 +90,8 @@
                 )
                 .PrepareToolbar("prepare")
                 .Listeners(ls => ls.Command.Handler = "Ext.Msg.alert(command, record.data.company);")
-            
-            
+
+
         )
     )
 }

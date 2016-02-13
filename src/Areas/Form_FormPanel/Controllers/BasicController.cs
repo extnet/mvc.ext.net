@@ -9,9 +9,9 @@ namespace Ext.Net.MVC.Examples.Areas.Form_FormPanel.Controllers
             return View(GetData());
         }
 
-		private object[] GetData()
-		{
-			return new object[]
+        private object[] GetData()
+        {
+            return new object[]
             {
                 new object[] { "3m Co", 71.72, 0.02, 0.03, "9/1 12:00am" },
                 new object[] { "Alcoa Inc", 29.01, 0.42, 1.47, "9/1 12:00am" },
@@ -43,7 +43,7 @@ namespace Ext.Net.MVC.Examples.Areas.Form_FormPanel.Controllers
                 new object[] { "Verizon Communications", 35.57, 0.39, 1.11, "9/1 12:00am" },
                 new object[] { "Wal-Mart Stores, Inc.", 45.45, 0.73, 1.63, "9/1 12:00am" }
             };
-		}
+        }
 
     }
 }

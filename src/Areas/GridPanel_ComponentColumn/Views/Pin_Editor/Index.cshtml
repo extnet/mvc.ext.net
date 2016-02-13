@@ -24,8 +24,8 @@
 }
 
 @section example
-{    
-    <h1>ComponentColumn as Pin Editor</h1> 
+{
+    <h1>ComponentColumn as Pin Editor</h1>
 
     @(Html.X().GridPanel()
         .Title("ComponentColumn Pin Editor")
@@ -51,7 +51,7 @@
                 .Flex(1)
                 .Text("Integer")
                 .Component(Html.X().NumberField()),
-                
+
             Html.X().ComponentColumn()
                 .Editor(true)
                 .OverOnly(true)
@@ -72,7 +72,7 @@
                         new ListItem("Item 9", 9)
                     )
                 ),
-                
+
             Html.X().ComponentColumn()
                 .Editor(true)
                 .OverOnly(true)
@@ -81,7 +81,7 @@
                 .Flex(1)
                 .Text("Text")
                 .Component(Html.X().TextField()),
-                
+
             Html.X().ComponentColumn()
                 .Editor(true)
                 .OverOnly(true)
@@ -89,13 +89,13 @@
                 .DataIndex("DateField")
                 .Flex(1)
                 .Text("Date")
-                .Renderer(new Renderer() 
-                    { 
-                        Format = RendererFormat.Date, 
-                        FormatArgs = new string[] { "'d/m/Y'" } 
+                .Renderer(new Renderer()
+                    {
+                        Format = RendererFormat.Date,
+                        FormatArgs = new string[] { "'d/m/Y'" }
                     })
                 .Component(Html.X().DateField().Format("dd/MM/yyyy")),
-                    
+
             Html.X().ComponentColumn()
                 .Width(25)
                 .PinAllColumns(false)

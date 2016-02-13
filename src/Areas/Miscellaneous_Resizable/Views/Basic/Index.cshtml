@@ -8,17 +8,17 @@
 {
     <script>
         var hideImage = function () {
-            var customEl = App.CustomResizer.getEl();            
+            var customEl = App.CustomResizer.getEl();
             document.body.insertBefore(customEl.dom, document.body.firstChild);
 
             customEl.on('dblclick', function () {
                 customEl.hide(true);
-            });            
+            });
 
             customEl.hide();
         };
     </script>
-    
+
     <link href="@Url.Content("~/Areas/Miscellaneous_Resizable/Content/css/basic.css")" rel="stylesheet" />
 }
 
@@ -29,19 +29,19 @@
             hideImage();
         });
     </script>
-    
+
     <h1>Resizable Examples</h1>
 
     <p>These examples show how to apply a floating (default) and pinned Resizable component to a standard element.</p>
-        
+
     <p>
         <b>Basic Example</b><br />
         This is a basic as you get. To resize the box, position your mouse anywhere near the bottom,
         right or border right edge of the box. This example uses the default "floating" handles.
     </p>
-        
+
     <div id="basic">Resize Me!</div>
-    
+
     @(X.Resizer()
         .Target("basic")
         .Width(200)
@@ -49,9 +49,9 @@
         .MinWidth(100)
         .MinHeight(50)
     )
-    
+
     <hr/>
-        
+
     <p>
         <b>Wrapped Elements</b>
         <br />
@@ -60,12 +60,12 @@
         easier for you and all you had to do was set "wrap:true". Now with Ext JS 4.x we go a step further
         and automatically detect if the element needs a wrap and wrap it for you.
     </p>
-        
+
     <p>
         <b>Pinned Handles</b><br />
         Notice this example has the resize handles "pinned". This is done by setting "pinned:true".
     </p>
-        
+
     <p>
         <b>Dynamic Sizing</b>
         <br />
@@ -82,7 +82,7 @@
     </textarea>
     <br />
     <br />
-        
+
     @(X.Resizer()
         .Target("dwrapped")
         .Pinned(true)
@@ -92,16 +92,16 @@
         .MinHeight(50)
         .Dynamic(true)
     )
-    
+
     <hr/>
-        
+
     <p>
         <b>Preserve Ratio</b><br />
         For some things like images, you will probably want to preserve the ratio of width to height. Just set PreserveRatio=true.
     </p>
-        
+
     <img id="wrapped" src="@Url.Content("~/Areas/Miscellaneous_Resizable/Content/images/flower.jpg")" width="200" height="133" />
-    
+
     @(X.Resizer()
         .Target("wrapped")
         .Pinned(true)
@@ -109,7 +109,7 @@
         .MinHeight(50)
         .PreserveRatio(true)
     )
-    
+
     <hr/>
 
     <p>
@@ -118,9 +118,9 @@
         To resize in fixed increments, specify the <code>WidthIncrement</code> or <code>HeightIncrement</code> options. The image below
         resizes (maintaining its aspect ratio) in increments of 20 pixels in both directions.
     </p>
-        
+
     <img id="croix-de-fer" src="@Url.Content("~/Areas/Miscellaneous_Resizable/Content/images/CroixDeFer.jpg")" width="160" height="120"/>
-    
+
     @(X.Resizer()
         .Target("croix-de-fer")
         .Width(160)
@@ -131,7 +131,7 @@
         .WidthIncrement(20)
         .HeightIncrement(20)
     )
-    
+
     <hr/>
 
     <p>
@@ -139,7 +139,7 @@
         If you just want the element to be resizable without any fancy handles, set transparent to true.
     </p>
     <img id="transparent" src="@Url.Content("~/Areas/Miscellaneous_Resizable/Content/images/grass.jpg")" width="200" height="133" />
-    
+
     @(X.Resizer()
         .Target("transparent")
         .MinWidth(50)
@@ -147,9 +147,9 @@
         .PreserveRatio(true)
         .Transparent(true)
     )
-    
+
     <hr />
-        
+
     <p>
         <b>Customizable Handles</b><br />
         Resizable elements are resizable 8 ways. 8 way resizing for a static positioned element will cause the element to be positioned relative and taken out of the document flow. For resizing which adjusts the
@@ -161,7 +161,7 @@
         <b>Double click anywhere on the image to hide it when you are done.</b>
     </p>
     <img id="custom" src="@Url.Content("~/Areas/Miscellaneous_Resizable/Content/images/stones.jpg")" width="200" height="150" style="position:absolute;left:0;top:0;" />
-        
+
     @(X.Resizer()
         .ID("CustomResizer")
         .Target("custom")
@@ -172,7 +172,7 @@
         .Handles(ResizeHandle.All)
         .Dynamic(true)
     )
-    
+
     <div style="padding:8px;border:1px solid #c3daf9;background:#d9e8fb;width:150px;text-align:center;">
         @(X.Button()
             .Text("Show Me")
@@ -180,7 +180,7 @@
         )
     </div>
     <hr />
-    
+
     @(X.Panel()
         .ID("ExtNetSite")
         .Title("Resizable panel")
@@ -189,7 +189,7 @@
         .Loader(X.ComponentLoader().Url("http://www.ext.net").Mode(LoadMode.Frame))
         .ResizableConfig(new Resizer() { MinHeight = 200, MinWidth = 200, Transparent = true })
     )
-    
+
     <br />
     <p>Images: graur codrin, Matt Banks, Lavoview (FreeDigitalPhotos.net)</p>
     <br />

@@ -7,13 +7,13 @@ namespace Ext.Net.MVC.Examples.Areas.Draw_Basic.Controllers
     {
         public ActionResult Index()
         {
-            string[] colors = new string[] { 
-                        "#8D38C9", 
-                        "#00FFFF", 
-                        "#FF00FF", 
-                        "#008000", 
-                        "#FFFF00", 
-                        "#0000FF", 
+            string[] colors = new string[] {
+                        "#8D38C9",
+                        "#00FFFF",
+                        "#FF00FF",
+                        "#008000",
+                        "#FFFF00",
+                        "#0000FF",
                         "#FF0000"
                 };
 

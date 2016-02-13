@@ -19,7 +19,7 @@ namespace Ext.Net.MVC.Examples.Areas.Chart_Area.Controllers
                 new { month = "Sep", data1 = 16 },
                 new { month = "Oct", data1 = 16 },
                 new { month = "Nov", data1 = 15 },
-                new { month = "Dec", data1 = 15 }   
+                new { month = "Dec", data1 = 15 }
             });
         }
     }

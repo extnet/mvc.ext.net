@@ -21,7 +21,7 @@
 }
 
 @section example
-{    
+{
     @(Html.X().GridPanel()
         .Title("Menu Row Command")
         .Width(700)
@@ -55,7 +55,7 @@
                 .Renderer("change"),
             Html.X().Column()
                 .Text("Change")
-                .DataIndex("pctChange")                
+                .DataIndex("pctChange")
                 .Width(75)
                 .Renderer("pctChange"),
             Html.X().DateColumn()
@@ -73,7 +73,7 @@
                             menu.Items.Add(Html.X().MenuCommand()
                                 .Text("Item1")
                                 .Icon(Icon.ArrowRight)
-                                .CommandName("Item1")    
+                                .CommandName("Item1")
                             );
                             menu.Items.Add(Html.X().MenuCommand()
                                 .Text("Submenu")
@@ -95,9 +95,9 @@
                             );
                         })
                         .ToolTip(tt => tt.Text = "Menu"),
-                    
+
                     Html.X().CommandSeparator(),
-                    
+
                     Html.X().SplitCommand()
                         .Icon(Icon.ArrowDown)
                         .CommandName("Split")
@@ -131,5 +131,5 @@
                 )
                 .Listeners(ls => ls.Command.Handler = "Ext.Msg.alert(command, record.data.company);")
         )
-    )   
+    )
 }

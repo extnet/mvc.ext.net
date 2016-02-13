@@ -21,11 +21,11 @@
 }
 
 @section example
-{    
+{
     <h1>Basic Row Command</h1>
-        
+
     <br />
-        
+
     <h3>Icons with tips</h3>
 
     @(Html.X().Store()
@@ -78,7 +78,7 @@
                         .CommandName("Delete")
                         .Icon(Icon.Delete)
                         .ToolTip(tt => tt.Text = "Delete"),
-                    
+
                     Html.X().GridCommand()
                         .CommandName("Edit")
                         .Icon(Icon.NoteEdit)
@@ -89,7 +89,7 @@
     )
 
     <br />
-        
+
     <h3>Icons with text</h3>
 
     @(Html.X().GridPanel()
@@ -128,7 +128,7 @@
                         .CommandName("Delete")
                         .Icon(Icon.Delete)
                         .Text("Delete"),
-                    
+
                     Html.X().GridCommand()
                         .CommandName("Edit")
                         .Icon(Icon.NoteEdit)
@@ -137,9 +137,9 @@
                 .Listeners(ls => ls.Command.Handler = "Ext.Msg.alert(command, record.data.company);")
         )
     )
- 
+
     <br />
-        
+
     <h3>Stand Out buttons</h3>
 
     @(Html.X().GridPanel()
@@ -179,7 +179,7 @@
                         .Icon(Icon.Delete)
                         .StandOut(true)
                         .ToolTip(tt => tt.Text = "Delete"),
-                    
+
                     Html.X().GridCommand()
                         .CommandName("Edit")
                         .Icon(Icon.NoteEdit)

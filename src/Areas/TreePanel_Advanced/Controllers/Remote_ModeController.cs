@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace Ext.Net.MVC.Examples.Areas.TreePanel_Advanced.Controllers
 {
     public class Remote_ModeController : Controller
-    {       
+    {
         public ActionResult Index()
         {
             return View();

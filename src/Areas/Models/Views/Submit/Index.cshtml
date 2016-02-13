@@ -15,7 +15,7 @@
         function failure (btn) {
             submit(btn.up('window').down('form'), '@Url.Action("FailureSubmit")');
         }
-        
+
         function submit(form, url)
         {
             form.submit({
@@ -23,7 +23,7 @@
                 waitMsg : "Submitting...",
                 success: function(form, action){
                     // server responded with success = true
-                    var result = action.result;                    
+                    var result = action.result;
                 },
                 failure: function(form, action){
                     if (action.failureType === Ext.form.action.Action.CONNECT_FAILURE) {
@@ -42,7 +42,7 @@
 }
 
 @section example
-{    
+{
     @(
  Html.X().Window()
             .Title("Submit")

@@ -164,7 +164,7 @@
 1. [[#1175](https://github.com/extnet/Ext.NET/issues/1175)] Modified on Component - MaskOnDisable bool type needs to be changed to nullable bool? `sencha`
 1. [[#1204](https://github.com/extnet/Ext.NET/issues/1204)] Modified on AbstractContainer - DoLayout method has been renamed to UpdateLayout `sencha`
 1. [[#1205](https://github.com/extnet/Ext.NET/issues/1205)] Modified on AbstractContainer - AutoDoLayout config has been renamed to AutoUpdateLayout `sencha`
-1. [[#1216](https://github.com/extnet/Ext.NET/issues/1216)] Chart Series Tooltip Renderer's signature and default scope have been changed 
+1. [[#1216](https://github.com/extnet/Ext.NET/issues/1216)] Chart Series Tooltip Renderer's signature and default scope have been changed
 1. [[#1215](https://github.com/extnet/Ext.NET/issues/1215)] Chart Axis Renderer signature has been changed `sencha`
 1. [[#1183](https://github.com/extnet/Ext.NET/issues/1183)] Column's Resizable bool type changed to nullable bool `sencha`
 1. [[#1203](https://github.com/extnet/Ext.NET/issues/1203)] TreeDropZone's AllowParentInsert has to be AllowParentInserts (with the "s" at the end)] `sencha`

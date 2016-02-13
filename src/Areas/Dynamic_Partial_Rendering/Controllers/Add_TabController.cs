@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace Ext.Net.MVC.Examples.Areas.Dynamic_Partial_Rendering.Controllers
 {
     public class Add_TabController : Controller
-    {       
+    {
         public ActionResult Index()
         {
             return View();
@@ -18,12 +18,12 @@ namespace Ext.Net.MVC.Examples.Areas.Dynamic_Partial_Rendering.Controllers
             var result = new PartialViewResult
             {
                 ViewName = "Tab",
-                ContainerId = containerId,                                
+                ContainerId = containerId,
                 RenderMode = RenderMode.AddTo
             };
-            
+
             this.GetCmp<TabPanel>(containerId).SetLastTabAsActive();
-            
+
             return result;
         }
     }

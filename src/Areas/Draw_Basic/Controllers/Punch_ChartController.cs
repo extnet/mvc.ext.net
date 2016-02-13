@@ -14,8 +14,8 @@ namespace Ext.Net.MVC.Examples.Areas.Draw_Basic.Controllers
 
         public ActionResult GetChart()
         {
-            List<string> axisx = new List<string> 
-            { 
+            List<string> axisx = new List<string>
+            {
                 "12am",
                 "1",
                 "2",
@@ -42,8 +42,8 @@ namespace Ext.Net.MVC.Examples.Areas.Draw_Basic.Controllers
                 "11"
             };
 
-            List<Pair> data = new List<Pair> 
-            {                 
+            List<Pair> data = new List<Pair>
+            {
                 new Pair("Mon", new List<int?>{
                   null, null, null, null, 23, null, null, null, null, 40, null, 15, 10, null, 17, null, 14, 12, 20, 16, null, null, 5, 28
                 }),
@@ -64,7 +64,7 @@ namespace Ext.Net.MVC.Examples.Areas.Draw_Basic.Controllers
                 }),
                 new Pair("Sun", new List<int?>{
                   null, 11, 30, null, null, 20, 3, null, null, null, 26, 3, 28, 23, null, null, null, 21, null, null, null, 20, null, null
-                })                
+                })
             };
 
             return this.ComponentConfig(Draw(axisx, data));
@@ -170,11 +170,11 @@ namespace Ext.Net.MVC.Examples.Areas.Draw_Basic.Controllers
                             GlobalAlpha = 0/*,
                             Listeners =
                             {
-                                MouseOver = { 
+                                MouseOver = {
                                     Handler = string.Format("onMouseOver(this.surface, {0});", JSON.Serialize("_"+i+"_"+j))
                                 },
-                                
-                                MouseOut = { 
+
+                                MouseOut = {
                                     Handler = string.Format("onMouseOut(this.surface, {0});", JSON.Serialize("_"+i+"_"+j))
                                 }
                             }*/

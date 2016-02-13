@@ -15,7 +15,7 @@ namespace Ext.Net.MVC.Examples.Areas.Models.Controllers
         }
 
         public ActionResult Submit(FormPanelEmployee employee)
-        {   
+        {
             X.Msg.Alert("Employee", JSON.Serialize(employee)).Show();
             return this.Direct();
         }

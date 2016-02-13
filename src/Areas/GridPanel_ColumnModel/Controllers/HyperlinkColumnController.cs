@@ -10,8 +10,8 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_ColumnModel.HyperlinkColumn.Contr
     {
         public ActionResult Index()
         {
-            return View(new object[] 
-            { 
+            return View(new object[]
+            {
                 new object[] { "company name 1", "companyId1" },
                 new object[] { "company name 2", "companyId2" },
                 new object[] { "company name 3", "companyId3" }

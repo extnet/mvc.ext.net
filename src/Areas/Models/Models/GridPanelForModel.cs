@@ -31,7 +31,7 @@ namespace Ext.Net.MVC.Examples.Areas.Models
 
         public static List<GridEmployee> GetAll()
         {
-            return new List<GridEmployee> { 
+            return new List<GridEmployee> {
                 new GridEmployee{ Id = 1, FirstName = "John", LastName = "Snow"},
                 new GridEmployee{ Id = 2, FirstName = "Fred", LastName = "Flintstone"},
                 new GridEmployee{ Id = 3, FirstName = "Andrew", LastName = "Fuller"}

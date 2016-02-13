@@ -43,7 +43,7 @@ namespace Ext.Net.MVC.Examples.Areas.TreePanel_Basic.Models
             {
 
                 treeNode.CustomAttributes.Add(new ConfigItem("url", siteMapNode.Url.StartsWith("~/") ? siteMapNode.Url.Replace("~/", "http://examples.ext.net/") : ("http://examples.ext.net" + siteMapNode.Url)));
-                treeNode.Href = "#";    
+                treeNode.Href = "#";
             }
 
             treeNode.NodeID = siteMapNode.Key;

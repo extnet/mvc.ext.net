@@ -65,7 +65,7 @@ namespace Ext.Net.MVC.Examples.Areas.Models
         }
 
         private string name;
-        public string Name 
+        public string Name
         {
             get
             {
@@ -74,7 +74,7 @@ namespace Ext.Net.MVC.Examples.Areas.Models
         }
 
         private string code;
-        public string Code 
+        public string Code
         {
             get
             {

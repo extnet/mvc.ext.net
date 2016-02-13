@@ -10,7 +10,7 @@
         .Title("Container In Content Page")
         .Layout(LayoutType.VBox)
         .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Stretch })
-        .Items(i => 
+        .Items(i =>
         {
             i.Add(X.Panel()
                 .Height(200)
@@ -22,7 +22,7 @@
                     Handler = "this.body.createChild({html: 'Name: ' + name, tag:'p'});"
                 })
             );
-            
+
             i.Add(X.Container()
                 .Flex(1)
                 .Layout(LayoutType.HBox)

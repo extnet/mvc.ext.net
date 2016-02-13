@@ -15,9 +15,9 @@
         .ActiveIndex(0)
         .Items(
             X.Container().Html("<h1>Welcome to the Wizard!</h1><p>Step 1 of 3</p>"),
-                
+
             X.Container().Html("<h1>Card 2</h1><p>Step 2 of 3</p>"),
-                
+
             X.Container().Html("<h1>Congratulations!</h1><p>Step 3 of 3 - Complete</p>")
         )
         .Buttons(
@@ -30,7 +30,7 @@
                     de.Click.Url = Url.Action("Prev_Click");
                     de.Click.ExtraParams.Add(new Parameter("index", "#{WizardPanel}.items.indexOf(#{WizardPanel}.layout.activeItem)", ParameterMode.Raw));
                 }),
-                
+
             X.Button()
                 .ID("btnNext")
                 .Text("Next")

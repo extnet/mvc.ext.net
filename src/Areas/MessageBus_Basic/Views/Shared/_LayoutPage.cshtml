@@ -10,11 +10,11 @@
 <head>
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="@Url.Content("~/resources/css/examples.css")" />
-	@RenderSection("headtag", false)
+    @RenderSection("headtag", false)
 </head>
 <body>
     @X.ResourceManager(ViewBag.ManagerConfig as MvcResourceManagerConfig)
-    
+
     @(X.Viewport()
         .Layout(LayoutType.Border)
         .Items(
@@ -28,7 +28,7 @@
                     Name = "**",
                     Handler = "this.body.createChild({html: 'Name: ' + name, tag:'p'});"
                 }),
-                
+
             X.Container()
                 .Layout(LayoutType.Fit)
                 .Region(Region.Center)

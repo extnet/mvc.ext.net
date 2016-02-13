@@ -7,7 +7,7 @@
 @section headtag
 {
     <script src="@Url.Content("~/resources/js/examples.js")" type="text/javascript"></script>
-    
+
     <script>
         var showResult = function (btn) {
             Ext.Msg.notify("Button Click", "You clicked the " + btn + " button");
@@ -16,72 +16,72 @@
         var showResultText = function (btn, text) {
             Ext.Msg.notify("Button Click", "You clicked the " + btn + 'button and entered the text "' + text + '".');
         };
-    </script> 
-    
+    </script>
+
     <style>
         .x-window-dlg .ext-mb-download {
             background : transparent url(resources/images/download.gif) no-repeat top left;
             height : 46px;
         }
-    </style> 
+    </style>
 }
 
 @section example
 {
     <h1>MessageBox Dialogs</h1>
-    
+
     <p>The following samples demonstrate how to display various MessageBox options.</p>
-    
+
     <h2>1. Confirm</h2>
-    
+
     <span>Standard Yes/No dialog.</span>
-    
+
     @(X.Button()
         .ID("Button1")
         .Text("Show")
         .DirectClickAction("Button1_Click")
     )
-    
+
     <h2>2. Prompt</h2>
-    
+
     <span>Standard prompt dialog.</span>
-    
+
     @(X.Button()
         .ID("Button2")
         .Text("Show")
         .DirectClickAction("Button2_Click")
     )
-    
+
     <h2>3. Multi-line Prompt</h2>
-    
+
     <span>A multi-line prompt dialog.</span>
-    
+
     @(X.Button()
         .ID("Button3")
         .Text("Show")
         .DirectClickAction("Button3_Click")
     )
-    
+
     <h2>4. Yes/No/Cancel</h2>
-    
+
     <span>Standard Yes/No/Cancel dialog.</span>
-    
+
     @(X.Button()
         .ID("Button4")
         .Text("Show")
         .DirectClickAction("Button4_Click")
     )
-    
+
     <h2>5. Progress Dialog</h2>
-    
+
     <span>Dialog with measured progress bar.</span>
-    
+
     @(X.Button()
         .ID("Button5")
         .Text("Show")
         .DirectClickAction("Button5_Click")
     )
-    
+
     @(X.TaskManager()
         .ID("TaskManager1")
         .Tasks(X.Task()
@@ -91,31 +91,31 @@
             .DirectEvents(de => de.Update.Action = "RefreshProgress")
         )
     )
-    
+
     <h2>6. Wait Dialog</h2>
-    
+
     <span>Dialog with indefinite ProgressBar and custom Icon (will close after 8 sec).</span>
-    
+
     @(X.Button()
         .ID("Button6")
         .Text("Show")
         .DirectClickAction("Button6_Click")
     )
-    
+
     <h2>7. Alert</h2>
-    
+
     <span>Standard Alert dialog.</span>
-    
+
     @(X.Button()
         .ID("Button7")
         .Text("Show")
         .DirectClickAction("Button7_Click")
     )
-    
+
     <h2>8. Icons</h2>
-    
+
     <span>Standard Alert with optional Icon.</span>
-    
+
     @(X.ComboBox()
         .ID("ComboBox1")
         .Editable(false)
@@ -129,7 +129,7 @@
             X.ListItem().Value("ERROR")
         )
     )
-    
+
     @(X.Button()
         .ID("Button8")
         .Text("Show")

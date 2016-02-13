@@ -16,7 +16,7 @@
             buf.push("New parent = " + newParent.data.text);
             buf.push("<br/>");
             buf.push("Index = " + index);
-            
+
             Ext.Msg.alert("Node droped", buf.join(""));
         };
     </script>
@@ -25,10 +25,10 @@
 @section example
 {
     <h1>Drag and Drop ordering of TreePanel Nodes</h1>
-        
-    <p>This example shows basic drag and drop node moving in a tree. In this implementation there are no restrictions and 
-    anything can be dropped anywhere except appending to nodes marked "leaf".</p>        
-        
+
+    <p>This example shows basic drag and drop node moving in a tree. In this implementation there are no restrictions and
+    anything can be dropped anywhere except appending to nodes marked "leaf".</p>
+
     <p>In order to demonstrate drag and drop insertion points, sorting was <b>not</b> enabled.</p>
 
     @(
@@ -36,7 +36,7 @@
             .Height(300)
             .Width(250)
             .UseArrows(true)
-            .Listeners(l => 
+            .Listeners(l =>
             {
                 l.ItemMove.Fn = "moveNode";
                 l.ItemMove.Delay = 1;
@@ -45,8 +45,8 @@
                 Html.X().TreeView()
                     .Plugins(
                         Html.X().TreeViewDragDrop().ContainerScroll(true)
-                    )   
-            )            
+                    )
+            )
             .Root(Model)
     )
 }

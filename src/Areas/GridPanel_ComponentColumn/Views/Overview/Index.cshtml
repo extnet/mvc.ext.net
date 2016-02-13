@@ -1,5 +1,5 @@
 @model System.Collections.IEnumerable
-           
+
 @using System.Collections.Generic
 
 @{
@@ -14,7 +14,7 @@
             var status = record.get('Status'),
                 statusLbl = cmp.down('#Status'),
                 progressWidget = cmp.down('#Progress'),
-                triggerButton = cmp.down('#Trigger'); 
+                triggerButton = cmp.down('#Trigger');
 
             // 0 - Ready to run
             // 1 - Starting
@@ -22,8 +22,8 @@
             // 3 - Complete
 
             cmp.suspendLayout = true;
-            
-            statusLbl.setVisible(status == 1 || status == 3);            
+
+            statusLbl.setVisible(status == 1 || status == 3);
             triggerButton.setVisible(status == 0);
             progressWidget.setVisible(status == 2);
 
@@ -64,9 +64,9 @@
 }
 
 @section example
-{    
+{
     <h1>ComponentColumn Overview</h1>
-    
+
     @(Html.X().GridPanel()
         .Title("ComponentColumn Overview")
         .Width(320)
@@ -81,11 +81,11 @@
         )
         .ColumnModel(
             Html.X().RowNumbererColumn(),
-            
+
             Html.X().ComponentColumn()
                 .Component(Html.X().ProgressBar().Text("Progress"))
                 .Listeners(ls => ls.Bind.Handler = "cmp.updateProgress(record.get('Percentage'));"),
-                
+
             Html.X().ComponentColumn()
                 .OverOnly(true)
                 .Width(180)
@@ -118,7 +118,7 @@
                 {
                     des.Update.Url = Url.Action("DoTasks");
                     des.Update.ExtraParams.Add(new { tasks = new JRawValue("App.StoreTasks.getRecordsValues({filterRecord: filterTask})") });
-                               
+
                 })
             )
         )
@@ -148,7 +148,7 @@
                             .Text("Run")
                             .ItemID("Trigger")
                             .Listeners(ls => ls.Click.Handler = "this.ownerCt.record.set('Status', 1);")
-                            
+
                     )
                 )
                 .Listeners(ls => ls.Bind.Fn = "bindWidgets")

@@ -8,7 +8,7 @@ using System.Xml.Linq;
 namespace Ext.Net.MVC.Examples.Areas.DataView_Advanced.Controllers
 {
     public class GroupingController : Controller
-    {       
+    {
         public ActionResult Index()
         {
             XElement document = XElement.Load(Server.MapPath("~/Areas/DataView_Advanced/Content/DashboardSchema.xml"));

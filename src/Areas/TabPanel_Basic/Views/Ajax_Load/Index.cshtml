@@ -10,7 +10,7 @@
         <h1>Fixed Height TabPanel with options</h1>
         <p>Tabs with no tab strip and a fixed height that scroll the content.</p>
     </div>
-    
+
     <div>
         @(X.TabPanel()
             .ID("TabPanel1")
@@ -25,14 +25,14 @@
                     .Html("My content was added with the Html Property.")
                     .BodyPadding(6)
                     .AutoScroll(true),
-                    
+
                 X.Panel()
                     .ID("Tab2")
                     .Title("Closable Tab")
                     .Html("You can close this Tab.")
                     .BodyPadding(6)
                     .Closable(true),
-                    
+
                 X.Panel()
                     .ID("Tab3")
                     .Title("Ajax Tab")
@@ -44,7 +44,7 @@
                         .Params(new Parameter("containerId", "Tab3"))
                         .Mode(LoadMode.Html)
                     ),
-                
+
                 X.Panel()
                     .ID("Tab4")
                     .Title("Event Tab")
@@ -54,9 +54,9 @@
                     .Listeners(l =>
                     {
                         l.Activate.Handler = "Ext.Msg.alert('Event', this.title + ' was activated.');";
-                        l.Activate.Delay = 1;       
+                        l.Activate.Delay = 1;
                     }),
-                    
+
                 X.Panel()
                     .ID("Tab5")
                     .Title("Disabled Tab")

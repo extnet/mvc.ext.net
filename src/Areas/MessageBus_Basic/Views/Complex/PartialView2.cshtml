@@ -17,11 +17,11 @@
             .Text("Publish 'FromPartialView.FromPV2'")
             .Listeners(l => l.Click.BroadcastOnBus = "FromPartialView.FromPV2")
         );
-        
+
         b.Add(X.Button()
             .Text("Publish 'ToPartialView1.event1'")
             .Listeners(l => l.Click.BroadcastOnBus = "ToPartialView1.event1")
         );
     })
-    
+
 )

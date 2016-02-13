@@ -10,12 +10,12 @@
         .invite {
             background-color : #99bbe8 !important;
         }
-        
+
         .x-drop-marker {
             background-color : silver;
         }
     </style>
-    
+
     <script>
         var notifyDrop = function (source, e, data) {
             var targetCt = Ext.getCmp(this.el.dom.id),
@@ -28,24 +28,24 @@
             Ext.defer(function (){
                 targetPanel.updateLayout();
                 data.panel.updateLayout();
-            }, 1);            
+            }, 1);
         };
 
-        var startDrag = function () {            
+        var startDrag = function () {
             Ext.select(".dropable").addCls("x-drop-marker");
             Ext.select(".draggable").hide();
             this.panelProxy.moveOnDrag = false;
         };
 
-        var endDrag = function () {            
+        var endDrag = function () {
             Ext.select(".dropable").removeCls("x-drop-marker");
             Ext.select(".draggable").show();
-            Ext.panel.DD.prototype.endDrag.apply(this, arguments);            
+            Ext.panel.DD.prototype.endDrag.apply(this, arguments);
         };
     </script>
 }
 
-@section example 
+@section example
 {
     @{var viewport = Html.X().Viewport()
         .Layout(LayoutType.Border)
@@ -61,7 +61,7 @@
                         .Cls("draggable")
                         .Title("North")
                 ),
-                     
+
             Html.X().Container()
                 .Region(Region.East)
                 .Cls("dropable")
@@ -73,7 +73,7 @@
                         .Cls("draggable")
                         .Title("East")
                     ),
-                                 
+
             Html.X().Container()
                 .Region(Region.Center)
                 .Cls("dropable")
@@ -86,7 +86,7 @@
                         .Html("Drag/Drop Panel Headers to a different Viewport Region")
                         .BodyPadding(5)
                 ),
- 
+
             Html.X().Container()
                 .Region(Region.South)
                 .Cls("dropable")
@@ -98,7 +98,7 @@
                         .Cls("draggable")
                         .Title("South")
                     ),
- 
+
             Html.X().Container()
                 .Region(Region.West)
                 .Cls("dropable")
@@ -112,13 +112,13 @@
                     )
         );
     }
- 
+
     @{viewport.ToComponent().Items.ForEach(item =>
         {
             var region = item as Container;
- 
+
             Ext.Net.Panel p = (Ext.Net.Panel)region.Items[0];
- 
+
             p.DraggablePanelConfig = new DragSource
             {
                 Group = "panelDD",
@@ -126,7 +126,7 @@
                 {
                     Fn = "startDrag"
                 },
- 
+
                 EndDrag =
                 {
                     Fn = "endDrag"
@@ -134,10 +134,10 @@
             };
         });
     }
- 
+
     @viewport
-     
- 
+
+
     @(Html.X().DropTarget()
         .Target("${.dropable}")
         .Group("panelDD")
@@ -145,6 +145,6 @@
         .NotifyDrop(nd => nd.Fn = "notifyDrop")
         .NotifyOut(nout => nout.Handler = "this.el.removeCls('invite');")
         .NotifyOver(nover => nover.Handler = "Ext.select('.dropable').removeCls('invite'); this.el.addCls('invite');")
-  
+
     )
 }

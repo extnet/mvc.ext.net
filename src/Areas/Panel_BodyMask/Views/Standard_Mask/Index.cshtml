@@ -7,9 +7,9 @@
 @section example
 {
     <h1>Configure LoadMask for Loader</h1>
-        
+
     <p>Demonstrates how to configure a LoadMask to render while an external page is loading.</p>
-    
+
     @(X.Window()
         .ID("Window1")
         .Width(500)
@@ -27,12 +27,12 @@
         .TopBar(X.Toolbar()
             .Items(
                 X.ToolbarFill(),
-                
+
                 X.Button()
                     .Text("Load Ext.NET forums")
                     .Icon(Icon.Application)
                     .Handler("#{Window1}.load('http://forums.ext.net');"),
-                
+
                 X.Button()
                     .Text("Refresh")
                     .Icon(Icon.ArrowRotateAnticlockwise)

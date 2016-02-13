@@ -7,7 +7,7 @@
 @section example
 {
     <h1>Draw Actions</h1>
-    
+
     @(X.Window()
         .Title("Draw Actions")
         .Width(640)
@@ -30,7 +30,7 @@
                             de.Click.ExtraParams.Add(new Parameter("button", "this.id", ParameterMode.Raw));
                             de.Click.Success = "this.disable(); this.next().enable(); ";
                         }),
-                        
+
                     X.Button()
                         .Text("Change Color")
                         .Disabled(true)
@@ -39,7 +39,7 @@
                             de.Click.ExtraParams.Add(new Parameter("button", "this.id", ParameterMode.Raw));
                             de.Click.Success = "this.disable(); this.next().enable(); ";
                         }),
-                        
+
                     X.Button()
                         .Text("Rotate -45")
                         .Disabled(true)
@@ -48,7 +48,7 @@
                             de.Click.ExtraParams.Add(new Parameter("button", "this.id", ParameterMode.Raw));
                             de.Click.Success = "this.disable(); this.next().enable(); ";
                         }),
-                        
+
                     X.Button()
                         .Text("Rotate back (animaton)")
                         .Disabled(true)
@@ -57,7 +57,7 @@
                             de.Click.ExtraParams.Add(new Parameter("button", "this.id", ParameterMode.Raw));
                             de.Click.Success = "this.disable(); this.next().enable(); ";
                         }),
-                        
+
                     X.Button()
                         .Text("Scaling")
                         .Disabled(true)
@@ -66,7 +66,7 @@
                             de.Click.ExtraParams.Add(new Parameter("button", "this.id", ParameterMode.Raw));
                             de.Click.Success = "this.disable(); this.next().enable(); ";
                         }),
-                        
+
                     X.Button()
                         .Text("Translation")
                         .Disabled(true)
@@ -76,7 +76,7 @@
                             de.Click.Success = "this.disable();";
                         })
                 ),
-                
+
             X.DrawContainer()
                 .ID("Draw1")
                 .Region(Region.Center)

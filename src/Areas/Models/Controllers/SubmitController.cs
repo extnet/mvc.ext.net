@@ -22,7 +22,7 @@ namespace Ext.Net.MVC.Examples.Areas.Models.Controllers
         public ActionResult FailureSubmit(FormCollection values)
         {
             var errors = new FieldErrors();
-            
+
             foreach (var key in values.Keys)
             {
                 errors.Add(new FieldError(key.ToString(), "Test error for " + key.ToString()));

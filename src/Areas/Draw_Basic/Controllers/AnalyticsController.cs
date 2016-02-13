@@ -84,11 +84,11 @@ namespace Ext.Net.MVC.Examples.Areas.Draw_Basic.Controllers
 
                 if (i == 0)
                 {
-                    p.AddRange(new string[]{"M", JSON.Serialize(xc), JSON.Serialize(yc), 
+                    p.AddRange(new string[]{"M", JSON.Serialize(xc), JSON.Serialize(yc),
                                             "C", JSON.Serialize(xc), JSON.Serialize(yc)});
 
-                    bgpp.AddRange(new string[]{"M", JSON.Serialize(leftgutter - 10 + x * 0.5), JSON.Serialize(height - bottomgutter), 
-                                               "L", JSON.Serialize(xc), JSON.Serialize(yc), 
+                    bgpp.AddRange(new string[]{"M", JSON.Serialize(leftgutter - 10 + x * 0.5), JSON.Serialize(height - bottomgutter),
+                                               "L", JSON.Serialize(xc), JSON.Serialize(yc),
                                                "C", JSON.Serialize(xc), JSON.Serialize(yc)});
                 }
 
@@ -172,10 +172,10 @@ namespace Ext.Net.MVC.Examples.Areas.Draw_Basic.Controllers
 
         private AbstractSprite GridPath(double x, double y, double w, double h, int wv, int hv, string color)
         {
-            List<string> path = new List<string>{"M", JSON.Serialize(Math.Round(x) + 0.5), JSON.Serialize(Math.Round(y) + 0.5), 
-                                        "L", JSON.Serialize(Math.Round(x + w) + 0.5), JSON.Serialize(Math.Round(y) + 0.5), 
-                                         JSON.Serialize(Math.Round(x + w) + 0.5), JSON.Serialize(Math.Round(y + h) + 0.5), 
-                                         JSON.Serialize(Math.Round(x) + 0.5), JSON.Serialize(Math.Round(y + h) + 0.5), 
+            List<string> path = new List<string>{"M", JSON.Serialize(Math.Round(x) + 0.5), JSON.Serialize(Math.Round(y) + 0.5),
+                                        "L", JSON.Serialize(Math.Round(x + w) + 0.5), JSON.Serialize(Math.Round(y) + 0.5),
+                                         JSON.Serialize(Math.Round(x + w) + 0.5), JSON.Serialize(Math.Round(y + h) + 0.5),
+                                         JSON.Serialize(Math.Round(x) + 0.5), JSON.Serialize(Math.Round(y + h) + 0.5),
                                          JSON.Serialize(Math.Round(x) + 0.5), JSON.Serialize(Math.Round(y) + 0.5)};
 
             double rowHeight = h / hv;
@@ -183,13 +183,13 @@ namespace Ext.Net.MVC.Examples.Areas.Draw_Basic.Controllers
 
             for (int i = 1; i < hv; i++)
             {
-                path.AddRange(new string[]{"M", JSON.Serialize(Math.Round(x) + 0.5), JSON.Serialize(Math.Round(y + i * rowHeight) + 0.5), 
+                path.AddRange(new string[]{"M", JSON.Serialize(Math.Round(x) + 0.5), JSON.Serialize(Math.Round(y + i * rowHeight) + 0.5),
                                                         "H", JSON.Serialize(Math.Round(x + w) + 0.5)});
             }
 
             for (int i = 1; i < wv; i++)
             {
-                path.AddRange(new string[]{"M", JSON.Serialize(Math.Round(x + i * columnWidth) + 0.5), JSON.Serialize(Math.Round(y) + 0.5), 
+                path.AddRange(new string[]{"M", JSON.Serialize(Math.Round(x + i * columnWidth) + 0.5), JSON.Serialize(Math.Round(y) + 0.5),
                                                         "V", JSON.Serialize(Math.Round(y + h) + 0.5)});
             }
 

@@ -12,9 +12,9 @@
             App.direct.NodeLoad(node.getId(), {
                 success : function (result) {
                     node.set('loading', false);
-                    node.set('loaded', true);                    
+                    node.set('loaded', true);
                     node.appendChild(result);
-                    node.expand();                    
+                    node.expand();
                 },
 
                 failure : function (errorMsg) {

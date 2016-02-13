@@ -8,94 +8,94 @@
 {
     <script>
         var template = '<span style="color:{0};">{1}</span>';
- 
+
         var change = function (value) {
             return Ext.String.format(template, (value > 0) ? "green" : "red", value);
         };
- 
+
         var pctChange = function (value) {
             return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
         };
 
-        var applyFilter = function (field) {                
+        var applyFilter = function (field) {
                 var store = App.GridPanel1.getStore();
-                store.filterBy(getRecordFilter());                                                
+                store.filterBy(getRecordFilter());
             };
-             
+
             var clearFilter = function () {
                 App.ComboBox1.reset();
                 App.PriceFilter.reset();
                 App.ChangeFilter.reset();
                 App.PctChangeFilter.reset();
                 App.LastChangeFilter.reset();
-                 
+
                 App.Store1.clearFilter();
             }
- 
+
             var filterString = function (value, dataIndex, record) {
                 var val = record.get(dataIndex);
-                
+
                 if (typeof val != "string") {
                     return value.length == 0;
                 }
-                
+
                 return val.toLowerCase().indexOf(value.toLowerCase()) > -1;
             };
- 
+
             var filterDate = function (value, dataIndex, record) {
                 var val = Ext.Date.clearTime(record.get(dataIndex), true).getTime();
- 
+
                 if (!Ext.isEmpty(value, false) && val != Ext.Date.clearTime(value, true).getTime()) {
                     return false;
                 }
                 return true;
             };
- 
+
             var filterNumber = function (value, dataIndex, record) {
-                var val = record.get(dataIndex);                
- 
+                var val = record.get(dataIndex);
+
                 if (!Ext.isEmpty(value, false) && val != value) {
                     return false;
                 }
-                
+
                 return true;
             };
- 
+
             var getRecordFilter = function () {
                 var f = [];
- 
+
                 f.push({
-                    filter: function (record) {                         
+                    filter: function (record) {
                         return filterString(App.ComboBox1.getValue()||"", "company", record);
                     }
                 });
-                 
+
                 f.push({
-                    filter: function (record) {                         
+                    filter: function (record) {
                         return filterNumber(App.PriceFilter.getValue(), "price", record);
                     }
                 });
-                 
+
                 f.push({
-                    filter: function (record) {                         
+                    filter: function (record) {
                         return filterNumber(App.ChangeFilter.getValue(), "change", record);
                     }
                 });
-                 
+
                 f.push({
-                    filter: function (record) {                         
+                    filter: function (record) {
                         return filterNumber(App.PctChangeFilter.getValue(), "pctChange", record);
                     }
                 });
-                 
+
                 f.push({
-                    filter: function (record) {                         
+                    filter: function (record) {
                         return filterDate(App.LastChangeFilter.getValue(), "lastChange", record);
                     }
                 });
- 
+
                 var len = f.length;
-                 
+
                 return function (record) {
                     for (var i = 0; i < len; i++) {
                         if (!f[i].filter(record)) {
@@ -159,8 +159,8 @@
                             {
                                 l.Change.Handler = "applyFilter(this);";
                                 l.Change.Buffer = 250;
-                            })                    
-                            .Plugins(Html.X().ClearButton())    
+                            })
+                            .Plugins(Html.X().ClearButton())
                     ),
 
                 Html.X().Column()
@@ -175,9 +175,9 @@
                                 l.Change.Handler = "applyFilter(this);";
                                 l.Change.Buffer = 250;
                             })
-                            .Plugins(Html.X().ClearButton())    
+                            .Plugins(Html.X().ClearButton())
                     ),
-                    
+
                Html.X().Column()
                     .Text("Changes")
                     .Columns(
@@ -194,9 +194,9 @@
                                         l.Change.Handler = "applyFilter(this);";
                                         l.Change.Buffer = 250;
                                     })
-                                    .Plugins(Html.X().ClearButton())    
+                                    .Plugins(Html.X().ClearButton())
                             ),
-                            
+
                         Html.X().Column()
                             .Text("Change %")
                             .DataIndex("pctChange")
@@ -210,10 +210,10 @@
                                         l.Change.Handler = "applyFilter(this);";
                                         l.Change.Buffer = 250;
                                     })
-                                    .Plugins(Html.X().ClearButton())    
+                                    .Plugins(Html.X().ClearButton())
                             )
                     ),
-                    
+
                 Html.X().DateColumn()
                     .Text("Last Updated")
                     .Width(95)
@@ -225,9 +225,9 @@
                             .Listeners(l => {
                                 l.Change.Handler = "applyFilter(this);";
                             })
-                            .Plugins(Html.X().ClearButton())    
+                            .Plugins(Html.X().ClearButton())
                     ),
-                    
+
                 Html.X().Column()
                     .Width(25)
                     .DataIndex("company")

@@ -1,17 +1,17 @@
 ﻿@{
     ViewBag.Title = "GridPanel with Remote Filtering, Sorting and Paging - Ext.NET MVC Examples";
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
-    var X = Html.X(); 
+    var X = Html.X();
 }
 
 @section example
 {
-    <h1>GridPanel with Remote Filtering, Sorting and Paging</h1>        
+    <h1>GridPanel with Remote Filtering, Sorting and Paging</h1>
     <p>Please see column header menu for apllying filters</p>
 
     @(X.Window()
         .Width(700)
-        .Resizable(false)            
+        .Resizable(false)
         .Closable(false)
         .Title("Example")
         .Items(
@@ -21,7 +21,7 @@
                     X.Store()
                         .RemoteSort(true)
                         .RemoteFilter(true)
-                        .PageSize(10)                            
+                        .PageSize(10)
                         .Proxy(
                             X.AjaxProxy()
                                 .Url(Url.Action("ReadData"))
@@ -45,28 +45,28 @@
                                 )
                         )
                         .Sorters(
-                            X.DataSorter().Property("Company").Direction(Ext.Net.SortDirection.ASC)                                
+                            X.DataSorter().Property("Company").Direction(Ext.Net.SortDirection.ASC)
                         )
                 )
                 .ColumnModel(
                     X.Column().Text("ID").DataIndex("Id").Filter(X.NumberFilter()),
-                        
+
                     X.Column().Text("Company").DataIndex("Company").Filter(X.StringFilter()),
-                        
+
                     X.Column().Text("Price").DataIndex("Price").Renderer(RendererFormat.UsMoney).Filter(X.NumberFilter()),
-                        
+
                     X.DateColumn()
                         .Text("Date")
                         .DataIndex("Date")
                         .Align(Alignment.Center)
                         .Format("yyyy-MM-dd")
                         .Filter(X.DateFilter().DatePickerOptions(picker => picker.TodayText = "Now")),
-                            
+
                     X.Column()
                         .Text("Size")
                         .DataIndex("Size")
                         .Filter(X.ListFilter().Options("extra small,small,medium,large,extra large")),
-                        
+
                     X.BooleanColumn()
                         .Text("Visible")
                         .DataIndex("Visible")

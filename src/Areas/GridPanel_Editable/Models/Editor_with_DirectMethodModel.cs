@@ -17,7 +17,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_Editable.Editor_with_DirectMethod
         {
             DateTime today = DateTime.Today;
 
-            return new List<Company> 
+            return new List<Company>
             {
                 new Company { ID = 1, Name = "3m Co", Price = 71.72, Change = 0.02, PctChange = 0.03, LastChange = today },
                 new Company { ID = 2, Name = "Alcoa Inc", Price = 29.01, Change = 0.42, PctChange = 1.47, LastChange = today },

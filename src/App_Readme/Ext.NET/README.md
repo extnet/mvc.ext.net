@@ -73,17 +73,17 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
       <namespaces>
         <add namespace="Ext.Net"/>
         <!--<add namespace="Ext.Net.MVC"/>-->
-      </namespaces>          
+      </namespaces>
     </pages>
   </system.web>
 
   <system.webServer>
     <validation validateIntegratedModeConfiguration="false" />
-    
+
     <modules>
       <add name="DirectRequestModule" preCondition="managedHandler" type="Ext.Net.DirectRequestModule, Ext.Net" />
     </modules>
-    
+
     <handlers>
       <add name="DirectRequestHandler" verb="*" path="*/ext.axd" preCondition="integratedMode" type="Ext.Net.ResourceHandler" />
     </handlers>
@@ -136,7 +136,7 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
       </dependentAssembly>
       -->
     </assemblyBinding>
-  </runtime>  
+  </runtime>
 </configuration>
 ```
 
@@ -191,7 +191,7 @@ public static void RegisterRoutes(RouteCollection routes)
 }
 ```
 
-This `IgnoreRoute` is automatically inserted if using the NuGet package [installer](https://www.nuget.org/packages/ext.net). 
+This `IgnoreRoute` is automatically inserted if using the NuGet package [installer](https://www.nuget.org/packages/ext.net).
 
 ## 7. Credits
 

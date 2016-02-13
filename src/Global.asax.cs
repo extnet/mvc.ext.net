@@ -7,7 +7,7 @@ using System.Web.Routing;
 
 namespace Ext.Net.MVC.Examples
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
+    // Note: For instructions on enabling IIS6 or IIS7 classic mode,
     // visit http://go.microsoft.com/?LinkId=9394801
 
     public class MvcApplication : System.Web.HttpApplication
@@ -44,7 +44,7 @@ namespace Ext.Net.MVC.Examples
                     {
                         Text = "Factory button",
                         Handler = "Ext.Msg.alert('Factory button', 'The button is clicked');",
-                        Plugins = 
+                        Plugins =
                     {
                         new Badge
                         {

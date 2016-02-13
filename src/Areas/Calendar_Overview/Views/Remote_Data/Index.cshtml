@@ -7,14 +7,14 @@
 
 @section headtag
 {
-    <link rel="stylesheet" href="@Url.Content("~/Areas/Calendar_Overview/Content/css/main.css")" />        
+    <link rel="stylesheet" href="@Url.Content("~/Areas/Calendar_Overview/Content/css/main.css")" />
     <script src="@Url.Content("~/Areas/Calendar_Overview/Content/js/common.js")"></script>
 }
 
 @section example
 {
-    @Html.X().ResourceManager().Namespace("CompanyX")    
-    
+    @Html.X().ResourceManager().Namespace("CompanyX")
+
     @(Html.X().Viewport()
         .Layout("border")
         .Items(

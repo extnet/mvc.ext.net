@@ -18,7 +18,7 @@
                 }
             });
         }
-        
+
         var saveChart = function saveChart (chart) {
             Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as an image?', function (choice) {
                 if (choice == 'yes') {
@@ -29,12 +29,12 @@
     </script>
 }
 
-@section example 
+@section example
 {
     <h1>Gauge</h1>
 
     <p>Displaying three custom gauge charts bound to different data stores with different configuration options and easings.</p>
-        
+
     <p>Click on <b>Reload Data</b> to update the information.</p>
 
     @(X.Panel()

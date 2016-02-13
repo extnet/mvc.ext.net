@@ -10,7 +10,7 @@ namespace Ext.Net.MVC.Examples.Areas.Models.Models
     {
         [Field(FieldType=typeof(Ext.Net.Hidden))]
         public int ID { get; set; }
-        
+
         public string Name { get; set; }
         public string Surname { get; set; }
 

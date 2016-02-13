@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace Ext.Net.MVC.Examples.Areas.DataView_Advanced.Controllers
 {
     public class ReportController : Controller
-    {        
+    {
         public ActionResult Index()
         {
             List<object> data = new List<object>(26);

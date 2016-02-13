@@ -18,10 +18,10 @@ namespace Ext.Net.MVC.Examples.Areas.Models.Controllers
         public ActionResult GoToViewMode(string containerId)
         {
             return this.PartialExtView(
-                viewName: "Display", 
-                containerId: containerId, 
-                model: this.Session["card"], 
-                mode: RenderMode.AddTo, 
+                viewName: "Display",
+                containerId: containerId,
+                model: this.Session["card"],
+                mode: RenderMode.AddTo,
                 clearContainer: true
             );
         }
@@ -29,10 +29,10 @@ namespace Ext.Net.MVC.Examples.Areas.Models.Controllers
         public ActionResult GoToEditMode(string containerId)
         {
             return this.PartialExtView(
-                viewName: "Edit", 
-                containerId: containerId, 
-                model: this.Session["card"], 
-                mode: RenderMode.AddTo, 
+                viewName: "Edit",
+                containerId: containerId,
+                model: this.Session["card"],
+                mode: RenderMode.AddTo,
                 clearContainer: true
             );
         }
@@ -44,7 +44,7 @@ namespace Ext.Net.MVC.Examples.Areas.Models.Controllers
                 this.Session["card"] = card;
                 X.Msg.Notify("Submit", "The card was successfully saved").Show();
             }
-            
+
             return this.FormPanel(this.ModelState);
         }
 

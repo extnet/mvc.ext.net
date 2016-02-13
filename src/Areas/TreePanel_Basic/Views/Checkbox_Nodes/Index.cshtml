@@ -12,22 +12,22 @@
             color : #777;
         }
     </style>
-    
+
     <script>
         var getTasks = function (button) {
-            var msg = "", 
+            var msg = "",
                 selChildren = button.up("treepanel").getChecked();
-                
+
             Ext.each(selChildren, function (node) {
                 if (msg.length > 0) {
                     msg += ", ";
                 }
-                
+
                 msg += node.data.text;
             });
-            
+
             Ext.Msg.show({
-                title    : "Completed Tasks", 
+                title    : "Completed Tasks",
                 msg      : msg.length > 0 ? msg : "None",
                 icon     : Ext.Msg.INFO,
                 minWidth : 200,
@@ -39,7 +39,7 @@
 
 @section example
 {
-    <h1>TreePanel with Checkbox Enabled Children</h1>        
+    <h1>TreePanel with Checkbox Enabled Children</h1>
     <p>This example demonstrates a simple checkbox selection in a TrePanel. The Checkbox is enabled on leaf Children by simply setting Checked="true/false" at the node level.</p>
 
     @(
@@ -79,7 +79,7 @@
             )
             .Listeners(l => {
                 l.CheckChange.Handler = "Ext.get(this.getView().getNode(item))[checked ? 'addCls' : 'removeCls']('complete')";
-                
+
                 l.AfterRender.Handler = "this.getRootNode().expand(true);";
                 l.AfterRender.Delay = 50;
             })

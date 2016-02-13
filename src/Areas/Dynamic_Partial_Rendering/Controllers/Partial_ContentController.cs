@@ -20,9 +20,9 @@ namespace Ext.Net.MVC.Examples.Areas.Dynamic_Partial_Rendering.Controllers
 
         public PartialViewResult AutoLoadPartialView(string containerId)
         {
-            return new PartialViewResult 
-            { 
-                ContainerId = containerId,                
+            return new PartialViewResult
+            {
+                ContainerId = containerId,
                 ViewName = "PartialView",
                 WrapByScriptTag = false
             };

@@ -8,14 +8,14 @@ namespace Ext.Net.MVC.Examples.Areas.Events.Controllers
 {
     /// <summary>
     /// Area name must be defined manually (if a controller belongs to an area)
-    /// 
+    ///
     /// Other useful options:
     /// - GenerateProxyForOtherAreas
     ///   If true then direct method proxy will be generated for all viewes in all areas, default false
-    ///   
+    ///
     /// - GenerateProxyForOtherControllers
     ///   If false then direct method proxy will be generated for particular controller views only, default true
-    ///   
+    ///
     /// - IDMode
     /// - Alias
     /// </summary>
