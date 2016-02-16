@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug NuGet</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>
     </ProductVersion>
@@ -28,15 +28,6 @@
     <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
     <UseGlobalApplicationHostFile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug NuGet|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -46,11 +37,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release NuGet|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Development|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -108,9 +100,9 @@
       <HintPath>ReferenceAssemblies\Wilco.SyntaxHighlighter.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup Condition=" ('$(Configuration)|$(Platform)' == 'Debug NuGet|AnyCPU') Or ('$(Configuration)|$(Platform)' == 'Release NuGet|AnyCPU') ">
+  <ItemGroup Condition=" ('$(Configuration)|$(Platform)' == 'Debug|AnyCPU') Or ('$(Configuration)|$(Platform)' == 'Release|AnyCPU') ">
     <Reference Include="Ext.Net">
-      <HintPath>..\packages\Ext.NET.MVC.3.2.1\lib\net45\Ext.Net.dll</HintPath>
+      <HintPath>..\packages\Ext.NET.MVC.3.3.0\lib\net45\Ext.Net.dll</HintPath>
     </Reference>
     <Reference Include="Ext.Net.Utilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=2c34ac34702a3c23, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -140,36 +132,36 @@
       <HintPath>..\packages\Transformer.NET.2.1.1\lib\net35\Transformer.NET.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup Condition=" ('$(Configuration)|$(Platform)' == 'Debug|AnyCPU') Or ('$(Configuration)|$(Platform)' == 'Release|AnyCPU') ">
+  <ItemGroup Condition=" ('$(Configuration)|$(Platform)' == 'Development|AnyCPU') ">
     <Reference Include="Ext.Net">
-      <HintPath>..\..\Premium\src\bin\$(Configuration)\Ext.Net.dll</HintPath>
+      <HintPath>..\..\Premium\src\bin\Debug\Ext.Net.dll</HintPath>
     </Reference>
     <Reference Include="Ext.Net.Utilities">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Premium\src\bin\$(Configuration)\Ext.Net.Utilities.dll</HintPath>
+      <HintPath>..\..\Premium\src\bin\Debug\Ext.Net.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure">
-      <HintPath>..\..\Premium\src\bin\$(Configuration)\Microsoft.Web.Infrastructure.dll</HintPath>
+      <HintPath>..\..\Premium\src\bin\Debug\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\Premium\src\bin\$(Configuration)\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\Premium\src\bin\Debug\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Mvc">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Premium\src\bin\$(Configuration)\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\..\Premium\src\bin\Debug\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Premium\src\bin\$(Configuration)\System.Web.WebPages.dll</HintPath>
+      <HintPath>..\..\Premium\src\bin\Debug\System.Web.WebPages.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Deployment">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Premium\src\bin\$(Configuration)\System.Web.WebPages.Deployment.dll</HintPath>
+      <HintPath>..\..\Premium\src\bin\Debug\System.Web.WebPages.Deployment.dll</HintPath>
     </Reference>
     <Reference Include="Transformer.NET">
-      <HintPath>..\..\Premium\src\bin\$(Configuration)\Transformer.NET.dll</HintPath>
+      <HintPath>..\..\Premium\src\bin\Debug\Transformer.NET.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
