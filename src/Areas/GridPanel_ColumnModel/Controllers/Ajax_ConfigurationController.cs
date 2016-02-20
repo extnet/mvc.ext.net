@@ -18,7 +18,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_ColumnModel.Ajax_Configuration.Co
             Column c = this.GetCmp<Ext.Net.Column>("ChangeColumn");
             c.Hidden = pressed;
 
-            return new AjaxResult();
+            return new DirectResult();
         }
 
         public ActionResult ChangeHeader()
@@ -26,7 +26,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_ColumnModel.Ajax_Configuration.Co
             Column c = this.GetCmp<Ext.Net.Column>("CompanyColumn");
             c.Text = "New label";
 
-            return new AjaxResult();
+            return new DirectResult();
         }
 
         public ActionResult ChangeWidth()
@@ -34,7 +34,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_ColumnModel.Ajax_Configuration.Co
             Column c = this.GetCmp<Ext.Net.Column>("PriceColumn");
             c.Width = 75;
 
-            return new AjaxResult();
+            return new DirectResult();
         }
 
         public ActionResult ChangeRenderer()
@@ -44,7 +44,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_ColumnModel.Ajax_Configuration.Co
             r.Fn = "change";
             c.Renderer = r;
 
-            return new AjaxResult();
+            return new DirectResult();
         }
 
         public ActionResult AddColumn()

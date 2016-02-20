@@ -11,7 +11,7 @@ namespace Ext.Net.MVC.Examples.Areas.Form_Login.Auto_Complete.Controllers
 
         public ActionResult Button1_Click(string user, string pass)
         {
-            AjaxResult r = new AjaxResult();
+            DirectResult r = new DirectResult();
 
             // Do some Authentication...
             if (user != "Ext.NET" || pass != "extnet")
