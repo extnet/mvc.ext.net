@@ -945,58 +945,6 @@ td.alt2{
     color: #364043;
 }
 
-.ext4-notification .sale-bar {
-    background-color: #1a2022;
-    color: #fff;
-    font-family: "Montserrat", sans-serif;
-    font-size: 18px;
-    font-weight: 900;
-    height: 50px;
-}
-
-.ext4-notification .sale-tag {
-    background-color: #f05658;
-    font-size: 26px;
-    text-align: left;
-    letter-spacing: 2px;
-    width: 160px;
-    height: 50px;
-    padding: 5px 32px;
-    float: left;
-    position: relative;
-}
-
-.ext4-notification .sale-tag:after {
-    content: "";
-    border-color: #1A2022 #1A2022 #1A2022 #F05658;
-    border-style: solid;
-    border-width: 25px;
-    position: absolute;
-    right: -20px;
-    top: 0;
-    bottom: 0;
-    width: 0;
-    z-index: 1;
-}
-
-.ext4-notification .sale-message {
-    letter-spacing: 2.5px;
-    height: 50px;
-    float: left;
-    padding: 11px 25px;
-    position: relative;
-    z-index: 1;
-}
-
-.ext4-notification .sale-message a {
-    color: #fff;
-    text-decoration: underline;
-}
-
-.ext4-notification .sale-message a:hover {
-    text-decoration: none;
-}
-
 
 /*  Fonts
     -----------------------------------------------------------------------------------------------*/
