@@ -320,7 +320,7 @@ body {
 }
 
 .ext4-notification {
-    background-color: #364043;
+    background-color: #263438;
     color: #fff;
     font-size: 14px;
     line-height: 1.5;
@@ -328,8 +328,19 @@ body {
     margin: 40px auto 20px;
 }
 
+.ext4-notification a {
+    color: #f05758;
+    text-decoration: none;
+}
+
+.ext4-notification a:hover,
+.ext4-notification a:active,
+.ext4-notification a:focus {
+    color: #d34c53;
+}
+
 .ext4-notification .notification-container {
-    background: url('../images/extdotnet4-preview-background.png') center right no-repeat;
+    background: url('../images/extdotnet4-beta-bg.jpg') center right no-repeat;
     width: 100%;
     display: block;
     height: 150px;
@@ -346,44 +357,32 @@ body {
 .ext4-notification .notification-img {
     text-align: center;
     position: relative;
-    width: 275px;
+    width: 225px;
     height: 150px;
-}
-
-.ext4-notification .notification-img::after {
-    content: "";
-    background-color: #fff;
-    opacity: 0.6;
-    display: block;
-    width: 1px;
-    height: 80px;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    margin-top: -40px;
+    padding: 28px 0;
 }
 
 .ext4-notification .notification-text {
     text-align: left;
-    width: 440px;
-    padding: 33px 0 33px 30px;
+    width: 510px;
+    padding: 33px 0 33px 10px;
 }
 
 .ext4-notification .notification-action {
     text-align: center;
-    width: 185px;
-    padding: 64px 0px;
+    width: 165px;
+    padding: 64px 0;
 }
 
 .ext4-notification .btn-notification {
+    background-color: #f05758;
     color: #fff;
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
     line-height: 1.6;
-    border: 1px solid #fff;
     padding: 10px 20px;
-    margin-right: 20px;
+    margin-right: 10px;
     -webkit-transition: all .3s ease-in-out;
          -o-transition: all .3s ease-in-out;
             transition: all .3s ease-in-out;
@@ -396,8 +395,9 @@ body {
 .ext4-notification .btn-notification:hover,
 .ext4-notification .btn-notification:active,
 .ext4-notification .btn-notification:focus {
-    background: #fff;
-    color: #364043;
+    background-color: #d34c53;
+    color: #fff;
+    text-decoration: none;
 }
 
 
