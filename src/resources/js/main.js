@@ -301,7 +301,7 @@ var onTreeItemClick = function (record, e) {
 
 var treeRenderer = function (value, metadata, record) {
     if (record.data.isNew) {
-        value += "<span>&nbsp;</span>";
+        value += "<span>New</span>";
     }
 
     return value;
