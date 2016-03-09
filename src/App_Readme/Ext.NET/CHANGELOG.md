@@ -1,6 +1,35 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
-| Release Date | 2016-02-01 |
+| Release Date | 2016-03-09 |
+| Current Version | 4.0.0-beta |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
+
+#### FEATURES
+
+1. [[#1274](https://github.com/extnet/Ext.NET/issues/1274)] New Clipboard plugin for GridPanels with a SpreadsheetSelectionModel
+1. [[#1267](https://github.com/extnet/Ext.NET/issues/1267)] New SelectionModel's and View's FocusChange event
+1. [[#1266](https://github.com/extnet/Ext.NET/issues/1266)] SelectedCell: new ColumnID property
+1. [[#635](https://github.com/extnet/Ext.NET/issues/635)] Implement SpreadsheetSelectionModel
+
+#### DEFECTS
+
+1. [[#1278](https://github.com/extnet/Ext.NET/issues/1278)] TagField: adding items with CreateNewOnBlur causes a wrong .getValue() result and also might result in a JavaScript error
+1. [[#1272](https://github.com/extnet/Ext.NET/issues/1272)] Ext.Net.Pie3DSeries, Ext.Net.Bar3DSeries: no support for legends and labels
+1. [[#1269](https://github.com/extnet/Ext.NET/issues/1269)] Ext.net.Image does not properly handle ImageUrl= setting
+1. [[#1247](https://github.com/extnet/Ext.NET/issues/1247)] Triton Theme: FieldTrigger Icons and DropDown's TriggerIrcons display glitched 4.x defect
+1. [[#1241](https://github.com/extnet/Ext.NET/issues/1241)] Ext.net.DropDownField: TriggerIcons are incompatible with Triton theme 4.x
+
+#### BREAKING CHANGES
+
+1. [[#1265](https://github.com/extnet/Ext.NET/issues/1265)] Rename SelectedCell's Name to ColumnDataIndex for better API consistency 4.x breaking-change modified
+1. [[#1264](https://github.com/extnet/Ext.NET/issues/1264)] Rename SelectedCell's ColIndex to ColumnIndex for better API consistency 4.x breaking-change modified
+1. [[#1259](https://github.com/extnet/Ext.NET/issues/1259)] Remove the AjaxResult class - it was deprecated since Ext.NET v3.x 4.x breaking-change
+
+---
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
+| Release Date | 2016-02-04 |
 | Current Version | 4.0.0-preview |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
 
@@ -164,7 +193,7 @@
 1. [[#1175](https://github.com/extnet/Ext.NET/issues/1175)] Modified on Component - MaskOnDisable bool type needs to be changed to nullable bool? `sencha`
 1. [[#1204](https://github.com/extnet/Ext.NET/issues/1204)] Modified on AbstractContainer - DoLayout method has been renamed to UpdateLayout `sencha`
 1. [[#1205](https://github.com/extnet/Ext.NET/issues/1205)] Modified on AbstractContainer - AutoDoLayout config has been renamed to AutoUpdateLayout `sencha`
-1. [[#1216](https://github.com/extnet/Ext.NET/issues/1216)] Chart Series Tooltip Renderer's signature and default scope have been changed
+1. [[#1216](https://github.com/extnet/Ext.NET/issues/1216)] Chart Series Tooltip Renderer's signature and default scope have been changed 
 1. [[#1215](https://github.com/extnet/Ext.NET/issues/1215)] Chart Axis Renderer signature has been changed `sencha`
 1. [[#1183](https://github.com/extnet/Ext.NET/issues/1183)] Column's Resizable bool type changed to nullable bool `sencha`
 1. [[#1203](https://github.com/extnet/Ext.NET/issues/1203)] TreeDropZone's AllowParentInsert has to be AllowParentInserts (with the "s" at the end)] `sencha`

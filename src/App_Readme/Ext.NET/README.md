@@ -1,7 +1,7 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
-| Release Date | 2016-02-01 |
-| Current Version | 4.0.0-preview |
+| Release Date | 2016-03-09 |
+| Current Version | 4.0.0-beta |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
 
 ## Contents
@@ -49,8 +49,8 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
     <section name="extnet" type="Ext.Net.GlobalConfig" requirePermission="false" />
   </configSections>
 
-  <extnet theme="Crisp" licenseKey="** Ext.NET LICENSE KEY HERE **" initScriptMode="Linked" />
-
+  <extnet theme="Triton" licenseKey="** Ext.NET LICENSE KEY HERE **" initScriptMode="Linked" />
+  
   <system.web>
     <!-- This httpHandlers config only required if using IIS6 (or lower) -->
     <!--
@@ -73,17 +73,17 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
       <namespaces>
         <add namespace="Ext.Net"/>
         <!--<add namespace="Ext.Net.MVC"/>-->
-      </namespaces>
+      </namespaces>      
     </pages>
   </system.web>
 
   <system.webServer>
     <validation validateIntegratedModeConfiguration="false" />
-
+    
     <modules>
       <add name="DirectRequestModule" preCondition="managedHandler" type="Ext.Net.DirectRequestModule, Ext.Net" />
     </modules>
-
+    
     <handlers>
       <add name="DirectRequestHandler" verb="*" path="*/ext.axd" preCondition="integratedMode" type="Ext.Net.ResourceHandler" />
     </handlers>
@@ -191,7 +191,7 @@ public static void RegisterRoutes(RouteCollection routes)
 }
 ```
 
-This `IgnoreRoute` is automatically inserted if using the NuGet package [installer](https://www.nuget.org/packages/ext.net).
+This `IgnoreRoute` is automatically inserted if using the NuGet package [installer](https://www.nuget.org/packages/ext.net). 
 
 ## 7. Credits
 
