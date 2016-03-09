@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<example>
+  <description>
+    <![CDATA[The example demonstrates the SpreadsheetSelectionModel functionality]]>
+  </description>
+  <tags>spreadsheet,clipboard,selectionreplicator,selection replicator</tags>
+</example>

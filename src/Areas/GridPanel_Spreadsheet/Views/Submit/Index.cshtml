@@ -1,0 +1,95 @@
+﻿@model IEnumerable<object>
+@{
+    ViewBag.Title = "Spreadsheet Selection Model Submit - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Spreadsheet Selection Model Submit</h1>
+
+    <p>The example demonstrates how to submit the SpreadsheetSelectionModel selected data</p>
+
+    @(X.GridPanel()
+        .ID("GridPanel1")
+        .ColumnLines(true)
+        .Height(400)
+        .Width(775)
+        .Title("Spreadsheet")
+        .Frame(true)
+        .Store(X.Store()
+            .ID("Store1")
+            .Model(X.Model()
+                .Fields("year", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec")
+            )
+            .Reader(X.ArrayReader())
+            .DataSource(Model)
+            .ServerProxy(
+                X.AjaxProxy().Url(Url.Action("Reload"))
+            )
+        )
+        .SelectionModel(
+            X.SpreadsheetSelectionModel()
+                .ID("SpreadsheetSelectionModel1")
+                .ColumnSelect(true)
+                .CheckboxSelect(true)
+                .PruneRemoved(false)
+                .Extensible(SpreadsheetExtensible.Y)
+        )
+        .ColumnModel(
+            X.Column().Text("Year").DataIndex("year").Flex(1).MinWidth(70),
+            X.Column().Text("Jan").DataIndex("jan").Width(50),
+            X.Column().Text("Feb").DataIndex("feb").Width(50),
+            X.Column().Text("Mar").DataIndex("mar").Width(50),
+            X.Column().Text("Apr").DataIndex("apr").Width(50),
+            X.Column().Text("May").DataIndex("may").Width(50),
+            X.Column().Text("Jun").DataIndex("jun").Width(50),
+            X.Column().Text("Jul").DataIndex("jul").Width(50),
+            X.Column().Text("Aug").DataIndex("aug").Width(50),
+            X.Column().Text("Sep").DataIndex("sep").Width(50),
+            X.Column().Text("Oct").DataIndex("oct").Width(50),
+            X.Column().Text("Nov").DataIndex("nov").Width(50),
+            X.Column().Text("Dec").DataIndex("dec").Width(50)
+        )
+        .ViewConfig(X.GridView().TrackOver(false))
+        .Tools(X.Tool()
+            .Type(ToolType.Refresh)
+            .ToolTip("Reload Data")
+            .Handler("App.Store1.reload();")
+        )
+        .TopBar(
+            X.Toolbar()
+                .Items(
+                    X.Button()
+                        .Text("Submit")
+                        .DirectEvents(events =>
+                        {
+                            events.Click.Url = Url.Action("Submit");
+                            events.Click.ExtraParams.Add(X.Parameter()
+                                .Name("selectedData")
+                                .Value("App.GridPanel1.getSelectionSubmit().getSelectionModelField().getValue()")
+                                .Mode(ParameterMode.Raw)
+                            );
+                        }),
+
+                    X.Button()
+                        .Text("Submit with values")
+                        .DirectEvents(events =>
+                        {
+                            events.Click.Url = Url.Action("SubmitWithValues");
+                            events.Click.ExtraParams.Add(X.Parameter()
+                                .Name("selectedData")
+                                .Value("App.SpreadsheetSelectionModel1.getSubmitData({ excludeId: true })")
+                                .Mode(ParameterMode.Raw)
+                                .Encode(true)
+                            );
+                        })
+                )
+        )
+    )
+
+    <div style="width: 763px; border: 1px solid gray; padding: 5px; margin-top: 10px;">
+        @X.Label().ID("Label1").Html("<h3>Submitted data will be shown here</h3>")
+    </div>
+}

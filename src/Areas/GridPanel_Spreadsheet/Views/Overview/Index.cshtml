@@ -1,0 +1,149 @@
+﻿@model IEnumerable<object>
+@{
+    ViewBag.Title = "Spreadsheet Selection Model - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var onSelectionChange = function (grid, selection) {
+            var status = App.Status,
+                message = '??',
+                firstRowIndex,
+                firstColumnIndex,
+                lastRowIndex,
+                lastColumnIndex;
+
+            if (!selection) {
+                message = 'No selection';
+            } else if (selection.isCells) {
+                firstRowIndex = selection.getFirstRowIndex();
+                firstColumnIndex = selection.getFirstColumnIndex();
+                lastRowIndex = selection.getLastRowIndex();
+                lastColumnIndex = selection.getLastColumnIndex();
+
+                message = 'Selected cells: ' + (lastColumnIndex - firstColumnIndex + 1) + 'x' + (lastRowIndex - firstRowIndex + 1) +
+                    ' at (' + firstColumnIndex + ',' + firstRowIndex + ')';
+            } else if (selection.isRows) {
+                message = 'Selected rows: ' + selection.getCount();
+            } else if (selection.isColumns) {
+                message = 'Selected columns: ' + selection.getCount();
+            }
+
+            status.update(message);
+        };
+
+        var toggleRowSelect = function (button, pressed) {
+            App.SpreadsheetSelectionModel1.setRowSelect(pressed);
+        };
+
+        var toggleCellSelect = function (button, pressed) {
+            App.SpreadsheetSelectionModel1.setCellSelect(pressed);
+        };
+
+        var toggleColumnSelect = function (button, pressed) {
+            App.SpreadsheetSelectionModel1.setColumnSelect(pressed);
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>Spreadsheet Selection Model</h1>
+
+    <p>Supported features:</p>
+
+    <ul>
+        <li>Single / Range / Multiple individual row selection.</li>
+        <li>Single / Range cell selection.</li>
+        <li>Column selection by click selecting column headers.</li>
+        <li>Select / deselect all by clicking in the top-left, header.</li>
+        <li>Adds row number column to enable row selection.</li>
+        <li>Selection extensibility using a drag gesture. Configured in this case to be up or down.</li>
+        <li>Copy/paste to system clipboard using CTRL+C, CTRL+X and CTRL+V.</li>
+    </ul>
+
+    @(X.GridPanel()
+        .ColumnLines(true)
+        .Height(400)
+        .Width(775)
+        .Title("Spreadsheet")
+        .Frame(true)
+        .Store(X.Store()
+            .ID("Store1")
+            .Model(X.Model()
+                .IDProperty("year")
+                .Fields("year", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec")
+            )
+            .Reader(X.ArrayReader())
+            .DataSource(Model)
+            .ServerProxy(
+                X.AjaxProxy().Url(Url.Action("Reload"))
+            )
+        )
+        .SelectionModel(
+            X.SpreadsheetSelectionModel()
+                .ID("SpreadsheetSelectionModel1")
+                .ColumnSelect(true)
+                .CheckboxSelect(true)
+                .PruneRemoved(false)
+                .Extensible(SpreadsheetExtensible.Y)
+        )
+        .ColumnModel(
+            X.Column().Text("Year").DataIndex("year").Flex(1).MinWidth(70),
+            X.Column().Text("Jan").DataIndex("jan").Width(50),
+            X.Column().Text("Feb").DataIndex("feb").Width(50),
+            X.Column().Text("Mar").DataIndex("mar").Width(50),
+            X.Column().Text("Apr").DataIndex("apr").Width(50),
+            X.Column().Text("May").DataIndex("may").Width(50),
+            X.Column().Text("Jun").DataIndex("jun").Width(50),
+            X.Column().Text("Jul").DataIndex("jul").Width(50),
+            X.Column().Text("Aug").DataIndex("aug").Width(50),
+            X.Column().Text("Sep").DataIndex("sep").Width(50),
+            X.Column().Text("Oct").DataIndex("oct").Width(50),
+            X.Column().Text("Nov").DataIndex("nov").Width(50),
+            X.Column().Text("Dec").DataIndex("dec").Width(50)
+        )
+        .ViewConfig(X.GridView().TrackOver(false))
+        .Tools(X.Tool()
+            .Type(ToolType.Refresh)
+            .ToolTip("Reload Data")
+            .Handler("App.Store1.reload();")
+        )
+        .TopBar(
+            X.Toolbar()
+                .Items(
+                    X.Component().Html("Selectable:"),
+
+                    X.Button()
+                        .Text("Rows")
+                        .EnableToggle(true)
+                        .ToggleHandler("toggleRowSelect")
+                        .Pressed(true),
+
+                    X.Button()
+                        .Text("Cells")
+                        .EnableToggle(true)
+                        .ToggleHandler("toggleCellSelect")
+                        .Pressed(true),
+
+                    X.Button()
+                        .Text("Columns")
+                        .EnableToggle(true)
+                        .ToggleHandler("toggleColumnSelect")
+                        .Pressed(true),
+
+                    X.ToolbarFill(),
+
+                    X.Component().ID("Status")
+                )
+            )
+        .Listeners(events => events.SelectionChange.Fn = "onSelectionChange")
+        .Plugins(
+            X.Clipboard(),
+            X.SelectionReplicator()
+        )
+    )
+}

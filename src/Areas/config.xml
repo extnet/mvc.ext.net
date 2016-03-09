@@ -58,6 +58,8 @@
   </icons>
 
   <new version="4.0.0">
+    <folder name="GridPanel_Spreadsheet\Views\Overview" />
+    <folder name="GridPanel_Spreadsheet\Views\Submit" />
   </new>
 
   <updated version="4.0.0">

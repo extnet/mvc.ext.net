@@ -271,6 +271,11 @@
     <Compile Include="Areas\GridPanel_Selection_Models\Controllers\Checkbox_SelectionController.cs" />
     <Compile Include="Areas\GridPanel_Selection_Models\GridPanel_Selection_ModelsAreaRegistration.cs" />
     <Compile Include="Areas\GridPanel_Selection_Models\Models\Checkbox_SelectionModel.cs" />
+    <Compile Include="Areas\GridPanel_Spreadsheet\Controllers\SubmitController.cs" />
+    <Compile Include="Areas\GridPanel_Spreadsheet\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\GridPanel_Spreadsheet\GridPanel_SpreadsheetAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_Spreadsheet\Models\SubmitModel.cs" />
+    <Compile Include="Areas\GridPanel_Spreadsheet\Models\OverviewModel.cs" />
     <Compile Include="Areas\Keys_KeyMap\Controllers\BorderLayout_Regions_ToggleController.cs" />
     <Compile Include="Areas\Keys_KeyMap\Keys_KeyMapAreaRegistration.cs" />
     <Compile Include="Areas\Keys_KeyNav\Controllers\BasicController.cs" />
@@ -808,6 +813,8 @@
     <Content Include="Areas\GridPanel_RowExpander\Views\MultiLevel_GridPanel\config.xml" />
     <Content Include="Areas\GridPanel_RowExpander\Views\Remote_Mode\config.xml" />
     <Content Include="Areas\GridPanel_Selection_Models\Views\Checkbox_Selection\config.xml" />
+    <Content Include="Areas\GridPanel_Spreadsheet\Views\Submit\config.xml" />
+    <Content Include="Areas\GridPanel_Spreadsheet\Views\Overview\config.xml" />
     <Content Include="Areas\GridPanel_Update\Views\AutoSave\config.xml" />
     <Content Include="Areas\GridPanel_Update\Views\Batch\config.xml" />
     <Content Include="Areas\GridPanel_Update\Views\Restful\config.xml" />
@@ -1224,6 +1231,9 @@
     <Content Include="Areas\Miscellaneous_Factory\Views\Basic\Index.cshtml" />
     <Content Include="Areas\Miscellaneous_Factory\Views\Web.config" />
     <Content Include="Areas\Miscellaneous_Factory\Views\Basic\MyWindow2.cshtml" />
+    <Content Include="Areas\GridPanel_Spreadsheet\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\GridPanel_Spreadsheet\Views\Web.config" />
+    <Content Include="Areas\GridPanel_Spreadsheet\Views\Submit\Index.cshtml" />
     <None Include="resources\fonts\fontawesome-webfont.eot" />
     <None Include="resources\fonts\fontawesome-webfont.ttf" />
     <None Include="resources\fonts\fontawesome-webfont.woff" />
