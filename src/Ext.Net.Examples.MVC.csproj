@@ -174,6 +174,8 @@
     <Compile Include="Areas\Associations_HasOne\Models\Address.cs" />
     <Compile Include="Areas\Associations_HasOne\Models\Person.cs" />
     <Compile Include="Areas\Chart_Bar\Controllers\Basic_3DController.cs" />
+    <Compile Include="Areas\ColorPicker_Advanced\ColorPicker_AdvancedAreaRegistration.cs" />
+    <Compile Include="Areas\ColorPicker_Advanced\Controllers\OverviewController.cs" />
     <Compile Include="Areas\Data_Basic\Data_BasicAreaRegistration.cs" />
     <Compile Include="Areas\Data_Basic\Controllers\ModelSerializerController.cs" />
     <Compile Include="Areas\Data_Basic\Models\ModelSerializerModel.cs" />
@@ -581,6 +583,7 @@
     <Content Include="Areas\Chart_Pie\Views\Basic\config.xml" />
     <Content Include="Areas\Chart_Radar\Views\Basic\config.xml" />
     <Content Include="Areas\Chart_Scatter\Views\Basic\config.xml" />
+    <Content Include="Areas\ColorPicker_Advanced\Views\Overview\config.xml" />
     <Content Include="Areas\ColorPicker_Basic\Views\Custom_Colors\config.xml" />
     <Content Include="Areas\ColorPicker_Basic\Views\Custom_View\config.xml" />
     <Content Include="Areas\ColorPicker_Basic\Views\Overview\config.xml" />
@@ -932,6 +935,8 @@
     <Content Include="App_Readme\Ext.NET\README.md" />
     <Content Include="App_Readme\Ext.NET\LICENSE" />
     <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
+    <Content Include="Areas\ColorPicker_Advanced\Views\Web.config" />
+    <Content Include="Areas\ColorPicker_Advanced\Views\Overview\Index.cshtml" />
     <None Include="Areas\DataView_Basic\Content\sencha-touch-examples.json" />
     <Content Include="Areas\Desktop\Views\Web.config" />
     <Content Include="Areas\Desktop\Views\Overview\Desktop.cshtml" />
@@ -1158,7 +1163,9 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_BaseLayoutNoMgr.cshtml" />
-    <Content Include="Web.sitemap" />
+    <Content Include="Web.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\GridPanel_MultiHeader\Views\Web.config" />
     <Content Include="Areas\GridPanel_MultiHeader\Views\Filter\Index.cshtml" />
     <Content Include="Areas\Layout_AbsoluteLayout\Views\Web.config" />

@@ -58,6 +58,7 @@
   </icons>
 
   <new version="4.0.0">
+    <folder name="ColorPicker_Advanced\Views\Overview" />
     <folder name="GridPanel_Spreadsheet\Views\Overview" />
     <folder name="GridPanel_Spreadsheet\Views\Submit" />
   </new>

@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Advanced Color Picker components' Overview - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Advanced Color Picker components' Overview</h1>
+    <h2>1. Button</h2>
+    <h3>This is a simple color button. When the color is changed, a client-side event is triggered filling an (initially empty) label just below the button with a descriptive text of the change.</h3>
+    <script type="text/javascript">
+        var handleColorButtonChange = function (item, color, previousColor) {
+            // Only try to fill the label contents when the label is registered.
+            if (App.Label1) {
+                App.Label1.setText('From client-side handler (listener): Changed color from ' + previousColor + ' to ' + color + '.');
+            }
+        }
+    </script>
+    @(X.ColorButton()
+        .ID("ColorButton1")
+        .Listeners(l => l.Change.Fn = "handleColorButtonChange")
+    )
+
+    @(X.Label().ID("Label1"))
+
+    <hr />
+    <h2>2. Field</h2>
+    <h3>A simple ColorField that will trigger a server-side direct event to fill an (initially empty) label just below the field with a descriptive text of the change.</h3>
+
+    @(X.ColorField()
+        .ID("Colorfield1")
+        .DirectEvents(de =>
+        {
+            de.Change.Action = "HandleFieldChange";
+            de.Change.ExtraParams.Add(new Ext.Net.Parameter
+            {
+                Name = "previousColor",
+                Value = "previousColor",
+                Mode = ParameterMode.Raw
+            });
+            de.Change.ExtraParams.Add(new Ext.Net.Parameter
+            {
+                Name = "color",
+                Value = "color",
+                Mode = ParameterMode.Raw
+            });
+            de.Change.Success = "function (response, result) { App.Label2.setText(result.message); }";
+        })
+    )
+
+    @(X.Label().ID("Label2"))
+
+    <hr />
+    <h2>3. Selector</h2>
+    <h3>
+        The color selector itself, with 'ok' and 'cancel' buttons enabled directly, as well as
+        custom client-side JavaScript handlers for either buttons, updating a text label below
+        on click.
+        <br />
+        The selector is set up to return colors with the sharp symbol and also alpha byte, i.e.
+        following the format #rrggbbaa (lowercase hexadecimal characters).
+    </h3>
+    
+    @(X.ColorSelector()
+        .ID("ColorSelector1")
+        .ShowOkCancelButtons(true)
+        .Format(ColorStringFormat.sharplchex8)
+        .Listeners(l =>
+        {
+            l.Ok.Handler = "App.Label3.setText('Clicked OK. Color chosen: ' + color);";
+            l.Cancel.Handler = "App.Label3.setText('Clicked Cancel. Current color: ' + item.value);";
+        })
+    )
+
+    @(X.Label().ID("Label3"))
+}
