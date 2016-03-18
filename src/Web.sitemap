@@ -34,11 +34,14 @@
         <siteMapNode title="Overview" description="No description" url="~/Examples/Buttons/ButtonGroup/Overview/" />
       </siteMapNode>
     </siteMapNode>
-    <siteMapNode title="ColorPalete">
+    <siteMapNode title="ColorPicker">
       <siteMapNode title="Basic">
-        <siteMapNode title="Custom Colors" description="No description" url="~/Examples/ColorPalete/Basic/Custom_Colors/" />
-        <siteMapNode title="Custom View" description="No description" url="~/Examples/ColorPalete/Basic/Custom_View/" />
-        <siteMapNode title="Overview" description="No description" url="~/Examples/ColorPalete/Basic/Overview/" />
+        <siteMapNode title="Custom Colors" description="No description" url="~/Examples/ColorPicker/Basic/Custom_Colors/" />
+        <siteMapNode title="Custom View" description="No description" url="~/Examples/ColorPicker/Basic/Custom_View/" />
+        <siteMapNode title="Overview" description="No description" url="~/Examples/ColorPicker/Basic/Overview/" />
+      </siteMapNode>
+      <siteMapNode title="Advanced">
+        <siteMapNode title="Overview" description="No description" url="~/Examples/ColorPicker/Advanced/Overview/" />
       </siteMapNode>
     </siteMapNode>
     <siteMapNode title="DataView">
