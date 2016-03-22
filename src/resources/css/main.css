@@ -875,17 +875,17 @@ td.alt2{
 }
 
 .ext4-notification a {
-    color: #f05758;
+    color: #00c19c;
 }
 
 .ext4-notification a:hover,
 .ext4-notification a:active,
 .ext4-notification a:focus {
-    color: #d34c53;
+    color: #00a081;
 }
 
 .ext4-notification .notification-container {
-    background: url('../images/extdotnet4-beta-bg.jpg') center right no-repeat;
+    background: url('../images/extdotnet4-rc-bg.jpg') center right no-repeat;
     width: 100%;
     height: 150px;
     margin: 0 auto;
@@ -901,15 +901,15 @@ td.alt2{
 .ext4-notification .notification-img {
     text-align: center;
     position: relative;
-    width: 225px;
+    width: 275px;
     height: 150px;
     padding: 28px 0;
 }
 
 .ext4-notification .notification-text {
     text-align: left;
-    width: 540px;
-    padding: 33px 5px 33px 10px;
+    width: 490px;
+    padding: 43px 10px;
 }
 
 .ext4-notification .notification-action {
@@ -919,7 +919,7 @@ td.alt2{
 }
 
 .ext4-notification .btn-notification {
-    background-color: #f05758;
+    background-color: #00c19c;
     color: #fff;
     text-decoration: none;
     font-size: 14px;
@@ -939,7 +939,7 @@ td.alt2{
 .ext4-notification .btn-notification:hover,
 .ext4-notification .btn-notification:active,
 .ext4-notification .btn-notification:focus {
-    background-color: #d34c53;
+    background-color: #00a081;
     color: #fff;
     text-decoration: none;
 }
