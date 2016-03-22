@@ -1,5 +1,32 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2016-03-22 |
+| Current Version | 4.0.0-rc |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
+
+#### FEATURES
+
+1. [[#1287](https://github.com/extnet/Ext.NET/issues/1287)] GridPanel with local paging + ListFilter: show all available options in ListFilter including filtered out ones
+1. [[#962](https://github.com/extnet/Ext.NET/issues/962)] New ColorSelector Class
+1. [[#961](https://github.com/extnet/Ext.NET/issues/961)] New ColorField Class
+1. [[#959](https://github.com/extnet/Ext.NET/issues/959)] New ColorButton Class
+
+#### DEFECTS
+
+1. [[#1290](https://github.com/extnet/Ext.NET/issues/1285)] Ext.Net.AbstractDataView does not include PreserveScrollOnReload
+1. [[#1285](https://github.com/extnet/Ext.NET/issues/1285)] ComponentConfigResult breaks if there is an Icon used in a partial view
+1. [[#1280](https://github.com/extnet/Ext.NET/issues/1280)] GridPanel with Local Paging & GridFilters does not correctly render in initial load
+1. [[#1277](https://github.com/extnet/Ext.NET/issues/1277)] Resources cache buster is always "0"
+
+#### BREAKING CHANGES
+
+None.
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+---
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2016-03-09 |
 | Current Version | 4.0.0-beta |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
