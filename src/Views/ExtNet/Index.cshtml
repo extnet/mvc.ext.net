@@ -11,7 +11,7 @@
 
 <html>
 <head>
-    <title>Ext.NET MVC Sample</title>
+    <title>Ext.NET MVC Sample</title>    
 
     <link type="text/css" rel="stylesheet" href="http://speed.ext.net/www/intro/css/main.css" />
 </head>
@@ -27,9 +27,9 @@
         <p>Thank you for installing Ext.NET MVC.</p>
         <p class="last">You can check that everything is working correctly by submitting a value in the message box below.</p>
     </div>
-
+    
     @using (Html.BeginForm()) {
-
+    
         @(Html.X().Panel()
             .Title(Model.Title)
             .Height(215)
@@ -54,7 +54,7 @@
                 .DirectClickAction("SampleAction")
             )
         )
-
+        
     }
 
     <div class="wrapper wrapper-lower">

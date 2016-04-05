@@ -1,5 +1,18 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2016-04-05 |
+| Current Version | 4.0.0 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
+
+#### BREAKING CHANGES
+
+None.
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+---
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2016-03-22 |
 | Current Version | 4.0.0-rc |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
