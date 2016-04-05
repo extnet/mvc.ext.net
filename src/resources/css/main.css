@@ -320,27 +320,16 @@ body {
 }
 
 .ext4-notification {
-    background-color: #263438;
-    color: #fff;
+    color: #5a6a77;
     font-size: 14px;
     line-height: 1.5;
     width: 900px;
     margin: 40px auto 20px;
 }
 
-.ext4-notification a {
-    color: #00c19c;
-    text-decoration: none;
-}
-
-.ext4-notification a:hover,
-.ext4-notification a:active,
-.ext4-notification a:focus {
-    color: #00a081;
-}
-
 .ext4-notification .notification-container {
-    background: url('../images/extdotnet4-rc-bg.jpg') center right no-repeat;
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
     width: 100%;
     display: block;
     height: 150px;
@@ -355,34 +344,33 @@ body {
 }
 
 .ext4-notification .notification-img {
-    text-align: center;
+    text-align: left;
     position: relative;
-    width: 275px;
+    width: 290px;
     height: 150px;
-    padding: 28px 0;
+    padding: 0;
 }
 
 .ext4-notification .notification-text {
     text-align: left;
-    width: 460px;
+    width: 440px;
     padding: 43px 0 43px 15px;
 }
 
 .ext4-notification .notification-action {
     text-align: center;
-    width: 165px;
+    width: 168px;
     padding: 64px 0;
 }
 
 .ext4-notification .btn-notification {
-    background-color: #00c19c;
+    background-color: #419ef7;
     color: #fff;
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
     line-height: 1.6;
     padding: 10px 20px;
-    margin-right: 10px;
     -webkit-transition: all .3s ease-in-out;
          -o-transition: all .3s ease-in-out;
             transition: all .3s ease-in-out;
@@ -395,7 +383,7 @@ body {
 .ext4-notification .btn-notification:hover,
 .ext4-notification .btn-notification:active,
 .ext4-notification .btn-notification:focus {
-    background-color: #00a081;
+    background-color: #2984ce;
     color: #fff;
     text-decoration: none;
 }
