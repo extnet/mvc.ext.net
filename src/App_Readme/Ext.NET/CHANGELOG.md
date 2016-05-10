@@ -1,5 +1,38 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2016-05-10 |
+| Current Version | 4.1.0 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
+
+#### FEATURES
+
+1. [[#1310](https://github.com/extnet/Ext.NET/issues/1310)] Incorporate Pictos font icons package into Triton theme
+2. [[#1328](https://github.com/extnet/Ext.NET/issues/1328)] Upgrade to ExtJS 6.0.2
+
+#### DEFECTS
+
+1. [[#295](https://github.com/extnet/Ext.NET/issues/295)] Summary RemoteRoot doesn't work
+2. [[#1245](https://github.com/extnet/Ext.NET/issues/1245)] Component's UI property is not supported by Triton theme
+3. [[#1293](https://github.com/extnet/Ext.NET/issues/1293)] GridPanel with GroupPaging does not correctly render on initial load
+4. [[#1302](https://github.com/extnet/Ext.NET/issues/1302)] Locale: pt_BR message does not match en_US for Date.minText and Date.maxText
+5. [[#1312](https://github.com/extnet/Ext.NET/issues/1312)] DirectEvent duration messages are not correctly centered on customTarget
+6. [[#1313](https://github.com/extnet/Ext.NET/issues/1313)] ComponentLoader's .afterIFrameLoad() throws a JavaScript error
+7. [[#1315](https://github.com/extnet/Ext.NET/issues/1315)] Ext.Net.TreeStore Load event has wrong arguments list
+8. [[#1318](https://github.com/extnet/Ext.NET/issues/1318)] Ext.Net.HyperlinkButton tries to open unexisting link in the buttons with IE11
+9. [[#1319](https://github.com/extnet/Ext.NET/issues/1319)] GridFilters Remote bug
+10. [[#1322](https://github.com/extnet/Ext.NET/issues/1322)] Some UXs rely on .doLayout() that has been deprecated and removed in favor or .updateLayout()
+11. [[#1323](https://github.com/extnet/Ext.NET/issues/1323)] TagField with TypeAhead="true" throws a JavaScript error on expand or typing
+12. [[#1324](https://github.com/extnet/Ext.NET/issues/1324)] TagField with Editable="false" doesn't collapse on outside click
+
+#### BREAKING CHANGES
+
+None.
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+---
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2016-04-05 |
 | Current Version | 4.0.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
