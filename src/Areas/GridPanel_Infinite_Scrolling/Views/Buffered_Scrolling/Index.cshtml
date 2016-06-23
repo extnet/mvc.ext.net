@@ -34,8 +34,6 @@
         .Width(700)
         .Height(500)
         .Store(Html.X().Store()
-            .PageSize(5000)
-            .Buffered(true)
             .DataSource(Model)
             .Model(Html.X().Model()
                 .Fields(
@@ -46,18 +44,18 @@
                 )
             )
         )
+        .Plugins(Html.X().BufferedRenderer())
         .View(Html.X().GridView().TrackOver(false))
         .ColumnModel(
             Html.X().RowNumbererColumn().Width(40).Sortable(false),
-                    Html.X().Column().Text("Name").Flex(1).DataIndex("name").Sortable(false),
-                    Html.X().Column().Text("Rating").Width(125).DataIndex("rating").Sortable(false),
+            Html.X().Column().Text("Name").Flex(1).DataIndex("name"),
+            Html.X().Column().Text("Rating").Width(125).DataIndex("rating"),
             Html.X().Column()
                 .Text("Salary")
                 .Width(125)
                 .DataIndex("salary")
                 .Align(Alignment.Right)
                 .Renderer(RendererFormat.UsMoney)
-                .Sortable(false)
         )
         .SelectionModel(Html.X().RowSelectionModel().PruneRemoved(false))
         .BottomBar(Html.X().Toolbar()
