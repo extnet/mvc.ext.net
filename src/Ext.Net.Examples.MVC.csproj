@@ -1111,6 +1111,7 @@
     <Content Include="resources\icons\wand.png" />
     <Content Include="resources\icons\wrench.png" />
     <Content Include="resources\images\404.png" />
+    <Content Include="resources\images\banner-2-small.png" />
     <Content Include="resources\images\bg-main.png" />
     <Content Include="resources\images\bg.gif" />
     <Content Include="resources\images\bgnoise.png" />
@@ -1124,10 +1125,11 @@
     <Content Include="resources\images\ee-ad-store-bg.png" />
     <Content Include="resources\images\expand-all.gif" />
     <Content Include="resources\images\ext.net-logo.png" />
-    <Content Include="resources\images\extdotnet4-preview-background.png" />
-    <Content Include="resources\images\extdotnet4-preview.svg" />
+    <Content Include="resources\images\extdotnet-logo.svg" />
+    <Content Include="resources\images\extnet-mobile-release.svg" />
     <Content Include="resources\images\ext_net_badge.gif" />
     <Content Include="resources\images\ext_net_logo_small.gif" />
+    <Content Include="resources\images\grey.png" />
     <Content Include="resources\images\grid-badge-bg.png" />
     <Content Include="resources\images\grid.png" />
     <Content Include="resources\images\group-expand-sprite.gif" />
