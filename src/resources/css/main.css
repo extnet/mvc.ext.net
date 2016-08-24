@@ -315,11 +315,11 @@ body {
 
 /* Notification Banner */
 
-.ext4-notification * {
+.extnet-notification * {
     box-sizing: border-box;
 }
 
-.ext4-notification {
+.extnet-notification {
     color: #5a6a77;
     font-size: 14px;
     line-height: 1.5;
@@ -327,65 +327,33 @@ body {
     margin: 40px auto 20px;
 }
 
-.ext4-notification .notification-container {
+.notification-container {
     background-color: #fff;
     border: 1px solid #e1e1e1;
-    width: 100%;
-    display: block;
     height: 150px;
+    margin: 0 auto;
 }
 
-.ext4-notification .notification-img,
-.ext4-notification .notification-text,
-.ext4-notification .notification-action {
+.notification-img,
+.notification-text,
+.notification-action {
     display: inline-block;
-    box-sizing: border-box;
     float: left;
 }
 
-.ext4-notification .notification-img {
+.notification-img {
     text-align: left;
     position: relative;
-    width: 290px;
+    width: 363px;
     height: 150px;
     padding: 0;
 }
 
-.ext4-notification .notification-text {
+.notification-text {
+    width: 535px;
+    padding: 30px 30px 30px 15px;
+    font-size: 15px;
     text-align: left;
-    width: 440px;
-    padding: 43px 0 43px 15px;
-}
-
-.ext4-notification .notification-action {
-    text-align: center;
-    width: 168px;
-    padding: 64px 0;
-}
-
-.ext4-notification .btn-notification {
-    background-color: #419ef7;
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.6;
-    padding: 10px 20px;
-    -webkit-transition: all .3s ease-in-out;
-         -o-transition: all .3s ease-in-out;
-            transition: all .3s ease-in-out;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-}
-
-.ext4-notification .btn-notification:hover,
-.ext4-notification .btn-notification:active,
-.ext4-notification .btn-notification:focus {
-    background-color: #2984ce;
-    color: #fff;
-    text-decoration: none;
 }
 
 
