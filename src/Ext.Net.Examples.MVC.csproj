@@ -1154,6 +1154,7 @@
     <Content Include="resources\images\welcome-screens.png" />
     <Content Include="resources\js\examples.js" />
     <Content Include="resources\js\main.js" />
+    <Content Include="resources\js\perfect-scrollbar.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1246,6 +1247,7 @@
     <None Include="resources\fonts\fontawesome-webfont.eot" />
     <None Include="resources\fonts\fontawesome-webfont.ttf" />
     <None Include="resources\fonts\fontawesome-webfont.woff" />
+    <Content Include="resources\fonts\fontawesome-webfont.woff2" />
     <None Include="resources\fonts\OpenSans-Italic-webfont.eot" />
     <None Include="resources\fonts\OpenSans-Italic-webfont.ttf" />
     <None Include="resources\fonts\OpenSans-Italic-webfont.woff" />

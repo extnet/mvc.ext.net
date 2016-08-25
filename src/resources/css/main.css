@@ -325,6 +325,11 @@ body {
     margin-bottom: 30px;
 }
 
+.nav-menu > li > ul {
+    padding-left: 20px;
+    list-style: none;
+}
+
 .nav-menu .section-title {
     color: #5c6d7d;
     font-family: OpenSansSemibold;
@@ -334,7 +339,7 @@ body {
     cursor: default;
 }
 
-.nav-menu > li > a {
+.nav-menu li a {
     color: #b0bcc7;
     font-size: 14px;
     text-decoration: none;
@@ -346,8 +351,13 @@ body {
             transition: all 0.25s ease-in-out;
 }
 
-.nav-menu > li > a:hover {
+.nav-menu li a:hover {
     color: #8fcbff;
+}
+
+.nav-menu li a i {
+    margin-right: 6px;
+    font-size: 12px;
 }
 
 .nav-menu .separator,
@@ -356,6 +366,10 @@ body {
     margin: 12px 0;
     overflow: hidden;
     background: #3e4a56;
+}
+
+.nav-menu .collapse {
+    margin: 10px 0;
 }
 
 .button-sidebar-right {
@@ -428,6 +442,27 @@ body {
     border-radius: 50px;
 }
 
+/* Collapse */
+
+.collapse {
+    max-height: 0;
+    overflow-y: hidden;
+    -webkit-transition: all 0.3s ease-in-out;
+         -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+}
+
+.collapse.expanded {
+    max-height: 265px;
+}
+
+.collapse-icon:before {
+    content: "\f067";
+}
+
+.expanded .collapse-icon:before {
+    content: "\f068";
+}
 
 /*  Misc
     -----------------------------------------------------------------------------------------------*/
