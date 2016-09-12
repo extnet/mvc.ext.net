@@ -924,14 +924,14 @@ td.alt2{
 .notification-img {
     text-align: left;
     position: relative;
-    width: 363px;
+    width: 340px;
     height: 150px;
     padding: 0;
 }
 
 .notification-text {
-    width: 595px;
-    padding: 30px 30px 30px 15px;
+    width: 618px;
+    padding: 41px 30px 41px 15px;
     font-size: 15px;
     text-align: left;
 }
