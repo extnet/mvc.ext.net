@@ -1,3 +1,42 @@
+var handleRedirection = function () {
+    if (Ext.os.deviceType !== "Desktop") {
+        var query = Ext.Object.fromQueryString(window.location.search),
+            queryRedirect = query.redirect;
+
+        if (!Ext.isEmpty(queryRedirect)) {
+            queryRedirect = Ext.JSON.decode(queryRedirect);
+
+            if (queryRedirect === false) {
+                return;
+            } else if (queryRedirect === true) {
+                window.location = "http://mobile.ext.net";
+                return;
+            }
+        }
+
+        var cookieRedirect = Ext.util.Cookies.get("redirect");
+
+        if (!Ext.isEmpty(cookieRedirect)) {
+            cookieRedirect = Ext.JSON.decode(cookieRedirect);
+
+            if (cookieRedirect === false) {
+                return;
+            } else if (cookieRedirect === true) {
+                window.location = "http://mobile.ext.net";
+                return;
+            }
+        }
+
+        // Rich this code if neither query string nor Cookie directives
+        // So, we should ask the user eiter redirect or stay
+        Ext.onReady(function () {
+            App.RedirectOverlay.show();
+        });
+    }
+};
+
+handleRedirection();
+
 Ext.grid.NavigationModel.override({
     onKeyUp: function (keyEvent) {
         var newRecord = keyEvent.view.walkRecs(keyEvent.record, -1);
@@ -679,3 +718,23 @@ if (window.location.href.indexOf("#") > 0) {
         }, 100, window);
     }, window);
 }
+
+var onRedirect = function () {
+    var remember = App.RememberCheckbox.getValue();
+
+    if (remember) {
+        Ext.util.Cookies.set("redirect", true);
+    }
+
+    window.location = "http://mvc.mobile.ext.net";
+};
+
+var onStay = function () {
+    var remember = App.RememberCheckbox.getValue();
+
+    if (remember) {
+        Ext.util.Cookies.set("redirect", false);
+    }
+
+    this.up().hide();
+};

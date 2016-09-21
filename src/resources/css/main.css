@@ -936,6 +936,38 @@ td.alt2{
     text-align: left;
 }
 
+/* Redirection Overlay */
+.redirect-overlay {
+    padding: 30px;
+    max-width: 400px;
+    background-color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.redirect-overlay p {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.redirect-overlay .x-btn {
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.redirect-overlay .x-btn-inner {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.redirect-overlay-body {
+    text-align: center;
+}
+
+.redirect-overlay .x-form-cb-label-default {
+    font-size: 15px;
+}
 
 /*  Fonts
     -----------------------------------------------------------------------------------------------*/

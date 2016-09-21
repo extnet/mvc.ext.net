@@ -1269,6 +1269,7 @@
     <Content Include="Views\Shared\_BaseLayoutClean.cshtml" />
     <Content Include="Views\ExtNet\Index.cshtml" />
     <Content Include="Views\Main\_East.cshtml" />
+    <Content Include="Views\Main\_RedirectionOverlay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Dynamic_Partial_Rendering\Views\Web.config" />

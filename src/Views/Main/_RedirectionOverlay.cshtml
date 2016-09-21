@@ -1,0 +1,36 @@
+﻿@{
+    var X = Html.X();
+}
+
+@(X.Container()
+    .ID("RedirectOverlay")
+    .Cls("redirect-overlay")
+    .WidthSpec("80%")
+    .Floating(true)
+    .LayoutConfig(new VBoxLayoutConfig
+    {
+        Align = VBoxAlign.Stretch
+    })
+    .CustomConfig(cc => cc.Add(new { modal = true }))
+    .Items(
+        X.Component()
+            .Cls("redirect-overlay-body")
+            .Html("<p>Looks like you are browsing from a phone or a tablet device. Would you like to redirect to Ext.NET Mobile examples?</p>"),
+
+        X.Button()
+            .Text("Redirect")
+            .Flex(1)
+            .Handler("onRedirect"),
+
+        X.Button()
+            .Text("Stay here")
+            .Flex(1)
+            .Handler("onStay"),
+
+        X.Checkbox()
+            .ID("RememberCheckbox")
+            .Cls("remember-me")
+            .BoxLabel("Remember my choice")
+
+    )
+)
