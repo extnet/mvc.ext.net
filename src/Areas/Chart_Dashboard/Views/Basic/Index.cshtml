@@ -209,35 +209,35 @@
                                 .Text("Price")
                                 .Width(75)
                                 .DataIndex("price")
-                                .Align(Alignment.Right)
+                                .Align(ColumnAlign.End)
                                 .Renderer(RendererFormat.UsMoney),
 
                             X.Column()
                                 .Text("Revenue")
                                 .Width(75)
                                 .DataIndex("revenue")
-                                .Align(Alignment.Right)
+                                .Align(ColumnAlign.End)
                                 .Renderer("return value + '%';"),
 
                             X.Column()
                                 .Text("Growth")
                                 .Width(75)
                                 .DataIndex("growth")
-                                .Align(Alignment.Right)
+                                .Align(ColumnAlign.End)
                                 .Renderer("return value + '%';"),
 
                             X.Column()
                                 .Text("Product")
                                 .Width(75)
                                 .DataIndex("product")
-                                .Align(Alignment.Right)
+                                .Align(ColumnAlign.End)
                                 .Renderer("return value + '%';"),
 
                             X.Column()
                                 .Text("Market")
                                 .Width(75)
                                 .DataIndex("market")
-                                .Align(Alignment.Right)
+                                .Align(ColumnAlign.End)
                                 .Renderer("return value + '%';")
                         )
                         .Listeners(l => l.SelectionChange.Fn = "onSelectionChange"),

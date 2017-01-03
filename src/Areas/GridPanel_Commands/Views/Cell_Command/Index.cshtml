@@ -66,7 +66,7 @@
             Html.X().Column()
                 .Text("Price")
                 .DataIndex("price")
-                .Align(Alignment.Right)
+                .Align(ColumnAlign.End)
                 .RightCommandAlign(false)
                 .Renderer(RendererFormat.UsMoney)
                 .Commands(
@@ -85,7 +85,7 @@
             Html.X().Column()
                 .Text("Change")
                 .DataIndex("change")
-                .Align(Alignment.Right)
+                .Align(ColumnAlign.End)
                 .RightCommandAlign(false)
                 .Renderer("change")
                 .Commands(
@@ -103,7 +103,7 @@
             Html.X().Column()
                 .Text("Change")
                 .DataIndex("pctChange")
-                .Align(Alignment.Right)
+                .Align(ColumnAlign.End)
                 .Renderer("pctChange")
                 .Commands(Html.X().ImageCommand()
                     .CommandName("Chart")
