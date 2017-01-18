@@ -10,6 +10,13 @@ namespace Ext.Net.MVC.Examples
     // Note: For instructions on enabling IIS6 or IIS7 classic mode,
     // visit http://go.microsoft.com/?LinkId=9394801
 
+    public class ExtNetVersion
+    {
+        public static Version Version = typeof(Ext.Net.MVC.Examples.MvcApplication).Assembly.GetName().Version;
+        public static string Major = Version.Major + "." + Version.Minor;
+        public static string Full = Version.ToString();
+    }
+
     public class MvcApplication : System.Web.HttpApplication
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
