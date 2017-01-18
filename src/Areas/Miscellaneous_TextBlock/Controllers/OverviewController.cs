@@ -2,7 +2,7 @@
 
 namespace Ext.Net.MVC.Examples.Areas.Miscellaneous_TextBlock.Controllers
 {
-    public class BasicController : Controller
+    public class OverviewController : Controller
     {
         public ActionResult Index()
         {

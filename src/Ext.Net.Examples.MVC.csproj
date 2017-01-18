@@ -315,7 +315,7 @@
     <Compile Include="Areas\Miscellaneous_Render_Template\Miscellaneous_Render_TemplateAreaRegistration.cs" />
     <Compile Include="Areas\Miscellaneous_Factory\Controllers\BasicController.cs" />
     <Compile Include="Areas\Miscellaneous_Factory\Miscellaneous_FactoryAreaRegistration.cs" />
-    <Compile Include="Areas\Miscellaneous_TextBlock\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Miscellaneous_TextBlock\Controllers\OverviewController.cs" />
     <Compile Include="Areas\Miscellaneous_TextBlock\Miscellaneous_TextBlockAreaRegistration.cs" />
     <Compile Include="Areas\Miscellaneous_Resizable\Controllers\BasicController.cs" />
     <Compile Include="Areas\Miscellaneous_Resizable\Miscellaneous_ResizableAreaRegistration.cs" />
@@ -850,7 +850,7 @@
     <Content Include="Areas\Miscellaneous_Mouse_Distance_Sensor\Views\Basic\config.xml" />
     <Content Include="Areas\Miscellaneous_Render_Template\Views\Basic\config.xml" />
     <Content Include="Areas\Miscellaneous_Factory\Views\Basic\config.xml" />
-    <Content Include="Areas\Miscellaneous_TextBlock\Views\Basic\config.xml" />
+    <Content Include="Areas\Miscellaneous_TextBlock\Views\Overview\config.xml" />
     <Content Include="Areas\Miscellaneous_Resizable\Content\css\basic.css" />
     <Content Include="Areas\Miscellaneous_Resizable\Content\images\avus_gtr.jpg" />
     <Content Include="Areas\Miscellaneous_Resizable\Content\images\CroixDeFer.jpg" />
@@ -1243,7 +1243,7 @@
     <Content Include="Areas\GridPanel_Spreadsheet\Views\Overview\Index.cshtml" />
     <Content Include="Areas\GridPanel_Spreadsheet\Views\Web.config" />
     <Content Include="Areas\GridPanel_Spreadsheet\Views\Submit\Index.cshtml" />
-    <Content Include="Areas\Miscellaneous_TextBlock\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Miscellaneous_TextBlock\Views\Overview\Index.cshtml" />
     <Content Include="Areas\Miscellaneous_TextBlock\Views\Web.config" />
     <None Include="resources\fonts\fontawesome-webfont.eot" />
     <None Include="resources\fonts\fontawesome-webfont.ttf" />
