@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "Text Block Overview - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{ 
+    <h1>&lt;Text&gt;&lt;/Text&gt; Block Examples</h1>
+
+    <p>
+        These examples shows usage of the text block in MVC Razor syntax. It allows to
+        enable intelliSense and syntax highlighting in Visual Studio for script and content
+        blocks in programs.
+    </p>
+
+    <p>
+        This example makes more sense when looking at the source code, or rather, opening it
+        using Visual Studio.
+    </p>
+
+    <p>
+        <b>1. Panel's HTML</b><br />
+        The panel below has imbued HTML written in an user-friendly interface with Visual Studio.
+    </p>
+
+    @(X.Panel()
+        .Title("My Panel")
+        .Width(500)
+        .Height(150)
+        .Html(@<text>
+            <b>This is a bold text.</b> <i>and then some italics.</i>
+            <hr />
+            An horizontal row above and...
+            <p style="text-align: center">
+                A paragraph with text aligned to center.
+            </p>
+        </text>)
+    )
+
+    <hr/>
+
+    <p>
+        <b>2. Button's handler with long JavaScript code</b><br />
+        The button's handler JavaScript can be nicely formatted, with line breaks and block comments.
+    </p>
+
+    @(X.Button()
+        .Text("Click me!")
+        .Handler(@<text>
+            <script type="text/javascript">
+                var me = this; /* bind 'me' to the button. */
+
+                console.log("Some output to the console.");
+
+                Ext.Msg.alert("Alert!", "An alert has been emitted by JavaScript!");
+
+                /* Block comments are fine. Just inline (//) comments that breaks the resulting code */
+                if (!me.textChanged) {
+                    me.textChanged = true; /* so that I run only once */
+                    me.setText("Click me again!");
+                }
+
+                /*
+                    * As long as block comments, they can span several lines.
+                    * This won't break our script!
+                    */
+            </script>
+        </text>)
+    )
+    <hr />
+
+    <p>
+        <b>3. Listener handler</b><br />
+        Listener handlers can span several lines by using the text block with the utility helper functions directly.
+    </p>
+    <p>
+        <b>Ext.Net.MvcUtils</b> brings some helper functions to extract code from text blocks
+        containing sub-blocks that implements syntax highlighting with Visual Studio.
+        <br />
+        <b>StringifyScriptBlock()</b> simply returns a string from the post-processing of the
+        script block inside the text block.
+        <br />
+        <b>StringifyStyleBlock()</b>, likewise, stripping out the <b>style</b> block from around
+        the text.
+        <br />
+        <b>JFyScriptBlock()</b> in turn will perform like <b>StringifyScriptBlock()</b>, but
+        returns the extracted JavaScript code encapsulated into a <b>JFunction</b>'s
+        <b>Handler</b> property.
+    </p>
+
+    @(X.Label()
+        .Text("Press me for a while (longpress)!")
+        .StyleSpec("background-color: lightgray; padding: 5px")
+        .Listeners(l => l.LongPress.Handler = MvcUtils.StringifyScriptBlock(
+            @<text>
+                <script type="text/javascript">
+                    console.log("Logged long press on a text label.");
+
+                    /* Same rule applies, no inline comments. */
+                    Ext.Msg.confirm(
+                        "Confirm long press",
+                        "Are you sure about the long press you just performed?",
+                        function (button) {
+                            Ext.toast("Dismissed dialog by clicking '" + button + "'.").show();
+                        }
+                    );
+                </script>
+            </text>
+        ))
+    )
+    <hr />
+}
