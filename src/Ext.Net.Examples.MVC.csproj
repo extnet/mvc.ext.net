@@ -332,6 +332,8 @@
     <Compile Include="Areas\Viewport_Basic\Controllers\Built_as_ClassController.cs" />
     <Compile Include="Areas\Viewport_Basic\Controllers\Built_as_BuilderController.cs" />
     <Compile Include="Areas\Viewport_Basic\Viewport_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\Window_Toast\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\Window_Toast\Window_ToastAreaRegistration.cs" />
     <Compile Include="Areas\XRender_Basic\Controllers\Add_ItemsController.cs" />
     <Compile Include="Areas\XRender_Basic\Controllers\New_WindowController.cs" />
     <Compile Include="Areas\XRender_Basic\XRender_BasicAreaRegistration.cs" />
@@ -1041,6 +1043,7 @@
     <Content Include="Areas\TreePanel_Loaders\Views\XML_File_Loading\config.xml" />
     <Content Include="Areas\Viewport_Basic\Views\Built_as_Class\config.xml" />
     <Content Include="Areas\Viewport_Basic\Views\Built_as_Builder\config.xml" />
+    <Content Include="Areas\Window_Toast\Views\Overview\config.xml" />
     <Content Include="Areas\Window_Basic\Views\Hello_World\config.xml" />
     <Content Include="Areas\Window_Basic\Views\Load_External_Website\config.xml" />
     <Content Include="Areas\Window_Basic\Views\Show\config.xml" />
@@ -1245,6 +1248,8 @@
     <Content Include="Areas\GridPanel_Spreadsheet\Views\Submit\Index.cshtml" />
     <Content Include="Areas\Miscellaneous_TextBlock\Views\Overview\Index.cshtml" />
     <Content Include="Areas\Miscellaneous_TextBlock\Views\Web.config" />
+    <Content Include="Areas\Window_Toast\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\Window_Toast\Views\Web.config" />
     <None Include="resources\fonts\fontawesome-webfont.eot" />
     <None Include="resources\fonts\fontawesome-webfont.ttf" />
     <None Include="resources\fonts\fontawesome-webfont.woff" />
