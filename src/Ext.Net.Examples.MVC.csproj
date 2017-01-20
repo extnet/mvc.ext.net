@@ -175,6 +175,7 @@
     <Compile Include="Areas\Data_Basic\Data_BasicAreaRegistration.cs" />
     <Compile Include="Areas\Data_Basic\Controllers\ModelSerializerController.cs" />
     <Compile Include="Areas\Data_Basic\Models\ModelSerializerModel.cs" />
+    <Compile Include="Areas\Dynamic_Partial_Rendering\Controllers\Render_as_ConfigController.cs" />
     <Compile Include="Areas\Form_ComboBox\Controllers\Linked_Combos_In_GridController.cs" />
     <Compile Include="Areas\Form_Login\Controllers\Auto_CompleteController.cs" />
     <Compile Include="Areas\Form_Login\Form_LoginAreaRegistration.cs" />
@@ -740,6 +741,7 @@
     <Content Include="Areas\Dynamic_Partial_Rendering\Views\ASPX_Engine\View4.ascx" />
     <Content Include="Areas\Dynamic_Partial_Rendering\Views\Partial_Content\config.xml" />
     <Content Include="Areas\Dynamic_Partial_Rendering\Views\Partial_Items\config.xml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Render_as_Config\config.xml" />
     <Content Include="Areas\Dynamic_Partial_Rendering\Views\Window\config.xml" />
     <Content Include="Areas\Editor_Basic\Views\FormPanel_Labels\config.xml" />
     <Content Include="Areas\Editor_Basic\Views\Overview\config.xml" />
@@ -998,6 +1000,8 @@
     <Content Include="Areas\Form_ComboBox\Views\Linked_Combos_In_Grid\Index.cshtml" />
     <Content Include="Areas\Form_Login\Views\Auto_Complete\Index.cshtml" />
     <Content Include="Areas\Form_Login\Views\Web.config" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Render_as_Config\Index.cshtml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Render_as_Config\Component.cshtml" />
     <None Include="Areas\GridPanel_ArrayGrid\Views\ArrayWithPaging\Index.cshtml" />
     <None Include="Areas\GridPanel_ColumnModel\Views\Ajax_Configuration\Index.cshtml" />
     <None Include="Areas\GridPanel_ColumnModel\Views\Column_Variations\Index.cshtml" />
