@@ -11,6 +11,11 @@
     @Html.X().Button().Text("Load View to the following container").DirectEvents(e => {
         e.Click.Url = Url.Action("PartialView");
         e.Click.ExtraParams.Add(new { containerId = "ViewContainer1" });
+        e.Click.Success = MvcUtils.StringifyScriptBlock(@<text>
+            <script type="text/javascript">
+                this.disable();
+            </script>
+        </text>);
     })
     <br />
     @Html.X().Container().ID("ViewContainer1").StyleSpec("border:solid 1px black; height:150px; width:300px;")
