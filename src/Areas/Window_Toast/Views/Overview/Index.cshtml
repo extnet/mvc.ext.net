@@ -43,8 +43,16 @@
         .DirectClickAction("Button3_Click")
     )
 
+
     <hr />
-    <h2>5: Markup toast</h2>
+    <h2>5: Server-side toast defined with an Ext.Net.Toast component definition.</h2>
+    @(X.Button()
+        .ID("Button4")
+        .Text("Trigger Toast")
+        .DirectClickAction("Button4_Click")
+    )
+    <hr />
+    <h2>6: Markup toast</h2>
     <p>
         See source code, the toast is displayed first, once the page loads.
     </p>
