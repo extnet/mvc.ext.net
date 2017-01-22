@@ -58,6 +58,9 @@
   </icons>
 
   <new version="4.2.0">
+    <folder name="Dynamic_Partial_Rendering\Views\Render_as_Config" />
+    <folder name="Miscellaneous_TextBlock\Views\Overview" />
+    <folder name="Window_Toast\Views\Overview" />
   </new>
 
   <!--
