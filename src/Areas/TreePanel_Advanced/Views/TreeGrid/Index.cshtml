@@ -77,7 +77,7 @@
                     .Text("Duration")
                     .Flex(1)
                     .DataIndex("duration")
-                    .Align(Alignment.Center)
+                    .Align(ColumnAlign.Center)
                     .Template(t =>
                     {
                         t.Html = "{duration:this.formatHours}";
@@ -100,7 +100,7 @@
                     .Text("Edit")
                     .Width(40)
                     .MenuDisabled(true)
-                    .Align(Alignment.Center)
+                    .Align(ColumnAlign.Center)
                     .Items(
                         X.ActionItem()
                             .Tooltip("Edit task")

@@ -60,6 +60,10 @@
       <HintPath>ReferenceAssemblies\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -89,8 +93,8 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="Wilco.SyntaxHighlighter, Version=0.5.0.0, Culture=neutral, PublicKeyToken=fb87150479c2990b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -98,8 +102,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" ('$(Configuration)|$(Platform)' == 'Debug|AnyCPU') Or ('$(Configuration)|$(Platform)' == 'Release|AnyCPU') ">
-    <Reference Include="Ext.Net, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ext.NET.MVC.4.1.0\lib\net45\Ext.Net.dll</HintPath>
+    <Reference Include="Ext.Net, Version=4.2.0.0, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ext.NET.MVC.4.2.0\lib\net45\Ext.Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ext.Net.Utilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=2c34ac34702a3c23, processorArchitecture=MSIL">
@@ -108,10 +112,6 @@
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -131,7 +131,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" ('$(Configuration)|$(Platform)' == 'Development|AnyCPU') ">
-    <Reference Include="Ext.Net, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
+    <Reference Include="Ext.Net, Version=4.2.0.0, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
       <HintPath>..\..\Premium\src\bin\Debug\Ext.Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -141,10 +141,6 @@
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure">
       <HintPath>..\..\Premium\src\bin\Debug\Microsoft.Web.Infrastructure.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\Premium\src\bin\Debug\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -179,6 +175,7 @@
     <Compile Include="Areas\Data_Basic\Data_BasicAreaRegistration.cs" />
     <Compile Include="Areas\Data_Basic\Controllers\ModelSerializerController.cs" />
     <Compile Include="Areas\Data_Basic\Models\ModelSerializerModel.cs" />
+    <Compile Include="Areas\Dynamic_Partial_Rendering\Controllers\Render_as_ConfigController.cs" />
     <Compile Include="Areas\Form_ComboBox\Controllers\Linked_Combos_In_GridController.cs" />
     <Compile Include="Areas\Form_Login\Controllers\Auto_CompleteController.cs" />
     <Compile Include="Areas\Form_Login\Form_LoginAreaRegistration.cs" />
@@ -319,6 +316,8 @@
     <Compile Include="Areas\Miscellaneous_Render_Template\Miscellaneous_Render_TemplateAreaRegistration.cs" />
     <Compile Include="Areas\Miscellaneous_Factory\Controllers\BasicController.cs" />
     <Compile Include="Areas\Miscellaneous_Factory\Miscellaneous_FactoryAreaRegistration.cs" />
+    <Compile Include="Areas\Miscellaneous_TextBlock\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\Miscellaneous_TextBlock\Miscellaneous_TextBlockAreaRegistration.cs" />
     <Compile Include="Areas\Miscellaneous_Resizable\Controllers\BasicController.cs" />
     <Compile Include="Areas\Miscellaneous_Resizable\Miscellaneous_ResizableAreaRegistration.cs" />
     <Compile Include="Areas\PropertyGrid_Basic\Controllers\OverviewController.cs" />
@@ -334,6 +333,8 @@
     <Compile Include="Areas\Viewport_Basic\Controllers\Built_as_ClassController.cs" />
     <Compile Include="Areas\Viewport_Basic\Controllers\Built_as_BuilderController.cs" />
     <Compile Include="Areas\Viewport_Basic\Viewport_BasicAreaRegistration.cs" />
+    <Compile Include="Areas\Window_Toast\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\Window_Toast\Window_ToastAreaRegistration.cs" />
     <Compile Include="Areas\XRender_Basic\Controllers\Add_ItemsController.cs" />
     <Compile Include="Areas\XRender_Basic\Controllers\New_WindowController.cs" />
     <Compile Include="Areas\XRender_Basic\XRender_BasicAreaRegistration.cs" />
@@ -740,6 +741,7 @@
     <Content Include="Areas\Dynamic_Partial_Rendering\Views\ASPX_Engine\View4.ascx" />
     <Content Include="Areas\Dynamic_Partial_Rendering\Views\Partial_Content\config.xml" />
     <Content Include="Areas\Dynamic_Partial_Rendering\Views\Partial_Items\config.xml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Render_as_Config\config.xml" />
     <Content Include="Areas\Dynamic_Partial_Rendering\Views\Window\config.xml" />
     <Content Include="Areas\Editor_Basic\Views\FormPanel_Labels\config.xml" />
     <Content Include="Areas\Editor_Basic\Views\Overview\config.xml" />
@@ -852,6 +854,7 @@
     <Content Include="Areas\Miscellaneous_Mouse_Distance_Sensor\Views\Basic\config.xml" />
     <Content Include="Areas\Miscellaneous_Render_Template\Views\Basic\config.xml" />
     <Content Include="Areas\Miscellaneous_Factory\Views\Basic\config.xml" />
+    <Content Include="Areas\Miscellaneous_TextBlock\Views\Overview\config.xml" />
     <Content Include="Areas\Miscellaneous_Resizable\Content\css\basic.css" />
     <Content Include="Areas\Miscellaneous_Resizable\Content\images\avus_gtr.jpg" />
     <Content Include="Areas\Miscellaneous_Resizable\Content\images\CroixDeFer.jpg" />
@@ -997,6 +1000,8 @@
     <Content Include="Areas\Form_ComboBox\Views\Linked_Combos_In_Grid\Index.cshtml" />
     <Content Include="Areas\Form_Login\Views\Auto_Complete\Index.cshtml" />
     <Content Include="Areas\Form_Login\Views\Web.config" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Render_as_Config\Index.cshtml" />
+    <Content Include="Areas\Dynamic_Partial_Rendering\Views\Render_as_Config\Component.cshtml" />
     <None Include="Areas\GridPanel_ArrayGrid\Views\ArrayWithPaging\Index.cshtml" />
     <None Include="Areas\GridPanel_ColumnModel\Views\Ajax_Configuration\Index.cshtml" />
     <None Include="Areas\GridPanel_ColumnModel\Views\Column_Variations\Index.cshtml" />
@@ -1042,6 +1047,7 @@
     <Content Include="Areas\TreePanel_Loaders\Views\XML_File_Loading\config.xml" />
     <Content Include="Areas\Viewport_Basic\Views\Built_as_Class\config.xml" />
     <Content Include="Areas\Viewport_Basic\Views\Built_as_Builder\config.xml" />
+    <Content Include="Areas\Window_Toast\Views\Overview\config.xml" />
     <Content Include="Areas\Window_Basic\Views\Hello_World\config.xml" />
     <Content Include="Areas\Window_Basic\Views\Load_External_Website\config.xml" />
     <Content Include="Areas\Window_Basic\Views\Show\config.xml" />
@@ -1244,6 +1250,10 @@
     <Content Include="Areas\GridPanel_Spreadsheet\Views\Overview\Index.cshtml" />
     <Content Include="Areas\GridPanel_Spreadsheet\Views\Web.config" />
     <Content Include="Areas\GridPanel_Spreadsheet\Views\Submit\Index.cshtml" />
+    <Content Include="Areas\Miscellaneous_TextBlock\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\Miscellaneous_TextBlock\Views\Web.config" />
+    <Content Include="Areas\Window_Toast\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\Window_Toast\Views\Web.config" />
     <None Include="resources\fonts\fontawesome-webfont.eot" />
     <None Include="resources\fonts\fontawesome-webfont.ttf" />
     <None Include="resources\fonts\fontawesome-webfont.woff" />

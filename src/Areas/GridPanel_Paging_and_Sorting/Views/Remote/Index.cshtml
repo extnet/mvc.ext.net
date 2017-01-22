@@ -26,7 +26,7 @@
                 Html.X().Column().DataIndex(Model, m => m.Common).Text("Common Name").Flex(1),
                 Html.X().Column().DataIndex(Model, m => m.Botanical).Text("Botanical").Width(230),
                 Html.X().Column().DataIndex(Model, m => m.Light).Text("Light").Width(130),
-                Html.X().Column().DataIndex(Model, m => m.Price).Text("Price").Width(70).Align(Alignment.Right),
+                Html.X().Column().DataIndex(Model, m => m.Price).Text("Price").Width(70).Align(ColumnAlign.End),
                 Html.X().DateColumn().DataIndex(Model, m => m.Availability).Text("Available").Width(95).Format("yyyy-MM-dd"),
                 Html.X().Column().DataIndex(Model, m => m.Indoor).Text("Indoor?").Width(55)
             )

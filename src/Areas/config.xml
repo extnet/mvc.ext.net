@@ -57,6 +57,10 @@
     <folder name="XRender" iconCls="fa fa-magic" />
   </icons>
 
+  <new version="4.2.0">
+  </new>
+
+  <!--
   <new version="4.0.0">
     <folder name="ColorPicker_Advanced\Views\Overview" />
     <folder name="GridPanel_Spreadsheet\Views\Overview" />
@@ -66,7 +70,6 @@
   <updated version="4.0.0">
   </updated>
 
-  <!--
   <new version="3.3.0">
     <folder name="Chart_Bar\Views\Basic_3D" />
     <folder name="Form_Login\Views\Auto_Complete" />

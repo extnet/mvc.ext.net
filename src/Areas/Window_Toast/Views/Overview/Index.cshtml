@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Simple Ext.NET Window Sample - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Window Toast Overview</h1>
+    <p>
+        Click the buttons below to see the toast drop. Check sources for how this is done.
+    </p>
+    <hr />
+    <h2>1: Simple client-side toast</h2>
+    @(X.Button()
+        .Text("Trigger Toast")
+        .Handler(@<text>
+            <script type="text/javascript">
+                Ext.toast('This is a client-side simple toast!');
+            </script>
+        </text>)
+    )
+    
+    <hr />
+    <h2>2: Simple server-side toast</h2>
+    @(X.Button()
+        .Text("Trigger Toast")
+        .DirectClickAction("Button1_Click")
+    )
+
+    <hr />
+    <h2>3: Server-side toast with title and position</h2>
+    @(X.Button()
+        .Text("Trigger Toast")
+        .DirectClickAction("Button2_Click")
+    )
+
+    <hr />
+    <h2>4: Server-side toast defined with an object.</h2>
+    @(X.Button()
+        .ID("Button3")
+        .Text("Trigger Toast")
+        .DirectClickAction("Button3_Click")
+    )
+
+
+    <hr />
+    <h2>5: Server-side toast defined with an Ext.Net.Toast component definition.</h2>
+    @(X.Button()
+        .ID("Button4")
+        .Text("Trigger Toast")
+        .DirectClickAction("Button4_Click")
+    )
+    <hr />
+    <h2>6: Markup toast</h2>
+    <p>
+        See source code, the toast is displayed first, once the page loads.
+    </p>
+
+    @(X.Toast()
+        .ID("Toast1")
+        .StickWhileHover(true)
+        .Content(
+            @<text>
+                This toast is defined in Razor View code and shows once -- once the page is loaded.
+            </text>
+        )
+    )
+}

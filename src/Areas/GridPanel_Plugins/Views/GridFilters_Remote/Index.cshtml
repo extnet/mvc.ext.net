@@ -58,7 +58,7 @@
                     X.DateColumn()
                         .Text("Date")
                         .DataIndex("Date")
-                        .Align(Alignment.Center)
+                        .Align(ColumnAlign.Center)
                         .Format("yyyy-MM-dd")
                         .Filter(X.DateFilter().DatePickerOptions(picker => picker.TodayText = "Now")),
 
@@ -70,7 +70,7 @@
                     X.BooleanColumn()
                         .Text("Visible")
                         .DataIndex("Visible")
-                        .Align(Alignment.Center)
+                        .Align(ColumnAlign.Center)
                         .TrueText("Yes")
                         .FalseText("No")
                         .Filter(X.BooleanFilter())

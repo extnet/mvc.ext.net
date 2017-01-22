@@ -19,9 +19,25 @@
     @(X.Button()
         .Text("Click me")
         .OnClientClick("alert('Clicked');")
+)
+
+    <h2>2. Button with Handler and text block (MVC-only)</h2>
+    @(X.Button()
+        .Text("Click me")
+        .Handler(@<text>
+            <script type="text/javascript">
+                /*
+                 * This allows nice Visual Studio syntax highlighting and intelliSense
+                 * for inline scripts.
+                 * But beware inline comments (//) will break the code!
+                 */
+                console.log("Logged a message to the console!");
+                Ext.Msg.alert("Alert!", "The button has triggered an Ext.Msg.alert()!");
+            </script>
+        </text>)
     )
 
-    <h2>2. Button with DirectEvent</h2>
+    <h2>3. Button with DirectEvent</h2>
 
     @(X.Button()
         .Text("Click me")
@@ -34,21 +50,21 @@
         )
     )
 
-    <h2>3. Button with Icon</h2>
+    <h2>4. Button with Icon</h2>
 
     @(X.Button()
        .Text("Text")
        .Icon(Icon.Add)
     )
 
-    <h2>4. Button with Custom Icon</h2>
+    <h2>5. Button with Custom Icon</h2>
 
     @(X.Button()
        .Text("Text")
        .IconCls("custom-icon1")
     )
 
-    <h2>5. Button with QuickTip</h2>
+    <h2>6. Button with QuickTip</h2>
 
     @(X.Button()
         .Text("Text")
@@ -57,7 +73,7 @@
         )
     )
 
-    <h2>6. Toggle Buttons</h2>
+    <h2>7. Toggle Buttons</h2>
 
     @(X.Button()
        .Text("Button1")
@@ -78,7 +94,7 @@
        .ToggleGroup("Group1")
     )
 
-    <h2>7. Button with menu</h2>
+    <h2>8. Button with menu</h2>
 
     @(X.Button()
        .Text("Text")
@@ -97,7 +113,7 @@
        )
     )
 
-    <h2>8. SplitButton with menu</h2>
+    <h2>9. SplitButton with menu</h2>
 
     @(X.SplitButton()
        .Text("Text")
@@ -116,7 +132,7 @@
        )
     )
 
-    <h2>9. SplitButton with custom drop down</h2>
+    <h2>10. SplitButton with custom drop down</h2>
 
     @(X.SplitButton()
        .Text("Text")
@@ -146,7 +162,7 @@
         .Listeners(l => l.ArrowClick.Handler = "this.bin[0].show(); this.bin[0].alignTo(this.el);")
     )
 
-    <h2>10. CycleButton</h2>
+    <h2>11. CycleButton</h2>
 
     @(X.CycleButton()
         .ShowText(true)
@@ -164,7 +180,7 @@
         )
     )
 
-    <h2>11. Flat Button</h2>
+    <h2>12. Flat Button</h2>
 
     @(X.Button()
        .Text("FlatButton")
@@ -172,7 +188,7 @@
        .Flat(true)
     )
 
-    <h2>12. Custom Size Button</h2>
+    <h2>13. Custom Size Button</h2>
 
     @(X.Button()
        .Text("128 x 128")

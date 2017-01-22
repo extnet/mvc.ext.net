@@ -93,9 +93,9 @@
                     X.Column().Text("ID").DataIndex("Id"),
                     X.Column().Text("Company").DataIndex("Company").Flex(1),
                     X.Column().Text("Price").DataIndex("Price").Renderer(RendererFormat.UsMoney),
-                    X.DateColumn().Text("Date").DataIndex("Date").Align(Alignment.Center).Format("yyyy-MM-dd"),
+                    X.DateColumn().Text("Date").DataIndex("Date").Align(ColumnAlign.Center).Format("yyyy-MM-dd"),
                     X.Column().Text("Size").DataIndex("Size"),
-                    X.Column().Text("Visible").DataIndex("Visible").Align(Alignment.Center)
+                    X.Column().Text("Visible").DataIndex("Visible").Align(ColumnAlign.Center)
                         .Renderer("return (value) ? 'Yes':'No';")
                 )
                 .Plugins(

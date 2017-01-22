@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Render Window";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script type="text/javascript">
+        var createComponentHandler = function (configList) {
+            var config = configList[0];
+
+            // Ensure the component has a renderTo setting. If not, set it
+            // to be rendered on document's body.
+            if (config.renderTo === undefined) {
+                config.renderTo = Ext.getBody();
+            };
+
+            Ext.create(config);
+        }
+    </script>
+}
+
+@section example
+{
+    <h1>Load window using PartialView's RenderMode.Config</h1>
+
+    <p>
+        Using this method, only the partial view's config object -- with any
+        relevant resources that may be needed to load -- is returned from the
+        action. Then a client-side function can handle the creation of the
+        retrieved partial view's settings.
+    </p>
+
+    @(Html.X().Button()
+        .Text("Show window")
+        .DirectEvents(de => {
+            de.Click.Url = Url.Action("RenderWindow");
+            de.Click.Success = MvcUtils.StringifyScriptBlock(
+            @<text>
+                <script type="text/javascript">
+                    var cmpObj = eval(Ext.decode(response.responseText));
+                    Ext.net.loadResources(cmpObj, createComponentHandler, this);
+                </script>
+            </text>);
+        })
+     )
+}
