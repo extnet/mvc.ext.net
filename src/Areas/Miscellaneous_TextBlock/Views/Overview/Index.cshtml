@@ -6,108 +6,89 @@
 
 @section example
 { 
-    <h1>&lt;Text&gt;&lt;/Text&gt; Block Examples</h1>
+    <h1>&lt;Text&gt;&lt;/Text&gt; Inline Block </h1>
 
-    <p>
-        These examples shows usage of the text block in MVC Razor syntax. It allows to
-        enable intelliSense and syntax highlighting in Visual Studio for script and content
-        blocks in programs.
-    </p>
+    <p>These examples demonstrate usage of an <code>&#64;&lt;text></code> block with MVC Razor syntax.</p>
+    
+    <p>This example makes more sense when looking at the source code, or rather, opening it using Visual Studio.</p>
 
-    <p>
-        This example makes more sense when looking at the source code, or rather, opening it
-        using Visual Studio.
-    </p>
+    <h2>Panel HTML</h2>
 
-    <p>
-        <b>1. Panel's HTML</b><br />
-        The panel below has imbued HTML written in an user-friendly interface with Visual Studio.
-    </p>
+    <p>Panel with embedded HTML.</p>
 
     @(X.Panel()
         .Title("My Panel")
         .Width(500)
         .Height(150)
+        .BodyPadding(10)
         .Html(@<text>
-            <b>This is a bold text.</b> <i>and then some italics.</i>
-            <hr />
-            An horizontal row above and...
-            <p style="text-align: center">
-                A paragraph with text aligned to center.
+            <strong>This is a bold text,</strong> <em>and some italics</em>
+            <p>
+                A paragraph
             </p>
         </text>)
     )
 
-    <hr/>
-
-    <p>
-        <b>2. Button's handler with long JavaScript code</b><br />
-        The button's handler JavaScript can be nicely formatted, with line breaks and block comments.
-    </p>
+    <h2>Button Handler</h2>
+    
+    <p>Button Handler code can be nicely formatted, with line breaks and block comments.</p>
 
     @(X.Button()
-        .Text("Click me!")
+        .Text("Click Me")
         .Handler(@<text>
             <script type="text/javascript">
                 var me = this; /* bind 'me' to the button. */
 
-                console.log("Some output to the console.");
-
                 Ext.Msg.alert("Alert!", "An alert has been emitted by JavaScript!");
 
-                /* Block comments are fine. Just inline (//) comments that breaks the resulting code */
+                /* Block comments are fine. Just inline (//) comments will break the code */
                 if (!me.textChanged) {
                     me.textChanged = true; /* so that I run only once */
-                    me.setText("Click me again!");
+                    me.setText("Click Again");
                 }
 
                 /*
                  * As long as block comments, they can span several lines.
-                 * This won't break our script!
+                 * This won't break.
                  */
             </script>
         </text>)
     )
-    <hr />
+
+    <h2>Listener Handler</h2>
 
     <p>
-        <b>3. Listener handler</b><br />
-        Listener handlers can span several lines by using the text block with the utility helper functions directly.
-    </p>
-    <p>
-        <b>Ext.Net.MvcUtils</b> brings some helper functions to extract code from text blocks
+        Listener Handler can span several lines by using the text block with the utility helper functions directly. <strong>Ext.NET.MvcUtils</strong> include several helper functions to extract code from text blocks
         containing sub-blocks that implements syntax highlighting with Visual Studio.
-        <br />
-        <b>StringifyScriptBlock()</b> simply returns a string from the post-processing of the
-        script block inside the text block.
-        <br />
-        <b>StringifyStyleBlock()</b>, likewise, stripping out the <b>style</b> block from around
-        the text.
-        <br />
-        <b>JFyScriptBlock()</b> in turn will perform like <b>StringifyScriptBlock()</b>, but
-        returns the extracted JavaScript code encapsulated into a <b>JFunction</b>'s
-        <b>Handler</b> property.
     </p>
+
+    <dl>
+        <dt>StringifyScriptBlock</dt>
+        <dd>Returns a string from the post-processing of the script block inside the text block</dd>
+
+        <dt>StringifyStyleBlock</dt>
+        <dd>Strips the <code>style</code> block from around the text</dd>
+
+        <dt>JFyScriptBlock</dt>
+        <dd>Returns the extracted JavaScript code encapsulated into a <strong>JFunction</strong> <strong>Handler</strong> property</dd>
+    </dl>
 
     @(X.Label()
-        .Text("Press me for a while (longpress)!")
+        .Text("LongPress")
         .StyleSpec("background-color: lightgray; padding: 5px")
         .Listeners(l => l.LongPress.Handler = MvcUtils.StringifyScriptBlock(
             @<text>
                 <script type="text/javascript">
-                    console.log("Logged long press on a text label.");
-
                     /* Same rule applies, no inline comments. */
                     Ext.Msg.confirm(
-                        "Confirm long press",
-                        "Are you sure about the long press you just performed?",
+                        "Confirm",
+                        "Please confirm LongPress?",
                         function (button) {
-                            Ext.toast("Dismissed dialog by clicking '" + button + "'.").show();
+                            Ext.toast("Selected: '" + button + "'.").show();
                         }
                     );
                 </script>
             </text>
         ))
     )
-    <hr />
 }
