@@ -7,5 +7,8 @@
     .X(new Random().Next(300))
     .Y(new Random().Next(300))
     .CloseAction(CloseAction.Destroy)
+    .TopBar(Html.X().Toolbar().Items(
+        Html.X().Button().Text("Button").Icon(Icon.BellAdd).UI(UI.Danger)
+    ))
     .Html(DateTime.Now.ToLongTimeString())
 )

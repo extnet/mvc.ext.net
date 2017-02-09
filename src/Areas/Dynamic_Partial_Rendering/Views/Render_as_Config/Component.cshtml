@@ -1,5 +1,5 @@
 ﻿@(Html.X().Window()
-    .Width(200)
+    .Width(250)
     .Height(200)
     .Icon(Icon.Clock)
     .Title("Server Time")
@@ -8,4 +8,11 @@
     .Y(new Random().Next(300))
     .CloseAction(CloseAction.Destroy)
     .Html(DateTime.Now.ToLongTimeString())
+    .TopBar(
+        Html.X().Toolbar()
+            .Items(
+                Html.X().Button().Text("Button").Icon(Icon.Add),
+                Html.X().Button().Text("Button").Icon(Icon.Delete).UI(UI.Warning)
+            )
+    )
 )

@@ -40,7 +40,8 @@
             de.Click.Success = MvcUtils.StringifyScriptBlock(
             @<text>
                 <script type="text/javascript">
-                    var cmpObj = eval(Ext.decode(response.responseText));
+                    /* In case the response comes with resources, we must eval all the line. */
+                    eval("var cmpObj = " + Ext.decode(response.responseText) + ";");
                     Ext.net.loadResources(cmpObj, createComponentHandler, this);
                 </script>
             </text>);
