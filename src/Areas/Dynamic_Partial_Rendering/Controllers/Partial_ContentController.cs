@@ -13,7 +13,7 @@ namespace Ext.Net.MVC.Examples.Areas.Dynamic_Partial_Rendering.Controllers
             return View();
         }
 
-        public PartialViewResult PartialView(string containerId)
+        public new PartialViewResult PartialView(string containerId)
         {
             return new PartialViewResult(containerId);
         }

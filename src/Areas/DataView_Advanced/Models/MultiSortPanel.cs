@@ -15,7 +15,7 @@ namespace Ext.Net.MVC.Examples.Areas.DataView_Advanced.Models
             this.Width = 730;
             this.Height = 535;
             this.Title = "Multisort DataView";
-            this.AutoScroll = true;
+            this.Scrollable = ScrollableOption.Both;
             this.TopBar.Add(this.GetTopBar());
             this.Items.Add(this.GetDataView());
             this.Frame = true;

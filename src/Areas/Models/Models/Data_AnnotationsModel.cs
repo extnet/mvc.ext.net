@@ -38,7 +38,7 @@ namespace Ext.Net.MVC.Examples.Areas.Models
 
         [Required]
         [Range(1, 120)]
-        [System.Web.Mvc.CompareAttribute("Hours")]
+        [System.ComponentModel.DataAnnotations.Compare("Hours")]
         public int? ConfirmHours
         {
             get;
