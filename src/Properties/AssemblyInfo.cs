@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("4.2.0")]
-[assembly: AssemblyFileVersion("4.2.0.0")]
-[assembly: AssemblyInformationalVersion("4.2.0")]
+[assembly: AssemblyVersion("4.2.1")]
+[assembly: AssemblyFileVersion("4.2.1.0")]
+[assembly: AssemblyInformationalVersion("4.2.1")]
 [assembly: AssemblyCompany("Object.NET, Inc.")]
-[assembly: AssemblyCopyright("Copyright (c) 2008-2016 Object.NET, Inc.")]
+[assembly: AssemblyCopyright("Copyright (c) 2008-2017 Object.NET, Inc.")]
 
 [assembly: AssemblyTitle("Ext.Net.MVC.Examples")]
 [assembly: AssemblyProduct("Ext.Net.MVC.Examples")]
