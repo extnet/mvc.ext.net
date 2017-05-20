@@ -173,6 +173,13 @@ namespace Ext.Net.MVC.Examples
 
         private static ExampleConfig rootCfg;
 
+        public static bool ClearExamplesTree()
+        {
+            rootCfg = null;
+
+            return true;
+        }
+
         private static bool IsNew(string folder)
         {
             if (ExamplesModel.rootCfg == null)

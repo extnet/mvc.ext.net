@@ -12,6 +12,11 @@ namespace Ext.Net.MVC.Examples
     {
         public ActionResult Index()
         {
+            if (this.Request.QueryString.Get("clearExamplesCache") != null)
+            {
+                ExamplesModel.ClearExamplesTree();
+                X.Msg.Alert("Cache clear", "Tree nodes cache cleared.").Show();
+            }
             return View();
         }
 
