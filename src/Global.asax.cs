@@ -85,5 +85,21 @@ namespace Ext.Net.MVC.Examples
                 Ext.Net.ResourceManager.AddFactoryView("~/Areas/Miscellaneous_Factory/Views/Basic/MyWindow2.cshtml", "mywindow2", "My.Window2");
             }
         }
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+#if DEBUG
+            // Enables debugging code output by default if the project is built in debug configuration.
+            if (Session["Ext.Net.ScriptMode"] == null)
+            {
+                Session["Ext.Net.ScriptMode"] = ScriptMode.Debug;
+            }
+
+            if (Session["Ext.Net.SourceFormatting"] == null)
+            {
+                Session["Ext.Net.SourceFormatting"] = true;
+            }
+#endif // DEBUG
+        }
     }
 }
