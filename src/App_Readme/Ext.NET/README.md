@@ -1,7 +1,7 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
-| Release Date | 2016-05-10 |
-| Current Version | 4.1.0 |
+| Release Date | 2017-05-22 |
+| Current Version | 4.2.1 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
 
 ## Contents
@@ -10,14 +10,15 @@
 2. [Installation Instructions](#2-installation-instructions)
 3. [Revisions and Breaking Changes](#3-revisions-and-breaking-changes)
 4. [Sample Web.config](#4-sample-webconfig)
-5. [Web.config Global Configuration Properties](#5-webconfig-global-configuration-properties)
-6. [MVC Installation Tips](#6-mvc-installation-tips)
-7. [Credits](#7-credits)
+5. [Browser Support](#5-browser-support)
+6. [Web.config Global Configuration Properties](#6-webconfig-global-configuration-properties)
+7. [MVC Installation Tips](#7-mvc-installation-tips)
+8. [Credits](#8-credits)
 
 ## 1. System Requirements
 
-1. Visual Studio 2012, 2013, 2015, or
-2. Visual Studio Express 2012, 2013, 2015
+1. Visual Studio 2012, 2013, 2015, 2017, or
+2. Visual Studio Express 2012, 2013, 2015, 2017
 3. .NET Framework 4.0, 4.5, 4.5.2 and 4.6
 
 ## 2. Installation Instructions
@@ -36,8 +37,8 @@ Install-Package Ext.NET
 
 See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), or view in the Examples Explorers:
 
-[WebForms Examples Explorer](http://examples.ext.net/#/Getting_Started/Release_Documents/README/)
-[MVC Examples Explorer](http://examples.ext.net/#/Getting_Started/Release_Documents/BREAKING_CHANGES/)
+ - [WebForms Examples Explorer](http://examples.ext.net/#/Getting_Started/Release_Documents/README/)
+ - [MVC Examples Explorer](http://examples.ext.net/#/Getting_Started/Release_Documents/BREAKING_CHANGES/)
 
 
 ## 4. Sample Web.config
@@ -93,7 +94,7 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
       <dependentAssembly>
         <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" />
-        <bindingRedirect oldVersion="0.0.0.0-8.0.0.0" newVersion="8.0.0.0" />
+        <bindingRedirect oldVersion="0.0.0.0-10.0.0.0" newVersion="10.0.0.0" />
       </dependentAssembly>
       <dependentAssembly>
         <assemblyIdentity name="Ext.Net.Utilities" publicKeyToken="2c34ac34702a3c23" />
@@ -140,7 +141,26 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
 </configuration>
 ```
 
-## 5. Web.config Global Configuration Properties
+## 5. Browser Support
+
+Official Ext JS [browser support](http://docs.sencha.com/extjs/6.2.1/guides/supported_browsers.html).
+
+| Platform | Browser | Version |
+| ---- | ---- | ---- |
+| Desktop | | |
+| | IE8+ | Strict DOCTYPE |
+| | Microsoft Edge | Latest 2 Versions |
+| | Firefox | Latest 2 Versions |
+| | Chrome | Latest 2 Versions |
+| | Opera | Latest 2 Versions |
+| | Safari | 7+ |
+| Tablet | | |
+| | Safari | 7+ iPad |
+| | Android | 4.0+ Chrome |
+| | Android | 4.4+ Native |
+| | Windows 8 Touch Screen | IE10+ |
+
+## 6. Web.config Global Configuration Properties
 
 | Name | Type | Description |
 | :---- | :---- | :---- |
@@ -158,7 +178,7 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
 | glyphFontFamily | string | Sets the default font-family to use for components that support a glyph config. Default is `""`. |
 | gzip | bool | Whether to automatically render scripts with gzip compression. Only works when `renderScripts="Embedded"` and/or `renderStyles="Embedded"`. Default is `True`. Options include [`True` \| `False`] |
 | idMode | IDMode | Manages how a control's id is rendered to the client. Default is `Explicit`. Options include [`Client` \| `Explicit` \| `Ignore` \| `Inherit` \| `Legacy` \| `Parent` \| `Predictable` \| `Static`] |
-| initScriptMode | InitScriptMode | Specifies how to render the Ext.NET initialization script. The options are self-explanatory. Default is 'Inline'. Options include [`Inline` \| `Linked`] |
+| initScriptMode | InitScriptMode | Specifies how to render the Ext.NET initialization script. The options are self-explanatory. Default is 'Linked'. Options include [`Inline` \| `Linked` \| `LinkedJS`] |
 | licenseKey | string | Your Ext.NET License key |
 | locale | string | Specifies the language of the Ext.NET localization resources to use. For example, `en-GB`, `fr-CA`, `ru`. Default is English. |
 | namespace | string | The application's JavaScript namespace. Default is `App`. |
@@ -179,7 +199,7 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
 | themePath | string | Configure the path to the custom theme .css and .js (if required) file globally across the entire application. This will override any `.Theme` setting. You can specify several files by delimiting them with `|`. For example, `some.css|another.css|some.js|another.js`. Regularly, you will need to specify the only .css file, for example, `some.css` or two files - one .css and one .js - `some.js|some.css`. Default is `""`. |
 | quickTips | bool | Specifies whether to render the QuickTips. Provides attractive and customizable tooltips for any element. Default is 'True'. Options include [`True` \| `False`] |
 
-## 6. MVC Installation Tips
+## 7. MVC Installation Tips
 
 If manually installing Ext.NET MVC into your project, the following `IgnoreRoute` config is required.
 
@@ -193,7 +213,7 @@ public static void RegisterRoutes(RouteCollection routes)
 
 This `IgnoreRoute` is automatically inserted if using the NuGet package [installer](https://www.nuget.org/packages/ext.net). 
 
-## 7. Credits
+## 8. Credits
 
 1. [FamFamFam](http://www.famfamfam.com/lab/icons/silk/) Icons provided by Mark James ([LICENSE](https://github.com/extnet/Premium/blob/master/.build/licenses/FamFamFam.md))
 1. [Flag icons](http://www.famfamfam.com/lab/icons/flags/) provided by Mark James ([LICENSE](https://github.com/extnet/Premium/blob/master/.build/licenses/FlagIcons.md))
@@ -201,4 +221,4 @@ This `IgnoreRoute` is automatically inserted if using the NuGet package [install
 1. [Json.NET](http://json.net/) provided by James Newton-King ([LICENSE](https://github.com/extnet/Premium/blob/master/.build/licenses/Newtonsoft.Json.md))
 1. [Ext JS](http://www.sencha.com/products/js/) JavaScript Library with Commercial License provided by Sencha, Inc. ([LICENSE](https://github.com/extnet/Premium/blob/master/.build/licenses/Sencha.md))
 
-Copyright 2008-2016 [Object.NET](http://object.net/), Inc., All rights reserved.
+Copyright 2008-2017 [Object.NET](http://object.net/), Inc., All rights reserved.

@@ -1,5 +1,94 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2017-05-22 |
+| Current Version | 4.2.1 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.2.1) on GitHub |
+
+#### FEATURES
+
+None
+
+#### DEFECTS
+
+1. [[#1477](https://github.com/extnet/Ext.NET/issues/1477)] VS2017 can break #{} tag expansions while pasting/formatting WebForms pages
+2. [[#1473](https://github.com/extnet/Ext.NET/issues/1473)] Editing a colorSelector from the input fields does not work
+3. [[#1472](https://github.com/extnet/Ext.NET/issues/1472)] Field's MsgTarget Qtip setting should not be Ext.NET's default value
+4. [[#1470](https://github.com/extnet/Ext.NET/issues/1470)] GridPanel vertical scrollbar resets when horizontal scrollbar is dragged
+5. [[#1448](https://github.com/extnet/Ext.NET/issues/1448)] HyperlinkButton disables after click
+6. [[#1444](https://github.com/extnet/Ext.NET/issues/1444)] Component's Resizable setting as false is ignored by Ext.NET
+7. [[#1443](https://github.com/extnet/Ext.NET/issues/1443)] Ext.form.field.ComboBox.doTypeAhead treats regex object as string
+8. [[#1436](https://github.com/extnet/Ext.NET/issues/1436)] URL resources not quote-escaped from Ext.Net.PartialViewResult
+9. [[#1422](https://github.com/extnet/Ext.NET/issues/1422)] Ext.grid.plugin.SelectionSubmit error while destroying instance with SpreadsheetModel
+10. [[#1330](https://github.com/extnet/Ext.NET/issues/1330)] GridPanel with Grouping, CommandColumn with GroupCommands, CellEditing causes a JavaScript error after editing
+
+#### BREAKING CHANGES
+
+1. [[#1444](https://github.com/extnet/Ext.NET/issues/1444)] Component's Resizable setting as false is ignored by Ext.NET
+
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
+| Release Date | 2017-01-23 |
+| Current Version | 4.2.0 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
+
+#### FEATURES
+
+1. [[#1416](https://github.com/extnet/Ext.NET/issues/1416)] Implement X.Toast(Ext.Net.Toast) overload
+2. [[#1415](https://github.com/extnet/Ext.NET/issues/1415)] Implement MVC Partial View's RenderMode.Config alternative
+3. [[#1414](https://github.com/extnet/Ext.NET/issues/1414)] Implement Ext.window.Toast support
+4. [[#1413](https://github.com/extnet/Ext.NET/issues/1413)] Implement MVC Razor syntax's text block support from Mobile
+5. [[#1411](https://github.com/extnet/Ext.NET/issues/1411)] Normalize enums' default values
+6. [[#1400](https://github.com/extnet/Ext.NET/issues/1400)] Ext.NET 4.2.0: Update ExtJS changes to C# objects
+7. [[#1399](https://github.com/extnet/Ext.NET/issues/1399)] Merge ExtJS 6.2.0 and 6.2.1 into Ext.NET (Ext.NET 4.2.0)
+8. [[#1359](https://github.com/extnet/Ext.NET/issues/1359)] Add Numeric3D, Category3D, Time3D axes for charts
+9. [[#1354](https://github.com/extnet/Ext.NET/issues/1354)] Mark Component's AutoScroll as obsolete and add Scrollable setting instead
+10. [[#1299](https://github.com/extnet/Ext.NET/issues/1299)] Add browser support to README.md files
+
+#### DEFECTS
+
+1. [[#1398](https://github.com/extnet/Ext.NET/issues/1398)] CSS class x-cmd-slicer.x-progress-bar-default:before broken in embedded CSS file 
+2. [[#1397](https://github.com/extnet/Ext.NET/issues/1397)] Buttons text does not fit only when under Safari 
+3. [[#1396](https://github.com/extnet/Ext.NET/issues/1396)] DatePickerField's DateFormat property is ignored
+4. [[#1393](https://github.com/extnet/Ext.NET/issues/1393)] ColumnBase.Resizable unnecessarily overrides ComponentBase.Resizable
+5. [[#1390](https://github.com/extnet/Ext.NET/issues/1390)] Horizontal scrolling issue on refresh -- header columns lose sync to columns
+6. [[#1385](https://github.com/extnet/Ext.NET/issues/1385)] FileField does not contain file upload handling ASP.NET bindings
+7. [[#1382](https://github.com/extnet/Ext.NET/issues/1382)] InfoPanel's Title is not visible with Triton theme
+8. [[#1380](https://github.com/extnet/Ext.NET/issues/1380)] Chart Label: Default display value of 'None' prevents hiding labels
+9. [[#1379](https://github.com/extnet/Ext.NET/issues/1379)] Charts' Pie3D series labels can't be hidden with Display="None"
+10. [[#1378](https://github.com/extnet/Ext.NET/issues/1378)] TagField constantly polls its input element - it is an overhead and affects performance
+11. [[#1377](https://github.com/extnet/Ext.NET/issues/1377)] CheckboxSelectionModel has InjectCheckbox ignored if using RowExpander plugin
+12. [[#1357](https://github.com/extnet/Ext.NET/issues/1357)] TabPanel's TabBarConfig renders xtype: "container" which is wrong
+13. [[#1356](https://github.com/extnet/Ext.NET/issues/1356)] Ext.net.loadResources passes different arguments to a callback in different scenarios
+14. [[#1352](https://github.com/extnet/Ext.NET/issues/1352)] Locking Grid + Cell Editing: error when tabbing between cells while editing
+15. [[#1347](https://github.com/extnet/Ext.NET/issues/1347)] RTL: Columns configuration glitches in some situations
+16. [[#1346](https://github.com/extnet/Ext.NET/issues/1346)] DataView's .SelectAll() docs comment wrongly claims "Clears all selections"
+17. [[#1345](https://github.com/extnet/Ext.NET/issues/1345)] RowExpander's header width is not adjusted to the themes
+18. [[#1343](https://github.com/extnet/Ext.NET/issues/1343)] Direct Method call translates null value into a string containing "null"
+19. [[#1341](https://github.com/extnet/Ext.NET/issues/1341)] Ext.Net.RowExpander: rowExpand body is aligned and limited by the second column of the outer grid
+20. [[#1336](https://github.com/extnet/Ext.NET/issues/1336)] ResourceManager's InitScriptMode is not available in MVC Razor
+21. [[#1331](https://github.com/extnet/Ext.NET/issues/1331)] Native mobile device's Pinch Zoom does not work
+22. [[#1330](https://github.com/extnet/Ext.NET/issues/1330)] GridPanel with Grouping, CommandColumn with GroupCommands, CellEditing causes a JavaScript error after editing
+23. [[#1329](https://github.com/extnet/Ext.NET/issues/1329)] Notification with "shadow: true" causes "this.syncShadow is not a function" JavaScript error
+24. [[#1307](https://github.com/extnet/Ext.NET/issues/1307)] Ext.grid.column.ComponentColumn not removing old components' cache
+25. [[#1298](https://github.com/extnet/Ext.NET/issues/1298)] Ext.net.FilterHeader is broken if GridPanel.reconfigure() with new columns
+26. [[#1291](https://github.com/extnet/Ext.NET/issues/1291)] Ext.net.Notification and InfoPanel can be shown behind stuff
+27. [[#1281](https://github.com/extnet/Ext.NET/issues/1281)] Horizontal scrolling issue with RTL GridPanel with RowEditor and Chrome
+28. [[#1273](https://github.com/extnet/Ext.NET/issues/1273)] Synching Store via its OnBeforeChange handler triggers a JavaScript error if there are a few different operations (update, insert or delete)
+
+#### BREAKING CHANGES
+
+1. [[#1404](https://github.com/extnet/Ext.NET/issues/1404)] Ext.Net.ColumnBase.Align enum change
+2. [[#1403](https://github.com/extnet/Ext.NET/issues/1403)] Ext.Net.TabPanel event parameters didn't match ExtJS
+3. [[#1380](https://github.com/extnet/Ext.NET/issues/1380)] Chart Label: Default display value of 'None' prevents hiding labels
+
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2016-05-10 |
 | Current Version | 4.1.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
@@ -272,4 +361,4 @@ If you experience a Breaking Change, please report in the [forums](http://forums
 1. [[#1203](https://github.com/extnet/Ext.NET/issues/1203)] TreeDropZone's AllowParentInsert has to be AllowParentInserts (with the "s" at the end)] `sencha`
 1. [[#1155](https://github.com/extnet/Ext.NET/issues/1155)] ComponentLoader doesn't take Mode="Html" into account, but it should render this setting to client
 
-Copyright 2008-2016 [Object.NET](http://object.net/), Inc., All rights reserved.
+Copyright 2008-2017 [Object.NET](http://object.net/), Inc., All rights reserved.
