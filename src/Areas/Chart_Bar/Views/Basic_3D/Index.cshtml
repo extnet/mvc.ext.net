@@ -141,7 +141,6 @@
                     )
                     .Tooltip(X.ChartTip()
                         .TrackMouse(true)
-                        .StyleSpec("background: #fff")
                         .Renderer(r => r.Handler = "toolTip.setHtml(record.get('Name') + ': ' + record.get('Data1') + '%');")
                     )
                     .Label(X.ChartLabel()

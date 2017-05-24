@@ -121,8 +121,7 @@
                                 .HighlightDefaults(X.CircleSprite().GlobalAlpha(1).Scaling(1.5))
                                 .Tooltip(X.ChartTip()
                                     .TrackMouse(true)
-                                    .StyleSpec("background: #fff;")
-                                            .Renderer(r => r.Handler = "toolTip.setHtml(record.get('month') + ': ' + record.get('data1') + ' %');")
+                                    .Renderer(r => r.Handler = "toolTip.setHtml(record.get('month') + ': ' + record.get('data1') + ' %');")
                                 )
                         ),
 

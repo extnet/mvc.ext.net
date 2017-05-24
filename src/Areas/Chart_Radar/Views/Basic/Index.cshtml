@@ -67,7 +67,6 @@
                 .HighlightConfig(X.Sprite().FillStyle("#000").LineWidth(2).StrokeStyle("#fff"))
                 .Tooltip(X.ChartTip()
                     .TrackMouse(true)
-                    .StyleSpec("background: #fff;")
                     .Renderer(r => r.Handler = "toolTip.setHtml(record.get('month') + ': ' + record.get('data1') + '%');")
                 )
             )

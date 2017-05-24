@@ -108,7 +108,6 @@
                             .HighlightConfig(X.Sprite().FillStyle("rgba(249, 204, 157, 1.0)").StrokeStyle("black").LineWidth(2))
                     .Tooltip(X.ChartTip()
                         .TrackMouse(true)
-                        .StyleSpec("background: #fff")
                         .Renderer(r => r.Handler = "toolTip.setHtml(record.get('Name') + ': ' + record.get('Data1') + '%');")
                     )
                     .Label(X.ChartLabel().Display(SeriesLabelDisplay.InsideEnd).Field("Data1"))
