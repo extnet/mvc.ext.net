@@ -24,6 +24,7 @@ None
 #### BREAKING CHANGES
 
 1. [[#1444](https://github.com/extnet/Ext.NET/issues/1444)] Component's Resizable setting as false is ignored by Ext.NET
+2. [[#1494](https://github.com/extnet/Ext.NET/issues/1494)] VS2012: Newtonsoft.Json v10 breaks NuGet package restore
 
 If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
 

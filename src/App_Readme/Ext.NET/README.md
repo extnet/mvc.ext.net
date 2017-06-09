@@ -17,8 +17,8 @@
 
 ## 1. System Requirements
 
-1. Visual Studio 2012, 2013, 2015, 2017, or
-2. Visual Studio Express 2012, 2013, 2015, 2017
+1. Visual Studio 2013, 2015, 2017, or
+2. Visual Studio Community 2015, 2017
 3. .NET Framework 4.0, 4.5, 4.5.2 and 4.6
 
 ## 2. Installation Instructions
