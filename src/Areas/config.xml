@@ -4,10 +4,19 @@
     <folder name="Getting_Started" />
   </order>
 
+  <updated version="4.2.2">
+    <folder name="Chart_Radar\Views\Basic" />
+    <folder name="Chart_Area\Views\Basic" />
+    <folder name="Chart_Bar\Views\Basic" />
+    <folder name="Chart_Bar\Views\Basic_3D" />
+  </updated>
+
+  <!--
   <updated version="4.2.1">
     <folder name="Dynamic_Partial_Rendering\Views\Partial_Content" />
     <folder name="Models\Views\Data_Annotations" />
   </updated>
+  -->
 
   <icons>
     <folder name="Action" iconCls="fa fa-play" />

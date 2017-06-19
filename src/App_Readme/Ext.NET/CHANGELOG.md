@@ -1,5 +1,37 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2017-06-19 |
+| Current Version | 4.2.2 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.2.2) on GitHub |
+
+#### FEATURES
+
+1. [[#1488](https://github.com/extnet/Ext.NET/issues/1488)] Ext.NET UX: improve scripts and override system
+
+#### DEFECTS
+
+1. [[#1496](https://github.com/extnet/Ext.NET/issues/1496)] CommandColumn commands with Tooltips break if removing rows from a buffered grid view
+2. [[#1493](https://github.com/extnet/Ext.NET/issues/1493)] Ext.net.ComponentLoader can load a page twice if it previously had content
+3. [[#1492](https://github.com/extnet/Ext.NET/issues/1492)] Ext.ux.SlidingPager initially disabled on page load
+4. [[#1491](https://github.com/extnet/Ext.NET/issues/1491)] GridPanel's CellEditor breaks horizontal scrolling when locking is enabled
+5. [[#1490](https://github.com/extnet/Ext.NET/issues/1490)] RTL Grid Panel horizontal scrollbar is moved to \"end/left\" on Chrome on load
+6. [[#1489](https://github.com/extnet/Ext.NET/issues/1489)] Ext.NET build is copying over v4.5.1 Newtonsoft.Json DLL
+7. [[#1486](https://github.com/extnet/Ext.NET/issues/1486)] Charts do not work when data has gaps/nulls and axis is auto-scaled.
+8. [[#1482](https://github.com/extnet/Ext.NET/issues/1482)] Update UX Javascript from ExtJS 6.2.1 into Ext.NET 4.2.0.
+9. [[#1474](https://github.com/extnet/Ext.NET/issues/1474)] The color field's field does not show the icon with the chosen image
+10. [[#1438](https://github.com/extnet/Ext.NET/issues/1438)] Drag and drop overlaps dragging DOM elements with selection
+11. [[#1344](https://github.com/extnet/Ext.NET/issues/1344)] Ext.ux.statusbar.ValidationStatus forces scrollbar when error messages are present
+12. [[#665](https://github.com/extnet/Ext.NET/issues/665)] Spotlight show and hide method callback isn't used
+
+#### BREAKING CHANGES
+
+None
+
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2017-05-22 |
 | Current Version | 4.2.1 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.2.1) on GitHub |

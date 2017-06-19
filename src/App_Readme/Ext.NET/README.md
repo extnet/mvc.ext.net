@@ -1,7 +1,7 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
-| Release Date | 2017-05-22 |
-| Current Version | 4.2.1 |
+| Release Date | 2017-06-19 |
+| Current Version | 4.2.2 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
 
 ## Contents
