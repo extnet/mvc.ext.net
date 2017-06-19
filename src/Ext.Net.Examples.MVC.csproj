@@ -130,7 +130,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" ('$(Configuration)|$(Platform)' == 'Development|AnyCPU') ">
-    <Reference Include="Ext.Net, Version=4.2.1.0, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
+    <Reference Include="Ext.Net, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
       <HintPath>..\..\Premium\src\bin\Debug\Ext.Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
