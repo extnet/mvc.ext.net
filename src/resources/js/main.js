@@ -329,7 +329,8 @@ var lookup = {};
 var onTreeAfterRender = function (tree) {
     var sm = tree.getSelectionModel();
 
-    Ext.create('Ext.util.KeyNav', tree.view.el, {
+    Ext.create('Ext.util.KeyNav', {
+        target: tree.view.el,
         enter: function (e) {
             if (sm.hasSelection()) {
                 onTreeItemClick(sm.getSelection()[0], e);
