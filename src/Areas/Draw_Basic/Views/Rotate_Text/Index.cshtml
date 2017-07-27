@@ -4,6 +4,18 @@
     var X = Html.X();
 }
 
+@section headtag
+{
+    <script>
+        var handleSliderChange = function (slider, newValue, thumb, type) {
+            if (App.Draw1) {
+                App.Draw1.getSurface().get('Sprite1').setAttributes({ rotationRads: newValue * Math.PI / 180 });
+                App.Draw1.getSurface().renderFrame();
+            }
+        }
+    </script>
+}
+
 @section example
 {
     <h1>Rotating Text with a Draw Component</h1>
@@ -21,7 +33,7 @@
             .MaxValue(360)
             .Number(0)
             .Listeners(events =>
-                events.Change.Handler = "App.Draw1.getSurface().get('Sprite1').setAttributes({rotationRads: newValue * Math.PI / 180}); App.Draw1.getSurface().renderFrame();"
+                events.Change.Fn = "handleSliderChange"
             )
     )
 
