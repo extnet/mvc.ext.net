@@ -59,7 +59,7 @@
                                 Html.X().SliderTip()
                             )
                             .Listeners(l=>{
-                                l.Change.Handler = "this.nextSibling('tbtext').setText((newValue+1) + '-' + (newValue + 1000));";
+                                l.Change.Handler = "if (this.nextSibling('tbtext')) this.nextSibling('tbtext').setText((newValue+1) + '-' + (newValue + 1000));";
                                 l.ChangeComplete.Handler = "this.up('grid').store.load();";
                             }),
 
