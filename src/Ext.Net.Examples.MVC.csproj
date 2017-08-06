@@ -274,6 +274,7 @@
     <Compile Include="Areas\GridPanel_Spreadsheet\GridPanel_SpreadsheetAreaRegistration.cs" />
     <Compile Include="Areas\GridPanel_Spreadsheet\Models\SubmitModel.cs" />
     <Compile Include="Areas\GridPanel_Spreadsheet\Models\OverviewModel.cs" />
+    <Compile Include="Areas\Keys_KeyMap\Controllers\Map_Inside_ComponentController.cs" />
     <Compile Include="Areas\Keys_KeyMap\Controllers\BorderLayout_Regions_ToggleController.cs" />
     <Compile Include="Areas\Keys_KeyMap\Keys_KeyMapAreaRegistration.cs" />
     <Compile Include="Areas\Keys_KeyNav\Controllers\BasicController.cs" />
@@ -828,6 +829,7 @@
     <Content Include="Areas\Items\Views\Page\config.xml" />
     <Content Include="Areas\Items\Views\Section\config.xml" />
     <Content Include="Areas\Items\Views\Section_From_Page\config.xml" />
+    <Content Include="Areas\Keys_KeyMap\Views\Map_Inside_Component\config.xml" />
     <Content Include="Areas\Keys_KeyMap\Views\BorderLayout_Regions_Toggle\config.xml" />
     <Content Include="Areas\Keys_KeyNav\Views\Basic\config.xml" />
     <Content Include="Areas\Layout_AbsoluteLayout\Views\Basic\config.xml" />
@@ -1253,6 +1255,7 @@
     <Content Include="Areas\Miscellaneous_TextBlock\Views\Web.config" />
     <Content Include="Areas\Window_Toast\Views\Overview\Index.cshtml" />
     <Content Include="Areas\Window_Toast\Views\Web.config" />
+    <Content Include="Areas\Keys_KeyMap\Views\Map_Inside_Component\Index.cshtml" />
     <None Include="resources\fonts\fontawesome-webfont.eot" />
     <None Include="resources\fonts\fontawesome-webfont.ttf" />
     <None Include="resources\fonts\fontawesome-webfont.woff" />

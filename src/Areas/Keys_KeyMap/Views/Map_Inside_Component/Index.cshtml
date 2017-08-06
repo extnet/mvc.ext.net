@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "KeyMap Toggling BorderLayout Regions - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(X.Viewport()
+        .Layout(LayoutType.Border)
+        .KeyMap(
+            X.KeyBindItem()
+                .Key("n")
+                .Handler(@<Text>
+                    <script>
+                        #{North}.toggleCollapse();
+                    </script>
+                </Text>),
+            X.KeyBindItem()
+                .Key("s")
+                .Handler(@<Text>
+                    <script>
+                        #{South}.toggleCollapse();
+                    </script>
+                </Text>),
+            X.KeyBindItem()
+                .Key("e")
+                .Handler(@<Text>
+                    <script>
+                        #{East}.toggleCollapse();
+                    </script>
+                </Text>),
+            X.KeyBindItem()
+                .Key("w")
+                .Handler(@<Text>
+                    <script>
+                        #{West}.toggleCollapse();
+                    </script>
+                </Text>),
+            X.KeyBindItem()
+                .Key("a")
+                .Handler(@<Text>
+                    <script>
+                        Ext.each([#{North}, #{South}, #{East}, #{West}],
+                            function (cmp) {
+                                cmp.toggleCollapse();
+                            });
+                    </script>
+                </Text>),
+
+            @* Modifier keys can be separated by either + or - characters *@
+            X.KeyBindItem()
+                .Key("shift+e")
+                .Handler(@<Text>
+                    <script>
+                        Ext.each([#{North}, #{South}, #{East}, #{West}],
+                            function (cmp) {
+                                cmp.expand();
+                            });
+                    </script>
+                </Text>),
+            X.KeyBindItem()
+                .Key("ctrl-c")
+                .Handler(@<Text>
+                    <script>
+                        Ext.each([#{North}, #{South}, #{East}, #{West}],
+                            function (cmp) {
+                                cmp.collapse();
+                            });
+                    </script>
+                </Text>)
+        )
+        .Items(
+            X.Panel()
+                .ID("North")
+                .Region(Region.North)
+                .Title("North")
+                .Frame(true)
+                .Height(200)
+                .Collapsible(true)
+                .Content(@<Text>
+                    <h2>Here, the key bindings are set to the viewport component directly, instead of a standalone keymap with an arbitrary target.</h2>
+                    <p>The key binding specification is different and this example illustrates some uses of it.</p>
+                </Text>),
+
+            X.Panel()
+                .ID("West")
+                .Region(Region.West)
+                .Title("West")
+                .Frame(true)
+                .Width(200)
+                .Collapsible(true),
+
+            X.Panel()
+                .Region(Region.Center)
+                .BodyPadding(5)
+                .Scrollable(ScrollableOption.Vertical)
+                .Content(@<Text>
+                    <ul>
+                        <li>If keys are not working then click on center area</li>
+                        <li>NORTH toggle: N</li>
+                        <li>WEST toggle: W</li>
+                        <li>EAST toggle: E</li>
+                        <li>SOUTH toggle: S</li>
+                        <li>Toggle all: a</li>
+                        <li>Expand all: shift+e</li>
+                        <li>Collapse all: ctrl+c</li>
+                    </ul>
+                </Text>),
+
+            X.Panel()
+                .ID("East")
+                .Region(Region.East)
+                .Title("East")
+                .Frame(true)
+                .Width(200)
+                .Collapsible(true),
+
+            X.Panel()
+                .ID("South")
+                .Region(Region.South)
+                .Title("South")
+                .Frame(true)
+                .Height(200)
+                .Collapsible(true)
+        )
+    )
+}
