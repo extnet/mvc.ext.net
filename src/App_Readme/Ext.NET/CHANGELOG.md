@@ -1,5 +1,44 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2017-08-07 |
+| Current Version | 4.3.0 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.3.0) on GitHub |
+
+#### FEATURES
+
+1. [[#1519](https://github.com/extnet/Ext.NET/issues/1519)] Upgrade Newtonsoft.Json NuGet package to 10.0.3
+2. [[#1500](https://github.com/extnet/Ext.NET/issues/1500)] Ext.NET 4.3.0: Update ExtJS 6.5.0 framework changes to C#
+3. [[#1498](https://github.com/extnet/Ext.NET/issues/1498)] Ext.NET 4.3.0: Upgrade ExtJS to 6.5.0
+
+#### DEFECTS
+
+1. [[#1520](https://github.com/extnet/Ext.NET/issues/1520)] Ext.Net.CalendarPanel: Mouse hover/clicks on month view calendar events ignored on IE
+2. [[#1518](https://github.com/extnet/Ext.NET/issues/1518)] Ext.Net.MenuPanel item selection does not work well
+3. [[#1517](https://github.com/extnet/Ext.NET/issues/1517)] Ext.Net.ToolbarDroppable breaks if CanDrop is specified
+4. [[#1514](https://github.com/extnet/Ext.NET/issues/1514)] Ext.Net.DropDownField: calling reset() triggers javascript error
+5. [[#1513](https://github.com/extnet/Ext.NET/issues/1513)] Ext.net.DropDownField: invalid KeyNav initialization
+6. [[#1512](https://github.com/extnet/Ext.NET/issues/1512)] BufferedRenderer-enabled grids extremely slow
+7. [[#1511](https://github.com/extnet/Ext.NET/issues/1511)] Ext.Net.Widget components can't be accessed from App.<ID>
+8. [[#1505](https://github.com/extnet/Ext.NET/issues/1505)] Grid Panels horizontal scrollbar misbehavior with IE11
+9. [[#1497](https://github.com/extnet/Ext.NET/issues/1497)] Ext.chart.series.Pie3D can skip refreshing legend text when data changes
+10. [[#1480](https://github.com/extnet/Ext.NET/issues/1480)] Ext.NET 4.3.0: remove overrides applied to code
+11. [[#1466](https://github.com/extnet/Ext.NET/issues/1466)] AbstractComponent.KeyMap format issue
+12. [[#1441](https://github.com/extnet/Ext.NET/issues/1441)] SelectOnFocus for text fields (TextArea, TextField) is ignored (always true)
+13. [[#1350](https://github.com/extnet/Ext.NET/issues/1350)] GridPanel's Ext.Net.GridView enableTextSelection setting does not work at all
+14. [[#380](https://github.com/extnet/Ext.NET/issues/380)] Exception with TableLayout and Fieldset on show in IE8
+
+#### BREAKING CHANGES
+
+1. [[#1516](https://github.com/extnet/Ext.NET/issues/1516)] Ext.Net.Slider change event now triggers on load
+2. [[#1515](https://github.com/extnet/Ext.NET/issues/1515)] Ext.chart.series.Bar3D no longer compatible with Ext.chart.axis.Category
+3. [[#1510](https://github.com/extnet/Ext.NET/issues/1510)] Remove Ext.Net.ClickRepeater Disable(), SetDisabled() and Enable() methods
+4. [[#1504](https://github.com/extnet/Ext.NET/issues/1504)] Remove Ext.Net.TimeAxis.CalculateByLabelSize
+
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2017-06-19 |
 | Current Version | 4.2.2 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.2.2) on GitHub |

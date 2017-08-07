@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("4.2.2")]
-[assembly: AssemblyFileVersion("4.2.2.0")]
-[assembly: AssemblyInformationalVersion("4.2.2")]
+[assembly: AssemblyVersion("4.3.0")]
+[assembly: AssemblyFileVersion("4.3.0.0")]
+[assembly: AssemblyInformationalVersion("4.3.0")]
 [assembly: AssemblyCompany("Object.NET, Inc.")]
 [assembly: AssemblyCopyright("Copyright (c) 2008-2017 Object.NET, Inc.")]
 
