@@ -17,11 +17,15 @@
             return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
         };
 
-        var onComboBoxSelect = function (combo) {
-            var store = combo.up("gridpanel").getStore();
+        var onComboBoxSelect = function (item, records) {
+            var store = App.GridPanel1.getStore(),
+                curPageSize = store.pageSize,
+                wantedPageSize = parseInt(item.getValue(), 10);
 
-            store.pageSize = parseInt(combo.getValue(), 10);
-            store.reload();
+            if (wantedPageSize != curPageSize) {
+                store.pageSize = wantedPageSize;
+                store.reload();
+            }
         };
     </script>
 }
@@ -36,6 +40,7 @@
     <br />This demonstrates that when the GridPanel is refreshed, the Data is requested again from the server via an AJAX request initiated by AjaxProxy, but the Paging and Sorting is done completely client-side in the browser.</p>
 
     @(Html.X().GridPanel()
+        .ID("GridPanel1")
         .Title("Array Grid")
         .Width(700)
         .Store(
