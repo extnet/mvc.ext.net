@@ -170,6 +170,8 @@
     <Compile Include="Areas\Associations_HasOne\Models\Address.cs" />
     <Compile Include="Areas\Associations_HasOne\Models\Person.cs" />
     <Compile Include="Areas\Chart_Bar\Controllers\Basic_3DController.cs" />
+    <Compile Include="Areas\Chart_Misc\Chart_MiscAreaRegistration.cs" />
+    <Compile Include="Areas\Chart_Misc\Controllers\CaptionsController.cs" />
     <Compile Include="Areas\ColorPicker_Advanced\ColorPicker_AdvancedAreaRegistration.cs" />
     <Compile Include="Areas\ColorPicker_Advanced\Controllers\OverviewController.cs" />
     <Compile Include="Areas\Data_Basic\Data_BasicAreaRegistration.cs" />
@@ -578,6 +580,7 @@
     <Content Include="Areas\Chart_Area\Views\Basic\config.xml" />
     <Content Include="Areas\Chart_Bar\Views\Basic_3D\config.xml" />
     <Content Include="Areas\Chart_Bar\Views\Basic\config.xml" />
+    <Content Include="Areas\Chart_Misc\Views\Captions\config.xml" />
     <Content Include="Areas\Chart_Column\Views\Basic\config.xml" />
     <Content Include="Areas\Chart_Dashboard\Views\Basic\config.xml" />
     <Content Include="Areas\Chart_Gauge\Views\Basic\config.xml" />
@@ -942,6 +945,8 @@
     <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
     <Content Include="Areas\ColorPicker_Advanced\Views\Web.config" />
     <Content Include="Areas\ColorPicker_Advanced\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\Chart_Misc\Views\Captions\Index.cshtml" />
+    <Content Include="Areas\Chart_Misc\Views\Web.config" />
     <None Include="Areas\DataView_Basic\Content\sencha-touch-examples.json" />
     <Content Include="Areas\Desktop\Views\Web.config" />
     <Content Include="Areas\Desktop\Views\Overview\Desktop.cshtml" />
