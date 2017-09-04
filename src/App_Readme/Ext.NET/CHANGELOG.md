@@ -1,5 +1,34 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2017-09-04 |
+| Current Version | 4.4.0 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.4.0) on GitHub |
+
+#### FEATURES
+
+1. [[#1525](https://github.com/extnet/Ext.NET/issues/1525)] Implement charts' Caption support
+2. [[#1524](https://github.com/extnet/Ext.NET/issues/1524)] Ext.NET 4.4.0: Update ExtJS 6.5.1 framework changes to C#
+3. [[#1521](https://github.com/extnet/Ext.NET/issues/1521)] Ext.NET 4.4.0: Upgrade ExtJS to 6.5.1
+
+#### DEFECTS
+
+1. [[#1535](https://github.com/extnet/Ext.NET/issues/1535)] Radio Group not submitted when the form contains a File Upload field
+2. [[#1531](https://github.com/extnet/Ext.NET/issues/1531)] Ext.Net.ModelField.Persist default value issue
+3. [[#1530](https://github.com/extnet/Ext.NET/issues/1530)] Ext.Net.RowExpander: typo breaks grid if used with locking
+4. [[#1527](https://github.com/extnet/Ext.NET/issues/1527)] Ext.NET 4.3.0: Add Ext.Net.FileUploadField. click the \"submit\" button, the page will be lost.
+5. [[#1526](https://github.com/extnet/Ext.NET/issues/1526)] Store's OnBeforeStoreChanged event breaks itself after first trigger
+6. [[#353](https://github.com/extnet/Ext.NET/issues/353)] GridPanel BufferedRenderer + RowWrap or RowExpander breaks rendering
+
+#### BREAKING CHANGES
+
+1. [[#1533](https://github.com/extnet/Ext.NET/issues/1533)] Remove Ext.NET.Axis' Increment and LabelInSpan config options
+2. [[#1531](https://github.com/extnet/Ext.NET/issues/1531)] Ext.Net.ModelField.Persist default value issue
+
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2017-08-07 |
 | Current Version | 4.3.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.3.0) on GitHub |
