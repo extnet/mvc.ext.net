@@ -1,5 +1,32 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2017-09-26 |
+| Current Version | 4.4.1 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.4.1) on GitHub |
+
+#### FEATURES
+
+None
+
+#### DEFECTS
+
+1. [[#1552](https://github.com/extnet/Ext.NET/issues/1552)] FileUploadField does not work on IE/Edge
+2. [[#1550](https://github.com/extnet/Ext.NET/issues/1550)] Menu + Window + Modal breaks the menu
+3. [[#1549](https://github.com/extnet/Ext.NET/issues/1549)] Ext.net.Desktop: Removing a module with icon does not remove the icon
+4. [[#1546](https://github.com/extnet/Ext.NET/issues/1546)] Charts do not work when data has fixed type, gaps/nulls and axis is auto-scaled.
+5. [[#1543](https://github.com/extnet/Ext.NET/issues/1543)] Chart legend infinite loop if chart narrower than series name entry
+6. [[#1541](https://github.com/extnet/Ext.NET/issues/1541)] ImageButton does not return the button status to 'not pressed'
+7. [[#1417](https://github.com/extnet/Ext.NET/issues/1417)] Field Note on checkbox shows merged with checkbox
+
+#### BREAKING CHANGES
+
+None
+
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2017-09-04 |
 | Current Version | 4.4.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.4.0) on GitHub |
