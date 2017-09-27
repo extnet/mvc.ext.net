@@ -8,9 +8,9 @@
   <new version="4.4.0">
     <folder name="Chart_Misc\Views\Captions" />
   </new>
-  <!--
   -->
 
+  <!--
   <updated version="4.4.0">
     <folder name="GridPanel_ArrayGrid\Views\ArrayWithPaging" />
   </updated>
