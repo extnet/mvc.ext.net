@@ -1,0 +1,115 @@
+@{
+    ViewBag.Title = "Native Input Mask - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+
+    var phoneFieldPattern = "(999) 999-9999";
+    var wildcardFieldPattern = "*9.99";
+    var wzFieldPattern = "00.000-000";
+}
+
+@section headtag
+{
+    <script>
+        var toggleInputMask = function () {
+            var newPattern = '(999) 999-9999';
+            if (App.TextField1.inputMask.getPattern() == newPattern) {
+                newPattern = '(99) 9999-9999';
+            };
+
+            App.TextField1.inputMask.setPattern(newPattern);
+            App.TextField1.setNote(newPattern);
+        }
+    </script>
+}
+
+@section example
+{
+    <h1>Native Input Mask</h1>
+    <p>The Native InputMask is a TextField feature, used to add an input mask to the field.</p>
+    <p>It has been introduced in Ext.NET 4.5 (ExtJS 6.5.2) and is a simpler approach to the InputMask plugin.</p>
+
+    @(
+        X.Window()
+            .ID("Window1")
+            .Width(550)
+            .Title("Input Mask")
+            .Closable(false)
+            .BodyPadding(5)
+            .Items(
+                X.Container()
+                    .WidthSpec("100%")
+                    .Layout(LayoutType.Form)
+                    .Defaults(defs => defs.Add(new Parameter()
+                    {
+                        Name = "LabelWidth",
+                        Value = "200",
+                        Mode = ParameterMode.Raw
+                    }))
+                    .Items(
+                        X.TextField()
+                            .Note(phoneFieldPattern)
+                            .FieldLabel("Phone")
+                            .InputMask(X.TextFieldInputMask().Pattern(phoneFieldPattern)),
+
+                        X.TextField()
+                            .Note(phoneFieldPattern)
+                            .FieldLabel("Object input mask binding")
+                            .InputMask(new TextFieldInputMask() { Pattern = phoneFieldPattern }),
+
+                        /*
+                         * This is currently broken. Can't input any text at all when set.
+                         * 
+                        X.TextField()
+                            .Note(phoneFieldPattern)
+                            .FieldLabel("Keep mask displayed")
+                            .AutoHideInputMask(false)
+                            .InputMask(X.TextFieldInputMask().Pattern(phoneFieldPattern)),
+                         */
+
+                        X.TextField()
+                            .Note(wildcardFieldPattern)
+                            .FieldLabel("* means any character accepted")
+                            .InputMask(X.TextFieldInputMask().Pattern(wildcardFieldPattern)),
+
+                        X.TextField()
+                            .Note(wzFieldPattern)
+                            .FieldLabel("Wildcard with 0's")
+                            .InputMask(X.TextFieldInputMask().Pattern(wzFieldPattern)),
+
+                        X.TextField()
+                            .Note("99.999-999 (quick string pattern)")
+                            .FieldLabel("String pattern")
+                            .InputMaskString("99.999-999"),
+
+                        X.TextField()
+                            .ID("TextField1")
+                            .Note(phoneFieldPattern)
+                            .FieldLabel("Masked Input")
+                            .InputMask(X.TextFieldInputMask().Pattern(phoneFieldPattern))
+                    ),
+                X.Container()
+                    .Layout(LayoutType.HBox)
+                    .WidthSpec("100%")
+                    .Items(
+                        X.Button()
+                            .Text("Change Input Mask (server-side)")
+                            .DirectClickAction("HandleBtnClick"),
+                        X.ToolbarSpacer().Width(25),
+                        X.Button()
+                            .Text("Change Input Mask (client-side)")
+                            .Handler(@<text>
+                                <script>
+                                    var newPattern = '(999) 999-9999';
+                                    if (App.TextField1.inputMask.getPattern() == newPattern) {
+                                        newPattern = '(99) 9999-9999';
+                                    };
+
+                                    App.TextField1.inputMask.setPattern(newPattern);
+                                    App.TextField1.setNote(newPattern);
+                                </script>
+                            </text>)
+                    )
+            )
+    )
+}

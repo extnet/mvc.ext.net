@@ -179,6 +179,8 @@
     <Compile Include="Areas\Data_Basic\Models\ModelSerializerModel.cs" />
     <Compile Include="Areas\Dynamic_Partial_Rendering\Controllers\Render_as_ConfigController.cs" />
     <Compile Include="Areas\Form_ComboBox\Controllers\Linked_Combos_In_GridController.cs" />
+    <Compile Include="Areas\Form_TextField\Controllers\InputMask_NativeController.cs" />
+    <Compile Include="Areas\Form_TextField\Form_TextFieldAreaRegistration.cs" />
     <Compile Include="Areas\Form_Login\Controllers\Auto_CompleteController.cs" />
     <Compile Include="Areas\Form_Login\Form_LoginAreaRegistration.cs" />
     <Compile Include="Areas\Form_MultiSelect\Controllers\OverviewController.cs" />
@@ -763,6 +765,7 @@
     <Content Include="Areas\Form_ComboBox\Views\Custom_Search\config.xml" />
     <Content Include="Areas\Form_ComboBox\Views\Linked_Combos_In_Grid\config.xml" />
     <Content Include="Areas\Form_ComboBox\Views\Web.config" />
+    <Content Include="Areas\Form_TextField\Views\InputMask_Native\config.xml" />
     <Content Include="Areas\Form_Login\Views\Auto_Complete\config.xml" />
     <Content Include="Areas\Form_FileUploadField\Views\Basic\config.xml" />
     <Content Include="Areas\Form_FormPanel\Views\Basic\config.xml" />
@@ -1009,6 +1012,8 @@
     <Content Include="Areas\Form_Login\Views\Web.config" />
     <Content Include="Areas\Dynamic_Partial_Rendering\Views\Render_as_Config\Index.cshtml" />
     <Content Include="Areas\Dynamic_Partial_Rendering\Views\Render_as_Config\Component.cshtml" />
+    <Content Include="Areas\Form_TextField\Views\InputMask_Native\Index.cshtml" />
+    <Content Include="Areas\Form_TextField\Views\Web.config" />
     <None Include="Areas\GridPanel_ArrayGrid\Views\ArrayWithPaging\Index.cshtml" />
     <None Include="Areas\GridPanel_ColumnModel\Views\Ajax_Configuration\Index.cshtml" />
     <None Include="Areas\GridPanel_ColumnModel\Views\Column_Variations\Index.cshtml" />
