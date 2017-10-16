@@ -1,5 +1,32 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2017-10-16 |
+| Current Version | 4.5.0 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.5.0) on GitHub |
+
+#### FEATURES
+
+1. [[#1561](https://github.com/extnet/Ext.NET/issues/1561)] Ext.NET 4.5: Update ExtJS 6.5.2 framework changes to C#
+
+#### DEFECTS
+
+1. [[#1565](https://github.com/extnet/Ext.NET/issues/1565)] Desktop createWindow() issue with initially maximized windows
+2. [[#1563](https://github.com/extnet/Ext.NET/issues/1563)] Android 8 + Pixel phone user agent string incompatibility
+3. [[#1559](https://github.com/extnet/Ext.NET/issues/1559)] Ext.ux.desktop.Desktop.onDesktopMenuBeforeShow overrides menus' disabled status
+4. [[#1558](https://github.com/extnet/Ext.NET/issues/1558)] Ext.ux.desktop.Desktop.setShortcutPosition() lets desktop move shortcuts back on resize
+5. [[#1554](https://github.com/extnet/Ext.NET/issues/1554)] Ext.form.FieldSet title broken in Safari 11
+6. [[#1553](https://github.com/extnet/Ext.NET/issues/1553)] Spotlight's show() method support for component as argument is broken
+7. [[#1542](https://github.com/extnet/Ext.NET/issues/1542)] Ext.form.field.Text does not focus on touch devices if emptyText is set
+
+#### BREAKING CHANGES
+
+1. [[#1562](https://github.com/extnet/Ext.NET/issues/1562)] Remove Ext.form.field.Text.growAppend setting
+
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2017-09-26 |
 | Current Version | 4.4.1 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.4.1) on GitHub |
