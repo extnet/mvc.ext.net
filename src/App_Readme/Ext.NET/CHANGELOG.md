@@ -66,8 +66,6 @@
 
 NONE
 
-Copyright 2008-2016 [Object.NET](http://object.net/), Inc., All rights reserved.
-
 ## v3.2.1
 
 | Product | Ext.NET Enterprise |
@@ -83,8 +81,6 @@ The [EXTJS] or [EXTNET] tag indicates origin framework of the Breaking Change.
 1. [EXTNET] ComboBox's, ReminderCombo's, CalendarCombo's ForceSelection type
    has been changed to bool? from bool. Please see the GitHub issue [#783](https://github.com/extnet/Ext.NET/issues/783) why.
 
-Copyright 2008-2016 [Object.NET](http://object.net/), Inc., All rights reserved.
-
 ## v3.2.0
 
 | Product | Ext.NET Enterprise |
@@ -99,8 +95,6 @@ The [EXTJS] or [EXTNET] tag indicates origin framework of the Breaking Change.
 
 1. [EXTNET] ComboBox's, ReminderCombo's, CalendarCombo's ForceSelection type
    has been changed to bool? from bool. Please see the GitHub issue [#783](https://github.com/extnet/Ext.NET/issues/783) why.
-
-Copyright 2008-2016 [Object.NET](http://object.net/), Inc., All rights reserved.
 
 ## v3.1.0
 
@@ -163,8 +157,6 @@ http://docs.sencha.com/extjs/5.1/5.1.0-apidocs/#!/api
 11. [EXTNET] The Toolbar's OverFlowChange event has been renamed to
     OverflowChange (lowercase "f").
 
-Copyright 2008-2016 [Object.NET](http://object.net/), Inc., All rights reserved.
-
 ## v3.0.0
 
 | Product | Ext.NET Enterprise |
@@ -178,8 +170,6 @@ The [EXTJS] or [EXTNET] tag indicates origin framework of the Breaking Change.
 #### BREAKING CHANGES
 
 NONE
-
-Copyright 2008-2016 [Object.NET](http://object.net/), Inc., All rights reserved.
 
 ## v3.0.0-beta
 
