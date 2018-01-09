@@ -1,7 +1,7 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
-| Release Date | 2017-10-16 |
-| Current Version | 4.5.0 |
+| Release Date | 2018-01-09 |
+| Current Version | 4.5.1 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
 
 ## Contents
@@ -221,4 +221,4 @@ This `IgnoreRoute` is automatically inserted if using the NuGet package [install
 1. [Json.NET](http://json.net/) provided by James Newton-King ([LICENSE](https://github.com/extnet/Premium/blob/master/.build/licenses/Newtonsoft.Json.md))
 1. [Ext JS](http://www.sencha.com/products/js/) JavaScript Library with Commercial License provided by Sencha, Inc. ([LICENSE](https://github.com/extnet/Premium/blob/master/.build/licenses/Sencha.md))
 
-Copyright 2008-2017 [Object.NET](http://object.net/), Inc., All rights reserved.
+Copyright 2008-2018 [Object.NET](http://object.net/), Inc., All rights reserved.

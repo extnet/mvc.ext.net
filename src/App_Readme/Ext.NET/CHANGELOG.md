@@ -1,5 +1,30 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2018-01-09 |
+| Current Version | 4.5.1 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.5.1) on GitHub |
+
+#### FEATURES
+
+None
+
+#### DEFECTS
+
+1. [[#1572](https://github.com/extnet/Ext.NET/issues/1572)] FilterHeader plug in removed by grid.reconfigure(columns)
+2. [[#1571](https://github.com/extnet/Ext.NET/issues/1571)] SelectBox ReadOnly setting does not prevent from filling from existing entries in IE/Edge
+3. [[#1570](https://github.com/extnet/Ext.NET/issues/1570)] Ext.form.field.Base.remoteValidate() override triggers validitychange event with wrong args
+4. [[#1569](https://github.com/extnet/Ext.NET/issues/1569)] Ext.form.field.Checkbox.hideIndicator() hides the whole checkbox
+5. [[#1317](https://github.com/extnet/Ext.NET/issues/1317)] Wrong numbers in RowNumberer in paged GridPanel with Grouping Feature 
+
+#### BREAKING CHANGES
+
+None
+
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2017-10-16 |
 | Current Version | 4.5.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.5.0) on GitHub |

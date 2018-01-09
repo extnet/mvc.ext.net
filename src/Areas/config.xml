@@ -4,9 +4,11 @@
     <folder name="Getting_Started" />
   </order>
 
+  <!--
   <new version="4.5.0">
     <folder name="Form_TextField\Views\InputMask_Native" />
   </new>
+  -->
 
   <!--
   <new version="4.4.0">
