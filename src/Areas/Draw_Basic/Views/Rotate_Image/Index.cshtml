@@ -13,7 +13,7 @@
                 var desiredSprite = "btn" + me.sprite.id.substr(3, 1) + "arrow";
                 var spriteToHiLit = App.dc1.getSprite(desiredSprite);
 
-                spriteToHiLit.fx.stop();
+                spriteToHiLit.getAnimation().stop();
                 spriteToHiLit.setAttributes({ fill: '#fc0', duration: 300 });
             }
         };
@@ -23,14 +23,14 @@
                 var desiredSprite = "btn" + me.sprite.id.substr(3, 1) + "arrow";
                 var spriteToDeHiLit = App.dc1.getSprite(desiredSprite);
 
-                spriteToDeHiLit.fx.stop();
+                spriteToDeHiLit.getAnimation().stop();
                 spriteToDeHiLit.setAttributes({ fill: '#000' });
             }
         };
 
         var onClick = function (me, event, eventOpts) {
             if (me.sprite.id.match(/^btn[12]/)) {
-                me.sprite.fx.stop();
+                me.sprite.getAnimation().stop();
                 var spriteToRotate = App.dc1.getSprite("img");
                 if (!fxApplied) {
                     spriteToRotate.setAttributes({ duration: 1000, easing: "easeInOut" });
