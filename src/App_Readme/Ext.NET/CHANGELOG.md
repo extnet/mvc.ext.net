@@ -1,5 +1,37 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2018-06-16 |
+| Current Version | 4.6.0 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.6.0) on GitHub |
+
+#### FEATURES
+
+1. [[#1593](https://github.com/extnet/Ext.NET/issues/1593)] NuGet packages upgrade
+2. [[#1592](https://github.com/extnet/Ext.NET/issues/1592)] New Ext.Net.Field ValidateOnFocusLeave config option
+
+#### DEFECTS
+
+1. [[#1591](https://github.com/extnet/Ext.NET/issues/1591)] Adding custom/typed tags to TagField expands picker instead of adding
+2. [[#1590](https://github.com/extnet/Ext.NET/issues/1590)] TagField's picker does not align with the field when removing tags
+3. [[#1589](https://github.com/extnet/Ext.NET/issues/1589)] TagField erratic when more than one entries have the same \"value\".
+4. [[#1588](https://github.com/extnet/Ext.NET/issues/1588)] Fields with InputMask trigger javascript error on input
+5. [[#1587](https://github.com/extnet/Ext.NET/issues/1587)] SpriteEvents plugin does not work
+6. [[#1585](https://github.com/extnet/Ext.NET/issues/1585)] Grid Grouping + CellEditing + CellSelection error if group is collapsed
+7. [[#1583](https://github.com/extnet/Ext.NET/issues/1583)] Ext.net.ImageButton throws client-side error on IE 11 when clicked
+8. [[#1582](https://github.com/extnet/Ext.NET/issues/1582)] TagField adds only the first tag when several tags are added at once
+9. [[#1581](https://github.com/extnet/Ext.NET/issues/1581)] TagField with TypeAhead and HideSelected breaks when selecting tag from dropdown
+10. [[#1573](https://github.com/extnet/Ext.NET/issues/1573)] AbstractContainer.RemoveAll() server-side call adds 'null' argument to the client-side call
+11. [[#1567](https://github.com/extnet/Ext.NET/issues/1567)] Ext.form.field.Checkbox.show() does not properly show back the checkbox
+
+#### BREAKING CHANGES
+
+None
+
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2018-01-09 |
 | Current Version | 4.5.1 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.5.1) on GitHub |

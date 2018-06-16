@@ -1,6 +1,6 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
-| Release Date | 2018-06-11 |
+| Release Date | 2018-06-16 |
 | Current Version | 4.6.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
 
@@ -94,7 +94,7 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
       <dependentAssembly>
         <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" />
-        <bindingRedirect oldVersion="0.0.0.0-10.0.0.0" newVersion="10.0.0.0" />
+        <bindingRedirect oldVersion="0.0.0.0-11.0.0.0" newVersion="11.0.0.0" />
       </dependentAssembly>
       <dependentAssembly>
         <assemblyIdentity name="Ext.Net.Utilities" publicKeyToken="2c34ac34702a3c23" />
@@ -133,7 +133,7 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
       </dependentAssembly>
       <dependentAssembly>
         <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35"/>
-        <bindingRedirect oldVersion="1.0.0.0-5.2.3.0" newVersion="5.2.3.0"/>
+        <bindingRedirect oldVersion="1.0.0.0-5.2.6.0" newVersion="5.2.6.0"/>
       </dependentAssembly>
       -->
     </assemblyBinding>
