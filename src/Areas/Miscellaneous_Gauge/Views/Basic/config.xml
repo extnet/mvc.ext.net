@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<example>
+  <description>
+    Basic Gauge component.
+  </description>
+  <tags>basic,bind,css,custom-ui,databind,gauge,panel,slider,ui,ux,viewmodel</tags>
+</example>

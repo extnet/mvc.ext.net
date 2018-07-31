@@ -27,6 +27,7 @@
     <IISExpressUseClassicPipelineMode />
     <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -314,6 +315,10 @@
     <Compile Include="Areas\MessageBus_Basic\MessageBus_BasicAreaRegistration.cs" />
     <Compile Include="Areas\Miscellaneous_ClickRepeater\Controllers\BasicController.cs" />
     <Compile Include="Areas\Miscellaneous_ClickRepeater\Miscellaneous_ClickRepeaterAreaRegistration.cs" />
+    <Compile Include="Areas\Miscellaneous_Gauge\Controllers\CustomController.cs" />
+    <Compile Include="Areas\Miscellaneous_Gauge\Controllers\NeedlesController.cs" />
+    <Compile Include="Areas\Miscellaneous_Gauge\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Miscellaneous_Gauge\Miscellaneous_GaugeAreaRegistration.cs" />
     <Compile Include="Areas\Miscellaneous_FlashComponent\Controllers\BasicController.cs" />
     <Compile Include="Areas\Miscellaneous_FlashComponent\Miscellaneous_FlashComponentAreaRegistration.cs" />
     <Compile Include="Areas\Miscellaneous_History\Controllers\BasicController.cs" />
@@ -858,6 +863,9 @@
     <Content Include="Areas\MessageBus_Basic\Views\Complex\config.xml" />
     <Content Include="Areas\MessageBus_Basic\Views\Simple\config.xml" />
     <Content Include="Areas\Miscellaneous_ClickRepeater\Views\Basic\config.xml" />
+    <Content Include="Areas\Miscellaneous_Gauge\Views\Custom\config.xml" />
+    <Content Include="Areas\Miscellaneous_Gauge\Views\Needles\config.xml" />
+    <Content Include="Areas\Miscellaneous_Gauge\Views\Basic\config.xml" />
     <Content Include="Areas\Miscellaneous_Factory\Views\Basic\MyWindow1.ascx" />
     <Content Include="Areas\Miscellaneous_Factory\Views\Basic\Window.ascx" />
     <Content Include="Areas\Miscellaneous_FlashComponent\Views\Basic\config.xml" />
@@ -1272,6 +1280,10 @@
     <Content Include="Areas\Window_Toast\Views\Overview\Index.cshtml" />
     <Content Include="Areas\Window_Toast\Views\Web.config" />
     <Content Include="Areas\Keys_KeyMap\Views\Map_Inside_Component\Index.cshtml" />
+    <Content Include="Areas\Miscellaneous_Gauge\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Miscellaneous_Gauge\Views\Web.config" />
+    <Content Include="Areas\Miscellaneous_Gauge\Views\Needles\Index.cshtml" />
+    <Content Include="Areas\Miscellaneous_Gauge\Views\Custom\Index.cshtml" />
     <None Include="resources\fonts\fontawesome-webfont.eot" />
     <None Include="resources\fonts\fontawesome-webfont.ttf" />
     <None Include="resources\fonts\fontawesome-webfont.woff" />

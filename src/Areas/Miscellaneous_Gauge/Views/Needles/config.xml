@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<example>
+  <description>
+    Gauge component using different predefined needles.
+  </description>
+  <tags>gauge,ux,databind,viewmodel,bind,slider,panel,basic,needle,animation,radius,offset,object</tags>
+</example>

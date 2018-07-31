@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Gauges with various kinds of needles - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+    var gaugeCount = 0;
+}
+
+@section example
+{
+    <h1>Gauges' needles</h1>
+
+    <p>This example shows some of the different gauge needles that are natively available for the component and some basic customization for them.</p>
+    <p>The second gauge (left to right) in the first row uses a custom animation setup.</p>
+    <p>Move the slider around to update the gauges' display value.</p>
+
+    @(
+        Html.X().Panel()
+            .ID("Panel1")
+            .Title("Gauges with various kinds of needles")
+            .Width(800)
+            .Height(500)
+            .LayoutConfig(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch })
+            .ViewModel(new { data = new { value = 30 } })
+            .Defaults(
+                Html.X().Parameter().Name("layout").Params(parms =>
+                {
+                    parms.Add(Html.X().Parameter().Name("type").Value("hbox"));
+                    parms.Add(Html.X().Parameter().Name("align").Value("stretch"));
+                })
+            )
+            .TopBar(
+                Html.X().Toolbar()
+                    .Items(
+                        Html.X().Slider()
+                            .ID("Slider1")
+                            .Single(true)
+                            .FieldLabel("Value")
+                            .BindString("{value}")
+                            .WidthSpec("100%")
+                    )
+            )
+            .Items(
+                Html.X().Panel().Flex(1).Items(
+                    Html.X().Gauge()
+                    .ID("Gauge" + (++gaugeCount))
+                    .Flex(1)
+                    .BindString("{value}")
+                    .ValueStyle(new { display = "none" })
+                    .NeedleConfig(new GaugeNeedleConfig() { OuterRadiusSpec = "100%" }),
+                Html.X().Gauge()
+                    .ID("Gauge" + (++gaugeCount))
+                    .Flex(1)
+                    .BindString("{value}")
+                    .Needle(Gauge.NeedleShape.Wedge)
+                    .Animation(new GaugeAnimConfig() { Easing = GaugeAnimConfig.Ease.InOut, Duration = 2000 })
+                ),
+                Html.X().Panel().Flex(1).Items(
+                    Html.X().Gauge()
+                    .ID("Gauge" + (++gaugeCount))
+                    .Flex(1)
+                    .BindString("{value}")
+                    .NeedleObject(new { type = "spike" }),
+                Html.X().Gauge()
+                    .ID("Gauge" + (++gaugeCount))
+                    .Flex(1)
+                    .BindString("{value}")
+                    .TextOffset(new GaugeTextOffset() { Y = 45 })
+                    .NeedleConfig(new GaugeNeedleConfig() { Type = Gauge.NeedleShape.Arrow, InnerRadius = 0 })
+                )
+            )
+    )
+}

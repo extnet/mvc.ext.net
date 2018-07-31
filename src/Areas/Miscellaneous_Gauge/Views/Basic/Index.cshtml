@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Basic Gauge - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+    var gaugeCount = 0;
+}
+
+@section headtag
+{
+    <style type="text/css">
+        .x-gauge-green .x-gauge-value {
+            fill: green
+        }
+    </style>
+}
+
+@section example
+{
+    <h1>Basic Gauge component overview</h1>
+
+    <p>This component allows to easily set, interact and update nice gauges on screen.</p>
+    <p>Pull the slider around to update the gauges' display value.</p>
+
+    @(
+        Html.X().Panel()
+            .ID("Panel1")
+            .Title("Basic Gauge")
+            .Width(800)
+            .Height(500)
+            .LayoutConfig(new HBoxLayoutConfig() { Align = HBoxAlign.Stretch })
+            .ViewModel(new { data = new { value = 30 } })
+            .TopBar(
+                Html.X().Toolbar()
+                    .Items(
+                        Html.X().Slider()
+                            .ID("Slider1")
+                            .Single(true)
+                            .FieldLabel("Value")
+                            .BindString("{value}")
+                            .WidthSpec("100%")
+                    )
+            )
+            .Items(
+                Html.X().Gauge()
+                    .ID("Gauge" + (++gaugeCount))
+                    .Flex(1)
+                    .BindString("{value}"),
+                Html.X().Gauge()
+                    .ID("Gauge" + (++gaugeCount))
+                    .Flex(1)
+                    .BindString("{value}")
+                    .TrackStart(180)
+                    .TrackLength(360)
+                    .UIName("green")
+            )
+    )
+}

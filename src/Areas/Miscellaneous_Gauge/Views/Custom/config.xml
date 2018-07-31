@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<example>
+  <description>
+    Gauge component style customization.
+  </description>
+  <tags>bind,custom,databind,gauge,panel,slider,style,svg,template,tpl,ux,viewmodel</tags>
+</example>
