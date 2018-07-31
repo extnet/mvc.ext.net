@@ -3,5 +3,5 @@
   <description>
     Gauge component using different predefined needles.
   </description>
-  <tags>gauge,ux,databind,viewmodel,bind,slider,panel,basic,needle,animation,radius,offset,object</tags>
+  <tags>animation,bind,databind,gauge,needle,object,offset,panel,radius,slider,ux,viewmodel</tags>
 </example>
