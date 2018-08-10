@@ -1,0 +1,179 @@
+﻿@{
+    ViewBag.Title = "Simple TreePanel";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script type="text/javascript">
+        Ext.onReady(function () {
+            App.ExpanderOnlyToggle.setChecked(App.TreeList1.getExpanderOnly());
+            App.SingleExpandToggle.setChecked(App.TreeList1.getSingleExpand());
+            App.MicroToggleBtn.setPressed(App.TreeList1.getMicro());
+        });
+
+        var handleSEToggle = function (me) {
+            if (me.checked) {
+                // If setting Single Expand, collapse everyone to ensure only one
+                // node ever gets expanded. Do not recurse into nodes, as manually
+                // collapsing a node does not collapse its children.
+                App.TreeList1.getStore().getRoot().collapseChildren(false);
+            }
+
+            App.TreeList1.setSingleExpand(me.checked);
+        }
+
+        var handleNavToggle = function (button, pressed) {
+            var treelist = App.TreeList1,
+                ct = treelist.ownerCt;
+
+            treelist.setExpanderFirst(!pressed);
+            treelist.setUi(pressed ? 'nav' : null);
+            treelist.setHighlightPath(pressed);
+            ct[pressed ? 'addCls' : 'removeCls']('treelist-with-nav');
+
+            // If switching to Nav while already on Micro, adjust the width
+            if (treelist.getMicro()) {
+                ct.setWidth(treelist.toolsElement.getWidth())
+            }
+
+            if (Ext.isIE8) {
+                this.repaintList(treelist);
+            }
+        }
+
+        var handleMicroToggle = function (me) {
+            var tl = App.TreeList1,
+                ct = tl.ownerCt;
+            App.TreeList1.setMicro(me.pressed);
+
+            if (me.pressed) {
+                tl.macroWidth = ct.getWidth();
+                ct.setWidth(tl.toolsElement.getWidth());
+            } else {
+                if (tl.macroWidth === undefined) {
+                    tl.macroWidth = 200;
+                }
+                ct.setWidth(tl.macroWidth);
+            }
+        }
+
+        var handleTLSel = function (me, node) {
+            var pane = App.SelectionPanel,
+                cn = node,
+                selPath = [];
+
+            while (!cn.isRoot()) {
+                selPath.push(cn.data.text);
+                cn = cn.parentNode;
+            }
+            pane.setHtml("Selected: <br /><b>" + selPath.reverse().join(" > ") + "</b>");
+        }
+    </script>
+}
+
+@section example
+{
+    <h1>Tree List Component Overview</h1>
+    <p>
+        The <b>TreeList</b> component is a simplified and lightweight version of the <b>TreePanel</b>, useful for simple and responsive navigation trees.
+    </p>
+    @(
+        X.Window()
+            .ID("Window1")
+            .Title("TreeList")
+            .IconCls("x-fa fa-gears")
+            .Width(500)
+            .Height(450)
+            .Closable(false)
+            .Resizable(false)
+            .Layout(LayoutType.Border)
+            .HeaderConfig(X.PanelHeader()
+                .Items(
+                    X.Button().Text("Options")
+                        .Menu(X.Menu().ID("OptionsMenu")
+                            .Items(
+                                X.CheckMenuItem()
+                                    .ID("ExpanderOnlyToggle")
+                                    .Text("Expander Only")
+                                    .Handler("App.TreeList1.setExpanderOnly(this.checked)"),
+                                X.CheckMenuItem()
+                                    .ID("SingleExpandToggle")
+                                    .Text("Single Expand")
+                                    .Listeners(l => l.CheckChange.Fn = "handleSEToggle")
+                            )
+                        ),
+                    X.Button().Text("Nav")
+                        .ID("NavToggleBtn")
+                        .EnableToggle(true)
+                        .Listeners(l => l.Toggle.Fn = "handleNavToggle"),
+                    X.Button().Text("Micro")
+                        .ID("MicroToggleBtn")
+                        .EnableToggle(true)
+                        .Listeners(l => l.Toggle.Fn = "handleMicroToggle")
+                )
+            )
+            .Items(
+                X.Panel()
+                    .ID("TreeListPanel")
+                    .Width(250)
+                    .Border(false)
+                    .Region(Region.West)
+                    .Split(true)
+                    .Scrollable(ScrollableOption.Both)
+                    .LayoutConfig(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch })
+                    .Items(
+                        X.TreeList().ID("TreeList1")
+                            .Listeners(l => l.SelectionChange.Fn = "handleTLSel")
+                            .Store(
+                                X.TreeStore()
+                                    .ID("TreeStore1")
+                                    .Root(
+                                        X.Node().Expanded(true)
+                                            .Children(
+                                                X.Node().Text("Home").IconCls("x-fa fa-home")
+                                                    .Children(
+                                                        X.Node().Text("Messages").IconCls("x-fa fa-inbox")
+                                                            .Leaf(true),
+                                                        X.Node().Text("Archive").IconCls("x-fa fa-database")
+                                                            .Children(
+                                                                X.Node().Text("First").IconCls("x-fa fa-sliders")
+                                                                    .Leaf(true),
+                                                                X.Node().Text("No icon").IconCls("")
+                                                                    .Leaf(true)
+                                                            ),
+                                                        X.Node().Text("Music").IconCls("x-fa fa-music")
+                                                            .Leaf(true),
+                                                        X.Node().Text("Video").IconCls("x-fa fa-film")
+                                                            .Leaf(true)
+                                                    ),
+                                                X.Node().Text("Users").IconCls("x-fa fa-inbox")
+                                                    .Children(
+                                                        X.Node().Text("Tagged").IconCls("x-fa fa-tag")
+                                                            .Leaf(true),
+                                                        X.Node().Text("Inactive").IconCls("x-fa fa-trash")
+                                                            .Leaf(true)
+                                                    ),
+                                                X.Node().Text("Groups").IconCls("x-fa fa-group")
+                                                    .Leaf(true),
+                                                X.Node().Text("Settings").IconCls("x-fa fa-wrench")
+                                                    .Children(
+                                                        X.Node().Text("Sharing").IconCls("x-fa fa-share-alt")
+                                                            .Leaf(true),
+                                                        X.Node().Text("Notifications").IconCls("x-fa fa-flag")
+                                                            .Leaf(true),
+                                                        X.Node().Text("Network").IconCls("x-fa fa-signal")
+                                                            .Leaf(true)
+                                                    )
+                                            )
+                                    )
+                            )
+                    ),
+                X.Panel()
+                    .ID("SelectionPanel")
+                    .Region(Region.Center)
+                    .BodyPadding(10)
+            )
+    )
+}

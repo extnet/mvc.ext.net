@@ -345,6 +345,8 @@
     <Compile Include="Areas\TabPanel_Basic\TabPanel_BasicAreaRegistration.cs" />
     <Compile Include="Areas\TabPanel_TabStrip\Controllers\OverviewController.cs" />
     <Compile Include="Areas\TabPanel_TabStrip\TabPanel_TabStripAreaRegistration.cs" />
+    <Compile Include="Areas\TreePanel_List\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\TreePanel_List\TreePanel_ListAreaRegistration.cs" />
     <Compile Include="Areas\Viewport_Basic\Controllers\Built_as_ClassController.cs" />
     <Compile Include="Areas\Viewport_Basic\Controllers\Built_as_BuilderController.cs" />
     <Compile Include="Areas\Viewport_Basic\Viewport_BasicAreaRegistration.cs" />
@@ -1058,6 +1060,7 @@
     <Content Include="Areas\TreePanel_Advanced\Views\Image_Organizer\config.xml" />
     <Content Include="Areas\TreePanel_Advanced\Views\Remote_Mode\config.xml" />
     <Content Include="Areas\TreePanel_Advanced\Views\TreeGrid\config.xml" />
+    <Content Include="Areas\TreePanel_List\Views\Overview\config.xml" />
     <Content Include="Areas\TreePanel_Basic\Views\Checkbox_Nodes\config.xml" />
     <Content Include="Areas\TreePanel_Basic\Views\DragDrop_Between_Trees\config.xml" />
     <Content Include="Areas\TreePanel_Basic\Views\Editors\config.xml" />
@@ -1284,6 +1287,8 @@
     <Content Include="Areas\Miscellaneous_Gauge\Views\Web.config" />
     <Content Include="Areas\Miscellaneous_Gauge\Views\Needles\Index.cshtml" />
     <Content Include="Areas\Miscellaneous_Gauge\Views\Custom\Index.cshtml" />
+    <Content Include="Areas\TreePanel_List\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\TreePanel_List\Views\Web.config" />
     <None Include="resources\fonts\fontawesome-webfont.eot" />
     <None Include="resources\fonts\fontawesome-webfont.ttf" />
     <None Include="resources\fonts\fontawesome-webfont.woff" />
