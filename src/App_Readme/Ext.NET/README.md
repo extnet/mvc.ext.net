@@ -1,7 +1,7 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
-| Release Date | 2018-06-16 |
-| Current Version | 4.6.0 |
+| Release Date | 2018-08-13 |
+| Current Version | 4.7.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
 
 ## Contents
@@ -175,6 +175,7 @@ Official Ext JS [browser support](http://docs.sencha.com/extjs/6.2.1/guides/supp
 | enableAria | bool | Set to true to enable Accessibility (ARIA). Defaults to `True`. |
 | enableAriaButtons | bool | Set to false to disable WAI-ARIA compatibility checks for buttons. Defaults to `True`. |
 | enableAriaPanels | bool | Set to false to disable WAI-ARIA compatibility checks for panels. Defaults to `True`. |
+| enableKeyboardMode | bool | When set to 'true', focus styling will be applied to focused elements based on the user interaction mode. |
 | glyphFontFamily | string | Sets the default font-family to use for components that support a glyph config. Default is `""`. |
 | gzip | bool | Whether to automatically render scripts with gzip compression. Only works when `renderScripts="Embedded"` and/or `renderStyles="Embedded"`. Default is `True`. Options include [`True` \| `False`] |
 | idMode | IDMode | Manages how a control's id is rendered to the client. Default is `Explicit`. Options include [`Client` \| `Explicit` \| `Ignore` \| `Inherit` \| `Legacy` \| `Parent` \| `Predictable` \| `Static`] |

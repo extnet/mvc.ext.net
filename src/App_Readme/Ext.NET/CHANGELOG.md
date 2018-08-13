@@ -1,5 +1,37 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2018-08-13 |
+| Current Version | 4.7.0 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.7.0) on GitHub |
+
+#### FEATURES
+
+1. [[#1601](https://github.com/extnet/Ext.NET/issues/1601)] Add new 'Graphite' theme support
+2. [[#1599](https://github.com/extnet/Ext.NET/issues/1599)] Add support to Ext.ux.gauge.Gauge
+3. [[#958](https://github.com/extnet/Ext.NET/issues/958)] Ext.list.Tree Component
+
+#### DEFECTS
+
+1. [[#1608](https://github.com/extnet/Ext.NET/issues/1608)] Missing supported events from Ext.Net.Widget
+2. [[#1607](https://github.com/extnet/Ext.NET/issues/1607)] Ext.menu.Menu constrained by body height are wrongly positioned
+3. [[#1606](https://github.com/extnet/Ext.NET/issues/1606)] QuerySelector down() breaks if there's a Chart with SpriteLegend within
+4. [[#1604](https://github.com/extnet/Ext.NET/issues/1604)] Ext JS 6.6.0 reliance on native JSON breaks Ext.NET implementations
+5. [[#1598](https://github.com/extnet/Ext.NET/issues/1598)] ComboBox: formBind buttons not updated if forceSelection and initially empty
+6. [[#1597](https://github.com/extnet/Ext.NET/issues/1597)] Ext.ProgressBar issue with SetUI
+7. [[#1596](https://github.com/extnet/Ext.NET/issues/1596)] Ext.net.InfoPanelQueue message boxes suppressed first display
+8. [[#1595](https://github.com/extnet/Ext.NET/issues/1595)] Ext.net.InfoPanelQueue's removeAll typo with items reference
+9. [[#1594](https://github.com/extnet/Ext.NET/issues/1594)] Remove Grid Filter's events
+
+#### BREAKING CHANGES
+
+1. [[#1604](https://github.com/extnet/Ext.NET/issues/1604)] Ext JS 6.6.0 reliance on native JSON breaks Ext.NET implementations
+2. [[#1594](https://github.com/extnet/Ext.NET/issues/1594)] Remove Grid Filter's events
+
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2018-06-16 |
 | Current Version | 4.6.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.6.0) on GitHub |
