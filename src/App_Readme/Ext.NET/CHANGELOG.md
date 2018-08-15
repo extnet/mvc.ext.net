@@ -1,5 +1,26 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2018-08-15 |
+| Current Version | 4.7.1 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.7.1) on GitHub |
+
+#### FEATURES
+
+None
+
+#### DEFECTS
+
+1. [[#1610](https://github.com/extnet/Ext.NET/issues/1610)] Ext.data.reader.Json and Ext.data.proxy.Ajax do not obey Ext.USE_NATIVE_JSON
+
+#### BREAKING CHANGES
+
+None
+
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2018-08-13 |
 | Current Version | 4.7.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.7.0) on GitHub |

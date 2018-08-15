@@ -4,12 +4,22 @@
     <folder name="Getting_Started" />
   </order>
 
+  <new version="4.7.1">
+    <!-- Keeping the new ones from 4.7.0 just to keep track. -->
+    <folder name="Miscellaneous_Gauge\Views\Needles" />
+    <folder name="Miscellaneous_Gauge\Views\Custom" />
+    <folder name="Miscellaneous_Gauge\Views\Basic" />
+    <folder name="TreePanel_List\Views\Overview" />
+  </new>
+
+  <!--
   <new version="4.7.0">
     <folder name="Miscellaneous_Gauge\Views\Needles" />
     <folder name="Miscellaneous_Gauge\Views\Custom" />
     <folder name="Miscellaneous_Gauge\Views\Basic" />
     <folder name="TreePanel_List\Views\Overview" />
   </new>
+  -->
 
   <!--
   <updated version="4.6.0">
