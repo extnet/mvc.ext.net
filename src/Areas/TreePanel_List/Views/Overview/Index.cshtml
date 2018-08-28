@@ -2,6 +2,30 @@
     ViewBag.Title = "Simple TreePanel";
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
     var X = Html.X();
+
+    #region Infer current theme and script mode
+    var resMan = MvcResourceManager.GetInstance();
+    var curTheme = Theme.Triton;
+    var enScriptMode = Ext.Net.ScriptMode.Release;
+
+    if (resMan != null)
+    {
+        curTheme = resMan.Theme;
+        enScriptMode = resMan.ScriptMode;
+    }
+    else
+    {
+        if (this.Session["Ext.Net.Theme"] != null)
+        {
+            curTheme = (Theme)this.Session["Ext.Net.Theme"];
+        }
+
+        if (this.Session["Ext.Net.ScriptMode"] != null)
+        {
+            enScriptMode = (Ext.Net.ScriptMode)this.Session["Ext.Net.ScriptMode"];
+        }
+    }
+    #endregion Infer current theme and script mode
 }
 
 @section headtag
@@ -71,6 +95,34 @@
             pane.setHtml("Selected: <br /><b>" + selPath.reverse().join(" > ") + "</b>");
         }
     </script>
+
+    @*
+        Add HTML output depending on current theme/scriptMode to include Font Awesome
+        in case the theme is not one of the themes that natively implement the font.
+    *@
+    @if (curTheme != Ext.Net.Theme.Triton && curTheme != Ext.Net.Theme.Graphite)
+    {
+        if (enScriptMode == Ext.Net.ScriptMode.Debug)
+        {
+            <link href="/resources/css/font-awesome.css" rel="stylesheet" />
+        }
+        else
+        {
+            <link href="/resources/css/font-awesome.min.css" rel="stylesheet" />
+        }
+
+        <style type="text/css">
+            /* wraps over the x-fa CSS class to match the reference from the Triton/Graphite themes */
+            .x-fa {
+              display: inline-block;
+              font: normal normal normal 14px/1 FontAwesome;
+              font-size: inherit;
+              text-rendering: auto;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+            }
+        </style>
+    }
 }
 
 @section example
