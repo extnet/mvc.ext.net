@@ -1088,6 +1088,8 @@
     <Content Include="ReferenceAssemblies\ReadMe.txt" />
     <Content Include="ReferenceAssemblies\Wilco.SyntaxHighlighter.dll" />
     <Content Include="resources\css\examples.css" />
+    <Content Include="resources\css\font-awesome.css" />
+    <Content Include="resources\css\font-awesome.min.css" />
     <Content Include="resources\css\main.css" />
     <Content Include="resources\fonts\fontawesome-webfont.svg" />
     <Content Include="resources\fonts\LICENSE_TITILLIUMTEXT.txt" />
