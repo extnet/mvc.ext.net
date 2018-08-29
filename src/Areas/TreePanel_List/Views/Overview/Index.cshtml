@@ -4,25 +4,18 @@
     var X = Html.X();
 
     #region Infer current theme and script mode
-    var resMan = MvcResourceManager.GetInstance();
-    var curTheme = Theme.Triton;
-    var enScriptMode = Ext.Net.ScriptMode.Release;
+    var manager = MvcResourceManager.GetInstance();
+    var theme = Theme.Triton;
 
-    if (resMan != null)
+    if (manager != null)
     {
-        curTheme = resMan.Theme;
-        enScriptMode = resMan.ScriptMode;
+        theme = manager.Theme;
     }
     else
     {
         if (this.Session["Ext.Net.Theme"] != null)
         {
-            curTheme = (Theme)this.Session["Ext.Net.Theme"];
-        }
-
-        if (this.Session["Ext.Net.ScriptMode"] != null)
-        {
-            enScriptMode = (Ext.Net.ScriptMode)this.Session["Ext.Net.ScriptMode"];
+            theme = (Theme)this.Session["Ext.Net.Theme"];
         }
     }
     #endregion Infer current theme and script mode
@@ -100,17 +93,9 @@
         Add HTML output depending on current theme/scriptMode to include Font Awesome
         in case the theme is not one of the themes that natively implement the font.
     *@
-    @if (curTheme != Ext.Net.Theme.Triton && curTheme != Ext.Net.Theme.Graphite)
+    @if (theme != Ext.Net.Theme.Triton && theme != Ext.Net.Theme.Graphite)
     {
-        if (enScriptMode == Ext.Net.ScriptMode.Debug)
-        {
-            <link href="/resources/css/font-awesome.css" rel="stylesheet" />
-        }
-        else
-        {
-            <link href="/resources/css/font-awesome.min.css" rel="stylesheet" />
-        }
-
+        <link href="/resources/css/font-awesome.min.css" rel="stylesheet" />
         <style type="text/css">
             /* wraps over the x-fa CSS class to match the reference from the Triton/Graphite themes */
             .x-fa {
