@@ -270,6 +270,8 @@
     <Compile Include="Areas\Form_Hyperlink\Form_HyperlinkAreaRegistration.cs" />
     <Compile Include="Areas\Form_Label\Controllers\BasicController.cs" />
     <Compile Include="Areas\Form_Label\Form_LabelAreaRegistration.cs" />
+    <Compile Include="Areas\Getting_Started\Controllers\Component_OverviewController.cs" />
+    <Compile Include="Areas\Getting_Started\Models\Component_OverviewModel.cs" />
     <Compile Include="Areas\GridPanel_ColumnModel\Controllers\HyperlinkColumnController.cs" />
     <Compile Include="Areas\GridPanel_FilterHeader\Controllers\OverviewController.cs" />
     <Compile Include="Areas\GridPanel_FilterHeader\GridPanel_FilterHeaderAreaRegistration.cs" />
@@ -788,6 +790,10 @@
     <Content Include="Areas\Form_MultiSelect\Views\Overview\config.xml" />
     <Content Include="Areas\Getting_Started\config.xml" />
     <Content Include="Areas\Getting_Started\Views\CHANGELOG\config.xml" />
+    <Content Include="Areas\Getting_Started\Views\Component_Overview\config.xml" />
+    <Content Include="Areas\Getting_Started\Views\Component_Overview\images\add16.gif" />
+    <Content Include="Areas\Getting_Started\Views\Component_Overview\images\add24.gif" />
+    <Content Include="Areas\Getting_Started\Views\Component_Overview\images\add32.gif" />
     <Content Include="Areas\GridPanel_ArrayGrid\Views\ArrayWithPaging\config.xml" />
     <Content Include="Areas\GridPanel_ArrayGrid\Views\DirectEvent_Creation\config.xml" />
     <Content Include="Areas\GridPanel_ArrayGrid\Views\Remote_Load\config.xml" />
@@ -1029,6 +1035,7 @@
     <Content Include="Areas\Dynamic_Partial_Rendering\Views\Render_as_Config\Component.cshtml" />
     <Content Include="Areas\Form_TextField\Views\InputMask_Native\Index.cshtml" />
     <Content Include="Areas\Form_TextField\Views\Web.config" />
+    <Content Include="Areas\Getting_Started\Views\Component_Overview\Index.cshtml" />
     <None Include="Areas\GridPanel_ArrayGrid\Views\ArrayWithPaging\Index.cshtml" />
     <None Include="Areas\GridPanel_ColumnModel\Views\Ajax_Configuration\Index.cshtml" />
     <None Include="Areas\GridPanel_ColumnModel\Views\Column_Variations\Index.cshtml" />
@@ -1463,6 +1470,7 @@
     <Content Include="Views\Main\_West.cshtml" />
     <Content Include="Views\Main\Home.cshtml" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

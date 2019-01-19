@@ -1,0 +1,771 @@
+@model System.Collections.IEnumerable
+@{
+    ViewBag.Title = "Ext.NET Component and Themes Overview - Ext.NET Examples";
+    Layout = "~/Views/Shared/_BaseLayoutNoMgr.cshtml";
+
+    #region Setup display theme
+    var manager = MvcResourceManager.GetInstance();
+    var theme = Theme.Triton;
+
+    if (manager != null)
+    {
+        theme = manager.Theme;
+    }
+    else
+    {
+        if (this.Session["Ext.Net.Theme"] != null)
+        {
+            theme = (Theme)this.Session["Ext.Net.Theme"];
+        }
+    }
+
+    if (this.Request["theme"] != null)
+    {
+        theme = (Theme)Enum.Parse(typeof(Theme), this.Request["theme"]);
+    }
+    #endregion Setup display theme
+}
+@section headtag
+{
+    <style type="text/css">
+        body {
+            font-family: 'Helvetica Neue',tahoma,helvetica,sans-serif;
+            font-size: 12px;
+        }
+
+        div#header {
+            height: 65px;
+            width: 1090px;
+            padding: 25px 0 10px 0;
+            margin: 0 50px;
+        }
+
+        .x-viewport body {
+            overflow: auto !important;
+        }
+
+        div#styleswitcher {
+            background-color: #f3f3f3;
+            background-color: rgba(243,243,243,.333);
+            border: 1px solid #ddd;
+            border-color: rgba(221,221,221,.333);
+            border-radius: 8px;
+            -moz-border-radius: 8px;
+            -ms-border-radius: 8px;
+            -o-border-radius: 8px;
+            -webkit-border-radius: 8px;
+            float: right;
+            padding: 8px 10px;
+            width: auto;
+        }
+
+        div#header h1 {
+            width: 900px;
+        }
+
+            div#header h1 span {
+                color: inherit;
+                font-family: tahoma,helvetica,verdana, sans-serif;
+                font-size: 12px;
+                font-weight: normal;
+                line-height: 16px;
+                padding-left: 25px;
+                text-shadow: none;
+            }
+
+        .add32 {
+            background-image: url(/resources/images/add32.gif) !important;
+        }
+
+        .add16 {
+            background-image: url(/resources/images/add16.gif) !important;
+        }
+    </style>
+}
+@section example
+{
+    @Html.X().ResourceManager().Theme(theme)
+
+    <div id="header">
+        <div id="styleswitcher">
+            @(
+                Html.X().ComboBox()
+                    .ID("ComboBoxTheme")
+                    .FieldLabel("Choose Theme")
+                    .Width(300)
+                    .Items((itms) =>
+                    {
+                        var themes = Enum.GetValues(typeof(Ext.Net.Theme));
+                        foreach (var tn in themes)
+                        {
+                            var value = ((Ext.Net.Theme)tn).ToString();
+                            var text = value.Replace("Touch", " Touch");
+                            if (text == "Default")
+                            {
+                                text = "Blue";
+                            }
+
+                            if (text != "None")
+                            {
+                                itms.Add(new ListItem(text, value));
+                            }
+                        }
+                    })
+                    .SelectedItems((itm) =>
+                    {
+                        itm.Add(new { value = theme.ToString() });
+                    })
+                    .Listeners((ltn) =>
+                    {
+                        ltn.Select.Handler = "window.location.search = '?theme=' + " +
+                            "records[0].data[this.valueField];";
+                    })
+            )
+        </div>
+        <h1>Ext.NET <span>View and test every Component against bundled Themes.</span></h1>
+    </div>
+
+    @(
+        Html.X().Window()
+            .Width(170)
+            .Height(170)
+            .MinWidth(150)
+            .Title("Window")
+            .BodyPadding(5)
+            .Html("Click Submit")
+            .Collapsible(true)
+            .X(570)
+            .Y(130)
+            .TopBar(
+                Html.X().Toolbar().Items(
+                    Html.X().Button().Text("Toolbar")
+                )
+            )
+            .Buttons(
+                Html.X().Button()
+                    .ID("Button1")
+                    .Text("Submit")
+                    .Icon(Icon.Accept)
+                    .DirectClickAction("Button1_Click")
+            )
+    )
+
+    @(
+        Html.X().Container()
+            .Height(1865)
+            .Width(1440)
+            .Layout(LayoutType.Absolute)
+            .StyleSpec("background-image: url('/resources/images/bg-main.png')")
+            .Items(
+                @*
+                    Panel / Window
+                *@
+
+                Html.X().Panel()
+                    .Width(170)
+                    .Height(170)
+                    .Title("Basic Panel")
+                    .BodyPadding(5)
+                    .Html("Some content")
+                    .Collapsible(true)
+                    .X(10)
+                    .Y(10),
+
+                Html.X().Panel()
+                    .Width(170)
+                    .Height(170)
+                    .Title("Masked Panel")
+                    .BodyPadding(5)
+                    .Html("Some content")
+                    .Collapsible(true)
+                    .X(190)
+                    .Y(10)
+                    .Listeners((ltn) =>
+                    {
+                        ltn.Render.Handler = "this.body.mask('Loading...');";
+                        ltn.Render.Delay = 50;
+                    }),
+
+                Html.X().Panel()
+                    .Width(170)
+                    .Height(170)
+                    .Title("Framed Panel")
+                    .Frame(true)
+                    .Html("Some content")
+                    .Collapsible(true)
+                    .X(370)
+                    .Y(10),
+
+                @*
+                    Basic Panel With Toolbars
+                *@
+
+                Html.X().Panel()
+                    .Width(700)
+                    .Height(170)
+                    .Title("Basic Panel With Toolbars")
+                    .X(730)
+                    .Y(10)
+                    .TopBar(
+                        Html.X().Toolbar()
+                            .Items(
+                                Html.X().ToolbarTextItem().Text("Toolbar &amp; Menus"),
+                                Html.X().ToolbarSpacer(),
+                                Html.X().ToolbarSeparator(),
+                                Html.X().Button().Text("Button"),
+                                Html.X().Button()
+                                    .Text("Menu Button")
+                                    .Menu(
+                                        Html.X().Menu()
+                                            .Items(
+                                                Html.X().MenuItem().Text("Menu Item"),
+                                                Html.X().CheckMenuItem()
+                                                    .Text("Check 1")
+                                                    .Checked(true),
+                                                Html.X().CheckMenuItem().Text("Check 2"),
+                                                Html.X().MenuSeparator(),
+                                                Html.X().CheckMenuItem()
+                                                    .Text("Option 1")
+                                                    .Checked(true)
+                                                    .Group("opts"),
+                                                Html.X().CheckMenuItem()
+                                                    .Text("Option 2")
+                                                    .Group("opts"),
+                                                Html.X().MenuSeparator(),
+                                                Html.X().MenuItem()
+                                                    .Text("Sub-items")
+                                                    .Menu(
+                                                        Html.X().Menu()
+                                                            .Items(
+                                                                Html.X().MenuItem().Text("Item 1"),
+                                                                Html.X().MenuItem().Text("Item 2")
+                                                            )
+                                                    )
+                                            )
+                                    ),
+                                Html.X().SplitButton()
+                                    .Text("Split Button")
+                                    .Menu(
+                                        Html.X().Menu()
+                                            .Items(
+                                                Html.X().MenuItem().Text("Item 1"),
+                                                Html.X().MenuItem().Text("Item 2")
+                                            )
+                                    ),
+                                Html.X().Button()
+                                    .Text("Toggle Button")
+                                    .EnableToggle(true)
+                                    .Pressed(true)
+                            )
+                    )
+                    .BottomBar(
+                        Html.X().Toolbar()
+                            .Items(
+                                Html.X().ToolbarTextItem().Text("Bottom Bar")
+                            )
+                    ),
+
+                @*
+                    Form Fields
+                *@
+
+                Html.X().FormPanel()
+                    .ID("FormPanel1")
+                    .Title("Form Fields")
+                    .Width(710)
+                    .Height(1130)
+                    .Frame(true)
+                    .X(10)
+                    .Y(190)
+                    .BodyStyle("padding:10px 20px;")
+                    .DefaultAnchor("100%")
+                    .Defaults((dfls) =>
+                    {
+                        dfls.Add(new Ext.Net.Parameter("msgTarget", "side"));
+                        dfls.Add(new Ext.Net.Parameter("allowBlank", "false", ParameterMode.Raw));
+                    })
+                    .Tools(
+                        Html.X().Tool().Type(ToolType.Toggle),
+                        Html.X().Tool().Type(ToolType.Close),
+                        Html.X().Tool().Type(ToolType.Minimize),
+                        Html.X().Tool().Type(ToolType.Maximize),
+                        Html.X().Tool().Type(ToolType.Restore),
+                        Html.X().Tool().Type(ToolType.Gear),
+                        Html.X().Tool().Type(ToolType.Pin),
+                        Html.X().Tool().Type(ToolType.Unpin),
+                        Html.X().Tool().Type(ToolType.Right),
+                        Html.X().Tool().Type(ToolType.Left),
+                        Html.X().Tool().Type(ToolType.Up),
+                        Html.X().Tool().Type(ToolType.Down),
+                        Html.X().Tool().Type(ToolType.Refresh),
+                        Html.X().Tool().Type(ToolType.Plus),
+                        Html.X().Tool().Type(ToolType.Help),
+                        Html.X().Tool().Type(ToolType.Search),
+                        Html.X().Tool().Type(ToolType.Save),
+                        Html.X().Tool().Type(ToolType.Print)
+                    )
+                    .Items(
+                        Html.X().DisplayField()
+                            .FieldLabel("DisplayField")
+                            .Text("A value here"),
+                        Html.X().TextField()
+                            .FieldLabel("TextField")
+                            .EmptyText("Enter a value")
+                            .AllowBlank(false),
+                        Html.X().NumberField()
+                            .FieldLabel("NumberField")
+                            .EmptyText("(This field is optional)"),
+                        Html.X().TextField()
+                            .FieldLabel("w/Indicator")
+                            .IndicatorIcon(Icon.Information)
+                            .Anchor("-20")
+                            .IndicatorTip("An Indicator ToolTip"),
+                        Html.X().TextField()
+                            .FieldLabel("w/Note")
+                            .Note("Simple note"),
+
+                        Html.X().FieldContainer()
+                            .FieldLabel("FieldContainer")
+                            .Layout(LayoutType.HBox)
+                            .Items(
+                                Html.X().ComboBox()
+                                    .Width(50)
+                                    .Editable(false)
+                                    .DataIndex("Title")
+                                    .Items(
+                                        Html.X().ListItem().Text("Mr").Value("mr"),
+                                        Html.X().ListItem().Text("Mrs").Value("mrs"),
+                                        Html.X().ListItem().Text("Miss").Value("miss")
+                                    )
+                                    .SelectedItems(
+                                        Html.X().ListItem().Value("mr")
+                                    ),
+                                Html.X().TextField().Flex(1),
+                                Html.X().TextField().Flex(1)
+                            ),
+
+                        Html.X().TextField()
+                            .FieldLabel("TextField with triggers")
+                            .Triggers(
+                                Html.X().FieldTrigger().Icon(TriggerIcon.Clear),
+                                Html.X().FieldTrigger().Icon(TriggerIcon.Search)
+                            ),
+
+                        Html.X().ComboBox()
+                            .FieldLabel("ComboBox")
+                            .Resizable(true)
+                            .Items(
+                                Html.X().ListItem().Text("Foo"),
+                                Html.X().ListItem().Text("Bar")
+                            ),
+                        Html.X().DateField().FieldLabel("DateField"),
+                        Html.X().TimeField().FieldLabel("TimeField"),
+                        Html.X().SpinnerField().FieldLabel("SpinnerField"),
+                        Html.X().Slider()
+                            .Number(50)
+                            .FieldLabel("SliderField")
+                            .Plugins(
+                                Html.X().SliderTip()
+                                    .CustomConfig((cfg) =>
+                                    {
+                                        cfg.Add(
+                                            new ConfigItem(
+                                                "getText",
+                                                "function(thumb) { return thumb.value; }",
+                                                ParameterMode.Raw
+                                            )
+                                        );
+                                    })
+                            ),
+
+                        Html.X().TextArea().FieldLabel("TextArea"),
+                        Html.X().CheckboxGroup()
+                            .FieldLabel("Checkboxes")
+                            .ColumnsWidths(new double[] { 100, 100 })
+                            .Items(
+                                Html.X().Checkbox().BoxLabel("Foo").Checked(true),
+                                Html.X().Checkbox().BoxLabel("Bar")
+                            ),
+                        Html.X().RadioGroup()
+                            .ColumnsWidths(new double[] { 100, 100 })
+                            .Items(
+                                Html.X().Radio().BoxLabel("Foo").Checked(true),
+                                Html.X().Radio().BoxLabel("Bar")
+                            ),
+                        Html.X().HtmlEditor()
+                            .HideLabel(true)
+                            .Height(110)
+                            .Text("Mouse over toolbar for tooltips."),
+                        Html.X().FieldSet().Title("Plain Fieldset").Height(50),
+                        Html.X().FieldSet()
+                            .Title("Collapsible Fieldset")
+                            .Height(50)
+                            .Collapsible(true),
+                        Html.X().FieldSet()
+                            .Title("Checkbox Fieldset")
+                            .Height(50)
+                            .CheckboxToggle(true)
+                    )
+                    .Buttons(
+                        Html.X().Button()
+                            .Text("Toggle Enabled")
+                            .Handler(@<text>
+                                <script type="text/javascript">
+                                    var fp = App.FormPanel1;
+                                    fp.cascade(function (item) {
+                                        if (item !== fp) {
+                                            item.setDisabled(!item.disabled);
+                                        }
+                                    });
+                                </script>
+                            </text>),
+                        Html.X().Button()
+                            .Text("Reset Form")
+                            .OnClientClick("App.FormPanel1.getForm().reset();"),
+                        Html.X().Button()
+                            .Text("Validate")
+                            .OnClientClick("App.FormPanel1.getForm().isValid();")
+                    ),
+
+                @*
+                    BorderLayout
+                *@
+
+                Html.X().Panel()
+                    .Title("BorderLayout Panel")
+                    .Width(700)
+                    .Height(380)
+                    .X(730)
+                    .Y(190)
+                    .Layout(LayoutType.Border)
+                    .Defaults((dfls) =>
+                    {
+                        dfls.Add(new Parameter("collapsible", "true"));
+                        dfls.Add(new Parameter("split", "true"));
+                    })
+                    .Items(
+                        Html.X().Panel()
+                            .Title("Center")
+                            .Region(Region.Center)
+                            .Html("Center")
+                            .Collapsible(false),
+                        Html.X().Panel()
+                            .Title("North")
+                            .Region(Region.North)
+                            .Html("North")
+                            .Height(70)
+                            .MarginSpec("5 5 0 5"),
+                        Html.X().Panel()
+                            .Title("East")
+                            .Region(Region.East)
+                            .Html("East")
+                            .Width(140)
+                            .MarginSpec("0 5 0 0"),
+                        Html.X().Panel()
+                            .Title("West")
+                            .Region(Region.West)
+                            .Html("West")
+                            .Width(140)
+                            .MarginSpec("0 0 0 5")
+                            .CollapseMode(CollapseMode.Mini),
+                        Html.X().Panel()
+                            .Title("South")
+                            .Region(Region.South)
+                            .Html("South")
+                            .MarginSpec("0 5 5 5")
+                    ),
+
+                @*
+                    GridPanel
+                *@
+
+                Html.X().GridPanel()
+                    .Title("GridPanel")
+                    .Width(700)
+                    .Height(270)
+                    .X(730)
+                    .Y(580)
+                    .Store(
+                        Html.X().Store()
+                            .ID("Store1")
+                            .PageSize(10)
+                            .DataSource(Model)
+                            .Model(
+                                Html.X().Model()
+                                    .Fields(
+                                        Html.X().ModelField().Name("company"),
+                                        Html.X().ModelField().Name("price").Type(ModelFieldType.Float),
+                                        Html.X().ModelField().Name("change").Type(ModelFieldType.Float),
+                                        Html.X().ModelField().Name("pctChange").Type(ModelFieldType.Float),
+                                        Html.X().ModelField().Name("lastChange").Type(ModelFieldType.Date)
+                                    )
+                            )
+                            .ServerProxy(
+                                Html.X().AjaxProxy()
+                                    .Url(Url.Action("GetGridData"))
+                            )
+                    )
+                    .ColumnModel(
+                        Html.X().Column()
+                            .Text("Company")
+                            .Width(160)
+                            .DataIndex("company")
+                            .Flex(1),
+                        Html.X().Column()
+                            .Text("Price")
+                            .Width(75)
+                            .DataIndex("price"),
+                        Html.X().Column()
+                            .Text("Change")
+                            .Width(75)
+                            .DataIndex("change"),
+                        Html.X().Column()
+                            .Text("Change")
+                            .Width(75)
+                            .DataIndex("pctChange"),
+                        Html.X().DateColumn()
+                            .Text("Last Updated")
+                            .Width(85)
+                            .DataIndex("lastChange")
+                            .Format("H:mm:ss")
+                    )
+                    .SelectionModel(
+                        Html.X().RowSelectionModel().Mode(SelectionMode.Multi)
+                    )
+                    .View(
+                        Html.X().GridView().StripeRows(true)
+                    )
+                    .TopBar(
+                        Html.X().Toolbar()
+                            .Items(
+                                Html.X().Button().Text("Toolbar"),
+                                Html.X().ToolbarFill(),
+                                Html.X().TextField()
+                                    .Triggers(
+                                        Html.X().FieldTrigger().Icon(TriggerIcon.Clear),
+                                        Html.X().FieldTrigger().Icon(TriggerIcon.Search)
+                                    )
+                            )
+                    )
+                    .BottomBar(
+                        Html.X().PagingToolbar()
+                    ),
+
+                @*
+                    Accordion / Tree
+                *@
+
+                Html.X().Panel()
+                    .Title("AccordionLayout with TreePanel")
+                    .Width(700)
+                    .Height(320)
+                    .X(730)
+                    .Y(860)
+                    .Layout(LayoutType.Accordion)
+                    .Defaults((dfls) =>
+                    {
+                        dfls.Add(new Ext.Net.Parameter("border", "false", ParameterMode.Raw));
+                    })
+                    .Items(
+                        Html.X().TreePanel()
+                            .Title("TreePanel")
+                            .Scrollable(ScrollableOption.Both)
+                            .Root(
+                                Html.X().Node()
+                                    .Text("Root Node")
+                                    .Expanded(true)
+                                    .Children(
+                                        Html.X().Node().Text("Item 1").Leaf(true),
+                                        Html.X().Node().Text("Item 2").Leaf(true),
+                                        Html.X().Node()
+                                            .Text("Folder")
+                                            .Children(
+                                                Html.X().Node().Text("Item 3").Leaf(true)
+                                            )
+                                    )
+                            ),
+                        Html.X().Panel()
+                            .Title("Item 2")
+                            .BodyPadding(5)
+                            .Html("Some content"),
+                        Html.X().Panel()
+                            .Title("Item 3")
+                            .BodyPadding(5)
+                            .Html("Some content")
+                    ),
+
+                @*
+                    TabPanel
+                *@
+
+                Html.X().TabPanel()
+                    .Width(350)
+                    .Height(200)
+                    .X(10)
+                    .Y(1330)
+                    .Defaults((dfls) =>
+                    {
+                        dfls.Add(new Ext.Net.Parameter("padding", 5));
+                    })
+                    .Items(
+                        Html.X().Panel()
+                            .Title("Tab 1")
+                            .Html("TabPanel with tab scroll enabled"),
+                        Html.X().Panel().Title("Tab 2").Closable(true),
+                        Html.X().Panel().Title("Tab 3").Closable(true),
+                        Html.X().Panel().Title("Tab 4").Closable(true),
+                        Html.X().Panel().Title("Tab 5").Closable(true),
+                        Html.X().Panel().Title("Tab 6").Closable(true),
+                        Html.X().Panel().Title("Tab 7").Closable(true)
+                    ),
+
+                Html.X().TabPanel()
+                    .Width(350)
+                    .Height(200)
+                    .X(370)
+                    .Y(1330)
+                    .Plain(true)
+                    .Defaults((dfls) =>
+                    {
+                        dfls.Add(new Ext.Net.Parameter("padding", 5));
+                    })
+                    .Items(
+                        Html.X().Panel()
+                            .Title("Tab 1")
+                            .Html("Plain TabPanel"),
+                        Html.X().Panel().Title("Tab 2").Closable(true),
+                        Html.X().Panel().Title("Tab 3").Closable(true)
+                    ),
+
+                @*
+                    DatePicker
+                *@
+
+                Html.X().DatePicker()
+                    .X(10)
+                    .Y(1540),
+
+                @*
+                    ProgressBar / Slider
+                *@
+
+                Html.X().Panel()
+                    .Title("ProgressBar / Slider")
+                    .Width(700)
+                    .Height(230)
+                    .X(730)
+                    .Y(1190)
+                    .BodyPadding(15)
+                    .Items(
+                        Html.X().ProgressBar()
+                            .Value(.5f)
+                            .Text("Progress text..."),
+                        Html.X().Slider()
+                            .Number(50)
+                            .Width(420),
+                        Html.X().Slider()
+                            .Vertical(true)
+                            .Number(50)
+                            .Height(100)
+                    ),
+
+                @*
+                    ButtonGroup
+                *@
+
+                Html.X().Panel()
+                    .Title("ButtonGroup with various Buttons and Icon sizes")
+                    .Width(700)
+                    .Height(270)
+                    .X(730)
+                    .Y(1430)
+                    .TopBar(
+                        Html.X().Toolbar()
+                            .Items(
+                                Html.X().ButtonGroup()
+                                    .Title("Clipboard")
+                                    .LayoutConfig(
+                                        new TableLayoutConfig()
+                                        {
+                                            Columns = 3
+                                        }
+                                    )
+                                    .Items(
+                                        Html.X().Button()
+                                            .Text("Paste")
+                                            .Cls("x-btn-as-arrow")
+                                            .IconCls("add32")
+                                            .IconAlign(IconAlign.Top)
+                                            .Scale(ButtonScale.Large)
+                                            .RowSpan(3),
+                                        Html.X().SplitButton()
+                                            .Text("Menu Button")
+                                            .IconCls("add32")
+                                            .IconAlign(IconAlign.Top)
+                                            .ArrowAlign(ArrowAlign.Bottom)
+                                            .Scale(ButtonScale.Large)
+                                            .RowSpan(3)
+                                            .Menu(
+                                                Html.X().Menu()
+                                                    .Items(
+                                                        Html.X().MenuItem().Text("Menu Button 1")
+                                                    )
+                                            ),
+                                        Html.X().SplitButton()
+                                            .Text("Cut")
+                                            .IconCls("add16")
+                                            .Menu(
+                                                Html.X().Menu()
+                                                    .Items(
+                                                        Html.X().MenuItem().Text("Cut Menu Item")
+                                                    )
+                                            ),
+                                        Html.X().Button().Text("Copy").IconCls("add16"),
+                                        Html.X().Button().Text("Format").IconCls("add16")
+                                    ),
+                                Html.X().ButtonGroup()
+                                    .Title("Other Actions")
+                                    .LayoutConfig(
+                                        new TableLayoutConfig()
+                                        {
+                                            Columns = 3
+                                        }
+                                    )
+                                    .Items(
+                                        Html.X().Button()
+                                            .Text("Paste")
+                                            .Cls("x-btn-as-arrow")
+                                            .IconCls("add32")
+                                            .IconAlign(IconAlign.Top)
+                                            .Scale(ButtonScale.Large)
+                                            .RowSpan(3),
+                                        Html.X().SplitButton()
+                                            .Text("Menu Button")
+                                            .IconCls("add32")
+                                            .IconAlign(IconAlign.Top)
+                                            .ArrowAlign(ArrowAlign.Bottom)
+                                            .Scale(ButtonScale.Large)
+                                            .RowSpan(3)
+                                            .Menu(
+                                                Html.X().Menu()
+                                                    .Items(
+                                                        Html.X().MenuItem().Text("Menu Button 1")
+                                                    )
+                                            ),
+                                        Html.X().SplitButton()
+                                            .Text("Cut")
+                                            .IconCls("add16")
+                                            .Menu(
+                                                Html.X().Menu()
+                                                    .Items(
+                                                        Html.X().MenuItem().Text("Cut Menu Item")
+                                                    )
+                                            ),
+                                        Html.X().Button().Text("Copy").IconCls("add16"),
+                                        Html.X().Button().Text("Format").IconCls("add16")
+                                    )
+                            )
+                    )
+            )
+    )
+}
