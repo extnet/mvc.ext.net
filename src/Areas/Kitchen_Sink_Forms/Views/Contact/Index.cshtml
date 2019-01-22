@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Contact Form - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(
+        X.Viewport()
+            .LayoutConfig(new VBoxLayoutConfig()
+            {
+                Align = VBoxAlign.Center, Pack = BoxPack.Center
+            })
+            .Items(
+                X.FormPanel()
+                    .Title("Contact Us")
+                    .Frame(true)
+                    .Height(480)
+                    .Width(400)
+                    .Border(false)
+                    .BodyPadding(10)
+                    .DefaultAnchor("100%")
+                    .FieldDefaults((fd) =>
+                    {
+                        fd.LabelAlign = LabelAlign.Top;
+                        fd.LabelWidth = 100;
+                        fd.LabelStyle = "font-weight:bold;";
+                    })
+                    .Defaults((dfls) =>
+                    {
+                        dfls.Add(new Ext.Net.Parameter("margin", "0 0 10 0", ParameterMode.Value));
+                    })
+                    .Items(
+                        X.FieldContainer()
+                            .FieldLabel("Your Name")
+                            .LabelStyle("font-weight:bold; padding: 0;")
+                            .Layout(LayoutType.HBox)
+                            .FieldDefaults((fd) => fd.LabelAlign = LabelAlign.Top)
+                            .Items(
+                                X.TextField()
+                                    .Name("firstName")
+                                    .Flex(1)
+                                    .FieldLabel("First")
+                                    .AllowBlank(false),
+                                X.TextField()
+                                    .Name("middleInitial")
+                                    .Width(30)
+                                    .FieldLabel("MI")
+                                    .MarginSpec("0 0 0 5"),
+                                X.TextField()
+                                    .Name("lastName")
+                                    .Flex(2)
+                                    .FieldLabel("Last")
+                                    .AllowBlank(false)
+                                    .MarginSpec("0 0 0 5")
+                            ),
+                        
+                        X.TextField()
+                            .FieldLabel("Your Email Address")
+                            .Vtype("email")
+                            .AllowBlank(false),
+
+                        X.TextField()
+                            .FieldLabel("Subject")
+                            .AllowBlank(false),
+
+                        X.TextArea()
+                            .FieldLabel("Message")
+                            .Flex(1)
+                            .MarginSpec("0")
+                            .AllowBlank(false)
+                    )
+                    .Buttons(
+                        X.Button().Text("Cancel"),
+                        X.Button().Text("Send")
+                    )
+            )
+    )
+}
