@@ -109,7 +109,7 @@ namespace Ext.Net.MVC.Examples
                         groupNode.IconCls = otherIconCls;
                     }
 
-                    flagNode(ref node, folder.FullName);
+                    flagNode(ref groupNode, folder.FullName);
 
                     node.Children.Add(groupNode);
                     node = groupNode;
