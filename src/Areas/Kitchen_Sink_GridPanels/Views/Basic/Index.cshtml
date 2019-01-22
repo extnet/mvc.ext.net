@@ -1,0 +1,55 @@
+﻿@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "X - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(
+        X.Viewport()
+            .MarginSpec("0 0 10 0")
+            .LayoutConfig(new VBoxLayoutConfig()
+            {
+                Align = VBoxAlign.Center,
+                Pack = BoxPack.Center
+            })
+            .Items(
+                X.GridPanel()
+                    .Title("Restaurants")
+                    .Frame(true)
+                    .Width(400)
+                    .Height(295)
+                    .Store(
+                        X.Store()
+                            .DataSource(Model)
+                            .Model(
+                                X.Model()
+                                    .Fields(
+                                        X.ModelField().Name("name"),
+                                        X.ModelField().Name("cuisine"),
+                                        X.ModelField().Name("description"),
+                                        X.ModelField().Name("rating").Type(ModelFieldType.Int)
+                                    )
+                            )
+                            .Sorters((sorter) =>
+                            {
+                                sorter.Add(X.DataSorter().Property("cuisine").Direction(Ext.Net.SortDirection.DESC));
+                                sorter.Add(X.DataSorter().Property("name"));
+                            })
+                    )
+                    .ColumnModel(
+                        X.Column()
+                            .Text("Name")
+                            .Flex(1)
+                            .DataIndex("name"),
+                        X.Column()
+                            .Text("Cuisine")
+                            .Flex(1)
+                            .DataIndex("cuisine")
+                    )
+            )
+    )
+}
