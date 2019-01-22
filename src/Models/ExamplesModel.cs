@@ -6,6 +6,7 @@ using System.IO;
 using System.Xml;
 using Ext.Net.Utilities;
 using Ext.Net.MVC.Examples.Models;
+using System.Web.Mvc;
 
 namespace Ext.Net.MVC.Examples
 {
@@ -55,9 +56,33 @@ namespace Ext.Net.MVC.Examples
 
                 string iconCls = string.IsNullOrEmpty(cfg.IconCls) ? "" : cfg.IconCls;
                 Node node = null;
-                var index = folder.Name.IndexOf('_');
+                int index = 0;
+                if (cfg.MainGroupSplitAt < 2)
+                {
+                    index = folder.Name.IndexOf('_');
+                }
+                else
+                {
+                    var split_folder = folder.Name.Split('_');
 
-                if (cfg.MainGroup || index < 0)
+                    if (split_folder.Length <= cfg.MainGroupSplitAt)
+                    {
+                        // The setting specifies to split the group beyond the
+                        // available amount of underscore splitters in the
+                        // folder string.
+                        index = -1;
+                    }
+                    else
+                    {
+                        index += cfg.MainGroupSplitAt - 1;
+                        for (var i = 0; i < cfg.MainGroupSplitAt; i++)
+                        {
+                            index += split_folder[i].Length;
+                        }
+                    }
+                }
+
+                if (cfg.MainGroup || index < 1)
                 {
                     node = new Node();
                     node.NodeID = BaseControl.GenerateID();
@@ -76,7 +101,8 @@ namespace Ext.Net.MVC.Examples
                 else
                 {
                     string otherIconCls;
-                    var mainGroupName = folder.Name.Substring(0, index);
+
+                    var mainGroupName = folder.Name.Substring(0, index).Replace('_', ' ');
                     node = nodes.FirstOrDefault(n => n.Text == mainGroupName);
 
                     if (node == null)
@@ -364,6 +390,19 @@ namespace Ext.Net.MVC.Examples
                 this.MainGroup = mainGroup.Value == "1";
             }
 
+            this.MainGroupSplitAt = 0;
+
+            XmlAttribute mainGroupSplitAt = root.Attributes["groupSplitAt"];
+
+            if (mainGroupSplitAt != null)
+            {
+                ushort value;
+                if (ushort.TryParse(mainGroupSplitAt.Value, out value))
+                {
+                    this.MainGroupSplitAt = value;
+                }
+            }
+
             XmlNode desc = root.SelectSingleNode("description");
 
             if (desc != null)
@@ -452,6 +491,17 @@ namespace Ext.Net.MVC.Examples
 
         public bool MainGroup { get; private set; }
 
+        /// <summary>
+        /// Splits the folder by specified underscore match count. It is
+        /// expressed as 'groupSplitAt' in the config.xml file, and only
+        /// relevant in the second level folders (src/Areas/[folder]/.)
+        /// </summary>
+        /// <example>
+        /// My_Folder_Example when 1 => My > Folder Example
+        /// My_Folder_Example when 2 => My Folder > Example
+        /// </example>
+        public ushort MainGroupSplitAt { get; private set; }
+
         public string Title { get; private set; }
 
         public string Description { get; private set; }
@@ -523,6 +573,30 @@ namespace Ext.Net.MVC.Examples
                 }
                 return outerFiles;
             }
+        }
+    }
+
+    public class ExampleAreaRegistration
+    {
+        public static string ParseAreaName(Type area)
+        {
+            var name = area.Name;
+            // Remove the 'AreaRegistration' at the end of the class name.
+            if (area.BaseType != null && name.EndsWith(area.BaseType.Name))
+            {
+                name = name.Substring(0, name.Length - area.BaseType.Name.Length);
+            }
+
+            return name;
+        }
+
+        public static void RegisterArea(AreaRegistrationContext context, string areaName)
+        {
+            context.MapRoute(
+                areaName + "_default",
+                areaName + "/{controller}/{action}/{id}",
+                new { action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }
