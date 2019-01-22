@@ -6,6 +6,7 @@
 
   <new version="4.7.1">
     <!-- Keeping the new ones from 4.7.0 just to keep track. -->
+    <folder name="Getting_Started\Views\Component_Overview" />
     <folder name="Miscellaneous_Gauge\Views\Needles" />
     <folder name="Miscellaneous_Gauge\Views\Custom" />
     <folder name="Miscellaneous_Gauge\Views\Basic" />
