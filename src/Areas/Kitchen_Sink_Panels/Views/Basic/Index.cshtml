@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Basic Panel - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+
+    var TEST_HTML = "Lorem ipsum dolor sit amet, consectetur adipiscing " +
+        "elit. Sed egestas gravida nibh, quis porttitor felis venenatis id. " +
+        "Nam sodales mollis quam eget venenatis. Aliquam metus lorem, " +
+        "tincidunt ut egestas imperdiet, convallis lacinia tortor.";
+}
+
+@section example
+{
+    @(
+        X.Viewport()
+            .LayoutConfig(new VBoxLayoutConfig()
+            {
+                Align = VBoxAlign.Center,
+                Pack = BoxPack.Center
+            })
+            .Items(
+                X.Container()
+                    .StyleSpec("background:transparent;")
+                    .MarginSpec("0 0 10 0")
+                    .LayoutConfig(new TableLayoutConfig()
+                    {
+                        Columns = 3
+                    })
+                    .Defaults((dfls) =>
+                    {
+                        dfls.Add(X.Parameter().Name("Width").Value("200").Mode(ParameterMode.Raw));
+                        dfls.Add(X.Parameter().Name("Height").Value("200").Mode(ParameterMode.Raw));
+                        dfls.Add(X.Parameter().Name("BodyPadding").Value("10").Mode(ParameterMode.Raw));
+                        dfls.Add(X.Parameter().Name("Scrollable").Value("both").Mode(ParameterMode.Value));
+                        dfls.Add(X.Parameter().Name("Margin").Value("10").Mode(ParameterMode.Raw));
+                        dfls.Add(X.Parameter().Name("Html").Value(TEST_HTML).Mode(ParameterMode.Value));
+                    })
+                    .Items(
+                        X.Panel(),
+                        X.Panel().Title("Title"),
+                        X.Panel()
+                            .Title("Header icons")
+                            .Tools(
+                                X.Tool().Type(ToolType.Pin),
+                                X.Tool().Type(ToolType.Refresh),
+                                X.Tool().Type(ToolType.Search),
+                                X.Tool().Type(ToolType.Save)
+                            ),
+                        X.Panel()
+                            .Title("Collapsed Panel")
+                            .ColSpan(3)
+                            .Collapsed(true)
+                            .Collapsible(true)
+                            .Width(640)
+                    )
+            )
+    )
+}
