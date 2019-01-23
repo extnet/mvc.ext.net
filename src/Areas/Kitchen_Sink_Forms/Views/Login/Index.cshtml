@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Login Form - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(
+        X.Viewport()
+            .LayoutConfig(new VBoxLayoutConfig()
+            {
+                Align = VBoxAlign.Center, Pack = BoxPack.Center
+            })
+            .Items(
+                X.FormPanel()
+                    .Title("Login")
+                    .Frame(true)
+                    .Width(400)
+                    .BodyPadding(13)
+                    .DefaultAnchor("100%")
+                    .Items(
+                        X.TextField()
+                            .Name("user")
+                            .FieldLabel("User ID")
+                            .EmptyText("user id")
+                            .AllowBlank(false),
+                        X.TextField()
+                            .Name("pass")
+                            .FieldLabel("Password")
+                            .EmptyText("password")
+                            .InputType(Ext.Net.InputType.Password)
+                            .AllowBlank(false),
+                        X.Checkbox()
+                            .Name("remember")
+                            .FieldLabel("Remember me")
+                    )
+                    .Buttons(
+                        X.Button().Text("Register"),
+                        X.Button().Text("Login")
+                    )
+            )
+    )
+}
