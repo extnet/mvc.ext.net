@@ -292,6 +292,21 @@
     <Compile Include="Areas\Keys_KeyMap\Keys_KeyMapAreaRegistration.cs" />
     <Compile Include="Areas\Keys_KeyNav\Controllers\BasicController.cs" />
     <Compile Include="Areas\Keys_KeyNav\Keys_KeyNavAreaRegistration.cs" />
+    <Compile Include="Areas\Kitchen_Sink_Forms\Controllers\ContactController.cs" />
+    <Compile Include="Areas\Kitchen_Sink_Forms\Kitchen_Sink_FormsAreaRegistration.cs" />
+    <Compile Include="Models\KitchenSink\RestaurantsModel.cs" />
+    <Compile Include="Areas\Kitchen_Sink_Windows\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Kitchen_Sink_Windows\Kitchen_Sink_WindowsAreaRegistration.cs" />
+    <Compile Include="Areas\Kitchen_Sink_TreePanels\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Kitchen_Sink_TreePanels\Kitchen_Sink_TreePanelsAreaRegistration.cs" />
+    <Compile Include="Areas\Kitchen_Sink_Toolbars\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Kitchen_Sink_Toolbars\Kitchen_Sink_ToolbarsAreaRegistration.cs" />
+    <Compile Include="Areas\Kitchen_Sink_TabPanels\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Kitchen_Sink_TabPanels\Kitchen_Sink_TabPanelsAreaRegistration.cs" />
+    <Compile Include="Areas\Kitchen_Sink_Panels\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Kitchen_Sink_Panels\Kitchen_Sink_PanelsAreaRegistration.cs" />
+    <Compile Include="Areas\Kitchen_Sink_GridPanels\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Kitchen_Sink_GridPanels\Kitchen_Sink_GridPanelsAreaRegistration.cs" />
     <Compile Include="Areas\Layout_AbsoluteLayout\Controllers\BasicController.cs" />
     <Compile Include="Areas\Layout_AbsoluteLayout\Layout_AbsoluteLayoutAreaRegistration.cs" />
     <Compile Include="Areas\Layout_Accordion\Controllers\Basic_In_CodeBehindController.cs" />
@@ -857,6 +872,20 @@
     <Content Include="Areas\Keys_KeyMap\Views\Map_Inside_Component\config.xml" />
     <Content Include="Areas\Keys_KeyMap\Views\BorderLayout_Regions_Toggle\config.xml" />
     <Content Include="Areas\Keys_KeyNav\Views\Basic\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_Forms\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_Forms\Views\Contact\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_Windows\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_Windows\Views\Basic\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_TreePanels\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_TreePanels\Views\Basic\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_Toolbars\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_Toolbars\Views\Basic\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_TabPanels\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_TabPanels\Views\Basic\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_Panels\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_Panels\Views\Basic\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_GridPanels\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Basic\config.xml" />
     <Content Include="Areas\Layout_AbsoluteLayout\Views\Basic\config.xml" />
     <Content Include="Areas\Layout_Accordion\Views\Basic_In_CodeBehind\config.xml" />
     <Content Include="Areas\Layout_Accordion\Views\Basic_In_Markup\config.xml" />
@@ -1298,6 +1327,20 @@
     <Content Include="Areas\Miscellaneous_Gauge\Views\Custom\Index.cshtml" />
     <Content Include="Areas\TreePanel_List\Views\Overview\Index.cshtml" />
     <Content Include="Areas\TreePanel_List\Views\Web.config" />
+    <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Web.config" />
+    <Content Include="Areas\Kitchen_Sink_Forms\Views\Contact\Index.cshtml" />
+    <Content Include="Areas\Kitchen_Sink_Forms\Views\Web.config" />
+    <Content Include="Areas\Kitchen_Sink_Panels\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Kitchen_Sink_Panels\Views\Web.config" />
+    <Content Include="Areas\Kitchen_Sink_TabPanels\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Kitchen_Sink_TabPanels\Views\Web.config" />
+    <Content Include="Areas\Kitchen_Sink_Toolbars\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Kitchen_Sink_Toolbars\Views\Web.config" />
+    <Content Include="Areas\Kitchen_Sink_TreePanels\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Kitchen_Sink_TreePanels\Views\Web.config" />
+    <Content Include="Areas\Kitchen_Sink_Windows\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Kitchen_Sink_Windows\Views\Web.config" />
     <None Include="resources\fonts\fontawesome-webfont.eot" />
     <None Include="resources\fonts\fontawesome-webfont.ttf" />
     <None Include="resources\fonts\fontawesome-webfont.woff" />
@@ -1470,7 +1513,9 @@
     <Content Include="Views\Main\_West.cshtml" />
     <Content Include="Views\Main\Home.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Areas\Kitchen_Sink_GridPanels\Models\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
