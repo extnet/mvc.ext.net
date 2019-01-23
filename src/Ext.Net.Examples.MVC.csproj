@@ -292,6 +292,7 @@
     <Compile Include="Areas\Keys_KeyMap\Keys_KeyMapAreaRegistration.cs" />
     <Compile Include="Areas\Keys_KeyNav\Controllers\BasicController.cs" />
     <Compile Include="Areas\Keys_KeyNav\Keys_KeyNavAreaRegistration.cs" />
+    <Compile Include="Areas\Kitchen_Sink_Forms\Controllers\RegisterController.cs" />
     <Compile Include="Areas\Kitchen_Sink_Forms\Controllers\LoginController.cs" />
     <Compile Include="Areas\Kitchen_Sink_Forms\Controllers\ContactController.cs" />
     <Compile Include="Areas\Kitchen_Sink_Forms\Kitchen_Sink_FormsAreaRegistration.cs" />
@@ -874,6 +875,7 @@
     <Content Include="Areas\Keys_KeyMap\Views\BorderLayout_Regions_Toggle\config.xml" />
     <Content Include="Areas\Keys_KeyNav\Views\Basic\config.xml" />
     <Content Include="Areas\Kitchen_Sink_Forms\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_Forms\Views\Register\config.xml" />
     <Content Include="Areas\Kitchen_Sink_Forms\Views\Login\config.xml" />
     <Content Include="Areas\Kitchen_Sink_Forms\Views\Contact\config.xml" />
     <Content Include="Areas\Kitchen_Sink_Windows\config.xml" />
@@ -1344,6 +1346,7 @@
     <Content Include="Areas\Kitchen_Sink_Windows\Views\Basic\Index.cshtml" />
     <Content Include="Areas\Kitchen_Sink_Windows\Views\Web.config" />
     <Content Include="Areas\Kitchen_Sink_Forms\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Kitchen_Sink_Forms\Views\Register\Index.cshtml" />
     <None Include="resources\fonts\fontawesome-webfont.eot" />
     <None Include="resources\fonts\fontawesome-webfont.ttf" />
     <None Include="resources\fonts\fontawesome-webfont.woff" />

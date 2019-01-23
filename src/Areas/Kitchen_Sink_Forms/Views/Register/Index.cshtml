@@ -1,0 +1,119 @@
+﻿@model System.Collections.IEnumerable
+@{
+    ViewBag.Title = "Register Form - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(
+        X.Viewport()
+            .LayoutConfig(new VBoxLayoutConfig()
+            {
+                Align = VBoxAlign.Center, Pack = BoxPack.Center
+            })
+            .Items(
+                X.FormPanel()
+                    .Title("Register")
+                    .Frame(true)
+                    .Width(400)
+                    .Height(295)
+                    .BodyPadding(13)
+                    .DefaultAnchor("100%")
+                    .Scrollable(ScrollableOption.Both)
+                    .FieldDefaults((dfls) =>
+                    {
+                        dfls.LabelAlign = LabelAlign.Right;
+                        dfls.LabelWidth = 115;
+                        dfls.MsgTarget = MessageTarget.Side;
+                    })
+                    .Items(
+                        X.FieldSet()
+                            .Title("User Info")
+                            .Defaults((dfls) => dfls.Add(
+                                new Ext.Net.Parameter("width", "300")
+                            ))
+                            .Items(
+                                X.TextField()
+                                    .AllowBlank(false)
+                                    .FieldLabel("User ID")
+                                    .Name("user")
+                                    .EmptyText("user id"),
+
+                                X.TextField()
+                                    .AllowBlank(false)
+                                    .FieldLabel("Password")
+                                    .Name("pass")
+                                    .EmptyText("password")
+                                    .InputType(Ext.Net.InputType.Password),
+
+                                X.TextField()
+                                    .AllowBlank(false)
+                                    .FieldLabel("Verify")
+                                    .Name("pass")
+                                    .EmptyText("password")
+                                    .InputType(Ext.Net.InputType.Password)
+                            ),
+                        X.FieldSet()
+                            .Title("Contact Information")
+                            .Defaults((dfls) => dfls.Add(
+                                new Ext.Net.Parameter("width", "300")
+                            ))
+                            .Items(
+                                X.TextField()
+                                    .FieldLabel("First Name")
+                                    .Name("first")
+                                    .EmptyText("First Name"),
+
+                                X.TextField()
+                                    .FieldLabel("Last Name")
+                                    .Name("last")
+                                    .EmptyText("Last Name"),
+
+                                X.TextField()
+                                    .FieldLabel("Company")
+                                    .Name("company"),
+
+                                X.TextField()
+                                    .FieldLabel("Email")
+                                    .Name("emails")
+                                    .Vtype("email"),
+
+                                X.ComboBox()
+                                    .FieldLabel("State")
+                                    .Name("state")
+                                    .DisplayField("name")
+                                    .ValueField("abbr")
+                                    .QueryMode(DataLoadMode.Local)
+                                    .TypeAhead(true)
+                                    .EmptyText("Select a state...")
+                                    .Store(
+                                        X.Store()
+                                            .DataSource(Model)
+                                            .Model(
+                                                X.Model()
+                                                    .Fields(
+                                                        X.ModelField().Name("abbr"),
+                                                        X.ModelField().Name("name"),
+                                                        X.ModelField().Name("slogan")
+                                                    )
+                                            )
+                                    ),
+
+                                X.DateField()
+                                    .FieldLabel("Date of birth")
+                                    .Name("dob")
+                                    .AllowBlank(false)
+                                    .MaxDate(DateTime.Today)
+                            )
+                    )
+                    .Buttons(
+                        X.Button()
+                            .Text("Register")
+                            .Disabled(true)
+                            .FormBind(true)
+                    )
+            )
+    )
+}
