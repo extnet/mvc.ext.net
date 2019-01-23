@@ -2,6 +2,9 @@
 <example>
   <order>
     <folder name="Getting_Started" />
+
+    <!-- It is enough to add just the first directory of the examples group -->
+    <folder name="Kitchen_Sink_Forms" />
   </order>
 
   <new version="4.7.1">
@@ -10,6 +13,26 @@
     <folder name="Miscellaneous_Gauge\Views\Needles" />
     <folder name="Miscellaneous_Gauge\Views\Custom" />
     <folder name="Miscellaneous_Gauge\Views\Basic" />
+    <folder name="Kitchen_Sink_Forms\Views\Contact" />
+    <folder name="Kitchen_Sink_Forms\Views\Login" />
+    <folder name="Kitchen_Sink_Forms\Views\Register" />
+    <folder name="Kitchen_Sink_GridPanels\Views\Basic" />
+    <folder name="Kitchen_Sink_GridPanels\Views\Grouped" />
+    <folder name="Kitchen_Sink_GridPanels\Views\Grouped Header" />
+    <folder name="Kitchen_Sink_GridPanels\Views\Locked" />
+    <folder name="Kitchen_Sink_GridPanels\Views\Property" />
+    <folder name="Kitchen_Sink_GridPanels\Views\Reconfigure" />
+    <folder name="Kitchen_Sink_Panels\Views\Basic" />
+    <folder name="Kitchen_Sink_Panels\Views\Framed" />
+    <folder name="Kitchen_Sink_TabPanels\Views\Basic" />
+    <folder name="Kitchen_Sink_TabPanels\Views\Framed" />
+    <folder name="Kitchen_Sink_TabPanels\Views\Header" />
+    <folder name="Kitchen_Sink_TabPanels\Views\Icon" />
+    <folder name="Kitchen_Sink_TabPanels\Views\Plain" />
+    <folder name="Kitchen_Sink_Toolbars\Views\Basic" />
+    <folder name="Kitchen_Sink_Toolbars\Views\Docked" />
+    <folder name="Kitchen_Sink_TreePanels\Views\Basic" />
+    <folder name="Kitchen_Sink_Windows\Views\Basic" />
     <folder name="TreePanel_List\Views\Overview" />
   </new>
 
