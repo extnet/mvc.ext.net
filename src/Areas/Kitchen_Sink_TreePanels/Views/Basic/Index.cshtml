@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "Basic TreePanel - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+@section example
+{
+    @{ 
+        var treeStore = X.TreeStore()
+            .ID("TreeStore1")
+            .Root(
+                X.Node()
+                    .Expanded(true)
+                    .Children(
+                        X.Node()
+                            .Text("app")
+                            .Expanded(true)
+                            .Children(
+                                X.Node()
+                                    .Text("Application.js")
+                                    .Leaf(true)
+                            ),
+                        X.Node()
+                            .Text("button")
+                            .Expanded(true)
+                            .Children(
+                                X.Node().Text("Button.js").Leaf(true),
+                                X.Node().Text("Cycle.js").Leaf(true),
+                                X.Node().Text("Split.js").Leaf(true)
+                            ),
+                        X.Node()
+                            .Text("container")
+                            .Children(
+                                X.Node().Text("ButtonGroup.js").Leaf(true),
+                                X.Node().Text("Container.js").Leaf(true),
+                                X.Node().Text("Viewport.js").Leaf(true)
+                            ),
+                        X.Node()
+                            .Text("core")
+                            .Children(
+                                X.Node()
+                                    .Text("dom")
+                                    .Children(
+                                        X.Node().Text("Element.form.js").Leaf(true),
+                                        X.Node().Text("Element.static-more.js").Leaf(true)
+                                    )
+                            ),
+                        X.Node()
+                            .Text("dd")
+                            .Children(
+                                X.Node().Text("DD.js").Leaf(true),
+                                X.Node().Text("DDProxy.js").Leaf(true),
+                                X.Node().Text("DDTarget.js").Leaf(true),
+                                X.Node().Text("DragDrop.js").Leaf(true),
+                                X.Node().Text("DragDropManager.js").Leaf(true),
+                                X.Node().Text("DragSource.js").Leaf(true),
+                                X.Node().Text("DragTracker.js").Leaf(true),
+                                X.Node().Text("DragZone.js").Leaf(true),
+                                X.Node().Text("DragTarget.js").Leaf(true),
+                                X.Node().Text("DragZone.js").Leaf(true),
+                                X.Node().Text("Registry.js").Leaf(true),
+                                X.Node().Text("ScrollManager.js").Leaf(true),
+                                X.Node().Text("StatusProxy.js").Leaf(true)
+                            ),
+                        X.Node()
+                            .Text("core")
+                            .Children(
+                                X.Node().Text("Element.alignment.js").Leaf(true),
+                                X.Node().Text("Element.anim.js").Leaf(true),
+                                X.Node().Text("Element.dd.js").Leaf(true),
+                                X.Node().Text("Element.fx.js").Leaf(true),
+                                X.Node().Text("Element.js").Leaf(true),
+                                X.Node().Text("Element.position.js").Leaf(true),
+                                X.Node().Text("Element.scroll.js").Leaf(true),
+                                X.Node().Text("Element.style.js").Leaf(true),
+                                X.Node().Text("Element.traversal.js").Leaf(true),
+                                X.Node().Text("Helper.js").Leaf(true),
+                                X.Node().Text("Query.js").Leaf(true)
+                            ),
+                        X.Node().Text("Cycle.js").Leaf(true),
+                        X.Node().Text("Cycle.js").Leaf(true),
+                        X.Node().Text("Cycle.js").Leaf(true),
+                        X.Node().Text("Cycle.js").Leaf(true),
+                        X.Node().Text("Cycle.js").Leaf(true),
+                        X.Node().Text("Cycle.js").Leaf(true),
+                        X.Node().Text("Cycle.js").Leaf(true),
+                        X.Node().Text("Cycle.js").Leaf(true),
+                        X.Node().Text("Cycle.js").Leaf(true),
+                        X.Node().Text("Cycle.js").Leaf(true)
+                    )
+            );
+    }
+    @(
+        X.Viewport()
+            .LayoutConfig(new VBoxLayoutConfig()
+            {
+                Align = VBoxAlign.Center,
+                Pack = BoxPack.Center
+            })
+            .Items(
+                X.Container()
+                    .LayoutConfig(
+                        new TableLayoutConfig()
+                        {
+                            Columns = 2
+                        }
+                    )
+                    .Items(
+                        X.TreePanel()
+                            .Title("TreePanel")
+                            .Width(300)
+                            .Height(200)
+                            .Margin(10)
+                            .RootVisible(false)
+                            .Lines(false)
+                            .UseArrows(false)
+                            .Store(treeStore),
+                        X.TreePanel()
+                            .Title("TreePanel with lines")
+                            .Width(300)
+                            .Height(200)
+                            .Margin(10)
+                            .RootVisible(false)
+                            .Lines(true)
+                            .UseArrows(false)
+                            // As the store was rendered to the page in the tree panel above,
+                            // we can just refer to its ID to reuse it
+                            .StoreID("TreeStore1"),
+                        X.TreePanel()
+                            .Title("TreePanel with arrows")
+                            .Width(300)
+                            .Height(200)
+                            .Margin(10)
+                            .RootVisible(false)
+                            .Lines(false)
+                            .UseArrows(true)
+                            // Can also pull its ID from the tree builder instance, converting to component.
+                            .StoreID(treeStore.ToComponent().ID)
+                    )
+            )
+    )
+}
