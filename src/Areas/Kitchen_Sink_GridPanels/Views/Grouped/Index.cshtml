@@ -1,0 +1,171 @@
+﻿@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Grouped GridPanel - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var onToggleButtonBeforeRender = function () {
+            App.GridPanel1.getStore().getGroups().each(function(group) {
+                App.ButtonToggleMenu.menu.add({
+                    xtype: 'menucheckitem',
+                    text: group.getGroupKey(),
+                    handler: toggleGroup
+                });
+            });
+        };
+
+        var onClearGroupingClick = function () {
+            var groupingFeature = App.GridPanel1.groupingFeature,
+                currentGroupedHeader;
+
+            currentGroupedHeader = groupingFeature.hideGroupedHeader && groupingFeature.getGroupedHeader();
+            App.GridPanel1.getStore().clearGrouping();
+
+            if (currentGroupedHeader) {
+                currentGroupedHeader.show();
+            }
+        };
+
+        var toggleGroup = function (item) {
+            var groupName = item.text;
+            if (item.checked) {
+                App.GridPanel1.groupingFeature.expand(groupName, true);
+            } else {
+                App.GridPanel1.groupingFeature.collapse(groupName, true);
+            }
+        };
+
+        var onGroupChange = function (store, grouper) {
+            var grouped = store.isGrouped(),
+                groupBy = grouper ? grouper.getProperty() : '',
+                toggleMenuItems, len, i = 0;
+
+            // Clear grouping button only valid if the store is grouped
+            App.GridPanel1.down('[text=Clear Grouping]').setDisabled(!grouped);
+
+            // Sync state of group toggle checkboxes
+            if (grouped && groupBy === 'cuisine') {
+                toggleMenuItems = App.GridPanel1.down('button[text=Toggle groups...]').menu.items.items;
+                for (len = toggleMenuItems.length; i < len; i++) {
+                    toggleMenuItems[i].setChecked(
+                        App.GridPanel1.groupingFeature.isExpanded(toggleMenuItems[i].text)
+                    );
+                }
+                App.GridPanel1.down('[text=Toggle groups...]').enable();
+            } else {
+                App.GridPanel1.down('[text=Toggle groups...]').disable();
+            }
+        };
+
+        var onGroupCollapse = function (v, n, groupName) {
+            if (!App.GridPanel1.down('[text=Toggle groups...]').disabled) {
+                App.GridPanel1.down('menucheckitem[text=' + groupName + ']').setChecked(false, true);
+            }
+        };
+
+        var onGroupExpand = function (v, n, groupName) {
+            if (!App.GridPanel1.down('[text=Toggle groups...]').disabled) {
+                App.GridPanel1.down('menucheckitem[text=' + groupName + ']').setChecked(true, true);
+            }
+        };
+    </script>
+}
+
+@section example
+{
+    @(
+        X.Viewport()
+            .MarginSpec("0 0 10 0")
+            .LayoutConfig(new VBoxLayoutConfig()
+            {
+                Align = VBoxAlign.Center,
+                Pack = BoxPack.Center
+            })
+            .Items(
+                X.GridPanel()
+                    .ID("GridPanel1")
+                    .Title("Restaurants")
+                    .Icon(Icon.Table)
+                    .Frame(true)
+                    .Width(600)
+                    .Height(400)
+                    .MinHeight(200)
+                    .Resizable(true)
+                    .Collapsible(true)
+                    .Store(
+                        X.Store()
+                            .DataSource(Model)
+                            .GroupField("cuisine")
+                            .Model(
+                                X.Model()
+                                    .Fields(
+                                        X.ModelField().Name("name"),
+                                        X.ModelField().Name("cuisine"),
+                                        X.ModelField().Name("description"),
+                                        X.ModelField().Name("rating").Type(ModelFieldType.Int)
+                                    )
+                            )
+                            .Sorters((sorter) =>
+                            {
+                                sorter.Add(X.DataSorter().Property("cuisine"));
+                                sorter.Add(X.DataSorter().Property("name"));
+                            })
+                            .Listeners((ltn) =>
+                            {
+                                ltn.GroupChange.Fn = "onGroupChange";
+                                ltn.GroupChange.Buffer = 10;
+                            })
+                    )
+                    .ColumnModel(
+                        X.Column()
+                            .Text("Name")
+                            .Flex(1)
+                            .DataIndex("name"),
+                        X.Column()
+                            .Text("Cuisine")
+                            .Flex(1)
+                            .DataIndex("cuisine")
+                    )
+                    .Features(
+                        X.Grouping()
+                            .HideGroupedHeader(true)
+                            .GroupHeaderTplString("Cuisine: {name} ({rows.length} Item{[values.rows.length > 1 ? 's' : '']})")
+                            .StartCollapsed(true)
+                    )
+                    .TopBar(
+                        X.Toolbar().Items(
+                            X.ToolbarFill(),
+                            X.Button()
+                                .ID("ButtonToggleMenu")
+                                .Text("Toggle groups...")
+                                .DestroyMenu(true)
+                                .Menu(
+                                    X.Menu()
+                                )
+                                .Listeners((ltn) => ltn.BeforeRender.Fn = "onToggleButtonBeforeRender")
+                        )
+                    )
+                    .FooterBar(
+                        X.Toolbar().Items(
+                            X.ToolbarFill(),
+                            X.Button()
+                                .Text("Clear Grouping")
+                                .Icon(Icon.Bin)
+                                .Handler("onClearGroupingClick")
+                        )
+                    )
+                    .View(
+                        X.GridView().Listeners((ltn) =>
+                        {
+                            ltn.GroupCollapse.Fn = "onGroupCollapse";
+                            ltn.GroupExpand.Fn = "onGroupExpand";
+                        })
+                    )
+            )
+    )
+}
