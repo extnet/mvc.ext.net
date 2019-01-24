@@ -296,9 +296,11 @@
     <Compile Include="Areas\Kitchen_Sink_Forms\Controllers\LoginController.cs" />
     <Compile Include="Areas\Kitchen_Sink_Forms\Controllers\ContactController.cs" />
     <Compile Include="Areas\Kitchen_Sink_Forms\Kitchen_Sink_FormsAreaRegistration.cs" />
+    <Compile Include="Areas\Kitchen_Sink_GridPanels\Controllers\PropertyController.cs" />
     <Compile Include="Areas\Kitchen_Sink_GridPanels\Controllers\LockedController.cs" />
     <Compile Include="Areas\Kitchen_Sink_GridPanels\Controllers\Grouped_HeaderController.cs" />
     <Compile Include="Areas\Kitchen_Sink_GridPanels\Controllers\GroupedController.cs" />
+    <Compile Include="Areas\Kitchen_Sink_GridPanels\Models\PropertyModel.cs" />
     <Compile Include="Areas\Kitchen_Sink_GridPanels\Models\Grouped_HeaderModel.cs" />
     <Compile Include="Models\KitchenSink\RestaurantsModel.cs" />
     <Compile Include="Areas\Kitchen_Sink_Windows\Controllers\BasicController.cs" />
@@ -882,6 +884,7 @@
     <Content Include="Areas\Kitchen_Sink_Forms\Views\Register\config.xml" />
     <Content Include="Areas\Kitchen_Sink_Forms\Views\Login\config.xml" />
     <Content Include="Areas\Kitchen_Sink_Forms\Views\Contact\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Property\config.xml" />
     <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Locked\config.xml" />
     <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Grouped_Header\config.xml" />
     <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Grouped\config.xml" />
@@ -1357,6 +1360,7 @@
     <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Grouped\Index.cshtml" />
     <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Grouped_Header\Index.cshtml" />
     <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Locked\Index.cshtml" />
+    <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Property\Index.cshtml" />
     <None Include="resources\fonts\fontawesome-webfont.eot" />
     <None Include="resources\fonts\fontawesome-webfont.ttf" />
     <None Include="resources\fonts\fontawesome-webfont.woff" />

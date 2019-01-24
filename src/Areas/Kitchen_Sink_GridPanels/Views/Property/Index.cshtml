@@ -1,0 +1,70 @@
+﻿@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Property GridPanel - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(
+        X.Viewport()
+            .MarginSpec("0 0 10 0")
+            .LayoutConfig(new VBoxLayoutConfig()
+            {
+                Align = VBoxAlign.Center,
+                Pack = BoxPack.Center
+            })
+            .Items(
+                X.Container()
+                    .Width(275)
+                    .Height(300)
+                    .LayoutConfig(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch })
+                    .Items(
+                        X.Container()
+                            .Layout(LayoutType.HBox)
+                            .MarginSpec("0 0 10 0")
+                            .Items(
+                                X.Button()
+                                    .Text("Update source")
+                                    .DirectClickAction("UpdateSource_Click"),
+                                X.Button()
+                                    .Text("New data source")
+                                    .DirectClickAction("NewDataSource_Click")
+                                    .MarginSpec("0 0 0 10")
+                            ),
+                        X.PropertyGrid()
+                            .ID("PropertyGrid1")
+                            .Source((props) =>
+                            {
+                                var proplist = new PropertyGridParameter[]
+                                {
+                                    new PropertyGridParameter("(name)", "Property GridPanel"),
+                                    new PropertyGridParameter("grouping", "false"),
+                                    new PropertyGridParameter("autoFitColumns", "true"),
+                                    new PropertyGridParameter("productionQuality", "false"),
+                                    new PropertyGridParameter("created", "Ext.Date.parse('10/15/2006', 'm/d/Y')")
+                                    {
+                                        Mode = ParameterMode.Raw
+                                    },
+                                    new PropertyGridParameter("tested", "false")
+                                    {
+                                        DisplayName = "QA"
+                                    },
+                                    new PropertyGridParameter("version", "0.01"),
+                                    new PropertyGridParameter("borderWidth", "5")
+                                    {
+                                        DisplayName = "Border Width"
+                                    }
+                                };
+
+                                foreach (var prop in proplist)
+                                {
+                                    props.Add(prop);
+                                }
+                            })
+                    )
+            )
+    )
+}
