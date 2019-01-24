@@ -121,11 +121,17 @@
     <folder name="Form" iconCls="fa fa-check-square-o" />
     <folder name="Getting_Started" iconCls="fa fa-info-circle" />
     <folder name="GridPanel" iconCls="fa fa-th">
-      <folder name="Plugins" iconCls="icon-plugin" />
+      <!--<folder name="Plugins" iconCls="#PluginGo" />-->
     </folder>
     <folder name="Items" iconCls="fa fa-cubes" />
     <folder name="Keys" iconCls="fa fa-keyboard-o" />
     <folder name="Kitchen_Sink" iconCls="fa fa-home">
+      <!--
+        Leaving the subfolders here commented out in favor of using the
+        +/- expander signs, but still maintain information of support of
+        icons in subfolders. Well, at least half-supported, as it seems
+        the +/- still gets rendered over the icon.
+
       <folder name="Forms" iconCls="#ApplicationForm" />
       <folder name="GridPanels" iconCls="#ApplicationViewColumns" />
       <folder name="Panels" iconCls="#Application" />
@@ -133,6 +139,7 @@
       <folder name="Toolbars" iconCls="#Toolbar" />
       <folder name="TreePanels" iconCls="#ApplicationSideTree" />
       <folder name="Windows" iconCls="#ApplicationDouble" />
+      -->
     </folder>
     <folder name="Layout" iconCls="fa fa-th-large" />
     <folder name="Loaders" iconCls="fa fa-spinner" />

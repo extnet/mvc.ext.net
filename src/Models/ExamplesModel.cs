@@ -102,7 +102,9 @@ namespace Ext.Net.MVC.Examples
                 {
                     string otherIconCls;
 
-                    var mainGroupName = folder.Name.Substring(0, index).Replace('_', ' ');
+                    var rawMainGroupName = folder.Name.Substring(0, index);
+                    var mainGroupName = rawMainGroupName.Replace('_', ' ');
+
                     node = nodes.FirstOrDefault(n => n.Text == mainGroupName);
 
                     if (node == null)
@@ -113,7 +115,7 @@ namespace Ext.Net.MVC.Examples
                         nodes.Add(node);
                     }
 
-                    if (staticIcons.TryGetIconCLS(out otherIconCls, mainGroupName))
+                    if (staticIcons.TryGetIconCLS(out otherIconCls, rawMainGroupName))
                     {
                         node.IconCls = otherIconCls;
                     }
@@ -130,7 +132,7 @@ namespace Ext.Net.MVC.Examples
                     {
                         groupNode.IconCls = iconCls;
                     }
-                    else if (staticIcons.TryGetIconCLS(out otherIconCls, mainGroupName, subGroupNodeName))
+                    else if (staticIcons.TryGetIconCLS(out otherIconCls, rawMainGroupName, subGroupNodeName))
                     {
                         groupNode.IconCls = otherIconCls;
                     }
