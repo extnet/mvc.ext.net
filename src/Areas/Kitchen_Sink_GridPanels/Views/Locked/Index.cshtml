@@ -1,0 +1,66 @@
+﻿@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Locked GridPanel - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    @(
+        X.Viewport()
+            .MarginSpec("0 0 10 0")
+            .LayoutConfig(new VBoxLayoutConfig()
+            {
+                Align = VBoxAlign.Center,
+                Pack = BoxPack.Center
+            })
+            .Items(
+                X.GridPanel()
+                    .Title("Restaurant Reviews")
+                    .Frame(true)
+                    .Width(800)
+                    .Height(400)
+                    .Store(
+                        X.Store()
+                            .DataSource(Model)
+                            .Model(
+                                X.Model()
+                                    .Fields(
+                                        X.ModelField().Name("name"),
+                                        X.ModelField().Name("cuisine"),
+                                        X.ModelField().Name("description"),
+                                        X.ModelField().Name("rating").Type(ModelFieldType.Int)
+                                    )
+                            )
+                            .Sorters((sorter) =>
+                            {
+                                sorter.Add(X.DataSorter().Property("cuisine").Direction(Ext.Net.SortDirection.DESC));
+                                sorter.Add(X.DataSorter().Property("name"));
+                            })
+                    )
+                    .ColumnModel(
+                        X.Column()
+                            .Text("Name")
+                            .Width(150)
+                            .DataIndex("name")
+                            .Locked(true),
+                        X.RatingColumn()
+                            .Text("Rating")
+                            .DataIndex("rating")
+                            .Width(90)
+                            .Sortable(false),
+                        X.Column()
+                            .Text("Cuisine")
+                            .Width(90)
+                            .DataIndex("cuisine"),
+                        X.Column()
+                            .Text("Review")
+                            .Width(1000)
+                            .DataIndex("description")
+                            .Sortable(false)
+                    )
+            )
+    )
+}
