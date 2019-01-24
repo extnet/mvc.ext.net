@@ -1,0 +1,96 @@
+﻿@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Grouped Header GridPanel - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+    </script>
+}
+
+@section example
+{
+    @(
+        X.Viewport()
+            .MarginSpec("0 0 10 0")
+            .LayoutConfig(new VBoxLayoutConfig()
+            {
+                Align = VBoxAlign.Center,
+                Pack = BoxPack.Center
+            })
+            .Items(
+                X.GridPanel()
+                    .ID("GridPanel1")
+                    .Title("Grouped Header GridPanel")
+                    .Width(640)
+                    .Height(400)
+                    .ColumnLines(true)
+                    .Store(
+                        X.Store()
+                            .ID("Store1")
+                            .DataSource(Model)
+                            .Model(
+                                X.Model()
+                                    .Fields(
+                                        X.ModelField().Name("company"),
+                                        X.ModelField().Name("price").Type(ModelFieldType.Float),
+                                        X.ModelField().Name("change").Type(ModelFieldType.Float),
+                                        X.ModelField().Name("pctChange").Type(ModelFieldType.Float),
+                                        X.ModelField()
+                                            .Name("lastChange")
+                                            .Type(ModelFieldType.Date)
+                                            .DateFormat("M/d hh:mmtt")
+                                    )
+                            )
+                    )
+                    .ColumnModel(
+                        X.Column()
+                            .Text("Company")
+                            .DataIndex("company")
+                            .Flex(1)
+                            .Sortable(false),
+                        X.Column()
+                            .Text("Stock Price")
+                            .Columns(
+                                X.Column()
+                                    .Text("Price")
+                                    .DataIndex("price")
+                                    .Width(75)
+                                    .Sortable(true)
+                                    .Renderer(RendererFormat.UsMoney),
+                                X.Column()
+                                    .Text("Change")
+                                    .DataIndex("change")
+                                    .Width(75)
+                                    .Sortable(true)
+                                    .Renderer(new Renderer() { Fn = "change" }),
+                                X.Column()
+                                    .Text("Change %")
+                                    .DataIndex("pctChange")
+                                    .Width(75)
+                                    .Sortable(true)
+                                    .Renderer(new Renderer() { Fn = "pctChange" })
+                            ),
+                        X.DateColumn()
+                            .Text("Last Updated")
+                            .DataIndex("lastChange")
+                            .Width(95)
+                            .Sortable(true)
+                            .Format("dd/MM/yyyy")
+                    )
+            )
+    )
+}

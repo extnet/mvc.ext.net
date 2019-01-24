@@ -296,7 +296,9 @@
     <Compile Include="Areas\Kitchen_Sink_Forms\Controllers\LoginController.cs" />
     <Compile Include="Areas\Kitchen_Sink_Forms\Controllers\ContactController.cs" />
     <Compile Include="Areas\Kitchen_Sink_Forms\Kitchen_Sink_FormsAreaRegistration.cs" />
+    <Compile Include="Areas\Kitchen_Sink_GridPanels\Controllers\Grouped_HeaderController.cs" />
     <Compile Include="Areas\Kitchen_Sink_GridPanels\Controllers\GroupedController.cs" />
+    <Compile Include="Areas\Kitchen_Sink_GridPanels\Models\Grouped_HeaderModel.cs" />
     <Compile Include="Models\KitchenSink\RestaurantsModel.cs" />
     <Compile Include="Areas\Kitchen_Sink_Windows\Controllers\BasicController.cs" />
     <Compile Include="Areas\Kitchen_Sink_Windows\Kitchen_Sink_WindowsAreaRegistration.cs" />
@@ -879,6 +881,7 @@
     <Content Include="Areas\Kitchen_Sink_Forms\Views\Register\config.xml" />
     <Content Include="Areas\Kitchen_Sink_Forms\Views\Login\config.xml" />
     <Content Include="Areas\Kitchen_Sink_Forms\Views\Contact\config.xml" />
+    <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Grouped_Header\config.xml" />
     <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Grouped\config.xml" />
     <Content Include="Areas\Kitchen_Sink_Windows\config.xml" />
     <Content Include="Areas\Kitchen_Sink_Windows\Views\Basic\config.xml" />
@@ -1350,6 +1353,7 @@
     <Content Include="Areas\Kitchen_Sink_Forms\Views\Login\Index.cshtml" />
     <Content Include="Areas\Kitchen_Sink_Forms\Views\Register\Index.cshtml" />
     <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Grouped\Index.cshtml" />
+    <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Grouped_Header\Index.cshtml" />
     <None Include="resources\fonts\fontawesome-webfont.eot" />
     <None Include="resources\fonts\fontawesome-webfont.ttf" />
     <None Include="resources\fonts\fontawesome-webfont.woff" />
@@ -1522,9 +1526,7 @@
     <Content Include="Views\Main\_West.cshtml" />
     <Content Include="Views\Main\Home.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\Kitchen_Sink_GridPanels\Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
