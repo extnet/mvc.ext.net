@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<example>
+  <description>
+    <![CDATA[Example using Ext.Net.ClientStore to store data from client-side (cookie, also supports using session).]]>
+  </description>
+  <tags>store,client,cookie,session,persistence,grid,save,delete,reset</tags>
+</example>

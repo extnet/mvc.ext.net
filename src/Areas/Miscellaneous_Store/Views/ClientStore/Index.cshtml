@@ -1,0 +1,93 @@
+﻿@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = "Client-side persistent Store - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .x-grid-row-over .x-grid-cell-inner {
+            font-weight : bold;
+        }
+    </style>
+
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+
+        var save = function () {
+            var store = App.Store1;
+            store.sync();
+            Ext.toast("Grid saved with key '" + store.storageKey +
+                "', total records: " + store.getCount())
+            App.SaveBtn.disable();
+        }
+    </script>
+}
+
+@section example
+{
+    <h1>Client-side persistent Store</h1>
+
+    <p>
+        The grid below is initially empty. Add some data and click 'save'. When the page is reloaded, the data will still be there.
+    </p>
+
+    @(X.GridPanel()
+        .Title("Array Grid")
+        .Width(600)
+        .Height(350)
+        .Store(X.ClientStore()
+            .ID("Store1")
+            .StorageKey("cookie001")
+            .Model(X.Model()
+                .Fields(
+                    new ModelField("company"),
+                    new ModelField("price", ModelFieldType.Float),
+                    new ModelField("change", ModelFieldType.Float),
+                    new ModelField("pctChange", ModelFieldType.Float),
+                    new ModelField("lastChange", ModelFieldType.Date, "M/d hh:mmtt")
+                )
+            )
+            .Listeners((ltn) => ltn.DataChanged.Handler = "if (App.SaveBtn) App.SaveBtn.enable();")
+        )
+        .ColumnModel(
+            X.Column().Text("Company").DataIndex("company").Flex(1),
+            X.Column().Text("Price").DataIndex("price").Renderer(RendererFormat.UsMoney),
+            X.Column().Text("Change").DataIndex("change").Renderer("change"),
+            X.Column().Text("Change").DataIndex("pctChange").Renderer("pctChange"),
+            X.DateColumn().Text("Last Updated").DataIndex("lastChange")
+        )
+        .BottomBar(
+            X.Toolbar()
+                .Items(
+                    X.Button()
+                        .Text("Add")
+                        .Icon(Icon.Add)
+                        .DirectClickAction("AddRandomRecord"),
+                    X.Button()
+                        .Text("Delete")
+                        .Icon(Icon.Delete)
+                        .Handler("App.Store1.removeAt(App.Store1.getCount() - 1)"),
+                    X.Button()
+                        .Text("Save")
+                        .Icon(Icon.DatabaseSave)
+                        .Handler("save()"),
+                    X.Button()
+                        .Text("Reset")
+                        .Icon(Icon.ArrowRefresh)
+                        .Handler("App.Store1.load(); App.Store1.sync(); App.SaveBtn.disable();")
+                )
+        )
+    )
+}
