@@ -275,9 +275,11 @@
     <Compile Include="Areas\GridPanel_ColumnModel\Controllers\HyperlinkColumnController.cs" />
     <Compile Include="Areas\GridPanel_FilterHeader\Controllers\OverviewController.cs" />
     <Compile Include="Areas\GridPanel_FilterHeader\GridPanel_FilterHeaderAreaRegistration.cs" />
+    <Compile Include="Areas\GridPanel_Miscellaneous\Controllers\FilterQueryController.cs" />
     <Compile Include="Areas\GridPanel_Miscellaneous\Controllers\Marking_RecordsController.cs" />
     <Compile Include="Areas\GridPanel_Miscellaneous\GridPanel_MiscellaneousAreaRegistration.cs" />
     <Compile Include="Areas\GridPanel_Miscellaneous\Models\Marking_RecordsModel.cs" />
+    <Compile Include="Areas\GridPanel_Miscellaneous\Models\FilterQueryModel.cs" />
     <Compile Include="Areas\GridPanel_Paging_and_Sorting\Controllers\Multiple_Sorting_LocalController.cs" />
     <Compile Include="Areas\GridPanel_Selection_Models\Controllers\Checkbox_SelectionController.cs" />
     <Compile Include="Areas\GridPanel_Selection_Models\GridPanel_Selection_ModelsAreaRegistration.cs" />
@@ -851,6 +853,7 @@
     <Content Include="Areas\GridPanel_Infinite_Scrolling\Views\Forum_topics\config.xml" />
     <Content Include="Areas\GridPanel_Infinite_Scrolling\Views\Overview\config.xml" />
     <Content Include="Areas\GridPanel_Infinite_Scrolling\Views\Remote_Filter\config.xml" />
+    <Content Include="Areas\GridPanel_Miscellaneous\Views\FilterQuery\config.xml" />
     <Content Include="Areas\GridPanel_Miscellaneous\Views\Marking_Records\config.xml" />
     <Content Include="Areas\GridPanel_MultiHeader\Views\Filter\config.xml" />
     <Content Include="Areas\GridPanel_Paging_and_Sorting\Views\Local\config.xml" />
@@ -1366,6 +1369,7 @@
     <Content Include="Areas\Kitchen_Sink_GridPanels\Views\Property\Index.cshtml" />
     <Content Include="Areas\Miscellaneous_Store\Views\ClientStore\Index.cshtml" />
     <Content Include="Areas\Miscellaneous_Store\Views\Web.config" />
+    <Content Include="Areas\GridPanel_Miscellaneous\Views\FilterQuery\Index.cshtml" />
     <None Include="resources\fonts\fontawesome-webfont.eot" />
     <None Include="resources\fonts\fontawesome-webfont.ttf" />
     <None Include="resources\fonts\fontawesome-webfont.woff" />

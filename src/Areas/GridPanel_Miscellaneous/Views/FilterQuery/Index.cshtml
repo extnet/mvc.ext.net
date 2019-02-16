@@ -1,0 +1,77 @@
+﻿@model System.Collections.IEnumerable
+@{
+    ViewBag.Title = "The FilterQuery filter - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+@section headtag
+{
+    <style>
+
+        .x-grid-row-over .x-grid-cell-inner {
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+    </script>
+}
+@section example
+{
+    <h1>The FilterQuery filter</h1>
+
+    @(Html.X().GridPanel()
+                .Title("Array Grid")
+                .Width(700)
+                .Height(350)
+                .Store(Html.X().Store()
+                    .ID("Store1")
+                    .Model(Html.X().Model()
+                        .Fields(
+                            new ModelField("company"),
+                            new ModelField("price", ModelFieldType.Float),
+                            new ModelField("change", ModelFieldType.Float),
+                            new ModelField("pctChange", ModelFieldType.Float),
+                            new ModelField("lastChange", ModelFieldType.Date, "M/d hh:mmtt")
+                        )
+                    )
+                    .DataSource(Model)
+                )
+                .ColumnModel(
+                    Html.X().Column().Text("Company").DataIndex("company").Flex(1),
+                    Html.X().Column().Text("Price").DataIndex("price").Renderer(RendererFormat.UsMoney),
+                    Html.X().Column().Text("Change").DataIndex("change").Renderer("change"),
+                    Html.X().Column().Text("Change").DataIndex("pctChange").Renderer("pctChange"),
+                    Html.X().DateColumn().Text("Last Updated").DataIndex("lastChange")
+                )
+                .SelectionModel(Html.X().RowSelectionModel())
+                .BottomBar(
+                    Html.X().Toolbar()
+                        .Items(
+                            Html.X().Button()
+                                .Text("Code Behind Filter")
+                                .Icon(Icon.Magnifier)
+                                .DirectClickAction("ApplyFilter"),
+                            Html.X().Button()
+                                .Text("Client Side Filter")
+                                .Icon(Icon.MagnifierZoomIn)
+                                .Handler(@<text><script>
+                                    var fquery = 'company like \'Ameri\' or price > 75';
+                                    App.Store1.addFilter(Ext.create('Ext.data.Query', { source: fquery }));
+                                    Ext.toast('Client-filtered by query: ' + fquery);
+                                </script></text>),
+                            Html.X().Button()
+                                .Text("Reset Filter")
+                                .Icon(Icon.BulletCross)
+                                .Handler("App.Store1.clearFilter()")
+                        )
+                )
+    )
+}
