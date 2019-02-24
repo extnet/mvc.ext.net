@@ -1,5 +1,35 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2019-02-24 |
+| Current Version | 4.8.0 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.8.0) on GitHub |
+
+#### FEATURES
+
+1. [[#1626](https://github.com/extnet/Ext.NET/issues/1626)] Add Ext.data.Query argument support to AbstractStore.AddFilter()
+2. [[#1624](https://github.com/extnet/Ext.NET/issues/1624)] Add support for Ext.data.ClientStore
+
+#### DEFECTS
+
+1. [[#1632](https://github.com/extnet/Ext.NET/issues/1632)] Animated Dataview creates two DOM elements with same ID
+2. [[#1628](https://github.com/extnet/Ext.NET/issues/1628)] Ext.data.Query incompatibility with GridFilters GridPanel plugin
+3. [[#1627](https://github.com/extnet/Ext.NET/issues/1627)] Viewport does not resize with browser's viewport
+4. [[#1621](https://github.com/extnet/Ext.NET/issues/1621)] Ext.net.FieldNote.setNote() error if no initial note is set
+5. [[#1619](https://github.com/extnet/Ext.NET/issues/1619)] Ext.form.field.Checkbox.updateIndicator() hides the whole checkbox
+6. [[#1618](https://github.com/extnet/Ext.NET/issues/1618)] Ext.ux.SelectBox picker expand issue with no initial data load
+7. [[#1617](https://github.com/extnet/Ext.NET/issues/1617)] Ext.menu.Item override relies on non-existing getIconUrl() method
+8. [[#1616](https://github.com/extnet/Ext.NET/issues/1616)] cleanResourceUrl=\"false\" fails loading Draw override
+9. [[#1615](https://github.com/extnet/Ext.NET/issues/1615)] Ext.Net.Node implements non-existing listeners
+
+#### BREAKING CHANGES
+
+1. [[#1615](https://github.com/extnet/Ext.NET/issues/1615)] Ext.Net.Node implements non-existing listeners
+
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2018-08-15 |
 | Current Version | 4.7.1 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.7.1) on GitHub |
