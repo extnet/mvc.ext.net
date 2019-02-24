@@ -7,8 +7,32 @@
     <folder name="Kitchen_Sink_Forms" />
   </order>
 
+  <new version="4.8.0">
+    <folder name="Getting_Started\Views\Component_Overview" />
+    <folder name="Kitchen_Sink_Forms\Views\Contact" />
+    <folder name="Kitchen_Sink_GridPanels\Views\Basic" />
+    <folder name="Kitchen_Sink_Panels\Views\Basic" />
+    <folder name="Kitchen_Sink_TabPanels\Views\Basic" />
+    <folder name="Kitchen_Sink_Toolbars\Views\Basic" />
+    <folder name="Kitchen_Sink_TreePanels\Views\Basic" />
+    <folder name="Kitchen_Sink_Windows\Views\Basic" />
+    <folder name="Kitchen_Sink_Forms\Views\Login" />
+    <folder name="Kitchen_Sink_Forms\Views\Register" />
+    <folder name="Kitchen_Sink_GridPanels\Views\Grouped" />
+    <folder name="Kitchen_Sink_GridPanels\Views\Grouped_Header" />
+    <folder name="Kitchen_Sink_GridPanels\Views\Locked" />
+    <folder name="Kitchen_Sink_GridPanels\Views\Property" />
+    <folder name="Miscellaneous_Store\Views\ClientStore" />
+    <folder name="GridPanel_Miscellaneous\Views\FilterQuery" />
+  </new>
+
+  <updated version="4.8.0">
+    <folder name="TreePanel_List\Views\Overview" />
+  </updated>
+
+  <!--
   <new version="4.7.1">
-    <!-- Keeping the new ones from 4.7.0 just to keep track. -->
+    <!- Keeping the new ones from 4.7.0 just to keep track. ->
     <folder name="Getting_Started\Views\Component_Overview" />
     <folder name="Miscellaneous_Gauge\Views\Needles" />
     <folder name="Miscellaneous_Gauge\Views\Custom" />
@@ -35,6 +59,7 @@
     <folder name="Kitchen_Sink_Windows\Views\Basic" />
     <folder name="TreePanel_List\Views\Overview" />
   </new>
+  -->
 
   <!--
   <new version="4.7.0">
