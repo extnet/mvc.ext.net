@@ -1,5 +1,26 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2019-02-27 |
+| Current Version | 4.8.1 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.8.1) on GitHub |
+
+#### FEATURES
+
+None
+
+#### DEFECTS
+
+1. [[#1633](https://github.com/extnet/Ext.NET/issues/1633)] GridPanel's CheckboxSelectionModel breaks grid display without error
+
+#### BREAKING CHANGES
+
+None
+
+If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2019-02-24 |
 | Current Version | 4.8.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.8.0) on GitHub |
