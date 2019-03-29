@@ -222,4 +222,4 @@ This `IgnoreRoute` is automatically inserted if using the NuGet package [install
 1. [Json.NET](http://json.net/) provided by James Newton-King ([LICENSE](https://github.com/extnet/Premium/blob/master/.build/licenses/Newtonsoft.Json.md))
 1. [Ext JS](http://www.sencha.com/products/js/) JavaScript Library with Commercial License provided by Sencha, Inc. ([LICENSE](https://github.com/extnet/Premium/blob/master/.build/licenses/Sencha.md))
 
-Copyright 2008-2018 [Object.NET](http://object.net/), Inc., All rights reserved.
+Copyright 2008-2019 [Object.NET](http://object.net/), Inc., All rights reserved.

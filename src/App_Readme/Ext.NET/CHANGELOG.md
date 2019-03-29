@@ -677,4 +677,4 @@ If you experience a Breaking Change, please report in the [forums](http://forums
 1. [[#1203](https://github.com/extnet/Ext.NET/issues/1203)] TreeDropZone's AllowParentInsert has to be AllowParentInserts (with the "s" at the end)] `sencha`
 1. [[#1155](https://github.com/extnet/Ext.NET/issues/1155)] ComponentLoader doesn't take Mode="Html" into account, but it should render this setting to client
 
-Copyright 2008-2017 [Object.NET](http://object.net/), Inc., All rights reserved.
+Copyright 2008-2019 [Object.NET](http://object.net/), Inc., All rights reserved.
