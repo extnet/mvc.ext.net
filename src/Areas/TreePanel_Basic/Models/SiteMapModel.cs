@@ -24,7 +24,7 @@ namespace Ext.Net.MVC.Examples.Areas.TreePanel_Basic.Models
 
             if (!string.IsNullOrEmpty(siteMapNode.Url))
             {
-                treeNode.Href = siteMapNode.Url.StartsWith("~/") ? siteMapNode.Url.Replace("~/", "http://examples.ext.net/") : ("http://examples.ext.net" + siteMapNode.Url);
+                treeNode.Href = siteMapNode.Url.StartsWith("~/") ? siteMapNode.Url.Replace("~/", "https://examples.ext.net/") : ("https://examples.ext.net" + siteMapNode.Url);
             }
 
             treeNode.NodeID = siteMapNode.Key;
@@ -42,7 +42,7 @@ namespace Ext.Net.MVC.Examples.Areas.TreePanel_Basic.Models
             if (!string.IsNullOrEmpty(siteMapNode.Url))
             {
 
-                treeNode.CustomAttributes.Add(new ConfigItem("url", siteMapNode.Url.StartsWith("~/") ? siteMapNode.Url.Replace("~/", "http://examples.ext.net/") : ("http://examples.ext.net" + siteMapNode.Url)));
+                treeNode.CustomAttributes.Add(new ConfigItem("url", siteMapNode.Url.StartsWith("~/") ? siteMapNode.Url.Replace("~/", "https://examples.ext.net/") : ("https://examples.ext.net" + siteMapNode.Url)));
                 treeNode.Href = "#";
             }
 

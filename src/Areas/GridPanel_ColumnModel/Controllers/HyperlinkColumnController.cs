@@ -22,7 +22,7 @@ namespace Ext.Net.MVC.Examples.Areas.GridPanel_ColumnModel.HyperlinkColumn.Contr
         {
             Ext.Net.HyperlinkColumn hlc = X.GetCmp<Ext.Net.HyperlinkColumn>("HyperlinkColumn1");
             hlc.Pattern = "{text:capitalize}";
-            hlc.HrefPattern = "http://ext.net?companyId={href}&someParamMore=hello";
+            hlc.HrefPattern = "https://ext.net?companyId={href}&someParamMore=hello";
             hlc.UpdatePatternTpl();
             X.GetCmp<GridPanel>("GridPanel1").Refresh();
 

@@ -34,7 +34,7 @@
         .Title("Frame loader")
         .Closable(false)
         .Loader(X.ComponentLoader()
-            .Url("http://www.ext.net")
+            .Url("https://www.ext.net")
             .Mode(LoadMode.Frame)
             .Listeners(l => {
                 l.BeforeLoad.Handler = "Ext.get('maskDiv').removeCls('x-hidden-display');";
@@ -48,7 +48,7 @@
                 X.Button()
                     .Text("Load Ext.NET forums")
                     .Icon(Icon.Application)
-                    .Handler("#{Window1}.load('http://forums.ext.net');"),
+                    .Handler("#{Window1}.load('https://forums.ext.net');"),
 
                 X.Button()
                     .Text("Refresh")

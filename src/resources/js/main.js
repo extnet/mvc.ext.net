@@ -9,7 +9,7 @@ var handleRedirection = function () {
             if (queryRedirect === false) {
                 return;
             } else if (queryRedirect === true) {
-                window.location = "http://mobile.ext.net";
+                window.location = "https://mobile.ext.net";
                 return;
             }
         }
@@ -22,7 +22,7 @@ var handleRedirection = function () {
             if (cookieRedirect === false) {
                 return;
             } else if (cookieRedirect === true) {
-                window.location = "http://mobile.ext.net";
+                window.location = "https://mobile.ext.net";
                 return;
             }
         }
@@ -731,7 +731,7 @@ var onRedirect = function () {
         Ext.util.Cookies.set("redirect", true);
     }
 
-    window.location = "http://mvc.mobile.ext.net";
+    window.location = "https://mvc.mobile.ext.net";
 };
 
 var onStay = function () {

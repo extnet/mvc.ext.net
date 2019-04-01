@@ -31,14 +31,14 @@ The easiest and quickest way to install Ext.NET is using [NuGet](https://www.nug
 Install-Package Ext.NET
 ```
 
-[Getting Started](http://forums.ext.net/showthread.php?11027-Install-and-Setup-Guide-for-Visual-Studio) (Manual Installation with Videos)
+[Getting Started](https://forums.ext.net/showthread.php?11027-Install-and-Setup-Guide-for-Visual-Studio) (Manual Installation with Videos)
 
 ## 3. Revisions and Breaking Changes
 
 See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), or view in the Examples Explorers:
 
- - [WebForms Examples Explorer](http://examples.ext.net/#/Getting_Started/Release_Documents/README/)
- - [MVC Examples Explorer](http://examples.ext.net/#/Getting_Started/Release_Documents/BREAKING_CHANGES/)
+ - [WebForms Examples Explorer](https://examples.ext.net/#/Getting_Started/Release_Documents/README/)
+ - [MVC Examples Explorer](https://examples.ext.net/#/Getting_Started/Release_Documents/BREAKING_CHANGES/)
 
 
 ## 4. Sample Web.config
@@ -222,4 +222,4 @@ This `IgnoreRoute` is automatically inserted if using the NuGet package [install
 1. [Json.NET](http://json.net/) provided by James Newton-King ([LICENSE](https://github.com/extnet/Premium/blob/master/.build/licenses/Newtonsoft.Json.md))
 1. [Ext JS](http://www.sencha.com/products/js/) JavaScript Library with Commercial License provided by Sencha, Inc. ([LICENSE](https://github.com/extnet/Premium/blob/master/.build/licenses/Sencha.md))
 
-Copyright 2008-2019 [Object.NET](http://object.net/), Inc., All rights reserved.
+Copyright 2008-2019 [Object.NET](https://object.net/), Inc., All rights reserved.
