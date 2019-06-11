@@ -1,5 +1,27 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2019-06-10 |
+| Current Version | 4.8.2 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.8.2) on GitHub |
+
+#### FEATURES
+
+1. [[#1636](https://github.com/extnet/Ext.NET/issues/1636)] Replace http:// Ext.NET urls to https://
+
+#### DEFECTS
+
+1. [[#1645](https://github.com/extnet/Ext.NET/issues/1645)] References to Newtonsoft.Json and Microsoft.Aspnet.Mvc are wrong throughout project
+2. [[#1642](https://github.com/extnet/Ext.NET/issues/1642)] Ext.net.PasswordMask plugin issue while destroying the component
+
+#### BREAKING CHANGES
+
+None
+
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2019-02-27 |
 | Current Version | 4.8.1 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.8.1) on GitHub |

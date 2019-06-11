@@ -1,7 +1,7 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
-| Release Date | 2019-02-27 |
-| Current Version | 4.8.1 |
+| Release Date | 2019-06-10 |
+| Current Version | 4.8.2 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
 
 ## Contents
@@ -39,7 +39,6 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
 
  - [WebForms Examples Explorer](https://examples.ext.net/#/Getting_Started/Release_Documents/README/)
  - [MVC Examples Explorer](https://examples.ext.net/#/Getting_Started/Release_Documents/BREAKING_CHANGES/)
-
 
 ## 4. Sample Web.config
 
@@ -94,7 +93,7 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
       <dependentAssembly>
         <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" />
-        <bindingRedirect oldVersion="0.0.0.0-11.0.0.0" newVersion="11.0.0.0" />
+        <bindingRedirect oldVersion="0.0.0.0-12.0.2.0" newVersion="12.0.2.0" />
       </dependentAssembly>
       <dependentAssembly>
         <assemblyIdentity name="Ext.Net.Utilities" publicKeyToken="2c34ac34702a3c23" />
@@ -133,7 +132,7 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
       </dependentAssembly>
       <dependentAssembly>
         <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35"/>
-        <bindingRedirect oldVersion="1.0.0.0-5.2.6.0" newVersion="5.2.6.0"/>
+        <bindingRedirect oldVersion="1.0.0.0-5.2.7.0" newVersion="5.2.7.0"/>
       </dependentAssembly>
       -->
     </assemblyBinding>
