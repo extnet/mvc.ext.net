@@ -8,6 +8,7 @@
   </order>
 
   <!-- keeping new ones for version 4.8.0 because they're real fresh. -->
+  <!--
   <new version="4.8.2">
     <folder name="Getting_Started\Views\Component_Overview" />
     <folder name="Kitchen_Sink_Forms\Views\Contact" />
@@ -26,12 +27,15 @@
     <folder name="Miscellaneous_Store\Views\ClientStore" />
     <folder name="GridPanel_Miscellaneous\Views\FilterQuery" />
   </new>
+  -->
 
+  <!--
   <updated version="4.8.2">
     <folder name="GridPanel_Commands\Views\Group_Command" />
     <folder name="GridPanel_Selection_Models\Views\Checkbox_Selection" />
     <folder name="TreePanel_List\Views\Overview" />
   </updated>
+  -->
 
   <!-- keeping new ones for version 4.8.0 because they're real fresh. -->
   <!--
