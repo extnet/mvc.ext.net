@@ -7,6 +7,9 @@
     <folder name="Kitchen_Sink_Forms" />
   </order>
 
+  <new version="5.0.0-preview">
+  </new>
+
   <!-- keeping new ones for version 4.8.0 because they're real fresh. -->
   <!--
   <new version="4.8.2">
