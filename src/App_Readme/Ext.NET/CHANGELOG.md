@@ -1,5 +1,27 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2019-08-27 |
+| Current Version | 4.8.3 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.8.3) on GitHub |
+
+#### FEATURES
+
+None
+
+#### DEFECTS
+
+1. [[#1649](https://github.com/extnet/Ext.NET/issues/1649)] IE Incompatibility in code introduced by fix to Ext JS code
+2. [[#1648](https://github.com/extnet/Ext.NET/issues/1648)] TabCloseMenu: Menu Icons no longer works after UX review
+
+#### BREAKING CHANGES
+
+None
+
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2019-06-10 |
 | Current Version | 4.8.2 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.8.2) on GitHub |
