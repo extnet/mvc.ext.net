@@ -89,6 +89,7 @@ If you experience a Breaking Change, please report in the [forums](https://forum
 #### BREAKING CHANGES
 
 1. [[#1615](https://github.com/extnet/Ext.NET/issues/1615)] Ext.Net.Node implements non-existing listeners
+2. [[#1651](https://github.com/extnet/Ext.NET/issues/1651)] Ext.form.field.Date.select event now also fires by setValue() call
 
 If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
