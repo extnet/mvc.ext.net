@@ -9,7 +9,7 @@
     .Items(
         Html.X().DataView()
         .ItemSelector("div.event")
-        .AutoScroll(true)
+        .Scrollable(ScrollableOption.Both)
         .Store(Html.X().Store()
             .Model(Html.X().Model()
                 .Fields("EventId", "CalendarId", "Title", "Location", "Notes", "Url", "IsAllDay", "Reminder")

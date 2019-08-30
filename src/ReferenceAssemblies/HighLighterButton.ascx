@@ -17,7 +17,7 @@
     CloseAction="Hide" 
     Collapsible="true" 
     Height="600px" 
-    AutoScroll="true"
+    Scrollable="Both"
     BodyStyle="background-color: #fff;"
     BodyPadding="6"
     Icon="PageWhiteCode"

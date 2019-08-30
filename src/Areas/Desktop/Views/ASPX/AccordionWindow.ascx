@@ -52,7 +52,7 @@
                     <ext:TreePanel ID="UsersTree" runat="server" 
                         RootVisible="false"
                         Lines="false"
-                        AutoScroll="true"
+                        Scrollable="Both"
                         Title="Online Users">
                         <Tools>
                             <ext:Tool runat="server" Type="Refresh" Handler="mimicRemoteLoading" />

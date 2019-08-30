@@ -24,7 +24,7 @@
                     .Title("Normal Tab")
                     .Html("My content was added with the Html Property.")
                     .BodyPadding(6)
-                    .AutoScroll(true),
+                    .Scrollable(ScrollableOption.Both),
 
                 X.Panel()
                     .ID("Tab2")
@@ -37,7 +37,7 @@
                     .ID("Tab3")
                     .Title("Ajax Tab")
                     .BodyPadding(6)
-                    .AutoScroll(true)
+                    .Scrollable(ScrollableOption.Both)
                     .Loader(X.ComponentLoader()
                         .Url(Url.Action("Ajax"))
                         .LoadMask(m => m.ShowMask = true)
@@ -50,7 +50,7 @@
                     .Title("Event Tab")
                     .Html("I am tab 3's content. I also have an event listener attached.")
                     .BodyPadding(6)
-                    .AutoScroll(true)
+                    .Scrollable(ScrollableOption.Both)
                     .Listeners(l =>
                     {
                         l.Activate.Handler = "Ext.Msg.alert('Event', this.title + ' was activated.');";
@@ -62,7 +62,7 @@
                     .Title("Disabled Tab")
                     .Disabled(true)
                     .Html("Can't see me cause I'm disabled")
-                    .AutoScroll(true)
+                    .Scrollable(ScrollableOption.Both)
             )
         )
     </div>
