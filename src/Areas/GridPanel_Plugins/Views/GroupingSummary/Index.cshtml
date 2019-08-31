@@ -79,21 +79,21 @@
                 Html.X().CellEditing().ClicksToEdit(1)
             )
             .ColumnModel(
-                Html.X().SummaryColumn()
+                Html.X().Column()
                     .TdCls("task")
                     .Text("Task")
                     .DataIndex("Description")
                     .Hideable(false)
                     .SummaryType(SummaryType.Count)
                     .Flex(1)
-                    .SummaryRenderer("return ((value === 0 || value > 1) ? '(' + value +' Tasks)' : '(1 Task)');"),
+                    .SummaryRenderer(new Renderer() { Handler = "return ((value === 0 || value > 1) ? '(' + value +' Tasks)' : '(1 Task)');" }),
 
                 Html.X().Column()
                     .Text("Project")
                     .DataIndex("Name")
                     .Width(20),
 
-                Html.X().SummaryColumn()
+                Html.X().Column()
                     .Width(85)
                     .Text("Due Date")
                     .DataIndex("Due")
@@ -104,36 +104,37 @@
                         Html.X().DateField().Format("MM/dd/yyyy")
                     ),
 
-                Html.X().SummaryColumn()
+                Html.X().Column()
                     .Width(75)
                     .Text("Estimate")
                     .DataIndex("Estimate")
                     .SummaryType(SummaryType.Sum)
                     .Renderer("return value +' hours';")
-                    .SummaryRenderer("return value +' hours';")
+                    .SummaryRenderer(new Renderer() { Handler = "return value +' hours';" })
                     .Editor(
                         Html.X().NumberField().AllowBlank(false).MinValue(0).StyleSpec("text-align:left")
                     ),
 
-                 Html.X().SummaryColumn()
+                 Html.X().Column()
                     .Width(75)
                     .Text("Rate")
                     .DataIndex("Rate")
                     .SummaryType(SummaryType.Average)
                     .Renderer(RendererFormat.UsMoney)
-                    .SummaryRenderer("Ext.util.Format.usMoney")
+                    // This illustrates support for specifying the client-side string specification of the renderer to use.
+                    .SummaryRenderer("Ext.util.Format.UsMoney")
                     .Editor(
                         Html.X().NumberField().AllowBlank(false).MinValue(0).StyleSpec("text-align:left")
                     ),
 
-                 Html.X().SummaryColumn()
+                 Html.X().Column()
                     .Width(75)
                     .Text("Cost")
                     .DataIndex("Cost")
                     .Groupable(false)
                     .CustomSummaryType("totalCost")
                     .Renderer("return Ext.util.Format.usMoney(record.data.Estimate * record.data.Rate);")
-                    .SummaryRenderer("Ext.util.Format.usMoney")
+                    .SummaryRenderer(new Renderer() { Format = RendererFormat.UsMoney })
             )
             .View(
                 Html.X().GridView().MarkDirty(false)
