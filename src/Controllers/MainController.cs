@@ -40,11 +40,6 @@ namespace Ext.Net.MVC.Examples
         [OutputCache(Duration=86400, VaryByParam="theme")]
         public DirectResult SetTheme(string theme)
         {
-            if (theme == "Blue")
-            {
-                theme = "Default";
-            }
-
             theme = theme.Replace(" ", "");
             this.Session["Ext.Net.Theme"] = (Theme)Enum.Parse(typeof(Theme), theme);
 

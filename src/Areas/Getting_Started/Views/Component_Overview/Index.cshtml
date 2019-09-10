@@ -100,11 +100,6 @@
                         {
                             var value = ((Ext.Net.Theme)tn).ToString();
                             var text = value.Replace("Touch", " Touch");
-                            if (text == "Default")
-                            {
-                                text = "Blue";
-                            }
-
                             if (text != "None")
                             {
                                 itms.Add(new ListItem(text, value));
