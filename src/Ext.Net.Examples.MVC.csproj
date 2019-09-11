@@ -348,8 +348,6 @@
     <Compile Include="Areas\Miscellaneous_Gauge\Controllers\NeedlesController.cs" />
     <Compile Include="Areas\Miscellaneous_Gauge\Controllers\BasicController.cs" />
     <Compile Include="Areas\Miscellaneous_Gauge\Miscellaneous_GaugeAreaRegistration.cs" />
-    <Compile Include="Areas\Miscellaneous_FlashComponent\Controllers\BasicController.cs" />
-    <Compile Include="Areas\Miscellaneous_FlashComponent\Miscellaneous_FlashComponentAreaRegistration.cs" />
     <Compile Include="Areas\Miscellaneous_History\Controllers\BasicController.cs" />
     <Compile Include="Areas\Miscellaneous_History\Miscellaneous_HistoryAreaRegistration.cs" />
     <Compile Include="Areas\Miscellaneous_Locale\Controllers\BasicController.cs" />
@@ -925,7 +923,6 @@
     <Content Include="Areas\Miscellaneous_Gauge\Views\Basic\config.xml" />
     <Content Include="Areas\Miscellaneous_Factory\Views\Basic\MyWindow1.ascx" />
     <Content Include="Areas\Miscellaneous_Factory\Views\Basic\Window.ascx" />
-    <Content Include="Areas\Miscellaneous_FlashComponent\Views\Basic\config.xml" />
     <Content Include="Areas\Miscellaneous_History\Content\Warning.html" />
     <Content Include="Areas\Miscellaneous_History\Views\Basic\config.xml" />
     <Content Include="Areas\Miscellaneous_Locale\Views\Basic\config.xml" />
@@ -1293,8 +1290,6 @@
     <Content Include="Areas\MessageBus_Basic\Views\Complex\PartialView2.cshtml" />
     <Content Include="Areas\Miscellaneous_ClickRepeater\Views\Web.config" />
     <Content Include="Areas\Miscellaneous_ClickRepeater\Views\Basic\Index.cshtml" />
-    <Content Include="Areas\Miscellaneous_FlashComponent\Views\Web.config" />
-    <Content Include="Areas\Miscellaneous_FlashComponent\Views\Basic\Index.cshtml" />
     <Content Include="Areas\Miscellaneous_History\Views\Web.config" />
     <Content Include="Areas\Miscellaneous_History\Views\Basic\Index.cshtml" />
     <Content Include="Areas\Miscellaneous_Locale\Views\Web.config" />
