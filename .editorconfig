@@ -1,6 +1,6 @@
 root = true
 
-[*.{cs,js}]
+[*.{cs,js,asax,ascx,ashx,aspx,config,cshtml,html,htm,xml}]
 indent_size = 4
 indent_style = spaces
 trim_trailing_whitespace = true
