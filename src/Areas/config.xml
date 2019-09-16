@@ -8,6 +8,8 @@
   </order>
 
   <updated version="5.0.0">
+    <!-- Too many examples tagged with 'updated'. It was decided to leave them
+         without the tag.
     <folder name="Draw_Basic\Views\Rotate_Text" />
     <folder name="Chart_Scatter\Views\Basic" />
     <folder name="TreePanel_Basic\Views\SiteMap" />
@@ -26,6 +28,7 @@
     <folder name="GridPanel_Plugins\Views\GroupingSummary" />
     <folder name="GridPanel_Infinite_Scrolling\Views\Buffered_Scrolling" />
     <folder name="Getting_Started\Views\Component_Overview" />
+    -->
   </updated>
 
   <!-- keeping new ones for version 4.8.0 because they're real fresh. -->
