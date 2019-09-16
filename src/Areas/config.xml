@@ -7,6 +7,27 @@
     <folder name="Kitchen_Sink_Forms" />
   </order>
 
+  <updated version="5.0.0">
+    <folder name="Draw_Basic\Views\Rotate_Text" />
+    <folder name="Chart_Scatter\Views\Basic" />
+    <folder name="TreePanel_Basic\Views\SiteMap" />
+    <folder name="TreePanel_Basic\Views\Simple" />
+    <folder name="TreePanel_Basic\Views\Editors" />
+    <folder name="TreePanel_Basic\Views\Checkbox_Nodes" />
+    <folder name="TreePanel_Advanced\Views\Remote_Mode" />
+    <folder name="TreePanel_Advanced\Views\Image_Organizer" />
+    <folder name="TabPanel_Basic\Views\Ajax_Load" />
+    <folder name="Portal\Views\Simple" />
+    <folder name="GridPanel_Update\Views\AutoSave" />
+    <folder name="Desktop\Views\Overview" />
+    <folder name="DataView_Advanced\Views\Chooser" />
+    <folder name="DataView_Advanced\Views\Animated" />
+    <folder name="Calendar_Overview\Views\Shared" />
+    <folder name="GridPanel_Plugins\Views\GroupingSummary" />
+    <folder name="GridPanel_Infinite_Scrolling\Views\Buffered_Scrolling" />
+    <folder name="Getting_Started\Views\Component_Overview" />
+  </updated>
+
   <!-- keeping new ones for version 4.8.0 because they're real fresh. -->
   <!--
   <new version="4.8.2">

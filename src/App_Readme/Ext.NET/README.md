@@ -1,7 +1,7 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
-| Release Date | 2019-08-07 |
-| Current Version | 5.0.0-preview |
+| Release Date | 2019-09-16 |
+| Current Version | 5.0.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
 
 ## Contents
@@ -17,8 +17,8 @@
 
 ## 1. System Requirements
 
-1. Visual Studio 2013, 2015, 2017, or
-2. Visual Studio Community 2015, 2017
+1. Visual Studio 2015, 2017, 2019, or
+2. Visual Studio Community 2015, 2017, 2019
 3. .NET Framework 4.0, 4.5, 4.5.2 and 4.6
 
 ## 2. Installation Instructions
