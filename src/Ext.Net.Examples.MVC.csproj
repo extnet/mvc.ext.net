@@ -304,6 +304,8 @@
     <Compile Include="Areas\Kitchen_Sink_GridPanels\Controllers\GroupedController.cs" />
     <Compile Include="Areas\Kitchen_Sink_GridPanels\Models\PropertyModel.cs" />
     <Compile Include="Areas\Kitchen_Sink_GridPanels\Models\Grouped_HeaderModel.cs" />
+    <Compile Include="Areas\Miscellaneous_Responsive\Controllers\BasicController.cs" />
+    <Compile Include="Areas\Miscellaneous_Responsive\Miscellaneous_ResponsiveAreaRegistration.cs" />
     <Compile Include="Areas\Miscellaneous_Store\Controllers\ClientStoreController.cs" />
     <Compile Include="Areas\Miscellaneous_Store\Miscellaneous_StoreAreaRegistration.cs" />
     <Compile Include="Models\KitchenSink\RestaurantsModel.cs" />
@@ -916,6 +918,7 @@
     <Content Include="Areas\MessageBox_Basic\Views\Overview\config.xml" />
     <Content Include="Areas\MessageBus_Basic\Views\Complex\config.xml" />
     <Content Include="Areas\MessageBus_Basic\Views\Simple\config.xml" />
+    <Content Include="Areas\Miscellaneous_Responsive\Views\Basic\config.xml" />
     <Content Include="Areas\Miscellaneous_Store\Views\ClientStore\config.xml" />
     <Content Include="Areas\Miscellaneous_ClickRepeater\Views\Basic\config.xml" />
     <Content Include="Areas\Miscellaneous_Gauge\Views\Custom\config.xml" />
@@ -1409,6 +1412,8 @@
     <Content Include="resources\font-awesome-5-free\webfonts\fa-solid-900.ttf" />
     <Content Include="resources\font-awesome-5-free\webfonts\fa-solid-900.woff" />
     <Content Include="resources\font-awesome-5-free\webfonts\fa-solid-900.woff2" />
+    <Content Include="Areas\Miscellaneous_Responsive\Views\Basic\Index.cshtml" />
+    <Content Include="Areas\Miscellaneous_Responsive\Views\Web.config" />
     <None Include="resources\fonts\fontawesome-webfont.eot" />
     <None Include="resources\fonts\fontawesome-webfont.ttf" />
     <None Include="resources\fonts\fontawesome-webfont.woff" />

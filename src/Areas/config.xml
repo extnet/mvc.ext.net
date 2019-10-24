@@ -31,6 +31,10 @@
     -->
   </updated>
 
+  <new version="5.0.0">
+    <folder name="Miscellaneous_Responsive\Views\Basic" />
+  </new>
+
   <!-- keeping new ones for version 4.8.0 because they're real fresh. -->
   <!--
   <new version="4.8.2">

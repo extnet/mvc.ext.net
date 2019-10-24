@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Responsive - Ext.NET MVC Examples";
+    ViewBag.ManagerConfig = new MvcResourceManagerConfig()
+    {
+        GlyphFontFamily = "Pictos"
+    };
+
+    Layout = "~/Views/Shared/_BaseLayoutNoMgr.cshtml";
+
+    var X = Html.X();
+}
+
+@section example
+{
+    @X.ResourceManager().GlyphFontFamily("Pictos")
+
+    @(
+        X.Panel()
+            .BodyPadding(20)
+            .Html("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+            .Factory(new FactoryConfig()
+            {
+                Instance = "My.TabItem",
+                Alias = "mytabitem"
+            })
+            .TabConfig(
+                X.Button()
+                    .ResponsiveConfig(rule =>
+                    {
+                        rule.Add(new ResponsiveRule()
+                        {
+                            Rule = "wide",
+                            CustomConfig =
+                            {
+                                new ConfigItem("iconAlign", "left"),
+                                new ConfigItem("textAlign", "left")
+                            }
+                        });
+
+                        rule.Add(new ResponsiveRule()
+                        {
+                            Rule = "tall",
+                            ResponsiveConfig =
+                            {
+                                X.Button()
+                                    .IconAlign(IconAlign.Top)
+                                    .TextAlign(ButtonTextAlign.Center)
+                                    .Width(120)
+                            }
+                        });
+                    })
+            )
+    )
+
+    @(
+        X.Viewport()
+            .Layout(LayoutType.Fit)
+            .Items(
+                X.TabPanel()
+                    .TabRotation(0)
+                    .ResponsiveConfig(rule =>
+                    {
+                        rule.Add(new ResponsiveRule()
+                        {
+                            Rule = "tall",
+                            ResponsiveConfig = {
+                                X.TabPanel().TabPosition(TabPosition.Top)
+                            }
+                        });
+
+                        rule.Add(new ResponsiveRule()
+                        {
+                            Rule = "wide",
+                            ResponsiveConfig = {
+                                X.TabPanel().TabPosition(TabPosition.Left)
+                            }
+                        });
+                    })
+                    .TabBarConfig(X.TabBar().Width(110))
+                    .Items(
+                        X.Panel()
+                            .FactoryAlias("mytabitem")
+                            .Title("Home")
+                            .Glyph(72)
+                            .Content(@<text>
+                                <h2>Responsive Design Demo</h2>
+
+                                <p>
+                                    This example demonstrates how to make your app responsive to changes in
+                                    screen size or orientation.  Applications that run on tablets often need to
+                                    change the position and/or layout of navigational elements when the orientation
+                                    changes (when the device is rotated). This application uses a built-in feature
+                                    in Ext JS called <code>responsiveConfig</code> to make real-time changes to the
+                                    navigation tab bar as the screen size changes.  We use "wide" to describe a
+                                    situation where the screen width is larger than its height, and "tall" when the
+                                    screen\'s height is larger than its width.
+                                </p>
+
+                                <ul>
+                                    <li>Application header is docked to the left when "wide" and top when "tall."</li>
+                                    <li>Tab icons are left-aligned when "wide" and top-aligned when "tall."</li>
+                                    <li>Tab text is left-aligned when "wide" and centered when "tall."</li>
+                                    <li>
+                                        Tabs stretch to fit the width of the tab bar when "wide", but have a
+                                        uniform width of 100px when "tall".
+                                    </li>
+                                </ul>
+
+                                <p>
+                                    Try resizing the window in your desktop browser, or rotating your tablet
+                                    to see it in action!
+                                </p>
+
+                                <p>
+                                    For more info on how to use responsiveConfig in your application, see the
+                                    API Docs for <a href="https://docs.sencha.com/extjs/7.0.0/classic/Ext.mixin.Responsive.html">Ext.mixin.Responsive</a>
+                                </p>
+                            </text>),
+                        X.Panel()
+                            .Title("Users")
+                            .Glyph(85)
+                            .FactoryAlias("mytabitem"),
+                        X.Panel()
+                            .Title("Groups")
+                            .Glyph(103)
+                            .FactoryAlias("mytabitem"),
+                        X.Panel()
+                            .Title("Settings")
+                            .Glyph(121)
+                            .FactoryAlias("mytabitem")
+                    )
+            )
+    )
+}
