@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Using Action - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var changeText = function (panel) {
+            var btn = panel.getComponent('myAction'),
+                ref = btn.baseAction;
+
+            Ext.Msg.prompt('Enter Text', 'Enter new text for the Action:', function (btn, text) {
+                if (btn == 'ok' && text) {
+                    ref.setText(text);
+                    ref.setHandler(function () {
+                        Ext.Msg.alert('Click', 'You clicked on "' + ref.getText() + '".');
+                    });
+                }
+            });
+        }
+    </script>
+}
+
+@section example
+{
+    <h1>Using Action</h1>
+
+    <p>Actions let you share client-side handlers, configuration and updates across Toolbar, Button and Menu components.</p>
+
+    @(X.Panel()
+        .ID("Panel1")
+        .Title("Actions")
+        .Width(500)
+        .Height(300)
+        .Bin(
+            X.Action()
+                .ID("Action1")
+                .Text("Do something")
+                .Handler(MvcUtils.StringifyScriptBlock(@<text>
+                    <script type="text/javascript">
+                        Ext.Msg.alert('Click', 'You did something.');
+                    </script>
+                </text>))
+                .Icon(Icon.Add)
+                .ItemID("myAction")
+        )
+        .TopBar(
+            X.Toolbar()
+                .Items(
+                    new ActionRef("#{Action1}"),
+                    X.Button().Text("Action Menu")
+                        .Menu(
+                            X.Menu().Items(
+                                new ActionRef("#{Action1}")
+                            )
+                        )
+                )
+        )
+        .Items(
+            new Ext.Net.ActionRef("#{Action1}", typeof(Ext.Net.SplitButton))
+        )
+        .BottomBar(
+            X.Toolbar()
+                .Items(
+                    X.Button().Text("Disable")
+                        .Listeners(l => l.Click.Handler = MvcUtils.StringifyScriptBlock(@<text>
+                            <script type="text/javascript">
+                                var action = #{Action1};
+                                action.setDisabled(!action.isDisabled());
+                                this.setText(action.isDisabled() ? 'Enable' : 'Disable');
+                            </script>
+                        </text>)),
+                    X.Button().Text("Change Icon")
+                        .Listeners(l => l.Click.Handler = MvcUtils.StringifyScriptBlock(@<text>
+                            <script type="text/javascript">
+                                var action = #{Action1};
+                                action.setIconCls(action.getIconCls() == '#Add' ? '#Delete' : '#Add');
+                            </script>
+                        </text>)),
+                    X.Button().Text("Change Text")
+                        .Handler(@<text><script>#{Action1}.setText('Something else');</script></text>),
+                    X.Button().Text("Another Text Change")
+                        .Handler(@<text><script>changeText(#{Panel1});</script></text>)
+                )
+        )
+    )
+}

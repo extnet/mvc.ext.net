@@ -1,0 +1,131 @@
+﻿@model System.Collections.IEnumerable
+@{
+    ViewBag.Title = "sing Actions - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var template = '<span style="color:{0};">{1}</span>';
+
+        var change = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value);
+        };
+
+        var pctChange = function (value) {
+            return Ext.String.format(template, (value > 0) ? "green" : "red", value + "%");
+        };
+    </script>
+}
+@section example
+{
+    <h1>Actions Example</h1>
+
+    <p>This example shows how to create multiple active UI event handling widgets from a single Action definition.</p>
+
+    <p>
+        Both Buttons and MenuItems can be created from the same Action instance. Action's enable, disable, hide, show and
+        setText methods affect every Component created from that Action.
+    <p>
+
+    <p>In this example, the Action is disabled when there is no grid selection, and this disables both Buttons and MenuItems.</p>
+
+    @(
+        X.Action()
+            .ID("SellAction")
+            .Icon(Icon.Delete)
+            .Text("Sell stock")
+            .Disabled(true)
+            .Handler(MvcUtils.StringifyScriptBlock(@<text>
+                <script type="text/javascript">
+                    var rec = #{ GridPanel1 }.getSelectionModel().getSelection()[0];
+                    if (rec) {
+                        Ext.Msg.alert('Sell', 'Sell ' + rec.get('company'));
+                    }
+                </script>
+            </text>))
+    )
+
+    @(
+        X.Action()
+            .ID("BuyAction")
+            .Icon(Icon.Accept)
+            .Text("Buy stock")
+            .Disabled(true)
+            .Handler(MvcUtils.StringifyScriptBlock(@<text>
+                <script type="text/javascript">
+                    var rec = #{GridPanel1}.getSelectionModel().getSelection()[0];
+                    if (rec) {
+                        Ext.Msg.alert('Buy', 'Buy ' + rec.get('company'));
+                    }
+                </script>
+            </text>))
+    )
+
+    @(
+        X.Menu().ID("ContextMenu")
+            .Items(
+                new ActionRef("#{BuyAction}"),
+                new ActionRef("#{SellAction}")
+            )
+    )
+
+    @(
+        X.GridPanel()
+            .ID("GridPanel1")
+            .ColumnLines(true)
+            .Title("Action Grid")
+            .Width(600)
+            .Height(350)
+            .Store(
+                X.Store().ID("Store1")
+                    .Model(X.Model().Fields(
+                        X.ModelField().Name("company"),
+                        X.ModelField().Name("price").Type(ModelFieldType.Float),
+                        X.ModelField().Name("change").Type(ModelFieldType.Float),
+                        X.ModelField().Name("pctChange").Type(ModelFieldType.Float),
+                        X.ModelField().Name("lastChange").Type(ModelFieldType.Date).DateFormat("M/d hh:mmtt")
+                    ))
+                    .DataSource(Model)
+            )
+            .ColumnModel(
+                X.Column().Text("Company").DataIndex("company").Flex(1),
+                X.Column().Text("Price").DataIndex("price").Renderer(RendererFormat.UsMoney),
+                X.Column().Text("Change").DataIndex("change").Renderer("change"),
+                X.Column().Text("Change").DataIndex("pctChange").Renderer("pctChange"),
+                X.Column().Text("Last Updated").DataIndex("lastChange")
+            )
+            .SelectionModel(
+                X.RowSelectionModel()
+                    .Listeners(l => l.SelectionChange.Handler = MvcUtils.StringifyScriptBlock(@<text>
+                        <script type="text/javascript">
+                            if (selected.length) {
+                                #{BuyAction}.enable();
+                                #{SellAction}.enable();
+                            } else {
+                                #{BuyAction}.disable();
+                                #{SellAction}.disable();
+                            }
+                        </script>
+                    </text>))
+            )
+            .ViewConfig(
+                X.GridView().StripeRows(true)
+                    .Listeners(ltn => ltn.ItemContextMenu.Handler = MvcUtils.StringifyScriptBlock(@<text>
+                        <script type="text/javascript">
+                            e.stopEvent();
+                            #{ContextMenu}.showAt(e.getXY());
+                            return false;
+                        </script>
+                    </text>))
+            )
+            .DockedItems(
+                X.Toolbar().Items(
+                    new ActionRef("#{BuyAction}"),
+                    new ActionRef("#{SellAction}")
+                )
+            )
+    )
+}

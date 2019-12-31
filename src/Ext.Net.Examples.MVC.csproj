@@ -167,10 +167,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\ExtNetConfig.cs" />
+    <Compile Include="Areas\Actions\Controllers\GridController.cs" />
     <Compile Include="Areas\Associations_HasMany\Associations_HasManyAreaRegistration.cs" />
     <Compile Include="Areas\Associations_HasMany\Controllers\SimpleController.cs" />
     <Compile Include="Areas\Associations_HasMany\Models\Product.cs" />
     <Compile Include="Areas\Associations_HasMany\Models\User.cs" />
+    <Compile Include="Areas\Actions\Actions.cs" />
+    <Compile Include="Areas\Actions\Controllers\SimpleController.cs" />
     <Compile Include="Areas\Associations_HasOne\Associations_HasOneAreaRegistration.cs" />
     <Compile Include="Areas\Associations_HasOne\Controllers\SimpleController.cs" />
     <Compile Include="Areas\Associations_HasOne\Models\Address.cs" />
@@ -604,7 +607,9 @@
     <Content Include="App_Readme\Ext.NET.Utilities\README.txt" />
     <Content Include="App_Readme\Transformer.NET\LICENSE.txt" />
     <Content Include="App_Readme\Transformer.NET\README.txt" />
+    <Content Include="Areas\Actions\Views\Grid\config.xml" />
     <Content Include="Areas\Associations_HasMany\Views\Simple\config.xml" />
+    <Content Include="Areas\Actions\Views\Simple\config.xml" />
     <Content Include="Areas\Associations_HasOne\Views\Simple\config.xml" />
     <Content Include="Areas\Buttons_Basic\Content\images\arrow-down.gif" />
     <Content Include="Areas\Buttons_Basic\Content\images\button.gif" />
@@ -1020,6 +1025,9 @@
     <Content Include="Areas\ColorPicker_Advanced\Views\Overview\Index.cshtml" />
     <Content Include="Areas\Chart_Misc\Views\Captions\Index.cshtml" />
     <Content Include="Areas\Chart_Misc\Views\Web.config" />
+    <Content Include="Areas\Actions\Views\Simple\Index.cshtml" />
+    <Content Include="Areas\Actions\Views\Web.config" />
+    <Content Include="Areas\Actions\Views\Grid\Index.cshtml" />
     <None Include="Areas\DataView_Basic\Content\sencha-touch-examples.json" />
     <Content Include="Areas\Desktop\Views\Web.config" />
     <Content Include="Areas\Desktop\Views\Overview\Desktop.cshtml" />
