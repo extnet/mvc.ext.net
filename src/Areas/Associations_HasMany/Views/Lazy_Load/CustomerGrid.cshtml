@@ -1,0 +1,61 @@
+﻿@(
+    Html.X().GridPanel()
+        .Title("Customers")
+        .Store(
+            Html.X().Store()
+                .ModelName("Customer")
+                .Listeners(ltn => ltn.Load.Handler = MvcUtils.StringifyScriptBlock(@<text><script type="text/javascript">
+                    Ext.net.Bus.publish('App.Log', {msg:'Customer store loaded', isStart: false});
+                </script></text>))
+                // For some reason, the proxy is being set to "memory" when called from partial views.
+                // This is not necessary if the store is in the main view.
+                .CustomConfig(c => c.Add(new ConfigItem("proxy", null)))
+        )
+        .ColumnModel(
+            Html.X().Column().Text("Id").DataIndex("Id"),
+            Html.X().Column().Text("Name").DataIndex("Name").Flex(1),
+            Html.X().Column().Text("Phone").DataIndex("Phone")
+        )
+        .DockedItems(
+            Html.X().Toolbar().Items(
+                Html.X().Button()
+                    .ItemID("btnLoad")
+                    .Text("Load Orders")
+                    .Disabled(true)
+                    .Listeners(l => l.Click.Fn = "loadOrders")
+            )
+        )
+        .Listeners(l => l.SelectionChange.Handler = MvcUtils.StringifyScriptBlock(@<text><script type="text/javascript">
+            this.active = selected[0];
+            this.down('#btnLoad').setDisabled(!this.active);
+        </script></text>))
+        .HtmlBin(@<text>
+            <script>
+                var loadOrders = function () {
+                    var grid = this.up("gridpanel"),
+                        rec = grid.active,
+                        name = rec.get('Name'),
+                        owner = grid.ownerCt,
+                        orders;
+         
+        
+                    orders = rec.orders();
+
+                    if (orders.isLoading()) {
+                        Ext.net.Bus.publish('App.Log', {msg:'Begin loading orders: ' + rec.getId(), isStart: true});
+                    }
+
+                    orders.on('load', function () {
+                        Ext.net.Bus.publish('App.Log', {msg:'Order store loaded - ' + rec.getId(), isStart: false});
+                    });
+
+                    App.direct.RenderOrders(rec.getId(), owner.id, {
+                        success : function () {
+                            owner.getComponent(owner.items.getCount()-1).bindStore(orders);
+                            owner.getLayout().next();
+                        }
+                    });
+                };
+            </script>
+        </text>)
+)

@@ -1,0 +1,38 @@
+﻿@(
+    Html.X().Panel()
+        .Title("Loader log")
+        .TplWriteMode(TemplateWriteMode.Append)
+        .BodyPadding(5)
+        .Scrollable(ScrollableOption.Both)
+        .Flex(1)
+        .Tpl(Html.X().XTemplate().Html(@<text>
+            <div class="{cls}">[{now:date("H:i:s")}] - {msg}</div>
+        </text>))
+        .MessageBusListeners(new MessageBusListener()
+        {
+            Name = "App.Log",
+            Fn = "addLogMessage"
+        })
+        .HtmlBin(@<text>
+            <style>
+                .beforeload {
+                    color: blue;
+                }
+
+                .afterload {
+                    color: green;
+                }
+            </style>
+
+            <script>
+                var addLogMessage = function (name, data) {
+                    this.update({
+                        now: new Date(),
+                        cls: data.isStart ? 'beforeload' : 'afterload',
+                        msg: data.msg
+                    });
+                    this.body.scroll('b', 100000, true);
+                };
+            </script>
+        </text>)
+)

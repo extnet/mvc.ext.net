@@ -1,0 +1,41 @@
+﻿@(
+    Html.X().Model()
+        .Name("Customer")
+        .IDProperty("Id")
+        .Fields(
+            Html.X().ModelField().Name("Id").Type(ModelFieldType.Int),
+            Html.X().ModelField().Name("Name"),
+            Html.X().ModelField().Name("Phone")
+        )
+        .Associations(a => a.Add(
+            Html.X().HasManyAssociation()
+                .Model("Order")
+                .AutoLoad(true)
+                .PrimaryKey("Id")
+                .ForeignKey("CustomerId")
+        ))
+        .Proxy(p => p.Add(
+            Html.X().PageProxy().DirectFn("App.direct.GetCustomers")
+        ))
+)
+
+@(
+    Html.X().Model()
+        .Name("Order")
+        .IDProperty("Id")
+        .Fields(
+            Html.X().ModelField().Name("Id").Type(ModelFieldType.Int),
+            Html.X().ModelField().Name("CustomerId").Type(ModelFieldType.Int),
+            Html.X().ModelField().Name("Date").Type(ModelFieldType.Date)
+        )
+        .Associations(a => a.Add(
+            Html.X().HasManyAssociation()
+                .Model("OrderItem")
+                .AutoLoad(true)
+                .PrimaryKey("Id")
+                .ForeignKey("OrderId")
+        ))
+        .Proxy(p => p.Add(
+            Html.X().PageProxy().DirectFn("App.direct.GetOrders")
+        ))
+)
