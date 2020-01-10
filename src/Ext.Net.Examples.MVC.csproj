@@ -169,9 +169,7 @@
     <Compile Include="App_Start\ExtNetConfig.cs" />
     <Compile Include="Areas\Actions\Controllers\GridController.cs" />
     <Compile Include="Areas\Associations_HasMany\Associations_HasManyAreaRegistration.cs" />
-    <Compile Include="Areas\Associations_HasMany\Controllers\Lazy_LoadController.cs" />
     <Compile Include="Areas\Associations_HasMany\Controllers\SimpleController.cs" />
-    <Compile Include="Areas\Associations_HasMany\Models\Lazy_LoadModels.cs" />
     <Compile Include="Areas\Associations_HasMany\Models\Product.cs" />
     <Compile Include="Areas\Associations_HasMany\Models\User.cs" />
     <Compile Include="Areas\Actions\Actions.cs" />
@@ -610,7 +608,6 @@
     <Content Include="App_Readme\Transformer.NET\LICENSE.txt" />
     <Content Include="App_Readme\Transformer.NET\README.txt" />
     <Content Include="Areas\Actions\Views\Grid\config.xml" />
-    <Content Include="Areas\Associations_HasMany\Views\Lazy_Load\config.xml" />
     <Content Include="Areas\Associations_HasMany\Views\Simple\config.xml" />
     <Content Include="Areas\Actions\Views\Simple\config.xml" />
     <Content Include="Areas\Associations_HasOne\Views\Simple\config.xml" />
@@ -1031,10 +1028,6 @@
     <Content Include="Areas\Actions\Views\Simple\Index.cshtml" />
     <Content Include="Areas\Actions\Views\Web.config" />
     <Content Include="Areas\Actions\Views\Grid\Index.cshtml" />
-    <Content Include="Areas\Associations_HasMany\Views\Lazy_Load\Index.cshtml" />
-    <Content Include="Areas\Associations_HasMany\Views\Lazy_Load\CustomerGrid.cshtml" />
-    <Content Include="Areas\Associations_HasMany\Views\Lazy_Load\Logger.cshtml" />
-    <Content Include="Areas\Associations_HasMany\Views\Lazy_Load\Models.cshtml" />
     <None Include="Areas\DataView_Basic\Content\sencha-touch-examples.json" />
     <Content Include="Areas\Desktop\Views\Web.config" />
     <Content Include="Areas\Desktop\Views\Overview\Desktop.cshtml" />
