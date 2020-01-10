@@ -170,6 +170,7 @@
     <Compile Include="Areas\Actions\Controllers\GridController.cs" />
     <Compile Include="Areas\Associations_HasMany\Associations_HasManyAreaRegistration.cs" />
     <Compile Include="Areas\Associations_HasMany\Controllers\Nested_LoadingController.cs" />
+    <Compile Include="Areas\Associations_HasOne\Controllers\Simple_Lazy_LoadController.cs" />
     <Compile Include="Areas\Associations_HasMany\Controllers\SimpleController.cs" />
     <Compile Include="Areas\Associations_HasMany\Models\Product.cs" />
     <Compile Include="Areas\Associations_HasMany\Models\User.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Areas\Actions\Controllers\SimpleController.cs" />
     <Compile Include="Areas\Associations_HasOne\Associations_HasOneAreaRegistration.cs" />
     <Compile Include="Areas\Associations_HasOne\Controllers\SimpleController.cs" />
+    <Compile Include="Areas\Associations_HasOne\Models\Simple_Lazy_LoadModel.cs" />
     <Compile Include="Areas\Associations_HasOne\Models\Address.cs" />
     <Compile Include="Areas\Associations_HasOne\Models\Person.cs" />
     <Compile Include="Areas\Chart_Bar\Controllers\Basic_3DController.cs" />
@@ -624,6 +626,7 @@
     <Content Include="Areas\Associations_HasMany\Content\Nested_Loading\images\star_no.gif" />
     <Content Include="Areas\Associations_HasMany\Content\Nested_Loading\images\star_no.png" />
     <Content Include="Areas\Associations_HasMany\Content\Nested_Loading\Book.css" />
+    <Content Include="Areas\Associations_HasOne\Views\Simple_Lazy_Load\config.xml" />
     <Content Include="Areas\Associations_HasMany\Views\Simple\config.xml" />
     <Content Include="Areas\Actions\Views\Simple\config.xml" />
     <Content Include="Areas\Associations_HasOne\Views\Simple\config.xml" />
@@ -1046,6 +1049,7 @@
     <Content Include="Areas\Actions\Views\Grid\Index.cshtml" />
     <Content Include="Areas\Associations_HasMany\Views\Nested_Loading\Index.cshtml" />
     <Content Include="Areas\Associations_HasMany\Content\Nested_Loading\products.json" />
+    <Content Include="Areas\Associations_HasOne\Views\Simple_Lazy_Load\Index.cshtml" />
     <None Include="Areas\DataView_Basic\Content\sencha-touch-examples.json" />
     <Content Include="Areas\Desktop\Views\Web.config" />
     <Content Include="Areas\Desktop\Views\Overview\Desktop.cshtml" />
