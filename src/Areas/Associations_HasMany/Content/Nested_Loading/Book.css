@@ -1,0 +1,136 @@
+﻿.app-header {
+    background-color: #363f49;
+    background-image: linear-gradient(top,#3d4752,#2d353d);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 0 1px 0 #16191d;
+    border-bottom: 1px solid #16191d !important;
+    padding: 10px;
+}
+
+.x-nlg .app-header {
+    background: url(~/Areas/Associations_HasMany/Content/Nested_Loading/images/legacy/header-bg.png) repeat-x;
+}
+
+.sidebar-title {
+    color: #666;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 #FFF;
+    padding: 5px;
+}
+
+.sidebar-list {
+    background: #eaeaea;
+}
+
+    .sidebar-list .x-item-selected {
+        color: #fff;
+        font-weight: 700;
+        text-shadow: 0 1px 0 #4c5866;
+        background-color: #7b8b9d;
+        background-image: linear-gradient(top,#8493a4,#6f8194);
+        border-color: #7b8b9d;
+    }
+
+.x-nlg .sidebar-list .x-item-selected {
+    background: url(~/Areas/Associations_HasMany/Content/Nested_Loading/images/legacy/sidebar-selected-bg.png) repeat-x;
+}
+
+.item-ct table {
+    margin: 50px auto;
+}
+
+.item-ct .img {
+    padding-right: 10px;
+    margin-right: 10px;
+    border-right: 1px solid #cbc3c3;
+    text-align: right;
+}
+
+.item-ct .name {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 28px;
+    text-wrap: nowrap;
+}
+
+    .item-ct .name span {
+        color: #7b8b9d;
+    }
+
+.item-ct .author {
+    color: #333;
+    font-size: 18px;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+    .item-ct .author span {
+        color: #000;
+    }
+
+.product {
+    font-size: 12px;
+    border-color: #eaeaea;
+    border-style: solid;
+    border-width: 1px 0;
+    padding: 3px 10px;
+    cursor: pointer;
+}
+
+
+.review-list {
+    background-color: #b6bec8;
+    background-image: linear-gradient(top,#98a5b3,#a7b2be10%,#b6bec865%,#b7c0ca);
+    border: 1px solid #98a5b3;
+    color: #20262c;
+    font-size: 12px;
+    padding: 0;
+}
+
+    .review-list .review-title {
+        color: #f0f2f4;
+        font-size: 20px;
+        text-shadow: 0 1px 0 #98a5b3;
+        background-color: #363f49;
+        background-image: linear-gradient(top,#3d4752,#2d353d);
+        padding: 10px;
+    }
+
+        .review-list .review-title span {
+            color: #8190a1;
+        }
+
+    .review-list .review {
+        background: #f0f2f4;
+        line-height: 18px;
+        margin: 10px;
+        padding: 10px;
+    }
+
+        .review-list .review .title {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+            .review-list .review .title img {
+                position: relative;
+                top: 1px;
+                margin-right: 1px;
+            }
+
+        .review-list .review .author {
+            color: #363f49;
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+            .review-list .review .author span {
+                color: #20262c;
+                font-weight: 700;
+            }

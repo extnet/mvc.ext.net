@@ -1,0 +1,189 @@
+﻿@{
+    ViewBag.Title = "Nested Loading, HasMany Association - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <link href="~/Areas/Associations_HasMany/Content/Nested_Loading/Book.css" rel="stylesheet" />
+    <script>
+        var image_path_prefix = "@Url.Content("~/Areas/Associations_HasMany/Content/Nested_Loading/")";
+
+        var stars = function (values) {
+            var res = "",
+                extension = Ext.isIE6 ? 'gif' : 'png',
+                i = 0;
+
+            //print out the stars for each of the ratings
+            for (; i < values.rating; i++) {
+                res += '<img src="' + image_path_prefix + 'images/star.' + extension + '" />';
+            }
+
+            //print out transparent stars for the rest (up to 5)
+            while (i < 5) {
+                res += '<img src="' + image_path_prefix + 'images/star_no.' + extension + '" />';
+                i++;
+            }
+
+            return res;
+        };
+    </script>
+}
+
+@section example
+{
+    @(X.Model()
+        .Name("Books.Review")
+        .Fields(
+            X.ModelField().Name("author"),
+            X.ModelField().Name("rating"),
+            X.ModelField().Name("date"),
+            X.ModelField().Name("title"),
+            X.ModelField().Name("comment")
+        )
+    )
+
+    @(X.Model()
+        .Name("Books.Book")
+        .Fields(
+            X.ModelField().Name("id"),
+            X.ModelField().Name("name"),
+            X.ModelField().Name("author"),
+            X.ModelField().Name("detail"),
+            X.ModelField().Name("price"),
+            X.ModelField().Name("image")
+        )
+        .Associations(assoc => assoc.Add(X.HasManyAssociation()
+            .Model("Books.Review")
+            .Name("reviews")
+            .ForeignKey("book_id")
+        ))
+    )
+
+    @(X.Viewport()
+        .Layout(LayoutType.Fit)
+        .Items(
+            X.Panel()
+                .Border(false)
+                .LayoutConfig(lay => lay.Add(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch }))
+                .DockedItems(
+                    X.Component()
+                        .Dock(Dock.Top)
+                        .BaseCls("app-header")
+                        .Html("Loading Nested Data Example"),
+                    X.DataView()
+                        .Dock(Dock.Left)
+                        .Width(100)
+                        .Border(false)
+                        .Cls("sidebar-list")
+                        .ItemSelector(".product")
+                        .Tpl(X.XTemplate().Html(@<text>
+                            <div class="sidebar-title">Books</div>
+                            <tpl for=".">
+                                <div class="product">{name}</div>
+                            </tpl>
+                        </text>))
+                        .Store(X.Store()
+                            .ID("BooksStore")
+                            .ModelName("Books.Book")
+                            .Proxy(X.AjaxProxy().Url("~/Areas/Associations_HasMany/Content/Nested_Loading/products.json"))
+                            .Listeners(ltn => ltn.Load.BroadcastOnBus = "App.BooksLoad")
+                        )
+                        .Listeners(ltn => ltn.SelectionChange.BroadcastOnBus = "App.SelectionChange")
+                        .MessageBusListeners(mbl => mbl.Add(new MessageBusListener()
+                        {
+                            Name = "App.BooksLoad",
+                            Handler = MvcUtils.StringifyScriptBlock(@<text><script>
+                                data.records.length && this.getSelectionModel().select(data.records[0]);
+                            </script></text>),
+                            Delay = 500
+                        }))
+                )
+                .Items(
+                    X.Panel()
+                        .Cls("item-ct")
+                        .Flex(2)
+                        .Border(false)
+                        .Scrollable(ScrollableOption.Both)
+                        .LayoutConfig(lay => lay.Add(new HBoxLayoutConfig()
+                        {
+                            Align = HBoxAlign.Middle,
+                            Pack = BoxPack.Center
+                        }))
+                        .Items(
+                            X.Image()
+                                .MarginSpec("0 20 0 0")
+                                .Width(250)
+                                .Height(308)
+                                .ImageUrl("={Ext.BLANK_IMAGE_URL}")
+                                .LoadMask(msk => msk.ShowMask = true)
+                                .MessageBusListeners(mbl => mbl.Add(new MessageBusListener()
+                                {
+                                    Name = "App.SelectionChange",
+                                    Handler = MvcUtils.StringifyScriptBlock(@<text><script>
+                                        if (data.selected) {
+                                            this.setImageUrl(image_path_prefix + data.selected[0].get('image'));
+                                        }
+                                    </script></text>)
+                                })),
+                            X.Component()
+                                .Width(500)
+                                .Border(false)
+                                .Tpl(X.XTemplate().Html(@<text>
+                                    <div class="name">{name} <span>${price}</span></div>
+                                    <div class="author">By {author}</div>
+                                    <div class="detail">{detail}</div>
+                                </text>))
+                                .MessageBusListeners(mbl => mbl.Add(new MessageBusListener()
+                                {
+                                    Name = "App.SelectionChange",
+                                    Handler = MvcUtils.StringifyScriptBlock(@<text><script>
+                                        data.selected.length && this.update(data.selected[0].getData());
+                                    </script></text>)
+                                }))
+                        ),
+                    X.Panel()
+                        .Border(false)
+                        .Flex(1)
+                        .Layout(LayoutType.Card)
+                        .DockedItems(
+                            X.Component()
+                                .Dock(Dock.Top)
+                                .BaseCls("app-header")
+                                .Html("Reviews")
+                        )
+                        .Items(
+                            X.DataView()
+                                .Border(false)
+                                .Cls("review-list")
+                                .Scrollable(ScrollableOption.Both)
+                                .ItemSelector(".review")
+                                .Tpl(X.XTemplate()
+                                    .Html(@<text>
+                                        <tpl for=".">
+                                            <div class="review {[xindex === 1 ? "first-review " : ""]}">
+                                                <div class="title">{title} {[this.stars(values)]}</div>
+                                                <div class="author">By <span>{author}</span> - {date}</div>
+                                                <div class="comment">{comment}</div>
+                                            </div>
+                                        </tpl>
+                                    </text>)
+                                    .Functions(fn => fn.Add(new JFunction() { Name = "stars", Fn = "stars" }))
+                                )
+                                .Store(X.Store()
+                                    .ID("ReviewStore")
+                                    .ModelName("Books.Review")
+                                )
+                                .MessageBusListeners(mbl => mbl.Add(new MessageBusListener()
+                                {
+                                    Name = "App.SelectionChange",
+                                    Handler = MvcUtils.StringifyScriptBlock(@<text><script>
+                                        data.selected.length && this.bindStore(data.selected[0].reviews());
+                                    </script></text>)
+                                }))
+                        )
+                )
+        )
+    )
+}
