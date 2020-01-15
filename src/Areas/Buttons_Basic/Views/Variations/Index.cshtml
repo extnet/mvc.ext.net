@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Button Variations - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .x-btn-default-large .add {
+            background-image: url(@Url.Content("~/Areas/Buttons_Basic/Content/images/variations/add32.gif")) !important;
+        }
+        .x-btn-default-small .add {
+            background-image: url(@Url.Content("~/Areas/Buttons_Basic/Content/images/variations/add16.gif")) !important;
+        }
+        .x-btn-default-medium .add {
+            background-image: url(@Url.Content("~/Areas/Buttons_Basic/Content/images/variations/add24.gif")) !important;
+        }
+
+        h2 {
+            color:#083772 !important;
+            margin: 20px 0 0 !important;
+            padding: 5px;
+            background:#eee;
+            width:400px;
+        }
+
+        h3 {
+            font-weight:normal !important;
+            margin:10px;
+        }
+
+        .x-btn {
+            margin-left:10px;
+        }
+
+        .floater{
+            float:left;
+        }
+    </style>
+}
+@section example
+{
+    @X.Component().ID("Buttons")
+}
