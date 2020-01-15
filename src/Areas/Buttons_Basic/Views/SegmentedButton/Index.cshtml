@@ -1,0 +1,153 @@
+﻿@{
+    ViewBag.Title = "SegmentedButton Variations - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Segmented buttons</h1>
+
+    <p>
+        This example shows how to use segmented buttons. Segmented buttons are just containers
+        with regular buttons inside, with some special styling and options added. By default,
+        all the child buttons will be part of a toggleGroup, but this behavior can be customized
+        using the <code>allowToggle</code> and <code>allowMultiple</code> config options.
+    </p>
+
+    @(X.Container()
+        .Layout(LayoutType.Form)
+        .Items(
+            X.FieldContainer()
+                .FieldLabel("Toggle Group")
+                .Items(
+                    X.SegmentedButton()
+                        .Items(
+                            X.Button().Text("Option One"),
+                            X.Button().Text("Option Two").Pressed(true),
+                            X.Button().Text("Option Three")
+                        )
+                ),
+            X.FieldContainer()
+                .FieldLabel("Multiple Toggle")
+                .Items(
+                    X.SegmentedButton()
+                        .AllowMultiple(true)
+                        .Items(
+                            X.Button().Text("Option One"),
+                            X.Button().Text("Option Two"),
+                            X.Button().Text("Option Three")
+                        )
+                        .Values(new [] {"0", "2"})
+                ),
+            X.FieldContainer()
+                .FieldLabel("No Toggle")
+                .Items(
+                    X.SegmentedButton()
+                        .AllowToggle(false)
+                        .Items(
+                            X.Button().Text("Option One"),
+                            X.Button().Text("Option Two"),
+                            X.Button().Text("Option Three")
+                        )
+                ),
+            X.FieldContainer()
+                .FieldLabel("Icons and Arrows")
+                .Items(
+                    X.SegmentedButton()
+                        .AllowToggle(false)
+                        .Items(
+                            X.Button().Text("Button").Icon(Icon.Add),
+                            X.Button().Text("Menu Button").Menu(X.Menu()
+                                .Items(
+                                    X.MenuItem().Text("Menu Item 1"),
+                                    X.MenuItem().Text("Menu Item 2"),
+                                    X.MenuItem().Text("Menu Item 3")
+                                )
+                            ),
+                            X.SplitButton().Text("Split Button").Menu(X.Menu()
+                                .Items(
+                                    X.MenuItem().Text("Menu Item 1"),
+                                    X.MenuItem().Text("Menu Item 2"),
+                                    X.MenuItem().Text("Menu Item 3")
+                                )
+                            )
+                        )
+                )
+        )
+    )
+
+    <h2>Vertical segmented buttons</h2>
+
+    <p>Aligning segmented buttons vertically is a simple as setting the <code>vertical</code> config to <code>true</code>. </p>
+
+    @(X.Container()
+        .Layout(LayoutType.Column)
+        .Defaults(d => {
+            d.Add(X.Parameter().Name("labelAlign").Value("top"));
+            d.Add(X.Parameter().Name("margin").Value("0 20 0 0"));
+        })
+        .Items(
+            X.FieldContainer()
+                .FieldLabel("Toggle Group")
+                .Items(
+                    X.SegmentedButton()
+                        .Vertical(true)
+                        .Items(
+                            X.Button().Text("Option One"),
+                            X.Button().Text("Option Two").Pressed(true),
+                            X.Button().Text("Option Three")
+                        )
+                ),
+            X.FieldContainer()
+                .FieldLabel("Multiple Toggle")
+                .Items(
+                    X.SegmentedButton()
+                        .AllowMultiple(true)
+                        .Values(new [] { "0", "2" })
+                        .Vertical(true)
+                        .Items(
+                            X.Button().Text("Option One"),
+                            X.Button().Text("Option Two"),
+                            X.Button().Text("Option Three")
+                        )
+                ),
+            X.FieldContainer()
+                .FieldLabel("No Toggle")
+                .Items(
+                    X.SegmentedButton()
+                        .AllowToggle(false)
+                        .Vertical(true)
+                        .Items(
+                            X.Button().Text("Option One"),
+                            X.Button().Text("Option Two"),
+                            X.Button().Text("Option Three")
+                        )
+                ),
+            X.FieldContainer()
+                .FieldLabel("Icons and Arrows")
+                .Items(
+                    X.SegmentedButton()
+                        .AllowToggle(false)
+                        .Vertical(true)
+                        .Items(
+                            X.Button().Text("Button").Icon(Icon.Add),
+                            X.Button().Text("Menu Button").Menu(X.Menu()
+                                .Items(
+                                    X.MenuItem().Text("Menu Item 1"),
+                                    X.MenuItem().Text("Menu Item 2"),
+                                    X.MenuItem().Text("Menu Item 3")
+                                )
+                            ),
+                            X.SplitButton().Text("Split Button").Menu(X.Menu()
+                                .Items(
+                                    X.MenuItem().Text("Menu Item 1"),
+                                    X.MenuItem().Text("Menu Item 2"),
+                                    X.MenuItem().Text("Menu Item 3")
+                                )
+                            )
+                        )
+                )
+        )
+    )
+}
