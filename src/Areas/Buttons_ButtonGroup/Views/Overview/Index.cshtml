@@ -1,0 +1,657 @@
+﻿@{
+    ViewBag.Title = "Toolbar ButtonGroups - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <style>
+        .add32 {
+            background-image : url(@Url.Content("~/Areas/Buttons_Basic/Content/images/variations/add32.gif")) !important;
+        }
+
+        .add16 {
+            background-image : url(@Url.Content("~/Areas/Buttons_Basic/Content/images/variations/add16.gif")) !important;
+        }
+
+        .add24 {
+            background-image : url(@Url.Content("~/Areas/Buttons_Basic/Content/images/variations/add24.gif")) !important;
+        }
+    </style>
+
+}
+@section example
+{
+    @(X.Panel()
+        .Title("Standard")
+        .MinWidth(500)
+        .Height(250)
+        .StyleSpec("magin-top:15px")
+        .BodyPadding(10)
+        .Scrollable(ScrollableOption.Both)
+        .TopBar(X.Toolbar().Items(
+            X.SplitButton()
+                .Text("Menu Button")
+                .IconCls("add16")
+                .Menu(X.Menu().Items(
+                    X.MenuItem().Text("Menu Button 1")
+                )),
+            X.SplitButton()
+                .Text("Cut")
+                .IconCls("add16")
+                .Menu(X.Menu().Items(
+                    X.MenuItem().Text("Cut Menu Item")
+                )),
+            X.Button()
+                .Text("Copy")
+                .IconCls("add16"),
+            X.Button()
+                .Text("Paste")
+                .IconCls("add16")
+                .Menu(X.Menu().Items(
+                    X.MenuItem().Text("Paste Menu Item")
+                )),
+            X.ToolbarSeparator(),
+            X.Button()
+                .Text("Format")
+                .IconCls("add16")
+        ))
+    )
+
+    @(X.Panel()
+        .Title("Multiple Columns with bottom title")
+        .MinWidth(500)
+        .Height(250)
+        .StyleSpec("margin-top:15px")
+        .BodyPadding(10)
+        .Scrollable(ScrollableOption.Both)
+        .TopBar(X.Toolbar().Items(
+            X.ButtonGroup()
+                .Title("Clipboard")
+                .HeaderPosition(Direction.Bottom)
+                .Columns(2)
+                .Items(
+                    X.SplitButton()
+                        .Text("Menu Button")
+                        .IconCls("add16")
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Menu Button 1")
+                        )),
+                    X.SplitButton()
+                        .Text("Cut")
+                        .IconCls("add16")
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Cut Menu Item")
+                        )),
+                    X.Button()
+                        .Text("Copy")
+                        .IconCls("add16"),
+                    X.Button()
+                        .Text("Paste")
+                        .IconCls("add16")
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Paste Menu Item")
+                        )),
+                    X.Button()
+                        .Text("Format")
+                        .IconCls("add16")
+                ),
+            X.ButtonGroup()
+                .Title("Other Actions")
+                .HeaderPosition(Direction.Bottom)
+                .Columns(2)
+                .Items(
+                    X.SplitButton()
+                        .Text("Menu Button")
+                        .IconCls("add16")
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Menu Button 1")
+                        )),
+                    X.SplitButton()
+                        .Text("Cut")
+                        .IconCls("add16")
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Cut Menu Item")
+                        )),
+                    X.Button()
+                        .Text("Copy")
+                        .IconCls("add16"),
+                    X.Button()
+                        .Text("Paste")
+                        .IconCls("add16")
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Paste Menu Item")
+                        )),
+                    X.Button()
+                        .Text("Format")
+                        .IconCls("add16")
+                )
+        ))
+    )
+
+    @(X.Panel()
+        .Title("Multiple Columns (No Titles, Double Stack)")
+        .MinWidth(500)
+        .Height(250)
+        .StyleSpec("margin-top:15px")
+        .BodyPadding(10)
+        .Scrollable(ScrollableOption.Both)
+        .TopBar(X.Toolbar().Items(
+            X.ButtonGroup()
+                .Columns(3)
+                .Items(
+                    X.SplitButton()
+                        .Text("Menu Button")
+                        .IconCls("add16")
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Menu Button 1")
+                        )),
+                    X.SplitButton()
+                        .Text("Cut")
+                        .IconCls("add16")
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Cut Menu Item")
+                        )),
+                    X.Button()
+                        .Text("Copy")
+                        .IconCls("add16"),
+                    X.Button()
+                        .Text("Paste")
+                        .IconCls("add16")
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Paste Menu Item")
+                        )),
+                    X.Button()
+                        .Text("Format")
+                        .IconCls("add16")
+                ),
+            X.ButtonGroup()
+                .Columns(3)
+                .Items(
+                    X.SplitButton()
+                        .Text("Menu Button")
+                        .IconCls("add16")
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Menu Button 1")
+                        )),
+                    X.SplitButton()
+                        .Text("Cut")
+                        .IconCls("add16")
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Cut Menu Item")
+                        )),
+                    X.Button()
+                        .Text("Copy")
+                        .IconCls("add16"),
+                    X.Button()
+                        .Text("Paste")
+                        .IconCls("add16")
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Paste Menu Item")
+                        )),
+                    X.Button()
+                        .Text("Format")
+                        .IconCls("add16")
+                )
+        ))
+    )
+
+    @(X.Panel()
+        .Title("Mix and Match Icon Sizes")
+        .MinWidth(500)
+        .Height(250)
+        .StyleSpec("margin-top:15px")
+        .BodyPadding(10)
+        .Scrollable(ScrollableOption.Both)
+        .TopBar(X.Toolbar().Items(
+            X.ButtonGroup()
+                .Title("Clipboard")
+                .Columns(3)
+                .Items(
+                    X.Button()
+                        .Text("Paste")
+                        .IconCls("add32")
+                        .Scale(ButtonScale.Large)
+                        .IconAlign(IconAlign.Top)
+                        .Cls("x-btn-as-arrow")
+                        .RowSpan(3),
+                    X.SplitButton()
+                        .Text("Menu Button")
+                        .IconCls("add32")
+                        .Scale(ButtonScale.Large)
+                        .IconAlign(IconAlign.Top)
+                        .ArrowAlign(ArrowAlign.Bottom)
+                        .RowSpan(3)
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Menu Button 1")
+                        )),
+                    X.SplitButton()
+                        .Text("Cut")
+                        .IconCls("add16")
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Cut Menu Item")
+                        )),
+                    X.Button()
+                        .Text("Copy")
+                        .IconCls("add16"),
+                    X.Button()
+                        .Text("Format")
+                        .IconCls("add16")
+                ),
+            X.ButtonGroup()
+                .Title("Other Actions")
+                .Columns(3)
+                .Items(
+                    X.Button()
+                        .Text("Paste")
+                        .IconCls("add32")
+                        .Scale(ButtonScale.Large)
+                        .IconAlign(IconAlign.Top)
+                        .Cls("x-btn-as-arrow")
+                        .RowSpan(3),
+                    X.SplitButton()
+                        .Text("Menu Button")
+                        .IconCls("add32")
+                        .Scale(ButtonScale.Large)
+                        .IconAlign(IconAlign.Top)
+                        .ArrowAlign(ArrowAlign.Bottom)
+                        .RowSpan(3)
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Menu Button 1")
+                        )),
+                    X.SplitButton()
+                        .Text("Cut")
+                        .IconCls("add16")
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Cut Menu Item")
+                        )),
+                    X.Button()
+                        .Text("Copy")
+                        .IconCls("add16"),
+                    X.Button()
+                        .Text("Format")
+                        .IconCls("add16")
+                )
+        ))
+    )
+
+    @(X.Panel()
+        .Title("Medium Icons, Arrows to the Bottom")
+        .MinWidth(500)
+        .Height(250)
+        .StyleSpec("margin-top:15px")
+        .BodyPadding(10)
+        .Scrollable(ScrollableOption.Both)
+        .TopBar(X.Toolbar().Items(
+            X.ButtonGroup()
+                .Title("Clipboard")
+                .Defaults(dfl =>
+                {
+                    dfl.Add(X.Parameter().Name("scale").Value("medium"));
+                    dfl.Add(X.Parameter().Name("iconAlign").Value("top"));
+                })
+                .Items(
+                    X.SplitButton()
+                        .Text("Menu Button")
+                        .IconCls("add24")
+                        .ArrowAlign(ArrowAlign.Bottom)
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Menu Button 1")
+                        )),
+                    X.SplitButton()
+                        .Text("Cut")
+                        .IconCls("add24")
+                        .ArrowAlign(ArrowAlign.Bottom)
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Cut Menu Item")
+                        )),
+                    X.Button()
+                        .Text("Copy")
+                        .IconCls("add24")
+                        .Cls("x-btn-as-arrow"),
+                    X.Button()
+                        .Text("Paste")
+                        .IconCls("add24")
+                        .ArrowAlign(ArrowAlign.Bottom)
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Paste Menu Item")
+                        )),
+                    X.Button()
+                        .Text("Format<br/>Stuff")
+                        .IconCls("add24")
+                ),
+            X.ButtonGroup()
+                .Title("Other Actions")
+                .Defaults(dfl =>
+                {
+                    dfl.Add(X.Parameter().Name("scale").Value("medium"));
+                    dfl.Add(X.Parameter().Name("iconAlign").Value("top"));
+                })
+                .Items(
+                    X.SplitButton()
+                        .Text("Menu Button")
+                        .IconCls("add24")
+                        .ArrowAlign(ArrowAlign.Bottom)
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Menu Button 1")
+                        )),
+                    X.SplitButton()
+                        .Text("Cut")
+                        .IconCls("add24")
+                        .ArrowAlign(ArrowAlign.Bottom)
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Cut Menu Item")
+                        )),
+                    X.Button()
+                        .Text("Copy")
+                        .IconCls("add24")
+                        .Cls("x-btn-as-arrow"),
+                    X.Button()
+                        .Text("Paste")
+                        .IconCls("add24")
+                        .ArrowAlign(ArrowAlign.Bottom)
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Paste Menu Item")
+                        )),
+                    X.Button()
+                        .Text("Format")
+                        .IconCls("add24")
+                        .Cls("x-btn-as-arrow")
+                )
+        ))
+    )
+
+    @(X.Panel()
+        .Title("Medium Icons, Text and Arrows to the Right")
+        .MinWidth(500)
+        .Height(250)
+        .StyleSpec("margin-top:15px")
+        .BodyPadding(10)
+        .Scrollable(ScrollableOption.Both)
+        .TopBar(X.Toolbar().Items(
+            X.ButtonGroup()
+                .Items(
+                    X.Button()
+                        .Text("Cut")
+                        .IconCls("add24")
+                        .Scale(ButtonScale.Medium),
+                    X.Button()
+                        .Text("Copy")
+                        .IconCls("add24")
+                        .Scale(ButtonScale.Medium),
+                    X.Button()
+                        .Text("Paste")
+                        .IconCls("add24")
+                        .Scale(ButtonScale.Medium)
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Paste Menu Item")
+                        ))
+                ),
+            X.ButtonGroup()
+                .Layout(LayoutType.Table)
+                .Items(
+                    X.Button()
+                        .Text("Format")
+                        .IconCls("add24")
+                        .Scale(ButtonScale.Medium)
+                )
+        ))
+    )
+
+    @(X.Panel()
+        .Title("Small Icons, Text and Arrows to the Right")
+        .MinWidth(500)
+        .Height(250)
+        .StyleSpec("margin-top:15px")
+        .BodyPadding(10)
+        .Scrollable(ScrollableOption.Both)
+        .TopBar(X.Toolbar().Items(
+            X.ButtonGroup()
+                .Items(
+                    X.Button()
+                        .Text("Cut")
+                        .IconCls("add16"),
+                    X.Button()
+                        .Text("Copy")
+                        .IconCls("add16"),
+                    X.Button()
+                        .Text("Paste")
+                        .IconCls("add16")
+                        .Menu(X.Menu().Items(
+                            X.MenuItem().Text("Paste Menu Item")
+                        ))
+                ),
+            X.ButtonGroup()
+                .Items(
+                    X.Button()
+                        .Text("Format")
+                        .IconCls("add16")
+                )
+        ))
+    )
+
+    @(X.TabPanel()
+        .Height(300)
+        .MinWidth(500)
+        .StyleSpec("margin-top: 15px")
+        .Items(
+            X.Panel()
+                .Title("Home")
+                .TopBar(X.Toolbar().Items(
+                    X.ButtonGroup()
+                        .Title("Clipboard")
+                        .Columns(3)
+                        .Items(
+                            X.Button()
+                                .Text("Paste")
+                                .IconCls("add32")
+                                .Scale(ButtonScale.Large)
+                                .IconAlign(IconAlign.Top)
+                                .Cls("x-btn-as-arrow")
+                                .RowSpan(3),
+                            X.SplitButton()
+                                .Text("Menu Button")
+                                .IconCls("add32")
+                                .Scale(ButtonScale.Large)
+                                .IconAlign(IconAlign.Top)
+                                .ArrowAlign(ArrowAlign.Bottom)
+                                .RowSpan(3)
+                                .Menu(X.Menu().Items(
+                                    X.MenuItem().Text("Menu Button 1")
+                                )),
+                            X.SplitButton()
+                                .Text("Cut")
+                                .IconCls("add16")
+                                .Menu(X.Menu().Items(
+                                    X.MenuItem().Text("Cut Menu Item")
+                                )),
+                            X.Button()
+                                .Text("Copy")
+                                .IconCls("add16"),
+                            X.Button()
+                                .Text("Format")
+                                .IconCls("add16")
+                        ),
+                    X.ButtonGroup()
+                        .Title("Other Actions")
+                        .Columns(3)
+                        .Items(
+                            X.Button()
+                                .Text("Paste")
+                                .IconCls("add32")
+                                .Scale(ButtonScale.Large)
+                                .IconAlign(IconAlign.Top)
+                                .Cls("x-btn-as-arrow")
+                                .RowSpan(3),
+                            X.SplitButton()
+                                .Text("Menu Button")
+                                .IconCls("add32")
+                                .Scale(ButtonScale.Large)
+                                .IconAlign(IconAlign.Top)
+                                .ArrowAlign(ArrowAlign.Bottom)
+                                .RowSpan(3)
+                                .Menu(X.Menu().Items(
+                                    X.MenuItem().Text("Menu Button 1")
+                                )),
+                            X.SplitButton()
+                                .Text("Cut")
+                                .IconCls("add16")
+                                .Menu(X.Menu().Items(
+                                    X.MenuItem().Text("Cut Menu Item")
+                                )),
+                            X.Button()
+                                .Text("Copy")
+                                .IconCls("add16"),
+                            X.Button()
+                                .Text("Format")
+                                .IconCls("add16")
+                        )
+                )),
+            X.Panel()
+                .Title("Insert")
+                .TopBar(X.Toolbar().Items(
+                    X.ButtonGroup()
+                        .Title("Clipboard")
+                        .Columns(3)
+                        .Items(
+                            X.Button()
+                                .Text("Paste")
+                                .IconCls("add32")
+                                .Scale(ButtonScale.Large)
+                                .IconAlign(IconAlign.Top)
+                                .Cls("x-btn-as-arrow")
+                                .RowSpan(3),
+                            X.SplitButton()
+                                .Text("Menu Button")
+                                .IconCls("add32")
+                                .Scale(ButtonScale.Large)
+                                .IconAlign(IconAlign.Top)
+                                .ArrowAlign(ArrowAlign.Bottom)
+                                .RowSpan(3)
+                                .Menu(X.Menu().Items(
+                                    X.MenuItem().Text("Menu Button 1")
+                                )),
+                            X.SplitButton()
+                                .Text("Cut")
+                                .IconCls("add16")
+                                .Menu(X.Menu().Items(
+                                    X.MenuItem().Text("Cut Menu Item")
+                                )),
+                            X.Button()
+                                .Text("Copy")
+                                .IconCls("add16"),
+                            X.Button()
+                                .Text("Format")
+                                .IconCls("add16")
+                        ),
+                    X.ButtonGroup()
+                        .Title("Other Actions")
+                        .Columns(3)
+                        .Items(
+                            X.Button()
+                                .Text("Paste")
+                                .IconCls("add32")
+                                .Scale(ButtonScale.Large)
+                                .IconAlign(IconAlign.Top)
+                                .Cls("x-btn-as-arrow")
+                                .RowSpan(3),
+                            X.SplitButton()
+                                .Text("Menu Button")
+                                .IconCls("add32")
+                                .Scale(ButtonScale.Large)
+                                .IconAlign(IconAlign.Top)
+                                .ArrowAlign(ArrowAlign.Bottom)
+                                .RowSpan(3)
+                                .Menu(X.Menu().Items(
+                                    X.MenuItem().Text("Menu Button 1")
+                                )),
+                            X.SplitButton()
+                                .Text("Cut")
+                                .IconCls("add16")
+                                .Menu(X.Menu().Items(
+                                    X.MenuItem().Text("Cut Menu Item")
+                                )),
+                            X.Button()
+                                .Text("Copy")
+                                .IconCls("add16"),
+                            X.Button()
+                                .Text("Format")
+                                .IconCls("add16")
+                        )
+                )),
+            X.Panel()
+                .Title("Page Layout")
+                .TopBar(X.Toolbar().Items(
+                    X.ButtonGroup()
+                        .Title("Clipboard")
+                        .Columns(3)
+                        .Items(
+                            X.Button()
+                                .Text("Paste")
+                                .IconCls("add32")
+                                .Scale(ButtonScale.Large)
+                                .IconAlign(IconAlign.Top)
+                                .Cls("x-btn-as-arrow")
+                                .RowSpan(3),
+                            X.SplitButton()
+                                .Text("Menu Button")
+                                .IconCls("add32")
+                                .Scale(ButtonScale.Large)
+                                .IconAlign(IconAlign.Top)
+                                .ArrowAlign(ArrowAlign.Bottom)
+                                .RowSpan(3)
+                                .Menu(X.Menu().Items(
+                                    X.MenuItem().Text("Menu Button 1")
+                                )),
+                            X.SplitButton()
+                                .Text("Cut")
+                                .IconCls("add16")
+                                .Menu(X.Menu().Items(
+                                    X.MenuItem().Text("Cut Menu Item")
+                                )),
+                            X.Button()
+                                .Text("Copy")
+                                .IconCls("add16"),
+                            X.Button()
+                                .Text("Format")
+                                .IconCls("add16")
+                        ),
+                    X.ButtonGroup()
+                        .Title("Other Actions")
+                        .Columns(3)
+                        .Items(
+                            X.Button()
+                                .Text("Paste")
+                                .IconCls("add32")
+                                .Scale(ButtonScale.Large)
+                                .IconAlign(IconAlign.Top)
+                                .Cls("x-btn-as-arrow")
+                                .RowSpan(3),
+                            X.SplitButton()
+                                .Text("Menu Button")
+                                .IconCls("add32")
+                                .Scale(ButtonScale.Large)
+                                .IconAlign(IconAlign.Top)
+                                .ArrowAlign(ArrowAlign.Bottom)
+                                .RowSpan(3)
+                                .Menu(X.Menu().Items(
+                                    X.MenuItem().Text("Menu Button 1")
+                                )),
+                            X.SplitButton()
+                                .Text("Cut")
+                                .IconCls("add16")
+                                .Menu(X.Menu().Items(
+                                    X.MenuItem().Text("Cut Menu Item")
+                                )),
+                            X.Button()
+                                .Text("Copy")
+                                .IconCls("add16"),
+                            X.Button()
+                                .Text("Format")
+                                .IconCls("add16")
+                        )
+                ))
+        )
+    )
+}

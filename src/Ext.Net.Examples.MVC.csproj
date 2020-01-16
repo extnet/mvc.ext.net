@@ -185,6 +185,8 @@
     <Compile Include="Areas\Buttons_Basic\Controllers\SegmentedButtonController.cs" />
     <Compile Include="Areas\Buttons_Basic\Controllers\LoadingStateController.cs" />
     <Compile Include="Areas\Buttons_Basic\Models\VariationsModel.cs" />
+    <Compile Include="Areas\Buttons_ButtonGroup\Buttons_ButtonGroupAreaRegistration.cs" />
+    <Compile Include="Areas\Buttons_ButtonGroup\Controllers\OverviewController.cs" />
     <Compile Include="Areas\Chart_Bar\Controllers\Basic_3DController.cs" />
     <Compile Include="Areas\Chart_Misc\Chart_MiscAreaRegistration.cs" />
     <Compile Include="Areas\Chart_Misc\Controllers\CaptionsController.cs" />
@@ -650,6 +652,7 @@
     <Content Include="Areas\Buttons_Basic\Views\ImageButton\config.xml" />
     <Content Include="Areas\Buttons_Basic\Views\HyperlinkButton\config.xml" />
     <Content Include="Areas\Buttons_Basic\Views\Overview\config.xml" />
+    <Content Include="Areas\Buttons_ButtonGroup\Views\Overview\config.xml" />
     <Content Include="Areas\Calendar_Overview\Content\css\main.css" />
     <Content Include="Areas\Calendar_Overview\Content\js\common.js" />
     <Content Include="Areas\Calendar_Overview\Views\Basic\config.xml" />
@@ -1063,6 +1066,8 @@
     <Content Include="Areas\Buttons_Basic\Views\LoadingState\Index.cshtml" />
     <Content Include="Areas\Buttons_Basic\Views\SegmentedButton\Index.cshtml" />
     <Content Include="Areas\Buttons_Basic\Views\Variations\Index.cshtml" />
+    <Content Include="Areas\Buttons_ButtonGroup\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\Buttons_ButtonGroup\Views\Web.config" />
     <None Include="Areas\DataView_Basic\Content\sencha-touch-examples.json" />
     <Content Include="Areas\Desktop\Views\Web.config" />
     <Content Include="Areas\Desktop\Views\Overview\Desktop.cshtml" />
