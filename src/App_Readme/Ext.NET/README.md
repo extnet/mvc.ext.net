@@ -1,7 +1,7 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
-| Release Date | 2019-09-16 |
-| Current Version | 5.0.0 |
+| Release Date | 2020-01-26 |
+| Current Version | 5.1.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
 
 ## Contents
@@ -93,7 +93,7 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
       <dependentAssembly>
         <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" />
-        <bindingRedirect oldVersion="0.0.0.0-12.0.2.0" newVersion="12.0.2.0" />
+        <bindingRedirect oldVersion="0.0.0.0-12.0.3.0" newVersion="12.0.3.0" />
       </dependentAssembly>
       <dependentAssembly>
         <assemblyIdentity name="Ext.Net.Utilities" publicKeyToken="2c34ac34702a3c23" />
@@ -221,4 +221,4 @@ This `IgnoreRoute` is automatically inserted if using the NuGet package [install
 1. [Json.NET](http://json.net/) provided by James Newton-King ([LICENSE](https://github.com/extnet/Premium/blob/master/.build/licenses/Newtonsoft.Json.md))
 1. [Ext JS](http://www.sencha.com/products/js/) JavaScript Library with Commercial License provided by Sencha, Inc. ([LICENSE](https://github.com/extnet/Premium/blob/master/.build/licenses/Sencha.md))
 
-Copyright 2008-2019 [Object.NET](https://object.net/), Inc., All rights reserved.
+Copyright 2008-2020 [Object.NET](https://object.net/), Inc., All rights reserved.

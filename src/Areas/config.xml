@@ -7,8 +7,26 @@
     <folder name="Kitchen_Sink_Forms" />
   </order>
 
+  <new version="5.1.0">
+    <folder name="Miscellaneous_Responsive\Views\Basic" />
+    <folder name="Actions\Views\Simple" />
+    <folder name="Actions\Views\Grid" />
+    <folder name="Associations_HasMany\Views\Lazy_Load" />
+    <folder name="Associations_HasMany\Views\Nested_Loading" />
+    <folder name="Associations_HasOne\Views\Simple_Lazy_Load" />
+    <folder name="Buttons_Basic\Views\LoadingState" />
+    <folder name="Buttons_Basic\Views\SegmentedButton" />
+    <folder name="Buttons_Basic\Views\Variations" />
+    <folder name="Buttons_ButtonGroup\Views\Overview" />
+  </new>
+
+  <updated version="5.1.0">
+    <folder name="TreePanel_List\Views\Overview" />
+  </updated>
+
+  <!--
   <updated version="5.0.0">
-    <!-- Too many examples tagged with 'updated'. It was decided to leave them
+    <!- Too many examples tagged with 'updated'. It was decided to leave them
          without the tag.
     <folder name="Draw_Basic\Views\Rotate_Text" />
     <folder name="Chart_Scatter\Views\Basic" />
@@ -28,12 +46,15 @@
     <folder name="GridPanel_Plugins\Views\GroupingSummary" />
     <folder name="GridPanel_Infinite_Scrolling\Views\Buffered_Scrolling" />
     <folder name="Getting_Started\Views\Component_Overview" />
-    -->
+    ->
   </updated>
+  -->
 
+  <!--
   <new version="5.0.0">
     <folder name="Miscellaneous_Responsive\Views\Basic" />
   </new>
+  -->
 
   <!-- keeping new ones for version 4.8.0 because they're real fresh. -->
   <!--

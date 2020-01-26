@@ -1,5 +1,29 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2020-01-26 |
+| Current Version | 5.1.0 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A5.1.0) on GitHub |
+
+#### FEATURES
+
+1. [[#1689](https://github.com/extnet/Ext.NET/issues/1689)] Upgrade NuGet Packages
+
+#### DEFECTS
+
+1. [[#1687](https://github.com/extnet/Ext.NET/issues/1687)] Group expand issues on GridPanel with locked columns
+2. [[#1686](https://github.com/extnet/Ext.NET/issues/1686)] Ext.Net.SliderField + Material theme: labels mispositioned
+3. [[#1683](https://github.com/extnet/Ext.NET/issues/1683)] Inconsistent ComboBox highlight-select with TypeAhead + AnyMatch
+4. [[#1681](https://github.com/extnet/Ext.NET/issues/1681)] TabCloseMenu: onHideMenu override breaking intended behavior
+
+#### BREAKING CHANGES
+
+None
+
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2019-09-16 |
 | Current Version | 5.0.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A5.0.0) on GitHub |
