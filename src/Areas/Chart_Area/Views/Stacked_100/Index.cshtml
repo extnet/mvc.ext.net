@@ -1,0 +1,117 @@
+﻿@model object[]
+
+@{
+    ViewBag.Title = "Area Stacked 100% - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+    var dataSeries = new string[] { "IE", "Chrome", "Firefox", "Safari", "Opera", "Other" };
+}
+
+@section example
+{
+    <h1>Area - Stacked 100%</h1>
+
+    <p>100% stacked area are multi-series area charts where categories are stacked (percentage
+    values) on top of each other, with an additional category 'Others' that is used to sum
+    up the various categories for each series to a perfect 100%.</p>
+
+    @(
+        X.Panel().Width(850).Height(650).Layout(LayoutType.Fit).Items(
+            X.CartesianChart()
+                .ID("Chart1")
+                .InsetPadding(50)
+                .Animation(false)
+                .LegendConfig(
+                    X.ChartLegend().Dock(Dock.Bottom)
+                )
+                .Store(X.Store()
+                    .Model(X.Model()
+                        .Fields(
+                            X.ModelField().Name("Date").Type(ModelFieldType.Date),
+                            X.ModelField().Name("IE"),
+                            X.ModelField().Name("Chrome"),
+                            X.ModelField().Name("Firefox"),
+                            X.ModelField().Name("Safari"),
+                            X.ModelField().Name("Opera"),
+                            X.ModelField().Name("Other")
+                        )
+                    )
+                    .DataSource(Model)
+                )
+                .Items(
+                    X.TextSprite()
+                        .Text("Area Charts - 100% Stacked Area")
+                        .FontSize("22")
+                        .Width(100)
+                        .Height(30)
+                        .X(40)
+                        .Y(20),
+                    X.TextSprite()
+                        .Text("Data: Browser Stats 2012")
+                        .FontSize("10")
+                        .X(12)
+                        .Y(580),
+                    X.TextSprite()
+                        .Text("Source: http://w3schools.com/")
+                        .FontSize("10")
+                        .X(12)
+                        .Y(590)
+                )
+                .Axes(
+                    X.NumericAxis()
+                        .Fields("IE")
+                        .Position(Position.Left)
+                        .Grid(true)
+                        .Minimum(0)
+                        .Renderer(r => r.Handler = MvcUtils.StringifyScriptBlock(@<text>
+                            <script type="text/javascript">
+                                return label.toFixed(label < 10 ? 1: 0) + '%';
+                            </script>
+                        </text>)),
+                    X.CategoryAxis()
+                        .Position(Position.Bottom)
+                        .Fields("Date")
+                        .Grid(true)
+                        .Label(X.ChartLabel().RotationDegrees(-90))
+                        .Renderer(r => r.Handler = MvcUtils.StringifyScriptBlock(@<text>
+                            <script type="text/javascript">
+                                return Ext.Date.format(label, 'M');
+                            </script>
+                        </text>))
+                )
+                .Series(X.AreaSeries()
+                    .Titles(dataSeries)
+                    .XField("Date")
+                    .YField(dataSeries)
+                    .StyleSpec(X.Sprite()
+                        .Opacity(0.8)
+                    )
+                    .Marker(X.CircleSprite()
+                        .Opacity(0)
+                        .Scaling(0.01)
+                        .Duration(200)
+                        .Easing(Easing.EaseOut)
+                    )
+                    .HighlightDefaults(X.CircleSprite()
+                        .Opacity(1)
+                        .Scaling(1.5)
+                    )
+                    .Tooltip(X.ChartTip()
+                        .TrackMouse(true)
+                        .Renderer(r => r.Handler = MvcUtils.StringifyScriptBlock(@<text>
+                            <script type="text/javascript">
+                                var field = context.field,
+                                    yfield = context.series.getYField(),
+                                    fieldIdx = Ext.Array.indexOf(yfield, field),
+                                    browser = context.series.getTitle()[fieldIdx],
+                                    recDate = Ext.Date.format(record.get('Date'), 'M d'),
+                                    recValue = record.get(context.field);
+
+                                toolTip.setHtml(browser + ' for ' + recDate + ': ' + recValue + '%');
+                            </script>
+                        </text>))
+                    )
+                )
+        )
+    )
+}
