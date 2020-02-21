@@ -1,0 +1,91 @@
+﻿
+@model List<Ext.Net.MVC.Examples.ChartModel>
+@{
+    ViewBag.Title = "Grouped Bar Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+
+    var yFields = new string[] { "Data1", "Data2", "Data3" };
+}
+
+@section headtag
+{
+    <script>
+        var saveChart = function (btn) {
+            Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as an image?', function (choice) {
+                if (choice === 'yes') {
+                    btn.up('panel').down('chart').download();
+                }
+            });
+        };
+    </script>
+}
+
+@section example
+{
+    <h1>Grouped Bar Sample</h1>
+
+    <p>Display 3 sets of random data in a grouped bar series.</p>
+
+    <p>Reload data will randomly generate a new set of data in the store. Click or hover on the legend items to highlight and remove them from the chart.</p>
+
+    @(X.Panel()
+        .Width(800)
+        .Height(600)
+        .Title("Grouped Bar Chart")
+        .Layout(LayoutType.Fit)
+        .TopBar(X.Toolbar()
+            .Items(
+                X.Button()
+                    .Text("Reload Data")
+                    .Icon(Icon.ArrowRefresh)
+                    .Handler("#{Chart1}.getStore().reload()"),
+                X.Button()
+                    .Text("Save Chart")
+                    .Icon(Icon.Disk)
+                    .Handler("saveChart")
+            )
+        )
+        .Items(
+            X.CartesianChart()
+                .ID("Chart1")
+                .FlipXY(true)
+                .LegendConfig(
+                    X.ChartLegend().Dock(Dock.Right)
+                )
+                .Store(X.Store()
+                    .Data(Model)
+                    .Model(X.Model()
+                        .Fields(
+                            X.ModelField().Name("Name"),
+                            X.ModelField().Name("Data1"),
+                            X.ModelField().Name("Data2"),
+                            X.ModelField().Name("Data3")
+                        )
+                    )
+                    .Proxy(X.AjaxProxy()
+                        .Url(Url.Action("GetData"))
+                        .Reader(X.JsonReader().RootProperty("data"))
+                    )
+                )
+                .Axes(
+                    X.NumericAxis()
+                        .Fields(yFields)
+                        .Grid(true)
+                        .Minimum(0)
+                        .Position(Position.Bottom)
+                        .Renderer(r => r.Fn = "Ext.util.Format.numberRenderer('0,0')")
+                        .Title("Number of Hits"),
+                    X.CategoryAxis()
+                        .Fields("Name")
+                        .Position(Position.Left)
+                        .Title("Month of the Year")
+                )
+                .Series(X.BarSeries()
+                    .Stacked(false)
+                    .XField("Name")
+                    .YField(yFields)
+                )
+        )
+    )
+}
