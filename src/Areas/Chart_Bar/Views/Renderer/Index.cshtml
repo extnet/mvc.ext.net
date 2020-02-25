@@ -1,0 +1,107 @@
+﻿
+@model List<Ext.Net.MVC.Examples.ChartModel>
+@{
+    ViewBag.Title = "Bar Renderer - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        function barRenderer(sprite, config, rendererData, index) {
+            var store = rendererData.store,
+                storeItems = store.getData().items,
+                record = storeItems[index],
+                fieldValue = Math.random() * 20 + 10,
+                value = (record.get('Data1') >> 0) % 5,
+                color = ['rgb(213, 70, 121)',
+                         'rgb(44, 153, 201)',
+                         'rgb(146, 6, 157)',
+                         'rgb(49, 149, 0)',
+                         'rgb(249, 153, 0)'][value];
+
+            return {
+                fill: color
+            };
+        }
+
+        var saveChart = function (btn) {
+            Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as an image?', function (choice) {
+                if(choice == 'yes') {
+                    btn.up('panel').down('chart').download();
+                }
+            });
+        };
+    </script>}
+
+@section example
+{
+    <h1>Bar Renderer Sample</h1>
+
+    <p>Displaying a horizontal bar series with a bar renderer that modifies the color of each bar.</p>
+
+
+    @(X.Panel()
+        .Width(800)
+        .Height(600)
+        .Title("Bar Renderer")
+        .Layout(LayoutType.Fit)
+        .TopBar(X.Toolbar()
+            .Items(
+                X.Button()
+                    .Text("Reload Data")
+                    .Icon(Icon.ArrowRefresh)
+                    .Handler("#{Chart1}.getStore().reload()"),
+                X.Button()
+                    .Text("Save Chart")
+                    .Icon(Icon.Disk)
+                    .Handler("saveChart")
+            )
+        )
+        .Items(
+            X.CartesianChart()
+                .ID("Chart1")
+                .FlipXY(true)
+                .Store(X.Store()
+                    .Data(Model)
+                    .Model(X.Model()
+                        .Fields(
+                            X.ModelField().Name("Name"),
+                            X.ModelField().Name("Data1")
+                        )
+                    )
+                    .Proxy(X.AjaxProxy()
+                        .Url(Url.Action("GetData"))
+                        .Reader(X.JsonReader().RootProperty("data"))
+                    )
+                )
+                .Axes(
+                    X.NumericAxis()
+                        .Fields("Data1")
+                        .Grid(true)
+                        .Position(Position.Bottom)
+                        .Renderer(r => r.Handler = "return Ext.util.Format.number(label, '0,0');")
+                        .Title("Number of Hits"),
+                    X.CategoryAxis()
+                        .Fields("Name")
+                        .Position(Position.Left)
+                        .Title("Month of the Year")
+                )
+                .Series(X.BarSeries()
+                    .Stacked(false)
+                    .XField("Name")
+                    .YField("Data1")
+                    .Label(X.ChartLabel()
+                        .Display(SeriesLabelDisplay.InsideEnd)
+                        .Field("Data1")
+                        .Orientation(Orientation.Horizontal)
+                        .Color("#333")
+                        .TextAlign(TextSpriteAlign.Center)
+                        .Renderer(r => r.Handler = "return Ext.util.Format.number(text, '0,0');")
+                    )
+                    .Renderer(r => r.Fn = "barRenderer")
+                )
+        )
+    )
+}
