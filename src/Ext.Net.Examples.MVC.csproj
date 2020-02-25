@@ -189,6 +189,7 @@
     <Compile Include="Areas\Buttons_ButtonGroup\Controllers\OverviewController.cs" />
     <Compile Include="Areas\Chart_Area\Controllers\Stacked_100Controller.cs" />
     <Compile Include="Areas\Chart_Area\Controllers\StackedController.cs" />
+    <Compile Include="Areas\Chart_Bar\Controllers\StackedController.cs" />
     <Compile Include="Areas\Chart_Bar\Controllers\RendererController.cs" />
     <Compile Include="Areas\Chart_Bar\Controllers\MixedController.cs" />
     <Compile Include="Areas\Chart_Bar\Controllers\GroupedController.cs" />
@@ -665,6 +666,7 @@
     <Content Include="Areas\Chart_Area\Views\Stacked_100\config.xml" />
     <Content Include="Areas\Chart_Area\Views\Stacked\config.xml" />
     <Content Include="Areas\Chart_Area\Views\Basic\config.xml" />
+    <Content Include="Areas\Chart_Bar\Views\Stacked\config.xml" />
     <Content Include="Areas\Chart_Bar\Views\Renderer\config.xml" />
     <Content Include="Areas\Chart_Bar\Views\Mixed\config.xml" />
     <Content Include="Areas\Chart_Bar\Views\Grouped\config.xml" />
@@ -1083,6 +1085,7 @@
     <Content Include="Areas\Chart_Bar\Views\Grouped\Index.cshtml" />
     <Content Include="Areas\Chart_Bar\Views\Mixed\Index.cshtml" />
     <Content Include="Areas\Chart_Bar\Views\Renderer\Index.cshtml" />
+    <Content Include="Areas\Chart_Bar\Views\Stacked\Index.cshtml" />
     <None Include="Areas\DataView_Basic\Content\sencha-touch-examples.json" />
     <Content Include="Areas\Desktop\Views\Web.config" />
     <Content Include="Areas\Desktop\Views\Overview\Desktop.cshtml" />

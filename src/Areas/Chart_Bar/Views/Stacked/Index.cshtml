@@ -1,0 +1,85 @@
+﻿@model object[]
+
+@{
+    ViewBag.Title = "SAtacked Bar Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Stacked Bar Chart Sample</h1>
+
+    <p>Stacked bars are multi-series bar charts where categories are stacked next to each</p>
+    <p>other. This is typically done to visually represent the total of all categories for a</p>
+    <p>given period or value.</p>
+
+    @(X.Container()
+        .Width(800)
+        .Height(500)
+        .Layout(LayoutType.Fit)
+        .Items(
+            X.CartesianChart()
+                .ID("Chart1")
+                .FlipXY(true)
+                .InsetPadding(40)
+                .Store(X.Store()
+                    .Data(Model)
+                    .Model(X.Model()
+                        .Fields(
+                            X.ModelField().Name("Month"),
+                            X.ModelField().Name("Data1"),
+                            X.ModelField().Name("Data2"),
+                            X.ModelField().Name("Data3"),
+                            X.ModelField().Name("Data4")
+                        )
+                    )
+                )
+                .LegendConfig(X.ChartLegend().Dock(Dock.Right))
+                .Items(
+                    X.TextSprite()
+                        .FontSize("22")
+                        .Height(30)
+                        .Text("Bar Charts - Stacked Bars")
+                        .Width(100)
+                        .X(40)
+                        .Y(20),
+                    X.TextSprite()
+                        .FontSize("10")
+                        .Text("Data: Browser Stats 2012")
+                        .X(12)
+                        .Y(480),
+                    X.TextSprite()
+                        .FontSize("10")
+                        .Text("Source: http://www.w3schools.com/")
+                        .X(12)
+                        .Y(495)
+                )
+                .Axes(
+                    X.NumericAxis()
+                        .AdjustByMajorUnit(true)
+                        .Fields("Data1")
+                        .Grid(true)
+                        .Minimum(0)
+                        .Position(Position.Bottom)
+                        .Renderer(r => r.Handler = "return label + '%';"),
+                    X.CategoryAxis()
+                        .Fields("Month")
+                        .Grid(true)
+                        .Position(Position.Left)
+                )
+                .Series(X.BarSeries()
+                    .HighlightConfig(X.Sprite().FillStyle("yellow"))
+                    .Stacked(true)
+                    .StyleSpec(X.Sprite().Opacity(0.8))
+                    .Titles(new string[] { "IE", "Firefox", "Chhrome", "Safari" })
+                    .Tooltip(X.ChartTip()
+                        .Renderer(r => r.Handler = "var browser = context.series.getTitle()[Ext.Array.indexOf(context.series.getYField(), context.field)]; toolTip.setHtml(browser + ' for ' + record.get('Month') + ': ' + record.get(context.field) + '%');")
+                        .TrackMouse(true)
+                    )
+                    .XField("Month")
+                    .YField(new string[] { "Data1", "Data2", "Data3", "Data4" })
+                )
+        )
+    )
+}
