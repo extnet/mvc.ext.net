@@ -1,0 +1,101 @@
+﻿@model object[]
+
+@{
+    ViewBag.Title = "Stacked Bar Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        function convert(value, record) {
+            var total = 0;
+            Ext.Object.each(record.data, function (key, value) {
+                total += Ext.isNumber(value) ? value : 0;
+            });
+            return Math.max(0, 100 - total);
+        }
+    </script>
+}
+
+@section example
+{
+    <h1>Stacked Bar Chart Sample</h1>
+
+    <p>100% stacked bars are multi-series bar charts where categories are stacked (percentage</p>
+    <p>values) next to each other, with an additional category 'Others' that is used to sum up</p>
+    <p>the various categories for each series to a perfect 100%.</p>
+
+    @(X.Container()
+        .Width(800)
+        .Height(500)
+        .Layout(LayoutType.Fit)
+        .Items(
+            X.CartesianChart()
+                .ID("Chart1")
+                .FlipXY(true)
+                .InsetPadding(40)
+                .Store(X.Store()
+                    .Data(Model)
+                    .Model(X.Model()
+                        .Fields(
+                            X.ModelField().Name("Month"),
+                            X.ModelField().Name("Data1"),
+                            X.ModelField().Name("Data2"),
+                            X.ModelField().Name("Data3"),
+                            X.ModelField().Name("Data4"),
+                            X.ModelField().Name("Other")
+                                .Convert(c => c.Fn = "convert")
+                        )
+                    )
+                )
+                .LegendConfig(X.ChartLegend().Dock(Dock.Right))
+                .Items(
+                    X.TextSprite()
+                        .FontSize("22")
+                        .Height(30)
+                        .Text("Bar Charts - 100% Stacked Bars")
+                        .Width(100)
+                        .X(40)
+                        .Y(20),
+                    X.TextSprite()
+                        .FontSize("10")
+                        .Text("Data: Browser Stats 2012")
+                        .X(12)
+                        .Y(480),
+                    X.TextSprite()
+                        .FontSize("10")
+                        .Text("Source: http://www.w3schools.com/")
+                        .X(12)
+                        .Y(495)
+                )
+                .Axes(
+                    X.NumericAxis()
+                        .Fields("Data1")
+                        .Grid(true)
+                        .MajorTickSteps(10)
+                        .Maximum(100)
+                        .Minimum(0)
+                        .Position(Position.Bottom)
+                        .Renderer(r => r.Handler = "return label + '%';"),
+                    X.CategoryAxis()
+                        .Fields("Month")
+                        .Grid(true)
+                        .Position(Position.Left)
+                )
+                .Series(X.BarSeries()
+                    .HighlightConfig(X.Sprite().FillStyle("yellow"))
+                    .Stacked(true)
+                    .StyleSpec(X.Sprite().Opacity(0.8))
+                    .Titles(new string[] { "IE", "Firefox", "Chhrome", "Safari", "Other" })
+                    .Tooltip(X.ChartTip()
+                        .Renderer(r => r.Handler = "var browser = context.series.getTitle()[Ext.Array.indexOf(context.series.getYField(), context.field)]; toolTip.setHtml(browser + ' for ' + record.get('Month') + ': ' + record.get(context.field) + '%');")
+                        .TrackMouse(true)
+                    )
+                    .XField("Month")
+                    .YField(new string[] { "Data1", "Data2", "Data3", "Data4", "Other" })
+                )
+        )
+    )
+}
