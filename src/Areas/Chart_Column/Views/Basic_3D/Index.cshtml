@@ -1,0 +1,186 @@
+﻿@using Ext.Net.MVC.Examples.Areas.Chart_Column.Controllers
+
+@model List<Basic_3DController.Temperature>
+
+@{
+    ViewBag.Title = "Column Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        function switchTheme() {
+            var panel = this.up('panel'),
+                chart = panel.down('cartesian'),
+                currentThemeClass = Ext.getClassName(chart.getTheme()),
+                themes = Ext.chart.theme,
+                themeNames = [],
+                currentIndex = 0,
+                name;
+
+            for (name in themes) {
+                if (Ext.getClassName(themes[name]) === currentThemeClass) {
+                    currentIndex = themeNames.length;
+                }
+                if (name !== 'Base' && name.indexOf('Gradients') < 0) {
+                    themeNames.push(name);
+                }
+            }
+            chart.setTheme(themes[themeNames[++currentIndex % themeNames.length]]);
+            chart.redraw();
+        }
+
+        function rangeChange(range) {
+            if (!range) {
+                return;
+            }
+            // expand the range slightly to make sure markers aren't clipped
+            var max = range[1];
+            if (max >= 35) {
+                range[1] = max - max % 5 + 5;
+            } else {
+                range[1] = max - max % 2 + 2;
+            }
+        }
+    </script>
+
+    <script>
+        /*
+         *  3D Column Sprite
+         */
+        Ext.define('Ext.net.ColumnSprite3D', {
+            alias: 'sprite.columnSeries3d',
+            extend: 'Ext.chart.series.sprite.Bar',
+            inheritableStatics: {
+                def: {
+                    defaults: {
+                        transformFillStroke: true,
+                        lineJoin: 'bevel'
+                    }
+                }
+            },
+            lastClip: null,
+
+            drawBar: function (ctx, surface, clip, left, top, right, bottom, itemId) {
+                var me = this,
+                    attr = me.attr,
+                    center = (left + right) / 2,
+                    barWidth = (right - left) * 0.33333,
+                    depthWidth = barWidth * 0.5,
+                    fill = attr.fillStyle,
+                    color, darkerColor, lighterColor;
+
+                color = Ext.draw.Color.create(fill.isGradient ? fill.getStops()[0].color : fill),
+                    darkerColor = color.createDarker(0.05),
+                    lighterColor = color.createLighter(0.25);
+
+                // top
+                ctx.beginPath();
+                ctx.moveTo(center - barWidth, top);
+                ctx.lineTo(center - barWidth + depthWidth, top + depthWidth);
+                ctx.lineTo(center + barWidth + depthWidth, top + depthWidth);
+                ctx.lineTo(center + barWidth, top);
+                ctx.lineTo(center - barWidth, top);
+                ctx.fillStyle = lighterColor.toString();
+                ctx.fillStroke(attr);
+
+                // right side
+                ctx.beginPath();
+                ctx.moveTo(center + barWidth, top);
+                ctx.lineTo(center + barWidth + depthWidth, top + depthWidth);
+                ctx.lineTo(center + barWidth + depthWidth, bottom + depthWidth);
+                ctx.lineTo(center + barWidth, bottom);
+                ctx.lineTo(center + barWidth, top);
+                ctx.fillStyle = darkerColor.toString();
+                ctx.fillStroke(attr);
+
+                // front
+                ctx.beginPath();
+                ctx.moveTo(center - barWidth, bottom);
+                ctx.lineTo(center - barWidth, top);
+                ctx.lineTo(center + barWidth, top);
+                ctx.lineTo(center + barWidth, bottom);
+                ctx.lineTo(center - barWidth, bottom);
+                ctx.fillStyle = fill.isGradient ? fill : color.toString();
+                ctx.fillStroke(attr);
+            }
+        });
+
+        /*
+         *  3D Column Series
+         */
+        Ext.define('Ext.net.ColumnSeries3D', {
+            extend: 'Ext.chart.series.Bar',
+            requires: ['Ext.net.ColumnSprite3D'],
+            seriesType: 'columnSeries3d',
+            alias: 'series.column3d',
+            type: 'column3d',
+            config: {
+                itemInstancing: null
+            }
+        });
+    </script>
+}
+
+@section example
+{
+    <h1>Column Chart Sample</h1>
+
+    <p>This example shows how to use custom sprites to create a 3D Column Chart. Click and drag to zoom the chart.</p>
+
+    @(X.Panel()
+        .Width(800)
+        .Height(600)
+        .Layout("fit")
+        .TopBar(X.Toolbar()
+            .Items(
+                X.ToolbarFill(),
+
+                X.Button()
+                    .Text("Reload Data")
+                    .Icon(Icon.ArrowRefresh)
+                    .Handler("#{Chart1}.getStore().reload();"),
+                X.Button()
+                    .Text("Switch Theme")
+                    .Handler("switchTheme")
+            )
+        )
+        .Items(X.CartesianChart()
+            .ID("Chart1")
+            .InsetPadding(20)
+            .StandardTheme(StandardChartTheme.Category5)
+            .Store(X.Store()
+                .Data(Model)
+                .Model(X.Model().Fields(
+                    X.ModelField().Name("Month"),
+                    X.ModelField().Name("High"),
+                    X.ModelField().Name("Low")
+                ))
+                .ServerProxy(X.AjaxProxy().Url(Url.Action("GetData")))
+            )
+            .Interactions(
+                X.PanZoomInteraction().ZoomOnPan(true)
+            )
+            .Axes(
+                X.NumericAxis()
+                    .Position(Position.Left)
+                    .Grid(true)
+                    .Label(X.ChartLabel().RotationDegrees(-30))
+                    .Listeners(l => l.RangeChange.Fn = "rangeChange"),
+                X.CategoryAxis()
+                    .Position(Position.Bottom)
+            )
+            .Series(new Basic_3DController.ColumnSeries3D()
+            {
+                XField = "Month",
+                YField = new string[] { "High" },
+                StyleSpec =
+                {
+                    new SeriesSprite { MaxBarWidth = 50 }
+                }
+            })
+        )
+    )
+}
