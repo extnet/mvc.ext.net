@@ -1,0 +1,146 @@
+﻿@using Ext.Net.MVC.Examples.Areas.Chart_Column.Controllers
+
+@model List<LimitController.Temperature>
+
+@{
+    ViewBag.Title = "Column Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        var saveChart = function (btn) {
+            var chart = btn.up('panel').down('chart');
+            if (Ext.os.is.Desktop) {
+                chart.download({
+                    filename: 'Redwood City Climate Data Chart'
+                });
+            } else {
+                chart.preview();
+            }
+        };
+
+        var refreshLimit = function (cmp) {
+            if (!cmp.isLoaded()) return;
+
+            var chart = App.Chart1;
+            var value = cmp.average("High");
+            var displayValue = Ext.util.Format.number(value, "0.00");
+            var limiter = chart.getAxis(0).getLimits()[0];
+            limiter.value = value;
+            limiter.line.title.text = "Average high: " + displayValue + "°C";
+        }
+    </script>
+}
+
+@functions
+{
+    private Limits initialChartLimits()
+    {
+        var value = Model.Average(t => t.High);
+
+        return new Limits()
+        {
+            new AxisLimit
+            {
+                Value = value,
+                Line = new LimitSprite
+                {
+                    LineDash = new int[] {2,2},
+                    Title = new Sprite
+                    {
+                        Text = string.Format("Average high: {0:N2}°C", value)
+                    }
+                }
+            }
+        };
+    }
+}
+
+@section example
+{
+    <h1>Column Chart Sample</h1>
+
+    <p>The Basic Column Chart displays a set of random data in a column series.</p>
+    <p>The "Reload Data" button will randomly generate a new set of data in the store.</p>
+    <p>Tapping or hovering a column will highlight it.</p>
+
+    @(X.Panel()
+        .Width(650)
+        .Height(500)
+        .Layout(LayoutType.Fit)
+        .TopBar(X.Toolbar()
+            .Items(
+                X.ToolbarFill(),
+
+                X.Button()
+                    .Text("Reload Data")
+                    .Icon(Icon.ArrowRefresh)
+                    .Handler("#{Chart1}.getStore().reload();"),
+                X.Button()
+                    .Text("={Ext.os.is.Desktop ? 'Download' : 'Preview'}")
+                    .Icon(Icon.Disk)
+                    .Handler("saveChart")
+            )
+        )
+        .Items(X.CartesianChart()
+            .ID("Chart1")
+            .InsetPaddingSpec("40 40 20 40")
+            .Store(X.Store()
+                .Data(Model)
+                .Model(X.Model().Fields(
+                    X.ModelField().Name("Month"),
+                    X.ModelField().Name("High"),
+                    X.ModelField().Name("Low")
+                ))
+                .ServerProxy(X.AjaxProxy().Url(Url.Action("GetData")))
+                .Listeners(l => l.BeforeLoad.Fn = "refreshLimit")
+            )
+
+            .AnimationConfig(new AnimConfig() { Easing = Easing.BackOut, Duration=500 })
+
+            .Interactions(
+                X.ItemHighlightInteraction()
+            )
+
+            .Axes(
+                X.NumericAxis()
+                    .Limits(initialChartLimits())
+                    .Minimum(10)
+                    .Position(Position.Left)
+                    .Title("Temperature in °C")
+                    .TitleMargin(20),
+                X.CategoryAxis()
+                    .Position(Position.Bottom)
+            )
+
+            .Series(X.BarSeries()
+                .Highlight(true)
+                .HighlightConfig(X.Sprite()
+                    .StrokeStyle("black")
+                    .FillStyle("#c1e30d")
+                    .LineDash(new int[] { 5, 3 })
+                )
+                .Label(X.ChartLabel()
+                    .Display(SeriesLabelDisplay.InsideEnd)
+                    .Field("High")
+                    .Renderer(r  => r.Handler = "return text.toFixed(1);")
+                )
+                .StyleSpec(X.SeriesSprite().MinGapWidth(20))
+                .XField("Month")
+                .YField("High")
+            )
+
+            .Items(X.TextSprite()
+                .FontSize("22")
+                .Height(30)
+                .Text("Redwood City Climate Data")
+                .Width(100)
+                .X(40)
+                .Y(20)
+            )
+        )
+    )
+}
