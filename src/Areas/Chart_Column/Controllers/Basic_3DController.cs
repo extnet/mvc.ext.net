@@ -83,17 +83,6 @@ namespace Ext.Net.MVC.Examples.Areas.Chart_Column.Controllers
 
         public ActionResult Index()
         {
-            var Chart1 = X.GetCmp<CartesianChart>("Chart1");
-            Chart1.Series.Add(new ColumnSeries3D
-            {
-                XField = "Month",
-                YField = new string[] { "High" },
-                StyleSpec =
-                {
-                    new SeriesSprite { MaxBarWidth = 50 }
-                }
-            });
-
             return View(makeMockData());
         }
 
