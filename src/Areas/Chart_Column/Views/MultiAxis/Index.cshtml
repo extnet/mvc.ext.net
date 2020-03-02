@@ -1,0 +1,148 @@
+﻿@using Ext.Net.MVC.Examples.Areas.Chart_Column.Controllers
+
+@model List<MultiAxisController.Temperature>
+
+@{
+    ViewBag.Title = "Column Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        function rangechange (range) {
+            var cAxis = this.getChart().getAxis('celsius-axis');
+            if (cAxis) {
+                cAxis.setMinimum((range[0] - 32) / 1.8);
+                cAxis.setMaximum((range[1] - 32) / 1.8);
+            }
+        }
+
+        function ctof(value) {
+            return value * 1.8 + 32;
+        }
+    </script>
+}
+
+@functions
+{
+    private GradientStop makeGradientStop(double offset, string color)
+    {
+        return new GradientStop()
+        {
+            Offset = offset,
+            Color = color
+        };
+    }
+
+    private IEnumerable<GradientStop> getRainbowGradientStops()
+    {
+        return new List<GradientStop>()
+        {
+            makeGradientStop(0, "#78C5D6"),
+            makeGradientStop(0.14, "#449AA7"),
+            makeGradientStop(0.28, "#79C267"),
+            makeGradientStop(0.42, "#C4D546"),
+            makeGradientStop(0.56, "#F5D63D"),
+            makeGradientStop(0.7, "#F18B32"),
+            makeGradientStop(0.84, "#E767A1"),
+            makeGradientStop(1, "#BF62A6")
+        };
+    }
+}
+
+@section example
+{
+    <h1>Column Chart Sample</h1>
+
+    <p>This example shows how to define multiple axes in a single direction. It also shows</p>
+    <p>how to have slave axes linked to the master axis. Slave axes mirror the data and the</p>
+    <p>layout of the master axis, but can be styled and positioned differently. The example</p>
+    <p>also shows how to use gradients in charts.</p>
+    <br />
+    <p>Click and drag to select a region to zoom into. Double-click to undo the last zoom.</p>
+
+    @(X.Panel()
+        .Width(650)
+        .Height(500)
+        .Layout(LayoutType.Fit)
+        .Items(X.CartesianChart()
+            .ID("Chart1")
+            .InnerPadding("0 20 0 20")
+            .InsetPadding(10)
+            .Store(X.Store()
+                .Data(Model)
+                .Model(X.Model().Fields(
+                    X.ModelField().Name("Month"),
+                    X.ModelField().Name("High"),
+                    X.ModelField().Name("Low"),
+                    X.ModelField().Name("HighF")
+                        .Convert(cnv => cnv.Handler = "return ctof(record.data.High);"),
+                    X.ModelField().Name("LowF")
+                        .Convert(cnv => cnv.Handler = "return ctof(record.data.Low);")
+                ))
+                .ServerProxy(X.AjaxProxy().Url(Url.Action("GetData")))
+            )
+
+            .Interactions(
+                X.CrossZoomInteraction()
+            )
+
+            .Axes(
+                X.NumericAxis()
+                    .AdjustByMajorUnit(true)
+                    .AxisID("fahrenheit-axis")
+                    .Grid(true)
+                    .Minimum(32)
+                    .Position(Position.Left)
+                    .Title("Temperature in °F")
+                    .TitleMargin(20)
+                    .Listeners(ltn => ltn.RangeChange.Fn = "rangechange"),
+                X.NumericAxis()
+                    .AxisID("celsius-axis")
+                    .Position(Position.Right)
+                    .TitleMargin(20)
+                    .TitleConfig(X.Sprite()
+                        .FillStyle("red")
+                        .Text("Temperature in °C")
+                    ),
+                X.CategoryAxis()
+                    .AxisID("months-axis")
+                    .Position(Position.Bottom),
+                X.CategoryAxis()
+                    .LinkedToID("months-axis")
+                    .Position(Position.Top)
+                    .TitleMargin(20)
+                    .TitleConfig(X.Sprite()
+                        .FillStyle("green")
+                        .Text("Climate data for Redwood City, California")
+                    )
+            )
+
+            .Series(
+                X.BarSeries()
+                    .XField("Month")
+                    .YAxisID("fahrenheit-axis")
+                    .YField("HighF")
+                    .StyleSpec(X.SeriesSprite().MinGapWidth(10))
+                    .SubStyle(ss => ss.Add(X.Sprite().FillStyle("url(#rainbow)"))),
+                X.BarSeries()
+                    .XField("Month")
+                    .YAxisID("fahrenheit-axis")
+                    .YField("LowF")
+                    .StyleSpec(X.SeriesSprite().MinGapWidth(10))
+                    .SubStyle(ss => ss.Add(X.Sprite().FillStyle("none")))
+            )
+
+            .Gradients(grads =>
+            {
+                grads.Add(X.LinearGradient()
+                    .GradientID("rainbow")
+                    .Degrees(270)
+                    .Stops(stops => stops.AddRange(getRainbowGradientStops()))
+                );
+            })
+        )
+    )
+}
