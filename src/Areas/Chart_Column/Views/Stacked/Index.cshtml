@@ -1,0 +1,143 @@
+﻿@model object[]
+
+@{
+    ViewBag.Title = "Stacked Column Chart - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section headtag
+{
+    <script>
+        function toggleMode(segmentedButton, button, pressed) {
+            var chart = this.up('panel').down('cartesian'),
+                series = chart.getSeries()[0],
+                value = segmentedButton.getValue();
+
+            series.setStacked(value === 0);
+            chart.redraw();
+        }
+    </script>
+}
+
+@section example
+{
+    <h1>Column Chart - Stacked Columns</h1>
+
+    <p>Stacked columns are multi-series column charts where categories are stacked on top of</p>
+    <p>each other. This is typically done to visually represent the total of all categories</p>
+    <p>for a given period or value.</p>
+
+    @(X.Panel()
+        .Width(650)
+        .Layout(LayoutType.Anchor)
+        .DefaultAnchor("100%")
+        .TopBar(X.Toolbar().Items(
+            X.ToolbarFill(),
+            X.SegmentedButton()
+                .Width(200)
+                .Items(
+                    X.Button().Text("Stack").Pressed(true),
+                    X.Button().Text("Group")
+                )
+                .Listeners(l => l.Toggle.Fn = "toggleMode"),
+            X.Button()
+                .Text("Preview")
+                .Handler(@<text><script type="text/javascript">
+                    this.up('panel').down('cartesian').preview();
+                </script></text>)
+        ))
+        .Items(
+            X.CartesianChart()
+                .Height(460)
+                .ID("Chart1")
+                .InsetPaddingSpec("10 40 40 40")
+                .Store(X.Store()
+                    .Data(Model)
+                    .ID("Store1")
+                    .Model(X.Model()
+                        .Fields(
+                            X.ModelField().Name("Month"),
+                            X.ModelField().Name("Data1"),
+                            X.ModelField().Name("Data2"),
+                            X.ModelField().Name("Data3"),
+                            X.ModelField().Name("Data4")
+                        )
+                    )
+                )
+                .LegendConfig(X.ChartLegend().Dock(Dock.Bottom))
+                .Items(
+                    X.TextSprite()
+                        .FontSize("10")
+                        .Text("Data: Browser Stats 2012")
+                        .X(12)
+                        .Y(380),
+                    X.TextSprite()
+                        .FontSize("10")
+                        .Text("Source: http://www.w3schools.com/")
+                        .X(12)
+                        .Y(395)
+                )
+                .Axes(
+                    X.NumericAxis()
+                        .AdjustByMajorUnit(true)
+                        .Fields("Data1")
+                        .Grid(true)
+                        .Minimum(0)
+                        .Position(Position.Left)
+                        .Renderer(r => r.Handler = "return label.toFixed(label < 10 ? 1: 0) + '%';"),
+                    X.CategoryAxis()
+                        .Fields("Month")
+                        .Grid(true)
+                        .Position(Position.Bottom)
+                        .Label(X.ChartLabel().RotationDegrees(-45))
+                )
+                .Series(X.BarSeries()
+                    .HighlightConfig(X.Sprite().FillStyle("yellow"))
+                    .Stacked(true)
+                    .StyleSpec(X.Sprite().Opacity(0.8))
+                    .Titles(new string[] { "IE", "Firefox", "Chhrome", "Safari" })
+                    .Tooltip(X.ChartTip()
+                        .Renderer(r => r.Handler = "var browser = context.series.getTitle()[Ext.Array.indexOf(context.series.getYField(), context.field)]; toolTip.setHtml(browser + ' for ' + record.get('Month') + ': ' + record.get(context.field) + '%');")
+                        .TrackMouse(true)
+                    )
+                    .XField("Month")
+                    .YField(new string[] { "Data1", "Data2", "Data3", "Data4" })
+                ),
+            X.GridPanel()
+                .StoreID("Store1")
+                .StyleSpec("margin-top: 10px")
+                .ColumnModel(
+                    X.Column()
+                        .DataIndex("Month")
+                        .MenuDisabled(true)
+                        .Sortable(false)
+                        .Text("Month"),
+                    X.Column()
+                        .DataIndex("Data1")
+                        .MenuDisabled(true)
+                        .Sortable(false)
+                        .Renderer("return value + '%';")
+                        .Text("IE"),
+                    X.Column()
+                        .DataIndex("Data2")
+                        .MenuDisabled(true)
+                        .Sortable(false)
+                        .Renderer("return value + '%';")
+                        .Text("Firefox"),
+                    X.Column()
+                        .DataIndex("Data3")
+                        .MenuDisabled(true)
+                        .Sortable(false)
+                        .Renderer("return value + '%';")
+                        .Text("Chrome"),
+                    X.Column()
+                        .DataIndex("Data4")
+                        .MenuDisabled(true)
+                        .Sortable(false)
+                        .Renderer("return value + '%';")
+                        .Text("Safari")
+                )
+        )
+    )
+}

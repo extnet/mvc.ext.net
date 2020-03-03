@@ -200,6 +200,8 @@
     <Compile Include="Areas\Chart_Column\Controllers\LimitController.cs" />
     <Compile Include="Areas\Chart_Column\Controllers\GradientsController.cs" />
     <Compile Include="Areas\Chart_Column\Controllers\Basic_3DController.cs" />
+    <Compile Include="Areas\Chart_Column\Controllers\StackedController.cs" />
+    <Compile Include="Areas\Chart_Column\Controllers\Stacked_100Controller.cs" />
     <Compile Include="Areas\Chart_Column\Models\RendererModel.cs" />
     <Compile Include="Areas\Chart_Misc\Chart_MiscAreaRegistration.cs" />
     <Compile Include="Areas\Chart_Misc\Controllers\CaptionsController.cs" />
@@ -685,6 +687,8 @@
     <Content Include="Areas\Chart_Column\Views\Limit\config.xml" />
     <Content Include="Areas\Chart_Column\Views\Gradients\config.xml" />
     <Content Include="Areas\Chart_Column\Views\Basic_3D\config.xml" />
+    <Content Include="Areas\Chart_Column\Views\Stacked\config.xml" />
+    <Content Include="Areas\Chart_Column\Views\Stacked_100\config.xml" />
     <Content Include="Areas\Chart_Misc\Views\Captions\config.xml" />
     <Content Include="Areas\Chart_Column\Views\Basic\config.xml" />
     <Content Include="Areas\Chart_Dashboard\Views\Basic\config.xml" />
@@ -1105,6 +1109,8 @@
     <Content Include="Areas\Chart_Column\Views\Limit\Index.cshtml" />
     <Content Include="Areas\Chart_Column\Views\MultiAxis\Index.cshtml" />
     <Content Include="Areas\Chart_Column\Views\Renderer\Index.cshtml" />
+    <Content Include="Areas\Chart_Column\Views\Stacked\Index.cshtml" />
+    <Content Include="Areas\Chart_Column\Views\Stacked_100\Index.cshtml" />
     <None Include="Areas\DataView_Basic\Content\sencha-touch-examples.json" />
     <Content Include="Areas\Desktop\Views\Web.config" />
     <Content Include="Areas\Desktop\Views\Overview\Desktop.cshtml" />
