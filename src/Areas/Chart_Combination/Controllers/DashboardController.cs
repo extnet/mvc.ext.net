@@ -21,7 +21,10 @@ namespace Ext.Net.MVC.Examples.Areas.Chart_Combination.Controllers
                     "AT&T Inc.",
                     "Boeing Co.",
                     "Caterpillar Inc.",
-                    "Citigroup, Inc."
+                    "Citigroup, Inc.",
+                    "Microsoft",
+                    "Verizon",
+                    "Wal-Mart"
                 };
 
                 Random rand = new Random();

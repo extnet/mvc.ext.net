@@ -67,13 +67,7 @@
         };
 
         var onSelectionChange = function (model, records) {
-            var json,
-                    name,
-                    i,
-                    l,
-                    items,
-                    series,
-                    fields;
+            var fields;
 
             if (records[0]) {
                 rec = records[0];
@@ -103,12 +97,6 @@
             }
         };
     </script>
-
-    <style>
-        .x-panel-framed {
-            padding: 0;
-        }
-    </style>
 }
 
 @section example
@@ -123,11 +111,10 @@
     </p>
 
     @(X.FormPanel()
-        .Title("Company data")
         .Frame(true)
         .BodyPadding(5)
         .Width(870)
-        .Height(720)
+        .Height(525)
         .Bin(
             X.Store()
                 .ID("CompanyStore")
@@ -151,15 +138,16 @@
         .LayoutConfig(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch })
         .Items(
             X.Panel()
-                .Height(200)
-                .Layout(LayoutType.Fit)
+                .Height(250)
                 .MarginSpec("0 0 3 0")
+                .LayoutConfig(new HBoxLayoutConfig() { Align = HBoxAlign.Stretch })
                 .Items(
                     X.CartesianChart()
                         .ID("BarChart1")
                         .Border(false)
+                        .Flex(1)
                         .StoreID("CompanyStore")
-                        .Interactions(i => i.Add(X.ItemHighlightInteraction()))
+                        .Interactions(X.ItemHighlightInteraction())
                         .AnimationConfig(new AnimConfig { Duration = 300, Easing = Easing.EaseOut })
                         .Axes(
                             X.NumericAxis().Position(Position.Left).Fields("price").Minimum(0).Hidden(true),
@@ -174,7 +162,7 @@
                             .XField("company")
                             .YField("price")
                             .StyleSpec(X.Sprite().FillStyle("#456d9f"))
-                            .HighlightConfig(X.Sprite().FillStyle("#a2b5ca"))
+                            .HighlightConfig(X.Sprite().FillStyle("#619fff").StrokeStyle("black"))
                             .Label(X.ChartLabel()
                                 .Display(SeriesLabelDisplay.InsideEnd)
                                 .Field("price")
@@ -184,7 +172,39 @@
                             )
                             .Listeners(events => events.ItemMouseUp.Fn="onMouseUp")
                         )
-                        .Plugins(p => p.Add(X.ChartItemEvents()))
+                        .Plugins(X.ChartItemEvents()),
+                    X.PolarChart()
+                        .Margin(0)
+                        .InsetPaddingSpec("15 30 15 30")
+                        .Width(200)
+                        .StandardTheme(StandardChartTheme.Blue)
+                        .Store(X.Store()
+                            .ID("RadarStore")
+                            .Data(ViewData["RadarData"])
+                            .Model(X.Model().Fields("Name", "Data"))
+                        )
+                        .Interactions(X.RotateInteraction())
+                        .Axes(
+                            X.CategoryAxis()
+                                .Position(Position.Angular)
+                                .Grid(true)
+                                .Label(X.ChartLabel().FontSize("10")),
+
+                            X.NumericAxis()
+                                .MajorTickSteps(5)
+                                .Minimum(0)
+                                .Maximum(100)
+                                .Position(Position.Radial)
+                                .Grid(true)
+                        )
+                        .Series(
+                            X.RadarSeries()
+                                .AngleField("Name")
+                                .RadiusField("Data")
+                                .ShowMarkers(true)
+                                .Marker(X.CircleSprite().Radius(4).FillStyle("rgb(69,109,159)"))
+                                .StyleSpec(X.Sprite().FillStyle("rgb(194,214,240)").Opacity(0.5).LineWidth(0.5))
+                        )
                 ),
 
             X.Panel()
@@ -196,7 +216,6 @@
                     X.GridPanel()
                         .ID("CompanyGrid")
                         .Flex(6)
-                        .Title("Company Data")
                         .StoreID("CompanyStore")
                         .ColumnModel(
                             X.Column()
@@ -242,121 +261,78 @@
                         )
                         .Listeners(l => l.SelectionChange.Fn = "onSelectionChange"),
 
+                    X.FieldSet()
+                        .Margin(5)
+                        .Flex(4)
+                        .MarginSpec("0 0 0 5")
+                        .Title("Company Details")
+                        .Defaults(d => {
+                            d.Add(new Parameter("Width", "240"));
+                            d.Add(new Parameter("LabelWidth", "90"));
+                            d.Add(new Parameter("Disabled", "true"));
+                        })
+                        .Items(
+                            X.NumberField()
+                                .FieldLabel("Price")
+                                .Name("price")
+                                .MinValue(0)
+                                .MaxValue(100)
+                                .EnforceMaxLength(true)
+                                .MaxLength(5)
+                                .Listeners(l => {
+                                    l.Change.Fn = "afterEdit";
+                                    l.Change.Buffer = 200;
+                                }),
 
-                X.Panel()
-                    .Flex(4)
-                    .Title("Company Details")
-                    .MarginSpec("0 0 0 5")
-                    .LayoutConfig(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch } )
-                    .Items(
-                        X.FieldSet()
-                            .Margin(5)
-                            .Flex(1)
-                            .Title("Company Details")
-                            .Defaults(d => {
-                                d.Add(new Parameter("Width", "240"));
-                                d.Add(new Parameter("LabelWidth", "90"));
-                                d.Add(new Parameter("Disabled", "true"));
-                            })
-                            .Items(
-                                X.TextField()
-                                    .FieldLabel("Name")
-                                    .Name("company"),
+                            X.NumberField()
+                                .FieldLabel("Revenue %")
+                                .Name("revenue")
+                                .MinValue(0)
+                                .MaxValue(100)
+                                .EnforceMaxLength(true)
+                                .MaxLength(5)
+                                .Listeners(l => {
+                                    l.Change.Fn = "afterEdit";
+                                    l.Change.Buffer = 200;
+                                }),
 
-                                X.NumberField()
-                                    .FieldLabel("Price")
-                                    .Name("price")
-                                    .MinValue(0)
-                                    .MaxValue(100)
-                                    .EnforceMaxLength(true)
-                                    .MaxLength(5)
-                                    .Listeners(l => {
-                                        l.Change.Fn = "afterEdit";
-                                        l.Change.Buffer = 200;
-                                    }),
+                            X.NumberField()
+                                .FieldLabel("Growth %")
+                                .Name("growth")
+                                .MinValue(0)
+                                .MaxValue(100)
+                                .EnforceMaxLength(true)
+                                .MaxLength(5)
+                                .Listeners(l => {
+                                    l.Change.Fn = "afterEdit";
+                                    l.Change.Buffer = 200;
+                                }),
 
-                                X.NumberField()
-                                    .FieldLabel("Revenue %")
-                                    .Name("revenue")
-                                    .MinValue(0)
-                                    .MaxValue(100)
-                                    .EnforceMaxLength(true)
-                                    .MaxLength(5)
-                                    .Listeners(l => {
-                                        l.Change.Fn = "afterEdit";
-                                        l.Change.Buffer = 200;
-                                    }),
+                            X.NumberField()
+                                .FieldLabel("Product %")
+                                .Name("product")
+                                .MinValue(0)
+                                .MaxValue(100)
+                                .EnforceMaxLength(true)
+                                .MaxLength(5)
+                                .Listeners(l => {
+                                    l.Change.Fn = "afterEdit";
+                                    l.Change.Buffer = 200;
+                                }),
 
-                                X.NumberField()
-                                    .FieldLabel("Growth %")
-                                    .Name("growth")
-                                    .MinValue(0)
-                                    .MaxValue(100)
-                                    .EnforceMaxLength(true)
-                                    .MaxLength(5)
-                                    .Listeners(l => {
-                                        l.Change.Fn = "afterEdit";
-                                        l.Change.Buffer = 200;
-                                    }),
-
-                                X.NumberField()
-                                    .FieldLabel("Product %")
-                                    .Name("product")
-                                    .MinValue(0)
-                                    .MaxValue(100)
-                                    .EnforceMaxLength(true)
-                                    .MaxLength(5)
-                                    .Listeners(l => {
-                                        l.Change.Fn = "afterEdit";
-                                        l.Change.Buffer = 200;
-                                    }),
-
-                                X.NumberField()
-                                    .FieldLabel("Market %")
-                                    .Name("market")
-                                    .MinValue(0)
-                                    .MaxValue(100)
-                                    .EnforceMaxLength(true)
-                                    .MaxLength(5)
-                                    .Listeners(l => {
-                                        l.Change.Fn = "afterEdit";
-                                        l.Change.Buffer = 200;
-                                    })
-                            ),
-
-                        X.PolarChart()
-                            .Margin(0)
-                            .InsetPadding(20)
-                            .Flex(1)
-                            .StandardTheme(StandardChartTheme.Blue)
-                            .Store(X.Store()
-                                .ID("RadarStore")
-                                .Data(ViewData["RadarData"])
-                                .Model(X.Model().Fields("Name", "Data"))
-                            )
-                            .Axes(
-                                X.CategoryAxis()
-                                    .Position(Position.Angular)
-                                    .Grid(true)
-                                    .Label(X.ChartLabel().FontSize("10")),
-
-                                X.NumericAxis()
-                                    .MajorTickSteps(5)
-                                    .Minimum(0)
-                                    .Maximum(100)
-                                    .Position(Position.Radial)
-                                    .Grid(true)
-                            )
-                            .Series(
-                                X.RadarSeries()
-                                    .AngleField("Name")
-                                    .RadiusField("Data")
-                                    .ShowMarkers(true)
-                                    .Marker(X.CircleSprite().Radius(4).FillStyle("rgb(69,109,159)"))
-                                    .StyleSpec(X.Sprite().FillStyle("rgb(194,214,240)").Opacity(0.5).LineWidth(0.5))
-                            )
+                            X.NumberField()
+                                .FieldLabel("Market %")
+                                .Name("market")
+                                .MinValue(0)
+                                .MaxValue(100)
+                                .EnforceMaxLength(true)
+                                .MaxLength(5)
+                                .Listeners(l => {
+                                    l.Change.Fn = "afterEdit";
+                                    l.Change.Buffer = 200;
+                                })
+                        )
                     )
-                )
         )
     )
 }
