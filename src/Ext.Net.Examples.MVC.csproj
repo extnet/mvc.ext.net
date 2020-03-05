@@ -203,6 +203,8 @@
     <Compile Include="Areas\Chart_Column\Controllers\StackedController.cs" />
     <Compile Include="Areas\Chart_Column\Controllers\Stacked_100Controller.cs" />
     <Compile Include="Areas\Chart_Column\Models\RendererModel.cs" />
+    <Compile Include="Areas\Chart_Combination\Chart_CombinationAreaRegistration.cs" />
+    <Compile Include="Areas\Chart_Combination\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Chart_Misc\Chart_MiscAreaRegistration.cs" />
     <Compile Include="Areas\Chart_Misc\Controllers\CaptionsController.cs" />
     <Compile Include="Areas\ColorPicker_Advanced\ColorPicker_AdvancedAreaRegistration.cs" />
@@ -234,8 +236,6 @@
     <Compile Include="Areas\Chart_Bar\Controllers\BasicController.cs" />
     <Compile Include="Areas\Chart_Column\Chart_ColumnAreaRegistration.cs" />
     <Compile Include="Areas\Chart_Column\Controllers\BasicController.cs" />
-    <Compile Include="Areas\Chart_Dashboard\Chart_DashboardAreaRegistration.cs" />
-    <Compile Include="Areas\Chart_Dashboard\Controllers\BasicController.cs" />
     <Compile Include="Areas\Chart_Gauge\Chart_GaugeAreaRegistration.cs" />
     <Compile Include="Areas\Chart_Gauge\Controllers\BasicController.cs" />
     <Compile Include="Areas\Chart_Line\Chart_LineAreaRegistration.cs" />
@@ -689,9 +689,9 @@
     <Content Include="Areas\Chart_Column\Views\Basic_3D\config.xml" />
     <Content Include="Areas\Chart_Column\Views\Stacked\config.xml" />
     <Content Include="Areas\Chart_Column\Views\Stacked_100\config.xml" />
+    <Content Include="Areas\Chart_Combination\Views\Dashboard\config.xml" />
     <Content Include="Areas\Chart_Misc\Views\Captions\config.xml" />
     <Content Include="Areas\Chart_Column\Views\Basic\config.xml" />
-    <Content Include="Areas\Chart_Dashboard\Views\Basic\config.xml" />
     <Content Include="Areas\Chart_Gauge\Views\Basic\config.xml" />
     <Content Include="Areas\Chart_Line\Views\Basic\config.xml" />
     <Content Include="Areas\Chart_Pie\Views\Basic\config.xml" />
@@ -1067,8 +1067,6 @@
     <Content Include="Areas\ColorPicker_Basic\Views\Overview\Index.cshtml" />
     <Content Include="Areas\Chart_Scatter\Views\Web.config" />
     <Content Include="Areas\Chart_Scatter\Views\Basic\Index.cshtml" />
-    <Content Include="Areas\Chart_Dashboard\Views\Web.config" />
-    <Content Include="Areas\Chart_Dashboard\Views\Basic\Index.cshtml" />
     <Content Include="Areas\DragDrop_Panel\Views\Swap_Dropable_Panel\Index.cshtml" />
     <Content Include="Areas\DragDrop_Panel\Views\Web.config" />
     <Content Include="Areas\DragDrop_Advanced\Views\Example3\Index.cshtml" />
@@ -1111,6 +1109,8 @@
     <Content Include="Areas\Chart_Column\Views\Renderer\Index.cshtml" />
     <Content Include="Areas\Chart_Column\Views\Stacked\Index.cshtml" />
     <Content Include="Areas\Chart_Column\Views\Stacked_100\Index.cshtml" />
+    <Content Include="Areas\Chart_Combination\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Chart_Combination\Views\Web.config" />
     <None Include="Areas\DataView_Basic\Content\sencha-touch-examples.json" />
     <Content Include="Areas\Desktop\Views\Web.config" />
     <Content Include="Areas\Desktop\Views\Overview\Desktop.cshtml" />

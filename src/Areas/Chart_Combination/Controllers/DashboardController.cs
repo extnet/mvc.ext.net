@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace Ext.Net.MVC.Examples.Areas.Chart_Dashboard.Controllers
+namespace Ext.Net.MVC.Examples.Areas.Chart_Combination.Controllers
 {
-    public class BasicController : Controller
+    public class DashboardController : Controller
     {
 
         public List<object> Data
