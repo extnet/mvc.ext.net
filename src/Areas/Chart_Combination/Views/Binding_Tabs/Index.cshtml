@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "Binding & Tabs - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+
+    object viewModel = ViewData.Model;
+}
+
+@section example
+{
+    <h1>Binding & Tabs</h1>
+    <p>This example shows how to use data binding to attach stores to charts. Each tab uses the same dataset from the ViewModel.</p>
+
+    @(X.TabPanel().ID("TabPanel1").Width(650).Height(500)
+        .ViewModel(viewModel)
+        .Items(
+            X.Panel().Title("Line Chart").Layout(LayoutType.Fit)
+                .Items(X.CartesianChart()
+                    .Animation(false)
+                    .BindString("{priceData}")
+                    .InsetPadding(40)
+                    .InnerPadding("0 40")
+                    .Interactions(
+                        X.ItemHighlightInteraction(),
+                        X.PanZoomInteraction().ZoomOnPan(true)
+                    )
+                    .Axes(
+                        X.NumericAxis()
+                            .Fields("price")
+                            .Grid(true)
+                            .Maximum(30)
+                            .Minimum(0)
+                            .Position(Position.Left)
+                            .Renderer(r => r.Fn = "Ext.util.Format.usMoney")
+                            .Title("Price"),
+                        X.CategoryAxis()
+                            .Fields("month")
+                            .Grid(true)
+                            .Label(X.ChartLabel().RotationDegrees(-45))
+                            .Position(Position.Bottom)
+                    )
+                    .Series(X.LineSeries()
+                        .Label(X.ChartLabel().Field("price").Display(SeriesLabelDisplay.Over))
+                        .Marker(X.Sprite().Radius(4))
+                        .XField("month")
+                        .YField("price")
+                        .Tooltip(X.ChartTip()
+                            .DismissDelay(0)
+                            .HideDelay(0)
+                            .ShowDelay(0)
+                            .StyleSpec("background: #fff")
+                            .TrackMouse(true)
+                            .Renderer(r => r.Handler = MvcUtils.StringifyScriptBlock(
+                            @<text><script type="text/javascript">
+                                var month = record.get("month"),
+                                    formattedPrice = Ext.util.Format.usMoney(record.get('price'));
+
+                                toolTip.setHtml(month + ': ' + formattedPrice);
+                            </script></text>))
+                        )
+                    )
+                ),
+            X.Panel().Title("Bar Chart").Layout(LayoutType.Fit)
+                .Items(X.CartesianChart()
+                    .Animation(false)
+                    .BindString("{priceData}")
+                    .InsetPadding(40)
+                    .Interactions(
+                        X.PanZoomInteraction().ZoomOnPan(true)
+                    )
+                    .Axes(
+                        X.NumericAxis()
+                            .Maximum(30)
+                            .Minimum(0)
+                            .Position(Position.Left)
+                            .Renderer(r => r.Fn = "Ext.util.Format.usMoney")
+                            .Title("Price"),
+                        X.CategoryAxis()
+                            .Label(X.ChartLabel().RotationDegrees(-45))
+                            .Position(Position.Bottom)
+                    )
+                    .Series(X.BarSeries()
+                        .Marker(X.Sprite().Radius(4))
+                        .StyleSpec(X.SeriesSprite().MinGapWidth(20))
+                        .XField("month")
+                        .YField("price")
+                        .HighlightConfig(X.Sprite()
+                            .StrokeStyle("black")
+                            .FillStyle("#c1e30d")
+                            .LineDash(new int[] { 5, 3 })
+                        )
+                        .Label(X.ChartLabel()
+                            .Display(SeriesLabelDisplay.InsideEnd)
+                            .Field("price")
+                            .Renderer(r => r.Fn = "Ext.util.Format.usMoney")
+                        )
+                    )
+                ),
+            X.Panel().Title("Radial").Layout(LayoutType.Fit)
+                .Items(X.PolarChart()
+                    .Animation(false)
+                    .BindString("{priceData}")
+                    .InsetPadding(40)
+                    .Interactions(
+                        X.ItemHighlightInteraction(),
+                        X.RotateInteraction()
+                    )
+                    .Axes(
+                        X.NumericAxis()
+                            .Fields("price")
+                            .Grid(true)
+                            .MajorTickSteps(4)
+                            .Maximum(30)
+                            .Minimum(0)
+                            .Position(Position.Radial)
+                            .Renderer(r => r.Fn = "Ext.util.Format.usMoney"),
+                        X.CategoryAxis()
+                            .Grid(true)
+                            .Position(Position.Angular)
+                    )
+                    .Series(X.RadarSeries()
+                        .AngleField("month")
+                        .Marker(X.CircleSprite().Radius(4))
+                        .RadiusField("price")
+                        .StyleSpec(X.Sprite().Opacity(0.8))
+                    )
+                )
+        )
+    )
+}
