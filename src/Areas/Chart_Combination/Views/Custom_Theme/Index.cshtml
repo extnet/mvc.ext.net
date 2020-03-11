@@ -1,0 +1,114 @@
+﻿@model object[]
+
+@{
+    ViewBag.Title = "Custom Theme - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@section example
+{
+    <h1>Custom Theme</h1>
+    <p>This example demonstrates how easy it is to change the colors of a chart's series using a custom theme.</p>
+
+    @(X.ChartTheme()
+        .ThemeName("custom-theme")
+        .Colors(new string[] { "#1ABC9C", "#F1C40F", "#3498DB", "#C0392B", "#9B59B6"})
+        .Axis(X.ThemeAxes()
+            .Defaults(dfl => dfl.Add(X.NumericAxis()
+                .Style(X.AxisSprite().StrokeStyle("#7F8C8D"))
+                .Label(X.ChartLabel().FillStyle("#7F8C8D").FontSize("18"))
+            ))
+        )
+    )
+    @(X.CartesianChart()
+        .Height(500)
+        .ID("Chart1")
+        .InsetPadding(40)
+        .Theme("custom-theme")
+        .Width(650)
+
+        .Store(X.Store()
+            .ID("Store1")
+            .DataSource(Model)
+            .Model(X.Model().Fields(
+                X.ModelField().Name("month"),
+                X.ModelField().Name("data1"),
+                X.ModelField().Name("data2"),
+                X.ModelField().Name("data3"),
+                X.ModelField().Name("data4"),
+                X.ModelField()
+                    .Name("other")
+                    .Convert(cnv => cnv.Handler = MvcUtils.StringifyScriptBlock(@<text>
+                        <script type="text/javascript">
+                            var total = 0;
+
+                            Ext.Object.each(record.data, function (key, value) {
+                                total += Ext.isNumber(value) ? value : 0;
+                            });
+
+                            return Math.max(0, 100 - total);
+                        </script>
+                    </text>))
+            ))
+        )
+
+        .LegendConfig(X.ChartLegend().Dock(Dock.Bottom))
+
+        .Items(
+            X.TextSprite()
+                .FontSize("22")
+                .Height(30)
+                .Text("Column Charts - 100% Stacked Columns")
+                .Width(100)
+                .X(40)
+                .Y(20),
+            X.TextSprite()
+                .FontSize("10")
+                .Text("Data: Browser Stats 2012")
+                .X(12)
+                .Y(420),
+            X.TextSprite()
+                .FontSize("10")
+                .Text("Source: http://www.w3schools.com/")
+                .X(12)
+                .Y(435)
+        )
+
+        .Axes(
+            X.NumericAxis()
+                .Fields(new string[] { "data1", "data2", "data3", "data4", "other" })
+                .Grid(true)
+                .Maximum(100)
+                .Minimum(0)
+                .Position(Position.Left)
+                .Renderer(r => r.Handler = "Ext.util.Format.usMoney"),
+            X.CategoryAxis()
+                .Fields("month")
+                .Grid(true)
+                .Label(X.ChartLabel().RotationDegrees(-45))
+                .Position(Position.Bottom)
+        )
+        .Series(X.BarSeries()
+            .Stacked(true)
+            .Titles(new string[] { "IE", "Firefox", "Chrome", "Safari", "Others" })
+            .XField("month")
+            .YField(new string[] { "data1", "data2", "data3", "data4", "other" })
+            .HighlightDefaults(X.Sprite().Opacity(1).StrokeStyle("black"))
+            .StyleSpec(X.Sprite().Opacity(0.8))
+            .Tooltip(X.ChartTip()
+                .TrackMouse(true)
+                .Renderer(r => r.Handler = MvcUtils.StringifyScriptBlock(
+                @<text><script type="text/javascript">
+                    var series = context.series,
+                        seriesIdx = Ext.Array.indexOf(series.getYField(), context.field),
+                        browser = series.getTitle()[seriesIdx],
+                        currMonth = record.get('month'),
+                        currValue = record.get(context.field);
+
+                    toolTip.setHtml(browser + ' for ' + currMonth + ': ' + currValue + '%');
+                </script></text>))
+            )
+        )
+    )
+}
