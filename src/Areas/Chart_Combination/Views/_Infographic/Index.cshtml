@@ -1,0 +1,465 @@
+﻿@{
+    ViewBag.Title = "The US Unemployment Infographic - Ext.NET MVC Examples";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    var X = Html.X();
+}
+
+@functions
+{
+    public TextSprite.Builder mkStateChangeSprite(int x, int y, string label, TextSpriteAlign alignment)
+    {
+        return Html.X().TextSprite()
+            .Text(label)
+            .TextAlign(alignment)
+            .Font("13px Charter")
+            .FillStyle("rgba(56, 54, 54, 1.0)")
+            .X(x)
+            .Y(y);
+    }
+
+    public PieSeries.Builder mkMainPieSeries()
+    {
+        return Html.X().PieSeries()
+            .AngleField("span")
+            .Donut(93)
+            .Rotation(-Math.PI/60)
+            .SubStyle(ss => ss.Add(
+                Html.X().Sprite() .StrokeStyle("white") .LineWidth(1)
+            ))
+            .Label(Html.X().ChartLabel()
+                .Orientation(Orientation.None)
+                .Field("label")
+                .Display(SeriesLabelDisplay.Inside)
+                .FillStyle("white")
+                .FontWeight("bold")
+                .FontSize("13")
+                .FontFamily("Tahoma")
+                .Renderer(r => r.Fn="onLabelRender2012")
+            )
+            .Renderer(r => r.Fn="onSliceRender2012");
+    }
+
+    public PieSeries.Builder mkOtherPieSeries(int donut, int radiusFactor, int fontSize, int refYear)
+    {
+        return Html.X().PieSeries()
+            .AngleField("span")
+            .Donut(donut)
+            .RadiusFactor(radiusFactor)
+            .Rotation(-Math.PI/60)
+
+            .SubStyle(ss => ss.Add(
+                Html.X().Sprite().StrokeStyle("white").LineWidth(1)
+            ))
+            .Label(Html.X().ChartLabel()
+                .Orientation(Orientation.None)
+                .Field("label")
+                .Display(SeriesLabelDisplay.Inside)
+                .FillStyle("white")
+                .FontWeight("bold")
+                .FontSize(fontSize.ToString())
+                .Renderer(r => r.Fn="onLabelRenderOther('" + refYear + "')")
+            )
+            .Renderer(r => r.Fn="onSliceRenderOther('y" + refYear + "')");
+    }
+}
+
+@section headTag
+{
+    <script src="@Url.Content("~/Areas/Chart_Combination/Content/Infographic/ArcText.js")"></script>
+    <script>
+        var InfographicApp = {
+            // State regions.
+            // A region line spans from the 'start' state through the 'end' state.
+            regions: [{
+                name: 'Northeast Region',
+                start: 'CT',
+                end: 'VT'
+            }, {
+                name: 'Southeast Region',
+                start: 'AL',
+                end: 'VA'
+            }, {
+                name: 'Midwest Region',
+                start: 'WI',
+                end: 'AR'
+            }, {
+                name: 'Southwest Region',
+                start: 'AZ',
+                end: 'UT'
+            }, {
+                name: 'Northwest Region',
+                start: 'AK',
+                end: 'WY'
+            }],
+
+            regionIndex: 0,
+            linePadding: 5,
+            tickSize: 10,
+            startAngle: 0,
+            endAngle: 0,
+            region: null,
+
+            /**
+             * Adds ticks to the ends of a region line.
+             * @@:param surface The surface to put the ticks into.
+             * @@:param attr The style of the ticks.
+             * @@:param angles Array with angles to put the ticks at.
+             * @@:param sprites The array to add the created tick sprites to (for future reference).
+             */
+            addTicks: function (surface, attr, angles, sprites) {
+                var linePadding = InfographicApp.linePadding,
+                    tickSize = InfographicApp.tickSize,
+                    i, ln, angle;
+
+                for (i = 0, ln = angles.length; i < ln; i++) {
+                    angle = angles[i] + attr.rotationRads;
+                    sprites.push(surface.add({
+                        type: 'line',
+                        strokeStyle: 'gray',
+
+                        translationX: attr.translationX,
+                        translationY: attr.translationY,
+
+                        fromX: attr.centerX + (attr.endRho + linePadding) * Math.cos(angle),
+                        fromY: attr.centerY + (attr.endRho + linePadding) * Math.sin(angle),
+
+                        toX: attr.centerX + (attr.endRho + linePadding + tickSize) * Math.cos(angle),
+                        toY: attr.centerY + (attr.endRho + linePadding + tickSize) * Math.sin(angle)
+                    }));
+                }
+            }
+        };
+
+        function onBeforeRender() {
+            // Make Ext.draw.TextMeasurer use the Ext.util.TextMetrics to measure text,
+            // which is a more precise but much slower solution.
+            // For this example it shouldn't be a noticable performace hit,
+            // since we made optimizations elsewhere.
+            Ext.draw.TextMeasurer.precise = true;
+        }
+
+        function onDestroy() {
+            var regions = InfographicApp.regions,
+                i, region;
+
+            for (i = 0; i < regions.length; i++) {
+                region = regions[i];
+                delete region.sprites;
+            }
+
+            InfographicApp.regionIndex = 0;
+
+            Ext.draw.TextMeasurer.precise = false;
+        }
+
+        // Returns color based on percentage change in unemployment.
+        function getStateColor(unemployment) {
+            if (unemployment < -1.5) {
+                return 'rgba(114, 166, 185, 1.0)';
+            } else if (unemployment < -0.5) {
+                return 'rgba(194, 212, 221, 1.0)';
+            } else if (unemployment < 0.5) {
+                return 'rgba(126, 135, 142, 1.0)';
+            } else if (unemployment < 1.5) {
+                return 'rgba(179, 113, 114, 1.0)';
+            } else {
+                return 'rgba(146, 50, 51, 1.0)';
+            }
+        }
+    </script>
+}
+
+@section example
+{
+    <!--
+    <h2>The US Unemployment Infographic</h2>
+
+    <p>The US Unemployment Infographic shows how to create what might seem like a distinct</p>
+    <p>type of chart, but in fact is only a fancy combination of standard features:</p>
+    <p>polar chart with multiple 'pie' series and a cartesian chart.</p>
+    <p>The unique look is achieved by a heavy use of sprites and renderers</p>
+    <p>to style the chart, and the only custom component is the 'arctext' sprite that</p>
+    <p>is used to put a text along a curve.</p>
+    -->
+    
+    @(X.Store()
+        .DataSource((object[])ViewData.Model)
+        .Fields("label", "span", "y2007", "y2008", "y2009", "y2010", "y2011", "y2012", "state")
+        .ID("Store1")
+        .IDMode(IDMode.Static)
+    )
+
+    @(X.Viewport().Layout(LayoutType.Fit).Items(
+        X.Container()
+            .LayoutConfig(new HBoxLayoutConfig() { Pack = BoxPack.Center })
+            .OverflowY(Overflow.Auto)
+            .Items(
+                X.Container()
+                    .Layout(LayoutType.Absolute)
+                    .Width(990)
+                    .Items(
+                        Html.X().PolarChart()
+                            .AnchorHorizontal("100%")
+                            .Animation(false)
+                            .Height(1375)
+                            .InsetPaddingSpec("400 0 125 0")
+                            .StoreID("Store1")
+                            .HtmlBin(@<text>
+                                <script type="text/javascript">
+                                    function onSliceRender2012(sprite, config, data, index) {
+                                        // Please see the comments in the KitchenSink.store.Unemployment class
+                                        // for more info on the meaning of the record fields.
+                                        var record = data.store.getAt(index),
+                                            label = record.get('label'),
+                                            unemployment = record.get('y2012'),
+                                            spriteSurface = sprite.getSurface(),
+                                            chart = spriteSurface.ownerCt,
+                                            style = {};
+
+                                        if (label === '') { // a separating sector
+                                            style.fillStyle = 'none';
+                                            style.strokeStyle = 'none';
+                                        } else if (label === 'year') { // a sector that shows a year
+                                            style.fillStyle = 'rgba(70, 70, 69, 1.0)';
+                                        } else { // a sector that shows the change in unemployment with a color
+                                            if (!spriteSurface.getStateColor) {
+                                                // Add the 'getStateColor' method of the view to the 'series' surface
+                                                // of the pie chart for the ease of access inside a series renderer.
+                                                spriteSurface.getStateColor = getStateColor;
+                                            }
+                                            style.fillStyle = spriteSurface.getStateColor(unemployment);
+                                        }
+                                        return style;
+                                    }
+
+                                    function onSliceRenderOther(year) {
+                                        return function (sprite, config, data, index) {
+                                            var record = data.store.getAt(index),
+                                                label = record.get('label'),
+                                                style = {};
+                                            if (label === '') {
+                                                style.fillStyle = 'none';
+                                                style.strokeStyle = 'none';
+                                            } else if (label === 'year') {
+                                                style.fillStyle = 'rgba(70, 70, 69, 1.0)';
+                                            } else {
+                                                style.fillStyle = sprite.getSurface().getStateColor(record.get(year));
+                                            }
+                                            return style;
+                                        };
+                                    }
+
+                                    function onLabelRender2012(text, sprite, config, data, index) {
+                                        if (text === 'year') {
+                                            return {
+                                                text: '2012',
+                                                font: 'bold 16px sans-serif'
+                                            };
+                                        }
+                                    }
+
+                                    function onLabelRenderOther(year) {
+                                        return function(text, sprite, config, data, index) {
+                                            if (text === 'year') {
+                                                return {
+                                                    text: year
+                                                };
+                                            } else {
+                                                return {
+                                                    hidden: true
+                                                };
+                                            }
+                                        }
+                                    }
+                                </script>
+                            </text>)
+                            .Items(
+                                X.RectSprite()
+                                    .X(50)
+                                    .Y(40)
+                                    .Width(890)
+                                    .Height(100)
+                                    .FillStyle("rgba(76, 76, 77, 1.0)"),
+
+                                X.TextSprite()
+                                    .Text("Changes in U.S. Unemployment")
+                                    .Font("bold 54px Charter")
+                                    .FillStyle("white")
+                                    .X(70)
+                                    .Y(120),
+
+                                X.TextSprite()
+                                    .Text("2007-2012")
+                                    .Font("24px Verdana")
+                                    .FillStyle("white")
+                                    .X(730)
+                                    .Y(76),
+
+                                // The stripe containing the "SENCHA INFOGRAPHIC" text
+                                X.PathSprite()
+                                    .Path("M0,0 L294,0 L302,8 L302,29.14 C302,29.14 0,29.5 0,29 C0,28.5 0,0 0,0 z")
+                                    .TranslationX(34)
+                                    .TranslationY(20)
+                                    .FillStyle("#DDDCD4"),
+
+                                // The edge twist of the stripe above.
+                                X.PathSprite()
+                                    .Path("M0,29.265 L13.5,29.265 L13.5,41.265 z")
+                                    .TranslationX(34)
+                                    .TranslationY(20)
+                                    .FillStyle("#9D9D9D"),
+
+                                X.TextSprite()
+                                    .Text("SENCHA")
+                                    .Font("12px Verdana")
+                                    .FillStyle("rgba(148, 51, 57, 1.0)")
+                                    .X(60)
+                                    .Y(42),
+
+                                X.TextSprite()
+                                    .Text("INFOGRAPHIC")
+                                    .Font("bold 12px Verdana")
+                                    .FillStyle("rgba(148, 51, 57, 1.0)")
+                                    .X(116)
+                                    .Y(42),
+
+                                X.ImageSprite()
+                                    .Src("sencha.png")
+                                    .X(24)
+                                    .Y(10),
+
+                                X.TextSprite()
+                                    .Text("Forty-three states and the District of Columbia added\njobs in the past 12 months, but the US has 4.8\nmillion fewer jobs than it did in 2008. North Dakota\nled the pack with a 7.2 percent increase, but the\nnational growth rate was only 1.1 percent. Seven\nstates lost jobs.")
+                                    .Font("20px Charter")
+                                    .TextBaseline(DominantBaseline.Top)
+                                    .X(75)
+                                    .Y(165),
+
+                                X.TextSprite()
+                                    .Text("Unemployment")
+                                    .Font("bold 36px Charter")
+                                    .FillStyle("rgba(76, 76, 77, 1.0)")
+                                    .TextBaseline(DominantBaseline.Top)
+                                    .X(632)
+                                    .Y(165),
+
+                                // The legend"s up arrow.
+                                X.PathSprite()
+                                    .Path("M0,6.5 L12.5,0 L25,6.5 L25,21.5 L0,21.5 z")
+                                    .TranslationX(748)
+                                    .TranslationY(214.5)
+                                    .FillStyle("rgba(146, 50, 51, 1.0)"),
+
+                                X.RectSprite()
+                                    .X(748)
+                                    .Y(238)
+                                    .Width(25)
+                                    .Height(20)
+                                    .FillStyle("rgba(179, 113, 114, 1.0)"),
+
+                                X.RectSprite()
+                                    .X(748)
+                                    .Y(260)
+                                    .Width(25)
+                                    .Height(20)
+                                    .FillStyle("rgba(126, 135, 142, 1.0)"),
+
+                                X.RectSprite()
+                                    .X(748)
+                                    .Y(282)
+                                    .Width(25)
+                                    .Height(20)
+                                    .FillStyle("rgba(194, 212, 221, 1.0)"),
+
+                                // The legend"s down arrow.
+                                X.PathSprite()
+                                    .Path("M0,15 L12.5,21.5 L25,15 L25,0 L0,0 z")
+                                    .TranslationX(748)
+                                    .TranslationY(304)
+                                    .FillStyle("rgba(114, 166, 185, 1.0)"),
+
+                                mkStateChangeSprite(742, 233, "rose by more than 1.5%", TextSpriteAlign.Right),
+                                mkStateChangeSprite(742, 255, "rose by 0.5% to 1.5%", TextSpriteAlign.Right),
+                                mkStateChangeSprite(742, 277, "rose by less than 0.5%", TextSpriteAlign.Right),
+                                mkStateChangeSprite(778, 277, "fell by less than 0.5%", TextSpriteAlign.Left),
+                                mkStateChangeSprite(778, 298, "fell by 0.5% to 1.5%", TextSpriteAlign.Left),
+                                mkStateChangeSprite(778, 318, "fell by more than 1.5%", TextSpriteAlign.Left),
+
+                                X.TextSprite()
+                                    .Text("Roll over a state to learn more.")
+                                    .TextAlign(TextSpriteAlign.Center)
+                                    .Font("bold 17px Charter")
+                                    .FillStyle("rgba(77, 77, 78, 1.0)")
+                                    .X(495)
+                                    .Y(370),
+
+                                X.TextSprite()
+                                    .Text("Percent change\nin unemployment")
+                                    .TextAlign(TextSpriteAlign.Center)
+                                    .Font("bold 21px Charter")
+                                    .FillStyle("rgba(56, 54, 54, 1.0)")
+                                    .X(495)
+                                    .Y(1020),
+
+                                // The footer rectangle
+                                X.RectSprite()
+                                    .X(50)
+                                    .Y(1300)
+                                    .Width(890)
+                                    .Height(50)
+                                    .FillStyle("rgba(76, 76, 77, 1.0)"),
+
+                                X.TextSprite()
+                                    .Text("Source=Bureau of Labor Statistics")
+                                    .TextBaseline(DominantBaseline.Top)
+                                    .Font("12px Tahoma")
+                                    .FillStyle("white")
+                                    .X(60)
+                                    .Y(1310),
+
+                                X.TextSprite()
+                                    .Text("Sencha infographic by Vitaly Kravchenko\nupdated June 4, 2014")
+                                    .TextBaseline(DominantBaseline.Top)
+                                    .TextAlign(TextSpriteAlign.Right)
+                                    .Font("12px Tahoma")
+                                    .FillStyle("white")
+                                    .X(910)
+                                    .Y(1310)/*,
+                                <ee:ArcTextSprite
+                                    .Text("Recession December 2007")
+                                    .TranslationX(495)
+                                    .TranslationY(829)
+                                    .Radius(276)
+                                    .Angle("-90")
+                                    .Spacing(3>)
+                                    <Template FontSize(13 FillStyle="rgba(146, 50, 51, 1.0)")*/
+                            )
+                            .Series(
+                                mkMainPieSeries(),
+                                mkOtherPieSeries(86, 93, 15, 2011),
+                                mkOtherPieSeries(79, 86, 14, 2010),
+                                mkOtherPieSeries(73, 79, 13, 2009),
+                                mkOtherPieSeries(67, 73, 12, 2008),
+                                mkOtherPieSeries(57, 63, 11, 2007)
+                            ),
+                        X.PolarChart()
+                            .AnchorHorizontal("100%")
+                            .Animation(false)
+                            .Height(1375)
+                            .InsetPaddingSpec("400 0 125 0")
+                            .StoreID("Store1"),
+                        X.CartesianChart()
+                            .Animation(false)
+                            .Height(250)
+                            .Width(350)
+                            .X(300)
+                            .Y(700)
+                    )
+                    .Listeners(ltn =>
+                    {
+                        ltn.BeforeRender.Fn = "onBeforeRender";
+                        ltn.Destroy.Fn = "onDestroy";
+                    })
+            )
+    ))
+}

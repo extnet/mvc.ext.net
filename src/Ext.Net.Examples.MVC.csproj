@@ -204,9 +204,11 @@
     <Compile Include="Areas\Chart_Column\Controllers\Stacked_100Controller.cs" />
     <Compile Include="Areas\Chart_Column\Models\RendererModel.cs" />
     <Compile Include="Areas\Chart_Combination\Chart_CombinationAreaRegistration.cs" />
+    <Compile Include="Areas\Chart_Combination\Controllers\InfographicController.cs" />
     <Compile Include="Areas\Chart_Combination\Controllers\Custom_ThemeController.cs" />
     <Compile Include="Areas\Chart_Combination\Controllers\Binding_TabsController.cs" />
     <Compile Include="Areas\Chart_Combination\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Chart_Combination\Models\InfographicModel.cs" />
     <Compile Include="Areas\Chart_Misc\Chart_MiscAreaRegistration.cs" />
     <Compile Include="Areas\Chart_Misc\Controllers\CaptionsController.cs" />
     <Compile Include="Areas\ColorPicker_Advanced\ColorPicker_AdvancedAreaRegistration.cs" />
@@ -691,6 +693,9 @@
     <Content Include="Areas\Chart_Column\Views\Basic_3D\config.xml" />
     <Content Include="Areas\Chart_Column\Views\Stacked\config.xml" />
     <Content Include="Areas\Chart_Column\Views\Stacked_100\config.xml" />
+    <Content Include="Areas\Chart_Combination\Content\Infographic\ArcText.js" />
+    <Content Include="Areas\Chart_Combination\Content\Infographic\sencha.png" />
+    <Content Include="Areas\Chart_Combination\Views\_Infographic\config.xml" />
     <Content Include="Areas\Chart_Combination\Views\Custom_Theme\config.xml" />
     <Content Include="Areas\Chart_Combination\Views\Binding_Tabs\config.xml" />
     <Content Include="Areas\Chart_Combination\Views\Dashboard\config.xml" />
@@ -1117,6 +1122,7 @@
     <Content Include="Areas\Chart_Combination\Views\Web.config" />
     <Content Include="Areas\Chart_Combination\Views\Binding_Tabs\Index.cshtml" />
     <Content Include="Areas\Chart_Combination\Views\Custom_Theme\Index.cshtml" />
+    <Content Include="Areas\Chart_Combination\Views\_Infographic\Index.cshtml" />
     <None Include="Areas\DataView_Basic\Content\sencha-touch-examples.json" />
     <Content Include="Areas\Desktop\Views\Web.config" />
     <Content Include="Areas\Desktop\Views\Overview\Desktop.cshtml" />
