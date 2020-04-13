@@ -1,7 +1,7 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
-| Release Date | 2020-01-26 |
-| Current Version | 5.1.0 |
+| Release Date | 2020-04-13 |
+| Current Version | 5.2.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
 
 ## Contents

@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("5.1.0")]
-[assembly: AssemblyFileVersion("5.1.0.0")]
-[assembly: AssemblyInformationalVersion("5.1.0")]
+[assembly: AssemblyVersion("5.2.0")]
+[assembly: AssemblyFileVersion("5.2.0.0")]
+[assembly: AssemblyInformationalVersion("5.2.0")]
 [assembly: AssemblyCompany("Object.NET, Inc.")]
 [assembly: AssemblyCopyright("Copyright (c) 2008-2020 Object.NET, Inc.")]
 

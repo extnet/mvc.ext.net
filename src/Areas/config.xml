@@ -7,6 +7,31 @@
     <folder name="Kitchen_Sink_Forms" />
   </order>
 
+  <new version="5.2.0">
+    <folder name="Chart_Area\Views\Stacked" />
+    <folder name="Chart_Area\Views\Stacked_100" />
+    <folder name="Chart_Bar\Views\Grouped" />
+    <folder name="Chart_Bar\Views\Mixed" />
+    <folder name="Chart_Bar\Views\Renderer" />
+    <folder name="Chart_Bar\Views\Stacked" />
+    <folder name="Chart_Bar\Views\Stacked_100" />
+    <folder name="Chart_Column\Views\Basic_3D" />
+    <folder name="Chart_Column\Views\Gradients" />
+    <folder name="Chart_Column\Views\Limit" />
+    <folder name="Chart_Column\Views\MultiAxis" />
+    <folder name="Chart_Column\Views\Renderer" />
+    <folder name="Chart_Column\Views\Stacked_100" />
+    <folder name="Chart_Column\Views\Stacked" />
+    <folder name="Chart_Combination\Views\Binding_Tabs" />
+    <folder name="Chart_Combination\Views\Custom_Theme" />
+    <folder name="Chart_Combination\Views\_Infographic" />
+  </new>
+
+  <updated version="5.2.0">
+    <folder name="Chart_Combination\Views\Dashboard" />
+  </updated>
+
+  <!--
   <new version="5.1.0">
     <folder name="Miscellaneous_Responsive\Views\Basic" />
     <folder name="Actions\Views\Simple" />
@@ -19,10 +44,13 @@
     <folder name="Buttons_Basic\Views\Variations" />
     <folder name="Buttons_ButtonGroup\Views\Overview" />
   </new>
+  -->
 
+  <!--
   <updated version="5.1.0">
     <folder name="TreePanel_List\Views\Overview" />
   </updated>
+  -->
 
   <!--
   <updated version="5.0.0">

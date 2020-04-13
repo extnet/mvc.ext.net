@@ -1,5 +1,28 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2020-04-13 |
+| Current Version | 5.2.0 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A5.2.0) on GitHub |
+
+#### FEATURES
+
+1. [[#1690](https://github.com/extnet/Ext.NET/issues/1690)] Replace .nuspec references for IconUrl to Icon
+
+#### DEFECTS
+
+1. [[#1692](https://github.com/extnet/Ext.NET/issues/1692)] Desktop.addModule()'s added shortcut position is reset on window resize
+2. [[#1691](https://github.com/extnet/Ext.NET/issues/1691)] Desktop's removeModule() method does not remove shortcut icons.
+3. [[#1646](https://github.com/extnet/Ext.NET/issues/1646)] Pie3d series cannot be hilighted by interaction's setHighlightItem()
+
+#### BREAKING CHANGES
+
+1. [[#1694](https://github.com/extnet/Ext.NET/issues/1694)] Ext.Net.ColumnBaseAttribute.Align setting mismatches Ext JS API
+
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2020-01-26 |
 | Current Version | 5.1.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A5.1.0) on GitHub |
