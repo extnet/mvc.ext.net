@@ -99,8 +99,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" ('$(Configuration)|$(Platform)' == 'Debug|AnyCPU') Or ('$(Configuration)|$(Platform)' == 'Release|AnyCPU') ">
-    <Reference Include="Ext.Net, Version=5.2.0.0, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87">
-      <HintPath>..\packages\Ext.NET.MVC.5.2.0\lib\net45\Ext.Net.dll</HintPath>
+    <Reference Include="Ext.Net, Version=5.3.0.0, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87">
+      <HintPath>..\packages\Ext.NET.MVC.5.3.0\lib\net45\Ext.Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ext.Net.Utilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=2c34ac34702a3c23, processorArchitecture=MSIL">

@@ -1,5 +1,28 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2020-11-06 |
+| Current Version | 5.3.0 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A5.3.0) on GitHub |
+
+#### FEATURES
+
+1. [[#1840](https://github.com/extnet/Ext.NET/issues/1840)] Ext.Net.ComboBox: add support to AutoSelectMatches config option
+2. [[#1839](https://github.com/extnet/Ext.NET/issues/1839)] Ext.Net.TreeList: add support to KeyMap config option
+
+#### DEFECTS
+
+1. [[#1831](https://github.com/extnet/Ext.NET/issues/1831)] Ext.net.Notification.contentEl destroys pointed content on callout close.
+2. [[#1830](https://github.com/extnet/Ext.NET/issues/1830)] Ext.Net.TabPanel: tabs' CloseAction=\"Hide\" ignored and tab destroyed on handle close
+
+#### BREAKING CHANGES
+
+None
+
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2020-04-13 |
 | Current Version | 5.2.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A5.2.0) on GitHub |
