@@ -1,0 +1,37 @@
+name: "Deploy Examples Explorer v5 (non-built code only)"
+
+on:
+  push:
+    branches: [ master ]
+jobs:
+  publish:
+    name: "Deploy examples explorer to websites"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.1.0
+      with:
+        fetch-depth: 0
+
+    - name: Deploy Examples Explorer to https://mvc.ext.net/
+      uses: objectdotnet/action-ftp-deploy-then-slack-notification@0.3.0
+      with:
+        repo-root: src
+        ftp-host: ${{ secrets.iis_ftp_host }}
+        ftp-user: ${{ secrets.iis_ftp_user }}
+        ftp-pass: ${{ secrets.iis_ftp_pass }}
+        ftp-root: mvc.ext.net/wwwroot
+        slack-webhook:  ${{ secrets.SLACK_WEBHOOK }}
+        slack-nick: "Ext.NET 5 MVC Examples Explorer Deploy Service"
+        slack-icon: ":extglow:"
+
+    - name: Deploy Examples Explorer to https://mvc5.ext.net/
+      uses: objectdotnet/action-ftp-deploy-then-slack-notification@0.3.0
+      with:
+        repo-root: src
+        ftp-host: ${{ secrets.iis_ftp_host }}
+        ftp-user: ${{ secrets.iis_ftp_user }}
+        ftp-pass: ${{ secrets.iis_ftp_pass }}
+        ftp-root: mvc5.ext.net/wwwroot
+        slack-webhook:  ${{ secrets.SLACK_WEBHOOK }}
+        slack-nick: "Ext.NET 5 MVC Examples Explorer Deploy Service"
+        slack-icon: ":extglow:"
