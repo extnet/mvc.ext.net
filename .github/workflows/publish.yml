@@ -19,7 +19,7 @@ jobs:
         ftp-host: ${{ secrets.iis_ftp_host }}
         ftp-user: ${{ secrets.iis_ftp_user }}
         ftp-pass: ${{ secrets.iis_ftp_pass }}
-        ftp-root: mvc.ext.net/wwwroot
+        ftp-root: mvc.ext.net
         slack-webhook:  ${{ secrets.SLACK_WEBHOOK }}
         slack-nick: "Ext.NET 5 MVC Examples Explorer Deploy Service"
         slack-icon: ":extglow:"
@@ -31,7 +31,7 @@ jobs:
         ftp-host: ${{ secrets.iis_ftp_host }}
         ftp-user: ${{ secrets.iis_ftp_user }}
         ftp-pass: ${{ secrets.iis_ftp_pass }}
-        ftp-root: mvc5.ext.net/wwwroot
+        ftp-root: mvc5.ext.net
         slack-webhook:  ${{ secrets.SLACK_WEBHOOK }}
         slack-nick: "Ext.NET 5 MVC Examples Explorer Deploy Service"
         slack-icon: ":extglow:"
